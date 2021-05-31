@@ -1,0 +1,252 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "cc-managment-ui": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "prefix": "ec",
+          "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "prefix": "ec"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/public",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/@oblique/oblique/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "*headers.conf",
+                "input": "src/nginx",
+                "output": "./../nginx/conf/includes"
+              },
+              {
+                "glob": "Staticfile",
+                "input": "src/nginx",
+                "output": "./.."
+              },
+              "src/assets",
+              "src/robots.txt"
+            ],
+            "styles": [
+              "node_modules/@oblique/oblique/styles/css/oblique-core.css",
+              "node_modules/@oblique/oblique/styles/css/oblique-material.css",
+              "node_modules/@oblique/oblique/styles/css/frutiger.css",
+              "src/styles/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/@oblique/oblique/ob-features.js"
+            ]
+          },
+          "configurations": {
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/@oblique/oblique/assets",
+                  "output": "assets"
+                },
+                {
+                  "glob": "*headers.conf",
+                  "input": "src/nginx",
+                  "output": "./../nginx/conf/includes"
+                },
+                {
+                  "glob": "Staticfile",
+                  "input": "src/nginx",
+                  "output": "./.."
+                },
+                "src/assets",
+                "src/robots.txt"
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "abn": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.abn.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/@oblique/oblique/assets",
+                  "output": "assets"
+                },
+                {
+                  "glob": "*headers.conf",
+                  "input": "src/nginx",
+                  "output": "./../nginx/conf/includes"
+                },
+                {
+                  "glob": "csp_headers.conf",
+                  "input": "src/nginx/abn",
+                  "output": "./../nginx/conf/includes"
+                },
+                {
+                  "glob": "Staticfile",
+                  "input": "src/nginx",
+                  "output": "./.."
+                },
+                "src/assets",
+                "src/robots.txt"
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/@oblique/oblique/assets",
+                  "output": "assets"
+                },
+                {
+                  "glob": "*headers.conf",
+                  "input": "src/nginx",
+                  "output": "./../nginx/conf/includes"
+                },
+                {
+                  "glob": "csp_headers.conf",
+                  "input": "src/nginx/prod",
+                  "output": "./../nginx/conf/includes"
+                },
+                {
+                  "glob": "Staticfile",
+                  "input": "src/nginx",
+                  "output": "./.."
+                },
+                "src/assets",
+                "src/robots.txt"
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cc-managment-ui:build",
+            "port": 4201
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cc-managment-ui:build:production"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "./tests/jest.config.js",
+            "watch": true,
+            "verbose": true
+          },
+          "configurations": {
+            "production": {
+              "watch": false,
+              "verbose": false
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "cc-managment-ui"
+}

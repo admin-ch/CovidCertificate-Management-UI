@@ -1,0 +1,13 @@
+.step-four {
+	display: flex;
+	flex-direction: row;
+}
+
+.uvci {
+	display: flex;
+	flex-direction: column;
+
+	& p {
+		text-align: center;
+	}
+}

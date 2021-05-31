@@ -1,0 +1,29 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+@import "~@oblique/oblique/styles/scss/core/mixins/layout";
+
+@include media-breakpoint-up(sm) {
+	:host.datetime::ng-deep {
+		display: flex;
+
+		.mat-form-field.mat-form-field-appearance-outline {
+			&:first-child {
+				flex: 1;
+				margin-right: $spacing-default;
+			}
+
+			&:last-child {
+				flex: 0 0 104px;
+			}
+		}
+	}
+}
+
+:host::ng-deep {
+	.mat-form-field-infix {
+		width: auto;
+	}
+}
+
+mat-form-field {
+	max-width: 550px;
+}

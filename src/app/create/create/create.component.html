@@ -1,0 +1,30 @@
+<mat-horizontal-stepper linear labelPosition="bottom" #stepper class="mat-stepper-lg" *ngIf="valueSetsLoaded$ | async">
+	<mat-step>
+		<ec-select-certificate-type (next)="nextCalled()"></ec-select-certificate-type>
+	</mat-step>
+	<mat-step>
+		<ec-vaccine-form
+			*ngIf="selectedForm === 'vaccination'"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-vaccine-form>
+		<ec-test-form *ngIf="selectedForm === 'test'" (back)="resetCalled()" (next)="nextCalled()"></ec-test-form>
+		<ec-recovery-form
+			*ngIf="selectedForm === 'recovery'"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-recovery-form>
+	</mat-step>
+	<mat-step>
+		<ec-summary (back)="backCalled()" (next)="nextCalled()"></ec-summary>
+	</mat-step>
+	<mat-step>
+		<ec-download (resetEmitter)="resetCalled()"></ec-download>
+	</mat-step>
+	<ng-template matStepperIcon="edit">
+		<span class="fa fa-pen"></span>
+	</ng-template>
+	<ng-template matStepperIcon="done">
+		<span class="fa fa-check"></span>
+	</ng-template>
+</mat-horizontal-stepper>

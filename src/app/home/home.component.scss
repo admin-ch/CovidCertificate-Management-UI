@@ -1,0 +1,32 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+:host {
+	display: flex;
+}
+
+.mat-card {
+	margin: $spacing-lg 0;
+}
+
+.mat-card > .mat-card-actions.actions {
+	padding-top: $spacing-lg;
+	margin-bottom: 0;
+	margin-right: 0;
+}
+
+.mat-card-avatar {
+	font-size: 30px;
+	line-height: 40px;
+	text-align: center;
+	background-color: $brand-primary;
+	color: $white;
+}
+
+.links {
+	list-style-type: none;
+}
+
+.icon-link {
+	text-decoration: none;
+	margin-right: $spacing-sm;
+}

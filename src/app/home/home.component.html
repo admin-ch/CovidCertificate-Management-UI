@@ -1,0 +1,57 @@
+<div class="wrapper">
+	<section>
+		<h1>{{ "home.title" | translate }}</h1>
+		<p>{{ "home.instructions" | translate }}</p>
+		<mat-card>
+			<mat-card-header>
+				<mat-card-title>{{ "home.login.title" | translate }}</mat-card-title>
+				<mat-card-subtitle>{{ "home.login.subtitle" | translate }}</mat-card-subtitle>
+				<mat-icon mat-card-avatar fontIcon="fa-user-md" fontSet="fas" class="ob-icon"></mat-icon>
+			</mat-card-header>
+			<mat-card-actions class="actions">
+				<a [routerLink]="['..', 'dashboard']" mat-flat-button color="primary" id="login_button">
+					<span class="fa fa-sign-in-alt"></span>
+					{{ (isAuthenticated ? "home.generate" : "home.login.button") | translate }}
+				</a>
+			</mat-card-actions>
+		</mat-card>
+	</section>
+	<section *ngIf="lang$ | async as lang">
+		<p>{{ "home.more" | translate }}</p>
+		<ul class="links">
+			<li>
+				<a
+					[href]="'https://www.eiam.admin.ch/index.php?c=f!supportggg!pub&l=' + lang"
+					target="_blank"
+					rel="noopener noreferrer"
+					id="support_link"
+				>
+					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+					>{{ "home.support" | translate }}
+				</a>
+			</li>
+			<li>
+				<a
+					[href]="'https://www.eiam.admin.ch/index.php?c=f!dmggg!pub&l=' + lang"
+					target="_blank"
+					rel="noopener noreferrer"
+					id="administration_link"
+				>
+					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+					>{{ "home.administration" | translate }}
+				</a>
+			</li>
+			<li>
+				<a
+					[href]="'https://www.eiam.admin.ch/covidcertificatetrainer?l=' + lang"
+					target="_blank"
+					rel="noopener noreferrer"
+					id="training_link"
+				>
+					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+					>{{ "home.training" | translate }}
+				</a>
+			</li>
+		</ul>
+	</section>
+</div>

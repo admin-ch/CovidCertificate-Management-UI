@@ -1,0 +1,21 @@
+<div class="step-four">
+	<div>
+		<h4>{{ "certificateCreate.step-four.title" | translate }}</h4>
+		<p>{{ "certificateCreate.step-four.description" | translate }}</p>
+		<button mat-button (click)="downloadCertificate()" obButton="primary" id="cert-create-download">
+			{{ "certificateCreate.step-four.download" | translate }}
+		</button>
+	</div>
+	<div class="uvci">
+		<img *ngIf="safeResourceUrl" [src]="safeResourceUrl" alt="QrCode of certificate" />
+		<p>{{ createCertificateResponse?.uvci }}</p>
+	</div>
+</div>
+
+<div class="stepper-footer">
+	<section class="stepper-footer-content stepper-footer-content-end">
+		<button mat-button type="button" (click)="callReset()" obButton="primary" id="cert-create-reset" class="right">
+			{{ "certificateCreate.step-four.generateNew" | translate }}
+		</button>
+	</section>
+</div>

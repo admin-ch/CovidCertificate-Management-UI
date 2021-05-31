@@ -1,0 +1,34 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+.dashboard {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacing-default;
+
+	.dashboard-card {
+		flex-basis: 400px;
+
+		.dashboard-icon {
+			display: flex;
+			justify-content: center;
+			color: $brand-primary;
+			background-color: $gray-extra-light;
+			font-size: 75px;
+			padding: 50px 100px;
+			margin: (-$spacing-default) (-$spacing-default) $spacing-default;
+		}
+
+		.dashboard-title {
+			font-weight: bold;
+		}
+
+		.dashboard-content {
+			min-height: 4rem;
+		}
+
+		.mat-card-actions {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}

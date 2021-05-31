@@ -1,0 +1,14 @@
+<ng-container [formGroup]="form">
+	<mat-form-field *ngIf="showDate" obErrorMessages class="mat-form-field-lg">
+		<mat-label>{{ label }}</mat-label>
+		<input [id]="id + '-date'" matInput formControlName="date" [matDatepicker]="datepicker" />
+		<mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+		<mat-datepicker #datepicker startView="month"></mat-datepicker>
+		<mat-error></mat-error>
+	</mat-form-field>
+	<mat-form-field *ngIf="showTime" obErrorMessages class="mat-form-field-lg">
+		<mat-label *ngIf="!showDate">{{ label }}</mat-label>
+		<input [id]="id + '-time'" type="time" matInput formControlName="time" />
+		<mat-error></mat-error>
+	</mat-form-field>
+</ng-container>

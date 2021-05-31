@@ -1,0 +1,54 @@
+<div class="dashboard">
+	<mat-card class="dashboard-card">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="qrcode" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{
+				"dashboard.createCertificate.title" | translate
+			}}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.createCertificate.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-create" mat-button obButton="primary" (click)="goToCertificateCreate()">
+				{{ "dashboard.createCertificate.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+	<mat-card class="dashboard-card">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="ban" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{
+				"dashboard.invalidateCertificate.title" | translate
+			}}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.invalidateCertificate.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-revoke" mat-button obButton="primary" (click)="goToCertificateRevoke()">
+				{{ "dashboard.invalidateCertificate.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+	<mat-card class="dashboard-card">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="unlock" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.otp.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.otp.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-otp" mat-button obButton="primary" (click)="goToGenerateOtp()">
+				{{ "dashboard.otp.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

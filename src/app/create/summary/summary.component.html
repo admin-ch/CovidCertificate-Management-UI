@@ -1,0 +1,71 @@
+<h4>{{ "certificateCreate.step-three.title" | translate }}</h4>
+<p>{{ "certificateCreate.step-three.description" | translate }}</p>
+
+<h5>{{ "certificateCreate.form.group.personalData" | translate }}</h5>
+<dl>
+	<dt>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</dt>
+	<dd id="firstName">{{ patient?.firstName }}</dd>
+	<dt>{{ "certificateCreate.form.label.personalData.surName" | translate }}</dt>
+	<dd id="surName">{{ patient?.surName }}</dd>
+	<dt>{{ "certificateCreate.form.label.personalData.birthdate" | translate }}</dt>
+	<dd id="birthdate">{{ patient?.birthdate | date }}</dd>
+	<dt>{{ "certificateCreate.form.label.personalData.certificateLanguage" | translate }}</dt>
+	<dd id="certificateLanguage">{{ "common.language." + patient?.language | translate }}</dd>
+</dl>
+
+<ng-container *ngIf="patient?.vaccination">
+	<h5>{{ "certificateCreate.form.group.vaccine" | translate }}</h5>
+	<dl>
+		<dt>{{ "certificateCreate.form.label.vaccine.medicalProduct" | translate }}</dt>
+		<dd id="medicalProduct">{{ patient?.vaccination.medicalProduct.display }}</dd>
+		<dt>{{ "certificateCreate.step-three.dose" | translate }}</dt>
+		<dd id="dose">{{ patient?.vaccination.doseNumber }} / {{ patient?.vaccination.totalDoses }}</dd>
+		<dt>{{ "certificateCreate.form.label.vaccine.dateOfVaccination" | translate }}</dt>
+		<dd id="dateOfVaccination">{{ patient?.vaccination.dateOfVaccination | date }}</dd>
+		<dt>{{ "certificateCreate.form.label.vaccine.countryOfVaccination" | translate }}</dt>
+		<dd id="countryOfVaccination">{{ patient?.vaccination.countryOfVaccination.display }}</dd>
+	</dl>
+</ng-container>
+
+<ng-container *ngIf="patient?.test">
+	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
+	<dl>
+		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
+		<dd id="typeOfTest">{{ patient?.test.typeOfTest.display }}</dd>
+		<ng-container *ngIf="patient?.test.manufacturer">
+			<dt>{{ "certificateCreate.form.label.test.manufacturer" | translate }}</dt>
+			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
+		</ng-container>
+		<dt>{{ "certificateCreate.form.label.test.sampleDate" | translate }}</dt>
+		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "short" }}</dd>
+		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
+		<dd id="center">{{ patient?.test.center }}</dd>
+		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
+		<dd id="countryOfTest">{{ patient?.test.countryOfTest.display }}</dd>
+	</dl>
+</ng-container>
+
+<ng-container *ngIf="patient?.recovery">
+	<h5>{{ "certificateCreate.form.group.recovery" | translate }}</h5>
+	<dl>
+		<dt>{{ "certificateCreate.form.label.recovery.dateFirstPositiveTestResult" | translate }}</dt>
+		<dd id="dateFirstPositiveTestResult">{{ patient?.recovery.dateFirstPositiveTestResult | date }}</dd>
+		<dt>{{ "certificateCreate.form.label.recovery.countryOfTest" | translate }}</dt>
+		<dd id="countryOfRecovery">{{ patient?.recovery.countryOfTest.display }}</dd>
+		<dt>{{ "certificateCreate.step-three.validFrom" | translate }}</dt>
+		<dd id="validFrom">{{ validFrom | date }}</dd>
+		<dt>{{ "certificateCreate.step-three.validUntil" | translate }}</dt>
+		<dd id="validUntil">{{ validUntil | date }}</dd>
+	</dl>
+</ng-container>
+
+<div class="stepper-footer">
+	<section class="stepper-footer-content">
+		<button id="cert-create-back" type="button" (click)="goBack()" mat-button obButton="secondary">
+			{{ "common.back" | translate }}
+		</button>
+		<button id="cert-create-next" type="button" (click)="goNext()" mat-button obButton="primary" class="right">
+			{{ "common.next" | translate }}
+		</button>
+	</section>
+</div>

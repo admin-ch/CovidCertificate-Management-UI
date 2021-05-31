@@ -1,0 +1,106 @@
+<form [formGroup]="testForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
+	<fieldset class="form-group">
+		<legend class="padding-top">{{ "certificateCreate.form.group.personalData" | translate }}</legend>
+
+		<div class="form-field">
+			<mat-form-field obErrorMessages class="mat-form-field-lg">
+				<mat-label>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</mat-label>
+				<input type="text" matInput formControlName="firstName" id="firstName" />
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<mat-form-field obErrorMessages class="mat-form-field-lg">
+				<mat-label>{{ "certificateCreate.form.label.personalData.surName" | translate }}</mat-label>
+				<input type="text" matInput formControlName="surName" id="surName" />
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<ob-nested-form formControlName="birthdate" [nestedForm]="datepickerBirthdate.form" obErrorMessages>
+				<ec-datetimepicker
+					#datepickerBirthdate
+					[label]="'certificateCreate.form.label.personalData.birthdate' | translate"
+					[showTime]="false"
+					required
+					[errors]="testForm.get('birthdate').errors"
+					id="birthdate"
+				>
+				</ec-datetimepicker>
+			</ob-nested-form>
+
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "certificateCreate.form.label.personalData.certificateLanguage" | translate }}</mat-label>
+				<mat-select formControlName="certificateLanguage" id="certificateLanguage">
+					<mat-option *ngFor="let option of getCertificateLanguages()" [value]="option">
+						{{ option.display }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+		</div>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
+
+		<div class="form-field">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</mat-label>
+				<mat-select formControlName="typeOfTest" id="typeOfTest">
+					<mat-option *ngFor="let option of getTypesOfTest()" [value]="option">
+						{{ option.display }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "certificateCreate.form.label.test.manufacturer" | translate }}</mat-label>
+				<mat-select formControlName="manufacturer" id="manufacturer">
+					<mat-option *ngFor="let option of getManufacturerOfTest()" [value]="option">
+						{{ option.display }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<ob-nested-form formControlName="sampleDate" [nestedForm]="datepickerSampleDate.form" obErrorMessages>
+				<ec-datetimepicker
+					#datepickerSampleDate
+					[label]="'certificateCreate.form.label.test.sampleDate' | translate"
+					[showTime]="true"
+					required
+					[errors]="testForm.get('sampleDate').errors"
+					id="dateOfVaccination"
+				>
+				</ec-datetimepicker>
+			</ob-nested-form>
+
+			<mat-form-field obErrorMessages class="mat-form-field-lg">
+				<mat-label>{{ "certificateCreate.form.label.test.center" | translate }}</mat-label>
+				<input type="text" matInput formControlName="center" id="center" />
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</mat-label>
+				<mat-select formControlName="countryOfTest" id="countryOfTest">
+					<mat-option *ngFor="let option of getCountriesOfTest()" [value]="option">
+						{{ option.display }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+		</div>
+	</fieldset>
+
+	<div class="stepper-footer">
+		<section class="stepper-footer-content">
+			<button id="cert-create-back" type="button" (click)="goBack()" mat-button obButton="secondary">
+				{{ "common.back" | translate }}
+			</button>
+			<button id="cert-create-next" mat-button obButton="primary" class="right">
+				{{ "common.next" | translate }}
+			</button>
+		</section>
+	</div>
+</form>

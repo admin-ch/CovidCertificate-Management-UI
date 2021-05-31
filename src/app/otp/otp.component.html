@@ -1,0 +1,27 @@
+<ob-column-layout [left]="false" [right]="false">
+	<div column-main-content class="default-layout">
+		<h1>{{ "otp.title" | translate }}</h1>
+		<p>{{ "otp.instructions" | translate }}</p>
+
+		<button id="otp-button-create" mat-button obButton="primary" (click)="generateOtp()">
+			{{ "otp.button.create" | translate }}
+		</button>
+
+		<mat-card *ngIf="otp">
+			<mat-card-header>
+				<mat-card-title>{{ "otp.key" | translate }}</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<p>
+					<em>{{ otp }}</em>
+				</p>
+			</mat-card-content>
+			<mat-card-actions>
+				<button id="otp-button-copy" mat-button obButton="secondary" [cdkCopyToClipboard]="otp">
+					{{ "otp.button.copy" | translate }}
+					<mat-icon svgIcon="clipboard" class="ob-icon"></mat-icon>
+				</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</ob-column-layout>

@@ -1,0 +1,20 @@
+<div class="wrapper">
+	<h1>{{ "certificateRevoke.title" | translate }}</h1>
+	<p>{{ "certificateRevoke.instructions" | translate }}</p>
+
+	<form [formGroup]="revocationForm" (submit)="revoke()">
+		<mat-form-field obErrorMessages class="mat-form-field-lg">
+			<mat-label>{{ "certificateRevoke.uvci" | translate }}</mat-label>
+			<input type="text" matInput formControlName="uvci" id="input-uvci" />
+			<mat-error></mat-error>
+		</mat-form-field>
+
+		<button id="button-revoke" mat-button obButton="primary" [disabled]="revocationForm.invalid">
+			{{ "certificateRevoke.button" | translate }}
+		</button>
+	</form>
+
+	<ob-alert *ngIf="revoked" type="success">{{
+		"certificateRevoke.success" | obTranslateParams: { uvci: uvciUsed }
+	}}</ob-alert>
+</div>

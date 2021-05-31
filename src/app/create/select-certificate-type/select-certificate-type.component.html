@@ -1,0 +1,21 @@
+<form [formGroup]="certificateTypeSelectionForm">
+	<mat-radio-group
+		formControlName="type"
+		id="generationType"
+		name="generationType"
+		aria-label="Select an option"
+		class="radio-button-container"
+	>
+		<mat-radio-button *ngFor="let type of typeSelection" [value]="type" [name]="type" class="radio-button">{{
+			"certificateCreate.step-one.enum." + type | translate
+		}}</mat-radio-button>
+	</mat-radio-group>
+
+	<div class="stepper-footer">
+		<section class="stepper-footer-content">
+			<button id="cert-create-next" type="button" (click)="goNext()" mat-button obButton="primary" class="right">
+				{{ "common.next" | translate }}
+			</button>
+		</section>
+	</div>
+</form>

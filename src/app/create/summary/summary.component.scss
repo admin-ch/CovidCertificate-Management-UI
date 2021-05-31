@@ -1,0 +1,34 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+dl {
+	display: flex;
+	flex-flow: row wrap;
+	width: 820px;
+
+	dt {
+		min-width: 380px;
+		border-bottom: 1px solid $gray-dark;
+		padding-bottom: 1em;
+		padding-top: 0.5em;
+	}
+
+	dd {
+		width: 440px;
+		border-bottom: 1px solid $gray-dark;
+		padding-bottom: 1em;
+		padding-top: 0.5em;
+	}
+
+	dd+dt {
+		margin-top: 0;
+	}
+}
+
+p {
+	margin-bottom: 24px;
+}
+
+h5 {
+	font-weight: bold;
+	margin-top: 40px;
+}

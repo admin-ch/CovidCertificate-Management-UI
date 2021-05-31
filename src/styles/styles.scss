@@ -1,0 +1,77 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+@import "~@oblique/oblique/styles/scss/core/mixins/layout";
+
+.cdk-overlay-container {
+	z-index: 10000;
+}
+
+.viewport-collapsed {
+	@include layout-collapse-down {
+		display: block;
+	}
+
+	@include layout-collapse-up {
+		display: none;
+	}
+}
+
+.viewport-expanded {
+	@include layout-collapse-down {
+		display: none;
+	}
+
+	@include layout-collapse-up {
+		display: inline;
+	}
+}
+
+// Oblique fix, should be removed with Oblique 7+
+.ob-master-layout-header .ob-header-controls.ob-header-locale {
+	margin-right: $spacing-default;
+}
+
+.stepper-footer {
+	position: sticky;
+	height: max-content;
+	bottom: 0;
+	left: 0;
+	z-index: $z-index-layout;
+	padding: 16px 24px;
+
+	background-color: white;
+	border-top: 1px $gray-light solid;
+
+	.stepper-footer-content {
+		background-color: white;
+
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+		& .right {
+			margin-left: auto;
+		}
+	}
+
+	.stepper-footer-content-end {
+		justify-content: flex-end;
+	}
+}
+
+.form-group {
+	display: grid;
+	grid-template-columns: 250px 50px 250px;
+	padding-bottom: 24px;
+
+	mat-form-field {
+		max-width: 550px;
+	}
+
+	.form-field {
+		grid-column: span 3;
+	}
+
+	.is-invalid {
+		background-color: red;
+	}
+}
