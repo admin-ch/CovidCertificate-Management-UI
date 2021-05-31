@@ -23,7 +23,7 @@ describe('OauthService', () => {
 					}
 				},
 				{provide: OpenIdConfigService, useValue: {autoLogin: true}},
-				{provide: LoggerService, useValue: {logDebug: () => {}}}
+				{provide: LoggerService, useValue: {logDebug: jest.fn()}}
 			]
 		}).compileComponents();
 		service = TestBed.inject(OauthService);
