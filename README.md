@@ -1,6 +1,6 @@
 # CovidCertificate-Management-UI
 
-The management UI allows the authorized user to create and revoke a COVID certificate. It allows also an authorized to generate a OneTime password.
+The management UI allows the authorized user to create and revoke a COVID certificate. It allows also an authorized to generate an OneTime password.
 
 ## Technical information
 This repository contains everything to build & test the project.
