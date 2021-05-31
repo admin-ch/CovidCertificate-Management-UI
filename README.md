@@ -1,4 +1,4 @@
-# Covid Certificate - Management-UI
+# CovidCertificate-Management-UI
 ## Technical information
 This repository contains everything to build & test the project.
 Each tag corresponds to a release done internally by the FOITT.
