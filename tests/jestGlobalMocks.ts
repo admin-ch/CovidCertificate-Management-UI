@@ -14,7 +14,7 @@ Object.defineProperty(window, 'scrollIntoView', {value: mock()});
 Object.defineProperty(window, 'getComputedStyle', {
 	value: () => ['-webkit-appearance']
 });
-(window as any).HTMLElement.prototype.scrollIntoView = function() {};
+(window as any).HTMLElement.prototype.scrollIntoView = jest.fn();
 Object.defineProperty(document.body.style, 'transform', {
 	value: () => {
 		return {

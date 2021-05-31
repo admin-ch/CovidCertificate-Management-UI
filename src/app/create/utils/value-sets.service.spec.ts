@@ -13,16 +13,16 @@ describe('ValueSetsService', () => {
 					display: 'Schweden',
 					lang: 'de',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'SE'
 				},
 				{
 					display: 'Schweiz',
 					lang: 'de',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'CH'
 				}
 			],
@@ -31,16 +31,16 @@ describe('ValueSetsService', () => {
 					display: 'Suède',
 					lang: 'fr',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'SE'
 				},
 				{
 					display: 'Suisse',
 					lang: 'fr',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'CH'
 				}
 			],
@@ -49,16 +49,16 @@ describe('ValueSetsService', () => {
 					display: 'Svezia',
 					lang: 'it',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'SE'
 				},
 				{
 					display: 'Svizzera',
 					lang: 'it',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'CH'
 				}
 			],
@@ -67,16 +67,16 @@ describe('ValueSetsService', () => {
 					display: 'Sweden',
 					lang: 'en',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'SE'
 				},
 				{
 					display: 'Switzerland',
 					lang: 'en',
 					active: true,
-					version: 'http://iso-3166-1_alpha-2/1',
-					system: 'http://iso-3166-1_alpha-2',
+					version: 'https://iso-3166-1_alpha-2/1',
+					system: 'https://iso-3166-1_alpha-2',
 					short: 'CH'
 				}
 			]
