@@ -1,4 +1,7 @@
 # CovidCertificate-Management-UI
+
+The management UI allows the authorized user to create and revoke a COVID certificate. It allows also an authorized to generate a OneTime password.
+
 ## Technical information
 This repository contains everything to build & test the project.
 Each tag corresponds to a release done internally by the FOITT.
