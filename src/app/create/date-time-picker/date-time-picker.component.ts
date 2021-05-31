@@ -35,10 +35,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 	form: FormGroup;
 
 	constructor(readonly fb: FormBuilder) {
-		this.form = this.fb.group({
-			time: '',
-			date: ''
-		});
+		this.createForm();
 	}
 
 	ngOnInit(): void {
@@ -50,6 +47,19 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 		this.datetime = this.showDate && this.showTime;
 		this.updateValidators();
 		this.updateErrors();
+	}
+
+	private createForm(): void {
+		this.form = this.fb.group({
+			time: '',
+			date: ''
+		});
+
+		this.form.get('date').valueChanges.subscribe(() => {
+			if (this.form.get('time').touched) {
+				this.form.get('time').updateValueAndValidity();
+			}
+		});
 	}
 
 	private defineId(): void {
@@ -81,9 +91,6 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 	}
 
 	private updateErrors(): void {
-		this.form.get('date').setErrors(null);
-		this.form.get('time').setErrors(null);
-
 		if (!!this.errors) {
 			this.handleErrors();
 		}
@@ -104,14 +111,6 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 				}
 				case 'dateTooSmall': {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
-					break;
-				}
-				case 'resultDate': {
-					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
-					break;
-				}
-				case 'resultTime': {
-					this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
 				case 'time': {

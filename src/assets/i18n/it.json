@@ -72,8 +72,6 @@
   "home.title": "Benvenuti",
   "home.training": "Formazione degli utenti per Certificato Covid",
   "i18n.validation.dosesTooBig": "Deve essere inferiore o uguale alle dosi necessarie",
-  "i18n.validation.resultDate": "La data del test è successiva alla data di valutazione",
-  "i18n.validation.resultTime": "La data del test è successiva alla data di valutazione",
   "i18n.validation.dateTooSmall": "La data deve essere successiva al 31.12.1899",
   "i18n.validation.dateAfterToday": "La data non deve essere nel futuro",
   "i18n.validation.date": "È richiesta una data valida",

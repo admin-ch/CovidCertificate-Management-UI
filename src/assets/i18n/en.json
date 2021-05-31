@@ -72,8 +72,6 @@
   "home.title": "Hello",
   "home.training": "User training for COVID certificate",
   "i18n.validation.dosesTooBig": "Must be smaller or equal than required doses",
-  "i18n.validation.resultDate": "Test date after result date",
-  "i18n.validation.resultTime": "Test date after result date",
   "i18n.validation.dateTooSmall": "The date must be after 31.12.1899",
   "i18n.validation.dateAfterToday": "The date cannot be in the future",
   "i18n.validation.date": "A valid date is needed",
