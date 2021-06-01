@@ -16,7 +16,12 @@ import {Claims, OauthService} from './oauth.service';
 import {environment} from '../../environments/environment';
 
 export enum Role {
-	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator'
+	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
+	SUPER_USER = 'bag-cc-superuser',
+	STRONG_AUTH = 'bag-cc-strongauth',
+	HINCODE = 'bag-cc-hincode',
+	HIN_EPR = 'bag-cc-hin-epr',
+	PERSONAL = 'bac-cc-personal'
 }
 
 @Injectable({
@@ -24,6 +29,7 @@ export enum Role {
 })
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
 	private readonly stage: string;
+
 	constructor(
 		private readonly oauthService: OauthService,
 		private readonly router: Router,
@@ -64,7 +70,19 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			return false;
 		}
 
-		if (claims.homeName === 'E-ID CH-LOGIN' && claims.unitName?.indexOf('HIN') === 0) {
+		if (
+			this.oauthService.hasUserRole(Role.SUPER_USER, claims) &&
+			!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)
+		) {
+			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
+			return false;
+		}
+
+		if (
+			this.oauthService.hasUserRole(Role.HIN_EPR, claims) &&
+			(!this.oauthService.hasUserRole(Role.HINCODE, claims) ||
+				!this.oauthService.hasUserRole(Role.PERSONAL, claims))
+		) {
 			this.window.location.href = `https://www.eiam.admin.ch/chloginforbidden?l=${this.translate.currentLang}&stage=${this.stage}`;
 			return false;
 		}
