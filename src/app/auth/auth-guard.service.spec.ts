@@ -81,16 +81,76 @@ describe('AuthGuardService', () => {
 
 			it('should not navigate', done => {
 				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
+				service[fn](null).subscribe(() => {
 					expect(router.navigate).not.toHaveBeenCalled();
 					done();
 				});
 			});
 
 			it('should redirect to auto-login', done => {
-				service.canLoad(null).subscribe(a => {
+				service.canLoad(null).subscribe(() => {
 					expect(window.location.href).toEqual('https://www.eiam.admin.ch/403ggg?l=en&stage=');
 					done();
+				});
+			});
+		});
+
+		describe('Superuser', () => {
+			describe('Without strong authentication', () => {
+				beforeEach(() => {
+					window = Object.create(window);
+					Object.defineProperty(window, 'location', {
+						value: {
+							href: ''
+						}
+					});
+
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
+
+					jest.spyOn(auth, 'hasUserRole')
+						.mockReturnValueOnce(true)
+						.mockReturnValueOnce(true)
+						.mockReturnValue(false);
+				});
+				it('should not give access', done => {
+					service[fn](null).subscribe(result => {
+						expect(result).toBeFalsy();
+						done();
+					});
+				});
+				it('should redirect to eiam page', done => {
+					service[fn](null).subscribe(() => {
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/qoaggg?l=en&stage=');
+						done();
+					});
+				});
+			});
+
+			describe('With strong authentication', () => {
+				beforeEach(() => {
+					window = Object.create(window);
+					Object.defineProperty(window, 'location', {
+						value: {
+							href: ''
+						}
+					});
+
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
+
+					jest.spyOn(auth, 'hasUserRole').mockReturnValue(true);
+				});
+				it('should give access', done => {
+					service[fn](null).subscribe(result => {
+						expect(result).toBeTruthy();
+						done();
+					});
+				});
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
 				});
 			});
 		});
@@ -110,14 +170,14 @@ describe('AuthGuardService', () => {
 
 			it('should not navigate', done => {
 				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
+				service[fn](null).subscribe(() => {
 					expect(router.navigate).not.toHaveBeenCalled();
 					done();
 				});
 			});
 
 			it('should redirect to auto-login', done => {
-				service.canLoad(null).subscribe(a => {
+				service.canLoad(null).subscribe(() => {
 					expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
 					done();
 				});
@@ -139,7 +199,7 @@ describe('AuthGuardService', () => {
 
 			it('should not navigate', done => {
 				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
+				service[fn](null).subscribe(() => {
 					expect(router.navigate).not.toHaveBeenCalled();
 					done();
 				});

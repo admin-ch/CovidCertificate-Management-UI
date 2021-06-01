@@ -16,7 +16,9 @@ import {Claims, OauthService} from './oauth.service';
 import {environment} from '../../environments/environment';
 
 export enum Role {
-	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator'
+	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
+	SUPER_USER = 'bag-cc-superuser',
+	STRONG_AUTH = 'bag-cc-strongauth'
 }
 
 @Injectable({
@@ -61,6 +63,14 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 		const hasAccess = this.oauthService.hasUserRole(Role.CERTIFICATE_CREATOR, claims);
 		if (!hasAccess) {
 			this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
+			return false;
+		}
+
+		if (
+			this.oauthService.hasUserRole(Role.SUPER_USER, claims) &&
+			!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)
+		) {
+			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
 			return false;
 		}
 
