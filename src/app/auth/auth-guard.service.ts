@@ -64,17 +64,25 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			return false;
 		}
 
+		if (this.oauthService.hasUserRole(Role.SUPER_USER, claims)) {
+			return this.checkExpectedRolesForSuperuser(claims);
+		} else {
+			return this.checkExpectedRolesForStandardUser(claims);
+		}
+	}
+
+	private checkExpectedRolesForSuperuser(claims: Claims): boolean {
+		if (!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)) {
+			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
+			return false;
+		}
+		return true;
+	}
+
+	private checkExpectedRolesForStandardUser(claims: Claims): boolean {
 		const hasAccess = this.oauthService.hasUserRole(Role.CERTIFICATE_CREATOR, claims);
 		if (!hasAccess) {
 			this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-			return false;
-		}
-
-		if (
-			this.oauthService.hasUserRole(Role.SUPER_USER, claims) &&
-			!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)
-		) {
-			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
 			return false;
 		}
 
