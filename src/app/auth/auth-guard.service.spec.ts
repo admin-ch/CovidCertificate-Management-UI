@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject} from 'rxjs';
 import {ObliqueTestingModule} from '@oblique/oblique';
-import {AuthGuardService} from './auth-guard.service';
+import {AuthGuardService, Role} from './auth-guard.service';
 import {OauthService} from './oauth.service';
 import {AutoLoginComponent} from './auto-login.component';
 
@@ -36,6 +36,27 @@ describe('AuthGuardService', () => {
 
 	it('should be created', () => {
 		expect(service).toBeTruthy();
+	});
+
+	describe('Role enum', () => {
+		it('should have the correct value for CERTIFICATE_CREATOR', () => {
+			expect(Role.CERTIFICATE_CREATOR).toBe('bag-cc-certificatecreator');
+		});
+		it('should have the correct value for SUPER_USER', () => {
+			expect(Role.SUPER_USER).toBe('bag-cc-superuser');
+		});
+		it('should have the correct value for STRONG_AUTH', () => {
+			expect(Role.STRONG_AUTH).toBe('bag-cc-strongauth');
+		});
+		it('should have the correct value for HINCODE', () => {
+			expect(Role.HINCODE).toBe('bag-cc-hincode');
+		});
+		it('should have the correct value for HIN_EPR', () => {
+			expect(Role.HIN_EPR).toBe('bag-cc-hin-epr');
+		});
+		it('should have the correct value for PERSONAL', () => {
+			expect(Role.PERSONAL).toBe('bac-cc-personal');
+		});
 	});
 
 	const runTest = (fn: string) => {
@@ -155,10 +176,15 @@ describe('AuthGuardService', () => {
 			});
 		});
 
-		describe('With HIN & CH-Login', () => {
+		describe('With HIN', () => {
 			beforeEach(() => {
 				mock.claims$.next({homeName: 'E-ID CH-LOGIN', unitName: 'HIN'});
-				jest.spyOn(auth, 'hasUserRole').mockReturnValue(true);
+				jest.spyOn(auth, 'hasUserRole')
+					.mockReturnValueOnce(true)
+					.mockReturnValueOnce(true)
+					.mockReturnValueOnce(true)
+					.mockReturnValueOnce(true)
+					.mockReturnValue(false);
 			});
 
 			it('should return false', done => {
