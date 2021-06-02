@@ -128,10 +128,9 @@ describe('AuthGuardService', () => {
 
 					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
 
-					jest.spyOn(auth, 'hasUserRole')
-						.mockReturnValueOnce(true)
-						.mockReturnValueOnce(true)
-						.mockReturnValue(false);
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER
+					);
 				});
 				it('should not give access', done => {
 					service[fn](null).subscribe(result => {
@@ -156,9 +155,14 @@ describe('AuthGuardService', () => {
 						}
 					});
 
-					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
+					mock.claims$.next({
+						userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser', 'bag-cc-strongauth']
+					});
 
-					jest.spyOn(auth, 'hasUserRole').mockReturnValue(true);
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) =>
+							role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER || role === Role.STRONG_AUTH
+					);
 				});
 				it('should give access', done => {
 					service[fn](null).subscribe(result => {
@@ -176,36 +180,73 @@ describe('AuthGuardService', () => {
 			});
 		});
 
-		describe('With HIN', () => {
-			beforeEach(() => {
-				mock.claims$.next({homeName: 'E-ID CH-LOGIN', unitName: 'HIN'});
-				jest.spyOn(auth, 'hasUserRole')
-					.mockReturnValueOnce(true)
-					.mockReturnValueOnce(true)
-					.mockReturnValueOnce(true)
-					.mockReturnValueOnce(true)
-					.mockReturnValue(false);
-			});
+		describe('HIN', () => {
+			describe('Without hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr']});
 
-			it('should return false', done => {
-				service[fn](null).subscribe(a => {
-					expect(a).toBe(false);
-					done();
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.HIN_EPR
+					);
+				});
+
+				it('should return false', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(false);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
+				});
+
+				it('should redirect to auto-login', done => {
+					service.canLoad(null).subscribe(() => {
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
+						done();
+					});
 				});
 			});
 
-			it('should not navigate', done => {
-				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(() => {
-					expect(router.navigate).not.toHaveBeenCalled();
-					done();
-				});
-			});
+			describe('With hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({
+						userroles: [
+							'bag-cc-certificatecreator',
+							'bag-cc-hin-epr',
+							'bag-cc-hincode',
+							,
+							'bag-cc-personal'
+						]
+					});
 
-			it('should redirect to auto-login', done => {
-				service.canLoad(null).subscribe(() => {
-					expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
-					done();
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) =>
+							role === Role.CERTIFICATE_CREATOR ||
+							role === Role.HIN_EPR ||
+							role === Role.HINCODE ||
+							role === Role.PERSONAL
+					);
+				});
+
+				it('should return true', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(true);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
 				});
 			});
 		});
