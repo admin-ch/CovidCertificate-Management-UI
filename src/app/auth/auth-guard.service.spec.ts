@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject} from 'rxjs';
 import {ObliqueTestingModule} from '@oblique/oblique';
-import {AuthGuardService} from './auth-guard.service';
+import {AuthGuardService, Role} from './auth-guard.service';
 import {OauthService} from './oauth.service';
 import {AutoLoginComponent} from './auto-login.component';
 
@@ -36,6 +36,27 @@ describe('AuthGuardService', () => {
 
 	it('should be created', () => {
 		expect(service).toBeTruthy();
+	});
+
+	describe('Role enum', () => {
+		it('should have the correct value for CERTIFICATE_CREATOR', () => {
+			expect(Role.CERTIFICATE_CREATOR).toBe('bag-cc-certificatecreator');
+		});
+		it('should have the correct value for SUPER_USER', () => {
+			expect(Role.SUPER_USER).toBe('bag-cc-superuser');
+		});
+		it('should have the correct value for STRONG_AUTH', () => {
+			expect(Role.STRONG_AUTH).toBe('bag-cc-strongauth');
+		});
+		it('should have the correct value for HINCODE', () => {
+			expect(Role.HINCODE).toBe('bag-cc-hincode');
+		});
+		it('should have the correct value for HIN_EPR', () => {
+			expect(Role.HIN_EPR).toBe('bag-cc-hin-epr');
+		});
+		it('should have the correct value for PERSONAL', () => {
+			expect(Role.PERSONAL).toBe('bac-cc-personal');
+		});
 	});
 
 	const runTest = (fn: string) => {
@@ -81,45 +102,145 @@ describe('AuthGuardService', () => {
 
 			it('should not navigate', done => {
 				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
+				service[fn](null).subscribe(() => {
 					expect(router.navigate).not.toHaveBeenCalled();
 					done();
 				});
 			});
 
 			it('should redirect to auto-login', done => {
-				service.canLoad(null).subscribe(a => {
+				service.canLoad(null).subscribe(() => {
 					expect(window.location.href).toEqual('https://www.eiam.admin.ch/403ggg?l=en&stage=');
 					done();
 				});
 			});
 		});
 
-		describe('With HIN & CH-Login', () => {
-			beforeEach(() => {
-				mock.claims$.next({homeName: 'E-ID CH-LOGIN', unitName: 'HIN'});
-				jest.spyOn(auth, 'hasUserRole').mockReturnValue(true);
-			});
+		describe('Superuser', () => {
+			describe('Without strong authentication', () => {
+				beforeEach(() => {
+					window = Object.create(window);
+					Object.defineProperty(window, 'location', {
+						value: {
+							href: ''
+						}
+					});
 
-			it('should return false', done => {
-				service[fn](null).subscribe(a => {
-					expect(a).toBe(false);
-					done();
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER
+					);
+				});
+				it('should not give access', done => {
+					service[fn](null).subscribe(result => {
+						expect(result).toBeFalsy();
+						done();
+					});
+				});
+				it('should redirect to eiam page', done => {
+					service[fn](null).subscribe(() => {
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/qoaggg?l=en&stage=');
+						done();
+					});
 				});
 			});
 
-			it('should not navigate', done => {
-				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
-					expect(router.navigate).not.toHaveBeenCalled();
-					done();
+			describe('With strong authentication', () => {
+				beforeEach(() => {
+					window = Object.create(window);
+					Object.defineProperty(window, 'location', {
+						value: {
+							href: ''
+						}
+					});
+
+					mock.claims$.next({
+						userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser', 'bag-cc-strongauth']
+					});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) =>
+							role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER || role === Role.STRONG_AUTH
+					);
+				});
+				it('should give access', done => {
+					service[fn](null).subscribe(result => {
+						expect(result).toBeTruthy();
+						done();
+					});
+				});
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
+				});
+			});
+		});
+
+		describe('HIN', () => {
+			describe('Without hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr']});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.HIN_EPR
+					);
+				});
+
+				it('should return false', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(false);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
+				});
+
+				it('should redirect to auto-login', done => {
+					service.canLoad(null).subscribe(() => {
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
+						done();
+					});
 				});
 			});
 
-			it('should redirect to auto-login', done => {
-				service.canLoad(null).subscribe(a => {
-					expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
-					done();
+			describe('With hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({
+						userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr', 'bag-cc-hincode', 'bag-cc-personal']
+					});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string, claims: any) =>
+							role === Role.CERTIFICATE_CREATOR ||
+							role === Role.HIN_EPR ||
+							role === Role.HINCODE ||
+							role === Role.PERSONAL
+					);
+				});
+
+				it('should return true', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(true);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
 				});
 			});
 		});
@@ -139,7 +260,7 @@ describe('AuthGuardService', () => {
 
 			it('should not navigate', done => {
 				jest.spyOn(router, 'navigate');
-				service[fn](null).subscribe(a => {
+				service[fn](null).subscribe(() => {
 					expect(router.navigate).not.toHaveBeenCalled();
 					done();
 				});
