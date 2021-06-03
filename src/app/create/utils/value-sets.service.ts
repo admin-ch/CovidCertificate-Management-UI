@@ -15,7 +15,8 @@ export class ValueSetsService {
 	private readonly certificateLanguages = [
 		{display: this.translateService.instant('common.language.de'), code: 'de'},
 		{display: this.translateService.instant('common.language.fr'), code: 'fr'},
-		{display: this.translateService.instant('common.language.it'), code: 'it'}
+		{display: this.translateService.instant('common.language.it'), code: 'it'},
+		{display: this.translateService.instant('common.language.rm'), code: 'rm'}
 	];
 
 	constructor(private readonly translateService: TranslateService) {}
