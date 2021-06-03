@@ -231,7 +231,7 @@ describe('ValueSetsService', () => {
 
 	describe('Certificate languages', () => {
 		it('should give back the correct number of certificate languages', () => {
-			expect(service.getCertificateLanguages().length).toBe(3);
+			expect(service.getCertificateLanguages().length).toBe(4);
 		});
 
 		it('should have german has certificate language', () => {
@@ -244,6 +244,10 @@ describe('ValueSetsService', () => {
 
 		it('should have italian has certificate language', () => {
 			expect(service.getCertificateLanguages()[2]).toEqual({code: 'it', display: 'common.language.it'});
+		});
+
+		it('should have romansh has certificate language', () => {
+			expect(service.getCertificateLanguages()[3]).toEqual({code: 'rm', display: 'common.language.rm'});
 		});
 	});
 });
