@@ -1,3 +1,5 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
 .from {
 	grid-column: span 2;
 	display: flex;
@@ -11,4 +13,10 @@
 
 .to {
 	grid-column: span 1;
+}
+
+.form-field-info {
+	grid-column: span 3;
+	font-size: $font-size-smallest;
+	text-align: justify;
 }
