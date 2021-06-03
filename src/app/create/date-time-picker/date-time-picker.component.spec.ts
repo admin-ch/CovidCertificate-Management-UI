@@ -72,7 +72,14 @@ describe('DateTimePickerComponent', () => {
 				component.ngOnChanges();
 				expect(component.form.get('date').setValidators).toHaveBeenCalledWith(Validators.required);
 			});
+
+			it('should set required validator on time', () => {
+				jest.spyOn(component.form.get('time'), 'setValidators');
+				component.ngOnChanges();
+				expect(component.form.get('time').setValidators).toHaveBeenCalledWith(Validators.required);
+			});
 		});
+
 		describe('not required', () => {
 			beforeEach(() => {
 				component.required = undefined;
@@ -93,6 +100,7 @@ describe('DateTimePickerComponent', () => {
 				expect(component.label).toBeUndefined();
 			});
 		});
+
 		describe('required, not showing date', () => {
 			beforeEach(() => {
 				component.required = true;
@@ -109,6 +117,7 @@ describe('DateTimePickerComponent', () => {
 				expect(component.form.get('time').setValidators).toHaveBeenCalledWith(Validators.required);
 			});
 		});
+
 		describe('required, not showing time', () => {
 			beforeEach(() => {
 				component.required = true;
@@ -123,6 +132,80 @@ describe('DateTimePickerComponent', () => {
 				jest.spyOn(component.form.get('time'), 'setValidators');
 				component.ngOnChanges();
 				expect(component.form.get('time').setValidators).toHaveBeenCalledTimes(0);
+			});
+		});
+
+		describe('Error handling', () => {
+			describe('Invalid date', () => {
+				beforeEach(() => {
+					component.errors = {['date']: {required: true}};
+					component.ngOnChanges();
+				});
+
+				it('should set error correctly in date field', () => {
+					expect(component.form.get('date').errors).toEqual({date: {required: true}});
+				});
+				it('should set no errors in time field', () => {
+					expect(component.form.get('time').errors).toBeNull();
+				});
+			});
+
+			describe('Invalid after today', () => {
+				beforeEach(() => {
+					component.errors = {dateAfterToday: true};
+					component.ngOnChanges();
+				});
+
+				it('should set error correctly in date field', () => {
+					expect(component.form.get('date').errors).toEqual({dateAfterToday: true});
+				});
+				it('should set no errors in time field', () => {
+					expect(component.form.get('time').errors).toBeNull();
+				});
+			});
+
+			describe('Date too small', () => {
+				beforeEach(() => {
+					component.errors = {dateTooSmall: true};
+					component.ngOnChanges();
+				});
+
+				it('should set error correctly in date field', () => {
+					expect(component.form.get('date').errors).toEqual({dateTooSmall: true});
+				});
+				it('should set no errors in time field', () => {
+					expect(component.form.get('time').errors).toBeNull();
+				});
+			});
+
+			describe('Invalid time', () => {
+				beforeEach(() => {
+					component.errors = {['time']: {required: true}};
+					component.ngOnChanges();
+				});
+
+				it('should set no errors in date field', () => {
+					expect(component.form.get('date').errors).toBeNull();
+				});
+
+				it('should set error correctly in time field', () => {
+					expect(component.form.get('time').errors).toEqual({time: {required: true}});
+				});
+			});
+
+			describe('Invalid time', () => {
+				beforeEach(() => {
+					component.errors = {timeAfterToday: true};
+					component.ngOnChanges();
+				});
+
+				it('should set no errors in date field', () => {
+					expect(component.form.get('date').errors).toBeNull();
+				});
+
+				it('should set error correctly in time field', () => {
+					expect(component.form.get('time').errors).toEqual({timeAfterToday: true});
+				});
 			});
 		});
 	});

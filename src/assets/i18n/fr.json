@@ -72,8 +72,6 @@
   "home.title": "Bonjour",
   "home.training": "Formation des utilisateurs pour Certificat COVID",
   "i18n.validation.dosesTooBig": "Doit être inférieur ou égal au nombre de doses requises",
-  "i18n.validation.resultDate": "La date de test est située après la date de l'évaluation",
-  "i18n.validation.resultTime": "La date de test est située après la date de l'évaluation",
   "i18n.validation.dateTooSmall": "La date doit être située après le 31.12.1899",
   "i18n.validation.dateAfterToday": "La date ne doit pas être située dans le futur",
   "i18n.validation.date": "Merci d'indiquer une date correcte",
