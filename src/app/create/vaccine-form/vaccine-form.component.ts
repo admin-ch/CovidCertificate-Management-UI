@@ -11,7 +11,8 @@ import * as moment from 'moment';
 
 @Component({
 	selector: 'ec-vaccine-form',
-	templateUrl: './vaccine-form.component.html'
+	templateUrl: './vaccine-form.component.html',
+	styleUrls: ['./vaccine-form.component.scss']
 })
 export class VaccineFormComponent implements OnInit {
 	@Output() back = new EventEmitter<void>();
