@@ -29,6 +29,7 @@ import {HttpConfigInterceptor} from './auth/http.config.interceptor';
 import {EiamSelfAdminComponent} from './eiam-self-admin/eiam-self-admin.component';
 import {SharedModule} from 'shared/shared.module';
 import {environment} from '../environments/environment';
+import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
 
 export const loadConfig =
 	(oidcConfigService: OidcConfigService, openIdConfigService: OpenIdConfigService): (() => Promise<any>) =>
@@ -58,6 +59,7 @@ registerLocaleData(localeENGB);
 	providers: [
 		{provide: LOCALE_ID, useValue: 'de-CH'},
 		{provide: HTTP_INTERCEPTORS, useClass: ObHttpApiInterceptor, multi: true},
+		{provide: HTTP_INTERCEPTORS, useClass: HttpResponsesInterceptor, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true},
 		OidcConfigService,
 		{
@@ -79,6 +81,7 @@ export class AppModule {
 	) {
 		ObLanguageService.locales.en = 'en-GB';
 		interceptor.api.url = '/v1';
+		interceptor.api.notification.active = false;
 		meta.titleSuffix = 'application.title';
 		config.homePageRoute = '/dashboard';
 		config.locale.locales = [
