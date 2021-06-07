@@ -85,5 +85,7 @@
   "otp.instructions": "Sie können hier einen Geheimschlüssel erzeugen und in die Zwischenablage kopieren.",
   "otp.key": "Geheimschlüssel",
   "otp.link": "OTP generieren",
-  "otp.title": "Neues OTP generieren"
+  "otp.title": "Neues OTP generieren",
+  "validation.error.http.470": "Ungültiges UVCI-Format",
+  "validation.error.http.480": "UVCI wurde bereits gesperrt"
 }
