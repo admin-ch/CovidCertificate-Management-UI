@@ -1,6 +1,6 @@
 ﻿{
   "application.title": "Certificat COVID",
-  "application.organization.name": "Office fédéral de la santé publique OFSP",
+  "application.organization.name": "Office fédéral de l'informatique et de la télécommunication OFIT",
   "certificateCreate.link": "Établir un nouveau certificat",
   "certificateCreate.form.label.personalData.firstName": "Prénom",
   "certificateCreate.form.label.personalData.surName": "Nom",

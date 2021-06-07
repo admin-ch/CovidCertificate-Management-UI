@@ -1,6 +1,6 @@
 ﻿{
   "application.title": "Covid-Zertifikat",
-  "application.organization.name": "Bundesamt für Gesundheit BAG",
+  "application.organization.name": "Bundesamt für Informatik und Telekommunikation BIT",
   "certificateCreate.link": "Neues Zertifikat erstellen",
   "certificateCreate.form.label.personalData.firstName": "Vorname",
   "certificateCreate.form.label.personalData.surName": "Nachname",

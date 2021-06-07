@@ -1,6 +1,6 @@
 ﻿{
   "application.title": "Certificato COVID",
-  "application.organization.name": "Ufficio federale della sanità pubblica UFSP",
+  "application.organization.name": "Ufficio federale dell'informatica e della telecomunicazione UFIT",
   "certificateCreate.link": "Crea nuovo certificato",
   "certificateCreate.form.label.personalData.firstName": "Nome",
   "certificateCreate.form.label.personalData.surName": "Cognome",
