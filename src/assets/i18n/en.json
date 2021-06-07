@@ -86,6 +86,8 @@
   "otp.key": "Private key",
   "otp.link": "Generate OTP",
   "otp.title": "Generate new OTP",
+  "support.instructions": "If you have any problems with the application, please contact the FOITT Helpdesk: 058 465 88 88",
+  "support.title": "Support",
   "validation.error.http.470": "Invalid UVCI format",
   "validation.error.http.480": "UVCI already revoked"
 }
