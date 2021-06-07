@@ -55,7 +55,7 @@
   "dashboard.createCertificate.description": "Qui è possibile creare un nuovo certificato.",
   "dashboard.createCertificate.action": "Crea certificato",
   "dashboard.invalidateCertificate.title": "Bloccare un certificato",
-  "dashboard.invalidateCertificate.description": "Qui è possibile bloccare i certificati creati. Questi appaiono poi in una lista dei certificati bloccati.",
+  "dashboard.invalidateCertificate.description": "Qui è possibile bloccare i certificati creati. I certificati revocati sono dichiarati non validi e non possono più essere utilizzati.",
   "dashboard.invalidateCertificate.action": "Blocca certificato",
   "dashboard.otp.title": "Generare un nuovo OTP",
   "dashboard.otp.description": "Qui puoi generare un nuovo OTP",

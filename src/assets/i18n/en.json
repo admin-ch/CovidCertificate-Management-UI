@@ -54,7 +54,7 @@
   "dashboard.createCertificate.description": "You can generate a new certificate here.",
   "dashboard.createCertificate.action": "Generate certificate",
   "dashboard.invalidateCertificate.title": "Revoke certificate",
-  "dashboard.invalidateCertificate.description": "You can revoke generated certificates here. They will then appear on a revocation list.",
+  "dashboard.invalidateCertificate.description": "You can revoke generated certificates here. Revoked certificates are declared invalid and can no longer be used.",
   "dashboard.invalidateCertificate.action": "Revoke certificate",
   "dashboard.otp.title": "Generate new OTP",
   "dashboard.otp.description": "You can generate a new OTP here",
