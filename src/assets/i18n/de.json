@@ -54,7 +54,7 @@
   "dashboard.createCertificate.description": "Hier können Sie ein neues Zertifikat erstellen.",
   "dashboard.createCertificate.action": "Zertifikat erstellen",
   "dashboard.invalidateCertificate.title": "Zertifikat sperren",
-  "dashboard.invalidateCertificate.description": "Hier können Sie erstellte Zertifikate sperren. Diese erscheinen anschliessend auf einer Sperrliste.",
+  "dashboard.invalidateCertificate.description": "Hier können Sie erstellte Zertifikate sperren. Gesperrte Zertifikate werden als nicht gültig deklariert und können nicht mehr verwendet werden.",
   "dashboard.invalidateCertificate.action": "Zertifikat sperren",
   "dashboard.otp.title": "Neues OTP generieren",
   "dashboard.otp.description": "Hier können Sie ein neues OTP generieren",

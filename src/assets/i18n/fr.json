@@ -54,7 +54,7 @@
   "dashboard.createCertificate.description": "Vous pouvez ici établir un nouveau certificat.",
   "dashboard.createCertificate.action": "Établir un certificat",
   "dashboard.invalidateCertificate.title": "Verrouiller le certificat",
-  "dashboard.invalidateCertificate.description": "Vous pouvez ici verrouiller des certificats établis. Ils apparaîtront ensuite sur une liste verrouillée.",
+  "dashboard.invalidateCertificate.description": "Vous pouvez ici verrouiller des certificats établis. Les certificats révoqués sont déclarés comme non valides et ne peuvent plus être utilisés.",
   "dashboard.invalidateCertificate.action": "Verrouiller le certificat",
   "dashboard.otp.title": "Générer un nouvel OTP",
   "dashboard.otp.description": "Vous pouvez ici générer un nouvel OTP",
