@@ -18,7 +18,8 @@ import {
 	ObMasterLayoutModule,
 	ObOffCanvasModule,
 	ObIconModule,
-	OB_BANNER
+	OB_BANNER,
+	ObDropdownModule
 } from '@oblique/oblique';
 import {AuthModule, OidcConfigService} from 'angular-auth-oidc-client';
 import {ObLanguageService} from 'shared/language.service';
@@ -53,6 +54,7 @@ registerLocaleData(localeENGB);
 		AuthModule.forRoot(),
 		ObMasterLayoutModule,
 		ObOffCanvasModule,
+		ObDropdownModule,
 		MatTooltipModule,
 		ObIconModule.forRoot()
 	],

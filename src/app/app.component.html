@@ -1,5 +1,14 @@
 <ob-master-layout [navigation]="navigation">
 	<ng-container obHeaderTitle>{{ "application.title" | translate }}</ng-container>
+	<ng-template #obHeaderControl>
+		<ob-dropdown position="left">
+			<span dropdown-toggle class="fa fa-fw fa-question ob-control-icon"></span>
+			<ng-container dropdown-content>
+				<h4>{{ "support.title" | translate }}</h4>
+				<p>{{ "support.instructions" | translate }}</p>
+			</ng-container>
+		</ob-dropdown>
+	</ng-template>
 	<ng-container *ngIf="isAuthenticated$ | async">
 		<ng-template #obHeaderControl>
 			<button id="button-logout" [matTooltip]="'logout' | translate" class="ob-control-link" (click)="logout()">
