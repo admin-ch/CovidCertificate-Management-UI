@@ -1,6 +1,6 @@
 ﻿{
   "application.title": "COVID certificate",
-  "application.organization.name": "Federal Office of Public Health FOPH",
+  "application.organization.name": "Federal Office of Information Technology, Systems and Telecommunication FOITT",
   "certificateCreate.link": "Generate new certificate",
   "certificateCreate.form.label.personalData.firstName": "First name",
   "certificateCreate.form.label.personalData.surName": "Last name",
