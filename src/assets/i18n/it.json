@@ -90,7 +90,7 @@
   "otp.key": "Chiave segreta",
   "otp.link": "Genera OTP",
   "otp.title": "Generare un nuovo OTP",
-  "support.instructions": "In caso di problemi con l'applicazione, si rivolga all'helpdesk dell'UFIT: 058 465 88 88.",
+  "support.instructions": "In caso di problemi con l'applicazione, si rivolga all'helpdesk dell'UFIT:",
   "support.title": "Supporto",
   "validation.error.http.470": "Formato UVCI non valido",
   "validation.error.http.480": "UVCI già bloccato"
