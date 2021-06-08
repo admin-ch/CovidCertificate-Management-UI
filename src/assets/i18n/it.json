@@ -22,6 +22,7 @@
   "certificateCreate.form.group.personalData": "Dati personali",
   "certificateCreate.form.group.vaccine": "Vaccinazione",
   "certificateCreate.form.group.test": "Test",
+  "certificateCreate.form.group.test.type.antigen": "Test antigenico rapido",
   "certificateCreate.form.group.recovery": "Guarigione",
   "certificateCreate.step-one.enum.vaccination": "Vaccinazione",
   "certificateCreate.step-one.enum.test": "Test negativo",
