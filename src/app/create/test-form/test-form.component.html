@@ -3,6 +3,11 @@
 		<legend class="padding-top">{{ "certificateCreate.form.group.personalData" | translate }}</legend>
 
 		<div class="form-field">
+			<p class="form-field-info">
+				<strong>{{ "common.important" | translate }}: </strong>
+				{{ "certificateCreate.step-two.personaldata.information" | translate }}
+			</p>
+
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</mat-label>
 				<input type="text" matInput formControlName="firstName" id="firstName" />
