@@ -51,9 +51,9 @@
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.vaccine.medicalProduct" | translate }}</mat-label>
 				<mat-select formControlName="medicalProduct" id="medicalProduct">
-					<mat-option *ngFor="let option of getMedicalProducts()" [value]="option">
-						{{ option.display }}
-					</mat-option>
+					<mat-optgroup *ngFor="let option of getMedicalProducts()" [label]="option.group">
+						<mat-option [value]="option">{{ option.display }}</mat-option>
+					</mat-optgroup>
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>

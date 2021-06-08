@@ -26,6 +26,7 @@ import {RecoveryFormComponent} from './recovery-form/recovery-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DownloadComponent} from './download/download.component';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
 	declarations: [
@@ -52,6 +53,7 @@ import {DownloadComponent} from './download/download.component';
 		MatMomentDateModule,
 		MatRadioModule,
 		MatSelectModule,
+		MatOptionModule,
 		MatStepperModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])

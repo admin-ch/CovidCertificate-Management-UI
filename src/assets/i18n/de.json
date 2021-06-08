@@ -21,6 +21,7 @@
   "certificateCreate.form.group.personalData": "Personalien",
   "certificateCreate.form.group.vaccine": "Impfung",
   "certificateCreate.form.group.test": "Test",
+  "certificateCreate.form.group.test.type.antigen": "Antigen-Schnelltest",
   "certificateCreate.form.group.recovery": "Genesung",
   "certificateCreate.step-one.enum.vaccination": "Impfung",
   "certificateCreate.step-one.enum.test": "Negativer Test",
