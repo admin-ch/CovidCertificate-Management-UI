@@ -18,13 +18,7 @@ export class ValueSetsService {
 	private medicinalProducts: ProductInfoWithGroup[] = [];
 	private typeOfTests: ProductInfo[] = [];
 	private manufacturerOfTest: ProductInfoWithGroup[] = [];
-
-	private readonly certificateLanguages = [
-		{display: this.translateService.instant('common.language.de'), code: 'de'},
-		{display: this.translateService.instant('common.language.fr'), code: 'fr'},
-		{display: this.translateService.instant('common.language.it'), code: 'it'},
-		{display: this.translateService.instant('common.language.rm'), code: 'rm'}
-	];
+	private certificateLanguages: ProductInfo[] = [];
 
 	constructor(private readonly translateService: TranslateService) {}
 
@@ -34,6 +28,7 @@ export class ValueSetsService {
 		this.computeCountryOptions();
 		this.computeTypeOfTests();
 		this.computeManufacturerOfTest();
+		this.computeCertificateLanguages();
 	}
 
 	getCertificateLanguages(): ProductInfo[] {
@@ -101,5 +96,14 @@ export class ValueSetsService {
 				code: testValue.manufacturer_code_eu
 			}))
 			.filter(value => value.code !== '');
+	}
+
+	private computeCertificateLanguages(): void {
+		this.certificateLanguages = [
+			{display: this.translateService.instant('common.language.de'), code: 'de'},
+			{display: this.translateService.instant('common.language.fr'), code: 'fr'},
+			{display: this.translateService.instant('common.language.it'), code: 'it'},
+			{display: this.translateService.instant('common.language.rm'), code: 'rm'}
+		];
 	}
 }
