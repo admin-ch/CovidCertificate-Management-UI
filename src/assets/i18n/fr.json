@@ -37,6 +37,7 @@
   "certificateCreate.step-four.description": "Vous pouvez désormais le télécharger ou laisser la personne vaccinée scanner le code QR affiché.",
   "certificateCreate.step-four.download": "Télécharger le certificat",
   "certificateCreate.step-four.generateNew": "Établir un nouveau certificat",
+  "certificateCreate.step-four.warning": "Le PDF contient des données sensibles. Il doit être remis en personne ou envoyé par un canal sécurisé.",
   "certificateRevoke.button": "Verrouiller le certificat",
   "certificateRevoke.instructions": "Vous pouvez verrouiller ici des certificats établis. Ils apparaîtront ensuite sur une liste verrouillée.",
   "certificateRevoke.link": "Verrouiller le certificat",

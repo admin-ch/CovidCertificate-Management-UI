@@ -37,6 +37,7 @@
   "certificateCreate.step-four.description": "You can now download the generated certificate or get the vaccinated person to scan the QR code shown here.",
   "certificateCreate.step-four.download": "Download certificate",
   "certificateCreate.step-four.generateNew": "Generate new certificate",
+  "certificateCreate.step-four.warning": "The PDF contains sensitive data. It must be delivered in person or sent via a secure channel.",
   "certificateRevoke.button": "Revoke certificate",
   "certificateRevoke.instructions": "You can revoke generated certificates here. They will then appear on a revocation list.",
   "certificateRevoke.link": "Revoke certificate",

@@ -38,6 +38,7 @@
   "certificateCreate.step-four.description": "Ora è possibile scaricare il certificato generato o permettere alla persona vaccinata di scansionare il codice QR mostrato qui.",
   "certificateCreate.step-four.download": "Scarica certificato",
   "certificateCreate.step-four.generateNew": "Crea nuovo certificato",
+  "certificateCreate.step-four.warning": "Il PDF contiene dati sensibili. Deve essere consegnato di persona o inviato attraverso un canale sicuro.",
   "certificateRevoke.button": "Blocca certificato",
   "certificateRevoke.instructions": "Qui è possibile bloccare i certificati emessi Questi appaiono poi in una lista dei certificati bloccati.",
   "certificateRevoke.link": "Blocca certificato",

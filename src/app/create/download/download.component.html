@@ -2,6 +2,9 @@
 	<div>
 		<h4>{{ "certificateCreate.step-four.title" | translate }}</h4>
 		<p>{{ "certificateCreate.step-four.description" | translate }}</p>
+
+		<ob-alert type="warning">{{ "certificateCreate.step-four.warning" | translate }}</ob-alert>
+
 		<button mat-button (click)="downloadCertificate()" obButton="primary" id="cert-create-download">
 			{{ "certificateCreate.step-four.download" | translate }}
 		</button>
