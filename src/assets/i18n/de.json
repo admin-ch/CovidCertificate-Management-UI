@@ -37,6 +37,7 @@
   "certificateCreate.step-four.description": "Sie können das generierte Zertifikat jetzt herunterladen oder den hier dargestellten QR-Code vom Geimpften einscannen lassen.",
   "certificateCreate.step-four.download": "Zertifikat herunterladen",
   "certificateCreate.step-four.generateNew": "Neues Zertifikat erstellen",
+  "certificateCreate.step-four.warning": "Das PDF enthält sensitive Daten. Es ist persönlich abzugeben oder auf einem sicheren Kanal zu übermitteln.",
   "certificateRevoke.button": "Zertifikat sperren",
   "certificateRevoke.instructions": "Hier können Sie erstellte Zertifikate sperren. Diese erscheinen anschliessend auf einer Sperrliste.",
   "certificateRevoke.link": "Zertifikat sperren",

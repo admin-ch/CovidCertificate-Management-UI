@@ -4,7 +4,13 @@ import {SharedModule} from 'shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {AuthGuardService} from '../auth/auth-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
-import {ObButtonModule, ObErrorMessagesModule, ObNestedFormModule, ObNumberFormatModule} from '@oblique/oblique';
+import {
+	ObAlertModule,
+	ObButtonModule,
+	ObErrorMessagesModule,
+	ObNestedFormModule,
+	ObNumberFormatModule
+} from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -34,6 +40,7 @@ import {DownloadComponent} from './download/download.component';
 	],
 	imports: [
 		SharedModule,
+		ObAlertModule,
 		ObButtonModule,
 		ObErrorMessagesModule,
 		ObNestedFormModule,
