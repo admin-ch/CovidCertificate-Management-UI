@@ -68,6 +68,8 @@
   "footer.legal.url": "https://www.admin.ch/gov/fr/accueil/conditions-utilisation.html",
   "home.administration": "Instructions pour l'administration des utilisateurs (gestion déléguée) par le superutilisateur",
   "home.instructions": "Vous vous trouvez sur la page Internet permettant d'établir des certificats COVID.",
+  "home.issuer": "Documentation pour les émetteurs et émettrices",
+  "home.issuer.url": "https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/dokumente-fuer-gesundheitsfachpersonen.html#73746234",
   "home.login.title": "Établir des certificats COVID",
   "home.login.subtitle": "Accès réservé aux personnes autorisées",
   "home.login.button": "Connexion",
@@ -89,7 +91,7 @@
   "otp.key": "Clé secrète",
   "otp.link": "Générer un OTP",
   "otp.title": "Générer un nouvel OTP",
-  "support.instructions": "Si vous rencontrez des problèmes avec l'application, veuillez contacter le helpdesk de l'OFIT: 058 465 88 88.",
+  "support.instructions": "Si vous rencontrez des problèmes avec l'application, veuillez contacter le helpdesk de l'OFIT:",
   "support.title": "Support",
   "validation.error.http.470": "Format de l'UVCI invalide",
   "validation.error.http.480": "UVCI déjà verrouillé"

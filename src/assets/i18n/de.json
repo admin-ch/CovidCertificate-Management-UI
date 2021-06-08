@@ -68,6 +68,8 @@
   "footer.legal.url": "https://www.admin.ch/gov/de/start/rechtliches.html",
   "home.administration": "Anleitungen zur Benutzerverwaltung (delegiertes Management) durch Superuser",
   "home.instructions": "Sie befinden sich auf der Internetseite zum Erstellen von Covid Zertifikaten.",
+  "home.issuer": "Dokumentation für Ausstellerinnen und Aussteller",
+  "home.issuer.url": "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/dokumente-fuer-gesundheitsfachpersonen.html#-1524643999",
   "home.login.title": "Erstellen von Covid Zertifikaten",
   "home.login.subtitle": "Zugang für berechtigte Personen",
   "home.login.button": "Login",
@@ -89,7 +91,7 @@
   "otp.key": "Geheimschlüssel",
   "otp.link": "OTP generieren",
   "otp.title": "Neues OTP generieren",
-  "support.instructions": "Sollten Sie Probleme mit der Anwendung haben, wenden Sie sich bitte an den BIT-Helpdesk: 058 465 88 88",
+  "support.instructions": "Sollten Sie Probleme mit der Anwendung haben, wenden Sie sich bitte an den BIT-Helpdesk:",
   "support.title": "Support",
   "validation.error.http.470": "Ungültiges UVCI-Format",
   "validation.error.http.480": "UVCI wurde bereits gesperrt"
