@@ -69,6 +69,8 @@
   "footer.legal.url": "https://www.admin.ch/gov/it/pagina-iniziale/basi-legali.html",
   "home.administration": "Istruzioni per l'amministrazione degli utenti (gestione delegata) da parte del superutente",
   "home.instructions": "Questo è il sito per creare certificati COVID.",
+  "home.issuer": "Documentazione per gli emittenti",
+  "home.issuer.url": "https://www.bag.admin.ch/bag/it/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/dokumente-fuer-gesundheitsfachpersonen.html#-817983233",
   "home.login.title": "Creazione di certificati COVID",
   "home.login.subtitle": "Accesso per le persone autorizzate",
   "home.login.button": "Login",

@@ -68,6 +68,8 @@
   "footer.legal.url": "https://www.admin.ch/gov/de/start/rechtliches.html",
   "home.administration": "Anleitungen zur Benutzerverwaltung (delegiertes Management) durch Superuser",
   "home.instructions": "Sie befinden sich auf der Internetseite zum Erstellen von Covid Zertifikaten.",
+  "home.issuer": "Dokumentation für Ausstellerinnen und Aussteller",
+  "home.issuer.url": "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/dokumente-fuer-gesundheitsfachpersonen.html#-1524643999",
   "home.login.title": "Erstellen von Covid Zertifikaten",
   "home.login.subtitle": "Zugang für berechtigte Personen",
   "home.login.button": "Login",

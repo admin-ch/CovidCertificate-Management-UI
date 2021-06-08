@@ -68,6 +68,8 @@
   "footer.legal.url": "https://www.admin.ch/gov/en/start/terms-and-conditions.html",
   "home.administration": "Instructions for user administration (delegated management) by superuser",
   "home.instructions": "You are on the website for generating COVID certificates.",
+  "home.issuer": "Documentation for issuers",
+  "home.issuer.url": "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/dokumente-fuer-gesundheitsfachpersonen.html#-1524643999",
   "home.login.title": "Generate COVID certificates",
   "home.login.subtitle": "Access for authorised people",
   "home.login.button": "Login",
