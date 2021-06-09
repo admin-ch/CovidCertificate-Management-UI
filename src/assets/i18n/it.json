@@ -6,7 +6,6 @@
   "certificateCreate.form.label.personalData.surName": "Cognome",
   "certificateCreate.form.label.personalData.birthdate": "Data di nascita",
   "certificateCreate.form.label.personalData.certificateLanguage": "Lingua del certificato",
-  "certificateCreate.form.label.vaccine.doses.info": "<b>it:Wichtig</b>: Die Vollständigkeit der Impfung und die damit verbundene Gültigkeit des Covid-Zertifikats ist nur bei identischer Anzahl erhaltener und erforderlichen Dosen gewährleistet. Bsp.: Genesung + Impfung: 1/1, Impfung mit 2 Dosen: 2/2, Booster 3/3\" <a href=\"https://www.bag.admin.ch/dam/bag/de/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/2019-nCoV/impfempfehlung-covid-19.pdf.download.pdf/Impfempfehlung%20f%C3%BCr%20mRNA-Impfstoffe%20gegen%20Covid-19.pdf \">Impfempfehlung</a>",
   "certificateCreate.form.label.vaccine.medicalProduct": "Vaccino",
   "certificateCreate.form.label.vaccine.doseNumber": "Dosi ricevute",
   "certificateCreate.form.label.vaccine.totalDoses": "Dosi necessarie",
