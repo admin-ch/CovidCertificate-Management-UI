@@ -7,8 +7,8 @@ export class DateValidators {
 
 	static dateLessThanToday() {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
-			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
-			if (!!dateValue && dateValue.isAfter(new Date())) {
+			const dateValue: Date = control.value?.date;
+			if (!!dateValue && dateValue > new Date()) {
 				return {dateAfterToday: true};
 			}
 			return null;
@@ -32,7 +32,7 @@ export class DateValidators {
 			const momentDateValue: moment.Moment = this.getMomentDate(dateTime);
 			const today: Date = new Date();
 			if (!!momentDateValue && momentDateValue.isAfter(today)) {
-				if (this.getMomentDate(control.value?.date).isAfter(today)) {
+				if (control.value?.date > today) {
 					return {dateAfterToday: true};
 				} else {
 					return {timeAfterToday: true};
