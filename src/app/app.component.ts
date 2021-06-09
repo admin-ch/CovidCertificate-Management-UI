@@ -8,7 +8,8 @@ import {Role} from './auth/auth-guard.service';
 
 @Component({
 	selector: 'ec-root',
-	templateUrl: './app.component.html'
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
 	navigation: ObINavigationLink[] = [

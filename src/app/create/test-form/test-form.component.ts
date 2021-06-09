@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Patient, ProductInfo} from 'shared/model';
+import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
@@ -61,7 +61,7 @@ export class TestFormComponent implements OnInit {
 		return this.valueSetsService.getTypeOfTests();
 	}
 
-	getManufacturerOfTest(): ProductInfo[] {
+	getManufacturerOfTest(): ProductInfoWithGroup[] {
 		return this.valueSetsService.getManufacturerOfTest();
 	}
 

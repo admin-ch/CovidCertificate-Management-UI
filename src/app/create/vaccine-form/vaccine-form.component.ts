@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
-import {DATE_FORMAT, MomentWrapper, Patient, ProductInfo} from 'shared/model';
+import {DATE_FORMAT, MomentWrapper, Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TranslateService} from '@ngx-translate/core';
 import {DosesValidators} from '../utils/doses-validator';
@@ -11,7 +11,8 @@ import * as moment from 'moment';
 
 @Component({
 	selector: 'ec-vaccine-form',
-	templateUrl: './vaccine-form.component.html'
+	templateUrl: './vaccine-form.component.html',
+	styleUrls: ['./vaccine-form.component.scss']
 })
 export class VaccineFormComponent implements OnInit {
 	@Output() back = new EventEmitter<void>();
@@ -53,7 +54,7 @@ export class VaccineFormComponent implements OnInit {
 		return this.valueSetsService.getCertificateLanguages();
 	}
 
-	getMedicalProducts(): ProductInfo[] {
+	getMedicalProducts(): ProductInfoWithGroup[] {
 		return this.valueSetsService.getMedicinalProducts();
 	}
 

@@ -18,7 +18,8 @@ import {
 	ObMasterLayoutModule,
 	ObOffCanvasModule,
 	ObIconModule,
-	OB_BANNER
+	OB_BANNER,
+	ObDropdownModule
 } from '@oblique/oblique';
 import {AuthModule, OidcConfigService} from 'angular-auth-oidc-client';
 import {ObLanguageService} from 'shared/language.service';
@@ -29,6 +30,7 @@ import {HttpConfigInterceptor} from './auth/http.config.interceptor';
 import {EiamSelfAdminComponent} from './eiam-self-admin/eiam-self-admin.component';
 import {SharedModule} from 'shared/shared.module';
 import {environment} from '../environments/environment';
+import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
 
 export const loadConfig =
 	(oidcConfigService: OidcConfigService, openIdConfigService: OpenIdConfigService): (() => Promise<any>) =>
@@ -52,12 +54,14 @@ registerLocaleData(localeENGB);
 		AuthModule.forRoot(),
 		ObMasterLayoutModule,
 		ObOffCanvasModule,
+		ObDropdownModule,
 		MatTooltipModule,
 		ObIconModule.forRoot()
 	],
 	providers: [
 		{provide: LOCALE_ID, useValue: 'de-CH'},
 		{provide: HTTP_INTERCEPTORS, useClass: ObHttpApiInterceptor, multi: true},
+		{provide: HTTP_INTERCEPTORS, useClass: HttpResponsesInterceptor, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true},
 		OidcConfigService,
 		{
@@ -79,6 +83,7 @@ export class AppModule {
 	) {
 		ObLanguageService.locales.en = 'en-GB';
 		interceptor.api.url = '/v1';
+		interceptor.api.notification.active = false;
 		meta.titleSuffix = 'application.title';
 		config.homePageRoute = '/dashboard';
 		config.locale.locales = [

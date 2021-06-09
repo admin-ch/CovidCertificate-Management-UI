@@ -75,3 +75,9 @@
 		background-color: red;
 	}
 }
+
+.form-field-info {
+	grid-column: span 3;
+	font-size: $font-size-smallest;
+	text-align: justify;
+}
