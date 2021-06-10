@@ -20,4 +20,8 @@ export class DashboardComponent {
 	goToGenerateOtp() {
 		this.router.navigateByUrl('otp');
 	}
+
+	goToGenerateMultipleCertificates() {
+		this.router.navigateByUrl('upload');
+	}
 }

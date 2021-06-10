@@ -51,4 +51,25 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
+	<mat-card class="dashboard-card">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="upload" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.upload.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.upload.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button
+				id="dashboard-button-upload"
+				mat-button
+				obButton="primary"
+				(click)="goToGenerateMultipleCertificates()"
+			>
+				{{ "dashboard.upload.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>

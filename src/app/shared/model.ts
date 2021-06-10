@@ -140,6 +140,10 @@ export interface CreateCertificateResponse {
 	uvci: string;
 }
 
+export interface CsvResponseDto {
+	zip: ArrayBuffer;
+}
+
 export interface ValueSetsResponse {
 	countryCodes: CountryCodesDto;
 	vaccinationSets: VaccinationValueSets[];
