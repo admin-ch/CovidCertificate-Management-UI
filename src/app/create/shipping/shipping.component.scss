@@ -1,0 +1,9 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+.radio-label {
+	display: flex;
+}
+
+mat-radio-button {
+	margin: $spacing-sm;
+}

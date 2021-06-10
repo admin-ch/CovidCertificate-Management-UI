@@ -13,13 +13,22 @@ export interface Patient {
 	language: string;
 }
 
-export interface PatientDto {
+export interface CertificateCreateDto {
 	name: Name;
 	dateOfBirth: string;
 	language: string;
 	vaccinationInfo?: VaccinationDto[];
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
+	address?: AddressDto;
+	appCode?: number;
+}
+
+export interface AddressDto {
+	streetAndNr: string;
+	zipCode: number;
+	city: string;
+	cantonCodeSender: string;
 }
 
 export interface Name {
@@ -84,6 +93,12 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery'
+}
+
+export enum ShippingOptions {
+	APP = 'app',
+	PDF = 'pdf',
+	POST = 'post'
 }
 
 export interface FormObject {
@@ -195,4 +210,13 @@ export interface RevokeDto {
 export interface MomentWrapper {
 	date: Moment;
 	time?: string;
+}
+
+export interface Shipping {
+	shippingOption: ShippingOptions;
+	appDeliveryCode?: number;
+	streetAndNr?: string;
+	city?: string;
+	cantonCodeSender?: string;
+	zipCode?: number;
 }

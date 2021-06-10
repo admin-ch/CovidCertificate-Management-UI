@@ -1,25 +1,36 @@
 import {Injectable} from '@angular/core';
-import {Patient, PatientDto, RecoveryDto, TestDto, VaccinationDto} from 'shared/model';
+import {
+	CertificateCreateDto,
+	Patient,
+	RecoveryDto,
+	Shipping,
+	ShippingOptions,
+	TestDto,
+	VaccinationDto
+} from 'shared/model';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CertificateCreateDtoMappingService {
-	mapPatientToDto(patient: Patient): PatientDto {
-		const patientDto: PatientDto = this.mapPatientData(patient);
+	mapCreationDataToDto(patient: Patient, shipping: Shipping): CertificateCreateDto {
+		const certificateCreateDto: CertificateCreateDto = this.mapPatientData(patient);
 		if (patient.vaccination) {
-			patientDto.vaccinationInfo = this.mapVaccinationData(patient);
+			certificateCreateDto.vaccinationInfo = this.mapVaccinationData(patient);
 		}
 		if (patient.test) {
-			patientDto.testInfo = this.mapTestData(patient);
+			certificateCreateDto.testInfo = this.mapTestData(patient);
 		}
 		if (patient.recovery) {
-			patientDto.recoveryInfo = this.mapRecoveryData(patient);
+			certificateCreateDto.recoveryInfo = this.mapRecoveryData(patient);
 		}
-		return patientDto;
+
+		this.addShippingData(certificateCreateDto, shipping);
+
+		return certificateCreateDto;
 	}
 
-	private mapPatientData(patient: Patient): PatientDto {
+	private mapPatientData(patient: Patient): CertificateCreateDto {
 		return {
 			name: {
 				familyName: patient.surName,
@@ -61,6 +72,24 @@ export class CertificateCreateDtoMappingService {
 				countryOfTest: patient.recovery.countryOfTest.code
 			}
 		];
+	}
+
+	private addShippingData(certificateCreateDto: CertificateCreateDto, shipping: Shipping): void {
+		switch (shipping.shippingOption) {
+			case ShippingOptions.POST:
+				certificateCreateDto.address = {
+					streetAndNr: shipping.streetAndNr,
+					zipCode: shipping.zipCode,
+					city: shipping.city,
+					cantonCodeSender: shipping.cantonCodeSender
+				};
+				break;
+			case ShippingOptions.APP:
+				certificateCreateDto.appCode = shipping.appDeliveryCode;
+				break;
+			default:
+				break;
+		}
 	}
 
 	private toJSONDateTimeString(date: Date): string {

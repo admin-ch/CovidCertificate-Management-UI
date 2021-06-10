@@ -59,6 +59,26 @@
 	</dl>
 </ng-container>
 
+<h5>{{ "certificateCreate.shipping.title" | translate }}</h5>
+<dl>
+	<dt>{{ "certificateCreate.form.label.shipping" | translate }}</dt>
+	<dd id="shippingOption">{{ "certificateCreate.shipping.options." + shipping?.shippingOption | translate }}</dd>
+	<ng-container *ngIf="shipping?.shippingOption === 'app'">
+		<dt>{{ "certificateCreate.shipping.app.code" | translate }}</dt>
+		<dd id="appCode">{{ shipping?.appDeliveryCode }}</dd>
+	</ng-container>
+	<ng-container *ngIf="shipping?.shippingOption === 'post'">
+		<dt>{{ "certificateCreate.shipping.post.streetAndNr" | translate }}</dt>
+		<dd id="streetAndNr">{{ shipping?.streetAndNr }}</dd>
+		<dt>{{ "certificateCreate.shipping.post.zipCode" | translate }}</dt>
+		<dd id="zipCode">{{ shipping?.zipCode }}</dd>
+		<dt>{{ "certificateCreate.shipping.post.city" | translate }}</dt>
+		<dd id="city">{{ shipping?.city }}</dd>
+		<dt>{{ "certificateCreate.shipping.post.cantonCodeSender" | translate }}</dt>
+		<dd id="cantonCodeSender">{{ shipping?.cantonCodeSender }}</dd>
+	</ng-container>
+</dl>
+
 <div class="stepper-footer">
 	<section class="stepper-footer-content">
 		<button id="cert-create-back" type="button" (click)="goBack()" mat-button obButton="secondary">

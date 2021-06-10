@@ -16,6 +16,9 @@
 		></ec-recovery-form>
 	</mat-step>
 	<mat-step>
+		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>
+	</mat-step>
+	<mat-step>
 		<ec-summary (back)="backCalled()" (next)="nextCalled()"></ec-summary>
 	</mat-step>
 	<mat-step>
