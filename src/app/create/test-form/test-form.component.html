@@ -60,7 +60,7 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturer" | translate }}</mat-label>
-				<mat-select formControlName="manufacturer" id="manufacturer">
+				<mat-select formControlName="manufacturer" id="manufacturer" panelClass="extended-select">
 					<mat-optgroup *ngFor="let option of getManufacturerOfTest()" [label]="option.group">
 						<mat-option [value]="option">{{ option.display }}</mat-option>
 					</mat-optgroup>
