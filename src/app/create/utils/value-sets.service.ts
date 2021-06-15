@@ -1,5 +1,12 @@
 import {Injectable} from '@angular/core';
-import {CountryCodeDto, ProductInfo, TestValueSets, VaccinationValueSets, ValueSetsResponse} from 'shared/model';
+import {
+	CountryCodeDto,
+	ProductInfo,
+	ProductInfoWithGroup,
+	TestValueSets,
+	VaccinationValueSets,
+	ValueSetsResponse
+} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
@@ -8,15 +15,10 @@ import {TranslateService} from '@ngx-translate/core';
 export class ValueSetsService {
 	private valueSets: ValueSetsResponse;
 	private countryOptions: ProductInfo[] = [];
-	private medicinalProducts: ProductInfo[] = [];
+	private medicinalProducts: ProductInfoWithGroup[] = [];
 	private typeOfTests: ProductInfo[] = [];
-	private manufacturerOfTest: ProductInfo[] = [];
-
-	private readonly certificateLanguages = [
-		{display: this.translateService.instant('common.language.de'), code: 'de'},
-		{display: this.translateService.instant('common.language.fr'), code: 'fr'},
-		{display: this.translateService.instant('common.language.it'), code: 'it'}
-	];
+	private manufacturerOfTest: ProductInfoWithGroup[] = [];
+	private certificateLanguages: ProductInfo[] = [];
 
 	constructor(private readonly translateService: TranslateService) {}
 
@@ -26,6 +28,7 @@ export class ValueSetsService {
 		this.computeCountryOptions();
 		this.computeTypeOfTests();
 		this.computeManufacturerOfTest();
+		this.computeCertificateLanguages();
 	}
 
 	getCertificateLanguages(): ProductInfo[] {
@@ -36,7 +39,7 @@ export class ValueSetsService {
 		return this.countryOptions;
 	}
 
-	getMedicinalProducts(): ProductInfo[] {
+	getMedicinalProducts(): ProductInfoWithGroup[] {
 		return this.medicinalProducts;
 	}
 
@@ -44,12 +47,13 @@ export class ValueSetsService {
 		return this.typeOfTests;
 	}
 
-	getManufacturerOfTest(): ProductInfo[] {
+	getManufacturerOfTest(): ProductInfoWithGroup[] {
 		return this.manufacturerOfTest;
 	}
 
 	private computeMedicinalProducts(): void {
 		this.medicinalProducts = this.valueSets.vaccinationSets.map((vaccinationValue: VaccinationValueSets) => ({
+			group: vaccinationValue.auth_holder,
 			display: vaccinationValue.name,
 			code: vaccinationValue.code
 		}));
@@ -67,18 +71,39 @@ export class ValueSetsService {
 	private computeTypeOfTests(): void {
 		this.typeOfTests = this.valueSets.testSets
 			.map((testValue: TestValueSets) => ({
-				display: testValue.type,
+				display: `${testValue.type}${this.getTypeOfTestSuffix(testValue.type)}`,
 				code: testValue.type_code
 			}))
 			.filter((value, index, self) => index === self.findIndex(t => t.code === value.code));
 	}
 
+	private getTypeOfTestSuffix(typeOfTest: string): string {
+		switch (typeOfTest) {
+			case 'Nucleic acid amplification with probe detection':
+				return ' (PCR)';
+			case 'Rapid immunoassay':
+				return ` (${this.translateService.instant('certificateCreate.form.group.test.type.antigen')})`;
+			default:
+				return '';
+		}
+	}
+
 	private computeManufacturerOfTest(): void {
 		this.manufacturerOfTest = this.valueSets.testSets
 			.map((testValue: TestValueSets) => ({
+				group: testValue.name,
 				display: testValue.manufacturer,
 				code: testValue.manufacturer_code_eu
 			}))
 			.filter(value => value.code !== '');
+	}
+
+	private computeCertificateLanguages(): void {
+		this.certificateLanguages = [
+			{display: this.translateService.instant('common.language.de'), code: 'de'},
+			{display: this.translateService.instant('common.language.fr'), code: 'fr'},
+			{display: this.translateService.instant('common.language.it'), code: 'it'},
+			{display: this.translateService.instant('common.language.rm'), code: 'rm'}
+		];
 	}
 }

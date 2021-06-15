@@ -4,7 +4,13 @@ import {SharedModule} from 'shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {AuthGuardService} from '../auth/auth-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
-import {ObButtonModule, ObErrorMessagesModule, ObNestedFormModule, ObNumberFormatModule} from '@oblique/oblique';
+import {
+	ObAlertModule,
+	ObButtonModule,
+	ObErrorMessagesModule,
+	ObNestedFormModule,
+	ObNumberFormatModule
+} from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -20,6 +26,7 @@ import {RecoveryFormComponent} from './recovery-form/recovery-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DownloadComponent} from './download/download.component';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
 	declarations: [
@@ -34,6 +41,7 @@ import {DownloadComponent} from './download/download.component';
 	],
 	imports: [
 		SharedModule,
+		ObAlertModule,
 		ObButtonModule,
 		ObErrorMessagesModule,
 		ObNestedFormModule,
@@ -45,6 +53,7 @@ import {DownloadComponent} from './download/download.component';
 		MatMomentDateModule,
 		MatRadioModule,
 		MatSelectModule,
+		MatOptionModule,
 		MatStepperModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])

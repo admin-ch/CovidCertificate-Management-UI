@@ -48,6 +48,12 @@ export interface ProductInfo {
 	display: string;
 }
 
+export interface ProductInfoWithGroup {
+	code: string;
+	group: string;
+	display: string;
+}
+
 export interface Test {
 	typeOfTest: ProductInfo;
 	manufacturer: ProductInfo;

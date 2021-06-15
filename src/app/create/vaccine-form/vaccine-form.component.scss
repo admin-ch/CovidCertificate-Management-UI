@@ -1,0 +1,16 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+.from {
+	grid-column: span 2;
+	display: flex;
+
+	&::after {
+		content: "/";
+		padding: 6px 16px;
+		font-size: xx-large;
+	}
+}
+
+.to {
+	grid-column: span 1;
+}

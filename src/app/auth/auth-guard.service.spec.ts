@@ -216,13 +216,7 @@ describe('AuthGuardService', () => {
 			describe('With hincode and personal', () => {
 				beforeEach(() => {
 					mock.claims$.next({
-						userroles: [
-							'bag-cc-certificatecreator',
-							'bag-cc-hin-epr',
-							'bag-cc-hincode',
-							,
-							'bag-cc-personal'
-						]
+						userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr', 'bag-cc-hincode', 'bag-cc-personal']
 					});
 
 					mock.hasUserRole.mockImplementation(
