@@ -16,7 +16,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		{url: 'dashboard', label: 'dashboard.link'},
 		{url: 'certificate-create', label: 'certificateCreate.link'},
 		{url: 'certificate-revoke', label: 'certificateRevoke.link'},
-		{url: 'otp', label: 'otp.link'}
+		{url: 'otp', label: 'otp.link'},
+		{url: 'upload', label: 'upload.link'}
 	];
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;

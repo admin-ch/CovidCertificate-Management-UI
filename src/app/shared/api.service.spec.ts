@@ -39,17 +39,8 @@ describe('ApiService', () => {
 		});
 	});
 
-	describe('postBlob', () => {
-		it('should call http post with correct url', () => {
-			jest.spyOn(http, 'post');
-			// @ts-ignore
-			service.postBlob('post-blob', {});
-			expect(http.post).toHaveBeenCalledWith('host/api/v1/post-blob', {}, {responseType: 'blob'});
-		});
-	});
-
 	describe('postText', () => {
-		it('should call http post with correct url', () => {
+		it('should call http post text with correct url', () => {
 			jest.spyOn(http, 'post');
 			// @ts-ignore
 			service.postText('post-text', {});

@@ -62,6 +62,9 @@
   "dashboard.otp.title": "Generate new One-Time-Password",
   "dashboard.otp.description": "You can generate a new One-Time-Password here. You need the One-Time-Password to be able to automatically generate Covid certificates with your primary system (e.g. practice information system, clinic software or pharmacist solution). The One-Time-Password is valid for 12 hours.",
   "dashboard.otp.action": "Generate One-Time-Password",
+  "dashboard.upload.action": "Generate multiple certificates",
+  "dashboard.upload.description": "Here you can generate multiple certificates.",
+  "dashboard.upload.title": "Generate multiple certificate",
   "footer.built.prefix": "Developed with",
   "footer.built.suffix": "",
   "footer.legal": "Terms and conditions",
@@ -93,6 +96,16 @@
   "otp.title": "Generate new One-Time-Password",
   "support.instructions": "If you have any problems with the application, please contact the FOITT Helpdesk:",
   "support.title": "Support",
+  "upload.file.noneSelected": "No CSV file selected.",
+  "upload.file.select": "Select CSV file",
+  "upload.file.select.limit": "Maximum size: 40 Kb.",
+  "upload.file.upload": "Generate certificates",
+  "upload.file.upload.success": "Certificates were successfully created. Please check the returned ZIP file.",
+  "upload.instructions": "Here you can generate multiple certificates. Please select the type of certificates to be generated and upload the CSV file containing the data.",
+  "upload.link": "Generate multiple certificates",
+  "upload.title": "Generate multiple certificates",
+  "upload.type": "Select certificate type",
   "validation.error.http.470": "Invalid UVCI format",
-  "validation.error.http.480": "UVCI already revoked"
+  "validation.error.http.480": "UVCI already revoked",
+  "validation.error.http.485": "One or more of the requests in the CSV contain invalid data. For more detailed error messages check the returned CSV file."
 }

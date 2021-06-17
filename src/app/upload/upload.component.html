@@ -1,0 +1,40 @@
+<h1>{{ "upload.title" | translate }}</h1>
+<p>{{ "upload.instructions" | translate }}</p>
+
+<form [formGroup]="certificateTypeSelectionForm">
+	<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileUpload />
+
+	<div class="form-group">
+		<div class="form-field">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "upload.type" | translate }}</mat-label>
+				<mat-select formControlName="type" id="certificateType" name="certificateType">
+					<mat-option *ngFor="let option of getCertificateTypes()" [value]="option">
+						{{ "certificateCreate.step-one.enum." + option | translate }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+		</div>
+	</div>
+</form>
+
+<div class="file-selection">
+	<button id="select-file-button" mat-button obButton="secondary" (click)="fileUpload.click()" class="margin-right">
+		{{ "upload.file.select" | translate }}
+	</button>
+
+	<p class="file-info" *ngIf="canUploadFile()">{{ getSelectedFileName() }}</p>
+	<p class="file-info" *ngIf="!canUploadFile()">{{ "upload.file.noneSelected" | translate }}</p>
+</div>
+<p class="hint">{{ "upload.file.select.limit" | translate }}</p>
+
+<button
+	id="upload-file-button"
+	mat-button
+	obButton="primary"
+	(click)="uploadSelectedFile()"
+	[disabled]="!canUploadFile()"
+>
+	{{ "upload.file.upload" | translate }}
+</button>

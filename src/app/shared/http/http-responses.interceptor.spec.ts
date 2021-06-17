@@ -120,6 +120,32 @@ describe('HttpResponsesInterceptor', () => {
 		});
 	});
 
+	describe('Handle error code 485', () => {
+		beforeEach(() => {
+			mockGeneralErrorHttpHandler.handle.mockReturnValueOnce(throwError({error: {errorCode: 485}}));
+		});
+
+		it('should call the ObNotificationService', done => {
+			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
+				() => {},
+				() => {
+					expect(mockNotificationService.error).toHaveBeenCalledTimes(1);
+					done();
+				}
+			);
+		});
+
+		it('should call the ObNotificationService with the correct param', done => {
+			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
+				() => {},
+				() => {
+					expect(mockNotificationService.error).toHaveBeenCalledWith('validation.error.http.485');
+					done();
+				}
+			);
+		});
+	});
+
 	describe('Handle status 401', () => {
 		beforeEach(() => {
 			const error: HttpErrorResponse = new HttpErrorResponse({error: {status: 401}});
