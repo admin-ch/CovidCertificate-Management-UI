@@ -7,7 +7,7 @@ import {ObIObliqueHttpErrorResponse} from '@oblique/oblique/lib/http-api-interce
 
 @Injectable()
 export class HttpResponsesInterceptor implements HttpInterceptor {
-	private readonly supportedErrorCodes: number[] = [470, 480];
+	private readonly supportedErrorCodes: number[] = [470, 480, 485];
 
 	constructor(
 		private readonly notificationService: ObNotificationService,
