@@ -37,10 +37,6 @@ export class ApiService {
 		return this.http.post<T>(`${this.path}/${url}`, data, options);
 	}
 
-	postBlob(url: string, data: any): Observable<Blob> {
-		return this.http.post(`${this.path}/${url}`, data, {responseType: 'blob'});
-	}
-
 	postText(url: string, data: any): Observable<string> {
 		return this.http.post(`${this.path}/${url}`, data, {responseType: 'text'});
 	}

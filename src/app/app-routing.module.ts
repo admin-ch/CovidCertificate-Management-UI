@@ -36,6 +36,12 @@ const routes: Routes = [
 		canLoad: [AuthGuardService],
 		canActivate: [AuthGuardService]
 	},
+	{
+		path: 'upload',
+		loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule),
+		canLoad: [AuthGuardService],
+		canActivate: [AuthGuardService]
+	},
 	{path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 

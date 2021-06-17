@@ -58,4 +58,10 @@ describe('DashboardComponent', () => {
 
 		expect(router.navigateByUrl).toHaveBeenCalledWith('otp');
 	});
+
+	it('go to generate multiple certificates', () => {
+		component.goToGenerateMultipleCertificates();
+
+		expect(router.navigateByUrl).toHaveBeenCalledWith('upload');
+	});
 });
