@@ -103,6 +103,7 @@
   "upload.file.upload.success": "Certificates were successfully created. Please check the returned ZIP file.",
   "upload.instructions": "Here you can generate multiple certificates. Please select the type of certificates to be generated and upload the CSV file containing the data.",
   "upload.link": "Generate multiple certificates (BETA)",
+  "upload.templates": "Templates for CSV upload.",
   "upload.title": "Generate multiple certificates (BETA)",
   "upload.type": "Select certificate type",
   "validation.error.http.470": "Invalid UVCI format",
