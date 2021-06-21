@@ -1,5 +1,15 @@
 <h1>{{ "upload.title" | translate }}</h1>
-<p>{{ "upload.instructions" | translate }}</p>
+<p>
+	{{ "upload.instructions" | translate }}
+	<a
+		href="https://github.com/admin-ch/CovidCertificate-UIdoc"
+		target="_blank"
+		rel="noopener noreferrer"
+		id="templates-link"
+		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+		>{{ "upload.templates" | translate }}</a
+	>
+</p>
 
 <form [formGroup]="certificateTypeSelectionForm">
 	<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileUpload />
