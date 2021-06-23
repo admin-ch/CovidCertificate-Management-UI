@@ -14,6 +14,7 @@ export const environment = {
 		stsServer: 'http://localhost:8180',
 		applicationUrl: 'http://localhost:4201/',
 		loginFeedback: 'auth/login-feedback/',
+		maxIdTokenIatOffsetAllowedInSeconds: 60,
 		silentRenew: true,
 		useAutoLogin: false,
 		debug: LogLevel.Warn,
