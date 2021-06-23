@@ -20,7 +20,13 @@ export class ValueSetsService {
 	private manufacturerOfTest: ProductInfoWithGroup[] = [];
 	private certificateLanguages: ProductInfo[] = [];
 
-	constructor(private readonly translateService: TranslateService) {}
+	constructor(private readonly translateService: TranslateService) {
+		translateService.onLangChange.subscribe(_ => {
+			if (this.valueSets) {
+				this.setValueSets(this.valueSets);
+			}
+		});
+	}
 
 	setValueSets(valueSets: ValueSetsResponse): void {
 		this.valueSets = valueSets;

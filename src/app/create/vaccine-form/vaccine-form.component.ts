@@ -37,6 +37,12 @@ export class VaccineFormComponent implements OnInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
+		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.patchValue({
+				certificateLanguage: this.getDefaultCertificateLanguage(),
+				countryOfVaccination: this.getDefaultCountryOfVaccination()
+			});
+		});
 	}
 
 	goBack(): void {
