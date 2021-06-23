@@ -207,7 +207,7 @@ describe('AuthGuardService', () => {
 
 				it('should redirect to auto-login', done => {
 					service.canLoad(null).subscribe(() => {
-						expect(window.location.href).toEqual('https://www.eiam.admin.ch/chloginforbidden?l=en&stage=');
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/403ggg?l=en&stage=');
 						done();
 					});
 				});
