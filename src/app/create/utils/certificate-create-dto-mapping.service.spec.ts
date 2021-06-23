@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {CertificateCreateDtoMappingService} from './certificate-create-dto-mapping.service';
-import {Patient} from 'shared/model';
+import {Patient, Shipping, ShippingOptions} from 'shared/model';
 import {getTimeZone} from 'shared/mocks';
 
 describe('CertificateCreateDtoMappingService', () => {
@@ -89,113 +89,393 @@ describe('CertificateCreateDtoMappingService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should map a dto with patient data only correctly', () => {
-		expect(service.mapPatientToDto(testDataPatientOnly)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de'
+	describe('with shipping PDF', () => {
+		const shipping: Shipping = {shippingOption: ShippingOptions.PDF};
+
+		it('should map a dto with patient data only correctly', () => {
+			expect(service.mapCreationDataToDto(testDataPatientOnly, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de'
+			});
+		});
+
+		it('should map a dto with data for vaccination correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForVaccination, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				vaccinationInfo: [
+					{
+						countryOfVaccination: 'CH',
+						medicinalProductCode: 'M-42',
+						numberOfDoses: 2,
+						totalNumberOfDoses: 2,
+						vaccinationDate: '2021-02-01'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTest, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTest.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data in summer for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestSummer, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-08-01T00:00:00.000${getTimeZone(testDataForTestSummer.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for test without manufacturer correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestWithoutManufacturer, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
+							testDataForTestWithoutManufacturer.test.sampleDate
+						)}`,
+						manufacturerCode: undefined,
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for recovery correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForRecovery, shipping)).toEqual({
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				recoveryInfo: [
+					{
+						countryOfTest: 'CH',
+						dateOfFirstPositiveTestResult: '2021-02-01'
+					}
+				]
+			});
 		});
 	});
 
-	it('should map a dto with data for vaccination correctly', () => {
-		expect(service.mapPatientToDto(testDataForVaccination)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de',
-			vaccinationInfo: [
-				{
-					countryOfVaccination: 'CH',
-					medicinalProductCode: 'M-42',
-					numberOfDoses: 2,
-					totalNumberOfDoses: 2,
-					vaccinationDate: '2021-02-01'
-				}
-			]
+	describe('with shipping app delivery', () => {
+		const shipping: Shipping = {shippingOption: ShippingOptions.APP, appDeliveryCode: 424242426};
+
+		it('should map a dto with patient data only correctly', () => {
+			expect(service.mapCreationDataToDto(testDataPatientOnly, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de'
+			});
+		});
+
+		it('should map a dto with data for vaccination correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForVaccination, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				vaccinationInfo: [
+					{
+						countryOfVaccination: 'CH',
+						medicinalProductCode: 'M-42',
+						numberOfDoses: 2,
+						totalNumberOfDoses: 2,
+						vaccinationDate: '2021-02-01'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTest, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTest.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data in summer for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestSummer, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-08-01T00:00:00.000${getTimeZone(testDataForTestSummer.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for test without manufacturer correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestWithoutManufacturer, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
+							testDataForTestWithoutManufacturer.test.sampleDate
+						)}`,
+						manufacturerCode: undefined,
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for recovery correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForRecovery, shipping)).toEqual({
+				appCode: 424242426,
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				recoveryInfo: [
+					{
+						countryOfTest: 'CH',
+						dateOfFirstPositiveTestResult: '2021-02-01'
+					}
+				]
+			});
 		});
 	});
 
-	it('should map a dto with data for test correctly', () => {
-		expect(service.mapPatientToDto(testDataForTest)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de',
-			testInfo: [
-				{
-					memberStateOfTest: 'CH',
-					sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTest.test.sampleDate)}`,
-					manufacturerCode: 'M-42',
-					testingCentreOrFacility: 'TEST-center',
-					typeCode: 'T-42'
-				}
-			]
-		});
-	});
+	describe('with shipping post', () => {
+		const shipping: Shipping = {
+			shippingOption: ShippingOptions.POST,
+			streetAndNr: 'Street 42',
+			zipCode: 4242,
+			city: 'Testcity',
+			cantonCodeSender: 'BE'
+		};
 
-	it('should map a dto with data in summer for test correctly', () => {
-		expect(service.mapPatientToDto(testDataForTestSummer)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de',
-			testInfo: [
-				{
-					memberStateOfTest: 'CH',
-					sampleDateTime: `2021-08-01T00:00:00.000${getTimeZone(testDataForTestSummer.test.sampleDate)}`,
-					manufacturerCode: 'M-42',
-					testingCentreOrFacility: 'TEST-center',
-					typeCode: 'T-42'
-				}
-			]
+		it('should map a dto with patient data only correctly', () => {
+			expect(service.mapCreationDataToDto(testDataPatientOnly, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de'
+			});
 		});
-	});
 
-	it('should map a dto with data for test without manufacturer correctly', () => {
-		expect(service.mapPatientToDto(testDataForTestWithoutManufacturer)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de',
-			testInfo: [
-				{
-					memberStateOfTest: 'CH',
-					sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
-						testDataForTestWithoutManufacturer.test.sampleDate
-					)}`,
-					manufacturerCode: undefined,
-					testingCentreOrFacility: 'TEST-center',
-					typeCode: 'T-42'
-				}
-			]
+		it('should map a dto with data for vaccination correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForVaccination, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				vaccinationInfo: [
+					{
+						countryOfVaccination: 'CH',
+						medicinalProductCode: 'M-42',
+						numberOfDoses: 2,
+						totalNumberOfDoses: 2,
+						vaccinationDate: '2021-02-01'
+					}
+				]
+			});
 		});
-	});
 
-	it('should map a dto with data for recovery correctly', () => {
-		expect(service.mapPatientToDto(testDataForRecovery)).toEqual({
-			dateOfBirth: '2000-02-01',
-			name: {
-				familyName: 'Doe',
-				givenName: 'John'
-			},
-			language: 'de',
-			recoveryInfo: [
-				{
-					countryOfTest: 'CH',
-					dateOfFirstPositiveTestResult: '2021-02-01'
-				}
-			]
+		it('should map a dto with data for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTest, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTest.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data in summer for test correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestSummer, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-08-01T00:00:00.000${getTimeZone(testDataForTestSummer.test.sampleDate)}`,
+						manufacturerCode: 'M-42',
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for test without manufacturer correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForTestWithoutManufacturer, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				testInfo: [
+					{
+						memberStateOfTest: 'CH',
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
+							testDataForTestWithoutManufacturer.test.sampleDate
+						)}`,
+						manufacturerCode: undefined,
+						testingCentreOrFacility: 'TEST-center',
+						typeCode: 'T-42'
+					}
+				]
+			});
+		});
+
+		it('should map a dto with data for recovery correctly', () => {
+			expect(service.mapCreationDataToDto(testDataForRecovery, shipping)).toEqual({
+				address: {
+					cantonCodeSender: 'BE',
+					city: 'Testcity',
+					streetAndNr: 'Street 42',
+					zipCode: 4242
+				},
+				dateOfBirth: '2000-02-01',
+				name: {
+					familyName: 'Doe',
+					givenName: 'John'
+				},
+				language: 'de',
+				recoveryInfo: [
+					{
+						countryOfTest: 'CH',
+						dateOfFirstPositiveTestResult: '2021-02-01'
+					}
+				]
+			});
 		});
 	});
 });

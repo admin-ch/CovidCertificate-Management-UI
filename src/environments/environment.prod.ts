@@ -15,6 +15,7 @@ export const environment = {
 		stsServer: 'https://identity.bit.admin.ch/realms/BAG-CovidCertificate',
 		applicationUrl: 'https://www.covidcertificate.admin.ch/',
 		loginFeedback: 'auth/login-feedback/',
+		maxIdTokenIatOffsetAllowedInSeconds: 60,
 		silentRenew: true,
 		useAutoLogin: false,
 		debug: LogLevel.Warn,

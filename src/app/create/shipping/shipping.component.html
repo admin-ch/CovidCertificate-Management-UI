@@ -1,0 +1,64 @@
+<form [formGroup]="shippingForm" #formDirective="ngForm" (submit)="goNext()">
+	<fieldset class="form-group">
+		<legend class="padding-top">{{ "certificateCreate.shipping.title" | translate }}</legend>
+
+		<div class="form-field">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages>
+				<mat-label>{{ "certificateCreate.shipping.options" | translate }}</mat-label>
+				<mat-select formControlName="shippingOption" id="shippingOption">
+					<mat-option *ngFor="let option of shippingOptions" [value]="option">
+						{{ "certificateCreate.shipping.options." + option | translate }}
+					</mat-option>
+				</mat-select>
+				<mat-error></mat-error>
+			</mat-form-field>
+
+			<mat-form-field
+				obErrorMessages
+				class="mat-form-field-lg"
+				*ngIf="shippingForm.get('shippingOption').value === 'app'"
+			>
+				<mat-label>{{ "certificateCreate.shipping.app.code" | translate }}</mat-label>
+				<input type="text" matInput formControlName="appDeliveryCode" id="appDeliveryCode" />
+				<mat-error></mat-error>
+			</mat-form-field>
+			<ng-container *ngIf="shippingForm.get('shippingOption').value === 'post'">
+				<mat-form-field obErrorMessages class="mat-form-field-lg">
+					<mat-label>{{ "certificateCreate.shipping.post.streetAndNr" | translate }}</mat-label>
+					<input type="text" matInput formControlName="streetAndNr" id="streetAndNr" />
+					<mat-error></mat-error>
+				</mat-form-field>
+				<mat-form-field obErrorMessages class="mat-form-field-lg">
+					<mat-label>{{ "certificateCreate.shipping.post.zipCode" | translate }}</mat-label>
+					<input type="number" matInput formControlName="zipCode" id="zipCode" />
+					<mat-error></mat-error>
+				</mat-form-field>
+				<mat-form-field obErrorMessages class="mat-form-field-lg">
+					<mat-label>{{ "certificateCreate.shipping.post.city" | translate }}</mat-label>
+					<input type="text" matInput formControlName="city" id="city" />
+					<mat-error></mat-error>
+				</mat-form-field>
+				<mat-form-field obErrorMessages class="mat-form-field-lg">
+					<mat-label>{{ "certificateCreate.shipping.post.cantonCodeSender" | translate }}</mat-label>
+					<mat-select formControlName="cantonCodeSender" id="cantonCodeSender">
+						<mat-option *ngFor="let option of cantonCodes" [value]="option">
+							{{ option }}
+						</mat-option>
+					</mat-select>
+					<mat-error></mat-error>
+				</mat-form-field>
+			</ng-container>
+		</div>
+	</fieldset>
+
+	<div class="stepper-footer">
+		<section class="stepper-footer-content">
+			<button id="cert-create-back" type="button" (click)="goBack()" mat-button obButton="secondary">
+				{{ "common.back" | translate }}
+			</button>
+			<button id="cert-create-next" mat-button obButton="primary" class="right">
+				{{ "common.next" | translate }}
+			</button>
+		</section>
+	</div>
+</form>
