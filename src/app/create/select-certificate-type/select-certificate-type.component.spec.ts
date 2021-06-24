@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {CreationDataService} from '../utils/creation-data.service';
+import {GenerationType} from 'shared/model';
 
 describe('SelectCertificateTypeComponent', () => {
 	let component: SelectCertificateTypeComponent;
@@ -97,6 +98,26 @@ describe('SelectCertificateTypeComponent', () => {
 			component.goNext();
 
 			expect(setNewCertificateTypeSpy).toHaveBeenLastCalledWith('recovery');
+		});
+	});
+
+	describe('Form reset', () => {
+		it('should reset the form correctly if the selected type was vaccination', () => {
+			component.certificateTypeSelectionForm.get('type').setValue(GenerationType.VACCINATION);
+			creationDataService.emitResetCalled();
+			expect(component.certificateTypeSelectionForm.value.type).toBe(GenerationType.VACCINATION);
+		});
+
+		it('should reset the form correctly if the selected type was test', () => {
+			component.certificateTypeSelectionForm.get('type').setValue(GenerationType.TEST);
+			creationDataService.emitResetCalled();
+			expect(component.certificateTypeSelectionForm.value.type).toBe(GenerationType.TEST);
+		});
+
+		it('should reset the form correctly if the selected type was recovery', () => {
+			component.certificateTypeSelectionForm.get('type').setValue(GenerationType.RECOVERY);
+			creationDataService.emitResetCalled();
+			expect(component.certificateTypeSelectionForm.value.type).toBe(GenerationType.RECOVERY);
 		});
 	});
 });

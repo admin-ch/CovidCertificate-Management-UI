@@ -24,7 +24,7 @@ describe('TestFormComponent', () => {
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([]),
+		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}]),
 		getTypeOfTests: jest.fn().mockReturnValue([]),
 		getManufacturerOfTest: jest.fn().mockReturnValue([])
 	};
@@ -366,6 +366,62 @@ describe('TestFormComponent', () => {
 					}
 				}
 			});
+		});
+	});
+
+	describe('Form reset', () => {
+		it('should reset the firstName correctly', () => {
+			component.testForm.get('firstName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.firstName).toBeNull();
+		});
+
+		it('should reset the surName correctly', () => {
+			component.testForm.get('surName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.surName).toBeNull();
+		});
+
+		it('should reset the birthdate correctly', () => {
+			component.testForm.get('birthdate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.birthdate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the certificateLanguage correctly', () => {
+			component.testForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
+
+		it('should reset the typeOfTest correctly', () => {
+			component.testForm.get('typeOfTest').setValue({display: 'TEST', code: 'typeOfTest'});
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.typeOfTest).toEqual({display: 'TEST', code: 'typeOfTest'});
+		});
+
+		it('should reset the manufacturer correctly', () => {
+			component.testForm.get('manufacturer').setValue({display: 'TEST', code: 'manufacturer'});
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.manufacturer).toEqual({display: 'TEST', code: 'manufacturer'});
+		});
+
+		it('should reset the sampleDate correctly', () => {
+			component.testForm.get('sampleDate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.sampleDate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the center correctly', () => {
+			component.testForm.get('center').setValue('Testcenter');
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.center).toBe('Testcenter');
+		});
+
+		it('should reset the countryOfTest correctly', () => {
+			component.testForm.get('countryOfTest').setValue({display: 'TEST', code: 'country'});
+			creationDataService.emitResetCalled();
+			expect(component.testForm.value.countryOfTest).toEqual({display: 'TEST-CH', code: 'CH'});
 		});
 	});
 });

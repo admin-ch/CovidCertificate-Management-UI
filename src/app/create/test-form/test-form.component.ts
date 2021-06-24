@@ -124,10 +124,18 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private resetForm(): void {
+		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
+		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
+		const previousManufacturer: ProductInfoWithGroup = this.testForm.value.manufacturer;
+		const previousCenter: string = this.testForm.value.center;
+
 		this.formDirective.resetForm();
 		this.testForm.reset({
-			certificateLanguage: this.getDefaultCertificateLanguage(),
-			countryOfTest: this.getDefaultCountryOfTest()
+			certificateLanguage: previousCertificateLanguage,
+			countryOfTest: this.getDefaultCountryOfTest(),
+			typeOfTest: previousTypeOfTest,
+			manufacturer: previousManufacturer,
+			center: previousCenter
 		});
 	}
 }

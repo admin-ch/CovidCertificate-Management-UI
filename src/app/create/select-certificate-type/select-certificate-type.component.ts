@@ -37,6 +37,7 @@ export class SelectCertificateTypeComponent implements OnInit {
 	}
 
 	private resetForm(): void {
-		this.certificateTypeSelectionForm.reset({type: GenerationType.VACCINATION});
+		const previousSelection: GenerationType = this.certificateTypeSelectionForm.value.type;
+		this.certificateTypeSelectionForm.reset({type: previousSelection});
 	}
 }
