@@ -153,6 +153,7 @@ export interface CreateCertificateResponse {
 	pdf: string; // base64 encoded pdf string
 	qrCode: string;
 	uvci: string;
+	appDeliveryError?: {errorCode: number; errorMessage: string};
 }
 
 export interface CsvResponseDto {

@@ -44,6 +44,8 @@
   "certificateCreate.step-three.dose": "Dose",
   "certificateCreate.step-three.validFrom": "Valid from",
   "certificateCreate.step-three.validUntil": "Valid until",
+  "certificateCreate.step-four.app.code.error.476": "Unknown or invalid delivery code. The certificate could not be delivered to the app.",
+  "certificateCreate.step-four.app.code.error.558": "Technical problem. The certificate could not be delivered to the app.",
   "certificateCreate.step-four.title": "Certificate generated",
   "certificateCreate.step-four.warn": "The PDF contains sensitive data. It must be handed over in person or sent via a secure channel.",
   "certificateCreate.step-four.description": "You can now download the generated certificate or get the vaccinated person to scan the QR code shown here.",
