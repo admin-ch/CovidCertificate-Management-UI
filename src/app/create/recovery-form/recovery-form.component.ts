@@ -34,6 +34,12 @@ export class RecoveryFormComponent implements OnInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
+		this.translateService.onLangChange.subscribe(_ => {
+			this.recoveryForm.patchValue({
+				certificateLanguage: this.getDefaultCertificateLanguage(),
+				countryOfTest: this.getDefaultCountryOfRecovery()
+			});
+		});
 	}
 
 	goBack(): void {

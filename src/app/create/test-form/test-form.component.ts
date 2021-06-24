@@ -36,6 +36,12 @@ export class TestFormComponent implements OnInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
+		this.translateService.onLangChange.subscribe(_ => {
+			this.testForm.patchValue({
+				certificateLanguage: this.getDefaultCertificateLanguage(),
+				countryOfTest: this.getDefaultCountryOfTest()
+			});
+		});
 	}
 
 	goBack(): void {
