@@ -43,7 +43,8 @@ export class ShippingComponent implements OnInit {
 		'VD',
 		'VS',
 		'ZG',
-		'ZH'
+		'ZH',
+		'MI'
 	];
 
 	constructor(private readonly formBuilder: FormBuilder, private readonly dataService: CreationDataService) {}
