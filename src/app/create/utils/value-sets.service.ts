@@ -20,7 +20,13 @@ export class ValueSetsService {
 	private manufacturerOfTest: ProductInfoWithGroup[] = [];
 	private certificateLanguages: ProductInfo[] = [];
 
-	constructor(private readonly translateService: TranslateService) {}
+	constructor(private readonly translateService: TranslateService) {
+		translateService.onLangChange.subscribe(_ => {
+			if (this.valueSets) {
+				this.setValueSets(this.valueSets);
+			}
+		});
+	}
 
 	setValueSets(valueSets: ValueSetsResponse): void {
 		this.valueSets = valueSets;
@@ -60,12 +66,14 @@ export class ValueSetsService {
 	}
 
 	private computeCountryOptions(): void {
-		this.countryOptions = this.valueSets.countryCodes[this.translateService.currentLang].map(
-			(country: CountryCodeDto) => ({
+		this.countryOptions = this.valueSets.countryCodes[this.translateService.currentLang]
+			.map((country: CountryCodeDto) => ({
 				display: country.display,
 				code: country.short
-			})
-		);
+			}))
+			.sort((countryA: CountryCodeDto, countryB: CountryCodeDto) =>
+				countryA.display.localeCompare(countryB.display)
+			);
 	}
 
 	private computeTypeOfTests(): void {
