@@ -44,6 +44,8 @@
   "certificateCreate.step-three.dose": "Dose",
   "certificateCreate.step-three.validFrom": "Valido dal",
   "certificateCreate.step-three.validUntil": "Valido fino al",
+  "certificateCreate.step-four.app.code.error.476": "Codice di spedizione sconosciuto o non valido. Il certificato non può essere rilasciato nell' applicazione.",
+  "certificateCreate.step-four.app.code.error.558": "Problema tecnico. Il certificato non può essere rilasciato nell' applicazione.",
   "certificateCreate.step-four.title": "Certificato generato",
   "certificateCreate.step-four.warn": "Il PDF contiene dati sensibili. Deve essere consegnato personalmente o trasmesso tramite un canale sicuro.",
   "certificateCreate.step-four.description": "Ora è possibile scaricare il certificato generato o permettere alla persona vaccinata di scansionare il codice QR mostrato qui.",

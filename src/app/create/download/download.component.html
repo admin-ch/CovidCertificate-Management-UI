@@ -4,6 +4,12 @@
 		<p>{{ "certificateCreate.step-four.description" | translate }}</p>
 
 		<ob-alert type="warning">{{ "certificateCreate.step-four.warning" | translate }}</ob-alert>
+		<ob-alert type="error" *ngIf="createCertificateResponse?.appDeliveryError">
+			{{
+				"certificateCreate.step-four.app.code.error." + createCertificateResponse?.appDeliveryError?.errorCode
+					| translate
+			}}
+		</ob-alert>
 
 		<button mat-button (click)="downloadCertificate()" obButton="primary" id="cert-create-download">
 			{{ "certificateCreate.step-four.download" | translate }}

@@ -44,6 +44,8 @@
   "certificateCreate.step-three.dose": "Dosis",
   "certificateCreate.step-three.validFrom": "Gültig von",
   "certificateCreate.step-three.validUntil": "Gültig bis",
+  "certificateCreate.step-four.app.code.error.476": "Unbekannter oder ungültiger Zustellungscode. Das Zertifikat konnte nicht in die App geliefert werden.",
+  "certificateCreate.step-four.app.code.error.558": "Technisches Problem. Das Zertifikat konnte nicht in die App geliefert werden.",
   "certificateCreate.step-four.title": "Generiertes Zertifikat",
   "certificateCreate.step-four.warn": "Das PDF enthält sensitive Daten. Es ist persönlich abzugeben oder auf einem sicheren Kanal zu übermitteln.",
   "certificateCreate.step-four.description": "Sie können das generierte Zertifikat jetzt herunterladen oder den hier dargestellten QR-Code vom Geimpften einscannen lassen.",

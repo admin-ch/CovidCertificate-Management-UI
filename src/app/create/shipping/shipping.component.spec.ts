@@ -58,112 +58,116 @@ describe('ShippingComponent', () => {
 	});
 
 	describe('Canton codes', () => {
-		it('should have 26 cantons code', () => {
-			expect(component.cantonCodes.length).toBe(26);
+		it('should have 27 cantons code', () => {
+			expect(component.cantonCodes.length).toBe(27);
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have AG as canton code', () => {
 			expect(component.cantonCodes[0]).toBe('AG');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have AI as canton code', () => {
 			expect(component.cantonCodes[1]).toBe('AI');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have AR as canton code', () => {
 			expect(component.cantonCodes[2]).toBe('AR');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have BE as canton code', () => {
 			expect(component.cantonCodes[3]).toBe('BE');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have BL as canton code', () => {
 			expect(component.cantonCodes[4]).toBe('BL');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have BS as canton code', () => {
 			expect(component.cantonCodes[5]).toBe('BS');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have FR as canton code', () => {
 			expect(component.cantonCodes[6]).toBe('FR');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have GE as canton code', () => {
 			expect(component.cantonCodes[7]).toBe('GE');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have GL as canton code', () => {
 			expect(component.cantonCodes[8]).toBe('GL');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have GR as canton code', () => {
 			expect(component.cantonCodes[9]).toBe('GR');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have JU as canton code', () => {
 			expect(component.cantonCodes[10]).toBe('JU');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have LU as canton code', () => {
 			expect(component.cantonCodes[11]).toBe('LU');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have NE as canton code', () => {
 			expect(component.cantonCodes[12]).toBe('NE');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have NW as canton code', () => {
 			expect(component.cantonCodes[13]).toBe('NW');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have OW as canton code', () => {
 			expect(component.cantonCodes[14]).toBe('OW');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have SG as canton code', () => {
 			expect(component.cantonCodes[15]).toBe('SG');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have SH as canton code', () => {
 			expect(component.cantonCodes[16]).toBe('SH');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have SO as canton code', () => {
 			expect(component.cantonCodes[17]).toBe('SO');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have SZ as canton code', () => {
 			expect(component.cantonCodes[18]).toBe('SZ');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have TG as canton code', () => {
 			expect(component.cantonCodes[19]).toBe('TG');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have TI as canton code', () => {
 			expect(component.cantonCodes[20]).toBe('TI');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have UR as canton code', () => {
 			expect(component.cantonCodes[21]).toBe('UR');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have VD as canton code', () => {
 			expect(component.cantonCodes[22]).toBe('VD');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have VS as canton code', () => {
 			expect(component.cantonCodes[23]).toBe('VS');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have ZG as canton code', () => {
 			expect(component.cantonCodes[24]).toBe('ZG');
 		});
 
-		it('should have XX as canton code', () => {
+		it('should have ZH as canton code', () => {
 			expect(component.cantonCodes[25]).toBe('ZH');
+		});
+
+		it('should have MI as canton code', () => {
+			expect(component.cantonCodes[26]).toBe('MI');
 		});
 	});
 });
