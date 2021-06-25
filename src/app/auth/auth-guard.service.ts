@@ -19,6 +19,7 @@ export enum Role {
 	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
 	SUPER_USER = 'bag-cc-superuser',
 	STRONG_AUTH = 'bag-cc-strongauth',
+	HIN = 'bag-cc-hin',
 	HINCODE = 'bag-cc-hincode',
 	HIN_EPR = 'bag-cc-hin-epr',
 	PERSONAL = 'bag-cc-personal'
@@ -87,7 +88,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 		}
 
 		if (
-			this.oauthService.hasUserRole(Role.HIN_EPR, claims) &&
+			this.isHinUser(claims) &&
 			(!this.oauthService.hasUserRole(Role.HINCODE, claims) ||
 				!this.oauthService.hasUserRole(Role.PERSONAL, claims))
 		) {
@@ -95,5 +96,9 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			return false;
 		}
 		return hasAccess;
+	}
+
+	private isHinUser(claims: Claims): boolean {
+		return this.oauthService.hasUserRole(Role.HIN_EPR, claims) || this.oauthService.hasUserRole(Role.HIN, claims);
 	}
 }
