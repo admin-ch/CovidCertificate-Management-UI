@@ -48,6 +48,9 @@ describe('AuthGuardService', () => {
 		it('should have the correct value for STRONG_AUTH', () => {
 			expect(Role.STRONG_AUTH).toBe('bag-cc-strongauth');
 		});
+		it('should have the correct value for HIN', () => {
+			expect(Role.HIN).toBe('bag-cc-hin');
+		});
 		it('should have the correct value for HINCODE', () => {
 			expect(Role.HINCODE).toBe('bag-cc-hincode');
 		});
@@ -181,6 +184,71 @@ describe('AuthGuardService', () => {
 		});
 
 		describe('HIN', () => {
+			describe('Without hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-hin']});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string) => role === Role.CERTIFICATE_CREATOR || role === Role.HIN
+					);
+				});
+
+				it('should return false', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(false);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
+				});
+
+				it('should redirect to auto-login', done => {
+					service.canLoad(null).subscribe(() => {
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/403ggg?l=en&stage=');
+						done();
+					});
+				});
+			});
+
+			describe('With hincode and personal', () => {
+				beforeEach(() => {
+					mock.claims$.next({
+						userroles: ['bag-cc-certificatecreator', 'bag-cc-hin', 'bag-cc-hincode', 'bag-cc-personal']
+					});
+
+					mock.hasUserRole.mockImplementation(
+						(role: string) =>
+							role === Role.CERTIFICATE_CREATOR ||
+							role === Role.HIN ||
+							role === Role.HINCODE ||
+							role === Role.PERSONAL
+					);
+				});
+
+				it('should return true', done => {
+					service[fn](null).subscribe(a => {
+						expect(a).toBe(true);
+						done();
+					});
+				});
+
+				it('should not navigate', done => {
+					jest.spyOn(router, 'navigate');
+					service[fn](null).subscribe(() => {
+						expect(router.navigate).not.toHaveBeenCalled();
+						done();
+					});
+				});
+			});
+		});
+
+		describe('HIN-EPR', () => {
 			describe('Without hincode and personal', () => {
 				beforeEach(() => {
 					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr']});
