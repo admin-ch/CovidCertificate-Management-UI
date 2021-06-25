@@ -58,7 +58,6 @@ describe('ShippingComponent', () => {
 	});
 
 	describe('Canton codes', () => {
-
 		it('should have 27 cantons code', () => {
 			expect(component.cantonCodes.length).toBe(27);
 		});
@@ -170,6 +169,5 @@ describe('ShippingComponent', () => {
 		it('should have MI as canton code', () => {
 			expect(component.cantonCodes[26]).toBe('MI');
 		});
-
 	});
 });
