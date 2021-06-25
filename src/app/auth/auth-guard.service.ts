@@ -21,7 +21,7 @@ export enum Role {
 	STRONG_AUTH = 'bag-cc-strongauth',
 	HINCODE = 'bag-cc-hincode',
 	HIN_EPR = 'bag-cc-hin-epr',
-	PERSONAL = 'bac-cc-personal'
+	PERSONAL = 'bag-cc-personal'
 }
 
 @Injectable({
