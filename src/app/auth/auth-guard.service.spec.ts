@@ -55,7 +55,7 @@ describe('AuthGuardService', () => {
 			expect(Role.HIN_EPR).toBe('bag-cc-hin-epr');
 		});
 		it('should have the correct value for PERSONAL', () => {
-			expect(Role.PERSONAL).toBe('bac-cc-personal');
+			expect(Role.PERSONAL).toBe('bag-cc-personal');
 		});
 	});
 
@@ -129,7 +129,7 @@ describe('AuthGuardService', () => {
 					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser']});
 
 					mock.hasUserRole.mockImplementation(
-						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER
+						(role: string) => role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER
 					);
 				});
 				it('should not give access', done => {
@@ -160,7 +160,7 @@ describe('AuthGuardService', () => {
 					});
 
 					mock.hasUserRole.mockImplementation(
-						(role: string, claims: any) =>
+						(role: string) =>
 							role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER || role === Role.STRONG_AUTH
 					);
 				});
@@ -186,7 +186,7 @@ describe('AuthGuardService', () => {
 					mock.claims$.next({userroles: ['bag-cc-certificatecreator', 'bag-cc-hin-epr']});
 
 					mock.hasUserRole.mockImplementation(
-						(role: string, claims: any) => role === Role.CERTIFICATE_CREATOR || role === Role.HIN_EPR
+						(role: string) => role === Role.CERTIFICATE_CREATOR || role === Role.HIN_EPR
 					);
 				});
 
@@ -220,7 +220,7 @@ describe('AuthGuardService', () => {
 					});
 
 					mock.hasUserRole.mockImplementation(
-						(role: string, claims: any) =>
+						(role: string) =>
 							role === Role.CERTIFICATE_CREATOR ||
 							role === Role.HIN_EPR ||
 							role === Role.HINCODE ||
