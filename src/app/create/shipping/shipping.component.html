@@ -19,7 +19,13 @@
 				*ngIf="shippingForm.get('shippingOption').value === 'app'"
 			>
 				<mat-label>{{ "certificateCreate.shipping.app.code" | translate }}</mat-label>
-				<input type="text" matInput formControlName="appDeliveryCode" id="appDeliveryCode" />
+				<input
+					type="text"
+					matInput
+					formControlName="appDeliveryCode"
+					id="appDeliveryCode"
+					ecDeliveryCodeCleaner
+				/>
 				<mat-error></mat-error>
 			</mat-form-field>
 			<ng-container *ngIf="shippingForm.get('shippingOption').value === 'post'">
