@@ -24,7 +24,7 @@ describe('VaccineFormComponent', () => {
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
 		getMedicinalProducts: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([])
+		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}])
 	};
 
 	beforeEach(async () => {
@@ -356,6 +356,61 @@ describe('VaccineFormComponent', () => {
 					totalDoses: 2
 				}
 			});
+		});
+	});
+	describe('Form reset', () => {
+		it('should reset the firstName correctly', () => {
+			component.vaccineForm.get('firstName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.firstName).toBeNull();
+		});
+
+		it('should reset the surName correctly', () => {
+			component.vaccineForm.get('surName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.surName).toBeNull();
+		});
+
+		it('should reset the birthdate correctly', () => {
+			component.vaccineForm.get('birthdate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.birthdate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the certificateLanguage correctly', () => {
+			component.vaccineForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
+
+		it('should reset the medicalProduct correctly', () => {
+			component.vaccineForm.get('medicalProduct').setValue({display: 'TEST', code: 'medicalProduct'});
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.medicalProduct).toEqual({display: 'TEST', code: 'medicalProduct'});
+		});
+
+		it('should reset the doseNumber correctly', () => {
+			component.vaccineForm.get('doseNumber').setValue(42);
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.doseNumber).toBeNull();
+		});
+
+		it('should reset the totalDoses correctly', () => {
+			component.vaccineForm.get('totalDoses').setValue(42);
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.totalDoses).toBeNull();
+		});
+
+		it('should reset the dateOfVaccination correctly', () => {
+			component.vaccineForm.get('dateOfVaccination').setValue(null);
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.dateOfVaccination).toBeDefined();
+		});
+
+		it('should reset the countryOfVaccination correctly', () => {
+			component.vaccineForm.get('countryOfVaccination').setValue(null);
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value.countryOfVaccination).toEqual({display: 'TEST-CH', code: 'CH'});
 		});
 	});
 });
