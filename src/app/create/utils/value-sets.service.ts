@@ -71,9 +71,13 @@ export class ValueSetsService {
 				display: country.display,
 				code: country.short
 			}))
-			.sort((countryA: CountryCodeDto, countryB: CountryCodeDto) =>
-				countryA.display.localeCompare(countryB.display)
-			);
+			.sort((countryA: ProductInfo, countryB: ProductInfo) => {
+				if (countryA.code === 'CH') {
+					return -1;
+				} else {
+					return countryA.display.localeCompare(countryB.display);
+				}
+			});
 	}
 
 	private computeTypeOfTests(): void {
