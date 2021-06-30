@@ -68,6 +68,9 @@
 				<mat-error></mat-error>
 			</mat-form-field>
 
+			<p class="form-field-info">
+				{{ "certificateCreate.form.label.test.sampleDate.info" | translate }}
+			</p>
 			<ob-nested-form formControlName="sampleDate" [nestedForm]="datepickerSampleDate.form" obErrorMessages>
 				<ec-datetimepicker
 					#datepickerSampleDate
@@ -79,6 +82,9 @@
 				</ec-datetimepicker>
 			</ob-nested-form>
 
+			<p class="form-field-info">
+				{{ "certificateCreate.form.label.test.center.info" | translate }}
+			</p>
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.test.center" | translate }}</mat-label>
 				<input type="text" matInput formControlName="center" id="center" />
