@@ -117,6 +117,7 @@
   "upload.file.select.limit": "Taille maximale: 40 kB.",
   "upload.file.upload": "Générer des certificats",
   "upload.file.upload.success": "Les certificats ont été créés avec succès. Veuillez vérifier le fichier ZIP retourné.",
+  "upload.file.upload.size.error": "Le fichier est trop grand.",
   "upload.instructions": "Vous pouvez générer plusieurs certificats. Pour ce faire, veuillez sélectionnez le type des certificats à générer et chargez le fichier CSV contenant les données.",
   "upload.link": "Générer plusieurs certificats",
   "upload.templates": "Modèles pour l'envoi de CSV.",
