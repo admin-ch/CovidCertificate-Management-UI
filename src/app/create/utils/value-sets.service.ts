@@ -74,6 +74,8 @@ export class ValueSetsService {
 			.sort((countryA: ProductInfo, countryB: ProductInfo) => {
 				if (countryA.code === 'CH') {
 					return -1;
+				} else if (countryB.code === 'CH') {
+					return 1;
 				} else {
 					return countryA.display.localeCompare(countryB.display);
 				}
