@@ -217,12 +217,12 @@ describe('TestFormComponent', () => {
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
 
-			it('should mark the sampleDate one hour in the future as invalid', () => {
+			it('should mark the sampleDate one hour in the future as valid', () => {
 				const testDate: Date = new Date();
 				testDate.setTime(testDate.getTime() + 60 * 60 * 1000);
 				const time = `${testDate.getHours()}:${testDate.getMinutes()}`;
 				component.testForm.get('sampleDate').setValue({date: testDate.toDateString(), time});
-				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
+				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
 
 			it('should mark the sampleDate today as valid', () => {
