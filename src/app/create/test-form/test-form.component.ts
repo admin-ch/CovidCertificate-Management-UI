@@ -82,7 +82,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: ['', Validators.required],
 			manufacturer: ['', Validators.required],
-			sampleDate: ['', [Validators.required, DateValidators.dateTimeLessThanToday()]],
+			sampleDate: ['', [Validators.required, DateValidators.dateLessThanToday()]],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
@@ -124,10 +124,18 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private resetForm(): void {
+		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
+		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
+		const previousManufacturer: ProductInfoWithGroup = this.testForm.value.manufacturer;
+		const previousCenter: string = this.testForm.value.center;
+
 		this.formDirective.resetForm();
 		this.testForm.reset({
-			certificateLanguage: this.getDefaultCertificateLanguage(),
-			countryOfTest: this.getDefaultCountryOfTest()
+			certificateLanguage: previousCertificateLanguage,
+			countryOfTest: this.getDefaultCountryOfTest(),
+			typeOfTest: previousTypeOfTest,
+			manufacturer: previousManufacturer,
+			center: previousCenter
 		});
 	}
 }
