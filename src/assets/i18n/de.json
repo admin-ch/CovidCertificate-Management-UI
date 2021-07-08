@@ -114,7 +114,7 @@
   "support.title": "Support",
   "upload.file.noneSelected": "Kein CSV Datei ausgewählt.",
   "upload.file.select": "CSV Datei auswählen",
-  "upload.file.select.limit": "Maximale Grösse: 40 Kb.",
+  "upload.file.select.limit": "Maximale Grösse: 40 Kb. Maximale Einträge: 100",
   "upload.file.upload": "Zertifikate generieren",
   "upload.file.upload.success": "Zertifikate wurden erfolgreich erstellt. Bitte prüfen Sie die zurückgegebene ZIP Datei.",
   "upload.file.upload.size.error": "Die Datei ist zu gross.",

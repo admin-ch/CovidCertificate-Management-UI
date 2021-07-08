@@ -82,7 +82,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: ['', Validators.required],
 			manufacturer: ['', Validators.required],
-			sampleDate: ['', [Validators.required, DateValidators.dateTimeLessThanToday()]],
+			sampleDate: ['', [Validators.required, DateValidators.dateLessThanToday()]],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});

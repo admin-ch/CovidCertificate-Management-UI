@@ -114,7 +114,7 @@
   "support.title": "Supporto",
   "upload.file.noneSelected": "Nessun file CSV selezionato.",
   "upload.file.select": "Selezionare un file CSV",
-  "upload.file.select.limit": "Dimensione massima: 40 kB.",
+  "upload.file.select.limit": "Dimensione massima: 40 kB. Voci massime: 100.",
   "upload.file.upload": "Generare certificati",
   "upload.file.upload.success": "I certificati sono stati creati con successo. Si prega di controllare il file ZIP restituito.",
   "upload.file.upload.size.error": "Il file è troppo grande.",
