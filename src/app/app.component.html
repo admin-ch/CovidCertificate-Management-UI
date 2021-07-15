@@ -5,8 +5,10 @@
 			<span dropdown-toggle class="fa fa-fw fa-question ob-control-icon"></span>
 			<ng-container dropdown-content>
 				<h4>{{ "support.title" | translate }}</h4>
-				<p>{{ "support.instructions" | translate }}</p>
-				<a href="tel:+41584658888">058 465 88 88</a>
+				<ng-container *ngIf="isAuthenticated$ | async">
+					<p>{{ "support.instructions" | translate }}</p>
+					<a href="tel:+41584658888">058 465 88 88</a>
+				</ng-container>
 				<section *ngIf="lang$ | async as lang">
 					<div class="help-link">
 						<a
