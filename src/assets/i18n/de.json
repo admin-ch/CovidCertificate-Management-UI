@@ -110,7 +110,7 @@
   "otp.key": "Geheimschlüssel",
   "otp.link": "One-Time-Password generieren",
   "otp.title": "Neues One-Time-Password generieren",
-  "support.instructions": "Sollten Sie Probleme mit der Anwendung haben, wenden Sie sich bitte an den BIT-Helpdesk:",
+  "support.instructions": "Sollten Sie Probleme mit dem CSV Upload haben, wenden Sie sich bitte an den BIT-Helpdesk:",
   "support.title": "Support",
   "upload.file.noneSelected": "Kein CSV Datei ausgewählt.",
   "upload.file.select": "CSV Datei auswählen",

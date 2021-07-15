@@ -110,7 +110,7 @@
   "otp.key": "Private key",
   "otp.link": "Generate One-Time-Password",
   "otp.title": "Generate new One-Time-Password",
-  "support.instructions": "If you have any problems with the application, please contact the FOITT Helpdesk:",
+  "support.instructions": "If you have any problems with the CSV upload, please contact the BIT Helpdesk:",
   "support.title": "Support",
   "upload.file.noneSelected": "No CSV file selected.",
   "upload.file.select": "Select CSV file",
