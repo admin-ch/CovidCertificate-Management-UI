@@ -110,7 +110,7 @@
   "otp.key": "Clé secrète",
   "otp.link": "Générer un One-Time-Password",
   "otp.title": "Générer un nouvel One-Time-Password",
-  "support.instructions": "Si vous rencontrez des problèmes avec l'application, veuillez contacter le helpdesk de l'OFIT:",
+  "support.instructions": "Si vous rencontrez des problèmes avec l'envoi de CSV, veuillez contacter le helpdesk de l'OFIT:",
   "support.title": "Support",
   "upload.file.noneSelected": "Aucun fichier CSV sélectionné.",
   "upload.file.select": "Sélectionnez un fichier CSV",
