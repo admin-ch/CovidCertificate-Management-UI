@@ -4,7 +4,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
-import {TimeValidators} from "../utils/time-validators";
+import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
