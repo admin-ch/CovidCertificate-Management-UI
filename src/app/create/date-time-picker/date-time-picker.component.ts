@@ -113,11 +113,14 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
-				case 'time':
-				case 'timeInvalid': {
+				case 'time': {
 					if (!!this.errors[keyError].required) {
 						this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					}
+					break;
+				}
+				case 'timeInvalid': {
+					this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
 				case 'timeAfterToday': {
