@@ -100,7 +100,7 @@
   "i18n.validation.dateAfterToday": "The date cannot be in the future",
   "i18n.validation.date": "A valid date is needed",
   "i18n.validation.invalidAppDeliveryCode": "Invalid delivery code",
-  "i18n.validation.time": "A valid time is needed",
+  "i18n.validation.time": "A valid time is needed (e.g. 14:30)",
   "i18n.validation.timeAfterToday": "The date cannot be in the future",
   "i18n.validation.matDatepickerParse": "Invalid date format. Please use \"dd.mm.yyyy hh:mm\"",
   "logout": "Logout",

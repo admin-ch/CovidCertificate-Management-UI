@@ -100,7 +100,7 @@
   "i18n.validation.dateAfterToday": "La date ne doit pas être située dans le futur",
   "i18n.validation.date": "Merci d'indiquer une date correcte",
   "i18n.validation.invalidAppDeliveryCode": "Code d'envoi invalide",
-  "i18n.validation.time": "Merci d'indiquer une heure correcte",
+  "i18n.validation.time": "Merci d'indiquer une heure correcte (e.g. 14:30)",
   "i18n.validation.timeAfterToday": "La date ne doit pas être située dans le futur",
   "i18n.validation.matDatepickerParse": "Format de date invalide, merci d'utiliser \"jj.mm.aaaa hh:mm\"",
   "logout": "Déconnexion",

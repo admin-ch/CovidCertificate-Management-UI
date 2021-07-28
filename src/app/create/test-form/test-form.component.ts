@@ -4,6 +4,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
+import {TimeValidators} from "../utils/time-validators";
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
@@ -82,7 +83,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: ['', Validators.required],
 			manufacturer: ['', Validators.required],
-			sampleDate: ['', [Validators.required, DateValidators.dateLessThanToday()]],
+			sampleDate: ['', [Validators.required, TimeValidators.validateTime(), DateValidators.dateLessThanToday()]],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
