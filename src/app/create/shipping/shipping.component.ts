@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
-import {Shipping, ShippingOptions} from 'shared/model';
+import {GenerationType, Shipping, ShippingOptions} from 'shared/model';
 import {DeliveryCodeValidatorValidators} from './delivery-code-validator';
 
 @Component({
@@ -54,7 +54,12 @@ export class ShippingComponent implements OnInit {
 		this.dataService.resetCalled.subscribe(() => {
 			this.resetForm();
 		});
-		this.dataService.certificateTypeChanged.subscribe(() => {
+		this.dataService.certificateTypeChanged.subscribe((certificateType: GenerationType) => {
+			if (certificateType === GenerationType.TEST) {
+				this.shippingOptions = [ShippingOptions.PDF, ShippingOptions.APP];
+			} else {
+				this.shippingOptions = Object.values(ShippingOptions);
+			}
 			this.resetForm();
 		});
 	}
