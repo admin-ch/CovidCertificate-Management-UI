@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
-import {CreateCertificateResponse} from 'shared/model';
+import {CreateCertificateResponse, GenerationType} from 'shared/model';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {CertificateService} from 'shared/certificate.service';
 
@@ -11,6 +11,7 @@ import {CertificateService} from 'shared/certificate.service';
 })
 export class DownloadComponent implements OnInit {
 	@Output() resetEmitter = new EventEmitter<void>();
+	@Input() type;
 
 	createCertificateResponse: CreateCertificateResponse;
 	safeResourceUrl: SafeResourceUrl;
@@ -51,6 +52,12 @@ export class DownloadComponent implements OnInit {
 
 			link.remove();
 		}
+	}
+
+	getDescription(): string {
+		return this.type === GenerationType.VACCINATION ?
+			'certificateCreate.step-four.description.vaccinated' :
+			'certificateCreate.step-four.description.tested';
 	}
 
 	callReset(): void {
