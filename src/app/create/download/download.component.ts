@@ -55,9 +55,9 @@ export class DownloadComponent implements OnInit {
 	}
 
 	getDescription(): string {
-		return this.type === GenerationType.VACCINATION ?
-			'certificateCreate.step-four.description.vaccinated' :
-			'certificateCreate.step-four.description.tested';
+		return this.type === GenerationType.VACCINATION
+			? 'certificateCreate.step-four.description.vaccinated'
+			: 'certificateCreate.step-four.description.tested';
 	}
 
 	callReset(): void {
