@@ -7,7 +7,8 @@
 		<mat-error></mat-error>
 	</mat-form-field>
 	<mat-form-field *ngIf="showTime" obErrorMessages class="mat-form-field-lg">
-		<mat-label *ngIf="!showDate">{{ label }}</mat-label>
+		<!-- This label is needed for the time polyfill library -->
+		<label [id]="id + '-time-label'" class="time-polyfill-label" *ngIf="timePolyfillNeeded"></label>
 		<input [id]="id + '-time'" type="time" matInput formControlName="time" />
 		<mat-error></mat-error>
 	</mat-form-field>

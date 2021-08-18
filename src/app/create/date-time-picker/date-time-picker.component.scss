@@ -27,3 +27,8 @@
 mat-form-field {
 	max-width: 550px;
 }
+
+.time-polyfill-label {
+	visibility: hidden;
+	position: absolute;
+}
