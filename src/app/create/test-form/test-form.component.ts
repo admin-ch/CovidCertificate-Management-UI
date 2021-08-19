@@ -78,7 +78,7 @@ export class TestFormComponent implements OnInit {
 	getCurrentDate(): any {
 		return {
 			time: moment().format('hh:mm'),
-			date: new Date()
+			date: moment()
 		};
 	}
 
@@ -93,7 +93,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: ['', Validators.required],
 			manufacturer: ['', Validators.required],
-			sampleDate: ['', SAMPLE_DATE_VALIDATORS],
+			sampleDate: [this.getCurrentDate(), SAMPLE_DATE_VALIDATORS],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
