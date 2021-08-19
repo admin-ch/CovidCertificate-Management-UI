@@ -22,7 +22,7 @@
 		<ec-summary (back)="backCalled()" (next)="nextCalled()"></ec-summary>
 	</mat-step>
 	<mat-step>
-		<ec-download (resetEmitter)="resetCalled()"></ec-download>
+		<ec-download [type]="selectedForm" (resetEmitter)="resetCalled()"></ec-download>
 	</mat-step>
 	<ng-template matStepperIcon="edit">
 		<span class="fa fa-pen"></span>

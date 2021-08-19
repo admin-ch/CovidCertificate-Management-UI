@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/for
 import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import timePolyfill from 'time-input-polyfill';
 import supportsTime from 'time-input-polyfill/supportsTime';
+import * as moment from 'moment';
 
 const MY_FORMATS: MatDateFormats = {
 	parse: {
@@ -35,6 +36,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	@Input() defaultValue?: {date?: Date; time?: Date};
 	@HostBinding('class.datetime') datetime = true;
 	form: FormGroup;
+	maxDate: Date = new Date();
 
 	get timePolyfillNeeded(): boolean {
 		return !supportsTime;
@@ -61,6 +63,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 		if (this.timePolyfillNeeded && timeInputElem && timeLabelElem) {
 			timePolyfill(timeInputElem, timeLabelElem);
 		}
+	}
+
+	getCurrentDate(): string {
+		return moment().format('DD.MM.YYYY');
 	}
 
 	private createForm(): void {
@@ -124,6 +130,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					break;
 				}
 				case 'dateTooSmall': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
+				case 'dateBeforeBirthday': {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}

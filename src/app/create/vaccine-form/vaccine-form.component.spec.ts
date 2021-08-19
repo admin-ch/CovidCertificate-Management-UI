@@ -211,7 +211,7 @@ describe('VaccineFormComponent', () => {
 		describe('dateOfVaccination validation', () => {
 			it('should marks the dateOfVaccination as invalid if empty', () => {
 				component.vaccineForm.get('dateOfVaccination').setValue({date: ''});
-				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
+				expect(component.vaccineForm.get('dateOfVaccination').parent.invalid).toBeTruthy();
 			});
 
 			it('should marks the dateOfVaccination as invalid if in the future', () => {

@@ -9,6 +9,8 @@ import {DateMapper} from '../utils/date-mapper';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 
+const VACCINE_DATE_VALIDATORS = [Validators.required, DateValidators.dateLessThanToday()];
+
 @Component({
 	selector: 'ec-vaccine-form',
 	templateUrl: './vaccine-form.component.html',
@@ -81,14 +83,20 @@ export class VaccineFormComponent implements OnInit {
 				medicalProduct: ['', Validators.required],
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
-				dateOfVaccination: [
-					this.getDefaultDateOfVaccination(),
-					[Validators.required, DateValidators.dateLessThanToday()]
-				],
+				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
 				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required]
 			},
 			{validators: DosesValidators.validateDoses}
 		);
+
+		this.vaccineForm.get('dateOfVaccination').valueChanges.subscribe(_ => {
+			if (!!this.vaccineForm.get('birthdate')) {
+				this.vaccineForm.controls.dateOfVaccination.setValidators([
+					DateValidators.dateMoreThanBirthday(),
+					...VACCINE_DATE_VALIDATORS
+				]);
+			}
+		});
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {

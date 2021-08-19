@@ -142,7 +142,7 @@ describe('RecoveryFormComponent', () => {
 
 		describe('dateFirstPositiveTestResult validation', () => {
 			it('should marks the dateFirstPositiveTestResult as invalid if empty', () => {
-				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: ''});
+				// default value is empty
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
 			});
 
