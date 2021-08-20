@@ -30,8 +30,12 @@ export class UploadComponent implements OnInit {
 	onFileSelected(event) {
 		const file: File = event.target.files[0];
 
-		if (file && file.size < this.maxFileSize) {
-			this.selectedFile = file;
+		if (file) {
+			if (file.size < this.maxFileSize) {
+				this.selectedFile = file;
+			} else {
+				this.notificationService.error('upload.file.upload.size.error');
+			}
 		}
 	}
 

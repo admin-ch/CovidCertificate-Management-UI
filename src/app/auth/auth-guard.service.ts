@@ -19,9 +19,10 @@ export enum Role {
 	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
 	SUPER_USER = 'bag-cc-superuser',
 	STRONG_AUTH = 'bag-cc-strongauth',
+	HIN = 'bag-cc-hin',
 	HINCODE = 'bag-cc-hincode',
 	HIN_EPR = 'bag-cc-hin-epr',
-	PERSONAL = 'bac-cc-personal'
+	PERSONAL = 'bag-cc-personal'
 }
 
 @Injectable({
@@ -87,13 +88,17 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 		}
 
 		if (
-			this.oauthService.hasUserRole(Role.HIN_EPR, claims) &&
+			this.isHinUser(claims) &&
 			(!this.oauthService.hasUserRole(Role.HINCODE, claims) ||
 				!this.oauthService.hasUserRole(Role.PERSONAL, claims))
 		) {
-			this.window.location.href = `https://www.eiam.admin.ch/chloginforbidden?l=${this.translate.currentLang}&stage=${this.stage}`;
+			this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
 			return false;
 		}
 		return hasAccess;
+	}
+
+	private isHinUser(claims: Claims): boolean {
+		return this.oauthService.hasUserRole(Role.HIN_EPR, claims) || this.oauthService.hasUserRole(Role.HIN, claims);
 	}
 }

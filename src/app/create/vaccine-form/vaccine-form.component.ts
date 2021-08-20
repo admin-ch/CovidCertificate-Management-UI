@@ -9,6 +9,8 @@ import {DateMapper} from '../utils/date-mapper';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 
+const VACCINE_DATE_VALIDATORS = [Validators.required, DateValidators.dateLessThanToday()];
+
 @Component({
 	selector: 'ec-vaccine-form',
 	templateUrl: './vaccine-form.component.html',
@@ -36,6 +38,12 @@ export class VaccineFormComponent implements OnInit {
 		});
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
+		});
+		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.patchValue({
+				certificateLanguage: this.getDefaultCertificateLanguage(),
+				countryOfVaccination: this.getDefaultCountryOfVaccination()
+			});
 		});
 	}
 
@@ -75,14 +83,20 @@ export class VaccineFormComponent implements OnInit {
 				medicalProduct: ['', Validators.required],
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
-				dateOfVaccination: [
-					this.getDefaultDateOfVaccination(),
-					[Validators.required, DateValidators.dateLessThanToday()]
-				],
+				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
 				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required]
 			},
 			{validators: DosesValidators.validateDoses}
 		);
+
+		this.vaccineForm.get('dateOfVaccination').valueChanges.subscribe(_ => {
+			if (!!this.vaccineForm.get('birthdate')) {
+				this.vaccineForm.controls.dateOfVaccination.setValidators([
+					DateValidators.dateMoreThanBirthday(),
+					...VACCINE_DATE_VALIDATORS
+				]);
+			}
+		});
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -116,11 +130,15 @@ export class VaccineFormComponent implements OnInit {
 	}
 
 	private resetForm(): void {
+		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
+		const previousMedicalProduct: ProductInfoWithGroup = this.vaccineForm.value.medicalProduct;
+
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
-			certificateLanguage: this.getDefaultCertificateLanguage(),
+			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
-			countryOfVaccination: this.getDefaultCountryOfVaccination()
+			countryOfVaccination: this.getDefaultCountryOfVaccination(),
+			medicalProduct: previousMedicalProduct
 		});
 	}
 }

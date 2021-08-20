@@ -5,8 +5,56 @@
 			<span dropdown-toggle class="fa fa-fw fa-question ob-control-icon"></span>
 			<ng-container dropdown-content>
 				<h4>{{ "support.title" | translate }}</h4>
-				<p>{{ "support.instructions" | translate }}</p>
-				<a href="tel:+41584658888">058 465 88 88</a>
+				<ng-container *ngIf="isAuthenticated$ | async">
+					<p>{{ "support.instructions" | translate }}</p>
+					<a href="tel:+41584658888">058 465 88 88</a>
+				</ng-container>
+				<section *ngIf="lang$ | async as lang">
+					<div class="help-link">
+						<a
+							[href]="'https://www.eiam.admin.ch/index.php?c=f!supportggg!pub&l=' + lang"
+							target="_blank"
+							rel="noopener noreferrer"
+							id="support_link"
+						>
+							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+							>{{ "home.support" | translate }}
+						</a>
+					</div>
+					<div class="help-link">
+						<a
+							[href]="'https://www.eiam.admin.ch/index.php?c=f!dmggg!pub&l=' + lang"
+							target="_blank"
+							rel="noopener noreferrer"
+							id="administration_link"
+						>
+							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+							>{{ "home.administration" | translate }}
+						</a>
+					</div>
+					<div class="help-link">
+						<a
+							[href]="'https://www.eiam.admin.ch/covidcertificatetrainer?l=' + lang"
+							target="_blank"
+							rel="noopener noreferrer"
+							id="training_link"
+						>
+							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+							>{{ "home.training" | translate }}
+						</a>
+					</div>
+					<div class="help-link">
+						<a
+							href="{{ 'home.issuer.url' | translate }}"
+							target="_blank"
+							rel="noopener noreferrer"
+							id="issuer_link"
+						>
+							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+							>{{ "home.issuer" | translate }}
+						</a>
+					</div>
+				</section>
 			</ng-container>
 		</ob-dropdown>
 	</ng-template>

@@ -27,6 +27,8 @@ import {TestFormComponent} from './test-form/test-form.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DownloadComponent} from './download/download.component';
 import {MatOptionModule} from '@angular/material/core';
+import {ShippingComponent} from './shipping/shipping.component';
+import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
 
 @NgModule({
 	declarations: [
@@ -37,7 +39,9 @@ import {MatOptionModule} from '@angular/material/core';
 		RecoveryFormComponent,
 		TestFormComponent,
 		SummaryComponent,
-		DownloadComponent
+		DownloadComponent,
+		ShippingComponent,
+		DeliveryCodeCleanerDirective
 	],
 	imports: [
 		SharedModule,

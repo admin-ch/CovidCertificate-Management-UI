@@ -2,9 +2,10 @@ import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {ObHttpApiInterceptorEvents, ObINavigationLink, ObMasterLayoutService} from '@oblique/oblique';
 import {Observable, of, Subject} from 'rxjs';
-import {delay, filter, map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {OauthService} from './auth/oauth.service';
 import {Role} from './auth/auth-guard.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
 	selector: 'ec-root',
@@ -22,13 +23,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;
 	currentPage: string;
+	lang$: Observable<string>;
 	private readonly unsubscribe = new Subject();
 
 	constructor(
 		private readonly oauthService: OauthService,
-		interceptor: ObHttpApiInterceptorEvents,
-		router: Router,
-		private readonly config: ObMasterLayoutService
+		private readonly interceptor: ObHttpApiInterceptorEvents,
+		private readonly router: Router,
+		private readonly config: ObMasterLayoutService,
+		private readonly translate: TranslateService
 	) {
 		this.name$ = this.oauthService.name$;
 		this.isAuthenticated$ = this.oauthService.isAuthenticated$.pipe(
@@ -47,6 +50,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			.subscribe(url => (this.currentPage = url));
 
 		interceptor.sessionExpired.subscribe(() => this.logout());
+		this.lang$ = translate.onLangChange.pipe(
+			map(lang => lang.lang),
+			startWith(translate.currentLang)
+		);
 	}
 
 	ngOnDestroy() {

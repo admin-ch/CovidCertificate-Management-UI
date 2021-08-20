@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CreateCertificateResponse, GenerationType, Patient} from 'shared/model';
+import {CreateCertificateResponse, GenerationType, Patient, Shipping} from 'shared/model';
 import {Subject} from 'rxjs';
 
 @Injectable({
@@ -8,6 +8,7 @@ import {Subject} from 'rxjs';
 export class CreationDataService {
 	certificateTypeChanged: Subject<GenerationType> = new Subject<GenerationType>();
 	patientChanged: Subject<Patient> = new Subject<Patient>();
+	shippingChanged: Subject<Shipping> = new Subject<Shipping>();
 	createCertificateResponseChanged: Subject<CreateCertificateResponse> = new Subject<CreateCertificateResponse>();
 	resetCalled: Subject<boolean> = new Subject<boolean>();
 
@@ -17,6 +18,10 @@ export class CreationDataService {
 
 	setNewPatient(patient: Patient) {
 		this.patientChanged.next(patient);
+	}
+
+	setNewShipping(shipping: Shipping) {
+		this.shippingChanged.next(shipping);
 	}
 
 	setNewCreateCertificateResponse(createCertificateResponse: CreateCertificateResponse) {

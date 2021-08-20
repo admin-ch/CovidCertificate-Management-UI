@@ -12,10 +12,13 @@ import {
 	vaccinationPatienDto,
 	vaccinationPatient
 } from './mocks';
+import {Shipping, ShippingOptions} from 'shared/model';
 
 describe('CertificateService', () => {
 	let service: CertificateService;
 	let api: ApiService;
+
+	const shipping: Shipping = {shippingOption: ShippingOptions.PDF};
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -30,25 +33,25 @@ describe('CertificateService', () => {
 	});
 
 	it('should call create vaccination certificate with the correct URL', () => {
-		service.createCertificate(vaccinationPatient);
+		service.createCertificate(vaccinationPatient, shipping);
 
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/vaccination', vaccinationPatienDto);
 	});
 
 	it('should call create test certificate with the correct URL', () => {
-		service.createCertificate(testPatient);
+		service.createCertificate(testPatient, shipping);
 
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/test', testPatientDto);
 	});
 
 	it('should call create recovery certificate with the correct URL', () => {
-		service.createCertificate(recoveryPatient);
+		service.createCertificate(recoveryPatient, shipping);
 
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/recovery', recoveryPatientDto);
 	});
 
 	it('should call create certificate with the correct URL if no type is defined', () => {
-		service.createCertificate(patientNoCertificate);
+		service.createCertificate(patientNoCertificate, shipping);
 
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/', patientNoCertificateDto);
 	});

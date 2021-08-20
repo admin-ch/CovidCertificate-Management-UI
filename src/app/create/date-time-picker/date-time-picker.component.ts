@@ -1,6 +1,9 @@
-import {Component, HostBinding, Input, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, Input, OnChanges, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
+import timePolyfill from 'time-input-polyfill';
+import supportsTime from 'time-input-polyfill/supportsTime';
+import * as moment from 'moment';
 
 const MY_FORMATS: MatDateFormats = {
 	parse: {
@@ -22,7 +25,7 @@ const MY_FORMATS: MatDateFormats = {
 	host: {class: 'ob-dateTimePicker'},
 	providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}]
 })
-export class DateTimePickerComponent implements OnInit, OnChanges {
+export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit {
 	private static counter = 0;
 	@Input() id: string;
 	@Input() label: string;
@@ -33,6 +36,11 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 	@Input() defaultValue?: {date?: Date; time?: Date};
 	@HostBinding('class.datetime') datetime = true;
 	form: FormGroup;
+	maxDate: Date = new Date();
+
+	get timePolyfillNeeded(): boolean {
+		return !supportsTime;
+	}
 
 	constructor(readonly fb: FormBuilder) {
 		this.createForm();
@@ -47,6 +55,18 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 		this.datetime = this.showDate && this.showTime;
 		this.updateValidators();
 		this.updateErrors();
+	}
+
+	ngAfterViewInit(): void {
+		const timeInputElem = document.getElementById(`${this.id}-time`);
+		const timeLabelElem = document.getElementById(`${this.id}-time-label`);
+		if (this.timePolyfillNeeded && timeInputElem && timeLabelElem) {
+			timePolyfill(timeInputElem, timeLabelElem);
+		}
+	}
+
+	getCurrentDate(): string {
+		return moment().format('DD.MM.YYYY');
 	}
 
 	private createForm(): void {
@@ -113,10 +133,18 @@ export class DateTimePickerComponent implements OnInit, OnChanges {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
+				case 'dateBeforeBirthday': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
 				case 'time': {
 					if (!!this.errors[keyError].required) {
 						this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					}
+					break;
+				}
+				case 'timeInvalid': {
+					this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
 				case 'timeAfterToday': {

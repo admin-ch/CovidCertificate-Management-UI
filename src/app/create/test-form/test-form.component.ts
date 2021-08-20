@@ -4,8 +4,12 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
+import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
+import * as moment from 'moment';
+
+const SAMPLE_DATE_VALIDATORS = [Validators.required, TimeValidators.validateTime(), DateValidators.dateLessThanToday()];
 
 @Component({
 	selector: 'ec-test-form',
@@ -36,6 +40,12 @@ export class TestFormComponent implements OnInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
+		this.translateService.onLangChange.subscribe(_ => {
+			this.testForm.patchValue({
+				certificateLanguage: this.getDefaultCertificateLanguage(),
+				countryOfTest: this.getDefaultCountryOfTest()
+			});
+		});
 	}
 
 	goBack(): void {
@@ -65,6 +75,13 @@ export class TestFormComponent implements OnInit {
 		return this.valueSetsService.getManufacturerOfTest();
 	}
 
+	getCurrentDate(): any {
+		return {
+			time: moment().format('hh:mm'),
+			date: moment()
+		};
+	}
+
 	private createForm(): void {
 		this.testForm = this.formBuilder.group({
 			firstName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -76,9 +93,18 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: ['', Validators.required],
 			manufacturer: ['', Validators.required],
-			sampleDate: ['', [Validators.required, DateValidators.dateTimeLessThanToday()]],
+			sampleDate: [this.getCurrentDate(), SAMPLE_DATE_VALIDATORS],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
+		});
+
+		this.testForm.get('sampleDate').valueChanges.subscribe(_ => {
+			if (!!this.testForm.get('birthdate')) {
+				this.testForm.controls.sampleDate.setValidators([
+					DateValidators.dateMoreThanBirthday(),
+					...SAMPLE_DATE_VALIDATORS
+				]);
+			}
 		});
 
 		this.testForm.get('typeOfTest').valueChanges.subscribe(newValue => {
@@ -118,10 +144,18 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private resetForm(): void {
+		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
+		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
+		const previousManufacturer: ProductInfoWithGroup = this.testForm.value.manufacturer;
+		const previousCenter: string = this.testForm.value.center;
+
 		this.formDirective.resetForm();
 		this.testForm.reset({
-			certificateLanguage: this.getDefaultCertificateLanguage(),
-			countryOfTest: this.getDefaultCountryOfTest()
+			certificateLanguage: previousCertificateLanguage,
+			countryOfTest: this.getDefaultCountryOfTest(),
+			typeOfTest: previousTypeOfTest,
+			manufacturer: previousManufacturer,
+			center: previousCenter
 		});
 	}
 }

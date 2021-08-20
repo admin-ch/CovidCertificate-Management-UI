@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Patient} from 'shared/model';
+import {Patient, Shipping} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {CertificateService} from 'shared/certificate.service';
 
@@ -15,6 +15,7 @@ export class SummaryComponent implements OnInit {
 	patient: Patient;
 	validFrom: Date;
 	validUntil: Date;
+	shipping: Shipping;
 
 	private readonly CERTIFICATE_VALIDITY_IN_DAYS = 179;
 	private readonly DAYS_UNTIL_VALID = 10;
@@ -37,6 +38,10 @@ export class SummaryComponent implements OnInit {
 				this.validUntil.setDate(this.validUntil.getDate() + this.CERTIFICATE_VALIDITY_IN_DAYS);
 			}
 		});
+
+		this.dataService.shippingChanged.subscribe(shipping => {
+			this.shipping = shipping;
+		});
 	}
 
 	goBack(): void {
@@ -44,7 +49,7 @@ export class SummaryComponent implements OnInit {
 	}
 
 	goNext(): void {
-		this.certificateService.createCertificate(this.patient).subscribe(createCertificateResponse => {
+		this.certificateService.createCertificate(this.patient, this.shipping).subscribe(createCertificateResponse => {
 			this.dataService.setNewCreateCertificateResponse(createCertificateResponse);
 			this.dataService.emitResetCalled();
 			this.next.emit();

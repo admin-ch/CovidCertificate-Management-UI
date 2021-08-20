@@ -8,6 +8,7 @@ export interface OIdC {
 	applicationUrl: string;
 	loginFeedback: string;
 	afterLoginPath: string;
+	maxIdTokenIatOffsetAllowedInSeconds: number;
 	silentRenew: boolean;
 	useAutoLogin: boolean;
 	debug: LogLevel;
@@ -26,6 +27,7 @@ export class OpenIdConfigService {
 		postLogoutRedirectUri: environment.oidc.applicationUrl,
 		postLoginRoute: `/${environment.oidc.afterLoginPath}`,
 		logLevel: environment.oidc.debug,
+		maxIdTokenIatOffsetAllowedInSeconds: environment.oidc.maxIdTokenIatOffsetAllowedInSeconds,
 		responseType: 'code',
 		startCheckSession: false,
 		silentRenew: environment.oidc.silentRenew,

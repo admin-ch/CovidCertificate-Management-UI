@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from 'shared/api.service';
-import {CreateCertificateResponse, Patient, PatientDto, ValueSetsResponse} from './model';
+import {CertificateCreateDto, CreateCertificateResponse, Patient, Shipping, ValueSetsResponse} from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class CertificateService {
 		private readonly dtoMappingService: CertificateCreateDtoMappingService
 	) {}
 
-	createCertificate(patient: Patient): Observable<CreateCertificateResponse> {
+	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
 		let certificateType = '';
 		if (patient.vaccination) {
 			certificateType = 'vaccination';
@@ -25,7 +25,7 @@ export class CertificateService {
 		} else if (patient.recovery) {
 			certificateType = 'recovery';
 		}
-		const patientDto: PatientDto = this.dtoMappingService.mapPatientToDto(patient);
+		const patientDto: CertificateCreateDto = this.dtoMappingService.mapCreationDataToDto(patient, shipping);
 		return this.http.post(`${this.covidCertificateApi}/${certificateType}`, patientDto);
 	}
 

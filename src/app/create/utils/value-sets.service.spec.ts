@@ -170,11 +170,11 @@ describe('ValueSetsService', () => {
 		});
 
 		it('should compute Sweden correctly', () => {
-			expect(service.getCountryOptions()[0]).toEqual({code: 'SE', display: 'Sweden'});
+			expect(service.getCountryOptions()[1]).toEqual({code: 'SE', display: 'Sweden'});
 		});
 
 		it('should compute Switzerland correctly', () => {
-			expect(service.getCountryOptions()[1]).toEqual({code: 'CH', display: 'Switzerland'});
+			expect(service.getCountryOptions()[0]).toEqual({code: 'CH', display: 'Switzerland'});
 		});
 	});
 
