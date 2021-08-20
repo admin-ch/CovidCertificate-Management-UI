@@ -61,6 +61,7 @@
   "certificateRevoke.success": "Il certificato con l'UVCI {{uvci}} è stato bloccato.",
   "certificateRevoke.title": "Bloccare il certificato",
   "certificateRevoke.uvci": "UVCI",
+  "certificateRevoke.uvci.info": "Formato: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
   "common.next": "Avanti",
   "common.back": "Indietro",
   "common.important": "Importante",

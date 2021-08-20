@@ -61,6 +61,7 @@
   "certificateRevoke.success": "Certificate with UVCI {{uvci}} was revoked successfully.",
   "certificateRevoke.title": "Revoke certificate",
   "certificateRevoke.uvci": "UVCI",
+  "certificateRevoke.uvci.info": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
   "common.next": "Next",
   "common.back": "Back",
   "common.important": "Important",

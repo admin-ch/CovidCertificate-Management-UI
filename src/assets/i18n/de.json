@@ -61,6 +61,7 @@
   "certificateRevoke.success": "Zertifikat mit UVCI {{uvci}} wurde erfolgreich gesperrt.",
   "certificateRevoke.title": "Zertifikat sperren",
   "certificateRevoke.uvci": "UVCI",
+  "certificateRevoke.uvci.info": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
   "common.next": "Weiter",
   "common.back": "Zurück",
   "common.important": "Wichtig",
