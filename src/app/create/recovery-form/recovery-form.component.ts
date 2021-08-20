@@ -7,7 +7,11 @@ import {Patient, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
-const FIRST_POSITIVE_TEST_VALIDATORS = [Validators.required, DateValidators.dateLessThanToday()];
+const FIRST_POSITIVE_TEST_VALIDATORS = [
+	Validators.required,
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate()
+];
 
 @Component({
 	selector: 'ec-recovery-form',
