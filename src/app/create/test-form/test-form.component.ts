@@ -9,7 +9,12 @@ import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
 
-const SAMPLE_DATE_VALIDATORS = [Validators.required, TimeValidators.validateTime(), DateValidators.dateLessThanToday()];
+const SAMPLE_DATE_VALIDATORS = [
+	Validators.required,
+	TimeValidators.validateTime(),
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate()
+];
 
 @Component({
 	selector: 'ec-test-form',
@@ -155,7 +160,8 @@ export class TestFormComponent implements OnInit {
 			countryOfTest: this.getDefaultCountryOfTest(),
 			typeOfTest: previousTypeOfTest,
 			manufacturer: previousManufacturer,
-			center: previousCenter
+			center: previousCenter,
+			sampleDate: this.getCurrentDate()
 		});
 	}
 }
