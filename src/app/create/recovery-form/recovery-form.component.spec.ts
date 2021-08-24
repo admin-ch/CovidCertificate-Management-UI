@@ -151,9 +151,9 @@ describe('RecoveryFormComponent', () => {
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
 			});
 
-			it('should marks the dateFirstPositiveTestResult as valid if to old', () => {
+			it('should mark the dateFirstPositiveTestResult as invalid if too old', () => {
 				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: dateToOld});
-				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
+				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
 			});
 
 			it('should marks the dateFirstPositiveTestResult as valid if set correctly', () => {

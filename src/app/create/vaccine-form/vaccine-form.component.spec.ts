@@ -219,9 +219,9 @@ describe('VaccineFormComponent', () => {
 				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
 			});
 
-			it('should marks the dateOfVaccination as valid if to old', () => {
+			it('should mark the dateOfVaccination as invalid if too old', () => {
 				component.vaccineForm.get('dateOfVaccination').setValue({date: dateToOld});
-				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeFalsy();
+				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
 			});
 
 			it('should marks the dateOfVaccination as valid if set correctly', () => {
