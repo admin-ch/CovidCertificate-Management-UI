@@ -7,6 +7,12 @@ import {Patient, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
+const FIRST_POSITIVE_TEST_VALIDATORS = [
+	Validators.required,
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate()
+];
+
 @Component({
 	selector: 'ec-recovery-form',
 	templateUrl: './recovery-form.component.html'
@@ -70,8 +76,17 @@ export class RecoveryFormComponent implements OnInit {
 				[Validators.required, DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
-			dateFirstPositiveTestResult: ['', [Validators.required, DateValidators.dateLessThanToday()]],
+			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
 			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required]
+		});
+
+		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
+			if (!!this.recoveryForm.get('birthdate')) {
+				this.recoveryForm.controls.dateFirstPositiveTestResult.setValidators([
+					DateValidators.dateMoreThanBirthday(),
+					...FIRST_POSITIVE_TEST_VALIDATORS
+				]);
+			}
 		});
 	}
 

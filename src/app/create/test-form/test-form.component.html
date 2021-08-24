@@ -78,6 +78,7 @@
 					required
 					[errors]="testForm.get('sampleDate').errors"
 					id="sampleDate"
+					[defaultValue]="getCurrentDate()"
 				>
 				</ec-datetimepicker>
 			</ob-nested-form>

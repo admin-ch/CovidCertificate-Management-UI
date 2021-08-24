@@ -212,9 +212,9 @@ describe('TestFormComponent', () => {
 				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
 			});
 
-			it('should marks the sampleDate as valid if to old', () => {
+			it('should mark the sampleDate as invalid if too old', () => {
 				component.testForm.get('sampleDate').setValue({date: dateToOld, time: timeNoon});
-				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
+				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
 			});
 
 			it('should mark the sampleDate one hour in the future as valid', () => {
@@ -407,9 +407,13 @@ describe('TestFormComponent', () => {
 		});
 
 		it('should reset the sampleDate correctly', () => {
+			const dateString = '2021-08-24T08:00:00.482Z';
+			const date = new Date(dateString);
+			Date.now = jest.fn().mockReturnValue(date);
 			component.testForm.get('sampleDate').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.sampleDate).toEqual({date: null, time: null});
+			const momentDate: moment.Moment = component.testForm.value.sampleDate.date;
+			expect(momentDate.toISOString()).toEqual(dateString);
 		});
 
 		it('should reset the center correctly', () => {

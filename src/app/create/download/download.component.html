@@ -1,7 +1,7 @@
 <div class="step-four">
 	<div>
 		<h4>{{ "certificateCreate.step-four.title" | translate }}</h4>
-		<p>{{ "certificateCreate.step-four.description" | translate }}</p>
+		<p>{{ getDescription() | translate }}</p>
 
 		<ob-alert type="warning">{{ "certificateCreate.step-four.warning" | translate }}</ob-alert>
 		<ob-alert type="error" *ngIf="createCertificateResponse?.appDeliveryError">

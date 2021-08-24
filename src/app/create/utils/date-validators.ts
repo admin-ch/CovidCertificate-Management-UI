@@ -25,6 +25,17 @@ export class DateValidators {
 		};
 	}
 
+	static dateMoreThanBirthday() {
+		return (control: AbstractControl): {[key: string]: boolean} | null => {
+			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
+			const birthdate = this.getMomentDate(control.parent.value.birthdate?.date);
+			if (!!dateValue && dateValue.isBefore(birthdate)) {
+				return {dateBeforeBirthday: true};
+			}
+			return null;
+		};
+	}
+
 	static dateTimeLessThanToday() {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
 			const dateValue: string = new Date(control.value?.date).toDateString();
