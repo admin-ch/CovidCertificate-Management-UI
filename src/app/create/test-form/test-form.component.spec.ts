@@ -414,7 +414,6 @@ describe('TestFormComponent', () => {
 			creationDataService.emitResetCalled();
 			const momentDate: moment.Moment = component.testForm.value.sampleDate.date;
 			expect(momentDate.toISOString()).toEqual(dateString);
-			expect(component.testForm.value.sampleDate.time).toEqual('10:00');
 		});
 
 		it('should reset the center correctly', () => {
