@@ -6,7 +6,6 @@ import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/ope
 import {OauthService} from './auth/oauth.service';
 import {Role} from './auth/auth-guard.service';
 import {TranslateService} from '@ngx-translate/core';
-import 'time-input-polyfill/auto';
 
 @Component({
 	selector: 'ec-root',

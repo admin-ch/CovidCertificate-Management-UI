@@ -45,8 +45,6 @@ export interface Vaccination {
 }
 
 export interface VaccinationDto {
-	productCode: string;
-	productDisplay: string;
 	medicinalProductCode: string;
 	numberOfDoses: number;
 	totalNumberOfDoses: number;
@@ -185,25 +183,12 @@ export interface CountryCodeDto {
 }
 
 export interface VaccinationValueSets {
-	name: string;
-	code: string;
-	prophylaxis: string;
-	active: boolean;
-	prophylaxis_code: string;
-	auth_holder: string;
-	auth_holder_code: string;
-}
-
-export interface TestValueSets {
-	name: string;
-	type: string;
-	manufacturer: string;
-	active: boolean;
-	type_code: string;
-	swiss_test_kit: string;
-	manufacturer_code_eu: string;
-	eu_accepted: boolean;
-	ch_accepted: boolean;
+	productCode: string;
+	productDisplay: string;
+	prophylaxisCode: string;
+	prophylaxisDisplay: string;
+	authHolderCode: string;
+	authHolderDisplay: string;
 }
 
 export interface RevokeDto {

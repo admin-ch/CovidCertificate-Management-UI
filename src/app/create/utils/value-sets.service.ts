@@ -1,12 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-	CountryCodeDto,
-	ProductInfo,
-	ProductInfoWithGroup,
-	TestValueSets,
-	VaccinationValueSets,
-	ValueSetsResponse
-} from 'shared/model';
+import {CountryCodeDto, ProductInfo, ProductInfoWithGroup, VaccinationValueSets, ValueSetsResponse} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 
@@ -64,9 +57,9 @@ export class ValueSetsService {
 
 	private computeMedicinalProducts(): void {
 		this.medicinalProducts = this.valueSets.vaccinationSets.map((vaccinationValue: VaccinationValueSets) => ({
-			group: vaccinationValue.auth_holder,
-			display: vaccinationValue.name,
-			code: vaccinationValue.code
+			group: vaccinationValue.authHolderDisplay,
+			display: vaccinationValue.productDisplay,
+			code: vaccinationValue.productCode
 		}));
 	}
 

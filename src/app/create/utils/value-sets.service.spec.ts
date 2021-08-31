@@ -83,22 +83,20 @@ describe('ValueSetsService', () => {
 		},
 		vaccinationSets: [
 			{
-				name: 'Comirnaty',
-				code: 'EU/1/20/1528',
-				prophylaxis: 'COVID-19 mRNA vaccine',
-				active: true,
-				prophylaxis_code: '1119349007',
-				auth_holder: 'BioNTech Manufacturing GmbH',
-				auth_holder_code: 'ORG-100030215'
+				productCode: 'EU/1/20/1528',
+				productDisplay: 'Comirnaty',
+				prophylaxisCode: '1119349007',
+				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
+				authHolderCode: 'ORG-100030215',
+				authHolderDisplay: 'BioNTech Manufacturing GmbH'
 			},
 			{
-				name: 'COVID-19 Vaccine Moderna',
-				code: 'EU/1/20/1507',
-				prophylaxis: 'COVID-19 mRNA vaccine',
-				active: true,
-				prophylaxis_code: '1119349007',
-				auth_holder: 'Moderna Biotech Spain, S.L.',
-				auth_holder_code: 'ORG-100031184'
+				productCode: 'EU/1/20/1507',
+				productDisplay: 'COVID-19 Vaccine Moderna',
+				prophylaxisCode: '1119349007',
+				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
+				authHolderCode: 'ORG-100031184',
+				authHolderDisplay: 'Moderna Biotech Spain, S.L.'
 			}
 		],
 		testSets: [
