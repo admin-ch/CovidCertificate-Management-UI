@@ -8,6 +8,7 @@ import {
 	ValueSetsResponse
 } from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
+import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,8 +17,8 @@ export class ValueSetsService {
 	private valueSets: ValueSetsResponse;
 	private countryOptions: ProductInfo[] = [];
 	private medicinalProducts: ProductInfoWithGroup[] = [];
+	private rapidTests: ProductInfo[] = [];
 	private typeOfTests: ProductInfo[] = [];
-	private manufacturerOfTest: ProductInfoWithGroup[] = [];
 	private certificateLanguages: ProductInfo[] = [];
 
 	constructor(private readonly translateService: TranslateService) {
@@ -32,9 +33,9 @@ export class ValueSetsService {
 		this.valueSets = valueSets;
 		this.computeMedicinalProducts();
 		this.computeCountryOptions();
-		this.computeTypeOfTests();
-		this.computeManufacturerOfTest();
+		this.computeRapidTests();
 		this.computeCertificateLanguages();
+		this.initializeTypeOfTests();
 	}
 
 	getCertificateLanguages(): ProductInfo[] {
@@ -53,8 +54,12 @@ export class ValueSetsService {
 		return this.typeOfTests;
 	}
 
-	getManufacturerOfTest(): ProductInfoWithGroup[] {
-		return this.manufacturerOfTest;
+	getRapidTests(): ProductInfo[] {
+		return this.rapidTests;
+	}
+
+	private computeRapidTests(): void {
+		this.rapidTests = this.valueSets.testSets;
 	}
 
 	private computeMedicinalProducts(): void {
@@ -82,34 +87,16 @@ export class ValueSetsService {
 			});
 	}
 
-	private computeTypeOfTests(): void {
-		this.typeOfTests = this.valueSets.testSets
-			.map((testValue: TestValueSets) => ({
-				display: `${testValue.type}${this.getTypeOfTestSuffix(testValue.type)}`,
-				code: testValue.type_code
-			}))
-			.filter((value, index, self) => index === self.findIndex(t => t.code === value.code));
-	}
-
-	private getTypeOfTestSuffix(typeOfTest: string): string {
-		switch (typeOfTest) {
-			case 'Nucleic acid amplification with probe detection':
-				return ' (PCR)';
-			case 'Rapid immunoassay':
-				return ` (${this.translateService.instant('certificateCreate.form.group.test.type.antigen')})`;
-			default:
-				return '';
-		}
-	}
-
-	private computeManufacturerOfTest(): void {
-		this.manufacturerOfTest = this.valueSets.testSets
-			.map((testValue: TestValueSets) => ({
-				group: testValue.name,
-				display: testValue.manufacturer,
-				code: testValue.manufacturer_code_eu
-			}))
-			.filter(value => value.code !== '');
+	private initializeTypeOfTests(): void {
+		this.typeOfTests = [
+			{code: PCR_TEST_CODE, display: 'Nucleic acid amplification with probe detection (PCR)'},
+			{
+				code: RAPID_TEST_CODE,
+				display: `Rapid immunoassay (${this.translateService.instant(
+					'certificateCreate.form.group.test.type.antigen'
+				)})`
+			}
+		];
 	}
 
 	private computeCertificateLanguages(): void {

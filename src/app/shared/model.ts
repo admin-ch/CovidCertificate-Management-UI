@@ -163,7 +163,7 @@ export interface CsvResponseDto {
 export interface ValueSetsResponse {
 	countryCodes: CountryCodesDto;
 	vaccinationSets: VaccinationValueSets[];
-	testSets: TestValueSets[];
+	testSets: ProductInfo[];
 }
 
 export interface CountryCodesDto {
