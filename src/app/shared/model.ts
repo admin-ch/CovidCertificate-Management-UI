@@ -45,6 +45,8 @@ export interface Vaccination {
 }
 
 export interface VaccinationDto {
+	productCode: string;
+	productDisplay: string;
 	medicinalProductCode: string;
 	numberOfDoses: number;
 	totalNumberOfDoses: number;
