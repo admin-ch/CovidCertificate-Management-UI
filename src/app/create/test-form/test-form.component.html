@@ -48,22 +48,27 @@
 		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
 
 		<div class="form-field">
-			<mat-form-field class="mat-form-field-lg" obErrorMessages>
-				<mat-label>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</mat-label>
-				<mat-select formControlName="typeOfTest" id="typeOfTest">
-					<mat-option *ngFor="let option of getTypesOfTest()" [value]="option">
-						{{ option.display }}
-					</mat-option>
-				</mat-select>
-				<mat-error></mat-error>
-			</mat-form-field>
+			<div class="radio-button-field" [ngClass]="{ 'additional-padding': !displayTestProducts }">
+				<label class="radio-button-field--label">{{
+					"certificateCreate.form.label.test.typeOfTest" | translate
+				}}</label>
+				<div>
+					<mat-radio-group id="typeOfTest" [value]="testType" (change)="certificateTypeChanged($event)">
+						<mat-radio-button
+							*ngFor="let option of getTestTypeOptions()"
+							[value]="option"
+							class="radio-button-field--option"
+						>
+							{{ option.display }}
+						</mat-radio-button>
+					</mat-radio-group>
+				</div>
+			</div>
 
-			<mat-form-field class="mat-form-field-lg" obErrorMessages>
-				<mat-label>{{ "certificateCreate.form.label.test.manufacturer" | translate }}</mat-label>
-				<mat-select formControlName="manufacturer" id="manufacturer" panelClass="extended-select">
-					<mat-optgroup *ngFor="let option of getManufacturerOfTest()" [label]="option.group">
-						<mat-option [value]="option">{{ option.display }}</mat-option>
-					</mat-optgroup>
+			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts">
+				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
+				<mat-select formControlName="product" id="product" panelClass="extended-select">
+					<mat-option *ngFor="let option of getRapidTest()" [value]="option">{{ option.display }}</mat-option>
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>
