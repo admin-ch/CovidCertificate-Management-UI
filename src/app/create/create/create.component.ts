@@ -15,7 +15,7 @@ export class CreateComponent implements OnInit {
 	@ViewChild('stepper') stepper: MatStepper;
 
 	selectedForm: GenerationType;
-	valueSetsLoaded$: Observable<any>;
+	valueSetsLoaded = false;
 
 	constructor(
 		private readonly valueSetsService: ValueSetsService,
@@ -24,10 +24,9 @@ export class CreateComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.valueSetsLoaded$ = this.certificateService.getValueSets();
-
-		this.valueSetsLoaded$.subscribe(valueSetsResponse => {
+		this.certificateService.getValueSets().subscribe(valueSetsResponse => {
 			this.valueSetsService.setValueSets(valueSetsResponse);
+			this.valueSetsLoaded = true;
 		});
 
 		this.dataService.certificateTypeChanged.subscribe(certificateType => {

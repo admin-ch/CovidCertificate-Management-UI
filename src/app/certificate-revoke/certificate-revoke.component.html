@@ -3,9 +3,18 @@
 	<p>{{ "certificateRevoke.instructions" | translate }}</p>
 
 	<form [formGroup]="revocationForm" (submit)="revoke()">
+		<p class="form-field-info">
+			{{ "certificateRevoke.uvci.info" | translate }}
+		</p>
 		<mat-form-field obErrorMessages class="mat-form-field-lg">
 			<mat-label>{{ "certificateRevoke.uvci" | translate }}</mat-label>
-			<input type="text" matInput formControlName="uvci" id="input-uvci" />
+			<input
+				type="text"
+				matInput
+				formControlName="uvci"
+				id="input-uvci"
+				placeholder="urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx"
+			/>
 			<mat-error></mat-error>
 		</mat-form-field>
 

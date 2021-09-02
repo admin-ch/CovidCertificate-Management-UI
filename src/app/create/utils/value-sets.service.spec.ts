@@ -83,68 +83,38 @@ describe('ValueSetsService', () => {
 		},
 		vaccinationSets: [
 			{
-				name: 'Comirnaty',
-				code: 'EU/1/20/1528',
-				prophylaxis: 'COVID-19 mRNA vaccine',
-				active: true,
-				prophylaxis_code: '1119349007',
-				auth_holder: 'BioNTech Manufacturing GmbH',
-				auth_holder_code: 'ORG-100030215'
+				productCode: 'EU/1/20/1528',
+				productDisplay: 'Comirnaty',
+				prophylaxisCode: '1119349007',
+				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
+				authHolderCode: 'ORG-100030215',
+				authHolderDisplay: 'BioNTech Manufacturing GmbH'
 			},
 			{
-				name: 'COVID-19 Vaccine Moderna',
-				code: 'EU/1/20/1507',
-				prophylaxis: 'COVID-19 mRNA vaccine',
-				active: true,
-				prophylaxis_code: '1119349007',
-				auth_holder: 'Moderna Biotech Spain, S.L.',
-				auth_holder_code: 'ORG-100031184'
+				productCode: 'EU/1/20/1507',
+				productDisplay: 'COVID-19 Vaccine Moderna',
+				prophylaxisCode: '1119349007',
+				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
+				authHolderCode: 'ORG-100031184',
+				authHolderDisplay: 'Moderna Biotech Spain, S.L.'
 			}
 		],
 		testSets: [
 			{
-				name: 'PCR',
-				type: 'Nucleic acid amplification with probe detection',
-				manufacturer: '',
-				active: true,
-				type_code: 'LP6464-4',
-				swiss_test_kit: '',
-				manufacturer_code_eu: '',
-				eu_accepted: true,
-				ch_accepted: true
+				display: 'PCR',
+				code: 'LP6464-4'
 			},
 			{
-				name: 'Panbio COVID-19 Ag Test',
-				type: 'Rapid immunoassay',
-				manufacturer: 'Abbott Rapid Diagnostics',
-				active: true,
-				type_code: 'LP217198-3',
-				swiss_test_kit: '2',
-				manufacturer_code_eu: '1232',
-				eu_accepted: true,
-				ch_accepted: true
+				display: 'Panbio COVID-19 Ag Test',
+				code: 'LP217198-3'
 			},
 			{
-				name: 'AMP Rapid Test SARS-CoV-2 Ag',
-				type: 'Rapid immunoassay',
-				manufacturer: 'AMEDA Labordiagnostik GmbH',
-				active: true,
-				type_code: 'LP217198-3',
-				swiss_test_kit: '19',
-				manufacturer_code_eu: '1304',
-				eu_accepted: true,
-				ch_accepted: true
+				display: 'AMP Rapid Test SARS-CoV-2 Ag',
+				code: 'LP217198-3'
 			},
 			{
-				name: 'Second test product',
-				type: 'Phantasy',
-				manufacturer: 'AMEDA Labordiagnostik GmbH',
-				active: true,
-				type_code: '42',
-				swiss_test_kit: '19',
-				manufacturer_code_eu: '1304',
-				eu_accepted: true,
-				ch_accepted: true
+				display: 'Fantasy',
+				code: '42'
 			}
 		]
 	};
@@ -210,7 +180,7 @@ describe('ValueSetsService', () => {
 		});
 
 		it('should compute the correct amount of types of test', () => {
-			expect(service.getTypeOfTests().length).toBe(3);
+			expect(service.getTypeOfTests().length).toBe(2);
 		});
 
 		it('should compute Nucleic acid amplification with probe detection correctly', () => {
@@ -224,47 +194,6 @@ describe('ValueSetsService', () => {
 			expect(service.getTypeOfTests()[1]).toEqual({
 				code: 'LP217198-3',
 				display: 'Rapid immunoassay (certificateCreate.form.group.test.type.antigen)'
-			});
-		});
-
-		it('should compute Phantasy test type correctly', () => {
-			expect(service.getTypeOfTests()[2]).toEqual({
-				code: '42',
-				display: 'Phantasy'
-			});
-		});
-	});
-
-	describe('Manufacturer of test ', () => {
-		beforeEach(() => {
-			service.setValueSets(valueSets);
-		});
-
-		it('should compute the correct amount of manufacturers of test', () => {
-			expect(service.getManufacturerOfTest().length).toBe(3);
-		});
-
-		it('should compute Abbott Rapid Diagnostics correctly', () => {
-			expect(service.getManufacturerOfTest()[0]).toEqual({
-				code: '1232',
-				display: 'Abbott Rapid Diagnostics',
-				group: 'Panbio COVID-19 Ag Test'
-			});
-		});
-
-		it('should compute AMEDA Labordiagnostik GmbH correctly', () => {
-			expect(service.getManufacturerOfTest()[1]).toEqual({
-				code: '1304',
-				display: 'AMEDA Labordiagnostik GmbH',
-				group: 'AMP Rapid Test SARS-CoV-2 Ag'
-			});
-		});
-
-		it('should compute AMEDA Labordiagnostik GmbH correctly', () => {
-			expect(service.getManufacturerOfTest()[2]).toEqual({
-				code: '1304',
-				display: 'AMEDA Labordiagnostik GmbH',
-				group: 'Second test product'
 			});
 		});
 	});

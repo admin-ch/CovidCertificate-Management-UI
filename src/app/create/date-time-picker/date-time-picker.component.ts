@@ -39,7 +39,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	maxDate: Date = new Date();
 
 	get timePolyfillNeeded(): boolean {
-		return !supportsTime;
+		if (supportsTime !== undefined) {
+			return !supportsTime;
+		}
+		return false;
 	}
 
 	constructor(readonly fb: FormBuilder) {
@@ -58,10 +61,12 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	}
 
 	ngAfterViewInit(): void {
-		const timeInputElem = document.getElementById(`${this.id}-time`);
-		const timeLabelElem = document.getElementById(`${this.id}-time-label`);
-		if (this.timePolyfillNeeded && timeInputElem && timeLabelElem) {
-			timePolyfill(timeInputElem, timeLabelElem);
+		if (this.timePolyfillNeeded) {
+			const timeInputElem = document.getElementById(`${this.id}-time`);
+			const timeLabelElem = document.getElementById(`${this.id}-time-label`);
+			if (timeInputElem && timeLabelElem) {
+				timePolyfill(timeInputElem, timeLabelElem);
+			}
 		}
 	}
 

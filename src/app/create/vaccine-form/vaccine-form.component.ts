@@ -9,7 +9,11 @@ import {DateMapper} from '../utils/date-mapper';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 
-const VACCINE_DATE_VALIDATORS = [Validators.required, DateValidators.dateLessThanToday()];
+const VACCINE_DATE_VALIDATORS = [
+	Validators.required,
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate()
+];
 
 @Component({
 	selector: 'ec-vaccine-form',

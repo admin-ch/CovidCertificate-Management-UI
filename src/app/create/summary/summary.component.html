@@ -33,7 +33,7 @@
 		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
 		<dd id="typeOfTest">{{ patient?.test.typeOfTest.display }}</dd>
 		<ng-container *ngIf="patient?.test.manufacturer">
-			<dt>{{ "certificateCreate.form.label.test.manufacturer" | translate }}</dt>
+			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDate" | translate }}</dt>
