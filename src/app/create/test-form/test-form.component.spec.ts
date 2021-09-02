@@ -11,6 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
+import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -25,8 +26,13 @@ describe('TestFormComponent', () => {
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
 		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}]),
-		getTypeOfTests: jest.fn().mockReturnValue([]),
-		getManufacturerOfTest: jest.fn().mockReturnValue([])
+		getTypeOfTests: jest.fn().mockReturnValue([
+			{code: PCR_TEST_CODE, display: 'Nucleic acid amplification with probe detection (PCR)'},
+			{
+				code: RAPID_TEST_CODE,
+				display: 'Rapid immunoassay'
+			}
+		])
 	};
 
 	beforeEach(async () => {
@@ -76,14 +82,8 @@ describe('TestFormComponent', () => {
 
 	it('should get the types of test from the ValueSetsService', () => {
 		jest.clearAllMocks();
-		component.getTypesOfTest();
+		component.getTestTypeOptions();
 		expect(mockValueSetsService.getTypeOfTests).toHaveBeenCalledTimes(1);
-	});
-
-	it('should get the manufacturers of test from the ValueSetsService', () => {
-		jest.clearAllMocks();
-		component.getManufacturerOfTest();
-		expect(mockValueSetsService.getManufacturerOfTest).toHaveBeenCalledTimes(1);
 	});
 
 	describe('Form validation', () => {
@@ -170,34 +170,34 @@ describe('TestFormComponent', () => {
 			});
 		});
 
-		describe('manufacturer validation', () => {
-			it('should marks the manufacturer as invalid if empty', () => {
-				component.testForm.get('manufacturer').setValue('');
-				expect(component.testForm.get('manufacturer').invalid).toBeTruthy();
+		describe('product validation', () => {
+			it('should mark the product as valid if empty', () => {
+				component.testForm.get('product').setValue('');
+				expect(component.testForm.get('product').invalid).toBeFalsy();
 			});
 
-			it('should marks the manufacturer as valid if filled', () => {
-				component.testForm.get('manufacturer').setValue({
+			it('should mark the product as valid if filled', () => {
+				component.testForm.get('product').setValue({
 					code: '1304',
 					display: 'AMEDA Labordiagnostik GmbH'
 				});
-				expect(component.testForm.get('manufacturer').invalid).toBeFalsy();
+				expect(component.testForm.get('product').invalid).toBeFalsy();
 			});
 
-			it('should marks the manufacturer as disabled if the type of test is PCR', () => {
+			it('should hide product selction if the type of test is PCR', () => {
 				component.testForm.get('typeOfTest').setValue({
 					code: 'LP6464-4',
 					display: 'Nucleic acid amplification with probe detection'
 				});
-				expect(component.testForm.get('manufacturer').enabled).toBeFalsy();
+				expect(component.displayTestProducts).toBeFalsy();
 			});
 
-			it('should set the manufacturer as empty string if the type of test is PCR', () => {
+			it('should set the product as empty string if the type of test is PCR', () => {
 				component.testForm.get('typeOfTest').setValue({
 					code: 'LP6464-4',
 					display: 'Nucleic acid amplification with probe detection'
 				});
-				expect(component.testForm.get('manufacturer').value).toBe('');
+				expect(component.testForm.get('product').value).toBe('');
 			});
 		});
 
@@ -298,7 +298,7 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('manufacturer').setValue('');
+			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue('CH');
@@ -319,7 +319,7 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('manufacturer').setValue('');
+			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue('CH');
@@ -340,7 +340,7 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('manufacturer').setValue('');
+			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue({code: 'CH', display: 'test-CH'});
@@ -358,7 +358,7 @@ describe('TestFormComponent', () => {
 				test: {
 					center: 'Testcenter',
 					countryOfTest: {code: 'CH', display: 'test-CH'},
-					manufacturer: undefined,
+					manufacturer: '',
 					sampleDate,
 					typeOfTest: {
 						code: 'LP6464-4',
@@ -400,10 +400,10 @@ describe('TestFormComponent', () => {
 			expect(component.testForm.value.typeOfTest).toEqual({display: 'TEST', code: 'typeOfTest'});
 		});
 
-		it('should reset the manufacturer correctly', () => {
-			component.testForm.get('manufacturer').setValue({display: 'TEST', code: 'manufacturer'});
+		it('should reset the product correctly', () => {
+			component.testForm.get('product').setValue({display: 'TEST', code: 'product'});
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.manufacturer).toEqual({display: 'TEST', code: 'manufacturer'});
+			expect(component.testForm.value.product).toEqual({display: 'TEST', code: 'product'});
 		});
 
 		it('should reset the sampleDate correctly', () => {

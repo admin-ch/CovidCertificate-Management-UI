@@ -12,7 +12,7 @@
   "certificateCreate.form.label.vaccine.dateOfVaccination": "Date of vaccination",
   "certificateCreate.form.label.vaccine.countryOfVaccination": "Country of vaccination",
   "certificateCreate.form.label.test.typeOfTest": "Test type",
-  "certificateCreate.form.label.test.manufacturer": "Manufacturer",
+  "certificateCreate.form.label.test.manufacturerAndName": "Manufacturer and Name",
   "certificateCreate.form.label.test.sampleDate": "Date/time of test",
   "certificateCreate.form.label.test.sampleDate.info": "This is the time at which the sample was taken.",
   "certificateCreate.form.label.test.center": "Performed by",

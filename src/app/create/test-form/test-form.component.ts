@@ -2,12 +2,13 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
+import {Patient, ProductInfo} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
+import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 
 const SAMPLE_DATE_VALIDATORS = [
 	Validators.required,
@@ -18,7 +19,8 @@ const SAMPLE_DATE_VALIDATORS = [
 
 @Component({
 	selector: 'ec-test-form',
-	templateUrl: './test-form.component.html'
+	templateUrl: './test-form.component.html',
+	styleUrls: ['./test-form.scss']
 })
 export class TestFormComponent implements OnInit {
 	@Output() back = new EventEmitter<void>();
@@ -27,8 +29,11 @@ export class TestFormComponent implements OnInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
 	testForm: FormGroup;
+	testType: ProductInfo;
 
-	private readonly PCR_TEST_CODE: string = 'LP6464-4';
+	get displayTestProducts(): boolean {
+		return this.testType.code === RAPID_TEST_CODE;
+	}
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -38,6 +43,7 @@ export class TestFormComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.testType = this.getTestTypeOptions()[0];
 		this.createForm();
 		this.dataService.resetCalled.subscribe(() => {
 			this.resetForm();
@@ -72,12 +78,12 @@ export class TestFormComponent implements OnInit {
 		return this.valueSetsService.getCountryOptions();
 	}
 
-	getTypesOfTest(): ProductInfo[] {
+	getTestTypeOptions(): ProductInfo[] {
 		return this.valueSetsService.getTypeOfTests();
 	}
 
-	getManufacturerOfTest(): ProductInfoWithGroup[] {
-		return this.valueSetsService.getManufacturerOfTest();
+	getRapidTest(): ProductInfo[] {
+		return this.valueSetsService.getRapidTests();
 	}
 
 	getCurrentDate(): any {
@@ -85,6 +91,18 @@ export class TestFormComponent implements OnInit {
 			time: moment().format('hh:mm'),
 			date: moment()
 		};
+	}
+
+	certificateTypeChanged(changeEvent: {value: ProductInfo}) {
+		const testType = changeEvent.value;
+		const isValidTestType = testType.code === PCR_TEST_CODE || testType.code === RAPID_TEST_CODE;
+		if (isValidTestType) {
+			this.testType = testType;
+			this.testForm.patchValue({
+				typeOfTest: testType,
+				product: ''
+			});
+		}
 	}
 
 	private createForm(): void {
@@ -96,8 +114,8 @@ export class TestFormComponent implements OnInit {
 				[Validators.required, DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
-			typeOfTest: ['', Validators.required],
-			manufacturer: ['', Validators.required],
+			typeOfTest: [this.testType, Validators.required],
+			product: [''],
 			sampleDate: [this.getCurrentDate(), SAMPLE_DATE_VALIDATORS],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
@@ -109,15 +127,6 @@ export class TestFormComponent implements OnInit {
 					DateValidators.dateMoreThanBirthday(),
 					...SAMPLE_DATE_VALIDATORS
 				]);
-			}
-		});
-
-		this.testForm.get('typeOfTest').valueChanges.subscribe(newValue => {
-			if (newValue?.code === this.PCR_TEST_CODE) {
-				this.testForm.get('manufacturer').setValue('');
-				this.testForm.get('manufacturer').disable();
-			} else {
-				this.testForm.get('manufacturer').enable();
 			}
 		});
 	}
@@ -141,7 +150,7 @@ export class TestFormComponent implements OnInit {
 			test: {
 				center: this.testForm.value.center,
 				countryOfTest: this.testForm.value.countryOfTest,
-				manufacturer: this.testForm.value.manufacturer,
+				manufacturer: this.testForm.value.product,
 				sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
 				typeOfTest: this.testForm.value.typeOfTest
 			}
@@ -151,7 +160,7 @@ export class TestFormComponent implements OnInit {
 	private resetForm(): void {
 		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
 		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
-		const previousManufacturer: ProductInfoWithGroup = this.testForm.value.manufacturer;
+		const previousProduct: ProductInfo = this.testForm.value.product;
 		const previousCenter: string = this.testForm.value.center;
 
 		this.formDirective.resetForm();
@@ -159,7 +168,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: previousCertificateLanguage,
 			countryOfTest: this.getDefaultCountryOfTest(),
 			typeOfTest: previousTypeOfTest,
-			manufacturer: previousManufacturer,
+			product: previousProduct,
 			center: previousCenter,
 			sampleDate: this.getCurrentDate()
 		});
