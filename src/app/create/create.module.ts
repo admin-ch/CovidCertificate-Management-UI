@@ -29,6 +29,7 @@ import {DownloadComponent} from './download/download.component';
 import {MatOptionModule} from '@angular/material/core';
 import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
 	declarations: [
@@ -59,6 +60,7 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		MatSelectModule,
 		MatOptionModule,
 		MatStepperModule,
+		MatAutocompleteModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])
 	]
