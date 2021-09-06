@@ -82,7 +82,7 @@ export class TestFormComponent implements OnInit {
 
 	getCurrentDate(): any {
 		return {
-			time: moment().format('hh:mm'),
+			time: moment().format('HH:mm'),
 			date: moment()
 		};
 	}
