@@ -141,6 +141,14 @@ describe('TestFormComponent', () => {
 				component.testForm.get('birthdate').setValue({date: datePast});
 				expect(component.testForm.get('birthdate').invalid).toBeFalsy();
 			});
+
+			it('should allow valid short date', () => {
+				component.testForm.get('birthdate').setValue({date: '2000-01'});
+				expect(component.testForm.get('birthdate').invalid).toBeFalsy();
+
+				component.testForm.get('birthdate').setValue({date: '2000'});
+				expect(component.testForm.get('birthdate').invalid).toBeFalsy();
+			});
 		});
 
 		describe('certificateLanguage validation', () => {
@@ -220,14 +228,14 @@ describe('TestFormComponent', () => {
 			it('should mark the sampleDate one hour in the future as valid', () => {
 				const testDate: Date = new Date();
 				testDate.setTime(testDate.getTime() + 60 * 60 * 1000);
-				const time = `${testDate.getHours()}:${testDate.getMinutes()}`;
+				const time = `${testDate.getHours()}:${addZeroIfLessThanTen(testDate.getMinutes())}`;
 				component.testForm.get('sampleDate').setValue({date: testDate.toDateString(), time});
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
 
 			it('should mark the sampleDate today as valid', () => {
 				const testDate: Date = new Date();
-				const time = `${testDate.getHours()}:${testDate.getMinutes()}`;
+				const time = `${testDate.getHours()}:${addZeroIfLessThanTen(testDate.getMinutes())}`;
 				component.testForm.get('sampleDate').setValue({date: testDate.toDateString(), time});
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
@@ -429,3 +437,5 @@ describe('TestFormComponent', () => {
 		});
 	});
 });
+
+const addZeroIfLessThanTen = (n: number): string => ('0' + n).slice(-2);

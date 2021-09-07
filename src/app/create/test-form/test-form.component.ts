@@ -111,7 +111,12 @@ export class TestFormComponent implements OnInit {
 			surName: ['', [Validators.required, Validators.maxLength(50)]],
 			birthdate: [
 				'',
-				[Validators.required, DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]
+				[
+					Validators.required,
+					DateValidators.validShortDate(),
+					DateValidators.dateLessThanToday(),
+					DateValidators.dateMoreThanMinDate()
+				]
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: [this.testType, Validators.required],
@@ -145,7 +150,7 @@ export class TestFormComponent implements OnInit {
 		return {
 			firstName: this.testForm.value.firstName,
 			surName: this.testForm.value.surName,
-			birthdate: DateMapper.getDate(this.testForm.value.birthdate),
+			birthdate: DateMapper.getBirthdate(this.testForm.value.birthdate),
 			language: this.testForm.value.certificateLanguage.code,
 			test: {
 				center: this.testForm.value.center,

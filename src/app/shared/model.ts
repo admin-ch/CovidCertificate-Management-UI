@@ -6,7 +6,7 @@ export const DATE_FORMAT = 'dd.MM.YYYY';
 export interface Patient {
 	firstName: string; // maxChar 50
 	surName: string; // maxChar 50
-	birthdate: Date; // between 1900-01-01 and 2099-12-31 (this format)
+	birthdate: Date | string; // between 1900-01-01 and 2099-12-31 (this format)
 	vaccination?: Vaccination;
 	test?: Test;
 	recovery?: Recovery;
@@ -196,7 +196,7 @@ export interface RevokeDto {
 }
 
 export interface MomentWrapper {
-	date: Moment;
+	date: Moment | string;
 	time?: string;
 }
 

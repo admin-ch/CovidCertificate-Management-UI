@@ -28,6 +28,68 @@ describe('DateValidators', () => {
 		});
 	});
 
+	describe('invalidShortDate', () => {
+		it('should validate jjjj correctly', () => {
+			control.setValue({date: '2000'});
+			const test = DateValidators.validShortDate();
+			expect(test(control)).toBeNull();
+		});
+
+		it('should validate jjjj low limits correctly', () => {
+			const test = DateValidators.validShortDate();
+
+			// allowed
+			control.setValue({date: '1900'});
+			expect(test(control)).toBeNull();
+
+			// not allowed
+			control.setValue({date: '1899'});
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+		});
+
+		it('should validate jjjj high limits correctly', () => {
+			const test = DateValidators.validShortDate();
+
+			// allowed
+			control.setValue({date: '2099'});
+			expect(test(control)).toBeNull();
+
+			// not allowed
+			control.setValue({date: '2100'});
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+		});
+
+		it('should validate jjjj-mm correctly', () => {
+			const test = DateValidators.validShortDate();
+			for (let month = 1; month < 13; month++) {
+				control.setValue({date: `2000-${addZeroIfLessThanTen(month)}`});
+				expect(test(control)).toBeNull();
+			}
+		});
+
+		it('should fail on invalid jjjj-mm', () => {
+			control.setValue({date: '2000-100'});
+			const test = DateValidators.validShortDate();
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+		});
+
+		it('should fail on invalid format', () => {
+			const test = DateValidators.validShortDate();
+
+			control.setValue({date: '2000.12'});
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+
+			control.setValue({date: '2000/12'});
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+		});
+
+		it('should fail on invalid string', () => {
+			control.setValue({date: 'test'});
+			const test = DateValidators.validShortDate();
+			expect(test(control)).toMatchObject({invalidShortDate: true});
+		});
+	});
+
 	describe('dateMoreThanMinDate', () => {
 		it('should validate a date to old correctly', () => {
 			control.setValue({date: dateToOld});
@@ -82,3 +144,5 @@ describe('DateValidators', () => {
 		});
 	});
 });
+
+const addZeroIfLessThanTen = (n: number): string => ('0' + n).slice(-2);

@@ -81,7 +81,12 @@ export class VaccineFormComponent implements OnInit {
 				surName: ['', [Validators.required, Validators.maxLength(50)]],
 				birthdate: [
 					'',
-					[Validators.required, DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]
+					[
+						Validators.required,
+						DateValidators.validShortDate(),
+						DateValidators.dateLessThanToday(),
+						DateValidators.dateMoreThanMinDate()
+					]
 				],
 				certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 				medicalProduct: ['', Validators.required],
@@ -121,7 +126,7 @@ export class VaccineFormComponent implements OnInit {
 		return {
 			firstName: this.vaccineForm.value.firstName,
 			surName: this.vaccineForm.value.surName,
-			birthdate: DateMapper.getDate(this.vaccineForm.value.birthdate),
+			birthdate: DateMapper.getBirthdate(this.vaccineForm.value.birthdate),
 			language: this.vaccineForm.value.certificateLanguage.code,
 			vaccination: {
 				countryOfVaccination: this.vaccineForm.value.countryOfVaccination,

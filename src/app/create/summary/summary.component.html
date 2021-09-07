@@ -8,7 +8,7 @@
 	<dt>{{ "certificateCreate.form.label.personalData.surName" | translate }}</dt>
 	<dd id="surName">{{ patient?.surName }}</dd>
 	<dt>{{ "certificateCreate.form.label.personalData.birthdate" | translate }}</dt>
-	<dd id="birthdate">{{ patient?.birthdate | date }}</dd>
+	<dd id="birthdate">{{ birthdate }}</dd>
 	<dt>{{ "certificateCreate.form.label.personalData.certificateLanguage" | translate }}</dt>
 	<dd id="certificateLanguage">{{ "common.language." + patient?.language | translate }}</dd>
 </dl>
@@ -37,7 +37,7 @@
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDate" | translate }}</dt>
-		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "short" }}</dd>
+		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm" }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
 		<dd id="center">{{ patient?.test.center }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
