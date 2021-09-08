@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -32,7 +33,8 @@ describe('TestFormComponent', () => {
 				code: RAPID_TEST_CODE,
 				display: 'Rapid immunoassay'
 			}
-		])
+		]),
+		getRapidTests: jest.fn().mockReturnValue([{code: 'test', display: 'test'}])
 	};
 
 	beforeEach(async () => {
@@ -45,7 +47,8 @@ describe('TestFormComponent', () => {
 				ReactiveFormsModule,
 				MatSelectModule,
 				MatFormFieldModule,
-				MatInputModule
+				MatInputModule,
+				MatAutocompleteModule
 			],
 			providers: [
 				{

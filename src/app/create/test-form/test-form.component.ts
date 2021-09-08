@@ -31,7 +31,7 @@ export class TestFormComponent implements OnInit {
 	testForm: FormGroup;
 	testType: ProductInfo;
 
-	rapidTestCompleteControl = new FormControl();
+	rapidTestCompleteControl: FormControl;
 	filteredRapidTests: ProductInfoWithToString[];
 
 	private rapidTests: ProductInfoWithToString[];
@@ -62,6 +62,7 @@ export class TestFormComponent implements OnInit {
 				countryOfTest: this.getDefaultCountryOfTest()
 			});
 		});
+		this.rapidTestCompleteControl = this.createAutocompleteControl();
 		this.rapidTests = this.valueSetsService
 			.getRapidTests()
 			.map(productInfo => new ProductInfoWithToString(productInfo.code, productInfo.display));
@@ -139,14 +140,18 @@ export class TestFormComponent implements OnInit {
 				]);
 			}
 		});
+	}
 
-		this.rapidTestCompleteControl.valueChanges.subscribe(value => {
+	private createAutocompleteControl(): FormControl {
+		const autocompleteControl = new FormControl();
+		autocompleteControl.valueChanges.subscribe(value => {
 			if (typeof value === 'string') {
 				this.filteredRapidTests = this.filterRapidTests(value);
 			} else if (value instanceof ProductInfoWithToString) {
 				this.testForm.patchValue({product: value});
 			}
 		});
+		return autocompleteControl;
 	}
 
 	private filterRapidTests(query: string) {
