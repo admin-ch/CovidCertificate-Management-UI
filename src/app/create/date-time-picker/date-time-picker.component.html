@@ -1,15 +1,27 @@
-<ng-container [formGroup]="form">
-	<mat-form-field *ngIf="showDate" obErrorMessages class="mat-form-field-lg">
-		<mat-label>{{ label }}</mat-label>
-		<input [id]="id + '-date'" matInput formControlName="date" [matDatepicker]="datepicker" [max]="maxDate" />
-		<mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-		<mat-datepicker #datepicker startView="month"></mat-datepicker>
-		<mat-error></mat-error>
-	</mat-form-field>
-	<mat-form-field *ngIf="showTime" obErrorMessages class="mat-form-field-lg time-input">
-		<!-- This label is needed for the time polyfill library -->
-		<label [id]="id + '-time-label'" class="time-polyfill-label" *ngIf="timePolyfillNeeded"></label>
-		<input [id]="id + '-time'" type="time" matInput formControlName="time" />
-		<mat-error></mat-error>
-	</mat-form-field>
-</ng-container>
+<div class="date-time-container">
+	<ng-container [formGroup]="form">
+		<mat-form-field *ngIf="showDate && !showShortDateInputField" obErrorMessages class="mat-form-field-lg">
+			<mat-label>{{ label }}</mat-label>
+			<input [id]="id + '-date'" matInput formControlName="date" [matDatepicker]="datepicker" [max]="maxDate" />
+			<mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+			<mat-datepicker #datepicker startView="month"></mat-datepicker>
+			<mat-error></mat-error>
+		</mat-form-field>
+		<mat-form-field *ngIf="showDate && showShortDateInputField" obErrorMessages class="mat-form-field-lg">
+			<mat-label>{{ label }}</mat-label>
+			<input [id]="id + '-date'" matInput formControlName="date" />
+			<mat-error></mat-error>
+		</mat-form-field>
+		<mat-form-field *ngIf="showTime && !shortDateAllowed" obErrorMessages class="mat-form-field-lg time-input">
+			<!-- This label is needed for the time polyfill library -->
+			<label [id]="id + '-time-label'" class="time-polyfill-label" *ngIf="timePolyfillNeeded"></label>
+			<input [id]="id + '-time'" type="time" matInput formControlName="time" />
+			<mat-error></mat-error>
+		</mat-form-field>
+	</ng-container>
+	<div *ngIf="shortDateAllowed" class="short-date-checkbox">
+		<mat-checkbox aria-label="Hint" [checked]="showShortDateInputField" (change)="toggleShortDate()">
+			{{ "certificateCreate.form.label.personalData.specialDate" | translate }}
+		</mat-checkbox>
+	</div>
+</div>
