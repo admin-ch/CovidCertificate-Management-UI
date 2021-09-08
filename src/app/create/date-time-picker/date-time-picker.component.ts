@@ -34,9 +34,12 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	@Input() required;
 	@Input() errors: ValidationErrors;
 	@Input() defaultValue?: {date?: Date; time?: Date};
+	@Input() shortDateAllowed: boolean;
 	@HostBinding('class.datetime') datetime = true;
 	form: FormGroup;
 	maxDate: Date = new Date();
+
+	showShortDateInputField = false;
 
 	get timePolyfillNeeded(): boolean {
 		if (supportsTime !== undefined) {
@@ -72,6 +75,14 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 
 	getCurrentDate(): string {
 		return moment().format('DD.MM.YYYY');
+	}
+
+	toggleShortDate() {
+		if (!this.showShortDateInputField) {
+			this.form.patchValue({date: ''});
+			this.form.get('date').markAsUntouched();
+		}
+		this.showShortDateInputField = !this.showShortDateInputField;
 	}
 
 	private createForm(): void {
@@ -139,6 +150,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					break;
 				}
 				case 'dateBeforeBirthday': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
+				case 'invalidShortDate': {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}

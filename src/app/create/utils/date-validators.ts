@@ -4,6 +4,17 @@ import {DATE_FORMAT} from 'shared/model';
 
 export class DateValidators {
 	static MIN_DATE: Date = new Date(1900, 0, 1);
+	static DATE_REGEX = /^((19|20)\d\d(-\d\d){0,2}){0,1}$/;
+
+	static validShortDate() {
+		return (control: AbstractControl): {[key: string]: boolean} | null => {
+			const dateValue: any = control.value?.date;
+			if (!this.isDate(dateValue) && !this.DATE_REGEX.test(dateValue)) {
+				return {invalidShortDate: true};
+			}
+			return null;
+		};
+	}
 
 	static dateLessThanToday() {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
@@ -58,5 +69,11 @@ export class DateValidators {
 			return date as moment.Moment;
 		}
 		return moment(date, DATE_FORMAT);
+	}
+
+	private static isDate(value: any): boolean {
+		const isMoment: boolean = moment.isMoment(value);
+		const isDateObject: boolean = value instanceof Date;
+		return isDateObject || isMoment;
 	}
 }

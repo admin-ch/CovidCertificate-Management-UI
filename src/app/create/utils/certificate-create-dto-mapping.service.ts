@@ -105,15 +105,18 @@ export class CertificateCreateDtoMappingService {
 		)}:00.000${dif}${pad(tzo / 60)}:${pad(tzo % 60)}`;
 	}
 
-	private toJSONDateString(date: Date): string {
-		let month = (date.getMonth() + 1).toString();
-		if (month.length === 1) {
-			month = `0${month}`;
+	private toJSONDateString(date: Date | string): string {
+		if (date instanceof Date) {
+			let month = (date.getMonth() + 1).toString();
+			if (month.length === 1) {
+				month = `0${month}`;
+			}
+			let day = date.getDate().toString();
+			if (day.length === 1) {
+				day = `0${day}`;
+			}
+			return `${date.getFullYear()}-${month}-${day}`;
 		}
-		let day = date.getDate().toString();
-		if (day.length === 1) {
-			day = `0${day}`;
-		}
-		return `${date.getFullYear()}-${month}-${day}`;
+		return date;
 	}
 }

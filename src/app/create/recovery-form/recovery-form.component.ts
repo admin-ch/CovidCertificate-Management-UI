@@ -73,7 +73,12 @@ export class RecoveryFormComponent implements OnInit {
 			surName: ['', [Validators.required, Validators.maxLength(50)]],
 			birthdate: [
 				'',
-				[Validators.required, DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]
+				[
+					Validators.required,
+					DateValidators.validShortDate(),
+					DateValidators.dateLessThanToday(),
+					DateValidators.dateMoreThanMinDate()
+				]
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
@@ -104,7 +109,7 @@ export class RecoveryFormComponent implements OnInit {
 		return {
 			firstName: this.recoveryForm.value.firstName,
 			surName: this.recoveryForm.value.surName,
-			birthdate: DateMapper.getDate(this.recoveryForm.value.birthdate),
+			birthdate: DateMapper.getBirthdate(this.recoveryForm.value.birthdate),
 			language: this.recoveryForm.value.certificateLanguage.code,
 			recovery: {
 				countryOfTest: this.recoveryForm.value.countryOfTest,

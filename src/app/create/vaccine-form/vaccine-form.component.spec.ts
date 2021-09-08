@@ -137,6 +137,14 @@ describe('VaccineFormComponent', () => {
 				component.vaccineForm.get('birthdate').setValue({date: datePast});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 			});
+
+			it('should allow valid short date', () => {
+				component.vaccineForm.get('birthdate').setValue({date: '2000-01'});
+				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
+
+				component.vaccineForm.get('birthdate').setValue({date: '2000'});
+				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
+			});
 		});
 
 		describe('certificateLanguage validation', () => {

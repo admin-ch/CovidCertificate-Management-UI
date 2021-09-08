@@ -20,6 +20,15 @@ export class SummaryComponent implements OnInit {
 	private readonly CERTIFICATE_VALIDITY_IN_DAYS = 179;
 	private readonly DAYS_UNTIL_VALID = 10;
 
+	get birthdate(): string {
+		const patientBirthdate = this.patient?.birthdate;
+		if (patientBirthdate instanceof Date) {
+			return patientBirthdate.toLocaleDateString('de-CH', {day: '2-digit', month: '2-digit', year: 'numeric'});
+		} else {
+			return patientBirthdate;
+		}
+	}
+
 	constructor(
 		private readonly dataService: CreationDataService,
 		private readonly certificateService: CertificateService
