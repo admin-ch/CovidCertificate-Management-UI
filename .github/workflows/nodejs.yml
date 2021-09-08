@@ -5,18 +5,17 @@ name: Node.js CI
 
 on:
     push:
-        branches: [ master ]
+        branches: [master]
     pull_request:
-        branches: [ master ]
+        branches: [master, develop]
 
 jobs:
     build:
-
         runs-on: ubuntu-latest
 
         strategy:
             matrix:
-                node-version: [12.x, 14.x, 16.x]
+                node-version: [12.x, 14.x, 16.8]
 
         steps:
             - uses: actions/checkout@v2

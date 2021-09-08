@@ -68,10 +68,12 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
-				<mat-select formControlName="product" id="product" panelClass="extended-select">
-					<mat-option *ngFor="let option of getRapidTest()" [value]="option">{{ option.display }}</mat-option>
-				</mat-select>
-				<mat-error></mat-error>
+				<input type="text" matInput [formControl]="rapidTestCompleteControl" [matAutocomplete]="auto" />
+				<mat-autocomplete #auto="matAutocomplete">
+					<mat-option *ngFor="let option of filteredRapidTests" [value]="option">
+						{{ option.display }}
+					</mat-option>
+				</mat-autocomplete>
 			</mat-form-field>
 
 			<p class="form-field-info">

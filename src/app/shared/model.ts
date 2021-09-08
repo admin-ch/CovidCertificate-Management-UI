@@ -57,6 +57,14 @@ export interface ProductInfo {
 	display: string;
 }
 
+export class ProductInfoWithToString implements ProductInfo {
+	constructor(public code: string, public display: string) {}
+
+	public toString() {
+		return this.display;
+	}
+}
+
 export interface ProductInfoWithGroup {
 	code: string;
 	group: string;

@@ -30,6 +30,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
 	declarations: [
@@ -61,6 +62,7 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		MatOptionModule,
 		MatStepperModule,
 		MatCheckboxModule,
+		MatAutocompleteModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])
 	]
