@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Patient, ProductInfo} from 'shared/model';
+import {Patient, ProductInfo, ProductInfoWithToString} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -31,6 +31,11 @@ export class TestFormComponent implements OnInit {
 	testForm: FormGroup;
 	testType: ProductInfo;
 
+	rapidTestCompleteControl = new FormControl();
+	filteredRapidTests: ProductInfoWithToString[];
+
+	private rapidTests: ProductInfoWithToString[];
+
 	get displayTestProducts(): boolean {
 		return this.testType.code === RAPID_TEST_CODE;
 	}
@@ -57,6 +62,10 @@ export class TestFormComponent implements OnInit {
 				countryOfTest: this.getDefaultCountryOfTest()
 			});
 		});
+		this.rapidTests = this.valueSetsService
+			.getRapidTests()
+			.map(productInfo => new ProductInfoWithToString(productInfo.code, productInfo.display));
+		this.filteredRapidTests = this.rapidTests;
 	}
 
 	goBack(): void {
@@ -80,10 +89,6 @@ export class TestFormComponent implements OnInit {
 
 	getTestTypeOptions(): ProductInfo[] {
 		return this.valueSetsService.getTypeOfTests();
-	}
-
-	getRapidTest(): ProductInfo[] {
-		return this.valueSetsService.getRapidTests();
 	}
 
 	getCurrentDate(): any {
@@ -129,6 +134,22 @@ export class TestFormComponent implements OnInit {
 				]);
 			}
 		});
+
+		this.rapidTestCompleteControl.valueChanges.subscribe(value => {
+			if (typeof value === 'string') {
+				this.filteredRapidTests = this.filterRapidTests(value);
+			} else if (value instanceof ProductInfoWithToString) {
+				this.testForm.patchValue({product: value});
+			}
+		});
+	}
+
+	private filterRapidTests(query: string) {
+		query = query.toLowerCase();
+		return this.rapidTests.filter(product => {
+			const productDisplay = product.display.toLowerCase();
+			return productDisplay.startsWith(query);
+		});
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -172,5 +193,7 @@ export class TestFormComponent implements OnInit {
 			center: previousCenter,
 			sampleDate: this.getCurrentDate()
 		});
+
+		this.filteredRapidTests = this.rapidTests;
 	}
 }
