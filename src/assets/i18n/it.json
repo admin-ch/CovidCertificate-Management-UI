@@ -129,6 +129,7 @@
   "upload.templates": "Modelli per l'invio di CSV.",
   "upload.title": "Generare più certificati",
   "upload.type": "Seleziona il tipo di certificato",
+  "validation.error.http.453": "Data di nascita non valida. Si prega di controllare i dati inseriti nella fase due.",
   "validation.error.http.470": "Formato UVCI non valido",
   "validation.error.http.480": "UVCI già bloccato",
   "validation.error.http.485": "Una o più delle query CSV contiene dati non validi. Per messaggi di errore più dettagliati, controlla il file CSV restituito."

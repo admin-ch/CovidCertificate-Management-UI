@@ -129,6 +129,7 @@
   "upload.templates": "Templates for CSV upload.",
   "upload.title": "Generate multiple certificates",
   "upload.type": "Select certificate type",
+  "validation.error.http.453": "Invalid date of birth. Please check your input in step two.",
   "validation.error.http.470": "Invalid UVCI format",
   "validation.error.http.480": "UVCI already revoked",
   "validation.error.http.485": "One or more of the requests in the CSV contain invalid data. For more detailed error messages check the returned CSV file."
