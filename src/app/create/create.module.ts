@@ -9,7 +9,8 @@ import {
 	ObButtonModule,
 	ObErrorMessagesModule,
 	ObNestedFormModule,
-	ObNumberFormatModule
+	ObNumberFormatModule,
+	ObInputClearModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
@@ -22,6 +23,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatIconModule} from '@angular/material/icon';
 import {DateTimePickerComponent} from './date-time-picker/date-time-picker.component';
 import {RecoveryFormComponent} from './recovery-form/recovery-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
@@ -52,6 +54,7 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		ObErrorMessagesModule,
 		ObNestedFormModule,
 		ObNumberFormatModule,
+		ObInputClearModule,
 		MatButtonModule,
 		MatDatepickerModule,
 		MatFormFieldModule,
@@ -63,6 +66,7 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		MatStepperModule,
 		MatCheckboxModule,
 		MatAutocompleteModule,
+		MatIconModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])
 	]
