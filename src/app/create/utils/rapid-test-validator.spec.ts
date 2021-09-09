@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {ProductInfoWithToString} from 'shared/model';
 import {RapidTestValidator} from './rapid-test-validator';
 
