@@ -126,6 +126,14 @@ describe('RecoveryFormComponent', () => {
 				component.recoveryForm.get('birthdate').setValue({date: datePast});
 				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
 			});
+
+			it('should allow valid short date', () => {
+				component.recoveryForm.get('birthdate').setValue({date: '2000-01'});
+				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
+
+				component.recoveryForm.get('birthdate').setValue({date: '2000'});
+				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
+			});
 		});
 
 		describe('certificateLanguage validation', () => {

@@ -10,10 +10,6 @@
 				flex: 1;
 				margin-right: $spacing-default;
 			}
-
-			&:last-child {
-				flex: 0 0 104px;
-			}
 		}
 	}
 }
@@ -24,15 +20,26 @@
 	}
 }
 
-mat-form-field {
-	max-width: 550px;
-}
+.date-time-container {
+	display: flex;
+	width: 100%;
 
-.time-polyfill-label {
-	visibility: hidden;
-	position: absolute;
-}
+	mat-form-field {
+		max-width: 550px;
+	}
 
-.time-input {
-	min-width: 150px;
+	.time-polyfill-label {
+		visibility: hidden;
+		position: absolute;
+	}
+
+	.time-input {
+		min-width: 150px;
+		flex: 0 0 150px;
+	}
+
+	.short-date-checkbox {
+		padding-left: 24px;
+		padding-top: 15px;
+	}
 }

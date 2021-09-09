@@ -20,13 +20,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
-import {DateTimePickerComponent} from './date-time-picker/date-time-picker.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {DateTimePickerComponent} from './date-time-picker/date-time-picker.component';
 import {RecoveryFormComponent} from './recovery-form/recovery-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DownloadComponent} from './download/download.component';
 import {MatOptionModule} from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
 
@@ -59,6 +61,8 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		MatSelectModule,
 		MatOptionModule,
 		MatStepperModule,
+		MatCheckboxModule,
+		MatAutocompleteModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])
 	]
