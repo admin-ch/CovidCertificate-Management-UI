@@ -98,6 +98,7 @@
   "home.support": "Allgemeine Supportangaben",
   "home.title": "Guten Tag",
   "home.training": "Anwenderschulung für Covid-Zertifikat",
+  "i18n.validation.required": "Dieses Feld wird benötigt",
   "i18n.validation.maxlength": "Bitte geben Sie höchstens {{requiredLength}} Zeichen ein",
   "i18n.validation.dosesTooBig": "Muss kleiner oder gleich als erforderliche Dosen sein",
   "i18n.validation.dateTooSmall": "Das Datum muss nach dem 31.12.1899 liegen",
