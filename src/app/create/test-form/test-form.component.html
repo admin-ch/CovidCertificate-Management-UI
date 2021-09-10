@@ -68,8 +68,25 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
-				<input type="text" matInput [formControl]="rapidTestCompleteControl" [matAutocomplete]="auto" />
-				<mat-autocomplete #auto="matAutocomplete">
+				<input
+					type="text"
+					matInput
+					[formControl]="rapidTestCompleteControl"
+					[matAutocomplete]="auto"
+					#rapidTestAutocomplete
+				/>
+				<button
+					type="button"
+					role="button"
+					[obInputClear]="rapidTestCompleteControl"
+					(onClear)="onRapidTestCompleteClear()"
+					class="clear-buton"
+				>
+					<mat-icon svgIcon="cancel-circle" class="ob-icon clear-icon"></mat-icon>
+					<span class="sr-only">{{ "i18n.common.clear" | translate }}</span>
+				</button>
+				<mat-error></mat-error>
+				<mat-autocomplete #auto="matAutocomplete" panelWidth="max-content">
 					<mat-option *ngFor="let option of filteredRapidTests" [value]="option">
 						{{ option.display }}
 					</mat-option>

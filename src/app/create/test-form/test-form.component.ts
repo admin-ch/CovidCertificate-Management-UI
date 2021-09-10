@@ -9,6 +9,7 @@ import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
+import {RapidTestValidator} from '../utils/rapid-test-validator';
 
 const SAMPLE_DATE_VALIDATORS = [
 	Validators.required,
@@ -99,6 +100,10 @@ export class TestFormComponent implements OnInit {
 		};
 	}
 
+	onRapidTestCompleteClear() {
+		this.filteredRapidTests = this.rapidTests;
+	}
+
 	certificateTypeChanged(changeEvent: {value: ProductInfo}) {
 		const testType = changeEvent.value;
 		const isValidTestType = testType.code === PCR_TEST_CODE || testType.code === RAPID_TEST_CODE;
@@ -108,7 +113,18 @@ export class TestFormComponent implements OnInit {
 				typeOfTest: testType,
 				product: ''
 			});
+			this.updateProductValidators(testType.code);
 		}
+	}
+
+	private updateProductValidators(testTypeCode: string) {
+		const productControl = this.testForm.controls.product;
+		if (testTypeCode === RAPID_TEST_CODE) {
+			productControl?.setValidators(Validators.required);
+		} else {
+			productControl?.clearValidators();
+		}
+		productControl?.updateValueAndValidity();
 	}
 
 	private createForm(): void {
@@ -143,7 +159,7 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private createAutocompleteControl(): FormControl {
-		const autocompleteControl = new FormControl();
+		const autocompleteControl = new FormControl('', RapidTestValidator.testRequired);
 		autocompleteControl.valueChanges.subscribe(value => {
 			if (typeof value === 'string') {
 				this.filteredRapidTests = this.filterRapidTests(value);

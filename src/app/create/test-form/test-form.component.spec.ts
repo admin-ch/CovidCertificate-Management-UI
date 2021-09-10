@@ -13,6 +13,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
+import {ProductInfo} from 'shared/model';
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -182,33 +183,46 @@ describe('TestFormComponent', () => {
 		});
 
 		describe('product validation', () => {
-			it('should mark the product as valid if empty', () => {
-				component.testForm.get('product').setValue('');
-				expect(component.testForm.get('product').invalid).toBeFalsy();
+			const pcrTest: ProductInfo = {code: PCR_TEST_CODE, display: 'pcr'};
+			const rapidTest: ProductInfo = {code: RAPID_TEST_CODE, display: 'rapidtest'};
+
+			describe('PCR', () => {
+				beforeEach(() => {
+					component.certificateTypeChanged({value: pcrTest});
+				});
+
+				it('should mark the product as valid if empty', () => {
+					component.testForm.get('product').setValue('');
+					expect(component.testForm.get('product').invalid).toBeFalsy();
+				});
+
+				it('should hide product selection', () => {
+					expect(component.displayTestProducts).toBeFalsy();
+				});
+
+				it('should set the product as empty string', () => {
+					expect(component.testForm.get('product').value).toBe('');
+				});
 			});
 
-			it('should mark the product as valid if filled', () => {
-				component.testForm.get('product').setValue({
-					code: '1304',
-					display: 'AMEDA Labordiagnostik GmbH'
+			describe('rapid test', () => {
+				beforeEach(() => {
+					component.certificateTypeChanged({value: rapidTest});
 				});
-				expect(component.testForm.get('product').invalid).toBeFalsy();
-			});
 
-			it('should hide product selction if the type of test is PCR', () => {
-				component.testForm.get('typeOfTest').setValue({
-					code: 'LP6464-4',
-					display: 'Nucleic acid amplification with probe detection'
+				it('should mark the product as invalid if empty', () => {
+					component.testForm.get('product').setValue('');
+					expect(component.testForm.get('product').invalid).toBeTruthy();
 				});
-				expect(component.displayTestProducts).toBeFalsy();
-			});
 
-			it('should set the product as empty string if the type of test is PCR', () => {
-				component.testForm.get('typeOfTest').setValue({
-					code: 'LP6464-4',
-					display: 'Nucleic acid amplification with probe detection'
+				it('should show product selection', () => {
+					expect(component.displayTestProducts).toBeTruthy();
 				});
-				expect(component.testForm.get('product').value).toBe('');
+
+				it('should mark string input as invalid', () => {
+					component.rapidTestCompleteControl.setValue('test');
+					expect(component.rapidTestCompleteControl.invalid).toBeTruthy();
+				});
 			});
 		});
 

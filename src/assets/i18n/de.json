@@ -98,6 +98,7 @@
   "home.support": "Allgemeine Supportangaben",
   "home.title": "Guten Tag",
   "home.training": "Anwenderschulung für Covid-Zertifikat",
+  "i18n.validation.required": "Dieses Feld wird benötigt",
   "i18n.validation.maxlength": "Bitte geben Sie höchstens {{requiredLength}} Zeichen ein",
   "i18n.validation.dosesTooBig": "Muss kleiner oder gleich als erforderliche Dosen sein",
   "i18n.validation.dateTooSmall": "Das Datum muss nach dem 31.12.1899 liegen",
@@ -130,6 +131,7 @@
   "upload.templates": "Vorlagen zum CSV Upload.",
   "upload.title": "Mehrere Zertifikate generieren",
   "upload.type": "Zertifikatstype auswählen",
+  "validation.error.http.453": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
   "validation.error.http.470": "Ungültiges UVCI-Format",
   "validation.error.http.480": "UVCI wurde bereits gesperrt",
   "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei."
