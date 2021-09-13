@@ -134,6 +134,9 @@
   "validation.error.http.453": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
   "validation.error.http.470": "Ungültiges UVCI-Format",
   "validation.error.http.480": "UVCI wurde bereits gesperrt",
+  "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
   "validation.error.http.482": "Das CSV konnte nicht verarbeitet werden aufgrund einer ungültigen Grösse. Es müssen 1 bis 100 Einträge enthalten sein.",
-  "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei."
+  "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
+  "notifications.unsupportedBrowser.title": "Nicht unterstützter Browser",
+  "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie das die Schweizerische Eidgenossenschaft nur Chrome, Firefox, Edge und Safari in den neusten 2 Versionen unterstützt."
 }
