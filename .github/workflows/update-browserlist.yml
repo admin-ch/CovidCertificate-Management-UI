@@ -21,4 +21,5 @@ jobs:
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
+                  file_pattern: src/app/supportedBrowsers.ts
                   commit_message: Update supported browsers regex
