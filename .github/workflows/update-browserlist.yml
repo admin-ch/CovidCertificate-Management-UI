@@ -9,15 +9,16 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+        
             - uses: actions/setup-node@v1
             - name: Generate regex
             - run: npm ci
             - run: npx browserslist@latest --update-db
             - run: npm run supportedBrowsers
 
-            - uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.head_ref }}
             - name: Push regex
             - run: |
                 git config --global user.name 'Yannik Inniger'
