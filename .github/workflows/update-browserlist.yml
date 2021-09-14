@@ -8,13 +8,17 @@ jobs:
     update-supported-regex:
         runs-on: ubuntu-latest
 
-        steps:       
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+            
             - name: Generate regex
               uses: actions/setup-node@v1
             - run: npm ci
             - run: npx browserslist@latest --update-db
             - run: npm run supportedBrowsers
-
+            
             - name: Push regex file
               uses: actions/checkout@v2
               with:
