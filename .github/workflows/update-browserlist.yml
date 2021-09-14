@@ -16,9 +16,9 @@ jobs:
             - run: npm run supportedBrowsers
 
             - uses: actions/checkout@v2
-            - name: Push regex
               with:
                   ref: ${{ github.head_ref }}
+            - name: Push regex
             - run: |
                 git config --global user.name 'Yannik Inniger'
                 git config --global user.email 'yannikinniger@users.noreply.github.com'
