@@ -20,6 +20,7 @@ jobs:
             - run: npm run supportedBrowsers
             
             - name: Push regex file
+              uses: actions/checkout@v2
             - run: git config --global user.name 'Yannik Inniger'
             - run: git config --global user.email 'yannikinniger@users.noreply.github.com'
             - run: git commit -am "Update regex for supported browsers"
