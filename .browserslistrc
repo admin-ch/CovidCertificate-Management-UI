@@ -8,6 +8,7 @@
 > 0.5%
 last 2 versions
 Firefox ESR
+not safari < 14.1
 not dead
 IE 11
 not IE 9-10 # For IE 9-11 support, remove 'not'.
