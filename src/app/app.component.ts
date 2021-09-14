@@ -1,11 +1,17 @@
 import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {ObHttpApiInterceptorEvents, ObINavigationLink, ObMasterLayoutService} from '@oblique/oblique';
+import {
+	ObHttpApiInterceptorEvents,
+	ObINavigationLink,
+	ObMasterLayoutService,
+	ObNotificationService
+} from '@oblique/oblique';
 import {Observable, of, Subject} from 'rxjs';
 import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {OauthService} from './auth/oauth.service';
 import {Role} from './auth/auth-guard.service';
 import {TranslateService} from '@ngx-translate/core';
+import {supportedBrowsers} from './supportedBrowsers';
 
 @Component({
 	selector: 'ec-root',
@@ -28,10 +34,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
 	constructor(
 		private readonly oauthService: OauthService,
-		private readonly interceptor: ObHttpApiInterceptorEvents,
-		private readonly router: Router,
 		private readonly config: ObMasterLayoutService,
-		private readonly translate: TranslateService
+		private readonly notificationService: ObNotificationService,
+		interceptor: ObHttpApiInterceptorEvents,
+		router: Router,
+		translate: TranslateService
 	) {
 		this.name$ = this.oauthService.name$;
 		this.isAuthenticated$ = this.oauthService.isAuthenticated$.pipe(
@@ -64,6 +71,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 	ngAfterViewInit(): void {
 		this.oauthService.initialize();
 		this.oauthService.loadClaims();
+		if (!supportedBrowsers.test(navigator.userAgent)) {
+			this.notificationService.info({
+				title: 'notifications.unsupportedBrowser.title',
+				message: 'notifications.unsupportedBrowser.message',
+				sticky: true
+			});
+		}
 	}
 
 	logout(): void {

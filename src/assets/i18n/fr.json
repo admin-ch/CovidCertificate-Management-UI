@@ -132,5 +132,6 @@
   "validation.error.http.453": "Date de naissance non valide. Veuillez vérifier votre saisie à l'étape 2.",
   "validation.error.http.470": "Format de l'UVCI invalide",
   "validation.error.http.480": "UVCI déjà verrouillé",
+  "validation.error.http.482": "Le CSV n'a pas été traité en raison d'une taille non valide. Il doit contenir de 1 à 100 entrées.",
   "validation.error.http.485": "Une ou plusieurs des requêtes du CSV contiennent des données non valides. Pour des messages d'erreur plus détaillés, vérifiez le fichier CSV retourné."
 }
