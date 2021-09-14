@@ -19,7 +19,9 @@ jobs:
             - run: npx browserslist@latest --update-db
             - run: npm run supportedBrowsers
 
-            - uses: stefanzweifel/git-auto-commit-action@v4
-              with:
-                  file_pattern: src/app/supportedBrowsers.ts
-                  commit_message: Update supported browsers regex
+            - name: Push regex
+            - run: |
+                git config --global user.name 'Yannik Inniger'
+                git config --global user.email 'yannikinniger@users.noreply.github.com'
+                git commit -am "Update regex for supported browsers"
+                git push
