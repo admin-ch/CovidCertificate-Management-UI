@@ -19,9 +19,8 @@ jobs:
             - run: npx browserslist@latest --update-db
             - run: npm run supportedBrowsers
 
-            - name: Push regex
-            - run: |
-                git config --global user.name 'Yannik Inniger'
-                git config --global user.email 'yannikinniger@users.noreply.github.com'
-                git commit -am "Update regex for supported browsers"
-                git push
+            - name: Push regex file
+            - run: git config --global user.name 'Yannik Inniger'
+            - run: git config --global user.email 'yannikinniger@users.noreply.github.com'
+            - run: git commit -am "Update regex for supported browsers"
+            - run: git push
