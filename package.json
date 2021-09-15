@@ -8,7 +8,8 @@
     "lint": "ng lint",
     "format": "npm run lint -- --fix && node_modules/prettier/bin-prettier.js --write 'src/**/{*.ts,*.html}'",
     "release": "node scripts/release.js",
-    "prerelease": "npm run lint && npm test -- --prod && npm run build -- --prod"
+    "prerelease": "npm run lint && npm test -- --prod && npm run build -- --prod",
+    "supportedBrowsers": "echo \"export const supportedBrowsers = $(browserslist-useragent-regexp --allowHigherVersions);\" > ./src/app/supportedBrowsers.ts"
   },
   "private": true,
   "jestSonar": {
@@ -61,6 +62,7 @@
     "@types/node": "^13.13.51",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "browserslist-useragent-regexp": "^3.0.0",
     "eslint": "^7.28.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
