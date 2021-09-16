@@ -133,5 +133,7 @@
   "validation.error.http.470": "Format de l'UVCI invalide",
   "validation.error.http.480": "UVCI déjà verrouillé",
   "validation.error.http.482": "Le CSV n'a pas été traité en raison d'une taille non valide. Il doit contenir de 1 à 100 entrées.",
-  "validation.error.http.485": "Une ou plusieurs des requêtes du CSV contiennent des données non valides. Pour des messages d'erreur plus détaillés, vérifiez le fichier CSV retourné."
+  "validation.error.http.485": "Une ou plusieurs des requêtes du CSV contiennent des données non valides. Pour des messages d'erreur plus détaillés, vérifiez le fichier CSV retourné.",
+  "notifications.unsupportedBrowser.title": "Navigateur non supporté",
+  "notifications.unsupportedBrowser.message": "Certaines fonctions de cette application ne sont pas prises en charge par votre navigateur. Veuillez noter que seules les 2 dernières versions de Chrome, de Firefox, d’Edge et de Safari sont prises en charge."
 }
