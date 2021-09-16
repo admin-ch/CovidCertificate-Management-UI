@@ -119,9 +119,11 @@ export class RecoveryFormComponent implements OnInit {
 	}
 
 	private resetForm(): void {
+		const previousCertificateLanguage: ProductInfo = this.recoveryForm.value.certificateLanguage;
+
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
-			certificateLanguage: this.getDefaultCertificateLanguage(),
+			certificateLanguage: previousCertificateLanguage,
 			countryOfTest: this.getDefaultCountryOfRecovery()
 		});
 	}
