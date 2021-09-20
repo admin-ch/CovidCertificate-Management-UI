@@ -58,6 +58,7 @@
 						<mat-radio-button
 							*ngFor="let option of getTestTypeOptions()"
 							[value]="option"
+							id="{{ 'typeOfTest-' + option.code }}"
 							class="radio-button-field--option"
 						>
 							{{ option.display }}
