@@ -136,6 +136,7 @@
   "validation.error.http.480": "UVCI wurde bereits gesperrt",
   "validation.error.http.482": "Das CSV konnte nicht verarbeitet werden aufgrund einer ungültigen Grösse. Es müssen 1 bis 100 Einträge enthalten sein.",
   "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
+  "validation.error.http.489": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
   "notifications.unsupportedBrowser.title": "Nicht unterstützter Browser",
   "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden."
 }
