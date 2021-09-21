@@ -134,6 +134,7 @@
   "validation.error.http.480": "UVCI already revoked",
   "validation.error.http.482": "The CSV was not processed due to an invalid size. It must contain 1 to 100 entries.",
   "validation.error.http.485": "One or more of the requests in the CSV contain invalid data. For more detailed error messages check the returned CSV file.",
+  "validation.error.http.489": "Invalid date of birth. Please check your input in step two.",
   "notifications.unsupportedBrowser.title": "Unsupported Browser",
   "notifications.unsupportedBrowser.message": "Some functions of this application are not supported by your browser. Please note that only the two latest versions of Chrome, Firefox, Edge and Safari are supported"
 }
