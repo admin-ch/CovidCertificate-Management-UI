@@ -2,7 +2,7 @@ name: Update supported browser list
 
 on:
     push:
-        branches: [develop-temp]
+        branches: [develop]
 
 jobs:
     update-supported-regex:
