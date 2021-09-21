@@ -82,7 +82,7 @@
   "dashboard.otp.action": "Generate One-Time-Password",
   "dashboard.upload.action": "Generate multiple certificates",
   "dashboard.upload.description": "Here you can generate multiple certificates.",
-  "dashboard.upload.title": "Generate multiple certificate",
+  "dashboard.upload.title": "Generate multiple certificates",
   "footer.built.prefix": "Developed with",
   "footer.built.suffix": "",
   "footer.legal": "Terms and conditions",
