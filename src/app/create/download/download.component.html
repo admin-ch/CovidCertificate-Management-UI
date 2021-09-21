@@ -16,8 +16,8 @@
 		</button>
 	</div>
 	<div class="uvci">
-		<img *ngIf="safeResourceUrl" [src]="safeResourceUrl" alt="QrCode of certificate" />
-		<p>{{ createCertificateResponse?.uvci }}</p>
+		<img *ngIf="safeResourceUrl" id="qrCode" [src]="safeResourceUrl" alt="QrCode of certificate" />
+		<p id="uniqueCode">{{ createCertificateResponse?.uvci }}</p>
 	</div>
 </div>
 

@@ -6,7 +6,7 @@
 		aria-label="Select an option"
 		class="radio-button-container"
 	>
-		<mat-radio-button *ngFor="let type of typeSelection" [value]="type" [name]="type" class="radio-button">{{
+		<mat-radio-button *ngFor="let type of typeSelection" id="{{ 'generationType-' + type }}" [value]="type" [name]="type" class="radio-button">{{
 			"certificateCreate.step-one.enum." + type | translate
 		}}</mat-radio-button>
 	</mat-radio-group>
