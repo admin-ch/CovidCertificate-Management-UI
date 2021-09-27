@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatStepper} from '@angular/material/stepper';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {CertificateService} from 'shared/certificate.service';
-import {Observable} from 'rxjs';
+import {forkJoin} from 'rxjs';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 
@@ -24,8 +24,8 @@ export class CreateComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.certificateService.getValueSets().subscribe(valueSetsResponse => {
-			this.valueSetsService.setValueSets(valueSetsResponse);
+		forkJoin([this.certificateService.getValueSets(), this.certificateService.getIssuableVaccines()]).subscribe(results => {
+			this.valueSetsService.setValueSets(results[0], results[1]);
 			this.valueSetsLoaded = true;
 		});
 
