@@ -48,10 +48,15 @@
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.vaccine" | translate }}</legend>
 
+		<p class="form-field-info" *ngIf="isNotIssuableProduct">
+			<strong>{{ "common.important" | translate }}: </strong>
+			{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+		</p>
+
 		<div class="form-field">
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.vaccine.medicalProduct" | translate }}</mat-label>
-				<mat-select formControlName="medicalProduct" id="medicalProduct">
+				<mat-select formControlName="medicalProduct" id="medicalProduct" (selectionChange)="onMedicalProductSelectionChanged($event.value)">
 					<mat-optgroup *ngFor="let option of getMedicalProducts()" [label]="option.group">
 						<mat-option [value]="option">{{ option.display }}</mat-option>
 					</mat-optgroup>

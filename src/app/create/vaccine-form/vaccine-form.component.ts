@@ -28,6 +28,8 @@ export class VaccineFormComponent implements OnInit {
 
 	vaccineForm: FormGroup;
 
+	isNotIssuableProduct: boolean
+
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
@@ -149,5 +151,9 @@ export class VaccineFormComponent implements OnInit {
 			countryOfVaccination: this.getDefaultCountryOfVaccination(),
 			medicalProduct: previousMedicalProduct
 		});
+	}
+
+	onMedicalProductSelectionChanged(value: any) {
+		this.isNotIssuableProduct = !value.isIssuable
 	}
 }

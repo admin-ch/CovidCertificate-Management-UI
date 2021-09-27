@@ -69,6 +69,7 @@ export interface ProductInfoWithGroup {
 	code: string;
 	group: string;
 	display: string;
+	isIssuable: boolean;
 }
 
 export interface Test {

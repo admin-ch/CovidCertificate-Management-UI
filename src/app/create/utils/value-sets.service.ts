@@ -61,7 +61,8 @@ export class ValueSetsService {
 		this.medicinalProducts = this.valueSets.vaccinationSets.map((vaccinationValue: VaccinationValueSets) => ({
 			group: vaccinationValue.authHolderDisplay,
 			display: vaccinationValue.productDisplay,
-			code: vaccinationValue.productCode
+			code: vaccinationValue.productCode,
+			isIssuable: !!this.issuableVaccines.find(element => element.productCode === vaccinationValue.productCode)
 		}));
 	}
 
