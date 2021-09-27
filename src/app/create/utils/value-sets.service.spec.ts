@@ -1,10 +1,46 @@
 import {TestBed} from '@angular/core/testing';
 import {ValueSetsService} from './value-sets.service';
 import {ObliqueTestingModule} from '@oblique/oblique';
-import {ValueSetsResponse} from 'shared/model';
+import {VaccinationValueSets, ValueSetsResponse} from 'shared/model';
 
 describe('ValueSetsService', () => {
 	let service: ValueSetsService;
+
+	const issuableVaccines: VaccinationValueSets[] =
+		[
+			{
+				productCode: "EU/1/20/1528",
+				productDisplay: "Comirnaty",
+				prophylaxisCode: "1119349007",
+				prophylaxisDisplay: "SARS-CoV-2 mRNA vaccine",
+				authHolderCode: "ORG-100030215",
+				authHolderDisplay: "Biontech Manufacturing GmbH"
+			},
+			{
+				productCode: "EU/1/20/1525",
+				productDisplay: "COVID-19 Vaccine Janssen",
+				prophylaxisCode: "J07BX03",
+				prophylaxisDisplay: "covid-19 vaccines",
+				authHolderCode: "ORG-100001417",
+				authHolderDisplay: "Janssen-Cilag International"
+			},
+			{
+				productCode: "EU/1/20/1507",
+				productDisplay: "Spikevax (previously COVID-19 Vaccine Moderna)",
+				prophylaxisCode: "1119349007",
+				prophylaxisDisplay: "SARS-CoV-2 mRNA vaccine",
+				authHolderCode: "ORG-100031184",
+				authHolderDisplay: "Moderna Biotech Spain S.L."
+			},
+			{
+				productCode: "EU/1/21/1529",
+				productDisplay: "Vaxzevria (previously COVID-19 Vaccine AstraZeneca)",
+				prophylaxisCode: "J07BX03",
+				prophylaxisDisplay: "covid-19 vaccines",
+				authHolderCode: "ORG-100001699",
+				authHolderDisplay: "AstraZeneca AB"
+			}
+		]
 
 	const valueSets: ValueSetsResponse = {
 		countryCodes: {
@@ -132,7 +168,7 @@ describe('ValueSetsService', () => {
 
 	describe('Country options', () => {
 		beforeEach(() => {
-			service.setValueSets(valueSets);
+			service.setValueSets(valueSets, issuableVaccines);
 		});
 
 		it('should compute the correct amount of countries', () => {
@@ -150,7 +186,7 @@ describe('ValueSetsService', () => {
 
 	describe('Medical products ', () => {
 		beforeEach(() => {
-			service.setValueSets(valueSets);
+			service.setValueSets(valueSets, issuableVaccines);
 		});
 
 		it('should compute the correct amount of medical products', () => {
@@ -176,7 +212,7 @@ describe('ValueSetsService', () => {
 
 	describe('Type of tests ', () => {
 		beforeEach(() => {
-			service.setValueSets(valueSets);
+			service.setValueSets(valueSets, issuableVaccines);
 		});
 
 		it('should compute the correct amount of types of test', () => {
@@ -200,7 +236,7 @@ describe('ValueSetsService', () => {
 
 	describe('Certificate languages', () => {
 		beforeEach(() => {
-			service.setValueSets(valueSets);
+			service.setValueSets(valueSets, issuableVaccines);
 		});
 
 		it('should give back the correct number of certificate languages', () => {

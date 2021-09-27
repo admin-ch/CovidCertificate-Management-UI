@@ -42,7 +42,7 @@
   "certificateCreate.step-one.enum.recovery": "Recovered (positive test)",
   "certificateCreate.step-two.personaldata.information": "The personal details must be identical to the identity document.",
   "certificateCreate.step-two.vaccinationinformation": "a person is only considered fully vaccinated and the associated COVID certificate is only valid if the number of doses received and the number of doses required is identical, e.g. recovery + vaccination: 1/1, vaccination with 2 doses: 2/2, booster 3/3",
-  "certificateCreate.step-two.nonissuablevaccineproductinformation": "<PLACEHOLDER-en>",
+  "certificateCreate.step-two.nonissuablevaccineproductinformation": "The issuance of a COVID-19 vaccination certificate for the selected vaccine is reserved exclusively for issuers with \"advanced rights\" as designated by the canton or the Surgeon General. If this does not apply to you, please cancel the issuance procedure.",
   "certificateCreate.step-three.title": "Certificate preview",
   "certificateCreate.step-three.description": "Please check the data you entered before generating the certificate",
   "certificateCreate.step-three.dose": "Dose",
