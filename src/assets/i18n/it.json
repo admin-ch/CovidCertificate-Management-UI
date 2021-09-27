@@ -42,6 +42,7 @@
   "certificateCreate.step-one.enum.recovery": "Guarigione (test positivo)",
   "certificateCreate.step-two.personaldata.information": "I dati personali devono essere identici al documento d'identità.",
   "certificateCreate.step-two.vaccinationinformation": "la completezza della vaccinazione e di conseguenza la validità del certificato COVID è garantita soltanto se il numero di dosi ricevute corrisponde a quello delle dosi necessarie. P. es.: guarigione + vaccinazione: 1/1, vaccinazione con 2 dosi: 2/2, richiamo 3/3.",
+  "certificateCreate.step-two.nonissuablevaccineproductinformation": "<PLACEHOLDER-it>",
   "certificateCreate.step-three.title": "Anteprima del certificato",
   "certificateCreate.step-three.description": "Controllare i dati inseriti prima di generare il certificato",
   "certificateCreate.step-three.dose": "Dose",
