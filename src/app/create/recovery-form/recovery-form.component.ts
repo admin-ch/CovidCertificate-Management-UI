@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {DateValidators} from '../utils/date-validators';
-import {Patient, ProductInfo} from 'shared/model';
+import {Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
@@ -82,7 +82,8 @@ export class RecoveryFormComponent implements OnInit {
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
-			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required]
+			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required],
+			checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
 		});
 
 		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
@@ -93,6 +94,19 @@ export class RecoveryFormComponent implements OnInit {
 				]);
 			}
 		});
+
+		this.recoveryForm.get('countryOfTest').valueChanges.subscribe(selectedCountryOfTest => {
+			this.handleCountryValidation(selectedCountryOfTest)
+		});
+	}
+
+	private handleCountryValidation(countryOfTest: ProductInfo) {
+		if (countryOfTest.code !== 'CH') {
+			this.recoveryForm.get('checkBox').enable()
+			this.recoveryForm.get('checkBox').setValue(false)
+		} else {
+			this.recoveryForm.get('checkBox').disable()
+		}
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {

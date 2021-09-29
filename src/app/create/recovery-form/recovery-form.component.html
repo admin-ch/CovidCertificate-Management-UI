@@ -10,13 +10,13 @@
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="firstName" id="firstName" />
+				<input type="text" matInput formControlName="firstName" id="firstName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.surName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="surName" id="surName" />
+				<input type="text" matInput formControlName="surName" id="surName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
@@ -73,6 +73,12 @@
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>
+
+			<mat-checkbox formControlName="checkBox"
+						  aria-label="Hint"
+						  *ngIf="recoveryForm.get('checkBox').enabled">
+				{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+			</mat-checkbox>
 		</div>
 	</fieldset>
 
