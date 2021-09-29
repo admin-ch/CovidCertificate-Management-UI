@@ -110,6 +110,7 @@
   "i18n.validation.timeAfterToday": "La data non deve essere nel futuro",
   "i18n.validation.matDatepickerParse": "Formato di data non valido, utilizzare \"dd.mm.yyyy hh:mm\"",
   "i18n.validation.invalidShortDate": "Formato di data non valido, utilizzare \"jjjj\" o \"jjjj-mm\"",
+  "i18n.validation.notIssuableInSwitzerland": "Questo vaccino non è autorizzato in Svizzera.",
   "logout": "Logout",
   "otp.button.copy": "Copia negli appunti",
   "otp.button.create": "Crea chiave segreta",

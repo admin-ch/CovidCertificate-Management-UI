@@ -112,6 +112,7 @@
   "i18n.validation.timeAfterToday": "Das Datum darf nicht in der Zukunft liegen",
   "i18n.validation.matDatepickerParse": "Ungültiges Datumsformat, bitte verwenden Sie \"tt.mm.jjjj hh:mm\"",
   "i18n.validation.invalidShortDate": "Ungültiges Datumsformat, bitte verwenden Sie \"jjjj\" oder \"jjjj-mm\"",
+  "i18n.validation.notIssuableInSwitzerland": "Dieser Impfstoff ist in der Schweiz nicht zugelassen.",
   "logout": "Logout",
   "otp.button.copy": "In die Zwischenablage kopieren",
   "otp.button.create": "Geheimschlüssel erzeugen",
