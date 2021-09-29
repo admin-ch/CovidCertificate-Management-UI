@@ -8,7 +8,6 @@ import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 })
 export class ValueSetsService {
 	private valueSets: ValueSetsResponse;
-	private issuableVaccines: VaccinationValueSets[];
 	private countryOptions: ProductInfo[] = [];
 	private medicinalProducts: ProductInfoWithGroup[] = [];
 	private rapidTests: ProductInfo[] = [];
@@ -18,14 +17,13 @@ export class ValueSetsService {
 	constructor(private readonly translateService: TranslateService) {
 		translateService.onLangChange.subscribe(_ => {
 			if (this.valueSets) {
-				this.setValueSets(this.valueSets, this.issuableVaccines);
+				this.setValueSets(this.valueSets);
 			}
 		});
 	}
 
-	setValueSets(valueSets: ValueSetsResponse, issuableVaccines: VaccinationValueSets[]): void {
+	setValueSets(valueSets: ValueSetsResponse): void {
 		this.valueSets = valueSets;
-		this.issuableVaccines = issuableVaccines;
 		this.computeMedicinalProducts();
 		this.computeCountryOptions();
 		this.computeRapidTests();
@@ -62,7 +60,7 @@ export class ValueSetsService {
 			group: vaccinationValue.authHolderDisplay,
 			display: vaccinationValue.productDisplay,
 			code: vaccinationValue.productCode,
-			isIssuable: !!this.issuableVaccines.find(element => element.productCode === vaccinationValue.productCode)
+			issuable: vaccinationValue.issuable
 		}));
 	}
 

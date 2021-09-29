@@ -6,7 +6,6 @@ import {
 	CreateCertificateResponse,
 	Patient,
 	Shipping,
-	VaccinationValueSets,
 	ValueSetsResponse
 } from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
@@ -17,7 +16,6 @@ import {CertificateCreateDtoMappingService} from '../create/utils/certificate-cr
 export class CertificateService {
 	private readonly covidCertificateApi = 'covidcertificate';
 	private readonly valueSetsApi = 'valuesets';
-	private readonly issuableVaccinesApi = 'valuesets/issuable-vaccines';
 
 	constructor(
 		private readonly http: ApiService,
@@ -39,10 +37,6 @@ export class CertificateService {
 
 	getValueSets(): Observable<ValueSetsResponse> {
 		return this.http.get<ValueSetsResponse>(this.valueSetsApi);
-	}
-
-	getIssuableVaccines(): Observable<VaccinationValueSets[]> {
-		return this.http.get<VaccinationValueSets[]>(this.issuableVaccinesApi);
 	}
 
 	PDFtoBlob(dataURI: string): Blob {
