@@ -22,6 +22,7 @@ export interface CertificateCreateDto {
 	recoveryInfo?: RecoveryDto[];
 	address?: AddressDto;
 	appCode?: number;
+	systemSource: string;
 }
 
 export interface AddressDto {
