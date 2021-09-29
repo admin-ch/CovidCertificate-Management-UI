@@ -63,7 +63,7 @@ describe('CertificateService', () => {
 	});
 
 	it('should get the issuable vaccines with the correct URL', () => {
-		service.getIssuableVaccines()
+		service.getIssuableVaccines();
 
 		expect(api.get).toHaveBeenCalledWith('valuesets/issuable-vaccines');
 	});

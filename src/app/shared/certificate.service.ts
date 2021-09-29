@@ -1,13 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from 'shared/api.service';
-import {
-	CertificateCreateDto,
-	CreateCertificateResponse,
-	Patient,
-	Shipping,
-	ValueSetsResponse
-} from './model';
+import {CertificateCreateDto, CreateCertificateResponse, Patient, Shipping, ValueSetsResponse} from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
 
 @Injectable({

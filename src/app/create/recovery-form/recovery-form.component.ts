@@ -96,16 +96,16 @@ export class RecoveryFormComponent implements OnInit {
 		});
 
 		this.recoveryForm.get('countryOfTest').valueChanges.subscribe(selectedCountryOfTest => {
-			this.handleCountryValidation(selectedCountryOfTest)
+			this.handleCountryValidation(selectedCountryOfTest);
 		});
 	}
 
 	private handleCountryValidation(countryOfTest: ProductInfo) {
 		if (countryOfTest.code !== 'CH') {
-			this.recoveryForm.get('checkBox').enable()
-			this.recoveryForm.get('checkBox').setValue(false)
+			this.recoveryForm.get('checkBox').enable();
+			this.recoveryForm.get('checkBox').setValue(false);
 		} else {
-			this.recoveryForm.get('checkBox').disable()
+			this.recoveryForm.get('checkBox').disable();
 		}
 	}
 

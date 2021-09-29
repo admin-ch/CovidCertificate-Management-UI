@@ -5,7 +5,12 @@ export class IssuableProductValidator {
 		const medicalProduct: AbstractControl = form.get('medicalProduct');
 		const countryOfVaccination: AbstractControl = form.get('countryOfVaccination');
 
-		if (medicalProduct && countryOfVaccination && medicalProduct.value.issuable === 'ABROAD_ONLY' && countryOfVaccination.value.code === 'CH') {
+		if (
+			medicalProduct &&
+			countryOfVaccination &&
+			medicalProduct.value.issuable === 'ABROAD_ONLY' &&
+			countryOfVaccination.value.code === 'CH'
+		) {
 			medicalProduct.setErrors({notIssuableInSwitzerland: true});
 			return {notIssuableInSwitzerland: true};
 		} else {
@@ -15,7 +20,7 @@ export class IssuableProductValidator {
 					medicalProduct.setErrors(null);
 				}
 			}
-			return null
+			return null;
 		}
 	};
 }
