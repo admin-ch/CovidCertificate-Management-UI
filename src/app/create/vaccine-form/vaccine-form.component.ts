@@ -109,23 +109,13 @@ export class VaccineFormComponent implements OnInit {
 			}
 		});
 
-		this.vaccineForm.get('medicalProduct').valueChanges.subscribe(selectedMedicalProduct => {
-			this.handleCountryAndMedicalProductValidation(
-				this.vaccineForm.get('countryOfVaccination').value,
-				selectedMedicalProduct
-			);
-		});
-
 		this.vaccineForm.get('countryOfVaccination').valueChanges.subscribe(selectedCountryOfVaccination => {
-			this.handleCountryAndMedicalProductValidation(
-				selectedCountryOfVaccination,
-				this.vaccineForm.get('medicalProduct').value
-			);
+			this.handleCountryAndMedicalProductValidation(selectedCountryOfVaccination);
 		});
 	}
 
-	private handleCountryAndMedicalProductValidation(country: ProductInfo, medicalProduct: ProductInfoWithGroup) {
-		if (medicalProduct.issuable === 'ABROAD_ONLY' && country.code !== 'CH') {
+	private handleCountryAndMedicalProductValidation(country: ProductInfo) {
+		if (country.code !== 'CH') {
 			this.vaccineForm.get('checkBox').enable();
 			this.vaccineForm.get('checkBox').setValue(false);
 		} else {
