@@ -99,6 +99,7 @@ describe('CertificateCreateDtoMappingService', () => {
 					familyName: 'Doe',
 					givenName: 'John'
 				},
+				systemSource: 'WebUI',
 				language: 'de'
 			});
 		});
@@ -110,6 +111,7 @@ describe('CertificateCreateDtoMappingService', () => {
 					familyName: 'Doe',
 					givenName: 'John'
 				},
+				systemSource: 'WebUI',
 				language: 'de',
 				vaccinationInfo: [
 					{
@@ -139,7 +141,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -159,7 +162,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -181,7 +185,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -198,7 +203,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						countryOfTest: 'CH',
 						dateOfFirstPositiveTestResult: '2021-02-01'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 	});
@@ -214,7 +220,8 @@ describe('CertificateCreateDtoMappingService', () => {
 					familyName: 'Doe',
 					givenName: 'John'
 				},
-				language: 'de'
+				language: 'de',
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -235,7 +242,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						totalNumberOfDoses: 2,
 						vaccinationDate: '2021-02-01'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -256,7 +264,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -277,7 +286,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -300,7 +310,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -318,7 +329,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						countryOfTest: 'CH',
 						dateOfFirstPositiveTestResult: '2021-02-01'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 	});
@@ -345,7 +357,8 @@ describe('CertificateCreateDtoMappingService', () => {
 					familyName: 'Doe',
 					givenName: 'John'
 				},
-				language: 'de'
+				language: 'de',
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -371,7 +384,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						totalNumberOfDoses: 2,
 						vaccinationDate: '2021-02-01'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -397,7 +411,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -423,7 +438,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -451,7 +467,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 
@@ -474,7 +491,8 @@ describe('CertificateCreateDtoMappingService', () => {
 						countryOfTest: 'CH',
 						dateOfFirstPositiveTestResult: '2021-02-01'
 					}
-				]
+				],
+				systemSource: 'WebUI'
 			});
 		});
 	});

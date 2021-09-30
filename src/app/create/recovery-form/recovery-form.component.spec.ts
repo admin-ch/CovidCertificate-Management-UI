@@ -211,6 +211,7 @@ describe('RecoveryFormComponent', () => {
 			component.recoveryForm.get('certificateLanguage').setValue('DE');
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
+			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 
@@ -226,6 +227,7 @@ describe('RecoveryFormComponent', () => {
 			component.recoveryForm.get('certificateLanguage').setValue('DE');
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
+			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 
@@ -241,6 +243,7 @@ describe('RecoveryFormComponent', () => {
 			component.recoveryForm.get('certificateLanguage').setValue({code: 'DE'});
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
+			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 

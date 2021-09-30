@@ -10,13 +10,13 @@
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="firstName" id="firstName" />
+				<input type="text" matInput formControlName="firstName" id="firstName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.surName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="surName" id="surName" />
+				<input type="text" matInput formControlName="surName" id="surName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
@@ -74,9 +74,24 @@
 				<mat-error></mat-error>
 			</mat-form-field>
 
-			<mat-checkbox formControlName="checkBox" aria-label="Hint" *ngIf="recoveryForm.get('checkBox').enabled">
-				{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
-			</mat-checkbox>
+			<div *ngIf="recoveryForm.get('checkBox').enabled">
+				<mat-checkbox formControlName="checkBox" aria-label="Hint">
+					{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+				</mat-checkbox>
+
+				<mat-error *ngIf="recoveryForm.get('checkBox').errors?.required" style="margin-left: 25px">{{
+					"i18n.validation.required" | translate
+					}}</mat-error>
+
+				<ob-collapse column-main-content iconPosition="left" [active]="false" style="margin-left: 25px">>
+					<span obCollapseHeader>
+						{{ "certificateCreate.step-two.moreInfosLabel" | translate }}
+					</span>
+					<p obCollapseMain style="text-align: justify; margin-left: 25px">
+						{{ "certificateCreate.step-two.moreInfosMessage" | translate }}
+					</p>
+				</ob-collapse>
+			</div>
 		</div>
 	</fieldset>
 
