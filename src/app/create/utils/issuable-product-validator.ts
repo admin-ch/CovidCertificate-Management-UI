@@ -4,10 +4,9 @@ export class IssuableProductValidator {
 	static validateProduct: ValidatorFn = (form: FormGroup): ValidationErrors | null => {
 		const medicalProduct: AbstractControl = form.get('medicalProduct');
 		const countryOfVaccination: AbstractControl = form.get('countryOfVaccination');
-
 		if (
-			medicalProduct &&
-			countryOfVaccination &&
+			medicalProduct && medicalProduct.value &&
+			countryOfVaccination && countryOfVaccination.value &&
 			medicalProduct.value.issuable === 'ABROAD_ONLY' &&
 			countryOfVaccination.value.code === 'CH'
 		) {

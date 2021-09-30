@@ -96,17 +96,13 @@ export class RecoveryFormComponent implements OnInit {
 		});
 
 		this.recoveryForm.get('countryOfTest').valueChanges.subscribe(selectedCountryOfTest => {
-			this.handleCountryValidation(selectedCountryOfTest);
+			if (selectedCountryOfTest && selectedCountryOfTest.code !== 'CH') {
+				this.recoveryForm.get('checkBox').enable();
+				this.recoveryForm.get('checkBox').setValue(false);
+			} else {
+				this.recoveryForm.get('checkBox').disable();
+			}
 		});
-	}
-
-	private handleCountryValidation(countryOfTest: ProductInfo) {
-		if (countryOfTest.code !== 'CH') {
-			this.recoveryForm.get('checkBox').enable();
-			this.recoveryForm.get('checkBox').setValue(false);
-		} else {
-			this.recoveryForm.get('checkBox').disable();
-		}
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -136,7 +132,8 @@ export class RecoveryFormComponent implements OnInit {
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
 			certificateLanguage: this.getDefaultCertificateLanguage(),
-			countryOfTest: this.getDefaultCountryOfRecovery()
+			countryOfTest: this.getDefaultCountryOfRecovery(),
+			checkBox: {value: false, disabled: true}
 		});
 	}
 }

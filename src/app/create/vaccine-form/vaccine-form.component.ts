@@ -110,17 +110,13 @@ export class VaccineFormComponent implements OnInit {
 		});
 
 		this.vaccineForm.get('countryOfVaccination').valueChanges.subscribe(selectedCountryOfVaccination => {
-			this.handleCountryAndMedicalProductValidation(selectedCountryOfVaccination);
+			if (selectedCountryOfVaccination && selectedCountryOfVaccination.code !== 'CH') {
+				this.vaccineForm.get('checkBox').enable();
+				this.vaccineForm.get('checkBox').setValue(false);
+			} else {
+				this.vaccineForm.get('checkBox').disable();
+			}
 		});
-	}
-
-	private handleCountryAndMedicalProductValidation(country: ProductInfo) {
-		if (country.code !== 'CH') {
-			this.vaccineForm.get('checkBox').enable();
-			this.vaccineForm.get('checkBox').setValue(false);
-		} else {
-			this.vaccineForm.get('checkBox').disable();
-		}
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -155,14 +151,13 @@ export class VaccineFormComponent implements OnInit {
 
 	private resetForm(): void {
 		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
-		const previousMedicalProduct: ProductInfoWithGroup = this.vaccineForm.value.medicalProduct;
 
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
 			countryOfVaccination: this.getDefaultCountryOfVaccination(),
-			medicalProduct: previousMedicalProduct
+			checkBox: {value: false, disabled: true}
 		});
 	}
 }
