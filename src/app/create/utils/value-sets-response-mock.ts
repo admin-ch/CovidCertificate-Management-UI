@@ -1,4 +1,4 @@
-import {ValueSetsResponse} from "shared/model";
+import {ValueSetsResponse} from 'shared/model';
 
 export class ValueSetsResponseMock {
 	static valueSets: ValueSetsResponse = {
@@ -713,5 +713,4 @@ export class ValueSetsResponseMock {
 			}
 		]
 	};
-
 }

@@ -5,12 +5,13 @@ import {RouterModule} from '@angular/router';
 import {AuthGuardService} from '../auth/auth-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
 import {
-    ObAlertModule,
-    ObButtonModule,
-    ObErrorMessagesModule,
-    ObNestedFormModule,
-    ObNumberFormatModule,
-    ObInputClearModule, ObCollapseModule
+	ObAlertModule,
+	ObButtonModule,
+	ObErrorMessagesModule,
+	ObNestedFormModule,
+	ObNumberFormatModule,
+	ObInputClearModule,
+	ObCollapseModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
@@ -47,29 +48,29 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		ShippingComponent,
 		DeliveryCodeCleanerDirective
 	],
-    imports: [
-        SharedModule,
-        ObAlertModule,
-        ObButtonModule,
-        ObErrorMessagesModule,
-        ObNestedFormModule,
-        ObNumberFormatModule,
-        ObInputClearModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatMomentDateModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatStepperModule,
-        MatCheckboxModule,
-        MatAutocompleteModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}]),
-        ObCollapseModule
-    ]
+	imports: [
+		SharedModule,
+		ObAlertModule,
+		ObButtonModule,
+		ObErrorMessagesModule,
+		ObNestedFormModule,
+		ObNumberFormatModule,
+		ObInputClearModule,
+		MatButtonModule,
+		MatDatepickerModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatMomentDateModule,
+		MatRadioModule,
+		MatSelectModule,
+		MatOptionModule,
+		MatStepperModule,
+		MatCheckboxModule,
+		MatAutocompleteModule,
+		MatIconModule,
+		ReactiveFormsModule,
+		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}]),
+		ObCollapseModule
+	]
 })
 export class CreateModule {}

@@ -9,7 +9,7 @@ import {ValueSetsResponseMock} from './value-sets-response-mock';
 describe('IssuableProductValidator', () => {
 	let service: ValueSetsService;
 
-	const valueSets: ValueSetsResponse = ValueSetsResponseMock.valueSets
+	const valueSets: ValueSetsResponse = ValueSetsResponseMock.valueSets;
 
 	beforeAll(() => {
 		TestBed.configureTestingModule({

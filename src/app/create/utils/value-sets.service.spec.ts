@@ -7,7 +7,7 @@ import {ValueSetsResponseMock} from './value-sets-response-mock';
 describe('ValueSetsService', () => {
 	let service: ValueSetsService;
 
-	const valueSets: ValueSetsResponse = ValueSetsResponseMock.valueSets
+	const valueSets: ValueSetsResponse = ValueSetsResponseMock.valueSets;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
