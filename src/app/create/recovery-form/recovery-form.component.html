@@ -73,6 +73,10 @@
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>
+
+			<mat-checkbox formControlName="checkBox" aria-label="Hint" *ngIf="recoveryForm.get('checkBox').enabled">
+				{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+			</mat-checkbox>
 		</div>
 	</fieldset>
 

@@ -2,122 +2,12 @@ import {TestBed} from '@angular/core/testing';
 import {ValueSetsService} from './value-sets.service';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ValueSetsResponse} from 'shared/model';
+import {ValueSetsResponseMock} from './value-sets-response-mock';
 
 describe('ValueSetsService', () => {
 	let service: ValueSetsService;
 
-	const valueSets: ValueSetsResponse = {
-		countryCodes: {
-			de: [
-				{
-					display: 'Schweden',
-					lang: 'de',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'SE'
-				},
-				{
-					display: 'Schweiz',
-					lang: 'de',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'CH'
-				}
-			],
-			fr: [
-				{
-					display: 'Suède',
-					lang: 'fr',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'SE'
-				},
-				{
-					display: 'Suisse',
-					lang: 'fr',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'CH'
-				}
-			],
-			it: [
-				{
-					display: 'Svezia',
-					lang: 'it',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'SE'
-				},
-				{
-					display: 'Svizzera',
-					lang: 'it',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'CH'
-				}
-			],
-			en: [
-				{
-					display: 'Sweden',
-					lang: 'en',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'SE'
-				},
-				{
-					display: 'Switzerland',
-					lang: 'en',
-					active: true,
-					version: 'https://iso-3166-1_alpha-2/1',
-					system: 'https://iso-3166-1_alpha-2',
-					short: 'CH'
-				}
-			]
-		},
-		vaccinationSets: [
-			{
-				productCode: 'EU/1/20/1528',
-				productDisplay: 'Comirnaty',
-				prophylaxisCode: '1119349007',
-				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
-				authHolderCode: 'ORG-100030215',
-				authHolderDisplay: 'BioNTech Manufacturing GmbH'
-			},
-			{
-				productCode: 'EU/1/20/1507',
-				productDisplay: 'COVID-19 Vaccine Moderna',
-				prophylaxisCode: '1119349007',
-				prophylaxisDisplay: 'COVID-19 mRNA vaccine',
-				authHolderCode: 'ORG-100031184',
-				authHolderDisplay: 'Moderna Biotech Spain, S.L.'
-			}
-		],
-		testSets: [
-			{
-				display: 'PCR',
-				code: 'LP6464-4'
-			},
-			{
-				display: 'Panbio COVID-19 Ag Test',
-				code: 'LP217198-3'
-			},
-			{
-				display: 'AMP Rapid Test SARS-CoV-2 Ag',
-				code: 'LP217198-3'
-			},
-			{
-				display: 'Fantasy',
-				code: '42'
-			}
-		]
-	};
+	const valueSets: ValueSetsResponse = ValueSetsResponseMock.valueSets;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -154,22 +44,24 @@ describe('ValueSetsService', () => {
 		});
 
 		it('should compute the correct amount of medical products', () => {
-			expect(service.getMedicinalProducts().length).toBe(2);
+			expect(service.getMedicinalProducts().length).toBe(7);
 		});
 
-		it('should compute Comirnaty correctly', () => {
+		it('should compute BBIBP-CorV correctly', () => {
 			expect(service.getMedicinalProducts()[0]).toEqual({
-				code: 'EU/1/20/1528',
-				display: 'Comirnaty',
-				group: 'BioNTech Manufacturing GmbH'
+				code: 'BBIBP-CorV',
+				display: 'BBIBP-CorV (Vero Cells)',
+				group: 'China Sinopharm International Corp. - Beijing location',
+				issuable: 'ABROAD_ONLY'
 			});
 		});
 
-		it('should compute COVID-19 Vaccine Moderna correctly', () => {
+		it('should compute Comirnaty correctly', () => {
 			expect(service.getMedicinalProducts()[1]).toEqual({
-				code: 'EU/1/20/1507',
-				display: 'COVID-19 Vaccine Moderna',
-				group: 'Moderna Biotech Spain, S.L.'
+				code: 'EU/1/20/1528',
+				display: 'Comirnaty',
+				group: 'Biontech Manufacturing GmbH',
+				issuable: 'CH_AND_ABROAD'
 			});
 		});
 	});

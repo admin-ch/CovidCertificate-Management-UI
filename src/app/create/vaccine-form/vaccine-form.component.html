@@ -122,6 +122,34 @@
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>
+
+			<div *ngIf="vaccineForm.get('checkBox').enabled" style="display: inline-block">
+				<mat-checkbox formControlName="checkBox" aria-label="Hint">
+					{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+				</mat-checkbox>
+
+				<mat-error *ngIf="vaccineForm.get('checkBox').errors?.required" style="margin-left: 25px">{{
+					"i18n.validation.required" | translate
+				}}</mat-error>
+
+				<ob-collapse column-main-content iconPosition="left" [active]="false">
+					<span obCollapseHeader>
+						{{ "certificateCreate.step-two.moreInformations" | translate }}
+					</span>
+					<p obCollapseMain style="text-align: justify">
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+						ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+						dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+						sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+						invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+						justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+						ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+						eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+						et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+						est Lorem ipsum
+					</p>
+				</ob-collapse>
+			</div>
 		</div>
 	</fieldset>
 
