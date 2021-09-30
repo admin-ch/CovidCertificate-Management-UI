@@ -128,7 +128,7 @@
 					{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
 				</mat-checkbox>
 
-				<mat-error *ngIf="vaccineForm.get('checkBox').errors?.required">{{
+				<mat-error *ngIf="vaccineForm.get('checkBox').errors?.required" style="margin-left: 25px">{{
 					"i18n.validation.required" | translate
 				}}</mat-error>
 
@@ -136,7 +136,7 @@
 					<span obCollapseHeader>
 						{{ "certificateCreate.step-two.moreInformations" | translate }}
 					</span>
-					<p obCollapseMain>
+					<p obCollapseMain style="text-align: justify">
 						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
 						ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
 						dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
