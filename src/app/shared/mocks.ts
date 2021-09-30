@@ -90,7 +90,8 @@ export const patientNoCertificate: Patient = {
 export const patientNoCertificateDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
 	name: {familyName: 'Muster', givenName: 'Hans'},
-	language: 'de'
+	language: 'de',
+	systemSource: 'WebUI'
 };
 export const vaccinationPatient: Patient = {
 	birthdate: new Date(VALUE_DATE_1989),
@@ -103,7 +104,8 @@ export const vaccinationPatienDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
 	name: {familyName: 'Muster', givenName: 'Hans'},
 	language: 'de',
-	vaccinationInfo: [vaccinationDto]
+	vaccinationInfo: [vaccinationDto],
+	systemSource: 'WebUI'
 };
 export const testPatient: Patient = {
 	birthdate: new Date(VALUE_DATE_1989),
@@ -116,7 +118,8 @@ export const testPatientDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
 	name: {familyName: 'Blau', givenName: 'Stefanie'},
 	language: 'de',
-	testInfo: [testDto]
+	testInfo: [testDto],
+	systemSource: 'WebUI'
 };
 export const recoveryPatient: Patient = {
 	birthdate: new Date(VALUE_DATE_1989),
@@ -129,5 +132,6 @@ export const recoveryPatientDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
 	name: {familyName: 'Stern', givenName: 'Kurt'},
 	language: 'de',
-	recoveryInfo: [recoveryDto]
+	recoveryInfo: [recoveryDto],
+	systemSource: 'WebUI'
 };
