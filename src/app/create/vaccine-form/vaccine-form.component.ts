@@ -8,6 +8,7 @@ import {DosesValidators} from '../utils/doses-validator';
 import {DateMapper} from '../utils/date-mapper';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
+import {IssuableProductValidator} from '../utils/issuable-product-validator';
 
 const VACCINE_DATE_VALIDATORS = [
 	Validators.required,
@@ -93,9 +94,10 @@ export class VaccineFormComponent implements OnInit {
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
-				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required]
+				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required],
+				checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
 			},
-			{validators: DosesValidators.validateDoses}
+			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
 		);
 
 		this.vaccineForm.get('dateOfVaccination').valueChanges.subscribe(_ => {
@@ -104,6 +106,15 @@ export class VaccineFormComponent implements OnInit {
 					DateValidators.dateMoreThanBirthday(),
 					...VACCINE_DATE_VALIDATORS
 				]);
+			}
+		});
+
+		this.vaccineForm.get('countryOfVaccination').valueChanges.subscribe(selectedCountryOfVaccination => {
+			if (selectedCountryOfVaccination && selectedCountryOfVaccination.code !== 'CH') {
+				this.vaccineForm.get('checkBox').enable();
+				this.vaccineForm.get('checkBox').setValue(false);
+			} else {
+				this.vaccineForm.get('checkBox').disable();
 			}
 		});
 	}
@@ -140,14 +151,13 @@ export class VaccineFormComponent implements OnInit {
 
 	private resetForm(): void {
 		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
-		const previousMedicalProduct: ProductInfoWithGroup = this.vaccineForm.value.medicalProduct;
 
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
 			countryOfVaccination: this.getDefaultCountryOfVaccination(),
-			medicalProduct: previousMedicalProduct
+			checkBox: {value: false, disabled: true}
 		});
 	}
 }

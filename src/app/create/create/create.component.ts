@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatStepper} from '@angular/material/stepper';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {CertificateService} from 'shared/certificate.service';
-import {Observable} from 'rxjs';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 
