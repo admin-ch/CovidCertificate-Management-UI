@@ -82,7 +82,8 @@ export class RecoveryFormComponent implements OnInit {
 			],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
-			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required]
+			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required],
+			checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
 		});
 
 		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
@@ -91,6 +92,15 @@ export class RecoveryFormComponent implements OnInit {
 					DateValidators.dateMoreThanBirthday(),
 					...FIRST_POSITIVE_TEST_VALIDATORS
 				]);
+			}
+		});
+
+		this.recoveryForm.get('countryOfTest').valueChanges.subscribe(selectedCountryOfTest => {
+			if (selectedCountryOfTest && selectedCountryOfTest.code !== 'CH') {
+				this.recoveryForm.get('checkBox').enable();
+				this.recoveryForm.get('checkBox').setValue(false);
+			} else {
+				this.recoveryForm.get('checkBox').disable();
 			}
 		});
 	}
@@ -124,7 +134,8 @@ export class RecoveryFormComponent implements OnInit {
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
 			certificateLanguage: previousCertificateLanguage,
-			countryOfTest: this.getDefaultCountryOfRecovery()
+			countryOfTest: this.getDefaultCountryOfRecovery(),
+			checkBox: {value: false, disabled: true}
 		});
 	}
 }

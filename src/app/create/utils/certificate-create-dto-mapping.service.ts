@@ -37,7 +37,8 @@ export class CertificateCreateDtoMappingService {
 				givenName: patient.firstName
 			},
 			dateOfBirth: this.toJSONDateString(patient.birthdate),
-			language: patient.language
+			language: patient.language,
+			systemSource: 'WebUI'
 		};
 	}
 

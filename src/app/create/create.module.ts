@@ -10,7 +10,8 @@ import {
 	ObErrorMessagesModule,
 	ObNestedFormModule,
 	ObNumberFormatModule,
-	ObInputClearModule
+	ObInputClearModule,
+	ObCollapseModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
@@ -68,7 +69,8 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 		MatAutocompleteModule,
 		MatIconModule,
 		ReactiveFormsModule,
-		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}])
+		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}]),
+		ObCollapseModule
 	]
 })
 export class CreateModule {}

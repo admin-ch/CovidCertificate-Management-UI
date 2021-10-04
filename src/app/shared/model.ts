@@ -22,6 +22,7 @@ export interface CertificateCreateDto {
 	recoveryInfo?: RecoveryDto[];
 	address?: AddressDto;
 	appCode?: number;
+	systemSource: string;
 }
 
 export interface AddressDto {
@@ -69,6 +70,7 @@ export interface ProductInfoWithGroup {
 	code: string;
 	group: string;
 	display: string;
+	issuable: string;
 }
 
 export interface Test {
@@ -197,6 +199,7 @@ export interface VaccinationValueSets {
 	prophylaxisDisplay: string;
 	authHolderCode: string;
 	authHolderDisplay: string;
+	issuable: string;
 }
 
 export interface RevokeDto {
