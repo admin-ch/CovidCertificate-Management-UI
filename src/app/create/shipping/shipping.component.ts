@@ -127,8 +127,8 @@ export class ShippingComponent implements OnInit {
 				case ShippingOptions.APP:
 					const appDeliveryCodeControl = this.shippingForm.get('appDeliveryCode');
 					appDeliveryCodeControl.enable();
-					appDeliveryCodeControl.valueChanges.subscribe(newValue =>
-						appDeliveryCodeControl.setValue(this.convertInAppCode(newValue), {emitEvent: false})
+					appDeliveryCodeControl.valueChanges.subscribe(appCodeValue =>
+						appDeliveryCodeControl.setValue(this.convertInAppCode(appCodeValue), {emitEvent: false})
 					);
 					this.disablePostDelivery();
 					break;
