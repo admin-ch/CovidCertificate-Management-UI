@@ -1,4 +1,5 @@
 @import "~@oblique/oblique/styles/scss/core/variables";
+@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@5.2/distr/fira_code.css);
 
 .radio-label {
 	display: flex;
@@ -6,4 +7,10 @@
 
 mat-radio-button {
 	margin: $spacing-sm;
+}
+
+#appDeliveryCode {
+	font-family: "Fira Code", monospace;
+	text-transform: uppercase;
+	letter-spacing: 5px;
 }

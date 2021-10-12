@@ -28,6 +28,7 @@
   "certificateCreate.form.group.test.type.antigen": "Antigen-Schnelltest",
   "certificateCreate.form.group.recovery": "Genesung",
   "certificateCreate.shipping.app.code": "Zustellungscode",
+  "certificateCreate.shipping.app.code.info": "Bitte beachten Sie das die folgenden Zeichen kein Teil des Codes sein können: \"G, I, J, L, O, Q, V\"",
   "certificateCreate.shipping.options": "Versand option auswählen",
   "certificateCreate.shipping.options.app": "Zertifikat in die App liefern",
   "certificateCreate.shipping.options.pdf": "Zertifikat im PDF-Format liefern",

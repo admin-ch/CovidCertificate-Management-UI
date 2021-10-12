@@ -28,6 +28,7 @@
   "certificateCreate.form.group.test.type.antigen": "Rapid antigen test",
   "certificateCreate.form.group.recovery": "Recovery",
   "certificateCreate.shipping.app.code": "Delivery code",
+  "certificateCreate.shipping.app.code.info": "Note that the following characters are left out to reduce confusion: \"G, I, J, L, O, Q, V\"",
   "certificateCreate.shipping.options": "Select the shipping option",
   "certificateCreate.shipping.options.app": "Deliver certificate in the app",
   "certificateCreate.shipping.options.pdf": "Deliver certificate in PDF format",
