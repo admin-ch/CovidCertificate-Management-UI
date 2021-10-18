@@ -76,21 +76,21 @@
 
 			<div *ngIf="recoveryForm.get('checkBox').enabled">
 				<mat-checkbox formControlName="checkBox" aria-label="Hint">
-					{{ "certificateCreate.step-two.nonissuablevaccineproductinformation" | translate }}
+					<span
+						[innerHTML]="'certificateCreate.step-two.nonissuablevaccineproductinformation' | translate"></span>
 				</mat-checkbox>
 
 				<mat-error *ngIf="recoveryForm.get('checkBox').errors?.required" style="margin-left: 25px">{{
 					"i18n.validation.required" | translate
-				}}</mat-error>
+					}}
+				</mat-error>
 
-				<ob-collapse column-main-content iconPosition="left" [active]="false" style="margin-left: 25px"
-					>>
+				<ob-collapse column-main-content iconPosition="left" [active]="false" style="margin-left: 25px">>
 					<span obCollapseHeader>
 						{{ "certificateCreate.step-two.moreInfosLabel" | translate }}
 					</span>
-					<p obCollapseMain style="text-align: justify; margin-left: 25px">
-						{{ "certificateCreate.step-two.moreInfosMessage" | translate }}
-					</p>
+					<p obCollapseMain style="text-align: justify; margin-left: 25px"
+					   [innerHTML]="'certificateCreate.step-two.moreInfosMessage' | translate"></p>
 				</ob-collapse>
 			</div>
 		</div>
