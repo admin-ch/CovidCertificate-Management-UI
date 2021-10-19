@@ -47,6 +47,16 @@ export class ShippingComponent implements OnInit {
 		'MI'
 	];
 
+	private inAppCodeConversionMap = {
+		O: '0',
+		G: '6',
+		I: '1',
+		J: '1',
+		L: '1',
+		Q: '9',
+		V: 'U'
+	};
+
 	constructor(private readonly formBuilder: FormBuilder, private readonly dataService: CreationDataService) {}
 
 	ngOnInit(): void {
@@ -73,6 +83,18 @@ export class ShippingComponent implements OnInit {
 			this.dataService.setNewShipping(this.mapFormToShippingData());
 			this.next.emit();
 		}
+	}
+
+	convertInAppCode(appCode: string): string {
+		return [...appCode]
+			.map(char => {
+				const uppercaseChar = char.toUpperCase();
+				if (this.inAppCodeConversionMap.hasOwnProperty(uppercaseChar)) {
+					return this.inAppCodeConversionMap[uppercaseChar];
+				}
+				return char;
+			})
+			.join('');
 	}
 
 	private createForm(): void {
@@ -103,7 +125,11 @@ export class ShippingComponent implements OnInit {
 		this.shippingForm.get('shippingOption').valueChanges.subscribe(newValue => {
 			switch (newValue) {
 				case ShippingOptions.APP:
-					this.shippingForm.get('appDeliveryCode').enable();
+					const appDeliveryCodeControl = this.shippingForm.get('appDeliveryCode');
+					appDeliveryCodeControl.enable();
+					appDeliveryCodeControl.valueChanges.subscribe(appCodeValue =>
+						appDeliveryCodeControl.setValue(this.convertInAppCode(appCodeValue), {emitEvent: false})
+					);
 					this.disablePostDelivery();
 					break;
 				case ShippingOptions.POST:

@@ -13,21 +13,23 @@
 				<mat-error></mat-error>
 			</mat-form-field>
 
-			<mat-form-field
-				obErrorMessages
-				class="mat-form-field-lg"
-				*ngIf="shippingForm.get('shippingOption').value === 'app'"
-			>
-				<mat-label>{{ "certificateCreate.shipping.app.code" | translate }}</mat-label>
-				<input
-					type="text"
-					matInput
-					formControlName="appDeliveryCode"
-					id="appDeliveryCode"
-					ecDeliveryCodeCleaner
-				/>
-				<mat-error></mat-error>
-			</mat-form-field>
+			<ng-container *ngIf="shippingForm.get('shippingOption').value === 'app'">
+				<ob-alert type="info">{{ "certificateCreate.shipping.app.code.info" | translate }}</ob-alert>
+				<mat-form-field obErrorMessages class="mat-form-field-lg">
+					<mat-label>{{ "certificateCreate.shipping.app.code" | translate }}</mat-label>
+					<input
+						type="text"
+						matInput
+						formControlName="appDeliveryCode"
+						id="appDeliveryCode"
+						ecDeliveryCodeCleaner
+						maxlength="9"
+						minlength="9"
+					/>
+					<mat-error></mat-error>
+				</mat-form-field>
+			</ng-container>
+
 			<ng-container *ngIf="shippingForm.get('shippingOption').value === 'post'">
 				<mat-form-field obErrorMessages class="mat-form-field-lg">
 					<mat-label>{{ "certificateCreate.shipping.post.streetAndNr" | translate }}</mat-label>
