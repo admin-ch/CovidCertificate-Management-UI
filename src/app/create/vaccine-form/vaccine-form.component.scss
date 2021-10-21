@@ -14,3 +14,13 @@
 .to {
 	grid-column: span 1;
 }
+
+::ng-deep .full-width {
+	width: max-content;
+	max-width: max-content;
+
+	::ng-deep .mat-option-text {
+		width: max-content;
+		max-width: max-content;
+	}
+}
