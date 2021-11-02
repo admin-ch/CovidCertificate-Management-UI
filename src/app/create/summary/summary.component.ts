@@ -17,7 +17,7 @@ export class SummaryComponent implements OnInit {
 	validUntil: Date;
 	shipping: Shipping;
 
-	private readonly CERTIFICATE_VALIDITY_IN_DAYS = 179;
+	private readonly RECOVERY_CERTIFICATE_VALIDITY_IN_DAYS = 364;
 	private readonly DAYS_UNTIL_VALID = 10;
 
 	get birthdate(): string {
@@ -44,7 +44,7 @@ export class SummaryComponent implements OnInit {
 					this.patient.recovery.dateFirstPositiveTestResult.getDate() + this.DAYS_UNTIL_VALID
 				);
 				this.validUntil = new Date(this.patient.recovery.dateFirstPositiveTestResult);
-				this.validUntil.setDate(this.validUntil.getDate() + this.CERTIFICATE_VALIDITY_IN_DAYS);
+				this.validUntil.setDate(this.validUntil.getDate() + this.RECOVERY_CERTIFICATE_VALIDITY_IN_DAYS);
 			}
 		});
 
