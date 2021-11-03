@@ -50,7 +50,7 @@
   "certificateCreate.step-three.description": "Merci de vérifier l'exactitude des données saisies avant la génération du certificat.",
   "certificateCreate.step-three.dose": "Dose",
   "certificateCreate.step-three.validFrom": "Valide depuis le",
-  "certificateCreate.step-three.validUntil": "Valide jusqu'au",
+  "certificateCreate.step-three.validUntil": "Valide en Suisse jusqu'au",
   "certificateCreate.step-four.app.code.error.476": "Code d'envoi inconnu ou invalide. Le certificat n'a pas pu être délivré à l'application.",
   "certificateCreate.step-four.app.code.error.558": "Problème technique. Le certificat n'a pas pu être délivré à l'application.",
   "certificateCreate.step-four.title": "Le certificat a été généré",

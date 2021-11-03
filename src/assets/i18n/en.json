@@ -50,7 +50,7 @@
   "certificateCreate.step-three.description": "Please check the data you entered before generating the certificate",
   "certificateCreate.step-three.dose": "Dose",
   "certificateCreate.step-three.validFrom": "Valid from",
-  "certificateCreate.step-three.validUntil": "Valid until",
+  "certificateCreate.step-three.validUntil": "Valid in Switzerland until",
   "certificateCreate.step-four.app.code.error.476": "Unknown or invalid delivery code. The certificate could not be delivered to the app.",
   "certificateCreate.step-four.app.code.error.558": "Technical problem. The certificate could not be delivered to the app.",
   "certificateCreate.step-four.title": "Certificate generated",
