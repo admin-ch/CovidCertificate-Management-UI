@@ -24,6 +24,8 @@ export class CertificateService {
 			certificateType = 'test';
 		} else if (patient.recovery) {
 			certificateType = 'recovery';
+		} else if (patient.antibody) {
+			certificateType = 'antibody'
 		}
 		const patientDto: CertificateCreateDto = this.dtoMappingService.mapCreationDataToDto(patient, shipping);
 		return this.http.post(`${this.covidCertificateApi}/${certificateType}`, patientDto);

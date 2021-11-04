@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CountryCodeDto, ProductInfo, ProductInfoWithGroup, VaccinationValueSets, ValueSetsResponse} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
-import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
+import {PCR_TEST_CODE, RAPID_TEST_CODE, ANTIBODY_TEST_CODE} from 'shared/constants';
 
 @Injectable({
 	providedIn: 'root'
@@ -45,6 +45,10 @@ export class ValueSetsService {
 
 	getTypeOfTests(): ProductInfo[] {
 		return this.typeOfTests;
+	}
+
+	getTypeOfAntibodyTests(): ProductInfo[] {
+		return [{code: ANTIBODY_TEST_CODE, display: 'Sars-CoV-2-Antibody'}];
 	}
 
 	getRapidTests(): ProductInfo[] {

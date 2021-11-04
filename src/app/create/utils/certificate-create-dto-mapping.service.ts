@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {
+	AntibodyDto,
 	CertificateCreateDto,
 	Patient,
 	RecoveryDto,
@@ -23,6 +24,9 @@ export class CertificateCreateDtoMappingService {
 		}
 		if (patient.recovery) {
 			certificateCreateDto.recoveryInfo = this.mapRecoveryData(patient);
+		}
+		if (patient.antibody) {
+			certificateCreateDto.antibodyInfo = this.mapAntibodyData(patient);
 		}
 
 		this.addShippingData(certificateCreateDto, shipping);
@@ -73,6 +77,15 @@ export class CertificateCreateDtoMappingService {
 				countryOfTest: patient.recovery.countryOfTest.code
 			}
 		];
+	}
+
+	private mapAntibodyData(patient: Patient): AntibodyDto[] {
+		return [
+			{
+				sampleDate: this.toJSONDateString(patient.antibody.sampleDate),
+				testingCenterOrFacility: patient.antibody.center
+			}
+		]
 	}
 
 	private addShippingData(certificateCreateDto: CertificateCreateDto, shipping: Shipping): void {

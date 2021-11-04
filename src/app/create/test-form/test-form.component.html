@@ -47,9 +47,10 @@
 
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
+		<label *ngIf="antibody" class="additional-padding">{{ "certificateCreate.from.label.antibody" | translate }}</label>
 
 		<div class="form-field">
-			<div class="radio-button-field" [ngClass]="{ 'additional-padding': !displayTestProducts }">
+			<div *ngIf="!antibody" class="radio-button-field" [ngClass]="{ 'additional-padding': !displayTestProducts }">
 				<label class="radio-button-field--label">{{
 					"certificateCreate.form.label.test.typeOfTest" | translate
 				}}</label>
@@ -105,7 +106,8 @@
 					required
 					[errors]="testForm.get('sampleDate').errors"
 					id="sampleDate"
-					[defaultValue]="getCurrentDate()"
+					[defaultValue]="antibody ? getCurrentDate() : getCurrentDateTime()"
+					[showTime]="!antibody"
 				>
 				</ec-datetimepicker>
 			</ob-nested-form>
@@ -121,7 +123,7 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</mat-label>
-				<mat-select formControlName="countryOfTest" id="countryOfTest">
+				<mat-select formControlName="countryOfTest" id="countryOfTest" [disabled]="antibody">
 					<mat-option *ngFor="let option of getCountriesOfTest()" [value]="option">
 						{{ option.display }}
 					</mat-option>

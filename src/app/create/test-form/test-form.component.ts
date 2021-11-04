@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -24,6 +24,7 @@ const SAMPLE_DATE_VALIDATORS = [
 	styleUrls: ['./test-form.scss']
 })
 export class TestFormComponent implements OnInit {
+	@Input() antibody = false;
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
@@ -90,12 +91,19 @@ export class TestFormComponent implements OnInit {
 	}
 
 	getTestTypeOptions(): ProductInfo[] {
-		return this.valueSetsService.getTypeOfTests();
+		return this.antibody ? this.valueSetsService.getTypeOfAntibodyTests() : this.valueSetsService.getTypeOfTests();
+	}
+
+	getCurrentDateTime(): any {
+		return {
+			time: moment().format('HH:mm'),
+			date: moment()
+		};
 	}
 
 	getCurrentDate(): any {
 		return {
-			time: moment().format('HH:mm'),
+			time: "00:00",
 			date: moment()
 		};
 	}
@@ -143,7 +151,7 @@ export class TestFormComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: [this.testType, Validators.required],
 			product: [''],
-			sampleDate: [this.getCurrentDate(), SAMPLE_DATE_VALIDATORS],
+			sampleDate: [this.getCurrentDateTime(), SAMPLE_DATE_VALIDATORS],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
@@ -189,18 +197,34 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private mapFormToPatientData(): Patient {
+		let test;
+
+		if (this.antibody) {
+			test = { antibody: {
+					center: this.testForm.value.center,
+					manufacturer: this.testForm.value.product,
+					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
+					typeOfTest: this.testForm.value.typeOfTest
+				}
+			}
+		} else {
+			test = { test: {
+					center: this.testForm.value.center,
+					countryOfTest: this.testForm.value.countryOfTest,
+					manufacturer: this.testForm.value.product,
+					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
+					typeOfTest: this.testForm.value.typeOfTest
+				}
+			}
+		}
+
+
 		return {
 			firstName: this.testForm.value.firstName,
 			surName: this.testForm.value.surName,
 			birthdate: DateMapper.getBirthdate(this.testForm.value.birthdate),
 			language: this.testForm.value.certificateLanguage.code,
-			test: {
-				center: this.testForm.value.center,
-				countryOfTest: this.testForm.value.countryOfTest,
-				manufacturer: this.testForm.value.product,
-				sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
-				typeOfTest: this.testForm.value.typeOfTest
-			}
+			...test
 		};
 	}
 
@@ -217,7 +241,7 @@ export class TestFormComponent implements OnInit {
 			typeOfTest: previousTypeOfTest,
 			product: previousProduct,
 			center: previousCenter,
-			sampleDate: this.getCurrentDate()
+			sampleDate: this.getCurrentDateTime()
 		});
 
 		this.filteredRapidTests = this.rapidTests;
