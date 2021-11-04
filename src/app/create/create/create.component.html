@@ -14,7 +14,12 @@
 			(back)="resetCalled()"
 			(next)="nextCalled()"
 		></ec-recovery-form>
-		<ec-test-form *ngIf="selectedForm === 'antibody'" [antibody]="true" (back)="resetCalled()" (next)="nextCalled()"></ec-test-form>
+		<ec-test-form
+			*ngIf="selectedForm === 'antibody'"
+			[antibody]="true"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-test-form>
 	</mat-step>
 	<mat-step>
 		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>

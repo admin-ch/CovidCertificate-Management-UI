@@ -47,10 +47,16 @@
 
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
-		<label *ngIf="antibody" class="additional-padding">{{ "certificateCreate.from.label.antibody" | translate }}</label>
+		<label *ngIf="antibody" class="additional-padding">{{
+			"certificateCreate.from.label.antibody" | translate
+		}}</label>
 
 		<div class="form-field">
-			<div *ngIf="!antibody" class="radio-button-field" [ngClass]="{ 'additional-padding': !displayTestProducts }">
+			<div
+				*ngIf="!antibody"
+				class="radio-button-field"
+				[ngClass]="{ 'additional-padding': !displayTestProducts }"
+			>
 				<label class="radio-button-field--label">{{
 					"certificateCreate.form.label.test.typeOfTest" | translate
 				}}</label>

@@ -10,7 +10,7 @@ export interface Patient {
 	vaccination?: Vaccination;
 	test?: Test;
 	recovery?: Recovery;
-	antibody?: Antibody
+	antibody?: Antibody;
 	language: string;
 }
 
@@ -105,7 +105,7 @@ export interface Antibody {
 	typeOfTest: ProductInfo;
 	manufacturer: ProductInfo;
 	sampleDate: Date; // format 2000-12-31T17:29 / < today
-	center: string // maxChar 50
+	center: string; // maxChar 50
 }
 
 export interface AntibodyDto {

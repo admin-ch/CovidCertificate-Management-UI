@@ -85,7 +85,7 @@ export class CertificateCreateDtoMappingService {
 				sampleDate: this.toJSONDateString(patient.antibody.sampleDate),
 				testingCenterOrFacility: patient.antibody.center
 			}
-		]
+		];
 	}
 
 	private addShippingData(certificateCreateDto: CertificateCreateDto, shipping: Shipping): void {

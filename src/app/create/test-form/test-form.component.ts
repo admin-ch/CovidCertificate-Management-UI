@@ -103,7 +103,7 @@ export class TestFormComponent implements OnInit {
 
 	getCurrentDate(): any {
 		return {
-			time: "00:00",
+			time: '00:00',
 			date: moment()
 		};
 	}
@@ -200,24 +200,25 @@ export class TestFormComponent implements OnInit {
 		let test;
 
 		if (this.antibody) {
-			test = { antibody: {
+			test = {
+				antibody: {
 					center: this.testForm.value.center,
 					manufacturer: this.testForm.value.product,
 					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
 					typeOfTest: this.testForm.value.typeOfTest
 				}
-			}
+			};
 		} else {
-			test = { test: {
+			test = {
+				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,
 					manufacturer: this.testForm.value.product,
 					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
 					typeOfTest: this.testForm.value.typeOfTest
 				}
-			}
+			};
 		}
-
 
 		return {
 			firstName: this.testForm.value.firstName,
