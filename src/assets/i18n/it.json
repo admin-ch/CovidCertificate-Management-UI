@@ -50,7 +50,7 @@
   "certificateCreate.step-three.description": "Controllare i dati inseriti prima di generare il certificato",
   "certificateCreate.step-three.dose": "Dose",
   "certificateCreate.step-three.validFrom": "Valido dal",
-  "certificateCreate.step-three.validUntil": "Valido fino al",
+  "certificateCreate.step-three.validUntil": "Valido in Svizzera fino al",
   "certificateCreate.step-four.app.code.error.476": "Codice di spedizione sconosciuto o non valido. Il certificato non può essere rilasciato nell' applicazione.",
   "certificateCreate.step-four.app.code.error.558": "Problema tecnico. Il certificato non può essere rilasciato nell' applicazione.",
   "certificateCreate.step-four.title": "Certificato generato",

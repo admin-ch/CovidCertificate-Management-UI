@@ -127,7 +127,7 @@ describe('SummaryComponent', () => {
 
 		creationDataService.setNewPatient(patient);
 
-		expect(component.validUntil).toEqual(new Date(2021, 9, 27));
+		expect(component.validUntil).toEqual(new Date(2022, 3, 30));
 	});
 
 	describe('Handling of goBack()', () => {
