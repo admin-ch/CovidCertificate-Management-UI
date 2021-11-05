@@ -10,6 +10,7 @@ export interface Patient {
 	vaccination?: Vaccination;
 	test?: Test;
 	recovery?: Recovery;
+	antibody?: Antibody;
 	language: string;
 }
 
@@ -20,6 +21,7 @@ export interface CertificateCreateDto {
 	vaccinationInfo?: VaccinationDto[];
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
+	antibodyInfo?: AntibodyDto[];
 	address?: AddressDto;
 	appCode?: number;
 	systemSource: string;
@@ -99,10 +101,23 @@ export interface RecoveryDto {
 	countryOfTest: string;
 }
 
+export interface Antibody {
+	typeOfTest: ProductInfo;
+	manufacturer: ProductInfo;
+	sampleDate: Date; // format 2000-12-31T17:29 / < today
+	center: string; // maxChar 50
+}
+
+export interface AntibodyDto {
+	sampleDate: string;
+	testingCenterOrFacility: string;
+}
+
 export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
-	RECOVERY = 'recovery'
+	RECOVERY = 'recovery',
+	ANTIBODY = 'antibody'
 }
 
 export enum ShippingOptions {

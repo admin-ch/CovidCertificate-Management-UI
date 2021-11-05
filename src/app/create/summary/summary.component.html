@@ -36,12 +36,30 @@
 			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
-		<dt>{{ "certificateCreate.form.label.test.sampleDate" | translate }}</dt>
+		<dt>{{ "certificateCreate.form.label.test.sampleDateTime" | translate }}</dt>
 		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm" }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
 		<dd id="center">{{ patient?.test.center }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
 		<dd id="countryOfTest">{{ patient?.test.countryOfTest.display }}</dd>
+	</dl>
+</ng-container>
+
+<ng-container *ngIf="patient?.antibody">
+	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
+	<dl>
+		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
+		<dd id="typeOfAntibodyTest">{{ patient?.antibody.typeOfTest.display }}</dd>
+		<ng-container *ngIf="patient?.antibody.manufacturer">
+			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
+			<dd id="antibodyManufacturer">{{ patient?.antibody.manufacturer.display }}</dd>
+		</ng-container>
+		<dt>{{ "certificateCreate.form.label.test.sampleDate" | translate }}</dt>
+		<dd id="antibodySampleDate">{{ patient?.antibody.sampleDate | date: "dd.MM.YYYY" }}</dd>
+		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
+		<dd id="AntibodyCenter">{{ patient?.antibody.center }}</dd>
+		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
+		<dd id="countryOfAntibodyTest">CH</dd>
 	</dl>
 </ng-container>
 
