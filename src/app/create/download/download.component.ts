@@ -63,4 +63,8 @@ export class DownloadComponent implements OnInit {
 	callReset(): void {
 		this.resetEmitter.emit();
 	}
+
+	isAntibodyTest(): boolean {
+		return this.type === GenerationType.ANTIBODY;
+	}
 }
