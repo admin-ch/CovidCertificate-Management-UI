@@ -42,7 +42,7 @@
   "certificateCreate.shipping.title": "Shipping",
   "certificateCreate.step-one.enum.vaccination": "Vaccination",
   "certificateCreate.step-one.enum.test": "Negative test",
-  "certificateCreate.step-one.enum.recovery": "Recovered (positive test)",
+  "certificateCreate.step-one.enum.recovery": "Recovered (PCR test positive)",
   "certificateCreate.step-one.enum.antibody": "Antibody test (seropositive)",
   "certificateCreate.step-two.personaldata.information": "The personal details must be identical to the identity document.",
   "certificateCreate.step-two.vaccinationinformation": "a person is only considered fully vaccinated and the associated COVID certificate is only valid if the number of doses received and the number of doses required is identical, e.g. recovery + vaccination: 1/1, vaccination with 2 doses: 2/2, booster 3/3",
