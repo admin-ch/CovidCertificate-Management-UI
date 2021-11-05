@@ -7,7 +7,7 @@
   "certificateCreate.form.label.personalData.birthdate": "Date of birth",
   "certificateCreate.form.label.personalData.specialDate": "Unusual format",
   "certificateCreate.form.label.personalData.certificateLanguage": "Language of certificate",
-  "certificateCreate.from.label.antibody": "Sars-CoV-2 antibody test",
+  "certificateCreate.from.label.antibody": "Test for Sars-CoV-2 antibody",
   "certificateCreate.form.label.vaccine.medicalProduct": "Vaccine product",
   "certificateCreate.form.label.vaccine.doseNumber": "Doses received",
   "certificateCreate.form.label.vaccine.totalDoses": "Doses required",
