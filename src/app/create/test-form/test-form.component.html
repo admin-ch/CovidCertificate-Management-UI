@@ -119,10 +119,20 @@
 			</ob-nested-form>
 
 			<p class="form-field-info">
-				{{ (antibody ? "certificateCreate.form.label.test.center.numberInfo" : "certificateCreate.form.label.test.center.info") | translate }}
+				{{
+					(antibody
+						? "certificateCreate.form.label.test.center.numberInfo"
+						: "certificateCreate.form.label.test.center.info"
+					) | translate
+				}}
 			</p>
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
-				<mat-label>{{ (antibody ?  "certificateCreate.form.label.test.center.number" : "certificateCreate.form.label.test.center") | translate }}</mat-label>
+				<mat-label>{{
+					(antibody
+						? "certificateCreate.form.label.test.center.number"
+						: "certificateCreate.form.label.test.center"
+					) | translate
+				}}</mat-label>
 				<input type="text" matInput formControlName="center" id="center" />
 				<mat-error></mat-error>
 			</mat-form-field>

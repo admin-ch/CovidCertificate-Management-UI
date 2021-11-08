@@ -4,7 +4,9 @@
 		<p>{{ getDescription() | translate }}</p>
 
 		<ob-alert type="warning">{{ "certificateCreate.step-four.warning" | translate }}</ob-alert>
-		<ob-alert type="warning" *ngIf="isAntibodyTest()">{{ "certificateCreate.step-four.warningChOnly" | translate }}</ob-alert>
+		<ob-alert type="warning" *ngIf="isAntibodyTest()">{{
+			"certificateCreate.step-four.warningChOnly" | translate
+		}}</ob-alert>
 		<ob-alert type="error" *ngIf="createCertificateResponse?.appDeliveryError">
 			{{
 				"certificateCreate.step-four.app.code.error." + createCertificateResponse?.appDeliveryError?.errorCode
