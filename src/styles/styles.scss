@@ -79,6 +79,10 @@
 	.is-invalid {
 		background-color: red;
 	}
+
+	label {
+		width: max-content;
+	}
 }
 
 .form-field-info {
