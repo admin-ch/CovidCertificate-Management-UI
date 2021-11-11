@@ -21,7 +21,7 @@
   "certificateCreate.form.label.test.center": "Effectué par",
   "certificateCreate.form.label.test.center.info": "Il s'agit de préférence de l'institution.",
   "certificateCreate.form.label.test.center.number": "Numéro d'autorisation",
-  "certificateCreate.form.label.test.center.numberInfo": "Numéro d'autorisation d'exploitation du laboratoire de test",
+  "certificateCreate.form.label.test.center.numberInfo": "Numéro d'autorisation du laboratoire effectuant le test",
   "certificateCreate.form.label.test.countryOfTest": "Pays où le test a été effectué",
   "certificateCreate.form.label.recovery.dateFirstPositiveTestResult": "Date du premier résultat positif",
   "certificateCreate.form.label.recovery.countryOfTest": "Pays où le test a été effectué",
