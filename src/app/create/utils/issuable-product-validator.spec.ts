@@ -24,7 +24,7 @@ describe('IssuableProductValidator', () => {
 	});
 
 	it('should be created', () => {
-		service.getMedicinalProducts().forEach(productInfoWithGroup => {
+		service.getVaccines().forEach(productInfoWithGroup => {
 			service.getCountryOptions().forEach(productInfo => {
 				const testGroup: FormGroup = new FormGroup({
 					medicalProduct: new FormControl(productInfoWithGroup),

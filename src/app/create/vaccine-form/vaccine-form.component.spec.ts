@@ -23,7 +23,7 @@ describe('VaccineFormComponent', () => {
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
-		getMedicinalProducts: jest.fn().mockReturnValue([]),
+		getVaccines: jest.fn().mockReturnValue([]),
 		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}])
 	};
 
@@ -78,8 +78,8 @@ describe('VaccineFormComponent', () => {
 
 	it('should get the medical products from the ValueSetsService', () => {
 		jest.clearAllMocks();
-		component.getMedicalProducts();
-		expect(mockValueSetsService.getMedicinalProducts).toHaveBeenCalledTimes(1);
+		component.getVaccines();
+		expect(mockValueSetsService.getVaccines).toHaveBeenCalledTimes(1);
 	});
 
 	describe('Form validation', () => {
