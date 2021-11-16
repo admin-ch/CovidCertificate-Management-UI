@@ -24,3 +24,32 @@
 		max-width: max-content;
 	}
 }
+
+.radio-button-field {
+	margin-bottom: 4px;
+	padding-bottom: 12px;
+	margin-top: 4px;
+
+	mat-radio-group {
+		display: flex;
+	}
+
+	.radio-button-field--option {
+		padding-right: 16px;
+		margin-bottom: 0.5rem;
+	}
+
+	.radio-button-field--label {
+		display: block;
+		margin-bottom: 0.25rem;
+		color: rgba(0, 0, 0, 0.6);
+		font-weight: 500;
+		font-size: 0.9rem;
+	}
+}
+
+mat-icon {
+	::ng-deep svg {
+		pointer-events: none;
+	}
+}

@@ -1,14 +1,14 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
-import {ValueSetsService} from '../utils/value-sets.service';
-import {DATE_FORMAT, MomentWrapper, Patient, ProductInfo, ProductInfoWithGroup} from 'shared/model';
-import {DateValidators} from '../utils/date-validators';
 import {TranslateService} from '@ngx-translate/core';
-import {DosesValidators} from '../utils/doses-validator';
-import {DateMapper} from '../utils/date-mapper';
-import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
+import {DATE_FORMAT, MomentWrapper, Patient, ProductInfo, Vaccine} from 'shared/model';
+import {CreationDataService} from '../utils/creation-data.service';
+import {DateMapper} from '../utils/date-mapper';
+import {DateValidators} from '../utils/date-validators';
+import {DosesValidators} from '../utils/doses-validator';
 import {IssuableProductValidator} from '../utils/issuable-product-validator';
+import {ValueSetsService} from '../utils/value-sets.service';
 
 const VACCINE_DATE_VALIDATORS = [
 	Validators.required,
@@ -28,6 +28,8 @@ export class VaccineFormComponent implements OnInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
 	vaccineForm: FormGroup;
+
+	isTouristCertificate = false;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -67,12 +69,28 @@ export class VaccineFormComponent implements OnInit {
 		return this.valueSetsService.getCertificateLanguages();
 	}
 
-	getMedicalProducts(): ProductInfoWithGroup[] {
-		return this.valueSetsService.getMedicinalProducts();
+	getVaccines(): Vaccine[] {
+		const vaccines = this.valueSetsService.getVaccines();
+		if (this.isTouristCertificate) {
+			return vaccines.filter(vaccine => vaccine.who);
+		}
+		return vaccines;
 	}
 
 	getCountriesOfVaccination(): ProductInfo[] {
-		return this.valueSetsService.getCountryOptions();
+		const countries = this.valueSetsService.getCountryOptions();
+		if (this.isTouristCertificate) {
+			return countries.filter(country => country.code !== 'CH');
+		}
+		return countries;
+	}
+
+	certifiateTypeChanged(event: {value: boolean}): void {
+		this.isTouristCertificate = event.value;
+		// vaccine and country lists are automatically updated as angular change detection rerenders the component
+
+		this.vaccineForm.get('medicalProduct').reset();
+		this.vaccineForm.get('countryOfVaccination').reset();
 	}
 
 	private createForm(): void {
@@ -152,6 +170,7 @@ export class VaccineFormComponent implements OnInit {
 	private resetForm(): void {
 		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
 
+		this.isTouristCertificate = false;
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
