@@ -48,11 +48,36 @@
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.vaccine" | translate }}</legend>
 
+		<div class="radio-button-field">
+			<label class="radio-button-field--label">
+				{{ "certificateCreate.form.label.vaccine.certificateSelection" | translate }}
+			</label>
+			<div>
+				<mat-radio-group
+					id="typeOfTest"
+					[value]="isTouristCertificate"
+					(change)="certifiateTypeChanged($event)"
+				>
+					<mat-radio-button class="radio-button-field--option" [value]="false">
+						{{ "certificateCreate.form.label.vaccine.regularCertificate" | translate }}
+					</mat-radio-button>
+					<mat-radio-button class="radio-button-field--option" [value]="true">
+						{{ "certificateCreate.form.label.vaccine.touristCertificate" | translate }}
+						<mat-icon
+							svgIcon="info-circle"
+							class="ob-icon"
+							[matTooltip]="'certificateCreate.form.label.vaccine.touristCertificateInfo' | translate"
+						></mat-icon>
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+
 		<div class="form-field">
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.vaccine.medicalProduct" | translate }}</mat-label>
 				<mat-select formControlName="medicalProduct" id="medicalProduct" panelClass="full-width">
-					<mat-optgroup *ngFor="let option of getMedicalProducts()" [label]="option.group">
+					<mat-optgroup *ngFor="let option of getVaccines()" [label]="option.group">
 						<mat-option [value]="option" class="full-width">{{ option.display }}</mat-option>
 					</mat-optgroup>
 				</mat-select>

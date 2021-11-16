@@ -68,11 +68,12 @@ export class ProductInfoWithToString implements ProductInfo {
 	}
 }
 
-export interface ProductInfoWithGroup {
+export interface Vaccine {
 	code: string;
 	group: string;
 	display: string;
 	issuable: string;
+	who: boolean;
 }
 
 export interface Test {
@@ -215,6 +216,7 @@ export interface VaccinationValueSets {
 	authHolderCode: string;
 	authHolderDisplay: string;
 	issuable: string;
+	who: boolean;
 }
 
 export interface RevokeDto {

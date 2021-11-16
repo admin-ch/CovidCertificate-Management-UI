@@ -44,11 +44,11 @@ describe('ValueSetsService', () => {
 		});
 
 		it('should compute the correct amount of medical products', () => {
-			expect(service.getMedicinalProducts().length).toBe(7);
+			expect(service.getVaccines().length).toBe(7);
 		});
 
 		it('should compute BBIBP-CorV correctly', () => {
-			expect(service.getMedicinalProducts()[0]).toEqual({
+			expect(service.getVaccines()[0]).toEqual({
 				code: 'BBIBP-CorV',
 				display: 'BBIBP-CorV (Vero Cells)',
 				group: 'China Sinopharm International Corp. - Beijing location',
@@ -57,7 +57,7 @@ describe('ValueSetsService', () => {
 		});
 
 		it('should compute Comirnaty correctly', () => {
-			expect(service.getMedicinalProducts()[1]).toEqual({
+			expect(service.getVaccines()[1]).toEqual({
 				code: 'EU/1/20/1528',
 				display: 'Comirnaty',
 				group: 'Biontech Manufacturing GmbH',

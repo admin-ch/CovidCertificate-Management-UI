@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CountryCodeDto, ProductInfo, ProductInfoWithGroup, VaccinationValueSets, ValueSetsResponse} from 'shared/model';
+import {CountryCodeDto, ProductInfo, Vaccine, VaccinationValueSets, ValueSetsResponse} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
 import {PCR_TEST_CODE, RAPID_TEST_CODE, ANTIBODY_TEST_CODE} from 'shared/constants';
 
@@ -9,7 +9,7 @@ import {PCR_TEST_CODE, RAPID_TEST_CODE, ANTIBODY_TEST_CODE} from 'shared/constan
 export class ValueSetsService {
 	private valueSets: ValueSetsResponse;
 	private countryOptions: ProductInfo[] = [];
-	private medicinalProducts: ProductInfoWithGroup[] = [];
+	private medicinalProducts: Vaccine[] = [];
 	private rapidTests: ProductInfo[] = [];
 	private typeOfTests: ProductInfo[] = [];
 	private certificateLanguages: ProductInfo[] = [];
@@ -39,7 +39,7 @@ export class ValueSetsService {
 		return this.countryOptions;
 	}
 
-	getMedicinalProducts(): ProductInfoWithGroup[] {
+	getVaccines(): Vaccine[] {
 		return this.medicinalProducts;
 	}
 
@@ -64,7 +64,8 @@ export class ValueSetsService {
 			group: vaccinationValue.authHolderDisplay,
 			display: vaccinationValue.productDisplay,
 			code: vaccinationValue.productCode,
-			issuable: vaccinationValue.issuable
+			issuable: vaccinationValue.issuable,
+			who: vaccinationValue.who
 		}));
 	}
 
