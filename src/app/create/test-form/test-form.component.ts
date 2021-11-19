@@ -136,7 +136,7 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private createForm(): void {
-		if(this.antibody) {
+		if (this.antibody) {
 			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
 		}
 		this.testForm = this.formBuilder.group({
