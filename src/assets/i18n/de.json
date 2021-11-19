@@ -126,6 +126,7 @@
   "i18n.validation.matDatepickerParse": "Ungültiges Datumsformat, bitte verwenden Sie \"tt.mm.jjjj hh:mm\"",
   "i18n.validation.invalidShortDate": "Ungültiges Datumsformat, bitte verwenden Sie \"jjjj\" oder \"jjjj-mm\"",
   "i18n.validation.notIssuableInSwitzerland": "Ausgewählter Impfstoff ist in der Schweiz nicht zugelassen.",
+  "i18n.validation.dateBeforeAntibodyCertificateMinDate": "[de]Date of sample collection must not be before 16.11.2021.",
   "logout": "Logout",
   "otp.button.copy": "In die Zwischenablage kopieren",
   "otp.button.create": "Geheimschlüssel erzeugen",
