@@ -3,8 +3,6 @@ import {TestBed} from '@angular/core/testing';
 import {CertificateService} from './certificate.service';
 import {ApiService} from './api.service';
 import {
-	patientNoCertificate,
-	patientNoCertificateDto,
 	recoveryPatient,
 	recoveryPatientDto,
 	testPatient,
