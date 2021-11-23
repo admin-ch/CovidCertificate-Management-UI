@@ -67,7 +67,7 @@ export class TouristVaccineFormComponent implements OnInit {
 	}
 
 	getVaccines(): Vaccine[] {
-		return this.valueSetsService.getVaccines().filter(vaccine => vaccine.who);
+		return this.valueSetsService.getVaccines().filter(vaccine => vaccine.touristVaccine);
 	}
 
 	getCountriesOfVaccination(): ProductInfo[] {

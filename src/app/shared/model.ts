@@ -75,7 +75,7 @@ export interface Vaccine {
 	group: string;
 	display: string;
 	issuable: string;
-	who: boolean;
+	touristVaccine: boolean;
 }
 
 export interface Test {
@@ -219,7 +219,7 @@ export interface VaccinationValueSets {
 	authHolderCode: string;
 	authHolderDisplay: string;
 	issuable: string;
-	who: boolean;
+	touristVaccine: boolean;
 }
 
 export interface RevokeDto {
