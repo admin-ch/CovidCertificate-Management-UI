@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Patient, ProductInfo, ProductInfoWithToString} from 'shared/model';
+import {GenerationType, Patient, ProductInfo, ProductInfoWithToString} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -197,10 +197,11 @@ export class TestFormComponent implements OnInit {
 	}
 
 	private mapFormToPatientData(): Patient {
-		let test;
+		let additionalData;
 
 		if (this.antibody) {
-			test = {
+			additionalData = {
+				certificateType: GenerationType.ANTIBODY,
 				antibody: {
 					center: this.testForm.value.center,
 					manufacturer: this.testForm.value.product,
@@ -209,7 +210,8 @@ export class TestFormComponent implements OnInit {
 				}
 			};
 		} else {
-			test = {
+			additionalData = {
+				certificateType: GenerationType.TEST,
 				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,
@@ -225,7 +227,7 @@ export class TestFormComponent implements OnInit {
 			surName: this.testForm.value.surName,
 			birthdate: DateMapper.getBirthdate(this.testForm.value.birthdate),
 			language: this.testForm.value.certificateLanguage.code,
-			...test
+			...additionalData
 		};
 	}
 

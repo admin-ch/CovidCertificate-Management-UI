@@ -17,16 +17,9 @@ export class CertificateService {
 	) {}
 
 	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
-		let certificateType = '';
-		if (patient.vaccination) {
-			certificateType = 'vaccination';
-		} else if (patient.test) {
-			certificateType = 'test';
-		} else if (patient.recovery) {
-			certificateType = 'recovery';
-		} else if (patient.antibody) {
-			certificateType = 'antibody';
-		}
+		// the api endpoint is infered from the certificate type of the patient
+		// change GenerationType string value in model.ts to change the api endpoint of each type
+		const certificateType: string = patient.certificateType;
 		const patientDto: CertificateCreateDto = this.dtoMappingService.mapCreationDataToDto(patient, shipping);
 		return this.http.post(`${this.covidCertificateApi}/${certificateType}`, patientDto);
 	}

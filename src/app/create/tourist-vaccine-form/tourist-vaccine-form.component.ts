@@ -17,19 +17,17 @@ const VACCINE_DATE_VALIDATORS = [
 ];
 
 @Component({
-	selector: 'ec-vaccine-form',
-	templateUrl: './vaccine-form.component.html',
-	styleUrls: ['./vaccine-form.component.scss']
+	selector: 'ec-tourist-vaccine-form',
+	templateUrl: './tourist-vaccine-form.component.html',
+	styleUrls: ['./tourist-vaccine-form.component.scss']
 })
-export class VaccineFormComponent implements OnInit {
+export class TouristVaccineFormComponent implements OnInit {
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
 	vaccineForm: FormGroup;
-
-	isTouristCertificate = false;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -48,8 +46,7 @@ export class VaccineFormComponent implements OnInit {
 		});
 		this.translateService.onLangChange.subscribe(_ => {
 			this.vaccineForm.patchValue({
-				certificateLanguage: this.getDefaultCertificateLanguage(),
-				countryOfVaccination: this.getDefaultCountryOfVaccination()
+				certificateLanguage: this.getDefaultCertificateLanguage()
 			});
 		});
 	}
@@ -70,27 +67,11 @@ export class VaccineFormComponent implements OnInit {
 	}
 
 	getVaccines(): Vaccine[] {
-		const vaccines = this.valueSetsService.getVaccines();
-		if (this.isTouristCertificate) {
-			return vaccines.filter(vaccine => vaccine.who);
-		}
-		return vaccines;
+		return this.valueSetsService.getVaccines().filter(vaccine => vaccine.who);
 	}
 
 	getCountriesOfVaccination(): ProductInfo[] {
-		const countries = this.valueSetsService.getCountryOptions();
-		if (this.isTouristCertificate) {
-			return countries.filter(country => country.code !== 'CH');
-		}
-		return countries;
-	}
-
-	certifiateTypeChanged(event: {value: boolean}): void {
-		this.isTouristCertificate = event.value;
-		// vaccine and country lists are automatically updated as angular change detection rerenders the component
-
-		this.vaccineForm.get('medicalProduct').reset();
-		this.vaccineForm.get('countryOfVaccination').reset();
+		return this.valueSetsService.getCountryOptions().filter(country => country.code !== 'CH');
 	}
 
 	private createForm(): void {
@@ -112,7 +93,7 @@ export class VaccineFormComponent implements OnInit {
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
-				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required],
+				countryOfVaccination: ['', Validators.required],
 				checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
 			},
 			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
@@ -143,10 +124,6 @@ export class VaccineFormComponent implements OnInit {
 			: this.getCertificateLanguages().find(lang => lang.code === this.translateService.currentLang);
 	}
 
-	private getDefaultCountryOfVaccination(): ProductInfo {
-		return this.getCountriesOfVaccination().find(countryCode => countryCode.code === 'CH');
-	}
-
 	private getDefaultDateOfVaccination(): MomentWrapper {
 		return {date: moment(new Date(), DATE_FORMAT)};
 	}
@@ -164,19 +141,17 @@ export class VaccineFormComponent implements OnInit {
 				medicalProduct: this.vaccineForm.value.medicalProduct,
 				totalDoses: this.vaccineForm.value.totalDoses
 			},
-			certificateType: GenerationType.VACCINATION
+			certificateType: GenerationType.TOURIST_VACCINATION
 		};
 	}
 
 	private resetForm(): void {
 		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
 
-		this.isTouristCertificate = false;
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
-			countryOfVaccination: this.getDefaultCountryOfVaccination(),
 			checkBox: {value: false, disabled: true}
 		});
 	}

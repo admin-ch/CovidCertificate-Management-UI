@@ -50,12 +50,6 @@ describe('CertificateService', () => {
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/recovery', recoveryPatientDto);
 	});
 
-	it('should call create certificate with the correct URL if no type is defined', () => {
-		service.createCertificate(patientNoCertificate, shipping);
-
-		expect(api.post).toHaveBeenCalledWith('covidcertificate/', patientNoCertificateDto);
-	});
-
 	it('should get the value sets with the correct URL', () => {
 		service.getValueSets();
 

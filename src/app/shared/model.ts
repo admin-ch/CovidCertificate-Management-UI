@@ -12,6 +12,7 @@ export interface Patient {
 	recovery?: Recovery;
 	antibody?: Antibody;
 	language: string;
+	certificateType: GenerationType;
 }
 
 export interface CertificateCreateDto {
@@ -19,6 +20,7 @@ export interface CertificateCreateDto {
 	dateOfBirth: string;
 	language: string;
 	vaccinationInfo?: VaccinationDto[];
+	vaccinationTouristInfo?: VaccinationDto[];
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
 	antibodyInfo?: AntibodyDto[];
@@ -118,7 +120,8 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
-	ANTIBODY = 'antibody'
+	ANTIBODY = 'antibody',
+	TOURIST_VACCINATION = 'vaccination-tourist'
 }
 
 export enum ShippingOptions {

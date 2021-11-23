@@ -20,6 +20,11 @@
 			(back)="resetCalled()"
 			(next)="nextCalled()"
 		></ec-test-form>
+		<ec-tourist-vaccine-form
+			*ngIf="selectedForm === 'vaccination-tourist'"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-tourist-vaccine-form>
 	</mat-step>
 	<mat-step>
 		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>
