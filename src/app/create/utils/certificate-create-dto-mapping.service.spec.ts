@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {CertificateCreateDtoMappingService} from './certificate-create-dto-mapping.service';
-import {Patient, Shipping, ShippingOptions} from 'shared/model';
+import {GenerationType, Patient, Shipping, ShippingOptions} from 'shared/model';
 import {getTimeZone} from 'shared/mocks';
 
 describe('CertificateCreateDtoMappingService', () => {
@@ -10,7 +10,8 @@ describe('CertificateCreateDtoMappingService', () => {
 		firstName: 'John',
 		surName: 'Doe',
 		birthdate: new Date(2000, 1, 1),
-		language: 'de'
+		language: 'de',
+		certificateType: GenerationType.TEST
 	};
 
 	const testDataForVaccination: Patient = {
@@ -24,7 +25,8 @@ describe('CertificateCreateDtoMappingService', () => {
 			totalDoses: 2,
 			dateOfVaccination: new Date(2021, 1, 1),
 			countryOfVaccination: {display: 'Schweiz', code: 'CH'}
-		}
+		},
+		certificateType: GenerationType.VACCINATION
 	};
 
 	const testDataForTest: Patient = {
@@ -38,7 +40,8 @@ describe('CertificateCreateDtoMappingService', () => {
 			sampleDate: new Date(2021, 1, 1),
 			center: 'TEST-center',
 			countryOfTest: {display: 'Schweiz', code: 'CH'}
-		}
+		},
+		certificateType: GenerationType.TEST
 	};
 
 	const testDataForTestSummer: Patient = {
@@ -52,7 +55,8 @@ describe('CertificateCreateDtoMappingService', () => {
 			sampleDate: new Date(2021, 7, 1),
 			center: 'TEST-center',
 			countryOfTest: {display: 'Schweiz', code: 'CH'}
-		}
+		},
+		certificateType: GenerationType.TEST
 	};
 
 	const testDataForTestWithoutManufacturer: Patient = {
@@ -66,7 +70,8 @@ describe('CertificateCreateDtoMappingService', () => {
 			sampleDate: new Date(2021, 1, 1),
 			center: 'TEST-center',
 			countryOfTest: {display: 'Schweiz', code: 'CH'}
-		}
+		},
+		certificateType: GenerationType.TEST
 	};
 
 	const testDataForRecovery: Patient = {
@@ -77,7 +82,8 @@ describe('CertificateCreateDtoMappingService', () => {
 		recovery: {
 			dateFirstPositiveTestResult: new Date(2021, 1, 1),
 			countryOfTest: {display: 'Schweiz', code: 'CH'}
-		}
+		},
+		certificateType: GenerationType.RECOVERY
 	};
 
 	beforeEach(() => {

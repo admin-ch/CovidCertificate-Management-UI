@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {VaccineFormComponent} from './vaccine-form.component';
+import {TouristVaccineFormComponent} from './tourist-vaccine-form.component';
 import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
@@ -13,9 +13,9 @@ import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 
-describe('VaccineFormComponent', () => {
-	let component: VaccineFormComponent;
-	let fixture: ComponentFixture<VaccineFormComponent>;
+describe('TouristVaccineFormComponent', () => {
+	let component: TouristVaccineFormComponent;
+	let fixture: ComponentFixture<TouristVaccineFormComponent>;
 	let creationDataService: CreationDataService;
 
 	const dateFuture: Date = new Date('9999-04-29');
@@ -30,7 +30,7 @@ describe('VaccineFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [VaccineFormComponent, DateTimePickerComponent],
+			declarations: [TouristVaccineFormComponent, DateTimePickerComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -51,7 +51,7 @@ describe('VaccineFormComponent', () => {
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(VaccineFormComponent);
+		fixture = TestBed.createComponent(TouristVaccineFormComponent);
 		creationDataService = TestBed.inject(CreationDataService);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
@@ -366,7 +366,7 @@ describe('VaccineFormComponent', () => {
 					medicalProduct: {code: '42', display: 'test-product'},
 					totalDoses: 2
 				},
-				certificateType: GenerationType.VACCINATION
+				certificateType: GenerationType.TOURIST_VACCINATION
 			});
 		});
 	});

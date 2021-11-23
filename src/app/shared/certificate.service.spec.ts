@@ -3,8 +3,6 @@ import {TestBed} from '@angular/core/testing';
 import {CertificateService} from './certificate.service';
 import {ApiService} from './api.service';
 import {
-	patientNoCertificate,
-	patientNoCertificateDto,
 	recoveryPatient,
 	recoveryPatientDto,
 	testPatient,
@@ -48,12 +46,6 @@ describe('CertificateService', () => {
 		service.createCertificate(recoveryPatient, shipping);
 
 		expect(api.post).toHaveBeenCalledWith('covidcertificate/recovery', recoveryPatientDto);
-	});
-
-	it('should call create certificate with the correct URL if no type is defined', () => {
-		service.createCertificate(patientNoCertificate, shipping);
-
-		expect(api.post).toHaveBeenCalledWith('covidcertificate/', patientNoCertificateDto);
 	});
 
 	it('should get the value sets with the correct URL', () => {

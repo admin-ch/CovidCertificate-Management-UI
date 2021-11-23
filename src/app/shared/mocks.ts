@@ -1,4 +1,5 @@
 import {
+	GenerationType,
 	Patient,
 	PatientDto,
 	ProductInfo,
@@ -98,7 +99,8 @@ export const vaccinationPatient: Patient = {
 	firstName: 'Hans',
 	surName: 'Muster',
 	language: 'de',
-	vaccination
+	vaccination,
+	certificateType: GenerationType.VACCINATION
 };
 export const vaccinationPatienDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
@@ -112,7 +114,8 @@ export const testPatient: Patient = {
 	firstName: 'Stefanie',
 	surName: 'Blau',
 	language: 'de',
-	test
+	test,
+	certificateType: GenerationType.TEST
 };
 export const testPatientDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
@@ -126,7 +129,8 @@ export const recoveryPatient: Patient = {
 	firstName: 'Kurt',
 	surName: 'Stern',
 	language: 'de',
-	recovery
+	recovery,
+	certificateType: GenerationType.RECOVERY
 };
 export const recoveryPatientDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,

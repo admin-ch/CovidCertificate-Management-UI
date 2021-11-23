@@ -73,7 +73,7 @@ describe('UploadComponent', () => {
 
 	describe('Certificate types', () => {
 		it('should have 4 certificate types for selection', () => {
-			expect(component.getCertificateTypes().length).toBe(4);
+			expect(component.getCertificateTypes().length).toBe(5);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
