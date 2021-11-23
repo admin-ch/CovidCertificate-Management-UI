@@ -151,7 +151,7 @@
 			<div *ngIf="vaccineForm.get('checkBox').enabled">
 				<mat-checkbox formControlName="checkBox" aria-label="Hint">
 					<span
-						[innerHTML]="'certificateCreate.step-two.nonissuablevaccineproductinformation' | translate"
+						[innerHTML]="('certificateCreate.step-two.entitledtoissueconfirmation' | translate) + ('certificateCreate.step-two.nonissuablevaccineproductinformation' | translate)"
 					></span>
 				</mat-checkbox>
 
