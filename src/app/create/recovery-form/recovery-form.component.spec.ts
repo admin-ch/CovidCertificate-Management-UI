@@ -11,7 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
-import { GenerationType } from 'shared/model';
+import {GenerationType} from 'shared/model';
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;

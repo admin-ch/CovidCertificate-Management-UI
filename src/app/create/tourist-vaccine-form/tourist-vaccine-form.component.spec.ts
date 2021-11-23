@@ -11,7 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
-import { GenerationType } from 'shared/model';
+import {GenerationType} from 'shared/model';
 
 describe('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;

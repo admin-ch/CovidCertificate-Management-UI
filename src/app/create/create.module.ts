@@ -35,7 +35,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
-import { TouristVaccineFormComponent } from './tourist-vaccine-form/tourist-vaccine-form.component';
+import {TouristVaccineFormComponent} from './tourist-vaccine-form/tourist-vaccine-form.component';
 
 @NgModule({
 	declarations: [
