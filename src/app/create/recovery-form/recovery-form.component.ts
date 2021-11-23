@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {DateValidators} from '../utils/date-validators';
-import {Patient, ProductInfo} from 'shared/model';
+import {GenerationType, Patient, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 
@@ -124,7 +124,8 @@ export class RecoveryFormComponent implements OnInit {
 			recovery: {
 				countryOfTest: this.recoveryForm.value.countryOfTest,
 				dateFirstPositiveTestResult: DateMapper.getDate(this.recoveryForm.value.dateFirstPositiveTestResult)
-			}
+			},
+			certificateType: GenerationType.RECOVERY
 		};
 	}
 

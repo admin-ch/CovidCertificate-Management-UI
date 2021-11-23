@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {
 	AntibodyDto,
 	CertificateCreateDto,
+	GenerationType,
 	Patient,
 	RecoveryDto,
 	Shipping,
@@ -17,7 +18,12 @@ export class CertificateCreateDtoMappingService {
 	mapCreationDataToDto(patient: Patient, shipping: Shipping): CertificateCreateDto {
 		const certificateCreateDto: CertificateCreateDto = this.mapPatientData(patient);
 		if (patient.vaccination) {
-			certificateCreateDto.vaccinationInfo = this.mapVaccinationData(patient);
+			const vaccinationDto = this.mapVaccinationData(patient);
+			if (patient.certificateType === GenerationType.VACCINATION) {
+				certificateCreateDto.vaccinationInfo = vaccinationDto;
+			} else if (patient.certificateType === GenerationType.TOURIST_VACCINATION) {
+				certificateCreateDto.vaccinationTouristInfo = vaccinationDto;
+			}
 		}
 		if (patient.test) {
 			certificateCreateDto.testInfo = this.mapTestData(patient);

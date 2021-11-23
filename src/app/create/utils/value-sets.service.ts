@@ -65,7 +65,7 @@ export class ValueSetsService {
 			display: vaccinationValue.productDisplay,
 			code: vaccinationValue.productCode,
 			issuable: vaccinationValue.issuable,
-			who: vaccinationValue.who
+			touristVaccine: vaccinationValue.touristVaccine
 		}));
 	}
 
