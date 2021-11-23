@@ -76,9 +76,7 @@
 
 			<div *ngIf="recoveryForm.get('checkBox').enabled">
 				<mat-checkbox formControlName="checkBox" aria-label="Hint">
-					<span
-						[innerHTML]="'certificateCreate.step-two.entitledtoissueconfirmation' | translate"
-					></span>
+					<span [innerHTML]="'certificateCreate.step-two.entitledtoissueconfirmation' | translate"></span>
 				</mat-checkbox>
 
 				<mat-error *ngIf="recoveryForm.get('checkBox').errors?.required" style="margin-left: 25px"
