@@ -124,6 +124,7 @@
   "i18n.validation.matDatepickerParse": "Ungültiges Datumsformat, bitte verwenden Sie \"tt.mm.jjjj hh:mm\"",
   "i18n.validation.invalidShortDate": "Ungültiges Datumsformat, bitte verwenden Sie \"jjjj\" oder \"jjjj-mm\"",
   "i18n.validation.notIssuableInSwitzerland": "Ausgewählter Impfstoff ist in der Schweiz nicht zugelassen.",
+  "i18n.validation.dateBeforeAntibodyCertificateMinDate": "Das Datum der Probenentnahme darf nicht vor dem 16.11.2021 liegen.",
   "logout": "Logout",
   "otp.button.copy": "In die Zwischenablage kopieren",
   "otp.button.create": "Geheimschlüssel erzeugen",
@@ -150,6 +151,8 @@
   "validation.error.http.482": "Das CSV konnte nicht verarbeitet werden aufgrund einer ungültigen Grösse. Es müssen 1 bis 100 Einträge enthalten sein.",
   "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
   "validation.error.http.489": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
+  "validation.error.http.458": "Ungültiger Vorname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
+  "validation.error.http.459": "Ungültiger Familienname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
   "notifications.unsupportedBrowser.title": "Nicht unterstützter Browser",
   "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden."
 }

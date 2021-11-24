@@ -121,7 +121,8 @@
   "i18n.validation.timeAfterToday": "La data non deve essere nel futuro",
   "i18n.validation.matDatepickerParse": "Formato di data non valido, utilizzare \"dd.mm.yyyy hh:mm\"",
   "i18n.validation.invalidShortDate": "Formato di data non valido, utilizzare \"jjjj\" o \"jjjj-mm\"",
-  "i18n.validation.notIssuableInSwitzerland": "Ausgewählter Impfstoff ist in der Schweiz nicht zugelassen.",
+  "i18n.validation.notIssuableInSwitzerland": "Il vaccino selezionato non è autorizzato in Svizzera.",
+  "i18n.validation.dateBeforeAntibodyCertificateMinDate": "La data del prelievo non può essere anteriore al 16.11.2021.",
   "logout": "Logout",
   "otp.button.copy": "Copia negli appunti",
   "otp.button.create": "Crea chiave segreta",
@@ -148,6 +149,8 @@
   "validation.error.http.482": "Il CSV non è stato elaborato a causa di una dimensione non valida. Deve contenere da 1 a 100 voci.",
   "validation.error.http.485": "Una o più delle query CSV contiene dati non validi. Per messaggi di errore più dettagliati, controlla il file CSV restituito.",
   "validation.error.http.489": "Data di nascita non valida. Si prega di controllare i dati inseriti nella fase due.",
+  "validation.error.http.458": "Il nome non è valido! Il nome non può eccedere 80 caratteri e/o contenere caratteri non validi.",
+  "validation.error.http.459": "Il cognome non è valido!! Il cognome non può eccedere 80 caratteri e/o contenere caratteri non validi.",
   "notifications.unsupportedBrowser.title": "Browser non supportato",
   "notifications.unsupportedBrowser.message": "Il browser non è compatibile con alcune funzioni dell'applicazione. Tali funzioni sono supportate soltanto nelle due versioni più recenti di Chrome, Firefox, Edge e Safari."
 }

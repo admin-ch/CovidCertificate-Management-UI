@@ -122,6 +122,7 @@
   "i18n.validation.matDatepickerParse": "Invalid date format. Please use \"dd.mm.yyyy hh:mm\"",
   "i18n.validation.invalidShortDate": "Invalid date format. Please use \"jjjj\" or \"jjjj-mm\"",
   "i18n.validation.notIssuableInSwitzerland": "The selected vaccine is not authorised in Switzerland.",
+  "i18n.validation.dateBeforeAntibodyCertificateMinDate": "Date of sample collection must not be before 16.11.2021.",
   "logout": "Logout",
   "otp.button.copy": "Copy to the clipboard",
   "otp.button.create": "Generate private key",
@@ -148,6 +149,8 @@
   "validation.error.http.482": "The CSV was not processed due to an invalid size. It must contain 1 to 100 entries.",
   "validation.error.http.485": "One or more of the requests in the CSV contain invalid data. For more detailed error messages check the returned CSV file.",
   "validation.error.http.489": "Invalid date of birth. Please check your input in step two.",
+  "validation.error.http.458": "Invalid given name! Must not exceed 80 chars and/or not contain any invalid characters.",
+  "validation.error.http.459": "Invalid family name! Must not exceed 80 chars and/or not contain any invalid characters.",
   "notifications.unsupportedBrowser.title": "Unsupported Browser",
   "notifications.unsupportedBrowser.message": "Some functions of this application are not supported by your browser. Please note that only the two latest versions of Chrome, Firefox, Edge and Safari are supported"
 }

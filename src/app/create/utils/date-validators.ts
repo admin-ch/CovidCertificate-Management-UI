@@ -4,6 +4,7 @@ import {DATE_FORMAT} from 'shared/model';
 
 export class DateValidators {
 	static MIN_DATE: Date = new Date(1900, 0, 1);
+	static ANTIBODY_CERTIFICATE_MIN_DATE: Date = new Date(2021, 10, 16);
 	static DATE_REGEX = /^((19|20)\d\d(-\d\d){0,2}){0,1}$/;
 
 	static validShortDate() {
@@ -59,6 +60,16 @@ export class DateValidators {
 				} else {
 					return {timeAfterToday: true};
 				}
+			}
+			return null;
+		};
+	}
+
+	static dateBeforeThanAntibodyCertificateMinDate() {
+		return (control: AbstractControl): {[key: string]: boolean} | null => {
+			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
+			if (!!dateValue && dateValue.isBefore(DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE)) {
+				return {dateBeforeAntibodyCertificateMinDate: true};
 			}
 			return null;
 		};
