@@ -56,6 +56,7 @@ export class TouristVaccineFormComponent implements OnInit {
 	}
 
 	goNext(): void {
+		this.vaccineForm.markAllAsTouched();
 		if (this.vaccineForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
@@ -94,7 +95,7 @@ export class TouristVaccineFormComponent implements OnInit {
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
 				countryOfVaccination: ['', Validators.required],
-				checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
+				checkBox: [false, Validators.requiredTrue]
 			},
 			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
 		);
@@ -105,15 +106,6 @@ export class TouristVaccineFormComponent implements OnInit {
 					DateValidators.dateMoreThanBirthday(),
 					...VACCINE_DATE_VALIDATORS
 				]);
-			}
-		});
-
-		this.vaccineForm.get('countryOfVaccination').valueChanges.subscribe(selectedCountryOfVaccination => {
-			if (selectedCountryOfVaccination && selectedCountryOfVaccination.code !== 'CH') {
-				this.vaccineForm.get('checkBox').enable();
-				this.vaccineForm.get('checkBox').setValue(false);
-			} else {
-				this.vaccineForm.get('checkBox').disable();
 			}
 		});
 	}
@@ -152,7 +144,7 @@ export class TouristVaccineFormComponent implements OnInit {
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
-			checkBox: {value: false, disabled: true}
+			checkBox: false
 		});
 	}
 }

@@ -1,0 +1,25 @@
+<section id="who-checkbox" [ngClass]="{'error': hasError}">
+  <mat-checkbox aria-label="Hint" [formControl]="formControl">
+    <span
+      [innerHTML]="
+        ('certificateCreate.step-two.entitledtoissueconfirmation' | translate) +
+        ('certificateCreate.step-two.nonissuablevaccineproductinformation' | translate)
+      "
+    ></span>
+  </mat-checkbox>
+
+  <ob-collapse column-main-content iconPosition="left" [active]="false">
+    <span obCollapseHeader class="collapse-header">
+      {{ "certificateCreate.step-two.moreInfosLabel" | translate }}
+    </span>
+    <p
+      class="collapse-content"
+      obCollapseMain
+      [innerHTML]="'certificateCreate.step-two.moreInfosMessage' | translate"
+    ></p>
+  </ob-collapse>
+
+  <mat-error *ngIf="hasError">
+    {{ "i18n.validation.required" | translate }}
+  </mat-error>
+</section>
