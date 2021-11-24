@@ -122,6 +122,7 @@
   "i18n.validation.matDatepickerParse": "Invalid date format. Please use \"dd.mm.yyyy hh:mm\"",
   "i18n.validation.invalidShortDate": "Invalid date format. Please use \"jjjj\" or \"jjjj-mm\"",
   "i18n.validation.notIssuableInSwitzerland": "The selected vaccine is not authorised in Switzerland.",
+  "i18n.validation.dateBeforeAntibodyCertificateMinDate": "Date of sample collection must not be before 16.11.2021.",
   "logout": "Logout",
   "otp.button.copy": "Copy to the clipboard",
   "otp.button.create": "Generate private key",
