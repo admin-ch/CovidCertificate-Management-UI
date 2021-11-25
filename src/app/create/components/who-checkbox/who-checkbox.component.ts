@@ -12,6 +12,4 @@ export class WhoCheckboxComponent {
 	get hasError(): boolean {
 		return this.formControl.errors?.required && this.formControl?.touched;
 	}
-
-	constructor() {}
 }
