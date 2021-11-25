@@ -36,11 +36,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
 import {TouristVaccineFormComponent} from './tourist-vaccine-form/tourist-vaccine-form.component';
+import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.component';
 
 @NgModule({
 	declarations: [
 		CreateComponent,
 		DateTimePickerComponent,
+		WhoCheckboxComponent,
 		SelectCertificateTypeComponent,
 		VaccineFormComponent,
 		RecoveryFormComponent,

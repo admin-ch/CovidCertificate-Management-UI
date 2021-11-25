@@ -47,6 +47,7 @@
   "certificateCreate.step-one.enum.recovery": "Guarigione (PCR test positivo)",
   "certificateCreate.step-one.enum.antibody": "Guarigione (Test anticorpi positivo)",
   "certificateCreate.step-one.enum.vaccination-tourist": "Certificato turistico (vaccino OMS)",
+  "certificateCreate.step-one.enum.chOnly": "Certificati svizzeri",
   "certificateCreate.step-two.personaldata.information": "I dati personali devono essere identici al documento d'identità.",
   "certificateCreate.step-two.vaccinationinformation": "la completezza della vaccinazione e di conseguenza la validità del certificato COVID è garantita soltanto se il numero di dosi ricevute corrisponde a quello delle dosi necessarie. P. es.: guarigione + vaccinazione: 1/1, vaccinazione con 2 dosi: 2/2, richiamo 3/3.",
   "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">L&rsquo;emissione di certificati di vaccinazione COVID-19 o di certificati di guarigione dalla COVID-19 per le persone vaccinate o guarite all&rsquo;estero &egrave; riservata soltanto ai servizi appositamente designati dal Cantone. Vogliate confermare di aver ottenuto l&rsquo;autorizzazione del Cantone per emettere questi certificati COVID-19.</p>",

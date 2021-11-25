@@ -57,6 +57,7 @@ export class VaccineFormComponent implements OnInit {
 	}
 
 	goNext(): void {
+		this.vaccineForm.markAllAsTouched();
 		if (this.vaccineForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();

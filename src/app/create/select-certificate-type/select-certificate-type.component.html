@@ -6,13 +6,25 @@
 		aria-label="Select an option"
 		class="radio-button-container"
 	>
+		<mat-radio-button id="generationType-vaccination" value="vaccination" name="vaccination" class="radio-button">{{
+			"certificateCreate.step-one.enum.vaccination" | translate
+		}}</mat-radio-button>
+		<mat-radio-button id="generationType-test" value="test" name="test" class="radio-button">{{
+			"certificateCreate.step-one.enum.test" | translate
+		}}</mat-radio-button>
+		<mat-radio-button id="generationType-recovery" value="recovery" name="recovery" class="radio-button">{{
+			"certificateCreate.step-one.enum.recovery" | translate
+		}}</mat-radio-button>
+		<legend class="group-header">{{ "certificateCreate.step-one.enum.chOnly" | translate }}</legend>
+		<mat-radio-button id="generationType-antibody" value="antibody" name="antibody" class="radio-button">{{
+			"certificateCreate.step-one.enum.antibody" | translate
+		}}</mat-radio-button>
 		<mat-radio-button
-			*ngFor="let type of typeSelection"
-			id="{{ 'generationType-' + type }}"
-			[value]="type"
-			[name]="type"
+			id="generationType-vaccination-tourist"
+			value="vaccination-tourist"
+			name="vaccination-tourist"
 			class="radio-button"
-			>{{ "certificateCreate.step-one.enum." + type | translate }}</mat-radio-button
+			>{{ "certificateCreate.step-one.enum.vaccination-tourist" | translate }}</mat-radio-button
 		>
 	</mat-radio-group>
 
