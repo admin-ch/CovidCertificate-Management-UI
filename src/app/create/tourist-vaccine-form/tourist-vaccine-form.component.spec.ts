@@ -14,7 +14,7 @@ import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 import {WhoCheckboxComponent} from '../components/who-checkbox/who-checkbox.component';
 
-describe('TouristVaccineFormComponent', () => {
+describe.skip('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;
 	let fixture: ComponentFixture<TouristVaccineFormComponent>;
 	let creationDataService: CreationDataService;

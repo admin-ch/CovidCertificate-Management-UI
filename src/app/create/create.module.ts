@@ -42,6 +42,7 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 	declarations: [
 		CreateComponent,
 		DateTimePickerComponent,
+		WhoCheckboxComponent,
 		SelectCertificateTypeComponent,
 		VaccineFormComponent,
 		RecoveryFormComponent,
@@ -51,7 +52,6 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 		DownloadComponent,
 		ShippingComponent,
 		DeliveryCodeCleanerDirective,
-		WhoCheckboxComponent
 	],
 	imports: [
 		SharedModule,
