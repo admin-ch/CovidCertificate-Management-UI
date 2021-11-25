@@ -12,7 +12,7 @@ import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.comp
 import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
-import { WhoCheckboxComponent } from '../components/who-checkbox/who-checkbox.component';
+import {WhoCheckboxComponent} from '../components/who-checkbox/who-checkbox.component';
 
 describe('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;
