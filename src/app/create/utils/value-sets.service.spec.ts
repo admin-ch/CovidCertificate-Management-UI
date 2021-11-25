@@ -52,7 +52,8 @@ describe('ValueSetsService', () => {
 				code: 'BBIBP-CorV',
 				display: 'BBIBP-CorV (Vero Cells)',
 				group: 'China Sinopharm International Corp. - Beijing location',
-				issuable: 'ABROAD_ONLY'
+				issuable: 'ABROAD_ONLY',
+				touristVaccine: false
 			});
 		});
 
@@ -61,7 +62,8 @@ describe('ValueSetsService', () => {
 				code: 'EU/1/20/1528',
 				display: 'Comirnaty',
 				group: 'Biontech Manufacturing GmbH',
-				issuable: 'CH_AND_ABROAD'
+				issuable: 'CH_AND_ABROAD',
+				touristVaccine: false
 			});
 		});
 	});

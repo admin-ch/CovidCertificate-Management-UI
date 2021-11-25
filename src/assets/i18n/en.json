@@ -47,6 +47,7 @@
   "certificateCreate.step-one.enum.recovery": "Recovered (PCR test positive)",
   "certificateCreate.step-one.enum.antibody": "Recovered (Antibody test positive)",
   "certificateCreate.step-one.enum.vaccination-tourist": "Tourist certificate (WHO vaccine)",
+  "certificateCreate.step-one.enum.chOnly": "Swiss certificates",
   "certificateCreate.step-two.personaldata.information": "The personal details must be identical to the identity document.",
   "certificateCreate.step-two.vaccinationinformation": "a person is only considered fully vaccinated and the associated COVID certificate is only valid if the number of doses received and the number of doses required is identical, e.g. recovery + vaccination: 1/1, vaccination with 2 doses: 2/2, booster 3/3",
   "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">The issuing of Covid vaccination certificates or Covid recovery certificates for persons who have been vaccinated or recovered abroad is reserved only for authorised issuers specifically designated by the canton. Please confirm that you have been authorised by the canton to issue these certificates.</p>",
