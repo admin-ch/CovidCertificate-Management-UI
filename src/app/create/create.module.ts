@@ -51,7 +51,7 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 		TouristVaccineFormComponent,
 		DownloadComponent,
 		ShippingComponent,
-		DeliveryCodeCleanerDirective,
+		DeliveryCodeCleanerDirective
 	],
 	imports: [
 		SharedModule,
