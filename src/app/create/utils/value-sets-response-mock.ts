@@ -84,7 +84,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'covid-19 vaccines',
 				authHolderCode: 'ORG-100020693',
 				authHolderDisplay: 'China Sinopharm International Corp. - Beijing location',
-				issuable: 'ABROAD_ONLY'
+				issuable: 'ABROAD_ONLY',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'EU/1/20/1528',
@@ -93,7 +94,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'SARS-CoV-2 mRNA vaccine',
 				authHolderCode: 'ORG-100030215',
 				authHolderDisplay: 'Biontech Manufacturing GmbH',
-				issuable: 'CH_AND_ABROAD'
+				issuable: 'CH_AND_ABROAD',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'EU/1/20/1525',
@@ -102,7 +104,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'covid-19 vaccines',
 				authHolderCode: 'ORG-100001417',
 				authHolderDisplay: 'Janssen-Cilag International',
-				issuable: 'CH_AND_ABROAD'
+				issuable: 'CH_AND_ABROAD',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'CoronaVac',
@@ -111,7 +114,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'covid-19 vaccines',
 				authHolderCode: 'Sinovac-Biotech',
 				authHolderDisplay: 'Sinovac Biotech',
-				issuable: 'ABROAD_ONLY'
+				issuable: 'ABROAD_ONLY',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'Covishield',
@@ -120,7 +124,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'covid-19 vaccines',
 				authHolderCode: 'ORG-100001981',
 				authHolderDisplay: 'Serum Institute Of India Private Limited',
-				issuable: 'ABROAD_ONLY'
+				issuable: 'ABROAD_ONLY',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'EU/1/20/1507',
@@ -129,7 +134,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'SARS-CoV-2 mRNA vaccine',
 				authHolderCode: 'ORG-100031184',
 				authHolderDisplay: 'Moderna Biotech Spain S.L.',
-				issuable: 'CH_AND_ABROAD'
+				issuable: 'CH_AND_ABROAD',
+				touristVaccine: false,
 			},
 			{
 				productCode: 'EU/1/21/1529',
@@ -138,7 +144,8 @@ export class ValueSetsResponseMock {
 				prophylaxisDisplay: 'covid-19 vaccines',
 				authHolderCode: 'ORG-100001699',
 				authHolderDisplay: 'AstraZeneca AB',
-				issuable: 'ABROAD_ONLY'
+				issuable: 'ABROAD_ONLY',
+				touristVaccine: true,
 			}
 		],
 		testSets: [

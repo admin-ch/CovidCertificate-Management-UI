@@ -12,6 +12,7 @@ import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.comp
 import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
+import { WhoCheckboxComponent } from '../components/who-checkbox/who-checkbox.component';
 
 describe('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;
@@ -30,7 +31,7 @@ describe('TouristVaccineFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TouristVaccineFormComponent, DateTimePickerComponent],
+			declarations: [TouristVaccineFormComponent, DateTimePickerComponent, WhoCheckboxComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -370,6 +371,7 @@ describe('TouristVaccineFormComponent', () => {
 			});
 		});
 	});
+
 	describe('Form reset', () => {
 		it('should reset the firstName correctly', () => {
 			component.vaccineForm.get('firstName').setValue('TEST');
