@@ -16,6 +16,10 @@ export class DownloadComponent implements OnInit {
 	createCertificateResponse: CreateCertificateResponse;
 	safeResourceUrl: SafeResourceUrl;
 
+	get showChOnlyBanner(): boolean {
+		return this.type === GenerationType.ANTIBODY || this.type === GenerationType.TOURIST_VACCINATION;
+	}
+
 	constructor(
 		private readonly dataService: CreationDataService,
 		private readonly sanitizer: DomSanitizer,
@@ -62,9 +66,5 @@ export class DownloadComponent implements OnInit {
 
 	callReset(): void {
 		this.resetEmitter.emit();
-	}
-
-	isAntibodyTest(): boolean {
-		return this.type === GenerationType.ANTIBODY;
 	}
 }
