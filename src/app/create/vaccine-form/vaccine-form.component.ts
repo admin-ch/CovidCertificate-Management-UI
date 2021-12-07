@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {DATE_FORMAT, GenerationType, MomentWrapper, Patient, ProductInfo, Vaccine} from 'shared/model';
-import { PersonalDataComponent } from '../components/personal-data/personal-data.component';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import {DateValidators} from '../utils/date-validators';
@@ -57,7 +57,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 		this.personalDataForm = this.personalDataChild.vaccineForm;
-	 }
+	}
 
 	goBack(): void {
 		this.back.emit();

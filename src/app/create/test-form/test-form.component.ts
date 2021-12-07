@@ -10,7 +10,7 @@ import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {RapidTestValidator} from '../utils/rapid-test-validator';
-import { PersonalDataComponent } from '../components/personal-data/personal-data.component';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 const SAMPLE_DATE_VALIDATORS = [
 	Validators.required,

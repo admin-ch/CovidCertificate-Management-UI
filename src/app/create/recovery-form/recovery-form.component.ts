@@ -6,7 +6,7 @@ import {DateValidators} from '../utils/date-validators';
 import {GenerationType, Patient, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
-import { PersonalDataComponent } from '../components/personal-data/personal-data.component';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 const FIRST_POSITIVE_TEST_VALIDATORS = [
 	Validators.required,
@@ -26,7 +26,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	@ViewChild(PersonalDataComponent) personalDataChild: PersonalDataComponent;
 
 	recoveryForm: FormGroup;
-	
+
 	personalDataForm: FormGroup;
 
 	constructor(
