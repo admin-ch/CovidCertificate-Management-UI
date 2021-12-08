@@ -1,10 +1,10 @@
 import {FormControl} from '@angular/forms';
-import {ProductInfoWithToString} from 'shared/model';
+import {RapidTestProductInfoWithToString} from 'shared/model';
 import {RapidTestValidator} from './rapid-test-validator';
 
 describe('RapidTestValidator', () => {
 	describe('testRequired', () => {
-		const mockRapidTest = new ProductInfoWithToString('testCode', 'testDisplay');
+		const mockRapidTest = new RapidTestProductInfoWithToString('testCode', 'testDisplay', null);
 
 		it('should mark no value as invalid', () => {
 			const formControl = new FormControl();
