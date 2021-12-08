@@ -109,7 +109,7 @@
 			<p id="gracePeriodMessage" *ngIf="this.testForm.get('product').value?.validUntil">
 				{{
 					"gracePeriodMessage"
-						| obTranslateParams: { validUntil: this.testForm.get("product").value?.validUntil }
+						| obTranslateParams: { validUntil: this.testForm.get("product").value?.validUntil | date:'YYYY-MM-dd' }
 				}}
 			</p>
 
