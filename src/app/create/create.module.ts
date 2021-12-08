@@ -11,7 +11,8 @@ import {
 	ObNestedFormModule,
 	ObNumberFormatModule,
 	ObInputClearModule,
-	ObCollapseModule
+	ObCollapseModule,
+	ObTranslateParamsModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {SelectCertificateTypeComponent} from './select-certificate-type/select-certificate-type.component';
@@ -60,6 +61,7 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 		ObErrorMessagesModule,
 		ObNestedFormModule,
 		ObNumberFormatModule,
+		ObTranslateParamsModule,
 		ObInputClearModule,
 		MatButtonModule,
 		MatDatepickerModule,

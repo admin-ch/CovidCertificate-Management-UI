@@ -153,5 +153,6 @@
   "validation.error.http.458": "Invalid given name! Must not exceed 80 chars and/or not contain any invalid characters.",
   "validation.error.http.459": "Invalid family name! Must not exceed 80 chars and/or not contain any invalid characters.",
   "notifications.unsupportedBrowser.title": "Unsupported Browser",
-  "notifications.unsupportedBrowser.message": "Some functions of this application are not supported by your browser. Please note that only the two latest versions of Chrome, Firefox, Edge and Safari are supported"
+  "notifications.unsupportedBrowser.message": "Some functions of this application are not supported by your browser. Please note that only the two latest versions of Chrome, Firefox, Edge and Safari are supported",
+  "gracePeriodMessage": "This rapid-test product can be used until {{validUntil}} after this date it will not be possible to generate certificates with this product."
 }
