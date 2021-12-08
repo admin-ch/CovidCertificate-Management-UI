@@ -5,7 +5,6 @@ import {
 	Vaccine,
 	VaccinationValueSets,
 	ValueSetsResponse,
-	ProductInfoWithToString,
 	RapidTestProductInfoWithToString
 } from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
