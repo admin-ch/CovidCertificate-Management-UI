@@ -155,5 +155,6 @@
   "validation.error.http.458": "Ungültiger Vorname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
   "validation.error.http.459": "Ungültiger Familienname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
   "notifications.unsupportedBrowser.title": "Nicht unterstützter Browser",
-  "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden."
+  "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden.",
+  "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen."
 }
