@@ -71,8 +71,7 @@ export class ProductInfoWithToString implements ProductInfo {
 }
 
 export class RapidTestProductInfoWithToString {
-	constructor(public code: string, public display: string, public validUntil: string) {
-	}
+	constructor(public code: string, public display: string, public validUntil: string) {}
 
 	public toString() {
 		return this.display;

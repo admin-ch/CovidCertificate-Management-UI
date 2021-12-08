@@ -5,7 +5,8 @@ import {
 	Vaccine,
 	VaccinationValueSets,
 	ValueSetsResponse,
-	ProductInfoWithToString, RapidTestProductInfoWithToString
+	ProductInfoWithToString,
+	RapidTestProductInfoWithToString
 } from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
 import {PCR_TEST_CODE, RAPID_TEST_CODE, ANTIBODY_TEST_CODE} from 'shared/constants';

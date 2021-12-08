@@ -2,12 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {
-	GenerationType,
-	Patient,
-	ProductInfo,
-	RapidTestProductInfoWithToString
-} from 'shared/model';
+import {GenerationType, Patient, ProductInfo, RapidTestProductInfoWithToString} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -72,7 +67,10 @@ export class TestFormComponent implements OnInit {
 		this.rapidTestCompleteControl = this.createAutocompleteControl();
 		this.rapidTests = this.valueSetsService
 			.getRapidTests()
-			.map(productInfo => new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil));
+			.map(
+				productInfo =>
+					new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil)
+			);
 		this.filteredRapidTests = this.rapidTests;
 	}
 

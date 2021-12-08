@@ -81,5 +81,4 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 		ObCollapseModule
 	]
 })
-export class CreateModule {
-}
+export class CreateModule {}
