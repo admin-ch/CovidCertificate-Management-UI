@@ -6,12 +6,6 @@ import {CreationDataService} from '../../utils/creation-data.service';
 import {DateValidators} from '../../utils/date-validators';
 import {ValueSetsService} from '../../utils/value-sets.service';
 
-const VACCINE_DATE_VALIDATORS = [
-	Validators.required,
-	DateValidators.dateLessThanToday(),
-	DateValidators.dateMoreThanMinDate()
-];
-
 @Component({
 	selector: 'ec-personal-data',
 	templateUrl: './personal-data.component.html',
