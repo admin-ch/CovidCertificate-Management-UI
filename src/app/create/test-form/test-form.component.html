@@ -10,13 +10,13 @@
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.firstName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="firstName" id="firstName" />
+				<input type="text" matInput formControlName="firstName" id="firstName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.personalData.surName" | translate }}</mat-label>
-				<input type="text" matInput formControlName="surName" id="surName" />
+				<input type="text" matInput formControlName="surName" id="surName"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 
@@ -49,7 +49,7 @@
 		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
 		<label *ngIf="antibody" class="additional-padding additional-width">{{
 			"certificateCreate.from.label.antibody" | translate
-		}}</label>
+			}}</label>
 
 		<div class="form-field">
 			<div
@@ -59,7 +59,7 @@
 			>
 				<label class="radio-button-field--label">{{
 					"certificateCreate.form.label.test.typeOfTest" | translate
-				}}</label>
+					}}</label>
 				<div>
 					<mat-radio-group id="typeOfTest" [value]="testType" (change)="certificateTypeChanged($event)">
 						<mat-radio-button
@@ -96,11 +96,17 @@
 				</button>
 				<mat-error></mat-error>
 				<mat-autocomplete #auto="matAutocomplete" panelWidth="max-content">
-					<mat-option *ngFor="let option of filteredRapidTests" [value]="option">
+					<mat-option *ngFor="let option of filteredRapidTests" [value]="option"
+								[ngStyle]="{'color':option.validUntil ? 'red' : 'black' }">
 						{{ option.display }}
 					</mat-option>
 				</mat-autocomplete>
 			</mat-form-field>
+
+			<p id="gracePeriodMessage"
+			   *ngIf="this.testForm.get('product').value?.validUntil">{{
+				"gracePeriodMessage" | obTranslateParams: {validUntil: this.testForm.get('product').value?.validUntil}
+				}}</p>
 
 			<p class="form-field-info">
 				{{ "certificateCreate.form.label.test.sampleDate.info" | translate }}
@@ -120,20 +126,20 @@
 
 			<p class="form-field-info">
 				{{
-					(antibody
+				(antibody
 						? "certificateCreate.form.label.test.center.numberInfo"
 						: "certificateCreate.form.label.test.center.info"
-					) | translate
+				) | translate
 				}}
 			</p>
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{
 					(antibody
-						? "certificateCreate.form.label.test.center.number"
-						: "certificateCreate.form.label.test.center"
+							? "certificateCreate.form.label.test.center.number"
+							: "certificateCreate.form.label.test.center"
 					) | translate
-				}}</mat-label>
-				<input type="text" matInput formControlName="center" id="center" />
+					}}</mat-label>
+				<input type="text" matInput formControlName="center" id="center"/>
 				<mat-error></mat-error>
 			</mat-form-field>
 

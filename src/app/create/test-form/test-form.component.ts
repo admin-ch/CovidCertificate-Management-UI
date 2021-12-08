@@ -2,7 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {GenerationType, Patient, ProductInfo, ProductInfoWithToString} from 'shared/model';
+import {
+	GenerationType,
+	Patient,
+	ProductInfo,
+	RapidTestProductInfoWithToString
+} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -34,9 +39,9 @@ export class TestFormComponent implements OnInit {
 	testType: ProductInfo;
 
 	rapidTestCompleteControl: FormControl;
-	filteredRapidTests: ProductInfoWithToString[];
+	filteredRapidTests: RapidTestProductInfoWithToString[];
 
-	private rapidTests: ProductInfoWithToString[];
+	private rapidTests: RapidTestProductInfoWithToString[];
 
 	get displayTestProducts(): boolean {
 		return this.testType.code === RAPID_TEST_CODE;
@@ -67,7 +72,7 @@ export class TestFormComponent implements OnInit {
 		this.rapidTestCompleteControl = this.createAutocompleteControl();
 		this.rapidTests = this.valueSetsService
 			.getRapidTests()
-			.map(productInfo => new ProductInfoWithToString(productInfo.code, productInfo.display));
+			.map(productInfo => new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil));
 		this.filteredRapidTests = this.rapidTests;
 	}
 
@@ -174,7 +179,7 @@ export class TestFormComponent implements OnInit {
 		autocompleteControl.valueChanges.subscribe(value => {
 			if (typeof value === 'string') {
 				this.filteredRapidTests = this.filterRapidTests(value);
-			} else if (value instanceof ProductInfoWithToString) {
+			} else if (value instanceof RapidTestProductInfoWithToString) {
 				this.testForm.patchValue({product: value});
 			}
 		});
