@@ -70,6 +70,15 @@ export class ProductInfoWithToString implements ProductInfo {
 	}
 }
 
+export class RapidTestProductInfoWithToString {
+	constructor(public code: string, public display: string, public validUntil: string) {
+	}
+
+	public toString() {
+		return this.display;
+	}
+}
+
 export interface Vaccine {
 	code: string;
 	group: string;
@@ -192,7 +201,7 @@ export interface CsvResponseDto {
 export interface ValueSetsResponse {
 	countryCodes: CountryCodesDto;
 	vaccinationSets: VaccinationValueSets[];
-	testSets: ProductInfo[];
+	testSets: RapidTestProductInfoWithToString[];
 }
 
 export interface CountryCodesDto {
