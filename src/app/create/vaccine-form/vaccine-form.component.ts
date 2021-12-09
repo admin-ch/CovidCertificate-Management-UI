@@ -56,7 +56,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		if(this.personalDataChild && this.personalDataChild.vaccineForm) {
+		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
 			this.personalDataForm = this.personalDataChild.vaccineForm;
 		}
 	}
