@@ -79,7 +79,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.personalDataForm = this.personalDataChild.vaccineForm;
+		if(this.personalDataChild && this.personalDataChild.vaccineForm) {
+			this.personalDataForm = this.personalDataChild.vaccineForm;
+		}
 	}
 
 	goBack(): void {
