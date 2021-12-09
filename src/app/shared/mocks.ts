@@ -86,7 +86,8 @@ export const patientNoCertificate: Patient = {
 	birthdate: new Date(VALUE_DATE_1989),
 	firstName: 'Hans',
 	surName: 'Muster',
-	language: 'de'
+	language: 'de',
+	certificateType: null
 };
 export const patientNoCertificateDto: PatientDto = {
 	dateOfBirth: VALUE_DATE_1989,
