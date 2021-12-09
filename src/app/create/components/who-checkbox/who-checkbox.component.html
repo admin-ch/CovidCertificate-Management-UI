@@ -1,10 +1,7 @@
 <section id="who-checkbox" [ngClass]="{ error: hasError }">
 	<mat-checkbox aria-label="Hint" [formControl]="formControl">
 		<span
-			[innerHTML]="
-				('certificateCreate.step-two.entitledtoissueconfirmation' | translate) +
-				('certificateCreate.step-two.nonissuablevaccineproductinformation' | translate)
-			"
+			[innerHTML]="infoText"
 		></span>
 	</mat-checkbox>
 

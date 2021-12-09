@@ -75,25 +75,7 @@
 			</mat-form-field>
 
 			<div *ngIf="recoveryForm.get('checkBox').enabled">
-				<mat-checkbox formControlName="checkBox" aria-label="Hint">
-					<span [innerHTML]="'certificateCreate.step-two.entitledtoissueconfirmation' | translate"></span>
-				</mat-checkbox>
-
-				<mat-error *ngIf="recoveryForm.get('checkBox').errors?.required" style="margin-left: 25px"
-					>{{ "i18n.validation.required" | translate }}
-				</mat-error>
-
-				<ob-collapse column-main-content iconPosition="left" [active]="false" style="margin-left: 25px"
-					>>
-					<span obCollapseHeader>
-						{{ "certificateCreate.step-two.moreInfosLabel" | translate }}
-					</span>
-					<p
-						obCollapseMain
-						style="text-align: justify; margin-left: 25px"
-						[innerHTML]="'certificateCreate.step-two.moreInfosMessage' | translate"
-					></p>
-				</ob-collapse>
+				<ec-who-checkbox [formControl]="recoveryForm.get('checkBox')" [certificateType]="'recovery'"></ec-who-checkbox>
 			</div>
 		</div>
 	</fieldset>
