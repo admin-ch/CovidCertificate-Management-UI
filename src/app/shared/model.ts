@@ -15,6 +15,17 @@ export interface Patient {
 	certificateType: GenerationType;
 }
 
+export interface PatientDto {
+	name: Name;
+	dateOfBirth: string;
+	language: string;
+	vaccinationInfo?: VaccinationDto[];
+	testInfo?: TestDto[];
+	recoveryInfo?: RecoveryDto[];
+	antibodyInfo?: AntibodyDto[];
+	systemSource: string;
+}
+
 export interface CertificateCreateDto {
 	name: Name;
 	dateOfBirth: string;
