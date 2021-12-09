@@ -153,19 +153,16 @@ export class ValueSetsResponseMock {
 				code: '1833',
 				display: 'AAZ-LMB, COVID-VIRO',
 				validUntil: null
-
 			},
 			{
 				code: '1232',
 				display: 'Abbott Rapid Diagnostics, Panbio Covid-19 Ag Rapid Test',
 				validUntil: null
-
 			},
 			{
 				code: '1457',
 				display: 'Acon Biotech (Hangzhou) Co., Ltd, SARS-CoV-2 Antigen Rapid Test',
 				validUntil: null
-
 			},
 			{
 				code: '1468',
@@ -289,7 +286,8 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1484',
-				display: 'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, Wantai SARS-CoV-2 Ag Rapid Test (FIA)',
+				display:
+					'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, Wantai SARS-CoV-2 Ag Rapid Test (FIA)',
 				validUntil: null
 			},
 			{
