@@ -154,5 +154,5 @@
   "validation.error.http.459": "Nom de famille invalide! Ne pas dépasser 80 signes ni saisir des caractères non valides.",
   "notifications.unsupportedBrowser.title": "Navigateur non supporté",
   "notifications.unsupportedBrowser.message": "Certaines fonctions de cette application ne sont pas prises en charge par votre navigateur. Veuillez noter que seules les 2 dernières versions de Chrome, de Firefox, d’Edge et de Safari sont prises en charge.",
-  "gracePeriodMessage": "Ce produit de test rapide peut être utilisé jusqu'à {{validUntil}}, après cette date il ne sera plus possible de générer des certificats avec ce produit."
+  "gracePeriodMessage": "Ce matériel de test rapide peut être utilisé jusqu’au {{validUntil}}; après cette date, il ne permettra plus d’établir des certificats."
 }
