@@ -13,7 +13,7 @@ import {ValueSetsService} from '../../utils/value-sets.service';
 })
 export class PersonalDataComponent implements OnInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
-	vaccineForm: FormGroup;
+	public vaccineForm: FormGroup;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
