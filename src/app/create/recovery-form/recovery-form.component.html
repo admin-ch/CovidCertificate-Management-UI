@@ -75,7 +75,10 @@
 			</mat-form-field>
 
 			<div *ngIf="recoveryForm.get('checkBox').enabled">
-				<ec-who-checkbox [formControl]="recoveryForm.get('checkBox')" [certificateType]="'recovery'"></ec-who-checkbox>
+				<ec-who-checkbox
+					[formControl]="recoveryForm.get('checkBox')"
+					[certificateType]="'recovery'"
+				></ec-who-checkbox>
 			</div>
 		</div>
 	</fieldset>
