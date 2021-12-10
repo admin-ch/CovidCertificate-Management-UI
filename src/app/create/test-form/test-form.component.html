@@ -96,11 +96,23 @@
 				</button>
 				<mat-error></mat-error>
 				<mat-autocomplete #auto="matAutocomplete" panelWidth="max-content">
-					<mat-option *ngFor="let option of filteredRapidTests" [value]="option">
+					<mat-option
+						*ngFor="let option of filteredRapidTests"
+						[value]="option"
+						[ngStyle]="{ color: option.validUntil ? 'red' : 'black' }"
+					>
 						{{ option.display }}
 					</mat-option>
 				</mat-autocomplete>
 			</mat-form-field>
+
+			<p id="gracePeriodMessage" *ngIf="this.testForm.get('product').value?.validUntil">
+				{{
+					"gracePeriodMessage"
+						| obTranslateParams
+							: { validUntil: this.testForm.get("product").value?.validUntil | date: "YYYY-MM-dd" }
+				}}
+			</p>
 
 			<p class="form-field-info">
 				{{ "certificateCreate.form.label.test.sampleDate.info" | translate }}
