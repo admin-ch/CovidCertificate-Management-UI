@@ -12,7 +12,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {GenerationType} from 'shared/model';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
@@ -75,14 +75,6 @@ describe('RecoveryFormComponent', () => {
 	});
 
 	describe('Form validation', () => {
-
-
-
-
-
-
-
-
 		describe('dateFirstPositiveTestResult validation', () => {
 			it('should marks the dateFirstPositiveTestResult as invalid if empty', () => {
 				// default value is empty

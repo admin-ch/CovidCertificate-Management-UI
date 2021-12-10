@@ -248,7 +248,6 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
-
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
@@ -264,7 +263,6 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
-
 		});
 
 		it('should map the new patient data correctly', () => {
@@ -283,12 +281,11 @@ describe('TestFormComponent', () => {
 
 			const sampleDate: Date = moment(datePast).toDate();
 			sampleDate.setHours(12);
-
 		});
 	});
 
 	describe('Form reset', () => {
-/*		it('should reset the firstName correctly', () => {
+		/*		it('should reset the firstName correctly', () => {
 			component.testForm.get('firstName').setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value.firstName).toBeNull();

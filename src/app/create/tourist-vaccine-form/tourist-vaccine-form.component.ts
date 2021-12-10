@@ -67,7 +67,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
-		if(this.personalDataForm) {
+		if (this.personalDataForm) {
 			this.personalDataForm.markAllAsTouched();
 		}
 		if (this.vaccineForm.valid && this.personalDataForm && this.personalDataForm.valid) {

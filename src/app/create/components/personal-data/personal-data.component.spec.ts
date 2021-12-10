@@ -1,16 +1,15 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { ObliqueTestingModule, ObNestedFormModule } from "@oblique/oblique";
-import { DateTimePickerComponent } from "../../date-time-picker/date-time-picker.component";
-import { CreationDataService } from "../../utils/creation-data.service";
-import { PersonalDataComponent } from './personal-data.component';
-
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {DateTimePickerComponent} from '../../date-time-picker/date-time-picker.component';
+import {CreationDataService} from '../../utils/creation-data.service';
+import {PersonalDataComponent} from './personal-data.component';
 
 describe('PersonalDataComponent', () => {
 	let component: PersonalDataComponent;
@@ -34,7 +33,7 @@ describe('PersonalDataComponent', () => {
 				MatInputModule,
 				MatAutocompleteModule
 			],
-			schemas: [NO_ERRORS_SCHEMA],
+			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
 	});
 
@@ -86,30 +85,30 @@ describe('PersonalDataComponent', () => {
 
 		describe('birthdate validation', () => {
 			it('should marks the birthdate as invalid if empty', () => {
-				component.vaccineForm.get('birthdate').setValue({ date: '' });
+				component.vaccineForm.get('birthdate').setValue({date: ''});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
 			it('should marks the birthdate as invalid if in the future', () => {
-				component.vaccineForm.get('birthdate').setValue({ date: dateFuture });
+				component.vaccineForm.get('birthdate').setValue({date: dateFuture});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
 			it('should marks the birthdate as invalid if to old', () => {
-				component.vaccineForm.get('birthdate').setValue({ date: dateToOld });
+				component.vaccineForm.get('birthdate').setValue({date: dateToOld});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
 			it('should marks the birthdate as valid if set correctly', () => {
-				component.vaccineForm.get('birthdate').setValue({ date: datePast });
+				component.vaccineForm.get('birthdate').setValue({date: datePast});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 			});
 
 			it('should allow valid short date', () => {
-				component.vaccineForm.get('birthdate').setValue({ date: '2000-01' });
+				component.vaccineForm.get('birthdate').setValue({date: '2000-01'});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 
-				component.vaccineForm.get('birthdate').setValue({ date: '2000' });
+				component.vaccineForm.get('birthdate').setValue({date: '2000'});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 			});
 		});
@@ -142,21 +141,20 @@ describe('PersonalDataComponent', () => {
 			it('should reset the birthdate correctly', () => {
 				component.vaccineForm.get('birthdate').setValue('TEST');
 				creationDataService.emitResetCalled();
-				expect(component.vaccineForm.value.birthdate).toEqual({ date: null, time: null });
+				expect(component.vaccineForm.value.birthdate).toEqual({date: null, time: null});
 			});
 
 			it('should reset the certificateLanguage correctly', () => {
-				component.vaccineForm.get('certificateLanguage').setValue({ display: 'TEST', code: 'lang' });
+				component.vaccineForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
 				creationDataService.emitResetCalled();
-				expect(component.vaccineForm.value.certificateLanguage).toEqual({ display: 'TEST', code: 'lang' });
+				expect(component.vaccineForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
 			});
-
 		});
 		describe('Field validation', () => {
 			it('should marks the form as valid if all fields are filled correctly', () => {
 				component.vaccineForm.get('firstName').setValue('John');
 				component.vaccineForm.get('surName').setValue('Doe');
-				component.vaccineForm.get('birthdate').setValue({ date: datePast });
+				component.vaccineForm.get('birthdate').setValue({date: datePast});
 				component.vaccineForm.get('certificateLanguage').setValue('DE');
 
 				expect(component.vaccineForm.invalid).toBeFalsy();

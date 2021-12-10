@@ -1,17 +1,17 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ObliqueTestingModule, ObNestedFormModule } from '@oblique/oblique';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
 import * as moment from 'moment';
-import { PersonalDataComponent } from "../components/personal-data/personal-data.component";
-import { DateTimePickerComponent } from '../date-time-picker/date-time-picker.component';
-import { CreationDataService } from '../utils/creation-data.service';
-import { ValueSetsService } from '../utils/value-sets.service';
-import { VaccineFormComponent } from './vaccine-form.component';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
+import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
+import {CreationDataService} from '../utils/creation-data.service';
+import {ValueSetsService} from '../utils/value-sets.service';
+import {VaccineFormComponent} from './vaccine-form.component';
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
@@ -85,7 +85,6 @@ describe('VaccineFormComponent', () => {
 	});
 
 	describe('Form validation', () => {
-
 		describe('medicalProduct validation', () => {
 			it('should marks the medicalProduct as invalid if empty', () => {
 				component.vaccineForm.get('medicalProduct').setValue('');
@@ -179,7 +178,6 @@ describe('VaccineFormComponent', () => {
 
 		describe('Cross field validation', () => {
 			it('should marks the form as valid if all fields are filled correctly', () => {
-
 				component.vaccineForm.get('medicalProduct').setValue('testproduct');
 				component.vaccineForm.get('doseNumber').setValue(2);
 				component.vaccineForm.get('totalDoses').setValue(2);
@@ -232,7 +230,6 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('checkBox').setValue(true);
 
 			component.goNext();
-
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
@@ -245,7 +242,6 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
-
 		});
 
 		it('should map the new patient data correctly', () => {
@@ -258,12 +254,9 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
-
-
 		});
 	});
 	describe('Form reset', () => {
-
 		it.skip('should reset the medicalProduct correctly', () => {
 			component.vaccineForm.get('medicalProduct').setValue({display: 'TEST', code: 'medicalProduct'});
 			creationDataService.emitResetCalled();
