@@ -1,5 +1,5 @@
 <form [formGroup]="testForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
-	<ec-personal-data></ec-personal-data>
+	<ec-personal-data #testPersonalDataComponent></ec-personal-data>
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
 		<label *ngIf="antibody" class="additional-padding additional-width">{{

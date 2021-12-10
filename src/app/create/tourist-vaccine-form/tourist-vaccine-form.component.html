@@ -1,5 +1,5 @@
 <form [formGroup]="vaccineForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
-	<ec-personal-data></ec-personal-data>
+	<ec-personal-data #touristPersonalDataComponent></ec-personal-data>
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.vaccine" | translate }}</legend>
 

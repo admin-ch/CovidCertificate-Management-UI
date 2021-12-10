@@ -30,7 +30,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	@Output() next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
-	@ViewChild(PersonalDataComponent) personalDataChild: PersonalDataComponent;
+	@ViewChild('testPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	testForm: FormGroup;
 	testType: ProductInfo;
@@ -89,8 +89,10 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	goNext(): void {
-		this.personalDataForm.markAllAsTouched();
-		if (this.testForm.valid && this.personalDataForm.valid) {
+		if(this.personalDataForm) {
+			this.personalDataForm.markAllAsTouched();
+		}
+		if (this.testForm.valid && this.personalDataForm && this.personalDataForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}

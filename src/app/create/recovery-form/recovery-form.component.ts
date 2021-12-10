@@ -23,7 +23,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	@Output() next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
-	@ViewChild(PersonalDataComponent) personalDataChild: PersonalDataComponent;
+	@ViewChild('recoveryPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	recoveryForm: FormGroup;
 
@@ -63,8 +63,10 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	}
 
 	goNext(): void {
-		this.personalDataForm.markAllAsTouched();
-		if (this.recoveryForm.valid && this.personalDataForm.valid) {
+		if (this.personalDataForm) {
+			this.personalDataForm.markAllAsTouched();
+		}
+		if (this.recoveryForm.valid && this.personalDataForm && this.personalDataForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}

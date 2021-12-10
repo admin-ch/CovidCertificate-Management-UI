@@ -12,9 +12,11 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {GenerationType} from 'shared/model';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
+	let personalDataComponent: PersonalDataComponent;
 	let fixture: ComponentFixture<RecoveryFormComponent>;
 	let creationDataService: CreationDataService;
 
@@ -73,81 +75,13 @@ describe('RecoveryFormComponent', () => {
 	});
 
 	describe('Form validation', () => {
-		describe('firstName validation', () => {
-			it('should marks the firstName as invalid if empty', () => {
-				component.recoveryForm.get('firstName').setValue('');
-				expect(component.recoveryForm.get('firstName').invalid).toBeTruthy();
-			});
 
-			it('should marks the firstName as invalid if length is over 50', () => {
-				component.recoveryForm.get('firstName').setValue('012345678901234567890123456789012345678901234567891');
-				expect(component.recoveryForm.get('firstName').invalid).toBeTruthy();
-			});
 
-			it('should marks the firstName as valid if filled correctly', () => {
-				component.recoveryForm.get('firstName').setValue('John');
-				expect(component.recoveryForm.get('firstName').invalid).toBeFalsy();
-			});
-		});
 
-		describe('surName validation', () => {
-			it('should marks the surName as invalid if empty', () => {
-				component.recoveryForm.get('surName').setValue('');
-				expect(component.recoveryForm.get('surName').invalid).toBeTruthy();
-			});
 
-			it('should marks the surName as invalid if length is over 50', () => {
-				component.recoveryForm.get('surName').setValue('012345678901234567890123456789012345678901234567891');
-				expect(component.recoveryForm.get('surName').invalid).toBeTruthy();
-			});
 
-			it('should marks the surName as valid if filled correctly', () => {
-				component.recoveryForm.get('surName').setValue('Doe');
-				expect(component.recoveryForm.get('surName').invalid).toBeFalsy();
-			});
-		});
 
-		describe('birthdate validation', () => {
-			it('should marks the birthdate as invalid if empty', () => {
-				component.recoveryForm.get('birthdate').setValue({date: ''});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeTruthy();
-			});
 
-			it('should marks the birthdate as invalid if in the future', () => {
-				component.recoveryForm.get('birthdate').setValue({date: dateFuture});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeTruthy();
-			});
-
-			it('should marks the birthdate as invalid if to old', () => {
-				component.recoveryForm.get('birthdate').setValue({date: dateToOld});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeTruthy();
-			});
-
-			it('should marks the birthdate as valid if set correctly', () => {
-				component.recoveryForm.get('birthdate').setValue({date: datePast});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
-			});
-
-			it('should allow valid short date', () => {
-				component.recoveryForm.get('birthdate').setValue({date: '2000-01'});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
-
-				component.recoveryForm.get('birthdate').setValue({date: '2000'});
-				expect(component.recoveryForm.get('birthdate').invalid).toBeFalsy();
-			});
-		});
-
-		describe('certificateLanguage validation', () => {
-			it('should marks the certificateLanguage as invalid if empty', () => {
-				component.recoveryForm.get('certificateLanguage').setValue('');
-				expect(component.recoveryForm.get('certificateLanguage').invalid).toBeTruthy();
-			});
-
-			it('should marks the certificateLanguage as valid if filled', () => {
-				component.recoveryForm.get('certificateLanguage').setValue('DE');
-				expect(component.recoveryForm.get('certificateLanguage').invalid).toBeFalsy();
-			});
-		});
 
 		describe('dateFirstPositiveTestResult validation', () => {
 			it('should marks the dateFirstPositiveTestResult as invalid if empty', () => {
@@ -206,59 +140,31 @@ describe('RecoveryFormComponent', () => {
 		it('should emit next if the form is valid', () => {
 			const nextSpy = jest.spyOn(component.next, 'emit');
 
-			component.recoveryForm.get('firstName').setValue('John');
-			component.recoveryForm.get('surName').setValue('Doe');
-			component.recoveryForm.get('birthdate').setValue({date: moment(datePast)});
-			component.recoveryForm.get('certificateLanguage').setValue('DE');
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
-
-			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
-			component.recoveryForm.get('firstName').setValue('John');
-			component.recoveryForm.get('surName').setValue('Doe');
-			component.recoveryForm.get('birthdate').setValue({date: moment(datePast)});
-			component.recoveryForm.get('certificateLanguage').setValue('DE');
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
-
-			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
-			component.recoveryForm.get('firstName').setValue('John');
-			component.recoveryForm.get('surName').setValue('Doe');
-			component.recoveryForm.get('birthdate').setValue({date: moment(datePast)});
-			component.recoveryForm.get('certificateLanguage').setValue({code: 'DE'});
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
-
-			expect(setNewPatientSpy).toHaveBeenCalledWith({
-				firstName: 'John',
-				surName: 'Doe',
-				birthdate: datePast,
-				language: 'DE',
-				recovery: {
-					dateFirstPositiveTestResult: datePast,
-					countryOfTest: 'CH'
-				},
-				certificateType: GenerationType.RECOVERY
-			});
 		});
 	});
 });
