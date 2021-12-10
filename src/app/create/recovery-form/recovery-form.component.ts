@@ -53,6 +53,7 @@ export class RecoveryFormComponent implements OnInit {
 	}
 
 	goNext(): void {
+		this.recoveryForm.markAllAsTouched();
 		if (this.recoveryForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
