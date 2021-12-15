@@ -112,6 +112,7 @@ export class TestFormComponent implements OnInit {
 	}
 
 	onRapidTestCompleteClear() {
+		this.testForm.controls.product.reset();
 		this.filteredRapidTests = this.rapidTests;
 	}
 
