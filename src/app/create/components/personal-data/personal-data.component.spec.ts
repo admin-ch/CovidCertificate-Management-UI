@@ -112,7 +112,7 @@ describe('PersonalDataComponent', () => {
 			});
 		});
 
-		 describe('certificateLanguage validation', () => {
+		describe('certificateLanguage validation', () => {
 			it('It  should marks the certificateLanguage as invalid if empty', () => {
 				component.vaccineForm.get('certificateLanguage').setValue('');
 				expect(component.vaccineForm.get('certificateLanguage').invalid).toBeTruthy();
