@@ -50,29 +50,29 @@ describe('PersonalDataComponent', () => {
 
 	describe('Form validation', () => {
 		describe('firstName validation', () => {
-			it('should marks the firstName as invalid if empty', () => {
+			it('It should marks the firstName as invalid if empty', () => {
 				component.vaccineForm.get('firstName').setValue('');
 				expect(component.vaccineForm.get('firstName').invalid).toBeTruthy();
 			});
 
-			it('should marks the firstName as invalid if length is over 50', () => {
+			it('It should marks the firstName as invalid if length is over 50', () => {
 				component.vaccineForm.get('firstName').setValue('012345678901234567890123456789012345678901234567891');
 				expect(component.vaccineForm.get('firstName').invalid).toBeTruthy();
 			});
 
-			it('should marks the firstName as valid if filled correctly', () => {
+			it('It should marks the firstName as valid if filled correctly', () => {
 				component.vaccineForm.get('firstName').setValue('John');
 				expect(component.vaccineForm.get('firstName').invalid).toBeFalsy();
 			});
 		});
 
 		describe('surName validation', () => {
-			it('should marks the surName as invalid if empty', () => {
+			it('It should marks the surName as invalid if empty', () => {
 				component.vaccineForm.get('surName').setValue('');
 				expect(component.vaccineForm.get('surName').invalid).toBeTruthy();
 			});
 
-			it('should marks the surName as invalid if length is over 50', () => {
+			it('It should marks the surName as invalid if length is over 50', () => {
 				component.vaccineForm.get('surName').setValue('012345678901234567890123456789012345678901234567891');
 				expect(component.vaccineForm.get('surName').invalid).toBeTruthy();
 			});
@@ -84,37 +84,36 @@ describe('PersonalDataComponent', () => {
 		});
 
 		describe('birthdate validation', () => {
-			it('should marks the birthdate as invalid if empty', () => {
+			it('It should marks the birthdate as invalid if empty', () => {
 				component.vaccineForm.get('birthdate').setValue({date: ''});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
-			it('should marks the birthdate as invalid if in the future', () => {
+			it('It  should marks the birthdate as invalid if in the future', () => {
 				component.vaccineForm.get('birthdate').setValue({date: dateFuture});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
-			it('should marks the birthdate as invalid if to old', () => {
+			it('It should marks the birthdate as invalid if to old', () => {
 				component.vaccineForm.get('birthdate').setValue({date: dateToOld});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeTruthy();
 			});
 
-			it('should marks the birthdate as valid if set correctly', () => {
+			it('It should marks the birthdate as valid if set correctly', () => {
 				component.vaccineForm.get('birthdate').setValue({date: datePast});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 			});
 
-			it('should allow valid short date', () => {
+			it('It should allow valid short date', () => {
 				component.vaccineForm.get('birthdate').setValue({date: '2000-01'});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
-
 				component.vaccineForm.get('birthdate').setValue({date: '2000'});
 				expect(component.vaccineForm.get('birthdate').invalid).toBeFalsy();
 			});
 		});
 
-		describe('certificateLanguage validation', () => {
-			it('should marks the certificateLanguage as invalid if empty', () => {
+		 describe('certificateLanguage validation', () => {
+			it('It  should marks the certificateLanguage as invalid if empty', () => {
 				component.vaccineForm.get('certificateLanguage').setValue('');
 				expect(component.vaccineForm.get('certificateLanguage').invalid).toBeTruthy();
 			});
@@ -126,32 +125,32 @@ describe('PersonalDataComponent', () => {
 		});
 
 		describe('Form reset', () => {
-			it('should reset the firstName correctly', () => {
+			it('It should reset the firstName correctly', () => {
 				component.vaccineForm.get('firstName').setValue('TEST');
 				creationDataService.emitResetCalled();
 				expect(component.vaccineForm.value.firstName).toBeNull();
 			});
 
-			it('should reset the surName correctly', () => {
+			it('It should reset the surName correctly', () => {
 				component.vaccineForm.get('surName').setValue('TEST');
 				creationDataService.emitResetCalled();
 				expect(component.vaccineForm.value.surName).toBeNull();
 			});
 
-			it('should reset the birthdate correctly', () => {
+			it('It should reset the birthdate correctly', () => {
 				component.vaccineForm.get('birthdate').setValue('TEST');
 				creationDataService.emitResetCalled();
 				expect(component.vaccineForm.value.birthdate).toEqual({date: null, time: null});
 			});
 
-			it('should reset the certificateLanguage correctly', () => {
+			it('It should reset the certificateLanguage correctly', () => {
 				component.vaccineForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
 				creationDataService.emitResetCalled();
 				expect(component.vaccineForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
 			});
 		});
 		describe('Field validation', () => {
-			it('should marks the form as valid if all fields are filled correctly', () => {
+			it('It should marks the form as valid if all fields are filled correctly', () => {
 				component.vaccineForm.get('firstName').setValue('John');
 				component.vaccineForm.get('surName').setValue('Doe');
 				component.vaccineForm.get('birthdate').setValue({date: datePast});

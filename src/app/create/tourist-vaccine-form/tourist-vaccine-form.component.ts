@@ -29,9 +29,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('touristPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
-	vaccineForm: FormGroup;
-
-	personalDataForm: FormGroup;
+	vaccineForm: FormGroup; personalDataForm: FormGroup;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -67,9 +65,8 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
-		if (this.personalDataForm) {
-			this.personalDataForm.markAllAsTouched();
-		}
+		if(this.personalDataForm) {this.personalDataForm.markAllAsTouched();}
+
 		if (this.vaccineForm.valid && this.personalDataForm && this.personalDataForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
