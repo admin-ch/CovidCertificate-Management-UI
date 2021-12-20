@@ -25,6 +25,11 @@
 			(back)="resetCalled()"
 			(next)="nextCalled()"
 		></ec-tourist-vaccine-form>
+		<ec-exceptional-form
+			*ngIf="selectedForm === 'exceptional'"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-exceptional-form>
 	</mat-step>
 	<mat-step>
 		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>

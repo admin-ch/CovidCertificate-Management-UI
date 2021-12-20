@@ -29,7 +29,7 @@ export class RecoveryFormComponent implements OnInit {
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
-		private readonly dataService: CreationDataService
+		private readonly dataService: CreationDataService,
 	) {}
 
 	ngOnInit(): void {
@@ -66,6 +66,10 @@ export class RecoveryFormComponent implements OnInit {
 
 	getCountriesOfRecovery(): ProductInfo[] {
 		return this.valueSetsService.getCountryOptions();
+	}
+
+	get infoText(): string {
+		return this.translateService.instant('certificateCreate.step-two.entitledtoissueconfirmation');
 	}
 
 	private createForm(): void {

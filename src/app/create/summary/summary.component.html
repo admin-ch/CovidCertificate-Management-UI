@@ -77,6 +77,18 @@
 	</dl>
 </ng-container>
 
+<ng-container *ngIf="patient?.exceptional">
+	<h5>Ausnahmezertifikat</h5>
+	<dl>
+		<dt>Datum des Attests oder Beginn der Gültigkeit</dt>
+		<dd id="exceptionalValidFrom">{{ patient?.exceptional.sampleDate | date }}</dd>
+		<dt>Für die Zertifikatsausstellung verantwortliche Stelle</dt>
+		<dd id="ExceptionalCenter">{{ patient?.exceptional.center }}</dd>
+		<dt>Ärztliches Attest ausgestellt in</dt>
+		<dd id="countryOfAttestation">CH</dd>
+	</dl>
+</ng-container>
+
 <h5>{{ "certificateCreate.shipping.title" | translate }}</h5>
 <dl>
 	<dt>{{ "certificateCreate.form.label.shipping" | translate }}</dt>
