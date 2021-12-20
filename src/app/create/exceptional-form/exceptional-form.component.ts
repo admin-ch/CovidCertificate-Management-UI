@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {GenerationType, Patient, ProductInfo } from 'shared/model';
+import {GenerationType, Patient, ProductInfo} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
@@ -87,7 +87,7 @@ export class ExceptionalFormComponent implements OnInit {
 	}
 
 	get infoText(): string {
-		return "Ich bestätige, dass ich ein/e vom Kanton ernannter Aussteller / ernannte Ausstellerin bin und berechtigt bin, Ausnahmezertifikate aufgrund von ärztlichen Attesten zu erstellen (gemäss Art. 21a Covid-19-Verordnung Zertifikate vom 4. Juni 2021, SR 818.102.2 ).";
+		return 'Ich bestätige, dass ich ein/e vom Kanton ernannter Aussteller / ernannte Ausstellerin bin und berechtigt bin, Ausnahmezertifikate aufgrund von ärztlichen Attesten zu erstellen (gemäss Art. 21a Covid-19-Verordnung Zertifikate vom 4. Juni 2021, SR 818.102.2 ).';
 	}
 
 	private createForm(): void {
@@ -136,10 +136,9 @@ export class ExceptionalFormComponent implements OnInit {
 			certificateType: GenerationType.EXCEPTIONAL,
 			exceptional: {
 				center: this.exceptionalForm.value.center,
-				sampleDate: DateMapper.getDate(this.exceptionalForm.value.sampleDate),
+				sampleDate: DateMapper.getDate(this.exceptionalForm.value.sampleDate)
 			}
 		};
-
 
 		return {
 			firstName: this.exceptionalForm.value.firstName,

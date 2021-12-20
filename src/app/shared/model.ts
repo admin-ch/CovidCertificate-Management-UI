@@ -11,7 +11,7 @@ export interface Patient {
 	test?: Test;
 	recovery?: Recovery;
 	antibody?: Antibody;
-	exceptional?: Exceptional
+	exceptional?: Exceptional;
 	language: string;
 	certificateType: GenerationType;
 }
@@ -24,7 +24,7 @@ export interface PatientDto {
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
 	antibodyInfo?: AntibodyDto[];
-	exceptionalInfo?: ExceptionalDto[]
+	exceptionalInfo?: ExceptionalDto[];
 	systemSource: string;
 }
 
@@ -139,13 +139,13 @@ export interface AntibodyDto {
 }
 
 export interface Exceptional {
-	center: string,
-	sampleDate: Date,
+	center: string;
+	sampleDate: Date;
 }
 
 export interface ExceptionalDto {
-	attestationIssuer: string,
-	validFrom: string
+	attestationIssuer: string;
+	validFrom: string;
 }
 
 export enum GenerationType {

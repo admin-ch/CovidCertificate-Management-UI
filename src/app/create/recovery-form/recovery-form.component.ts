@@ -29,7 +29,7 @@ export class RecoveryFormComponent implements OnInit {
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
-		private readonly dataService: CreationDataService,
+		private readonly dataService: CreationDataService
 	) {}
 
 	ngOnInit(): void {

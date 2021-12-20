@@ -38,7 +38,7 @@ import {ShippingComponent} from './shipping/shipping.component';
 import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.directive';
 import {TouristVaccineFormComponent} from './tourist-vaccine-form/tourist-vaccine-form.component';
 import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.component';
-import { ExceptionalFormComponent } from './exceptional-form/exceptional-form.component';
+import {ExceptionalFormComponent} from './exceptional-form/exceptional-form.component';
 
 @NgModule({
 	declarations: [
@@ -54,7 +54,7 @@ import { ExceptionalFormComponent } from './exceptional-form/exceptional-form.co
 		DownloadComponent,
 		ShippingComponent,
 		DeliveryCodeCleanerDirective,
-  		ExceptionalFormComponent
+		ExceptionalFormComponent
 	],
 	imports: [
 		SharedModule,

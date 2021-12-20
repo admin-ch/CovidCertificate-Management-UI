@@ -8,8 +8,8 @@ import {FormControl} from '@angular/forms';
 })
 export class WhoCheckboxComponent {
 	@Input() formControl: FormControl;
-	@Input() infoText: string
-	@Input() moreInfo: string
+	@Input() infoText: string;
+	@Input() moreInfo: string;
 
 	get hasError(): boolean {
 		return this.formControl.errors?.required && this.formControl?.touched;

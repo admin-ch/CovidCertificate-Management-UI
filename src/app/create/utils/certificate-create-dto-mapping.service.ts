@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {
 	AntibodyDto,
-	CertificateCreateDto, ExceptionalDto,
+	CertificateCreateDto,
+	ExceptionalDto,
 	GenerationType,
 	Patient,
 	RecoveryDto,
@@ -103,7 +104,7 @@ export class CertificateCreateDtoMappingService {
 				attestationIssuer: patient.exceptional.center,
 				validFrom: this.toJSONDateString(patient.exceptional.sampleDate)
 			}
-		]
+		];
 	}
 
 	private addShippingData(certificateCreateDto: CertificateCreateDto, shipping: Shipping): void {

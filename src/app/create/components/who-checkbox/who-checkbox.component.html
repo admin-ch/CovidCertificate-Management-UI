@@ -7,11 +7,7 @@
 		<span obCollapseHeader class="collapse-header">
 			{{ "certificateCreate.step-two.moreInfosLabel" | translate }}
 		</span>
-		<p
-			class="collapse-content"
-			obCollapseMain
-			[innerHTML]="moreInfo"
-		></p>
+		<p class="collapse-content" obCollapseMain [innerHTML]="moreInfo"></p>
 	</ob-collapse>
 
 	<mat-error *ngIf="hasError">
