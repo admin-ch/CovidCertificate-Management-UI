@@ -59,9 +59,10 @@ export class TestFormComponent implements OnInit {
 			this.resetForm();
 		});
 		this.translateService.onLangChange.subscribe(_ => {
+			this.updateTestTypeRadio();
 			this.testForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage(),
-				countryOfTest: this.getDefaultCountryOfTest()
+				countryOfTest: this.getCountriesOfTest().find(countryCode => countryCode.code === this.testForm.controls.countryOfTest.value.code),
 			});
 		});
 		this.rapidTestCompleteControl = this.createAutocompleteControl();
@@ -232,9 +233,13 @@ export class TestFormComponent implements OnInit {
 			firstName: this.testForm.value.firstName,
 			surName: this.testForm.value.surName,
 			birthdate: DateMapper.getBirthdate(this.testForm.value.birthdate),
-			language: this.testForm.value.certificateLanguage.code,
+			language: this.testForm.value.certificateLanguage.code,			
 			...additionalData
 		};
+	}
+
+	private updateTestTypeRadio(): void {
+		this.testType = this.testType.code === this.getTestTypeOptions()[0].code ? this.getTestTypeOptions()[0] : this.getTestTypeOptions()[1];
 	}
 
 	private resetForm(): void {

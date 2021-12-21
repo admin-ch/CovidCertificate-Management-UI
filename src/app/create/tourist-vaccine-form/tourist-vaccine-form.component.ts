@@ -45,6 +45,9 @@ export class TouristVaccineFormComponent implements OnInit {
 			this.resetForm();
 		});
 		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.controls.medicalProduct.reset();
+			this.vaccineForm.controls.countryOfVaccination.reset();
+			this.vaccineForm.controls.checkBox.reset();
 			this.vaccineForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage()
 			});
