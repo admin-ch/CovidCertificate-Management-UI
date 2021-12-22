@@ -45,6 +45,7 @@ export class VaccineFormComponent implements OnInit {
 			this.resetForm();
 		});
 		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.controls.medicalProduct.reset();
 			this.vaccineForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage(),
 				countryOfVaccination: this.getDefaultCountryOfVaccination()
