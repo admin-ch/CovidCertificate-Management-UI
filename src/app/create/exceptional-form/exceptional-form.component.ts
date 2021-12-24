@@ -57,7 +57,7 @@ export class ExceptionalFormComponent implements OnInit {
 	}
 
 	goNext(): void {
-		console.log(this.exceptionalForm.valid);
+		this.exceptionalForm.markAllAsTouched();
 		if (this.exceptionalForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
