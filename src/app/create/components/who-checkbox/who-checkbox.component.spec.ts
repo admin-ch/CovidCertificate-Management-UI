@@ -22,7 +22,7 @@ describe('WhoCheckboxComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(WhoCheckboxComponent);
 		component = fixture.componentInstance;
-		component.formControl = new FormControl('', Validators.required);
+		component.control = new FormControl('', Validators.required);
 		fixture.detectChanges();
 	});
 
@@ -32,31 +32,31 @@ describe('WhoCheckboxComponent', () => {
 
 	describe('hasError', () => {
 		it('should show error on invalid', () => {
-			component.formControl.markAllAsTouched();
+			component.control.markAllAsTouched();
 
 			expect(component.hasError).toBeTruthy();
 
-			component.formControl.setValue(undefined);
+			component.control.setValue(undefined);
 			expect(component.hasError).toBeTruthy();
 
-			component.formControl.setValue(null);
+			component.control.setValue(null);
 			expect(component.hasError).toBeTruthy();
 		});
 
 		it('should not show error if untouched', () => {
 			expect(component.hasError).toBeFalsy();
 
-			component.formControl.setValue(undefined);
+			component.control.setValue(undefined);
 			expect(component.hasError).toBeFalsy();
 
-			component.formControl.setValue(null);
+			component.control.setValue(null);
 			expect(component.hasError).toBeFalsy();
 		});
 
 		it('should not show error if valid', () => {
-			component.formControl.markAllAsTouched();
+			component.control.markAllAsTouched();
 
-			component.formControl.setValue(true);
+			component.control.setValue(true);
 			expect(component.hasError).toBeFalsy();
 		});
 	});

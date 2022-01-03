@@ -78,6 +78,13 @@ export class TouristVaccineFormComponent implements OnInit {
 		return this.valueSetsService.getCountryOptions().filter(country => country.code !== 'CH');
 	}
 
+	get infoText(): string {
+		let text = this.translateService.instant('certificateCreate.step-two.entitledtoissueconfirmation');
+		text += this.translateService.instant('certificateCreate.step-two.nonissuablevaccineproductinformation');
+
+		return text;
+	}
+
 	private createForm(): void {
 		this.vaccineForm = this.formBuilder.group(
 			{

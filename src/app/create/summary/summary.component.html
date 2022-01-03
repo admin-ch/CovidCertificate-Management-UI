@@ -77,6 +77,18 @@
 	</dl>
 </ng-container>
 
+<ng-container *ngIf="patient?.exceptional">
+	<h5>{{ "certificateCreate.step-one.enum.exceptional" | translate }}</h5>
+	<dl>
+		<dt>{{ "certificateCreate.form.label.exceptional.medicalAttestationValidFrom" | translate }}</dt>
+		<dd id="exceptionalValidFrom">{{ patient?.exceptional.sampleDate | date }}</dd>
+		<dt>{{ "certificateCreate.form.label.exceptional.responsible" | translate }}</dt>
+		<dd id="ExceptionalCenter">{{ patient?.exceptional.center }}</dd>
+		<dt>{{ "certificateCreate.step-three.attestationCountry" | translate }}</dt>
+		<dd id="countryOfAttestation">CH</dd>
+	</dl>
+</ng-container>
+
 <h5>{{ "certificateCreate.shipping.title" | translate }}</h5>
 <dl>
 	<dt>{{ "certificateCreate.form.label.shipping" | translate }}</dt>

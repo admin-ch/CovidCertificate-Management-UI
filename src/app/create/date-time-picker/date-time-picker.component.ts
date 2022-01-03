@@ -161,6 +161,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
+				case 'dateBeforeExceptionalCertificateMinDate': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
 				case 'time': {
 					if (!!this.errors[keyError].required) {
 						this.form.get('time').setErrors({[keyError]: this.errors[keyError]});

@@ -49,7 +49,7 @@ describe('SelectCertificateTypeComponent', () => {
 
 	describe('Certificate type options', () => {
 		it('should have the correct number of options', () => {
-			expect(component.typeSelection.length).toBe(5);
+			expect(component.typeSelection.length).toBe(6);
 		});
 
 		it('should have vaccination as option', () => {

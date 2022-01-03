@@ -124,7 +124,11 @@
 			</mat-form-field>
 
 			<div *ngIf="vaccineForm.get('checkBox').enabled">
-				<ec-who-checkbox [formControl]="vaccineForm.get('checkBox')"></ec-who-checkbox>
+				<ec-who-checkbox
+					[control]="vaccineForm.get('checkBox')"
+					[infoText]="infoText"
+					[moreInfo]="'certificateCreate.step-two.moreInfosMessage' | translate"
+				></ec-who-checkbox>
 			</div>
 		</div>
 	</fieldset>

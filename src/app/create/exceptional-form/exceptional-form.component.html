@@ -1,4 +1,4 @@
-<form [formGroup]="recoveryForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
+<form [formGroup]="exceptionalForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
 	<fieldset class="form-group">
 		<legend class="padding-top">{{ "certificateCreate.form.group.personalData" | translate }}</legend>
 
@@ -26,7 +26,7 @@
 					[label]="'certificateCreate.form.label.personalData.birthdate' | translate"
 					[showTime]="false"
 					required
-					[errors]="recoveryForm.get('birthdate').errors"
+					[errors]="exceptionalForm.get('birthdate').errors"
 					id="birthdate"
 					shortDateAllowed="true"
 				>
@@ -46,40 +46,44 @@
 	</fieldset>
 
 	<fieldset class="form-group">
-		<legend class="padding-top">{{ "certificateCreate.form.group.recovery" | translate }}</legend>
+		<legend class="padding-top">{{ "certificateCreate.step-one.enum.exceptional" | translate }}</legend>
 
 		<div class="form-field">
-			<ob-nested-form
-				formControlName="dateFirstPositiveTestResult"
-				[nestedForm]="datepickerTestResult.form"
-				obErrorMessages
-			>
+			<p class="form-field-info">
+				{{ "certificateCreate.form.label.exceptional.medicalAttestationValidFrom" | translate }}
+			</p>
+			<ob-nested-form formControlName="sampleDate" [nestedForm]="datepickerSampleDate.form" obErrorMessages>
 				<ec-datetimepicker
-					#datepickerTestResult
-					[label]="'certificateCreate.form.label.recovery.dateFirstPositiveTestResult' | translate"
-					[showTime]="false"
+					#datepickerSampleDate
+					[label]="'certificateCreate.form.label.exceptional.medicalAttestationValidFrom' | translate"
 					required
-					[errors]="recoveryForm.get('dateFirstPositiveTestResult').errors"
-					id="dateOfVaccination"
+					[errors]="exceptionalForm.get('sampleDate').errors"
+					id="sampleDate"
+					[defaultValue]="getCurrentDate()"
+					[showTime]="false"
 				>
 				</ec-datetimepicker>
 			</ob-nested-form>
+
+			<p class="form-field-info">{{ "certificateCreate.form.label.exceptional.responsible" | translate }}</p>
+			<mat-form-field obErrorMessages class="mat-form-field-lg">
+				<mat-label>{{ "certificateCreate.form.label.test.center" | translate }}</mat-label>
+				<input type="text" matInput formControlName="center" id="center" />
+				<mat-error></mat-error>
+			</mat-form-field>
+
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
-				<mat-label>{{ "certificateCreate.form.label.recovery.countryOfTest" | translate }}</mat-label>
-				<mat-select formControlName="countryOfTest" id="countryOfTest">
-					<mat-option *ngFor="let option of getCountriesOfRecovery()" [value]="option">
+				<mat-label>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</mat-label>
+				<mat-select formControlName="countryOfTest" id="countryOfTest" [disabled]="true">
+					<mat-option *ngFor="let option of getCountriesOfTest()" [value]="option">
 						{{ option.display }}
 					</mat-option>
 				</mat-select>
 				<mat-error></mat-error>
 			</mat-form-field>
 
-			<div *ngIf="recoveryForm.get('checkBox').enabled">
-				<ec-who-checkbox
-					[control]="recoveryForm.get('checkBox')"
-					[infoText]="infoText"
-					[moreInfo]="'certificateCreate.step-two.moreInfosMessage' | translate"
-				></ec-who-checkbox>
+			<div *ngIf="exceptionalForm.get('checkBox').enabled">
+				<ec-who-checkbox [control]="exceptionalForm.get('checkBox')" [infoText]="infoText"></ec-who-checkbox>
 			</div>
 		</div>
 	</fieldset>
