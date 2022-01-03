@@ -46,14 +46,14 @@
 	</fieldset>
 
 	<fieldset class="form-group">
-		<legend class="padding-top">Ausnahmezertifikat</legend>
+		<legend class="padding-top">{{ "certificateCreate.step-one.enum.exceptional" | translate }}</legend>
 
 		<div class="form-field">
-			<p class="form-field-info">Datum des Attests oder Beginn der Gültigkeit</p>
+			<p class="form-field-info">{{ "certificateCreate.form.label.exceptional.medicalAttestationValidFrom" | translate }}</p>
 			<ob-nested-form formControlName="sampleDate" [nestedForm]="datepickerSampleDate.form" obErrorMessages>
 				<ec-datetimepicker
 					#datepickerSampleDate
-					[label]="'Datum des Attests oder Beginn der Gültigkeit'"
+					[label]="'certificateCreate.form.label.exceptional.medicalAttestationValidFrom' | translate"
 					required
 					[errors]="exceptionalForm.get('sampleDate').errors"
 					id="sampleDate"
@@ -63,7 +63,7 @@
 				</ec-datetimepicker>
 			</ob-nested-form>
 
-			<p class="form-field-info">Für die Zertifikatsausstellung verantwortliche Stelle</p>
+			<p class="form-field-info">{{ "certificateCreate.form.label.exceptional.responsible" | translate }}</p>
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.test.center" | translate }}</mat-label>
 				<input type="text" matInput formControlName="center" id="center" />

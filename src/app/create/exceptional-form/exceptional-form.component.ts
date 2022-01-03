@@ -87,7 +87,7 @@ export class ExceptionalFormComponent implements OnInit {
 	}
 
 	get infoText(): string {
-		return 'Ich bestätige, dass ich ein/e vom Kanton ernannter Aussteller / ernannte Ausstellerin bin und berechtigt bin, Ausnahmezertifikate aufgrund von ärztlichen Attesten zu erstellen (gemäss Art. 21a Covid-19-Verordnung Zertifikate vom 4. Juni 2021, SR 818.102.2 ).';
+		return this.translateService.instant('certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation');
 	}
 
 	private createForm(): void {
