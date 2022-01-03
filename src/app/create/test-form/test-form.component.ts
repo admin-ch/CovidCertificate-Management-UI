@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -10,6 +10,7 @@ import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {RapidTestValidator} from '../utils/rapid-test-validator';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 const SAMPLE_DATE_VALIDATORS = [
 	Validators.required,
@@ -23,15 +24,18 @@ const SAMPLE_DATE_VALIDATORS = [
 	templateUrl: './test-form.component.html',
 	styleUrls: ['./test-form.scss']
 })
-export class TestFormComponent implements OnInit {
+export class TestFormComponent implements OnInit, AfterViewInit {
 	@Input() antibody = false;
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
+	@ViewChild('testPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	testForm: FormGroup;
 	testType: ProductInfo;
+
+	personalDataForm: FormGroup;
 
 	rapidTestCompleteControl: FormControl;
 	filteredRapidTests: RapidTestProductInfoWithToString[];
@@ -77,12 +81,21 @@ export class TestFormComponent implements OnInit {
 		this.filteredRapidTests = this.rapidTests;
 	}
 
+	ngAfterViewInit() {
+		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
+			this.personalDataForm = this.personalDataChild.vaccineForm;
+		}
+	}
+
 	goBack(): void {
 		this.back.emit();
 	}
 
 	goNext(): void {
-		if (this.testForm.valid) {
+		if (this.personalDataForm) {
+			this.personalDataForm.markAllAsTouched();
+		}
+		if (this.testForm.valid && this.personalDataForm && this.personalDataForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
@@ -147,18 +160,6 @@ export class TestFormComponent implements OnInit {
 			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
 		}
 		this.testForm = this.formBuilder.group({
-			firstName: ['', [Validators.required, Validators.maxLength(50)]],
-			surName: ['', [Validators.required, Validators.maxLength(50)]],
-			birthdate: [
-				'',
-				[
-					Validators.required,
-					DateValidators.validShortDate(),
-					DateValidators.dateLessThanToday(),
-					DateValidators.dateMoreThanMinDate()
-				]
-			],
-			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			typeOfTest: [this.testType, Validators.required],
 			product: [''],
 			sampleDate: [this.getCurrentDateTime(), SAMPLE_DATE_VALIDATORS],
@@ -233,10 +234,10 @@ export class TestFormComponent implements OnInit {
 		}
 
 		return {
-			firstName: this.testForm.value.firstName,
-			surName: this.testForm.value.surName,
-			birthdate: DateMapper.getBirthdate(this.testForm.value.birthdate),
-			language: this.testForm.value.certificateLanguage.code,
+			firstName: this.personalDataForm.value.firstName,
+			surName: this.personalDataForm.value.surName,
+			birthdate: DateMapper.getBirthdate(this.personalDataForm.value.birthdate),
+			language: this.personalDataForm.value.certificateLanguage.code,
 			...additionalData
 		};
 	}
