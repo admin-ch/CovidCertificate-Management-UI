@@ -1,15 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExceptionalFormComponent} from './exceptional-form.component';
-import {DateTimePickerComponent} from "../date-time-picker/date-time-picker.component";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {ObliqueTestingModule, ObNestedFormModule} from "@oblique/oblique";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatSelectModule} from "@angular/material/select";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('ExceptionalFormComponent', () => {
 	let component: ExceptionalFormComponent;

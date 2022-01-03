@@ -83,10 +83,7 @@
 			</mat-form-field>
 
 			<div *ngIf="exceptionalForm.get('checkBox').enabled">
-				<ec-who-checkbox
-					[control]="exceptionalForm.get('checkBox')"
-					[infoText]="infoText"
-				></ec-who-checkbox>
+				<ec-who-checkbox [control]="exceptionalForm.get('checkBox')" [infoText]="infoText"></ec-who-checkbox>
 			</div>
 		</div>
 	</fieldset>
