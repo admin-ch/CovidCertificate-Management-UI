@@ -39,6 +39,7 @@ import {DeliveryCodeCleanerDirective} from './shipping/delivery-code-cleaner.dir
 import {TouristVaccineFormComponent} from './tourist-vaccine-form/tourist-vaccine-form.component';
 import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.component';
 import {PersonalDataComponent} from './components/personal-data/personal-data.component';
+import {ExceptionalFormComponent} from './exceptional-form/exceptional-form.component';
 
 @NgModule({
 	declarations: [
@@ -54,7 +55,8 @@ import {PersonalDataComponent} from './components/personal-data/personal-data.co
 		DownloadComponent,
 		ShippingComponent,
 		DeliveryCodeCleanerDirective,
-		PersonalDataComponent
+		PersonalDataComponent,
+		ExceptionalFormComponent
 	],
 	imports: [
 		SharedModule,

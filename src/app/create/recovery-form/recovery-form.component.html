@@ -31,8 +31,9 @@
 
 			<div *ngIf="recoveryForm.get('checkBox').enabled">
 				<ec-who-checkbox
-					[formControl]="recoveryForm.get('checkBox')"
-					[certificateType]="'recovery'"
+					[control]="recoveryForm.get('checkBox')"
+					[infoText]="infoText"
+					[moreInfo]="'certificateCreate.step-two.moreInfosMessage' | translate"
 				></ec-who-checkbox>
 			</div>
 		</div>

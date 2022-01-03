@@ -80,6 +80,10 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		return this.valueSetsService.getCountryOptions();
 	}
 
+	get infoText(): string {
+		return this.translateService.instant('certificateCreate.step-two.entitledtoissueconfirmation');
+	}
+
 	private createForm(): void {
 		this.recoveryForm = this.formBuilder.group({
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],

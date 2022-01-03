@@ -17,7 +17,11 @@ export class DownloadComponent implements OnInit {
 	safeResourceUrl: SafeResourceUrl;
 
 	get showChOnlyBanner(): boolean {
-		return this.type === GenerationType.ANTIBODY || this.type === GenerationType.TOURIST_VACCINATION;
+		return (
+			this.type === GenerationType.ANTIBODY ||
+			this.type === GenerationType.TOURIST_VACCINATION ||
+			this.type === GenerationType.EXCEPTIONAL
+		);
 	}
 
 	constructor(

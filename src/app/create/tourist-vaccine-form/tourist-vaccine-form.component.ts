@@ -48,6 +48,9 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 			this.resetForm();
 		});
 		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.controls.medicalProduct.reset();
+			this.vaccineForm.controls.countryOfVaccination.reset();
+			this.vaccineForm.controls.checkBox.reset();
 			this.vaccineForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage()
 			});
@@ -86,6 +89,13 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 
 	getCountriesOfVaccination(): ProductInfo[] {
 		return this.valueSetsService.getCountryOptions().filter(country => country.code !== 'CH');
+	}
+
+	get infoText(): string {
+		let text = this.translateService.instant('certificateCreate.step-two.entitledtoissueconfirmation');
+		text += this.translateService.instant('certificateCreate.step-two.nonissuablevaccineproductinformation');
+
+		return text;
 	}
 
 	private createForm(): void {
