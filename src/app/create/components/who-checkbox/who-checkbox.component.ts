@@ -7,11 +7,11 @@ import {FormControl} from '@angular/forms';
 	styleUrls: ['./who-checkbox.component.scss']
 })
 export class WhoCheckboxComponent {
-	@Input() formControl: FormControl;
+	@Input() control: FormControl;
 	@Input() infoText: string;
 	@Input() moreInfo: string;
 
 	get hasError(): boolean {
-		return this.formControl.errors?.required && this.formControl?.touched;
+		return this.control.errors?.required && this.control?.touched;
 	}
 }
