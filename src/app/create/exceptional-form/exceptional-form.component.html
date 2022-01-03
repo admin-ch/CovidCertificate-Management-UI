@@ -49,7 +49,9 @@
 		<legend class="padding-top">{{ "certificateCreate.step-one.enum.exceptional" | translate }}</legend>
 
 		<div class="form-field">
-			<p class="form-field-info">{{ "certificateCreate.form.label.exceptional.medicalAttestationValidFrom" | translate }}</p>
+			<p class="form-field-info">
+				{{ "certificateCreate.form.label.exceptional.medicalAttestationValidFrom" | translate }}
+			</p>
 			<ob-nested-form formControlName="sampleDate" [nestedForm]="datepickerSampleDate.form" obErrorMessages>
 				<ec-datetimepicker
 					#datepickerSampleDate

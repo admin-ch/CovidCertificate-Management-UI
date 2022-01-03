@@ -87,7 +87,9 @@ export class ExceptionalFormComponent implements OnInit {
 	}
 
 	get infoText(): string {
-		return this.translateService.instant('certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation');
+		return this.translateService.instant(
+			'certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation'
+		);
 	}
 
 	private createForm(): void {
