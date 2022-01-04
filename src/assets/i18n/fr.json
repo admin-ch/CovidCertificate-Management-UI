@@ -129,6 +129,7 @@
   "i18n.validation.invalidShortDate": "Format de date invalide, merci d'utiliser \"jjjj\" ou \"jjjj-mm\"",
   "i18n.validation.notIssuableInSwitzerland": "Le vaccin sélectionné n'est pas autorisé en Suisse.",
   "i18n.validation.dateBeforeAntibodyCertificateMinDate": "Le prélèvement de l'échantillon ne doit pas dater d'avant le 16.11.2021.",
+  "i18n.validation.dateBeforeExceptionalCertificateMinDate": "La date ne doit pas être antérieure au 1.10.2021.",
   "logout": "Déconnexion",
   "otp.button.copy": "Copier dans le presse-papier",
   "otp.button.create": "Créer une clé secrète",
