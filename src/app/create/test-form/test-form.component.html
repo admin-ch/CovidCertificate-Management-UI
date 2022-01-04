@@ -81,6 +81,7 @@
 					id="sampleDate"
 					[defaultValue]="antibody ? getCurrentDate() : getCurrentDateTime()"
 					[showTime]="!antibody"
+					[minDate]="getMinDate()"
 				>
 				</ec-datetimepicker>
 			</ob-nested-form>

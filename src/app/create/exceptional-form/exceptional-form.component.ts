@@ -34,7 +34,8 @@ export class ExceptionalFormComponent implements OnInit {
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
-	) {}
+	) {
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -84,6 +85,10 @@ export class ExceptionalFormComponent implements OnInit {
 			time: '23:59',
 			date: moment()
 		};
+	}
+
+	getMinDate(): Date {
+		return DateValidators.EXCEPTIONAL_CERTIFICATE_MIN_DATE;
 	}
 
 	get infoText(): string {
