@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {DATE_FORMAT, GenerationType, MomentWrapper, Patient, ProductInfo, Vaccine} from 'shared/model';
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import {DateValidators} from '../utils/date-validators';
@@ -21,13 +22,15 @@ const VACCINE_DATE_VALIDATORS = [
 	templateUrl: './tourist-vaccine-form.component.html',
 	styleUrls: ['./tourist-vaccine-form.component.scss']
 })
-export class TouristVaccineFormComponent implements OnInit {
+export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
+	@ViewChild('touristPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	vaccineForm: FormGroup;
+	personalDataForm: FormGroup;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -45,10 +48,19 @@ export class TouristVaccineFormComponent implements OnInit {
 			this.resetForm();
 		});
 		this.translateService.onLangChange.subscribe(_ => {
+			this.vaccineForm.controls.medicalProduct.reset();
+			this.vaccineForm.controls.countryOfVaccination.reset();
+			this.vaccineForm.controls.checkBox.reset();
 			this.vaccineForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage()
 			});
 		});
+	}
+
+	ngAfterViewInit() {
+		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
+			this.personalDataForm = this.personalDataChild.vaccineForm;
+		}
 	}
 
 	goBack(): void {
@@ -57,7 +69,11 @@ export class TouristVaccineFormComponent implements OnInit {
 
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
-		if (this.vaccineForm.valid) {
+		if (this.personalDataForm) {
+			this.personalDataForm.markAllAsTouched();
+		}
+
+		if (this.vaccineForm.valid && this.personalDataForm && this.personalDataForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
@@ -75,21 +91,16 @@ export class TouristVaccineFormComponent implements OnInit {
 		return this.valueSetsService.getCountryOptions().filter(country => country.code !== 'CH');
 	}
 
+	get infoText(): string {
+		let text = this.translateService.instant('certificateCreate.step-two.entitledtoissueconfirmation');
+		text += this.translateService.instant('certificateCreate.step-two.nonissuablevaccineproductinformation');
+
+		return text;
+	}
+
 	private createForm(): void {
 		this.vaccineForm = this.formBuilder.group(
 			{
-				firstName: ['', [Validators.required, Validators.maxLength(50)]],
-				surName: ['', [Validators.required, Validators.maxLength(50)]],
-				birthdate: [
-					'',
-					[
-						Validators.required,
-						DateValidators.validShortDate(),
-						DateValidators.dateLessThanToday(),
-						DateValidators.dateMoreThanMinDate()
-					]
-				],
-				certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 				medicalProduct: ['', Validators.required],
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
@@ -122,10 +133,10 @@ export class TouristVaccineFormComponent implements OnInit {
 
 	private mapFormToPatientData(): Patient {
 		return {
-			firstName: this.vaccineForm.value.firstName,
-			surName: this.vaccineForm.value.surName,
-			birthdate: DateMapper.getBirthdate(this.vaccineForm.value.birthdate),
-			language: this.vaccineForm.value.certificateLanguage.code,
+			firstName: this.personalDataForm.value.firstName,
+			surName: this.personalDataForm.value.surName,
+			birthdate: DateMapper.getBirthdate(this.personalDataForm.value.birthdate),
+			language: this.personalDataForm.value.certificateLanguage.code,
 			vaccination: {
 				countryOfVaccination: this.vaccineForm.value.countryOfVaccination,
 				dateOfVaccination: DateMapper.getDate(this.vaccineForm.value.dateOfVaccination),

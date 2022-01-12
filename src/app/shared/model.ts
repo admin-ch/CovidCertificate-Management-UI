@@ -11,6 +11,7 @@ export interface Patient {
 	test?: Test;
 	recovery?: Recovery;
 	antibody?: Antibody;
+	exceptional?: Exceptional;
 	language: string;
 	certificateType: GenerationType;
 }
@@ -23,6 +24,7 @@ export interface PatientDto {
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
 	antibodyInfo?: AntibodyDto[];
+	exceptionalInfo?: ExceptionalDto[];
 	systemSource: string;
 }
 
@@ -35,6 +37,7 @@ export interface CertificateCreateDto {
 	testInfo?: TestDto[];
 	recoveryInfo?: RecoveryDto[];
 	antibodyInfo?: AntibodyDto[];
+	exceptionalInfo?: ExceptionalDto[];
 	address?: AddressDto;
 	appCode?: number;
 	systemSource: string;
@@ -135,12 +138,23 @@ export interface AntibodyDto {
 	testingCenterOrFacility: string;
 }
 
+export interface Exceptional {
+	center: string;
+	sampleDate: Date;
+}
+
+export interface ExceptionalDto {
+	attestationIssuer: string;
+	validFrom: string;
+}
+
 export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
 	ANTIBODY = 'antibody',
-	TOURIST_VACCINATION = 'vaccination-tourist'
+	TOURIST_VACCINATION = 'vaccination-tourist',
+	EXCEPTIONAL = 'exceptional'
 }
 
 export enum ShippingOptions {
