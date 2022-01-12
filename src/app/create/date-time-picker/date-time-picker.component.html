@@ -2,7 +2,7 @@
 	<ng-container [formGroup]="form">
 		<mat-form-field *ngIf="showDate && !showShortDateInputField" obErrorMessages class="mat-form-field-lg">
 			<mat-label>{{ label }}</mat-label>
-			<input [id]="id + '-date'" matInput formControlName="date" [matDatepicker]="datepicker" [max]="maxDate" />
+			<input [id]="id + '-date'" matInput formControlName="date" [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate" />
 			<mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
 			<mat-datepicker #datepicker startView="month"></mat-datepicker>
 			<mat-error></mat-error>

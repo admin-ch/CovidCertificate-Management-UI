@@ -145,6 +145,10 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	getMinDate(): Date {
+		return this.antibody ? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE : DateValidators.MIN_DATE;
+	}
+
 	private updateProductValidators(testTypeCode: string) {
 		const productControl = this.testForm.controls.product;
 		if (testTypeCode === RAPID_TEST_CODE) {

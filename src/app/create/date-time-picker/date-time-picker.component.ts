@@ -4,6 +4,7 @@ import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import timePolyfill from 'time-input-polyfill';
 import supportsTime from 'time-input-polyfill/supportsTime';
 import * as moment from 'moment';
+import {DateValidators} from "../utils/date-validators";
 
 const MY_FORMATS: MatDateFormats = {
 	parse: {
@@ -35,6 +36,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	@Input() errors: ValidationErrors;
 	@Input() defaultValue?: {date?: Date; time?: Date};
 	@Input() shortDateAllowed: boolean;
+	@Input() minDate: Date = DateValidators.MIN_DATE;
 	@HostBinding('class.datetime') datetime = true;
 	form: FormGroup;
 	maxDate: Date = new Date();
