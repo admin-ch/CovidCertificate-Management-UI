@@ -70,6 +70,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
 		if (this.personalDataForm) {
+			this.personalDataChild.touchDatepicker();
 			this.personalDataForm.markAllAsTouched();
 		}
 

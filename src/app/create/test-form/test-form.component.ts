@@ -93,6 +93,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		if (this.personalDataForm) {
+			this.personalDataChild.touchDatepicker();
 			this.personalDataForm.markAllAsTouched();
 		}
 		if (this.testForm.valid && this.personalDataForm && this.personalDataForm.valid) {
