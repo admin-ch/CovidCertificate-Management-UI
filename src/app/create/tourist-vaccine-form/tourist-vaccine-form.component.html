@@ -15,9 +15,7 @@
 			</mat-form-field>
 		</div>
 
-		<p class="form-field-info">
-			<strong>{{ "common.important" | translate }}: </strong>
-			{{ "certificateCreate.step-two.vaccinationinformation" | translate }}
+		<p class="form-field-info" [innerHTML]="'certificateCreate.step-two.vaccinationinformation' | translate ">
 		</p>
 
 		<div class="from">
