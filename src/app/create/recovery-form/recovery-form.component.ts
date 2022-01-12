@@ -63,7 +63,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	}
 
 	goNext(): void {
-		if(this.recoveryForm.controls.countryOfTest.value.code !== "CH") {
+		if (this.recoveryForm.controls.countryOfTest.value.code !== 'CH') {
 			this.recoveryForm.markAllAsTouched();
 		}
 		if (this.personalDataForm) {
