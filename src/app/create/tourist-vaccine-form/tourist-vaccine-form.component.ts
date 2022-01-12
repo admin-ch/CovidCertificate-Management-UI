@@ -32,8 +32,8 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	vaccineForm: FormGroup;
 	personalDataForm: FormGroup;
 
-	public maxDose = 9
-	public minDose = 0
+	public maxDose = 9;
+	public minDose = 0;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
