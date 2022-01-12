@@ -32,6 +32,9 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 	vaccineForm: FormGroup;
 	personalDataForm: FormGroup;
 
+	public maxDose = 9
+	public minDose = 0
+
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
