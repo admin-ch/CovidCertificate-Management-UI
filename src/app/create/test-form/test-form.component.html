@@ -3,7 +3,7 @@
 
 	<fieldset class="form-group">
 		<legend class="padding-top">
-			<div *ngIf="!rapid && !antibody">			
+			<div *ngIf="!rapid && !antibody">
 				{{ "certificateCreate.form.group.test" | translate }}
 			</div>
 			<div *ngIf="rapid">
@@ -11,7 +11,7 @@
 			</div>
 			<div *ngIf="antibody">
 				{{ "certificateCreate.step-one.enum.antibody" | translate }}
-			</div>	
+			</div>
 		</legend>
 		<label *ngIf="antibody" class="additional-padding additional-width">{{
 			"certificateCreate.from.label.antibody" | translate
@@ -19,10 +19,10 @@
 
 		<div class="form-field">
 			<div
-			    *ngIf="!antibody && !rapid" 
-				class="radio-button-field" 
+				*ngIf="!antibody && !rapid"
+				class="radio-button-field"
 				[ngClass]="{ 'additional-padding': !displayTestProducts }"
-				>			
+			>
 				<label class="radio-button-field--label">{{
 					"certificateCreate.form.label.test.typeOfTest" | translate
 				}}</label>
