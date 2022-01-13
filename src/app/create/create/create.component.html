@@ -30,6 +30,13 @@
 			(back)="resetCalled()"
 			(next)="nextCalled()"
 		></ec-exceptional-form>
+		<ec-test-form
+			*ngIf="selectedForm === 'rapid'"
+			[antibody]="false"
+			[rapid]="true"
+			(back)="resetCalled()"
+			(next)="nextCalled()"
+		></ec-test-form>
 	</mat-step>
 	<mat-step>
 		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>

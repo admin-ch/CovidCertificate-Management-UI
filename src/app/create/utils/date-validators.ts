@@ -6,6 +6,7 @@ export class DateValidators {
 	static MIN_DATE: Date = new Date(1900, 0, 1);
 	static ANTIBODY_CERTIFICATE_MIN_DATE: Date = new Date(2021, 10, 16);
 	static EXCEPTIONAL_CERTIFICATE_MIN_DATE: Date = new Date(2021, 9, 1);
+	static RAPID_CERTIFICATE_MIN_DATE: Date = new Date(2022, 0, 24);
 	static DATE_REGEX = /^((19|20)\d\d(-\d\d){0,2}){0,1}$/;
 
 	static validShortDate() {
