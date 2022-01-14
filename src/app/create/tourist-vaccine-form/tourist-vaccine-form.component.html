@@ -15,10 +15,7 @@
 			</mat-form-field>
 		</div>
 
-		<p class="form-field-info">
-			<strong>{{ "common.important" | translate }}: </strong>
-			{{ "certificateCreate.step-two.vaccinationinformation" | translate }}
-		</p>
+		<p class="form-field-info" [innerHTML]="'certificateCreate.step-two.vaccinationinformation' | translate"></p>
 
 		<div class="from">
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
@@ -28,6 +25,8 @@
 					matInput
 					formControlName="doseNumber"
 					id="doseNumber"
+					min="{{ minDose }}"
+					max="{{ maxDose }}"
 					obNumberFormat
 					decimals="0"
 				/>
@@ -43,6 +42,8 @@
 					matInput
 					formControlName="totalDoses"
 					id="totalDoses"
+					min="{{ minDose }}"
+					max="{{ maxDose }}"
 					obNumberFormat
 					decimals="0"
 				/>
