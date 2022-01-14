@@ -162,6 +162,6 @@
     "notifications.unsupportedBrowser.title": "Nicht unterstützter Browser",
     "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden.",
     "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen.",
-    "i18n.validation.dosesNotValid": "Die Dosierungen sind nicht korrekt. Siehe die Regeln oben.",
+    "i18n.validation.dosesNotValid": "Die Angaben zu den Dosen müssen den Regeln oben entsprechen.",
     "certificateCreate.step-one.enum.rapid": "Genesen (Antigen-Schnelltest positiv)"
 }

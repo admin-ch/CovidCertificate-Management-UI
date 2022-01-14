@@ -162,6 +162,6 @@
     "notifications.unsupportedBrowser.title": "Navigateur non supporté",
     "notifications.unsupportedBrowser.message": "Certaines fonctions de cette application ne sont pas prises en charge par votre navigateur. Veuillez noter que seules les 2 dernières versions de Chrome, de Firefox, d’Edge et de Safari sont prises en charge.",
     "gracePeriodMessage": "Ce matériel de test rapide peut être utilisé jusqu’au {{validUntil}}; après cette date, il ne permettra plus d’établir des certificats.",
-    "i18n.validation.dosesNotValid": "Les dosages ne sont pas corrects. Voir les règles ci-dessus.",
+    "i18n.validation.dosesNotValid": "Les indications des doses doivent être conformes aux règles ci-dessus.",
     "certificateCreate.step-one.enum.rapid": "Guérison (Test rapide antigénique positif)"
 }

@@ -162,6 +162,6 @@
     "notifications.unsupportedBrowser.title": "Unsupported Browser",
     "notifications.unsupportedBrowser.message": "Some functions of this application are not supported by your browser. Please note that only the two latest versions of Chrome, Firefox, Edge and Safari are supported",
     "gracePeriodMessage": "This rapid test product can be used until {{validUntil}}; after that date, it can no longer be used to generate certificates.",
-    "i18n.validation.dosesNotValid": "The dosages are not correct. See the rules above.",
+    "i18n.validation.dosesNotValid": "The dose entries must comply with the rules above.",
     "certificateCreate.step-one.enum.rapid": "Recovered (Rapid antigen test) TODO"
 }

@@ -162,6 +162,6 @@
     "notifications.unsupportedBrowser.title": "Browser non supportato",
     "notifications.unsupportedBrowser.message": "Il browser non è compatibile con alcune funzioni dell'applicazione. Tali funzioni sono supportate soltanto nelle due versioni più recenti di Chrome, Firefox, Edge e Safari.",
     "gracePeriodMessage": "Questo prodotto per il test antigenico rapido può essere utilizzato fino al {{validUntil}}. Dopo tale data non è più possibile generare certificati COVID con questo prodotto.",
-    "i18n.validation.dosesNotValid": "I dosaggi non sono corretti. Vedi le regole di cui sopra.",
+    "i18n.validation.dosesNotValid": "L'indicazione della dose deve rispettare le regole di cui sopra.",
     "certificateCreate.step-one.enum.rapid": "Guarigione (Test antigenico rapido positivo)"
 }
