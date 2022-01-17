@@ -157,6 +157,14 @@ export enum GenerationType {
 	EXCEPTIONAL = 'exceptional'
 }
 
+export enum CsvGenerationType {
+	VACCINATION = 'vaccination',
+	TEST = 'test',
+	RECOVERY = 'recovery',
+	ANTIBODY = 'antibody',
+	TOURIST_VACCINATION = 'vaccination-tourist',
+}
+
 export enum ShippingOptions {
 	APP = 'app',
 	PDF = 'pdf',
