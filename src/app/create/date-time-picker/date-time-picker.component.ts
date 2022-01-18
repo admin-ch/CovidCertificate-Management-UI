@@ -151,6 +151,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}
+				case 'rapidDateTooSmall': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
 				case 'dateBeforeBirthday': {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
