@@ -148,9 +148,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	getMinDate(): Date {
-		return this.rapid 
-			? DateValidators.RAPID_CERTIFICATE_MIN_DATE 
-			: this.antibody 
+		return this.rapid
+			? DateValidators.RAPID_CERTIFICATE_MIN_DATE
+			: this.antibody
 			? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE
 			: DateValidators.MIN_DATE;
 	}
@@ -170,7 +170,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
 		}
 		if (this.rapid) {
-			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateMoreThanMinDateRapid ());
+			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateMoreThanMinDateRapid());
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],

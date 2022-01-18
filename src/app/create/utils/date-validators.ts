@@ -37,8 +37,8 @@ export class DateValidators {
 			}
 			return null;
 		};
-	}	
-	
+	}
+
 	static dateMoreThanMinDateRapid() {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
 			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
