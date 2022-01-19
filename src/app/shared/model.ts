@@ -163,7 +163,7 @@ export enum CsvGenerationType {
 	TEST = 'test',
 	RECOVERY = 'recovery',
 	ANTIBODY = 'antibody',
-	TOURIST_VACCINATION = 'vaccination-tourist',
+	TOURIST_VACCINATION = 'vaccination-tourist'
 }
 
 export enum ShippingOptions {
