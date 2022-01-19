@@ -1,7 +1,7 @@
 <form [formGroup]="recoveryForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
 	<ec-personal-data #recoveryPersonalDataComponent></ec-personal-data>
 	<fieldset class="form-group">
-		<legend class="padding-top">{{ "certificateCreate.form.group.recovery" | translate }}</legend>
+		<legend class="padding-top">{{ "certificateCreate.step-one.enum.recovery" | translate }}</legend>
 
 		<div class="form-field">
 			<ob-nested-form

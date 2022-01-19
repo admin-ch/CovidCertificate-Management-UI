@@ -116,7 +116,7 @@
     "home.support": "Allgemeine Supportangaben",
     "home.title": "Guten Tag",
     "home.training": "Anwenderschulung für Covid-Zertifikat",
-    "i18n.validation.required": "Dieses Feld wird benötigt",
+    "i18n.validation.required": "Pflichtfeld",
     "i18n.validation.maxlength": "Bitte geben Sie höchstens {{requiredLength}} Zeichen ein",
     "i18n.validation.dosesTooBig": "Muss kleiner oder gleich als erforderliche Dosen sein",
     "i18n.validation.dateTooSmall": "Das Datum muss nach dem 31.12.1899 liegen",
@@ -163,5 +163,6 @@
     "notifications.unsupportedBrowser.message": "Einige Funktionen dieser Applikation werden von Ihrem Browser nicht unterstützt. Bitte beachten Sie, dass nur Chrome, Firefox, Edge und Safari in den neuesten 2 Versionen unterstützt werden.",
     "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen.",
     "i18n.validation.dosesNotValid": "Die Angaben zu den Dosen müssen den Regeln oben entsprechen.",
-    "certificateCreate.step-one.enum.rapid": "Genesen (Antigen-Schnelltest positiv)"
+    "certificateCreate.step-one.enum.recovery-rat": "Genesen (Antigen-Schnelltest positiv)",
+    "i18n.validation.rapidDateTooSmall": "Das Datum der Probenentnahme darf nicht vor dem 24.01.2022 liegen."
 }

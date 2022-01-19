@@ -1,14 +1,25 @@
 <form [formGroup]="testForm" #formDirective="ngForm" (submit)="goNext()" obParentFormDirective>
 	<ec-personal-data #testPersonalDataComponent></ec-personal-data>
+
 	<fieldset class="form-group">
-		<legend class="padding-top">{{ "certificateCreate.form.group.test" | translate }}</legend>
+		<legend class="padding-top">
+			<div *ngIf="!rapid && !antibody">
+				{{ "certificateCreate.form.group.test" | translate }}
+			</div>
+			<div *ngIf="rapid">
+				{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}
+			</div>
+			<div *ngIf="antibody">
+				{{ "certificateCreate.step-one.enum.antibody" | translate }}
+			</div>
+		</legend>
 		<label *ngIf="antibody" class="additional-padding additional-width">{{
 			"certificateCreate.from.label.antibody" | translate
 		}}</label>
 
 		<div class="form-field">
 			<div
-				*ngIf="!antibody"
+				*ngIf="!antibody && !rapid"
 				class="radio-button-field"
 				[ngClass]="{ 'additional-padding': !displayTestProducts }"
 			>
@@ -29,7 +40,7 @@
 				</div>
 			</div>
 
-			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts || rapid">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
 				<input
 					type="text"
@@ -107,7 +118,7 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</mat-label>
-				<mat-select formControlName="countryOfTest" id="countryOfTest" [disabled]="antibody">
+				<mat-select formControlName="countryOfTest" id="countryOfTest" [disabled]="antibody || rapid">
 					<mat-option *ngFor="let option of getCountriesOfTest()" [value]="option">
 						{{ option.display }}
 					</mat-option>

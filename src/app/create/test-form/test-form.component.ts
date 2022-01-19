@@ -26,6 +26,7 @@ const SAMPLE_DATE_VALIDATORS = [
 })
 export class TestFormComponent implements OnInit, AfterViewInit {
 	@Input() antibody = false;
+	@Input() rapid = false;
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
@@ -54,7 +55,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	) {}
 
 	ngOnInit(): void {
-		this.testType = this.getTestTypeOptions()[0];
+		this.testType = this.rapid ? this.getTestTypeOptions()[1] : this.getTestTypeOptions()[0];
 		this.createForm();
 		this.dataService.resetCalled.subscribe(() => {
 			this.resetForm();
@@ -147,7 +148,11 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	getMinDate(): Date {
-		return this.antibody ? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE : DateValidators.MIN_DATE;
+		return this.rapid
+			? DateValidators.RAPID_CERTIFICATE_MIN_DATE
+			: this.antibody
+			? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE
+			: DateValidators.MIN_DATE;
 	}
 
 	private updateProductValidators(testTypeCode: string) {
@@ -163,6 +168,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	private createForm(): void {
 		if (this.antibody) {
 			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
+		}
+		if (this.rapid) {
+			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateMoreThanMinDateRapid());
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
@@ -227,7 +235,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			};
 		} else {
 			additionalData = {
-				certificateType: GenerationType.TEST,
+				certificateType: this.rapid ? GenerationType.RAPID : GenerationType.TEST,
 				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,
