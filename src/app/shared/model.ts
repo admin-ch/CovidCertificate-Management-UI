@@ -152,9 +152,18 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
+	RAPID = 'recovery-rat',
 	ANTIBODY = 'antibody',
 	TOURIST_VACCINATION = 'vaccination-tourist',
 	EXCEPTIONAL = 'exceptional'
+}
+
+export enum CsvGenerationType {
+	VACCINATION = 'vaccination',
+	TEST = 'test',
+	RECOVERY = 'recovery',
+	ANTIBODY = 'antibody',
+	TOURIST_VACCINATION = 'vaccination-tourist'
 }
 
 export enum ShippingOptions {

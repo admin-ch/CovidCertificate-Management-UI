@@ -7,7 +7,7 @@ import {UploadService} from './upload.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {GenerationType} from 'shared/model';
+import {CsvGenerationType, GenerationType} from 'shared/model';
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -72,12 +72,12 @@ describe('UploadComponent', () => {
 	});
 
 	describe('Certificate types', () => {
-		it('should have 6 certificate types for selection', () => {
-			expect(component.getCertificateTypes().length).toBe(6);
+		it('should have 5 certificate types for selection', () => {
+			expect(component.getCertificateTypes().length).toBe(5);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[0]).toBe(GenerationType.VACCINATION);
+			expect(component.getCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
 		});
 
 		it('should have TEST as certificate types for selection', () => {
@@ -86,6 +86,14 @@ describe('UploadComponent', () => {
 
 		it('should have RECOVERY as certificate types for selection', () => {
 			expect(component.getCertificateTypes()[2]).toBe(GenerationType.RECOVERY);
+		});
+
+		it('should have VACCINATION as certificate types for selection', () => {
+			expect(component.getCertificateTypes()[3]).toBe(CsvGenerationType.ANTIBODY);
+		});
+
+		it('should have TOURIST_VACCINATION as certificate types for selection', () => {
+			expect(component.getCertificateTypes()[4]).toBe(CsvGenerationType.TOURIST_VACCINATION);
 		});
 	});
 });
