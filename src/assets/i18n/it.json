@@ -67,7 +67,6 @@
     "certificateCreate.step-three.dose": "Dose",
     "certificateCreate.step-three.title": "Anteprima del certificato",
     "certificateCreate.step-three.validFrom": "Valido dal",
-    "certificateCreate.step-three.validUntil": "Valido in Svizzera fino al",
     "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">L&rsquo;emissione di certificati di vaccinazione COVID-19 o di certificati di guarigione dalla COVID-19 per le persone vaccinate o guarite all&rsquo;estero &egrave; riservata soltanto ai servizi appositamente designati dal Cantone. Vogliate confermare di aver ottenuto l&rsquo;autorizzazione del Cantone per emettere questi certificati COVID-19.</p>",
     "certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation": "<p style=\"text-align: justify;\">Confermo di essere un emittente designato dal Cantone e di essere autorizzato a emettere certificati di deroga sulla base di certificati medici (secondo l'art. 21a dell'ordinanza del 4 giugno 2021 sui certificati COVID-19, RS 818.102.2).</p><p style=\"text-align: justify;\">Inoltre, accetto che un elenco dei certificati da me emessi venga trasmesso al servizio competente del Cantone allo scopo di combattere gli abusi.</p>",
     "certificateCreate.step-two.moreInfosLabel": "Più informazioni",
