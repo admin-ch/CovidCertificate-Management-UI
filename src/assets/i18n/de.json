@@ -67,7 +67,6 @@
     "certificateCreate.step-three.dose": "Dosis",
     "certificateCreate.step-three.title": "Zertifikatvorschau",
     "certificateCreate.step-three.validFrom": "Gültig von",
-    "certificateCreate.step-three.validUntil": "Gültig in der Schweiz bis",
     "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">Die Ausstellung von Covid-Impfzertifikaten oder Covid-Genesenenzertifikaten f&uuml;r Personen die im Ausland geimpft oder genesen sind, ist nur speziell vom Kanton bezeichneten Stellen vorbehalten. Bitte best&auml;tigen Sie, dass Sie f&uuml;r diese Ausstellungen vom Kanton berechtigt wurden.</p>",
     "certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation": "<p style=\"text-align: justify;\">Ich best&auml;tige, dass ich ein/e vom Kanton ernannter Aussteller / ernannte Ausstellerin bin und berechtigt bin, Ausnahmezertifikate aufgrund von &auml;rztlichen Attesten zu erstellen (gem&auml;ss Art. 21a Covid-19-Verordnung Zertifikate vom 4. Juni 2021, SR 818.102.2 ).</p><p style=\"text-align: justify;\">Zudem erkl&auml;re ich mich einverstanden, dass der zuständigen Stelle des Kantons zwecks Missbrauchsbek&auml;mpfung eine Liste mit der von mir ausgestellten Zertifikaten zur Verf&uuml;gung gestellt wird.</p>",
     "certificateCreate.step-two.moreInfosLabel": "Mehr Informationen",

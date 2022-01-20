@@ -67,7 +67,6 @@
     "certificateCreate.step-three.dose": "Dose",
     "certificateCreate.step-three.title": "Aperçu du certificat",
     "certificateCreate.step-three.validFrom": "Valide depuis le",
-    "certificateCreate.step-three.validUntil": "Valide en Suisse jusqu'au",
     "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">L'&eacute;tablissement des certificats de vaccination Covid ou des certificats de gu&eacute;rison Covid pour les personnes ayant &eacute;t&eacute; vaccin&eacute;es ou gu&eacute;rit &agrave; l'&eacute;tranger est r&eacute;serv&eacute; aux seuls bureaux sp&eacute;cifiquement d&eacute;sign&eacute;s par le canton. Veuillez confirmer que vous avez &eacute;t&eacute; autoris&eacute; par le canton &agrave; d&eacute;livrer ces certificats.</p>",
     "certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation": "<p style=\"text-align: justify;\">Je confirme être une personne habilitée par le canton à délivrer des certificats de dérogation COVID-19 sur la base d'une attestation médicale (en vertu de l'art. 21a de l'ordonnance COVID-19 certificats du 4 juin 2021, RS 818.102.2).</p><p style=\"text-align: justify;\">En outre, je consens que l'autorité cantonale compétente dispose d'une liste des certificats que j'ai délivrés afin de lutter contre les abus.</p>",
     "certificateCreate.step-two.moreInfosLabel": "Plus d'informations",
