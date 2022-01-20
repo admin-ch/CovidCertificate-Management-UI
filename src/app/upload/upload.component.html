@@ -19,7 +19,7 @@
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "upload.type" | translate }}</mat-label>
 				<mat-select formControlName="type" id="certificateType" name="certificateType">
-					<mat-option *ngFor="let option of getCertificateTypes()" [value]="option">
+					<mat-option *ngFor="let option of getCsvCertificateTypes()" [value]="option">
 						{{ "certificateCreate.step-one.enum." + option | translate }}
 					</mat-option>
 				</mat-select>
