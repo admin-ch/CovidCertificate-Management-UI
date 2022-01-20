@@ -67,7 +67,6 @@
     "certificateCreate.step-three.dose": "Dose",
     "certificateCreate.step-three.title": "Certificate preview",
     "certificateCreate.step-three.validFrom": "Valid from",
-    "certificateCreate.step-three.validUntil": "Valid in Switzerland until",
     "certificateCreate.step-two.entitledtoissueconfirmation": "<p style=\"text-align: justify;\">The issuing of Covid vaccination certificates or Covid recovery certificates for persons who have been vaccinated or recovered abroad is reserved only for authorised issuers specifically designated by the canton. Please confirm that you have been authorised by the canton to issue these certificates.</p>",
     "certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation": "<p style=\"text-align: justify;\">I confirm that I am an issuer appointed by the canton and that I am authorised to issue certificates of exemption on the basis of medical certificates (in accordance with Art. 21a of the COVID-19 Certificates Ordinance of 4 June 2021, SR 818.102.2).</p><p style=\"text-align: justify;\">I also agree that the responsible cantonal agencies will be provided with a list of the certificates issued by me, in order to combat abuse.</p>",
     "certificateCreate.step-two.moreInfosLabel": "More informations",
