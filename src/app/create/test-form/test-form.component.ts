@@ -12,11 +12,27 @@ import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {RapidTestValidator} from '../utils/rapid-test-validator';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
-const SAMPLE_DATE_VALIDATORS = [
+const BASE_DATE_VALIDATORS = [
 	Validators.required,
 	TimeValidators.validateTime(),
 	DateValidators.dateLessThanToday(),
 	DateValidators.dateMoreThanMinDate()
+];
+
+const RAPID_DATE_VALIDATORS = [
+	Validators.required,
+	TimeValidators.validateTime(),
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateMoreThanMinDateRapid()
+];
+
+const ANTIBODY_DATE_VALIDATORS = [
+	Validators.required,
+	TimeValidators.validateTime(),
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateBeforeThanAntibodyCertificateMinDate()
 ];
 
 @Component({
@@ -166,16 +182,17 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private createForm(): void {
+		let sampleDateValidators = BASE_DATE_VALIDATORS;
 		if (this.antibody) {
-			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
+			sampleDateValidators = ANTIBODY_DATE_VALIDATORS;
 		}
 		if (this.rapid) {
-			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateMoreThanMinDateRapid());
+			sampleDateValidators =  RAPID_DATE_VALIDATORS;
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
 			product: [''],
-			sampleDate: [this.getCurrentDateTime(), SAMPLE_DATE_VALIDATORS],
+			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
@@ -184,7 +201,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			if (!!this.testForm.get('birthdate')) {
 				this.testForm.controls.sampleDate.setValidators([
 					DateValidators.dateMoreThanBirthday(),
-					...SAMPLE_DATE_VALIDATORS
+					...sampleDateValidators
 				]);
 			}
 		});
