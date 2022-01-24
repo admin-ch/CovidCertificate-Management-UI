@@ -187,7 +187,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			sampleDateValidators = ANTIBODY_DATE_VALIDATORS;
 		}
 		if (this.rapid) {
-			sampleDateValidators =  RAPID_DATE_VALIDATORS;
+			sampleDateValidators = RAPID_DATE_VALIDATORS;
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
