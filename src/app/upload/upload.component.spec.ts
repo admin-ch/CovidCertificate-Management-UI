@@ -71,29 +71,33 @@ describe('UploadComponent', () => {
 		expect(mockUploadService.uploadSelectedFile).toHaveBeenCalledTimes(1);
 	});
 
-	describe('Certificate types', () => {
+	describe('Certificate types for CSV', () => {
 		it('should have 5 certificate types for selection', () => {
-			expect(component.getCertificateTypes().length).toBe(5);
+			expect(component.getCsvCertificateTypes().length).toBe(6);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
+			expect(component.getCsvCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
 		});
 
 		it('should have TEST as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[1]).toBe(GenerationType.TEST);
+			expect(component.getCsvCertificateTypes()[1]).toBe(GenerationType.TEST);
 		});
 
 		it('should have RECOVERY as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[2]).toBe(GenerationType.RECOVERY);
+			expect(component.getCsvCertificateTypes()[2]).toBe(GenerationType.RECOVERY);
+		});
+
+		it('should have RECOVERY as certificate types for selection', () => {
+			expect(component.getCsvCertificateTypes()[3]).toBe(GenerationType.RAPID);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[3]).toBe(CsvGenerationType.ANTIBODY);
+			expect(component.getCsvCertificateTypes()[4]).toBe(CsvGenerationType.ANTIBODY);
 		});
 
 		it('should have TOURIST_VACCINATION as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[4]).toBe(CsvGenerationType.TOURIST_VACCINATION);
+			expect(component.getCsvCertificateTypes()[5]).toBe(CsvGenerationType.TOURIST_VACCINATION);
 		});
 	});
 });

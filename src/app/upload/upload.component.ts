@@ -47,7 +47,7 @@ export class UploadComponent implements OnInit {
 		return this.selectedFile?.name;
 	}
 
-	getCertificateTypes(): CsvGenerationType[] {
+	getCsvCertificateTypes(): CsvGenerationType[] {
 		return Object.values(CsvGenerationType);
 	}
 

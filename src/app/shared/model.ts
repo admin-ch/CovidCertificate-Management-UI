@@ -162,6 +162,7 @@ export enum CsvGenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
+	RAPID = 'recovery-rat',
 	ANTIBODY = 'antibody',
 	TOURIST_VACCINATION = 'vaccination-tourist'
 }
