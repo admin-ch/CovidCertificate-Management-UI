@@ -34,8 +34,7 @@ export class ExceptionalFormComponent implements OnInit {
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
-	) {
-	}
+	) {}
 
 	ngOnInit(): void {
 		this.createForm();

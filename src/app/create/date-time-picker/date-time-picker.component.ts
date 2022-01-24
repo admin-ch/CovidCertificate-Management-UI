@@ -4,7 +4,7 @@ import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import timePolyfill from 'time-input-polyfill';
 import supportsTime from 'time-input-polyfill/supportsTime';
 import * as moment from 'moment';
-import {DateValidators} from "../utils/date-validators";
+import {DateValidators} from '../utils/date-validators';
 
 const MY_FORMATS: MatDateFormats = {
 	parse: {
@@ -148,6 +148,10 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					break;
 				}
 				case 'dateTooSmall': {
+					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
+					break;
+				}
+				case 'rapidDateTooSmall': {
 					this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					break;
 				}

@@ -32,6 +32,9 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	vaccineForm: FormGroup;
 	personalDataForm: FormGroup;
 
+	public maxDose = 9;
+	public minDose = 0;
+
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
@@ -70,6 +73,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
 		if (this.personalDataForm) {
+			this.personalDataChild.touchDatepicker();
 			this.personalDataForm.markAllAsTouched();
 		}
 

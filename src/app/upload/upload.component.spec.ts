@@ -7,7 +7,7 @@ import {UploadService} from './upload.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {GenerationType} from 'shared/model';
+import {CsvGenerationType, GenerationType} from 'shared/model';
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -71,21 +71,33 @@ describe('UploadComponent', () => {
 		expect(mockUploadService.uploadSelectedFile).toHaveBeenCalledTimes(1);
 	});
 
-	describe('Certificate types', () => {
-		it('should have 6 certificate types for selection', () => {
-			expect(component.getCertificateTypes().length).toBe(6);
+	describe('Certificate types for CSV', () => {
+		it('should have 5 certificate types for selection', () => {
+			expect(component.getCsvCertificateTypes().length).toBe(6);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[0]).toBe(GenerationType.VACCINATION);
+			expect(component.getCsvCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
 		});
 
 		it('should have TEST as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[1]).toBe(GenerationType.TEST);
+			expect(component.getCsvCertificateTypes()[1]).toBe(GenerationType.TEST);
 		});
 
 		it('should have RECOVERY as certificate types for selection', () => {
-			expect(component.getCertificateTypes()[2]).toBe(GenerationType.RECOVERY);
+			expect(component.getCsvCertificateTypes()[2]).toBe(GenerationType.RECOVERY);
+		});
+
+		it('should have RECOVERY as certificate types for selection', () => {
+			expect(component.getCsvCertificateTypes()[3]).toBe(GenerationType.RAPID);
+		});
+
+		it('should have VACCINATION as certificate types for selection', () => {
+			expect(component.getCsvCertificateTypes()[4]).toBe(CsvGenerationType.ANTIBODY);
+		});
+
+		it('should have TOURIST_VACCINATION as certificate types for selection', () => {
+			expect(component.getCsvCertificateTypes()[5]).toBe(CsvGenerationType.TOURIST_VACCINATION);
 		});
 	});
 });

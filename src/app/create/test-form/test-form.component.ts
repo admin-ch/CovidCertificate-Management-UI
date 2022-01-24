@@ -12,11 +12,27 @@ import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {RapidTestValidator} from '../utils/rapid-test-validator';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
-const SAMPLE_DATE_VALIDATORS = [
+const BASE_DATE_VALIDATORS = [
 	Validators.required,
 	TimeValidators.validateTime(),
 	DateValidators.dateLessThanToday(),
 	DateValidators.dateMoreThanMinDate()
+];
+
+const RAPID_DATE_VALIDATORS = [
+	Validators.required,
+	TimeValidators.validateTime(),
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateMoreThanMinDateRapid()
+];
+
+const ANTIBODY_DATE_VALIDATORS = [
+	Validators.required,
+	TimeValidators.validateTime(),
+	DateValidators.dateLessThanToday(),
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateBeforeThanAntibodyCertificateMinDate()
 ];
 
 @Component({
@@ -26,6 +42,7 @@ const SAMPLE_DATE_VALIDATORS = [
 })
 export class TestFormComponent implements OnInit, AfterViewInit {
 	@Input() antibody = false;
+	@Input() rapid = false;
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
@@ -54,7 +71,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	) {}
 
 	ngOnInit(): void {
-		this.testType = this.getTestTypeOptions()[0];
+		this.testType = this.rapid ? this.getTestTypeOptions()[1] : this.getTestTypeOptions()[0];
 		this.createForm();
 		this.dataService.resetCalled.subscribe(() => {
 			this.resetForm();
@@ -93,6 +110,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		if (this.personalDataForm) {
+			this.personalDataChild.touchDatepicker();
 			this.personalDataForm.markAllAsTouched();
 		}
 		if (this.testForm.valid && this.personalDataForm && this.personalDataForm.valid) {
@@ -146,7 +164,11 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	getMinDate(): Date {
-		return this.antibody ? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE : DateValidators.MIN_DATE;
+		return this.rapid
+			? DateValidators.RAPID_CERTIFICATE_MIN_DATE
+			: this.antibody
+			? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE
+			: DateValidators.MIN_DATE;
 	}
 
 	private updateProductValidators(testTypeCode: string) {
@@ -160,13 +182,17 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private createForm(): void {
+		let sampleDateValidators = BASE_DATE_VALIDATORS;
 		if (this.antibody) {
-			SAMPLE_DATE_VALIDATORS.push(DateValidators.dateBeforeThanAntibodyCertificateMinDate());
+			sampleDateValidators = ANTIBODY_DATE_VALIDATORS;
+		}
+		if (this.rapid) {
+			sampleDateValidators = RAPID_DATE_VALIDATORS;
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
 			product: [''],
-			sampleDate: [this.getCurrentDateTime(), SAMPLE_DATE_VALIDATORS],
+			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
 		});
@@ -175,7 +201,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			if (!!this.testForm.get('birthdate')) {
 				this.testForm.controls.sampleDate.setValidators([
 					DateValidators.dateMoreThanBirthday(),
-					...SAMPLE_DATE_VALIDATORS
+					...sampleDateValidators
 				]);
 			}
 		});
@@ -226,7 +252,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			};
 		} else {
 			additionalData = {
-				certificateType: GenerationType.TEST,
+				certificateType: this.rapid ? GenerationType.RAPID : GenerationType.TEST,
 				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,

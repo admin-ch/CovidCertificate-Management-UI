@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UploadService} from './upload.service';
-import {GenerationType} from 'shared/model';
+import {CsvGenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ObNotificationService} from '@oblique/oblique';
 
@@ -47,8 +47,8 @@ export class UploadComponent implements OnInit {
 		return this.selectedFile?.name;
 	}
 
-	getCertificateTypes(): GenerationType[] {
-		return Object.values(GenerationType);
+	getCsvCertificateTypes(): CsvGenerationType[] {
+		return Object.values(CsvGenerationType);
 	}
 
 	uploadSelectedFile(): void {
@@ -101,7 +101,7 @@ export class UploadComponent implements OnInit {
 
 	private createForm(): void {
 		this.certificateTypeSelectionForm = this.formBuilder.group({
-			type: [GenerationType.VACCINATION, Validators.required]
+			type: [CsvGenerationType.VACCINATION, Validators.required]
 		});
 	}
 

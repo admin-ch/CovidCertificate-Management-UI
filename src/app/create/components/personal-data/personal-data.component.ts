@@ -41,6 +41,12 @@ export class PersonalDataComponent implements OnInit {
 		return this.valueSetsService.getCertificateLanguages();
 	}
 
+	touchDatepicker(): void {
+		const element: HTMLElement = document.querySelector('#birthdate-date');
+		element.focus();
+		element.blur();
+	}
+
 	private getDefaultCertificateLanguage(): ProductInfo {
 		return this.translateService.currentLang === 'en'
 			? this.getCertificateLanguages().find(lang => lang.code === 'de')
