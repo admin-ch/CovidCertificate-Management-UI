@@ -194,7 +194,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
-			... (this.rapid ?  {product: ['', Validators.required]} : {product: ['']}),
+			...(this.rapid ? {product: ['', Validators.required]} : {product: ['']})
 		});
 
 		this.testForm.get('sampleDate').valueChanges.subscribe(_ => {
