@@ -6,5 +6,4 @@ import {FormControl} from '@angular/forms';
 	templateUrl: './vaccination-important-information.component.html',
 	styleUrls: ['./vaccination-important-information.component.scss']
 })
-export class VaccinationImportantInformationComponent {
-}
+export class VaccinationImportantInformationComponent {}
