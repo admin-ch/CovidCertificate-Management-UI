@@ -23,7 +23,7 @@
 		<dt>{{ "certificateCreate.form.label.vaccine.dateOfVaccination" | translate }}</dt>
 		<dd id="dateOfVaccination">{{ patient?.vaccination.dateOfVaccination | date }}</dd>
 		<dt>{{ "certificateCreate.form.label.vaccine.countryOfVaccination" | translate }}</dt>
-		<dd id="countryOfVaccination">{{getTranslatedCountry()}}</dd>
+		<dd id="countryOfVaccination">{{ getTranslatedCountry() }}</dd>
 	</dl>
 </ng-container>
 
@@ -31,7 +31,7 @@
 	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
 	<dl>
 		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
-		<dd id="typeOfTest">{{getTranslatedTypeOfTest()}}</dd>
+		<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
 		<ng-container *ngIf="patient?.test.manufacturer">
 			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
@@ -41,7 +41,7 @@
 		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
 		<dd id="center">{{ patient?.test.center }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
-		<dd id="countryOfTest">{{getTranslatedCountry()}}</dd>
+		<dd id="countryOfTest">{{ getTranslatedCountry() }}</dd>
 	</dl>
 </ng-container>
 
@@ -69,7 +69,7 @@
 		<dt>{{ "certificateCreate.form.label.recovery.dateFirstPositiveTestResult" | translate }}</dt>
 		<dd id="dateFirstPositiveTestResult">{{ patient?.recovery.dateFirstPositiveTestResult | date }}</dd>
 		<dt>{{ "certificateCreate.form.label.recovery.countryOfTest" | translate }}</dt>
-		<dd id="countryOfRecovery">{{getTranslatedCountry()}}</dd>
+		<dd id="countryOfRecovery">{{ getTranslatedCountry() }}</dd>
 		<dt>{{ "certificateCreate.step-three.validFrom" | translate }}</dt>
 		<dd id="validFrom">{{ validFrom | date }}</dd>
 	</dl>
