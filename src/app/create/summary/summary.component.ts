@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {CertificateService} from 'shared/certificate.service';
 import {Patient, Shipping} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
-import {CertificateService} from 'shared/certificate.service';
+import {ValueSetsService} from '../utils/value-sets.service';
 
 @Component({
 	selector: 'ec-summary',
@@ -16,6 +17,8 @@ export class SummaryComponent implements OnInit {
 	validFrom: Date;
 	validUntil: Date;
 	shipping: Shipping;
+	patientTypeOfTest: string;
+	patientVaccinationCountry: string;
 
 	private readonly RECOVERY_CERTIFICATE_VALIDITY_IN_DAYS = 364;
 	private readonly DAYS_UNTIL_VALID = 10;
@@ -31,6 +34,7 @@ export class SummaryComponent implements OnInit {
 
 	constructor(
 		private readonly dataService: CreationDataService,
+		private readonly valueSetsService: ValueSetsService,
 		private readonly certificateService: CertificateService
 	) {}
 
@@ -51,6 +55,34 @@ export class SummaryComponent implements OnInit {
 		this.dataService.shippingChanged.subscribe(shipping => {
 			this.shipping = shipping;
 		});
+	}
+
+	getTranslatedTypeOfTest(): string {
+		return this.valueSetsService
+			.getTypeOfTests()
+			.filter(elem => elem.code === this.patient?.test.typeOfTest.code)
+			.map(item => item.display)[0];
+	}
+
+	getTranslatedCountry(): string {
+		if (this.patient.test) {
+			return this.valueSetsService
+				.getCountryOptions()
+				.filter(elem => elem.code === this.patient?.test.countryOfTest.code)
+				.map(item => item.display)[0];
+		}
+		if (this.patient.vaccination) {
+			return this.valueSetsService
+				.getCountryOptions()
+				.filter(elem => elem.code === this.patient?.vaccination.countryOfVaccination.code)
+				.map(item => item.display)[0];
+		}
+		if (this.patient.recovery) {
+			return this.valueSetsService
+				.getCountryOptions()
+				.filter(elem => elem.code === this.patient?.recovery.countryOfTest.code)
+				.map(item => item.display)[0];
+		}
 	}
 
 	goBack(): void {
