@@ -63,6 +63,7 @@
     "certificateCreate.step-one.enum.vaccination": "Vaccin",
     "certificateCreate.step-one.enum.vaccination-tourist": "Certificat de tourisme (vaccin de l'OMS)",
     "certificateCreate.step-three.attestationCountry": "Attestation médicale délivrée en",
+    "certificateCreate.step-three.defaultCountrySwitzerland": "Suisse",
     "certificateCreate.step-three.description": "Merci de vérifier l'exactitude des données saisies avant la génération du certificat.",
     "certificateCreate.step-three.dose": "Dose",
     "certificateCreate.step-three.title": "Aperçu du certificat",
