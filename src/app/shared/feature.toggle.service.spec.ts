@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ApiService} from './api.service';
-import {FeatureToggleService} from "shared/feature.toggle.service";
+import {FeatureToggleService} from 'shared/feature.toggle.service';
 
 describe('FeatureToggleService', () => {
 	let service: FeatureToggleService;

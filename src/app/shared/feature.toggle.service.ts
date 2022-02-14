@@ -14,18 +14,16 @@ export class FeatureToggleService {
 	constructor(
 		private readonly http: ApiService,
 		private readonly dtoMappingService: CertificateCreateDtoMappingService
-	) {
-	}
+	) {}
 
 	getFeatureToggle(): Observable<FeatureToggle[]> {
-		console.log("theGet" + this.http.get<FeatureToggle[]>(this.featureToggle))
+		console.log('theGet' + this.http.get<FeatureToggle[]>(this.featureToggle));
 		return this.http.get<FeatureToggle[]>(this.featureToggle, {withCredentials: true});
 	}
 
 	setFeatureToggleGroup(featureToggleGroup: FeatureToggle[]) {
 		this.featureToggleGroup = featureToggleGroup;
 	}
-
 
 	isActive(generationType: GenerationType): boolean {
 		switch (generationType) {

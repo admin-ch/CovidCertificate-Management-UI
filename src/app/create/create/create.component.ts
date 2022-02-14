@@ -4,7 +4,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {CertificateService} from 'shared/certificate.service';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
-import {FeatureToggleService} from "shared/feature.toggle.service";
+import {FeatureToggleService} from 'shared/feature.toggle.service';
 
 @Component({
 	selector: 'ec-create',
@@ -23,8 +23,7 @@ export class CreateComponent implements OnInit {
 		private readonly certificateService: CertificateService,
 		private readonly featureToggleService: FeatureToggleService,
 		private readonly dataService: CreationDataService
-	) {
-	}
+	) {}
 
 	ngOnInit() {
 		this.certificateService.getValueSets().subscribe(valueSetsResponse => {
@@ -32,7 +31,7 @@ export class CreateComponent implements OnInit {
 			this.valueSetsLoaded = true;
 		});
 
-	 	this.featureToggleService.getFeatureToggle().subscribe(featureToggleGroup => {
+		this.featureToggleService.getFeatureToggle().subscribe(featureToggleGroup => {
 			console.log('featureToggleGroup: ' + featureToggleGroup);
 			//	this.featureToggleService.setFeatureToggleGroup(featureToggleGroup);
 			//	this.featureToggleSetsLoaded = true;
