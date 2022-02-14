@@ -18,7 +18,8 @@ export class FeatureToggleService {
 	}
 
 	getFeatureToggle(): Observable<FeatureToggle[]> {
-		return this.http.get<FeatureToggle[]>(this.featureToggle);
+		console.log("theGet" + this.http.get<FeatureToggle[]>(this.featureToggle))
+		return this.http.get<FeatureToggle[]>(this.featureToggle, {withCredentials: true});
 	}
 
 	setFeatureToggleGroup(featureToggleGroup: FeatureToggle[]) {
