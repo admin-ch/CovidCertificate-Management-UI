@@ -238,6 +238,13 @@ export interface ValueSetsResponse {
 	testSets: RapidTestProductInfoWithToString[];
 }
 
+export interface FeatureToggle {
+	uri: any;
+	// start: string;
+	// end: string;
+	// active: boolean;
+}
+
 export interface CountryCodesDto {
 	de: CountryCodeDto[];
 	en: CountryCodeDto[];
