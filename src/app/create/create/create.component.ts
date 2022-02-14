@@ -32,6 +32,7 @@ export class CreateComponent implements OnInit {
 		});
 
 		this.featureToggleService.getFeatureToggle().subscribe(featureToggleGroup => {
+			console.log("the get")
 			console.log('featureToggleGroup: ' + featureToggleGroup);
 			//	this.featureToggleService.setFeatureToggleGroup(featureToggleGroup);
 			//	this.featureToggleSetsLoaded = true;
