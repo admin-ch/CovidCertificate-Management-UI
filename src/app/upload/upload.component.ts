@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UploadService} from './upload.service';
-import {CsvGenerationType} from 'shared/model';
+import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ObNotificationService} from '@oblique/oblique';
+import {CertificateService} from "shared/certificate.service";
 
 @Component({
 	selector: 'ec-upload',
@@ -20,8 +21,10 @@ export class UploadComponent implements OnInit {
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly uploadService: UploadService,
-		private readonly notificationService: ObNotificationService
-	) {}
+		private readonly notificationService: ObNotificationService,
+		private readonly certificateService: CertificateService
+	) {
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -47,8 +50,8 @@ export class UploadComponent implements OnInit {
 		return this.selectedFile?.name;
 	}
 
-	getCsvCertificateTypes(): CsvGenerationType[] {
-		return Object.values(CsvGenerationType);
+	getCsvCertificateTypes(): GenerationType[] {
+		return Object.values(GenerationType).filter(elem => elem !== GenerationType.EXCEPTIONAL).filter(elem => this.certificateService.verifyFeatureAvailability(elem))
 	}
 
 	uploadSelectedFile(): void {
@@ -101,7 +104,7 @@ export class UploadComponent implements OnInit {
 
 	private createForm(): void {
 		this.certificateTypeSelectionForm = this.formBuilder.group({
-			type: [CsvGenerationType.VACCINATION, Validators.required]
+			type: ['', Validators.required]
 		});
 	}
 

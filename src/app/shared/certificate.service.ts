@@ -1,7 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from 'shared/api.service';
-import {CertificateCreateDto, CreateCertificateResponse, Patient, Shipping, ValueSetsResponse} from './model';
+import {
+	CertificateCreateDto,
+	CreateCertificateResponse,
+	FeatureToggle,
+	GenerationType,
+	Patient,
+	Shipping,
+	ValueSetsResponse
+} from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
 
 @Injectable({
@@ -9,12 +17,15 @@ import {CertificateCreateDtoMappingService} from '../create/utils/certificate-cr
 })
 export class CertificateService {
 	private readonly covidCertificateApi = 'covidcertificate';
+	private readonly featureToggleApi = 'feature-toggle/features';
 	private readonly valueSetsApi = 'valuesets';
+	private featureToggleSets: FeatureToggle[] = [];
 
 	constructor(
 		private readonly http: ApiService,
 		private readonly dtoMappingService: CertificateCreateDtoMappingService
-	) {}
+	) {
+	}
 
 	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
 		// the api endpoint is infered from the certificate type of the patient
@@ -26,6 +37,14 @@ export class CertificateService {
 
 	getValueSets(): Observable<ValueSetsResponse> {
 		return this.http.get<ValueSetsResponse>(this.valueSetsApi);
+	}
+
+	getFeatureToggleSets(): Observable<FeatureToggle[]> {
+		return this.http.get<FeatureToggle[]>(this.featureToggleApi);
+	}
+
+	setFeatureToggleSets(featureToggleSets: FeatureToggle[]): void {
+		this.featureToggleSets = featureToggleSets;
 	}
 
 	PDFtoBlob(dataURI: string): Blob {
@@ -40,5 +59,14 @@ export class CertificateService {
 
 		// write the ArrayBuffer to a blob, and you're done
 		return new Blob([arrayBuffer], {type: 'application/pdf'});
+	}
+
+	verifyFeatureAvailability(generationType: GenerationType) {
+		const featureToggleValue = this.featureToggleSets.find(e => GenerationType[e.type] === generationType);
+		if (featureToggleValue === undefined) {
+			return true
+		}
+		const now = Date.now()
+		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime()
 	}
 }

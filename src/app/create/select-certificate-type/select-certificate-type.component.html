@@ -6,36 +6,68 @@
 		aria-label="Select an option"
 		class="radio-button-container"
 	>
-		<mat-radio-button id="generationType-vaccination" value="vaccination" name="vaccination" class="radio-button">{{
-			"certificateCreate.step-one.enum.vaccination" | translate
-		}}</mat-radio-button>
-		<mat-radio-button id="generationType-test" value="test" name="test" class="radio-button">{{
-			"certificateCreate.step-one.enum.test" | translate
-		}}</mat-radio-button>
-		<mat-radio-button id="generationType-recovery" value="recovery" name="recovery" class="radio-button">{{
-			"certificateCreate.step-one.enum.recovery" | translate
-		}}</mat-radio-button>
-		<legend class="group-header">{{ "certificateCreate.step-one.enum.chOnly" | translate }}</legend>
 		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION)"
+			id="generationType-vaccination"
+			value="vaccination"
+			name="vaccination"
+			class="radio-button">
+			{{"certificateCreate.step-one.enum.vaccination" | translate}}
+		</mat-radio-button>
+		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.TEST)"
+			id="generationType-test"
+			value="test"
+			name="test"
+			class="radio-button">
+			{{"certificateCreate.step-one.enum.test" | translate}}
+		</mat-radio-button>
+		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY)"
+			id="generationType-recovery"
+			value="recovery"
+			name="recovery"
+			class="radio-button">
+			{{"certificateCreate.step-one.enum.recovery" | translate}}
+		</mat-radio-button>
+
+		<legend
+			class="group-header">
+			{{ "certificateCreate.step-one.enum.chOnly" | translate }}
+		</legend>
+
+		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.RAPID)"
 			id="generationType-recovery-rat"
 			value="recovery-rat"
 			name="recovery-rat"
-			class="radio-button"
-			>{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}</mat-radio-button
-		>
-		<mat-radio-button id="generationType-antibody" value="antibody" name="antibody" class="radio-button">{{
-			"certificateCreate.step-one.enum.antibody" | translate
-		}}</mat-radio-button>
+			class="radio-button">
+			{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}
+		</mat-radio-button>
 		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.ANTIBODY)"
+			id="generationType-antibody"
+			value="antibody"
+			name="antibody"
+			class="radio-button">
+			{{"certificateCreate.step-one.enum.antibody" | translate}}
+		</mat-radio-button>
+		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)"
 			id="generationType-vaccination-tourist"
 			value="vaccination-tourist"
 			name="vaccination-tourist"
-			class="radio-button"
-			>{{ "certificateCreate.step-one.enum.vaccination-tourist" | translate }}</mat-radio-button
-		>
-		<mat-radio-button id="exceptional" value="exceptional" name="exceptional" class="radio-button">{{
-			"certificateCreate.step-one.enum.exceptional" | translate
-		}}</mat-radio-button>
+			class="radio-button">
+			{{ "certificateCreate.step-one.enum.vaccination-tourist" | translate }}
+		</mat-radio-button>
+		<mat-radio-button
+			*ngIf="verifyFeatureAvailability(GenerationType.EXCEPTIONAL)"
+			id="exceptional"
+			value="exceptional"
+			name="exceptional"
+			class="radio-button">
+			{{"certificateCreate.step-one.enum.exceptional" | translate}}
+		</mat-radio-button>
 	</mat-radio-group>
 
 	<div class="stepper-footer">

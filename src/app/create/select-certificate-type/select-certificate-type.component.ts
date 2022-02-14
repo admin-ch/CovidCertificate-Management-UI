@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
+import {CertificateService} from "shared/certificate.service";
 
 @Component({
 	selector: 'ec-select-certificate-type',
@@ -11,10 +12,17 @@ import {CreationDataService} from '../utils/creation-data.service';
 export class SelectCertificateTypeComponent implements OnInit {
 	@Output() next = new EventEmitter<void>();
 
+	GenerationType = GenerationType
+
 	certificateTypeSelectionForm: FormGroup;
 	typeSelection: string[] = Object.values(GenerationType);
 
-	constructor(private readonly formBuilder: FormBuilder, private readonly dataService: CreationDataService) {}
+	constructor(
+		private readonly formBuilder: FormBuilder,
+		private readonly dataService: CreationDataService,
+		private readonly certificateService: CertificateService
+	) {
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -28,6 +36,10 @@ export class SelectCertificateTypeComponent implements OnInit {
 			this.dataService.setNewCertificateType(this.certificateTypeSelectionForm.get('type').value);
 			this.next.emit();
 		}
+	}
+
+	verifyFeatureAvailability(generationType: GenerationType) {
+		return this.certificateService.verifyFeatureAvailability(generationType)
 	}
 
 	private createForm(): void {

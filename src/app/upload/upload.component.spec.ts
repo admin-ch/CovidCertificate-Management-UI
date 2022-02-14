@@ -7,7 +7,7 @@ import {UploadService} from './upload.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {CsvGenerationType, GenerationType} from 'shared/model';
+import {GenerationType} from 'shared/model';
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -77,7 +77,7 @@ describe('UploadComponent', () => {
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
+			expect(component.getCsvCertificateTypes()[0]).toBe(GenerationType.VACCINATION);
 		});
 
 		it('should have TEST as certificate types for selection', () => {
@@ -93,11 +93,11 @@ describe('UploadComponent', () => {
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[4]).toBe(CsvGenerationType.ANTIBODY);
+			expect(component.getCsvCertificateTypes()[4]).toBe(GenerationType.ANTIBODY);
 		});
 
 		it('should have TOURIST_VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[5]).toBe(CsvGenerationType.TOURIST_VACCINATION);
+			expect(component.getCsvCertificateTypes()[5]).toBe(GenerationType.VACCINATION_TOURIST);
 		});
 	});
 });

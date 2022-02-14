@@ -367,7 +367,7 @@ describe.skip('TouristVaccineFormComponent', () => {
 					medicalProduct: {code: '42', display: 'test-product'},
 					totalDoses: 2
 				},
-				certificateType: GenerationType.TOURIST_VACCINATION
+				certificateType: GenerationType.VACCINATION_TOURIST
 			});
 		});
 	});

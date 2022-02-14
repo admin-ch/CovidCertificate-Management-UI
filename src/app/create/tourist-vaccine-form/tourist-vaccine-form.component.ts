@@ -148,7 +148,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 				medicalProduct: this.vaccineForm.value.medicalProduct,
 				totalDoses: this.vaccineForm.value.totalDoses
 			},
-			certificateType: GenerationType.TOURIST_VACCINATION
+			certificateType: GenerationType.VACCINATION_TOURIST
 		};
 	}
 

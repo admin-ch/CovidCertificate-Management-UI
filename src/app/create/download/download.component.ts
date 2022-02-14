@@ -20,7 +20,7 @@ export class DownloadComponent implements OnInit {
 		return (
 			this.type === GenerationType.ANTIBODY ||
 			this.type === GenerationType.RAPID ||
-			this.type === GenerationType.TOURIST_VACCINATION ||
+			this.type === GenerationType.VACCINATION_TOURIST ||
 			this.type === GenerationType.EXCEPTIONAL
 		);
 	}
