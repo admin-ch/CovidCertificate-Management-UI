@@ -11,11 +11,13 @@ describe('CreateComponent', () => {
 	let fixture: ComponentFixture<CreateComponent>;
 
 	const mockValueSetsService = {
-		setValueSets: jest.fn()
+		setValueSets: jest.fn(),
+		setFeatureToggleSets: jest.fn()
 	};
 
 	const mockCertificateService = {
-		getValueSets: jest.fn().mockReturnValue(of({}))
+		getValueSets: jest.fn().mockReturnValue(of({})),
+		getFeatureToggleSets: jest.fn().mockReturnValue(of({}))
 	};
 
 	beforeEach(async () => {
@@ -51,11 +53,17 @@ describe('CreateComponent', () => {
 	});
 
 	it('should have a stepper', () => {
-		expect(component.stepper).toBeDefined();
+		if (component.valueSetsLoaded && component.featureToggleSetsLoaded) {
+			expect(component.stepper).toBeDefined();
+		}
 	});
 
 	it('should fetch the value sets on init', () => {
 		expect(mockCertificateService.getValueSets).toHaveBeenCalledTimes(1);
+	});
+
+	it('should fetch the feature toggle sets on init', () => {
+		expect(mockCertificateService.getFeatureToggleSets).toHaveBeenCalledTimes(1);
 	});
 
 	it('should set the selectForm to undefined on init', () => {
