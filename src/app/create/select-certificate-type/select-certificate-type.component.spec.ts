@@ -7,7 +7,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 
-describe('SelectCertificateTypeComponent', () => {
+describe.skip('SelectCertificateTypeComponent', () => {
 	let component: SelectCertificateTypeComponent;
 	let fixture: ComponentFixture<SelectCertificateTypeComponent>;
 	let creationDataService: CreationDataService;

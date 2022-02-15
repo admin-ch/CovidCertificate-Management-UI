@@ -15,17 +15,24 @@ export class CreateComponent implements OnInit {
 
 	selectedForm: GenerationType;
 	valueSetsLoaded = false;
+	featureToggleSetsLoaded = false;
 
 	constructor(
 		private readonly valueSetsService: ValueSetsService,
 		private readonly certificateService: CertificateService,
 		private readonly dataService: CreationDataService
-	) {}
+	) {
+	}
 
 	ngOnInit() {
 		this.certificateService.getValueSets().subscribe(valueSetsResponse => {
 			this.valueSetsService.setValueSets(valueSetsResponse);
 			this.valueSetsLoaded = true;
+		});
+
+		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
+			this.certificateService.setFeatureToggleSets(featureToggleGroup);
+			this.featureToggleSetsLoaded = true;
 		});
 
 		this.dataService.certificateTypeChanged.subscribe(certificateType => {

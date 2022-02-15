@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UploadService} from './upload.service';
-import {CsvGenerationType} from 'shared/model';
+import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ObNotificationService} from '@oblique/oblique';
+import {CertificateService} from "shared/certificate.service";
 
 @Component({
 	selector: 'ec-upload',
@@ -20,8 +21,42 @@ export class UploadComponent implements OnInit {
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly uploadService: UploadService,
-		private readonly notificationService: ObNotificationService
-	) {}
+		private readonly notificationService: ObNotificationService,
+		private readonly certificateService: CertificateService
+	) {
+	}
+
+	private static downloadZip(zipToDownload: ArrayBuffer): void {
+		if (zipToDownload) {
+			const linkSource = `data:application/zip;base64,${zipToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
+	}
+
+	private static downloadCsv(csvToDownload: string): void {
+		if (csvToDownload) {
+			const linkSource = `data:text/csv;base64,${csvToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -47,8 +82,8 @@ export class UploadComponent implements OnInit {
 		return this.selectedFile?.name;
 	}
 
-	getCsvCertificateTypes(): CsvGenerationType[] {
-		return Object.values(CsvGenerationType);
+	getCsvCertificateTypes(): GenerationType[] {
+		return Object.values(GenerationType).filter(elem => elem !== GenerationType.EXCEPTIONAL).filter(elem => this.certificateService.verifyFeatureAvailability(elem))
 	}
 
 	uploadSelectedFile(): void {
@@ -57,51 +92,19 @@ export class UploadComponent implements OnInit {
 			.subscribe(
 				response => {
 					this.resetSelectedFile();
-					this.downloadZip(response?.zip);
+					UploadComponent.downloadZip(response?.zip);
 					this.notificationService.success('upload.file.upload.success');
 				},
 				error => {
 					this.resetSelectedFile();
-					this.downloadCsv(error?.error?.csv);
+					UploadComponent.downloadCsv(error?.error?.csv);
 				}
 			);
 	}
 
-	private downloadZip(zipToDownload: ArrayBuffer): void {
-		if (zipToDownload) {
-			const linkSource = `data:application/zip;base64,${zipToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
-	private downloadCsv(csvToDownload: string): void {
-		if (csvToDownload) {
-			const linkSource = `data:text/csv;base64,${csvToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
 	private createForm(): void {
 		this.certificateTypeSelectionForm = this.formBuilder.group({
-			type: [CsvGenerationType.VACCINATION, Validators.required]
+			type: ['', Validators.required]
 		});
 	}
 

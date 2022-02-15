@@ -65,7 +65,7 @@ export class ShippingComponent implements OnInit {
 			this.resetForm();
 		});
 		this.dataService.certificateTypeChanged.subscribe((certificateType: GenerationType) => {
-			if (certificateType === GenerationType.TEST || certificateType === GenerationType.TOURIST_VACCINATION) {
+			if (certificateType === GenerationType.TEST || certificateType === GenerationType.VACCINATION_TOURIST) {
 				this.shippingOptions = [ShippingOptions.PDF, ShippingOptions.APP];
 			} else {
 				this.shippingOptions = Object.values(ShippingOptions);

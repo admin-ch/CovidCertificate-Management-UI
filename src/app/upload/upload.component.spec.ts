@@ -7,7 +7,8 @@ import {UploadService} from './upload.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {CsvGenerationType, GenerationType} from 'shared/model';
+import {GenerationType} from 'shared/model';
+import {CertificateService} from "shared/certificate.service";
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -15,6 +16,10 @@ describe('UploadComponent', () => {
 
 	const mockUploadService = {
 		uploadSelectedFile: jest.fn().mockReturnValue(of({}))
+	};
+
+	const mockCertificateService = {
+		verifyFeatureAvailability: jest.fn().mockReturnValue(true)
 	};
 
 	beforeEach(async () => {
@@ -25,6 +30,10 @@ describe('UploadComponent', () => {
 				{
 					provide: UploadService,
 					useValue: mockUploadService
+				},
+				{
+					provide: CertificateService,
+					useValue: mockCertificateService
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA]
@@ -49,15 +58,16 @@ describe('UploadComponent', () => {
 		expect(component.getSelectedFileName()).toBeUndefined();
 	});
 
+	it('should be able to upload after a file has been selected', () => {
+		component.onFileSelected({target: {files: [new File([], 'test-file')]}});
+		component.certificateTypeSelectionForm.get('type').setValue(GenerationType.VACCINATION);
+		expect(component.canUploadFile()).toBeTruthy();
+	});
+
 	it('should not be able to upload if a file has been selected but not the type', () => {
 		component.onFileSelected({target: {files: [new File([], 'test-file')]}});
 		component.certificateTypeSelectionForm.get('type').setValue(null);
 		expect(component.canUploadFile()).toBeFalsy();
-	});
-
-	it('should be able to upload after a file has been selected', () => {
-		component.onFileSelected({target: {files: [new File([], 'test-file')]}});
-		expect(component.canUploadFile()).toBeTruthy();
 	});
 
 	it('should have a selected file name after a file has been selected', () => {
@@ -77,7 +87,7 @@ describe('UploadComponent', () => {
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[0]).toBe(CsvGenerationType.VACCINATION);
+			expect(component.getCsvCertificateTypes()[0]).toBe(GenerationType.VACCINATION);
 		});
 
 		it('should have TEST as certificate types for selection', () => {
@@ -93,11 +103,11 @@ describe('UploadComponent', () => {
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[4]).toBe(CsvGenerationType.ANTIBODY);
+			expect(component.getCsvCertificateTypes()[4]).toBe(GenerationType.ANTIBODY);
 		});
 
 		it('should have TOURIST_VACCINATION as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[5]).toBe(CsvGenerationType.TOURIST_VACCINATION);
+			expect(component.getCsvCertificateTypes()[5]).toBe(GenerationType.VACCINATION_TOURIST);
 		});
 	});
 });
