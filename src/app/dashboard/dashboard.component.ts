@@ -7,17 +7,10 @@ import {CertificateService} from "shared/certificate.service";
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 	constructor(
-		private readonly router: Router,
-		private readonly certificateService: CertificateService
+		private readonly router: Router
 	) {
-	}
-
-	ngOnInit() {
-		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
-			this.certificateService.setFeatureToggleSets(featureToggleGroup);
-		});
 	}
 
 	goToCertificateCreate() {
