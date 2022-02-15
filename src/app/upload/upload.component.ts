@@ -26,6 +26,38 @@ export class UploadComponent implements OnInit {
 	) {
 	}
 
+	private static downloadZip(zipToDownload: ArrayBuffer): void {
+		if (zipToDownload) {
+			const linkSource = `data:application/zip;base64,${zipToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
+	}
+
+	private static downloadCsv(csvToDownload: string): void {
+		if (csvToDownload) {
+			const linkSource = `data:text/csv;base64,${csvToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
+	}
+
 	ngOnInit(): void {
 		this.createForm();
 	}
@@ -60,46 +92,14 @@ export class UploadComponent implements OnInit {
 			.subscribe(
 				response => {
 					this.resetSelectedFile();
-					this.downloadZip(response?.zip);
+					UploadComponent.downloadZip(response?.zip);
 					this.notificationService.success('upload.file.upload.success');
 				},
 				error => {
 					this.resetSelectedFile();
-					this.downloadCsv(error?.error?.csv);
+					UploadComponent.downloadCsv(error?.error?.csv);
 				}
 			);
-	}
-
-	private downloadZip(zipToDownload: ArrayBuffer): void {
-		if (zipToDownload) {
-			const linkSource = `data:application/zip;base64,${zipToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
-	private downloadCsv(csvToDownload: string): void {
-		if (csvToDownload) {
-			const linkSource = `data:text/csv;base64,${csvToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
 	}
 
 	private createForm(): void {
