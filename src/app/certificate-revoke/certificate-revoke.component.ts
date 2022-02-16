@@ -12,6 +12,7 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	revocationForm: FormGroup;
 	revoked: boolean;
 	uvciUsed: string;
+	isFraud = false;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -22,6 +23,7 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.revoked = false;
 		this.uvciUsed = undefined;
+		this.isFraud = false;
 		this.createRevocationForm();
 	}
 
@@ -37,14 +39,19 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	toggleFraud() {
+		this.isFraud = !this.isFraud;
+	}
+
 	private createRevocationForm(): void {
 		this.revocationForm = this.formBuilder.group({
-			uvci: ['', [Validators.required, Validators.minLength(39), Validators.maxLength(39)]]
+			uvci: ['', [Validators.required, Validators.minLength(39), Validators.maxLength(39)]],
+			isFraud: [],
 		});
 	}
 
 	private callRevocation(): void {
-		this.revocationService.revoke({uvci: this.uvciUsed}).subscribe(() => {
+		this.revocationService.revoke({uvci: this.uvciUsed, fraud: this.isFraud}).subscribe(() => {
 			this.revoked = true;
 		});
 	}
