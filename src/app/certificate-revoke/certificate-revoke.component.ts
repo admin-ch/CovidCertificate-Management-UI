@@ -46,7 +46,7 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	private createRevocationForm(): void {
 		this.revocationForm = this.formBuilder.group({
 			uvci: ['', [Validators.required, Validators.minLength(39), Validators.maxLength(39)]],
-			isFraud: [],
+			isFraud: []
 		});
 	}
 
