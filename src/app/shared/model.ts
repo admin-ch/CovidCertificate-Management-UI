@@ -230,6 +230,7 @@ export interface ValueSetsResponse {
 }
 
 export interface FeatureToggle {
+	uris: string[];
 	type: GenerationType;
 	start: Date;
 	end: Date;
