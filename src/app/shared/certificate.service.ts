@@ -24,8 +24,7 @@ export class CertificateService {
 	constructor(
 		private readonly http: ApiService,
 		private readonly dtoMappingService: CertificateCreateDtoMappingService
-	) {
-	}
+	) {}
 
 	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
 		// the api endpoint is infered from the certificate type of the patient
@@ -64,9 +63,9 @@ export class CertificateService {
 	verifyFeatureAvailability(generationType: GenerationType) {
 		const featureToggleValue = this.featureToggleSets.find(e => GenerationType[e.type] === generationType);
 		if (featureToggleValue === undefined) {
-			return true
+			return true;
 		}
-		const now = Date.now()
-		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime()
+		const now = Date.now();
+		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime();
 	}
 }
