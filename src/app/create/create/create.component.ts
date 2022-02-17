@@ -21,8 +21,7 @@ export class CreateComponent implements OnInit {
 		private readonly valueSetsService: ValueSetsService,
 		private readonly certificateService: CertificateService,
 		private readonly dataService: CreationDataService
-	) {
-	}
+	) {}
 
 	ngOnInit() {
 		this.certificateService.getValueSets().subscribe(valueSetsResponse => {

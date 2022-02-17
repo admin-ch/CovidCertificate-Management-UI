@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CertificateService} from "shared/certificate.service";
+import {CertificateService} from 'shared/certificate.service';
 
 @Component({
 	selector: 'ec-dashboard',
@@ -8,10 +8,7 @@ import {CertificateService} from "shared/certificate.service";
 	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-	constructor(
-		private readonly router: Router
-	) {
-	}
+	constructor(private readonly router: Router) {}
 
 	goToCertificateCreate() {
 		this.router.navigateByUrl('certificate-create');
