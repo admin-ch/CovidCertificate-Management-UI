@@ -61,7 +61,9 @@ export class CertificateService {
 	}
 
 	verifyFeatureAvailability(generationType: GenerationType) {
-		const featureToggleValue = this.featuresResponse.featureData.find(e => GenerationType[e.type] === generationType);
+		const featureToggleValue = this.featuresResponse.featureData.find(
+			e => GenerationType[e.type] === generationType
+		);
 		if (featureToggleValue === undefined) {
 			return true;
 		}
