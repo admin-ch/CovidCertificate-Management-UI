@@ -41,6 +41,15 @@ export class SelectCertificateTypeComponent implements OnInit {
 		return this.certificateService.verifyFeatureAvailability(generationType);
 	}
 
+	isAnyChOnlyCertificateAvailable(): boolean {
+		return (
+			this.certificateService.verifyFeatureAvailability(GenerationType.ANTIBODY) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.EXCEPTIONAL) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.RECOVERY_RAT) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)
+		);
+	}
+
 	private createForm(): void {
 		this.certificateTypeSelectionForm = this.formBuilder.group({
 			type: [GenerationType.VACCINATION, Validators.required]

@@ -1,6 +1,6 @@
 {
   "name": "cc-management-ui",
-  "version": "3.3.10",
+  "version": "3.6.4",
   "scripts": {
     "start": "ng serve",
     "build": "ng build",

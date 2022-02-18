@@ -152,7 +152,7 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
-	RAPID = 'recovery-rat',
+	RECOVERY_RAT = 'recovery-rat',
 	ANTIBODY = 'antibody',
 	VACCINATION_TOURIST = 'vaccination-tourist',
 	EXCEPTIONAL = 'exceptional'
@@ -229,7 +229,12 @@ export interface ValueSetsResponse {
 	testSets: RapidTestProductInfoWithToString[];
 }
 
-export interface FeatureToggle {
+export interface FeaturesResponse {
+	featureData: FeatureData[];
+}
+
+export interface FeatureData {
+	uris: string[];
 	type: GenerationType;
 	start: Date;
 	end: Date;

@@ -4,7 +4,7 @@ import {ApiService} from 'shared/api.service';
 import {
 	CertificateCreateDto,
 	CreateCertificateResponse,
-	FeatureToggle,
+	FeaturesResponse,
 	GenerationType,
 	Patient,
 	Shipping,
@@ -19,7 +19,7 @@ export class CertificateService {
 	private readonly covidCertificateApi = 'covidcertificate';
 	private readonly featureToggleApi = 'feature-toggle/features';
 	private readonly valueSetsApi = 'valuesets';
-	private featureToggleSets: FeatureToggle[] = [];
+	private featuresResponse: FeaturesResponse;
 
 	constructor(
 		private readonly http: ApiService,
@@ -38,12 +38,12 @@ export class CertificateService {
 		return this.http.get<ValueSetsResponse>(this.valueSetsApi);
 	}
 
-	getFeatureToggleSets(): Observable<FeatureToggle[]> {
-		return this.http.get<FeatureToggle[]>(this.featureToggleApi);
+	getFeatureToggleSets(): Observable<FeaturesResponse> {
+		return this.http.get<FeaturesResponse>(this.featureToggleApi);
 	}
 
-	setFeatureToggleSets(featureToggleSets: FeatureToggle[]): void {
-		this.featureToggleSets = featureToggleSets;
+	setFeatureToggleSets(featuresResponse: FeaturesResponse): void {
+		this.featuresResponse = featuresResponse;
 	}
 
 	PDFtoBlob(dataURI: string): Blob {
@@ -61,7 +61,9 @@ export class CertificateService {
 	}
 
 	verifyFeatureAvailability(generationType: GenerationType) {
-		const featureToggleValue = this.featureToggleSets.find(e => GenerationType[e.type] === generationType);
+		const featureToggleValue = this.featuresResponse.featureData.find(
+			e => GenerationType[e.type] === generationType
+		);
 		if (featureToggleValue === undefined) {
 			return true;
 		}
