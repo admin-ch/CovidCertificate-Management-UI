@@ -229,7 +229,11 @@ export interface ValueSetsResponse {
 	testSets: RapidTestProductInfoWithToString[];
 }
 
-export interface FeatureToggle {
+export interface FeaturesResponse {
+	featureData: FeatureData[];
+}
+
+export interface FeatureData {
 	uris: string[];
 	type: GenerationType;
 	start: Date;
