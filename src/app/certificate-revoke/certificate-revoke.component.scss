@@ -5,3 +5,12 @@
 .ob-alert {
 	margin-top: 1.2em;
 }
+
+.input-container {
+	display: flex;
+	flex-direction: row;
+	
+	mat-checkbox {
+		margin-left: 3rem;
+	}	
+}
