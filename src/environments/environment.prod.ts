@@ -19,6 +19,12 @@ export const environment = {
 		silentRenew: true,
 		useAutoLogin: false,
 		debug: LogLevel.Warn,
-		tokenAwareUrlPatterns: ['/v1/covidcertificate.*', '/v1/valuesets', '/v1/otp', '/v1/revocation']
+		tokenAwareUrlPatterns: [
+			'/v1/covidcertificate.*',
+			'/v1/valuesets',
+			'/v1/feature-toggle/features',
+			'/v1/otp',
+			'/v1/revocation'
+		]
 	} as OIdC
 };
