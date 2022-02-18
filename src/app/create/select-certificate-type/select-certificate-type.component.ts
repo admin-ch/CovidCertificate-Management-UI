@@ -21,7 +21,8 @@ export class SelectCertificateTypeComponent implements OnInit {
 		private readonly formBuilder: FormBuilder,
 		private readonly dataService: CreationDataService,
 		private readonly certificateService: CertificateService
-	) {}
+	) {
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -39,6 +40,13 @@ export class SelectCertificateTypeComponent implements OnInit {
 
 	verifyFeatureAvailability(generationType: GenerationType) {
 		return this.certificateService.verifyFeatureAvailability(generationType);
+	}
+
+	isAnyChOnlyCertificateAvailable(): boolean {
+		return this.certificateService.verifyFeatureAvailability(GenerationType.ANTIBODY) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.EXCEPTIONAL) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.RECOVERY_RAT) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST);
 	}
 
 	private createForm(): void {

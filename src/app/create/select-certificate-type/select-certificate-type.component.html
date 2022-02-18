@@ -34,12 +34,12 @@
 			{{ "certificateCreate.step-one.enum.recovery" | translate }}
 		</mat-radio-button>
 
-		<legend class="group-header">
+		<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
 			{{ "certificateCreate.step-one.enum.chOnly" | translate }}
 		</legend>
 
 		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.RAPID)"
+			*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY_RAT)"
 			id="generationType-recovery-rat"
 			value="recovery-rat"
 			name="recovery-rat"

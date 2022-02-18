@@ -152,7 +152,7 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
-	RAPID = 'recovery-rat',
+	RECOVERY_RAT = 'recovery-rat',
 	ANTIBODY = 'antibody',
 	VACCINATION_TOURIST = 'vaccination-tourist',
 	EXCEPTIONAL = 'exceptional'
