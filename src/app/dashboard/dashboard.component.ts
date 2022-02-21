@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {CertificateService} from 'shared/certificate.service';
 
 @Component({
 	selector: 'ec-dashboard',

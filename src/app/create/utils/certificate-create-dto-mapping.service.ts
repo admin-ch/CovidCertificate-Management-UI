@@ -22,7 +22,7 @@ export class CertificateCreateDtoMappingService {
 			const vaccinationDto = this.mapVaccinationData(patient);
 			if (patient.certificateType === GenerationType.VACCINATION) {
 				certificateCreateDto.vaccinationInfo = vaccinationDto;
-			} else if (patient.certificateType === GenerationType.TOURIST_VACCINATION) {
+			} else if (patient.certificateType === GenerationType.VACCINATION_TOURIST) {
 				certificateCreateDto.vaccinationTouristInfo = vaccinationDto;
 			}
 		}

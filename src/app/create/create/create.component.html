@@ -1,4 +1,10 @@
-<mat-horizontal-stepper linear labelPosition="bottom" #stepper class="mat-stepper-lg" *ngIf="valueSetsLoaded">
+<mat-horizontal-stepper
+	linear
+	labelPosition="bottom"
+	#stepper
+	class="mat-stepper-lg"
+	*ngIf="valueSetsLoaded && featureToggleSetsLoaded"
+>
 	<mat-step>
 		<ec-select-certificate-type (next)="nextCalled()"></ec-select-certificate-type>
 	</mat-step>

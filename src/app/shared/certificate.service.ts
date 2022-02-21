@@ -1,7 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from 'shared/api.service';
-import {CertificateCreateDto, CreateCertificateResponse, Patient, Shipping, ValueSetsResponse} from './model';
+import {
+	CertificateCreateDto,
+	CreateCertificateResponse,
+	FeaturesResponse,
+	GenerationType,
+	Patient,
+	Shipping,
+	ValueSetsResponse
+} from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
 
 @Injectable({
@@ -9,7 +17,9 @@ import {CertificateCreateDtoMappingService} from '../create/utils/certificate-cr
 })
 export class CertificateService {
 	private readonly covidCertificateApi = 'covidcertificate';
+	private readonly featureToggleApi = 'feature-toggle/features';
 	private readonly valueSetsApi = 'valuesets';
+	private featuresResponse: FeaturesResponse;
 
 	constructor(
 		private readonly http: ApiService,
@@ -28,6 +38,14 @@ export class CertificateService {
 		return this.http.get<ValueSetsResponse>(this.valueSetsApi);
 	}
 
+	getFeatureToggleSets(): Observable<FeaturesResponse> {
+		return this.http.get<FeaturesResponse>(this.featureToggleApi);
+	}
+
+	setFeatureToggleSets(featuresResponse: FeaturesResponse): void {
+		this.featuresResponse = featuresResponse;
+	}
+
 	PDFtoBlob(dataURI: string): Blob {
 		const byteString = atob(dataURI.split(',')[1]);
 
@@ -40,5 +58,16 @@ export class CertificateService {
 
 		// write the ArrayBuffer to a blob, and you're done
 		return new Blob([arrayBuffer], {type: 'application/pdf'});
+	}
+
+	verifyFeatureAvailability(generationType: GenerationType) {
+		const featureToggleValue = this.featuresResponse.featureData.find(
+			e => GenerationType[e.type] === generationType
+		);
+		if (featureToggleValue === undefined) {
+			return true;
+		}
+		const now = Date.now();
+		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime();
 	}
 }

@@ -191,10 +191,10 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
-			product: [''],
 			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			center: ['', [Validators.required, Validators.maxLength(50)]],
-			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required]
+			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
+			...(this.rapid ? {product: ['', Validators.required]} : {product: ['']})
 		});
 
 		this.testForm.get('sampleDate').valueChanges.subscribe(_ => {
@@ -252,7 +252,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			};
 		} else {
 			additionalData = {
-				certificateType: this.rapid ? GenerationType.RAPID : GenerationType.TEST,
+				certificateType: this.rapid ? GenerationType.RECOVERY_RAT : GenerationType.TEST,
 				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,

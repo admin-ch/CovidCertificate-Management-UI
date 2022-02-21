@@ -152,19 +152,10 @@ export enum GenerationType {
 	VACCINATION = 'vaccination',
 	TEST = 'test',
 	RECOVERY = 'recovery',
-	RAPID = 'recovery-rat',
+	RECOVERY_RAT = 'recovery-rat',
 	ANTIBODY = 'antibody',
-	TOURIST_VACCINATION = 'vaccination-tourist',
+	VACCINATION_TOURIST = 'vaccination-tourist',
 	EXCEPTIONAL = 'exceptional'
-}
-
-export enum CsvGenerationType {
-	VACCINATION = 'vaccination',
-	TEST = 'test',
-	RECOVERY = 'recovery',
-	RAPID = 'recovery-rat',
-	ANTIBODY = 'antibody',
-	TOURIST_VACCINATION = 'vaccination-tourist'
 }
 
 export enum ShippingOptions {
@@ -238,6 +229,17 @@ export interface ValueSetsResponse {
 	testSets: RapidTestProductInfoWithToString[];
 }
 
+export interface FeaturesResponse {
+	featureData: FeatureData[];
+}
+
+export interface FeatureData {
+	uris: string[];
+	type: GenerationType;
+	start: Date;
+	end: Date;
+}
+
 export interface CountryCodesDto {
 	de: CountryCodeDto[];
 	en: CountryCodeDto[];
@@ -267,6 +269,7 @@ export interface VaccinationValueSets {
 
 export interface RevokeDto {
 	uvci: string;
+	fraud: boolean;
 }
 
 export interface MomentWrapper {

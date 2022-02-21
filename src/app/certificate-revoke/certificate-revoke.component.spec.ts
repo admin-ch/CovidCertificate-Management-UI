@@ -58,6 +58,13 @@ describe('CertificateRevokeComponent', () => {
 		expect(mockRevocationService.revoke).toHaveBeenCalledTimes(1);
 	});
 
+	it('should call the RevocationService for revoking a certificate if the uvci is valid with fraud uvci', () => {
+		component.revocationForm.get('isFraud').setValue(true);
+		component.revocationForm.get('uvci').setValue('01:CH:123456789123456789123456123456789');
+		component.revoke();
+		expect(mockRevocationService.revoke).toHaveBeenCalledTimes(2);
+	});
+
 	it('should not mark revoked to true after calling for revocation if the uvci is invalid', () => {
 		component.revocationForm.get('uvci').setValue('42');
 		component.revoke();
