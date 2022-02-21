@@ -252,7 +252,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			};
 		} else {
 			additionalData = {
-				certificateType: this.rapid ? GenerationType.RAPID : GenerationType.TEST,
+				certificateType: this.rapid ? GenerationType.RECOVERY_RAT : GenerationType.TEST,
 				test: {
 					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,

@@ -3,7 +3,7 @@ import {UploadService} from './upload.service';
 import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ObNotificationService} from '@oblique/oblique';
-import {CertificateService} from "shared/certificate.service";
+import {CertificateService} from 'shared/certificate.service';
 
 @Component({
 	selector: 'ec-upload',
@@ -23,8 +23,7 @@ export class UploadComponent implements OnInit {
 		private readonly uploadService: UploadService,
 		private readonly notificationService: ObNotificationService,
 		private readonly certificateService: CertificateService
-	) {
-	}
+	) {}
 
 	private static downloadZip(zipToDownload: ArrayBuffer): void {
 		if (zipToDownload) {
@@ -83,7 +82,9 @@ export class UploadComponent implements OnInit {
 	}
 
 	getCsvCertificateTypes(): GenerationType[] {
-		return Object.values(GenerationType).filter(elem => elem !== GenerationType.EXCEPTIONAL).filter(elem => this.certificateService.verifyFeatureAvailability(elem))
+		return Object.values(GenerationType)
+			.filter(elem => elem !== GenerationType.EXCEPTIONAL)
+			.filter(elem => this.certificateService.verifyFeatureAvailability(elem));
 	}
 
 	uploadSelectedFile(): void {

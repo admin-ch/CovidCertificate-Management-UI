@@ -8,7 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {GenerationType} from 'shared/model';
-import {CertificateService} from "shared/certificate.service";
+import {CertificateService} from 'shared/certificate.service';
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -99,7 +99,7 @@ describe('UploadComponent', () => {
 		});
 
 		it('should have RECOVERY as certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes()[3]).toBe(GenerationType.RAPID);
+			expect(component.getCsvCertificateTypes()[3]).toBe(GenerationType.RECOVERY_RAT);
 		});
 
 		it('should have VACCINATION as certificate types for selection', () => {

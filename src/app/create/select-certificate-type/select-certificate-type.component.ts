@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
-import {CertificateService} from "shared/certificate.service";
+import {CertificateService} from 'shared/certificate.service';
 
 @Component({
 	selector: 'ec-select-certificate-type',
@@ -12,7 +12,7 @@ import {CertificateService} from "shared/certificate.service";
 export class SelectCertificateTypeComponent implements OnInit {
 	@Output() next = new EventEmitter<void>();
 
-	GenerationType = GenerationType
+	GenerationType = GenerationType;
 
 	certificateTypeSelectionForm: FormGroup;
 	typeSelection: string[] = Object.values(GenerationType);
@@ -21,8 +21,7 @@ export class SelectCertificateTypeComponent implements OnInit {
 		private readonly formBuilder: FormBuilder,
 		private readonly dataService: CreationDataService,
 		private readonly certificateService: CertificateService
-	) {
-	}
+	) {}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -39,7 +38,16 @@ export class SelectCertificateTypeComponent implements OnInit {
 	}
 
 	verifyFeatureAvailability(generationType: GenerationType) {
-		return this.certificateService.verifyFeatureAvailability(generationType)
+		return this.certificateService.verifyFeatureAvailability(generationType);
+	}
+
+	isAnyChOnlyCertificateAvailable(): boolean {
+		return (
+			this.certificateService.verifyFeatureAvailability(GenerationType.ANTIBODY) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.EXCEPTIONAL) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.RECOVERY_RAT) ||
+			this.certificateService.verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)
+		);
 	}
 
 	private createForm(): void {

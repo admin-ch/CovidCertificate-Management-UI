@@ -4,7 +4,7 @@ import {ApiService} from 'shared/api.service';
 import {
 	CertificateCreateDto,
 	CreateCertificateResponse,
-	FeatureToggle,
+	FeaturesResponse,
 	GenerationType,
 	Patient,
 	Shipping,
@@ -19,13 +19,12 @@ export class CertificateService {
 	private readonly covidCertificateApi = 'covidcertificate';
 	private readonly featureToggleApi = 'feature-toggle/features';
 	private readonly valueSetsApi = 'valuesets';
-	private featureToggleSets: FeatureToggle[] = [];
+	private featuresResponse: FeaturesResponse;
 
 	constructor(
 		private readonly http: ApiService,
 		private readonly dtoMappingService: CertificateCreateDtoMappingService
-	) {
-	}
+	) {}
 
 	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
 		// the api endpoint is infered from the certificate type of the patient
@@ -39,12 +38,12 @@ export class CertificateService {
 		return this.http.get<ValueSetsResponse>(this.valueSetsApi);
 	}
 
-	getFeatureToggleSets(): Observable<FeatureToggle[]> {
-		return this.http.get<FeatureToggle[]>(this.featureToggleApi);
+	getFeatureToggleSets(): Observable<FeaturesResponse> {
+		return this.http.get<FeaturesResponse>(this.featureToggleApi);
 	}
 
-	setFeatureToggleSets(featureToggleSets: FeatureToggle[]): void {
-		this.featureToggleSets = featureToggleSets;
+	setFeatureToggleSets(featuresResponse: FeaturesResponse): void {
+		this.featuresResponse = featuresResponse;
 	}
 
 	PDFtoBlob(dataURI: string): Blob {
@@ -62,11 +61,13 @@ export class CertificateService {
 	}
 
 	verifyFeatureAvailability(generationType: GenerationType) {
-		const featureToggleValue = this.featureToggleSets.find(e => GenerationType[e.type] === generationType);
+		const featureToggleValue = this.featuresResponse.featureData.find(
+			e => GenerationType[e.type] === generationType
+		);
 		if (featureToggleValue === undefined) {
-			return true
+			return true;
 		}
-		const now = Date.now()
-		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime()
+		const now = Date.now();
+		return new Date(featureToggleValue.start).getTime() < now && now < new Date(featureToggleValue.end).getTime();
 	}
 }
