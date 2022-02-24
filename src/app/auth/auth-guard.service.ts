@@ -64,20 +64,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			this.router.navigate(['auth/auto-login']);
 			return false;
 		}
-
-		if (this.oauthService.hasUserRole(Role.SUPER_USER, claims)) {
-			return this.checkExpectedRolesForSuperuser(claims);
-		} else {
-			return this.checkExpectedRolesForStandardUser(claims);
-		}
-	}
-
-	private checkExpectedRolesForSuperuser(claims: Claims): boolean {
-		if (!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)) {
-			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-			return false;
-		}
-		return true;
+	 	return this.checkExpectedRolesForStandardUser(claims);
 	}
 
 	private checkExpectedRolesForStandardUser(claims: Claims): boolean {
