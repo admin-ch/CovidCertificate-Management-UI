@@ -64,7 +64,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			this.router.navigate(['auth/auto-login']);
 			return false;
 		}
-	 	return this.checkExpectedRolesForStandardUser(claims);
+		return this.checkExpectedRolesForStandardUser(claims);
 	}
 
 	private checkExpectedRolesForStandardUser(claims: Claims): boolean {
