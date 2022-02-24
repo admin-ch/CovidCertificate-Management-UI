@@ -45,9 +45,6 @@ describe('AuthGuardService', () => {
 		it('should have the correct value for SUPER_USER', () => {
 			expect(Role.SUPER_USER).toBe('bag-cc-superuser');
 		});
-		it('should have the correct value for STRONG_AUTH', () => {
-			expect(Role.STRONG_AUTH).toBe('bag-cc-strongauth');
-		});
 		it('should have the correct value for HIN', () => {
 			expect(Role.HIN).toBe('bag-cc-hin');
 		});
@@ -120,7 +117,7 @@ describe('AuthGuardService', () => {
 		});
 
 		describe('Superuser', () => {
-			describe('Without strong authentication', () => {
+			describe('With Superuser role', () => {
 				beforeEach(() => {
 					window = Object.create(window);
 					Object.defineProperty(window, 'location', {
@@ -135,48 +132,15 @@ describe('AuthGuardService', () => {
 						(role: string) => role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER
 					);
 				});
-				it('should not give access', done => {
-					service[fn](null).subscribe(result => {
-						expect(result).toBeFalsy();
-						done();
-					});
-				});
-				it('should redirect to eiam page', done => {
-					service[fn](null).subscribe(() => {
-						expect(window.location.href).toEqual('https://www.eiam.admin.ch/qoaggg?l=en&stage=');
-						done();
-					});
-				});
-			});
-
-			describe('With strong authentication', () => {
-				beforeEach(() => {
-					window = Object.create(window);
-					Object.defineProperty(window, 'location', {
-						value: {
-							href: ''
-						}
-					});
-
-					mock.claims$.next({
-						userroles: ['bag-cc-certificatecreator', 'bag-cc-superuser', 'bag-cc-strongauth']
-					});
-
-					mock.hasUserRole.mockImplementation(
-						(role: string) =>
-							role === Role.CERTIFICATE_CREATOR || role === Role.SUPER_USER || role === Role.STRONG_AUTH
-					);
-				});
 				it('should give access', done => {
 					service[fn](null).subscribe(result => {
 						expect(result).toBeTruthy();
 						done();
 					});
 				});
-				it('should not navigate', done => {
-					jest.spyOn(router, 'navigate');
+				it('should redirect to eiam page', done => {
 					service[fn](null).subscribe(() => {
-						expect(router.navigate).not.toHaveBeenCalled();
+						expect(window.location.href).toEqual('https://www.eiam.admin.ch/qoaggg?l=en&stage=');
 						done();
 					});
 				});

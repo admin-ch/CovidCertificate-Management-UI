@@ -18,7 +18,6 @@ import {environment} from '../../environments/environment';
 export enum Role {
 	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
 	SUPER_USER = 'bag-cc-superuser',
-	STRONG_AUTH = 'bag-cc-strongauth',
 	HIN = 'bag-cc-hin',
 	HINCODE = 'bag-cc-hincode',
 	HIN_EPR = 'bag-cc-hin-epr',
@@ -64,7 +63,12 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 			this.router.navigate(['auth/auto-login']);
 			return false;
 		}
-		return this.checkExpectedRolesForStandardUser(claims);
+
+		if (this.oauthService.hasUserRole(Role.SUPER_USER, claims)) {
+			return true;
+		} else {
+			return this.checkExpectedRolesForStandardUser(claims);
+		}
 	}
 
 	private checkExpectedRolesForStandardUser(claims: Claims): boolean {
