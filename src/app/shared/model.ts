@@ -270,6 +270,7 @@ export interface VaccinationValueSets {
 export interface RevokeDto {
 	uvci: string;
 	fraud: boolean;
+	systemSource: string;
 }
 
 export interface MomentWrapper {
