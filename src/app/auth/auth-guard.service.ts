@@ -18,7 +18,6 @@ import {environment} from '../../environments/environment';
 export enum Role {
 	CERTIFICATE_CREATOR = 'bag-cc-certificatecreator',
 	SUPER_USER = 'bag-cc-superuser',
-	STRONG_AUTH = 'bag-cc-strongauth',
 	HIN = 'bag-cc-hin',
 	HINCODE = 'bag-cc-hincode',
 	HIN_EPR = 'bag-cc-hin-epr',
@@ -66,18 +65,10 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 		}
 
 		if (this.oauthService.hasUserRole(Role.SUPER_USER, claims)) {
-			return this.checkExpectedRolesForSuperuser(claims);
+			return true;
 		} else {
 			return this.checkExpectedRolesForStandardUser(claims);
 		}
-	}
-
-	private checkExpectedRolesForSuperuser(claims: Claims): boolean {
-		if (!this.oauthService.hasUserRole(Role.STRONG_AUTH, claims)) {
-			this.window.location.href = `https://www.eiam.admin.ch/qoaggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-			return false;
-		}
-		return true;
 	}
 
 	private checkExpectedRolesForStandardUser(claims: Claims): boolean {
