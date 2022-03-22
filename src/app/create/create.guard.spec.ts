@@ -3,36 +3,35 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {of, ReplaySubject} from 'rxjs';
-import {AuthFunction, AuthService} from "./auth.service";
+import {AuthFunction, AuthService} from "../auth/auth.service";
+import {CreateGuard} from "./create.guard";
 import {ObliqueTestingModule, WINDOW} from "@oblique/oblique";
-import {AuthGuardService} from "./auth-guard.service";
-import {OauthService} from "./oauth.service";
-import {AutoLoginComponent} from "./auto-login.component";
 
-
-describe('AuthGuardService', () => {
-	let service: AuthGuardService;
+describe('CreateGuard', () => {
+	let service: CreateGuard;
 	let router: Router;
-	const oauthServiceMock = {
-		claims$: new ReplaySubject(1),
-		hasUserRole: jest.fn(),
-		isAuthenticated$: of(true),
-	};
 	const hasAuthorizationForMock = new ReplaySubject(1)
 	const hasAuthorizationForObsMock = hasAuthorizationForMock.asObservable()
 	const hasAuthorizationFor$Mock = jest.fn().mockReturnValue(hasAuthorizationForObsMock)
 	const authServiceMock = {
 		hasAuthorizationFor$: hasAuthorizationFor$Mock,
 	};
-
+	const ALL_CREATE_AUTH_FUNCTIONS = [
+		AuthFunction.CREATE_VACCINATION_CERTIFICATE,
+		AuthFunction.CREATE_VACCINATION_TOURIST,
+		AuthFunction.CREATE_TEST_CERTIFICATE,
+		AuthFunction.CREATE_RECOVERY_CERTIFICATE,
+		AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
+		AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+		AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE,
+	]
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [
-				RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}]),
+				RouterTestingModule,
 				ObliqueTestingModule
 			],
-			declarations: [AutoLoginComponent],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},
 				{
@@ -42,11 +41,10 @@ describe('AuthGuardService', () => {
 						}
 					}
 				},
-				{provide: OauthService, useValue: oauthServiceMock},
 				{provide: TranslateService, useValue: {currentLang: 'en'}}
 			]
 		}).compileComponents();
-		service = TestBed.inject(AuthGuardService);
+		service = TestBed.inject(CreateGuard);
 		router = TestBed.inject(Router);
 
 	});
@@ -79,11 +77,11 @@ describe('AuthGuardService', () => {
 					done()
 				})
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, (done) => {
+			it(`should call hasAuthorizationFor$ with ${ALL_CREATE_AUTH_FUNCTIONS}`, (done) => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS)
 					done()
 				})
 			});
@@ -92,7 +90,7 @@ describe('AuthGuardService', () => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(() => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS)
 					// @ts-ignore
 					expect(service.window.location.href).toBe('')
 					done()
@@ -117,11 +115,11 @@ describe('AuthGuardService', () => {
 					done()
 				})
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, (done) => {
+			it(`should call hasAuthorizationFor$ with ${ALL_CREATE_AUTH_FUNCTIONS}`, (done) => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS)
 					done()
 				})
 			});

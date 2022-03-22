@@ -1,80 +1,107 @@
 <form [formGroup]="certificateTypeSelectionForm">
-	<mat-radio-group
-		formControlName="type"
-		id="generationType"
-		name="generationType"
-		aria-label="Select an option"
-		class="radio-button-container"
-	>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION)"
-			id="generationType-vaccination"
-			value="vaccination"
-			name="vaccination"
-			class="radio-button"
+	<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_CERTIFICATE_WEB">
+		<mat-radio-group
+			formControlName="type"
+			id="generationType"
+			name="generationType"
+			aria-label="Select an option"
+			class="radio-button-container"
 		>
-			{{ "certificateCreate.step-one.enum.vaccination" | translate }}
-		</mat-radio-button>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.TEST)"
-			id="generationType-test"
-			value="test"
-			name="test"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.test" | translate }}
-		</mat-radio-button>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY)"
-			id="generationType-recovery"
-			value="recovery"
-			name="recovery"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.recovery" | translate }}
-		</mat-radio-button>
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_VACCINATION_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION)"
+					id="generationType-vaccination"
+					value="vaccination"
+					name="vaccination"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.vaccination" | translate }}
+				</mat-radio-button>
+			</ng-container>
 
-		<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
-			{{ "certificateCreate.step-one.enum.chOnly" | translate }}
-		</legend>
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_TEST_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.TEST)"
+					id="generationType-test"
+					value="test"
+					name="test"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.test" | translate }}
+				</mat-radio-button>
+			</ng-container>
 
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY_RAT)"
-			id="generationType-recovery-rat"
-			value="recovery-rat"
-			name="recovery-rat"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}
-		</mat-radio-button>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.ANTIBODY)"
-			id="generationType-antibody"
-			value="antibody"
-			name="antibody"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.antibody" | translate }}
-		</mat-radio-button>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)"
-			id="generationType-vaccination-tourist"
-			value="vaccination-tourist"
-			name="vaccination-tourist"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.vaccination-tourist" | translate }}
-		</mat-radio-button>
-		<mat-radio-button
-			*ngIf="verifyFeatureAvailability(GenerationType.EXCEPTIONAL)"
-			id="exceptional"
-			value="exceptional"
-			name="exceptional"
-			class="radio-button"
-		>
-			{{ "certificateCreate.step-one.enum.exceptional" | translate }}
-		</mat-radio-button>
-	</mat-radio-group>
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_RECOVERY_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY)"
+					id="generationType-recovery"
+					value="recovery"
+					name="recovery"
+					class="radio-button">
+					{{ "certificateCreate.step-one.enum.recovery" | translate }}
+				</mat-radio-button>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationForAny="[
+		AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
+		AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+		AuthFunction.CREATE_VACCINATION_TOURIST,
+		AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE,
+		]">
+				<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
+					{{ "certificateCreate.step-one.enum.chOnly" | translate }}
+				</legend>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY_RAT)"
+					id="generationType-recovery-rat"
+					value="recovery-rat"
+					name="recovery-rat"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}
+				</mat-radio-button>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_ANTIBODY_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.ANTIBODY)"
+					id="generationType-antibody"
+					value="antibody"
+					name="antibody"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.antibody" | translate }}
+				</mat-radio-button>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_VACCINATION_TOURIST">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)"
+					id="generationType-vaccination-tourist"
+					value="vaccination-tourist"
+					name="vaccination-tourist"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.vaccination-tourist" | translate }}
+				</mat-radio-button>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE">
+				<mat-radio-button
+					*ngIf="verifyFeatureAvailability(GenerationType.EXCEPTIONAL)"
+					id="exceptional"
+					value="exceptional"
+					name="exceptional"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.exceptional" | translate }}
+				</mat-radio-button>
+			</ng-container>
+		</mat-radio-group>
+	</ng-container>
 
 	<div class="stepper-footer">
 		<section class="stepper-footer-content">

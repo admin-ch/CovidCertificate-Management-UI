@@ -8,6 +8,7 @@ import {ObButtonModule, ObIconModule} from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {UploadGuard} from "./upload.guard";
 
 @NgModule({
 	declarations: [UploadComponent],
@@ -19,7 +20,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 		MatFormFieldModule,
 		MatIconModule,
 		MatSelectModule,
-		RouterModule.forChild([{path: '', component: UploadComponent, canActivate: [AuthGuardService]}])
+		RouterModule.forChild([{path: '', component: UploadComponent, canActivate: [AuthGuardService, UploadGuard]}])
 	]
 })
 export class UploadModule {}

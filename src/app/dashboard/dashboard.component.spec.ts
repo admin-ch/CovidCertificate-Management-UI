@@ -1,9 +1,17 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {DashboardComponent} from './dashboard.component';
 import {ObliqueTestingModule} from '@oblique/oblique';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
+
+@Directive({
+	selector: '[ecHasAuthorizationFor]'
+})
+export class HasAuthorizationForMockDirective {
+	@Input()
+	ecHasAuthorizationFor
+}
 
 describe('DashboardComponent', () => {
 	let component: DashboardComponent;
@@ -24,7 +32,7 @@ describe('DashboardComponent', () => {
 					]),
 					ObliqueTestingModule
 				],
-				declarations: [DashboardComponent],
+				declarations: [DashboardComponent, HasAuthorizationForMockDirective],
 				schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 				providers: [{provide: Router, useValue: router}]
 			}).compileComponents();

@@ -3,21 +3,13 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {of, ReplaySubject} from 'rxjs';
-import {AuthFunction, AuthService} from "./auth.service";
+import {AuthFunction, AuthService} from "../auth/auth.service";
 import {ObliqueTestingModule, WINDOW} from "@oblique/oblique";
-import {AuthGuardService} from "./auth-guard.service";
-import {OauthService} from "./oauth.service";
-import {AutoLoginComponent} from "./auto-login.component";
+import {OtpGuard} from "./otp.guard";
 
-
-describe('AuthGuardService', () => {
-	let service: AuthGuardService;
+describe('CertificateRevokeGuard', () => {
+	let service: OtpGuard;
 	let router: Router;
-	const oauthServiceMock = {
-		claims$: new ReplaySubject(1),
-		hasUserRole: jest.fn(),
-		isAuthenticated$: of(true),
-	};
 	const hasAuthorizationForMock = new ReplaySubject(1)
 	const hasAuthorizationForObsMock = hasAuthorizationForMock.asObservable()
 	const hasAuthorizationFor$Mock = jest.fn().mockReturnValue(hasAuthorizationForObsMock)
@@ -25,14 +17,12 @@ describe('AuthGuardService', () => {
 		hasAuthorizationFor$: hasAuthorizationFor$Mock,
 	};
 
-
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [
-				RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}]),
+				RouterTestingModule,
 				ObliqueTestingModule
 			],
-			declarations: [AutoLoginComponent],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},
 				{
@@ -42,11 +32,10 @@ describe('AuthGuardService', () => {
 						}
 					}
 				},
-				{provide: OauthService, useValue: oauthServiceMock},
 				{provide: TranslateService, useValue: {currentLang: 'en'}}
 			]
 		}).compileComponents();
-		service = TestBed.inject(AuthGuardService);
+		service = TestBed.inject(OtpGuard);
 		router = TestBed.inject(Router);
 
 	});
@@ -79,11 +68,11 @@ describe('AuthGuardService', () => {
 					done()
 				})
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, (done) => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CREATE_OTP}`, (done) => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CREATE_OTP)
 					done()
 				})
 			});
@@ -92,7 +81,7 @@ describe('AuthGuardService', () => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(() => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CREATE_OTP)
 					// @ts-ignore
 					expect(service.window.location.href).toBe('')
 					done()
@@ -117,11 +106,11 @@ describe('AuthGuardService', () => {
 					done()
 				})
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, (done) => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CREATE_OTP}`, (done) => {
 				const obs$ = service[name]()
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN)
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CREATE_OTP)
 					done()
 				})
 			});

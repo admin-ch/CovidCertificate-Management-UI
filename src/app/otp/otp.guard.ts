@@ -4,28 +4,25 @@ import {
 	CanActivate,
 	CanActivateChild,
 	CanLoad,
-	Route, Router,
+	Route,
 	RouterStateSnapshot,
 	UrlSegment
 } from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {switchMap, take, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {take, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {WINDOW} from '@oblique/oblique';
 import {environment} from '../../environments/environment';
-import {AuthFunction, AuthService} from "./auth.service";
-import {OauthService} from "./oauth.service";
+import {AuthFunction, AuthService} from "../auth/auth.service";
 
 
 @Injectable({
 	providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
+export class OtpGuard implements CanActivate, CanActivateChild, CanLoad {
 	private readonly stage: string;
 
 	constructor(
-		private readonly oauthService: OauthService,
-		private readonly router: Router,
 		private readonly translate: TranslateService,
 		private readonly authService: AuthService,
 		@Inject(WINDOW) private readonly window
@@ -46,22 +43,13 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 	}
 
 	private checkExpectedRole(): Observable<boolean> {
-		return this.oauthService.isAuthenticated$.pipe(
-			switchMap(isAuthenticated => {
-				if (!isAuthenticated) {
-					this.router.navigate(['auth/auto-login']);
-					return of(false);
-				} else {
-					return this.authService.hasAuthorizationFor$(AuthFunction.MAIN).pipe(
-						take(1),
-						tap(isAuthorized => {
-							if (!isAuthorized) {
-								this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-							}
-						})
-					)
+		return this.authService.hasAuthorizationFor$(AuthFunction.CREATE_OTP).pipe(
+			take(1),
+			tap(isAuthorized => {
+				if (!isAuthorized) {
+					this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
 				}
 			})
-		)
+		);
 	}
 }
