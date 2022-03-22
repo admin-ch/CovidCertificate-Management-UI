@@ -6,7 +6,7 @@ import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
-import {AuthFunction, AuthService} from "./auth/auth.service";
+import {AuthFunction, AuthService} from './auth/auth.service';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
@@ -24,19 +24,14 @@ describe('AppComponent', () => {
 		};
 		const authServiceMock = {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(true).asObservable()),
-			authorizedFunctions$:
-				{
-					pipe: () => ({
-						subscribe: (fn) => {
-							fn([
-								AuthFunction.MAIN,
-								AuthFunction.CERTIFICATE_REVOCATION,
-								AuthFunction.BULK_OPERATIONS
-							])
-						}
-					})
-				}
-		}
+			authorizedFunctions$: {
+				pipe: () => ({
+					subscribe: fn => {
+						fn([AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION, AuthFunction.BULK_OPERATIONS]);
+					}
+				})
+			}
+		};
 		beforeEach(
 			waitForAsync(() => {
 				TestBed.configureTestingModule({
@@ -111,7 +106,7 @@ describe('AppComponent', () => {
 			});
 			it('should setup navigation', () => {
 				app.ngAfterViewInit();
-				expect(['dashboard', 'certificate-revoke', 'upload']).toEqual(app.navigation.map(n => n.url))
+				expect(['dashboard', 'certificate-revoke', 'upload']).toEqual(app.navigation.map(n => n.url));
 			});
 		});
 
@@ -136,7 +131,7 @@ describe('AppComponent', () => {
 		};
 		const authServiceMock = {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(false).asObservable())
-		}
+		};
 
 		beforeEach(
 			waitForAsync(() => {
@@ -194,7 +189,7 @@ describe('AppComponent', () => {
 		};
 		const authServiceMock = {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(of())
-		}
+		};
 		beforeEach(
 			waitForAsync(() => {
 				TestBed.configureTestingModule({

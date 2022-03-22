@@ -3,7 +3,7 @@ import {GenerationType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {CertificateService} from 'shared/certificate.service';
-import {AuthFunction} from "../../auth/auth.service";
+import {AuthFunction} from '../../auth/auth.service';
 
 @Component({
 	selector: 'ec-select-certificate-type',
@@ -18,7 +18,7 @@ export class SelectCertificateTypeComponent implements OnInit {
 	certificateTypeSelectionForm: FormGroup;
 	typeSelection: string[] = Object.values(GenerationType);
 
-	AuthFunction: typeof AuthFunction = AuthFunction
+	AuthFunction: typeof AuthFunction = AuthFunction;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,

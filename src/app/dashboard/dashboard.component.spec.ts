@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HasAuthorizationForMockDirective {
 	@Input()
-	ecHasAuthorizationFor
+	ecHasAuthorizationFor;
 }
 
 describe('DashboardComponent', () => {

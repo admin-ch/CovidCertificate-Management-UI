@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from './auth/auth-guard.service';
-import {CreateGuard} from "./create/create.guard";
-import {CertificateRevokeGuard} from "./certificate-revoke/certificate-revoke.guard";
-import {OtpGuard} from "./otp/otp.guard";
-import {UploadGuard} from "./upload/upload.guard";
+import {CreateGuard} from './create/create.guard';
+import {CertificateRevokeGuard} from './certificate-revoke/certificate-revoke.guard';
+import {OtpGuard} from './otp/otp.guard';
+import {UploadGuard} from './upload/upload.guard';
 
 const routes: Routes = [
 	{
@@ -25,7 +25,7 @@ const routes: Routes = [
 		path: 'certificate-create',
 		loadChildren: () => import('./create/create.module').then(m => m.CreateModule),
 		canLoad: [AuthGuardService, CreateGuard],
-		canActivate: [AuthGuardService, CreateGuard],
+		canActivate: [AuthGuardService, CreateGuard]
 	},
 	{
 		path: 'certificate-revoke',

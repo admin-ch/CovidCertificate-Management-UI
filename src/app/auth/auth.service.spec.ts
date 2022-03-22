@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {of, ReplaySubject} from 'rxjs';
 import {Claims, OauthService} from './oauth.service';
-import {AuthFunction, AuthService} from "./auth.service";
-import {ApiService} from "shared/api.service";
+import {AuthFunction, AuthService} from './auth.service';
+import {ApiService} from 'shared/api.service';
 import SpyInstance = jest.SpyInstance;
 
 describe('AuthService', () => {
@@ -10,11 +10,11 @@ describe('AuthService', () => {
 	let apiService: ApiService;
 	let oauthService: OauthService;
 
-	let nextSpy: SpyInstance
+	let nextSpy: SpyInstance;
 
-	const authFunctionsMock: AuthFunction[] = [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION]
+	const authFunctionsMock: AuthFunction[] = [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION];
 	let claimsMock: Claims;
-	const oauthServiceClaims = new ReplaySubject<Claims>(1)
+	const oauthServiceClaims = new ReplaySubject<Claims>(1);
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('AuthService', () => {
 				{
 					provide: ApiService,
 					useValue: {
-						get: jest.fn().mockReturnValue(of(authFunctionsMock)),
+						get: jest.fn().mockReturnValue(of(authFunctionsMock))
 					}
 				},
 				{
@@ -30,21 +30,19 @@ describe('AuthService', () => {
 					useValue: {
 						claims$: oauthServiceClaims.asObservable()
 					}
-				},
+				}
 			]
 		}).compileComponents();
 		service = TestBed.inject(AuthService);
 		apiService = TestBed.inject(ApiService);
 		oauthService = TestBed.inject(OauthService);
-
 	});
 
 	beforeEach(() => {
 		// @ts-ignore
-		nextSpy = jest.spyOn(service.authorizedFunctions, 'next')
-		claimsMock = {userroles: [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION]} as Claims
-	})
-
+		nextSpy = jest.spyOn(service.authorizedFunctions, 'next');
+		claimsMock = {userroles: [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION]} as Claims;
+	});
 
 	it('should be created', () => {
 		expect(service).toBeTruthy();
@@ -54,7 +52,6 @@ describe('AuthService', () => {
 		it('should be defined', () => {
 			expect(service.authorizedFunctions$).toBeDefined();
 		});
-
 	});
 
 	describe('hasAuthorizationFor$', () => {
@@ -66,41 +63,41 @@ describe('AuthService', () => {
 			[AuthFunction.MAIN, [AuthFunction.BULK_OPERATIONS], false],
 			[AuthFunction.MAIN, [AuthFunction.BULK_OPERATIONS, AuthFunction.CERTIFICATE_REVOCATION], false],
 			['MAIN' as AuthFunction, [AuthFunction.MAIN], false],
-			['' as AuthFunction, [], false],
+			['' as AuthFunction, [], false]
 			// @ts-ignore
-		])('when neededIdentifier is %s, and current AuthFunctions are %s, should emit  %s', (neededIdentifier, currentAuthFunctions, expected, done) => {
-			service.hasAuthorizationFor$(neededIdentifier).subscribe(received => {
-				expect(received).toBe(expected)
-				done()
-			})
+		])(
+			'when neededIdentifier is %s, and current AuthFunctions are %s, should emit  %s',
+			(neededIdentifier, currentAuthFunctions, expected, done) => {
+				service.hasAuthorizationFor$(neededIdentifier).subscribe(received => {
+					expect(received).toBe(expected);
+					done();
+				});
 
-			// @ts-ignore
-			service.authorizedFunctions.next(currentAuthFunctions)
-		})
+				// @ts-ignore
+				service.authorizedFunctions.next(currentAuthFunctions);
+			}
+		);
 	});
 
 	describe('oauthService.claims$', () => {
-
 		beforeEach(() => {
-			nextSpy.mockReset()
-		})
+			nextSpy.mockReset();
+		});
 
 		it.each<[Claims | null, AuthFunction[]]>([
 			[null, null],
 			[{} as Claims, null],
 			[{userroles: null} as Claims, null],
 			[{userroles: []} as Claims, null],
-			[{userroles: ['not', 'empty']} as Claims, authFunctionsMock],
-
+			[{userroles: ['not', 'empty']} as Claims, authFunctionsMock]
 		])('when claims is %s, should call next with %s', (claims, expected) => {
-			oauthServiceClaims.next(claims)
+			oauthServiceClaims.next(claims);
 			if (expected) {
 				// @ts-ignore
-				expect(nextSpy).toHaveBeenCalledWith(expected)
+				expect(nextSpy).toHaveBeenCalledWith(expected);
 			} else {
-				expect(nextSpy).not.toHaveBeenCalled()
+				expect(nextSpy).not.toHaveBeenCalled();
 			}
-		})
-
-	})
+		});
+	});
 });

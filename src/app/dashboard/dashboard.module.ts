@@ -17,7 +17,7 @@ import {ObButtonModule, ObIconModule} from '@oblique/oblique';
 		MatButtonModule,
 		MatIconModule,
 		ObButtonModule,
-		ObIconModule,
+		ObIconModule
 	]
 })
 export class DashboardModule {}

@@ -37,17 +37,20 @@
 					id="generationType-recovery"
 					value="recovery"
 					name="recovery"
-					class="radio-button">
+					class="radio-button"
+				>
 					{{ "certificateCreate.step-one.enum.recovery" | translate }}
 				</mat-radio-button>
 			</ng-container>
 
-			<ng-container *ecHasAuthorizationForAny="[
-		AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
-		AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
-		AuthFunction.CREATE_VACCINATION_TOURIST,
-		AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE,
-		]">
+			<ng-container
+				*ecHasAuthorizationForAny="[
+					AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
+					AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+					AuthFunction.CREATE_VACCINATION_TOURIST,
+					AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
+				]"
+			>
 				<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
 					{{ "certificateCreate.step-one.enum.chOnly" | translate }}
 				</legend>

@@ -11,7 +11,7 @@ import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/ope
 import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
-import {AuthFunction, AuthService} from "./auth/auth.service";
+import {AuthFunction, AuthService} from './auth/auth.service';
 
 @Component({
 	selector: 'ec-root',
@@ -81,36 +81,33 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 	}
 
 	private setNavigation(): void {
-		this.authService.authorizedFunctions$.pipe(
-			delay(0),
-			takeUntil(this.unsubscribe))
-			.subscribe(authFunctions => {
-				const navigation: ObINavigationLink[] = []
-				if (authFunctions.includes(AuthFunction.MAIN)) {
-					navigation.push({url: 'dashboard', label: 'dashboard.link'})
-				}
-				if (authFunctions.includes(AuthFunction.CERTIFICATE_GENERATION)) {
-					navigation.push({url: 'certificate-create', label: 'certificateCreate.link'})
-				}
-				if (authFunctions.includes(AuthFunction.CERTIFICATE_REVOCATION)) {
-					navigation.push({url: 'certificate-revoke', label: 'certificateRevoke.link'},)
-				}
-				if (authFunctions.includes(AuthFunction.OTP_GENERATION)) {
-					navigation.push({url: 'otp', label: 'otp.link'})
-				}
-				if (authFunctions.includes(AuthFunction.BULK_OPERATIONS)) {
-					navigation.push({url: 'upload', label: 'upload.link'})
-				}
-				this.navigation = navigation
-			})
+		this.authService.authorizedFunctions$.pipe(delay(0), takeUntil(this.unsubscribe)).subscribe(authFunctions => {
+			const navigation: ObINavigationLink[] = [];
+			if (authFunctions.includes(AuthFunction.MAIN)) {
+				navigation.push({url: 'dashboard', label: 'dashboard.link'});
+			}
+			if (authFunctions.includes(AuthFunction.CERTIFICATE_GENERATION)) {
+				navigation.push({url: 'certificate-create', label: 'certificateCreate.link'});
+			}
+			if (authFunctions.includes(AuthFunction.CERTIFICATE_REVOCATION)) {
+				navigation.push({url: 'certificate-revoke', label: 'certificateRevoke.link'});
+			}
+			if (authFunctions.includes(AuthFunction.OTP_GENERATION)) {
+				navigation.push({url: 'otp', label: 'otp.link'});
+			}
+			if (authFunctions.includes(AuthFunction.BULK_OPERATIONS)) {
+				navigation.push({url: 'upload', label: 'upload.link'});
+			}
+			this.navigation = navigation;
+		});
 	}
 
-	private isAuthorized(isAuthenticated: boolean): Observable<{ isAuthenticated: boolean; isAuthorized: boolean }> {
+	private isAuthorized(isAuthenticated: boolean): Observable<{isAuthenticated: boolean; isAuthorized: boolean}> {
 		if (!isAuthenticated) {
 			return of({isAuthenticated, isAuthorized: false});
 		}
-		return this.authService.hasAuthorizationFor$(AuthFunction.MAIN).pipe(
-			map(isAuthorized => ({isAuthenticated, isAuthorized}))
-		);
+		return this.authService
+			.hasAuthorizationFor$(AuthFunction.MAIN)
+			.pipe(map(isAuthorized => ({isAuthenticated, isAuthorized})));
 	}
 }

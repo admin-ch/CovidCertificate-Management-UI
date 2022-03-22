@@ -8,7 +8,7 @@ import {ObButtonModule, ObIconModule} from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {UploadGuard} from "./upload.guard";
+import {UploadGuard} from './upload.guard';
 
 @NgModule({
 	declarations: [UploadComponent],

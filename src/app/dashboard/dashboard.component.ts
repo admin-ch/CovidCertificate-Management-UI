@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthFunction} from "../auth/auth.service";
+import {AuthFunction} from '../auth/auth.service';
 
 @Component({
 	selector: 'ec-dashboard',
@@ -8,8 +8,7 @@ import {AuthFunction} from "../auth/auth.service";
 	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
-	AuthFunction: typeof AuthFunction =  AuthFunction;
+	AuthFunction: typeof AuthFunction = AuthFunction;
 
 	constructor(private readonly router: Router) {}
 

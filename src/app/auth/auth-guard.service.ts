@@ -4,7 +4,8 @@ import {
 	CanActivate,
 	CanActivateChild,
 	CanLoad,
-	Route, Router,
+	Route,
+	Router,
 	RouterStateSnapshot,
 	UrlSegment
 } from '@angular/router';
@@ -13,9 +14,8 @@ import {switchMap, take, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {WINDOW} from '@oblique/oblique';
 import {environment} from '../../environments/environment';
-import {AuthFunction, AuthService} from "./auth.service";
-import {OauthService} from "./oauth.service";
-
+import {AuthFunction, AuthService} from './auth.service';
+import {OauthService} from './oauth.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -59,9 +59,9 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 								this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
 							}
 						})
-					)
+					);
 				}
 			})
-		)
+		);
 	}
 }
