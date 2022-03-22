@@ -62,7 +62,7 @@ export class UploadComponent implements OnInit {
 		this.createForm();
 		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
 			this.certificateService.setFeatureToggleSets(featureToggleGroup);
-				this.featureToggleSetsLoaded = true;
+			this.featureToggleSetsLoaded = true;
 		});
 	}
 
