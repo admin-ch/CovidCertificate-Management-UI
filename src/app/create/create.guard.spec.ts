@@ -2,12 +2,12 @@ import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthFunction} from '../auth/auth.service';
 import {ObliqueTestingModule} from '@oblique/oblique';
-import {BaseGuard} from "shared/base.guard";
-import {CreateGuard} from "./create.guard";
+import {BaseGuard} from 'shared/base.guard';
+import {CreateGuard} from './create.guard';
 
 describe('UploadGuard', () => {
 	let service: CreateGuard;
-	const checkExpectedRoleMock = jest.fn().mockReturnValue('mockReturnValue')
+	const checkExpectedRoleMock = jest.fn().mockReturnValue('mockReturnValue');
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('UploadGuard', () => {
 					useValue: {
 						checkExpectedRole: checkExpectedRoleMock
 					}
-				},
+				}
 			]
 		}).compileComponents();
 		service = TestBed.inject(CreateGuard);
@@ -29,15 +29,13 @@ describe('UploadGuard', () => {
 	});
 
 	describe.each(['canActivate', 'canActivateChild', 'canLoad'])('%s', name => {
-
 		it(`should return value of checkExpectedRole`, () => {
-			expect(service[name]()).toBe('mockReturnValue')
-		})
+			expect(service[name]()).toBe('mockReturnValue');
+		});
 
 		it(`should call ${name} with ${AuthFunction.CERTIFICATE_GENERATION}`, () => {
-			service[name]()
-			expect(checkExpectedRoleMock).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_GENERATION)
-		})
-
+			service[name]();
+			expect(checkExpectedRoleMock).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_GENERATION);
+		});
 	});
 });

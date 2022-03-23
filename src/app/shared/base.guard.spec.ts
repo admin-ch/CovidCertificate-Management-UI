@@ -5,7 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {of, ReplaySubject} from 'rxjs';
 import {AuthFunction, AuthService} from '../auth/auth.service';
 import {ObliqueTestingModule, WINDOW} from '@oblique/oblique';
-import {BaseGuard} from "shared/base.guard";
+import {BaseGuard} from 'shared/base.guard';
 
 describe('BaseGuard', () => {
 	let service: BaseGuard;
@@ -51,8 +51,7 @@ describe('BaseGuard', () => {
 				spy = jest.spyOn(authServiceMock, 'hasAuthorizationFor$').mockReturnValue(of(true));
 			});
 
-			describe.each(Object.values(AuthFunction))
-			('with auth function %s ', (authFunction) => {
+			describe.each(Object.values(AuthFunction))('with auth function %s ', authFunction => {
 				it(`should return true`, done => {
 					const obs$ = service.checkExpectedRole(authFunction);
 
@@ -83,7 +82,6 @@ describe('BaseGuard', () => {
 			});
 		});
 
-
 		describe('with expected return value false', () => {
 			let spy: jest.SpyInstance;
 
@@ -93,10 +91,7 @@ describe('BaseGuard', () => {
 				spy = jest.spyOn(authServiceMock, 'hasAuthorizationFor$').mockReturnValue(of(false));
 			});
 
-			describe.each(Object.values(AuthFunction))
-			('with auth function %s ', (authFunction) => {
-
-
+			describe.each(Object.values(AuthFunction))('with auth function %s ', authFunction => {
 				it(`should return false`, done => {
 					const obs$ = service.checkExpectedRole(authFunction);
 
@@ -121,12 +116,13 @@ describe('BaseGuard', () => {
 
 					obs$.subscribe(() => {
 						// @ts-ignore
-						expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
+						expect(service.window.location.href).toBe(
+							`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
+						);
 						done();
 					});
 				});
 			});
 		});
 	});
-})
-
+});

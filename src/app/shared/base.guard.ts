@@ -3,8 +3,8 @@ import {take, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../environments/environment';
 import {AuthFunction, AuthService} from '../auth/auth.service';
-import {Inject, Injectable} from "@angular/core";
-import {WINDOW} from "@oblique/oblique";
+import {Inject, Injectable} from '@angular/core';
+import {WINDOW} from '@oblique/oblique';
 
 @Injectable({
 	providedIn: 'root'
