@@ -14,7 +14,7 @@
 <form [formGroup]="certificateTypeSelectionForm">
 	<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileUpload />
 
-	<div class="form-group">
+	<div *ngIf="featureToggleSetsLoaded" class="form-group">
 		<div class="form-field">
 			<mat-form-field class="mat-form-field-lg" obErrorMessages>
 				<mat-label>{{ "upload.type" | translate }}</mat-label>
