@@ -42,15 +42,13 @@ export class CreateGuard implements CanActivate, CanActivateChild, CanLoad {
 	}
 
 	private checkExpectedRole(): Observable<boolean> {
-		return this.authService
-			.hasAuthorizationFor$(AuthFunction.CERTIFICATE_GENERATION)
-			.pipe(
-				take(1),
-				tap(isAuthorized => {
-					if (!isAuthorized) {
-						this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-					}
-				})
-			);
+		return this.authService.hasAuthorizationFor$(AuthFunction.CERTIFICATE_GENERATION).pipe(
+			take(1),
+			tap(isAuthorized => {
+				if (!isAuthorized) {
+					this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
+				}
+			})
+		);
 	}
 }

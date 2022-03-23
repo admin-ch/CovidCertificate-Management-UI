@@ -6,7 +6,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
-import {AuthFunction, AuthService} from "../../auth/auth.service";
+import {AuthFunction, AuthService} from '../../auth/auth.service';
 
 describe.skip('SelectCertificateTypeComponent', () => {
 	let component: SelectCertificateTypeComponent;
@@ -15,19 +15,20 @@ describe.skip('SelectCertificateTypeComponent', () => {
 	const authServiceMock = {
 		authorizedFunctions$: {
 			pipe: () => ({
-				subscribe: (fn) => fn([
-					AuthFunction.CREATE_CERTIFICATE_WEB,
-					AuthFunction.CREATE_VACCINATION_CERTIFICATE,
-					AuthFunction.CREATE_VACCINATION_TOURIST,
-					AuthFunction.CREATE_TEST_CERTIFICATE,
-					AuthFunction.CREATE_RECOVERY_CERTIFICATE,
-					AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
-					AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
-					AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE,
-				])
+				subscribe: fn =>
+					fn([
+						AuthFunction.CREATE_CERTIFICATE_WEB,
+						AuthFunction.CREATE_VACCINATION_CERTIFICATE,
+						AuthFunction.CREATE_VACCINATION_TOURIST,
+						AuthFunction.CREATE_TEST_CERTIFICATE,
+						AuthFunction.CREATE_RECOVERY_CERTIFICATE,
+						AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
+						AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+						AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
+					])
 			})
 		}
-	}
+	};
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({

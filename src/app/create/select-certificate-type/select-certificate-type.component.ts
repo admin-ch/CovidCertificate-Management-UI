@@ -4,18 +4,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {CertificateService} from 'shared/certificate.service';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
-import {take} from "rxjs/operators";
-
+import {take} from 'rxjs/operators';
 
 const AUTH_FUNCTION_GEN_TYPE_MAP = {
 	[AuthFunction.CREATE_VACCINATION_CERTIFICATE]: GenerationType.VACCINATION,
 	[AuthFunction.CREATE_TEST_CERTIFICATE]: GenerationType.TEST,
-	[AuthFunction.CREATE_RECOVERY_CERTIFICATE]:GenerationType.RECOVERY,
+	[AuthFunction.CREATE_RECOVERY_CERTIFICATE]: GenerationType.RECOVERY,
 	[AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE]: GenerationType.RECOVERY_RAT,
-	[AuthFunction.CREATE_ANTIBODY_CERTIFICATE]:  GenerationType.ANTIBODY,
+	[AuthFunction.CREATE_ANTIBODY_CERTIFICATE]: GenerationType.ANTIBODY,
 	[AuthFunction.CREATE_VACCINATION_TOURIST]: GenerationType.VACCINATION_TOURIST,
-	[AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE]: GenerationType.EXCEPTIONAL,
-}
+	[AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE]: GenerationType.EXCEPTIONAL
+};
 
 @Component({
 	selector: 'ec-select-certificate-type',
@@ -67,15 +66,16 @@ export class SelectCertificateTypeComponent implements OnInit {
 	}
 
 	private createForm(): void {
-
 		this.authService.authorizedFunctions$.pipe(take(1)).subscribe(authFunctions => {
-			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key => authFunctions.includes(key))
+			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key =>
+				authFunctions.includes(key)
+			);
 
-			const type = AUTH_FUNCTION_GEN_TYPE_MAP[authFunction]
+			const type = AUTH_FUNCTION_GEN_TYPE_MAP[authFunction];
 			this.certificateTypeSelectionForm = this.formBuilder.group({
 				type: [type, Validators.required]
 			});
-		})
+		});
 	}
 
 	private resetForm(): void {

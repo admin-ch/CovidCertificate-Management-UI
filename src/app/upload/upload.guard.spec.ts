@@ -113,7 +113,9 @@ describe('UploadGuard', () => {
 
 				obs$.subscribe(() => {
 					// @ts-ignore
-					expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
+					expect(service.window.location.href).toBe(
+						`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
+					);
 					done();
 				});
 			});

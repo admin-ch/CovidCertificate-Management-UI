@@ -108,7 +108,15 @@
 
 	<div class="stepper-footer">
 		<section class="stepper-footer-content">
-			<button id="cert-create-next" type="button" [disabled]="certificateTypeSelectionForm.invalid" (click)="goNext()" mat-button obButton="primary" class="right">
+			<button
+				id="cert-create-next"
+				type="button"
+				[disabled]="certificateTypeSelectionForm.invalid"
+				(click)="goNext()"
+				mat-button
+				obButton="primary"
+				class="right"
+			>
 				{{ "common.next" | translate }}
 			</button>
 		</section>
