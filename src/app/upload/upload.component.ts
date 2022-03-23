@@ -14,6 +14,7 @@ export class UploadComponent implements OnInit {
 	@ViewChild('fileUpload') fileUpload: ElementRef;
 
 	certificateTypeSelectionForm: FormGroup;
+	featureToggleSetsLoaded = false;
 
 	private selectedFile: File;
 	private readonly maxFileSize: number = 40000;
@@ -59,6 +60,10 @@ export class UploadComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.createForm();
+		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
+			this.certificateService.setFeatureToggleSets(featureToggleGroup);
+			this.featureToggleSetsLoaded = true;
+		});
 	}
 
 	onFileSelected(event) {
