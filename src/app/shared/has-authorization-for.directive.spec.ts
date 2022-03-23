@@ -25,7 +25,6 @@ class TestComponent {
 }
 
 describe('HasAuthorizationForDirective', () => {
-	let component: TestComponent;
 	let fixture: ComponentFixture<TestComponent>;
 	const hasAuthorizationFor$Mock = jest.fn();
 
@@ -46,15 +45,10 @@ describe('HasAuthorizationForDirective', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TestComponent);
-		component = fixture.componentInstance;
 		hasAuthorizationFor$Mock.mockReturnValue(of());
 	});
 
-	describe('ecHasAuthorizationFor', () => {
-		it('should call hasAuthorizationFor$ with correct params', () => {
-			fixture.detectChanges();
-			expect(hasAuthorizationFor$Mock).toHaveBeenCalledWith(AuthFunction.CREATE_CERTIFICATE_WEB);
-		});
+	const expectShouldRender = () => {
 		it('should render element if hasAuthorizationFor$ emits true', () => {
 			hasAuthorizationFor$Mock.mockReturnValue(of(true));
 
@@ -69,6 +63,14 @@ describe('HasAuthorizationForDirective', () => {
 
 			expect(fixture.debugElement.query(By.css('#ecHasAuthorizationForDiv'))).toBeFalsy();
 		});
+	}
+
+	describe('ecHasAuthorizationFor', () => {
+		it('should call hasAuthorizationFor$ with correct params', () => {
+			fixture.detectChanges();
+			expect(hasAuthorizationFor$Mock).toHaveBeenCalledWith(AuthFunction.CREATE_CERTIFICATE_WEB);
+		});
+		expectShouldRender()
 	});
 	describe('ecHasAuthorizationForAny', () => {
 		it('should call hasAuthorizationFor$ with correct params', () => {
@@ -79,19 +81,6 @@ describe('HasAuthorizationForDirective', () => {
 				AuthFunction.OTP_GENERATION
 			);
 		});
-		it('should render element if hasAuthorizationFor$ emits true', () => {
-			hasAuthorizationFor$Mock.mockReturnValue(of(true));
-
-			fixture.detectChanges();
-
-			expect(fixture.debugElement.query(By.css('#ecHasAuthorizationForAnyDiv'))).toBeTruthy();
-		});
-		it('should not render element if hasAuthorizationFor$ emits false', () => {
-			hasAuthorizationFor$Mock.mockReturnValue(of(false));
-
-			fixture.detectChanges();
-
-			expect(fixture.debugElement.query(By.css('#ecHasAuthorizationForAnyDiv'))).toBeFalsy();
-		});
+		expectShouldRender()
 	});
 });
