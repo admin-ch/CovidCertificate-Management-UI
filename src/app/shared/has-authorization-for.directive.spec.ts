@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 import {HasAuthorizationForDirective} from './has-authorization-for.directive';
-import {AuthFunction, AuthService} from './auth.service';
+import {AuthFunction, AuthService} from '../auth/auth.service';
 import {of} from 'rxjs';
 
 @Component({

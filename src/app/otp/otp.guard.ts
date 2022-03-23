@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
 	ActivatedRouteSnapshot,
 	CanActivate,
@@ -9,46 +9,26 @@ import {
 	UrlSegment
 } from '@angular/router';
 import {Observable} from 'rxjs';
-import {take, tap} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
-import {WINDOW} from '@oblique/oblique';
-import {environment} from '../../environments/environment';
-import {AuthFunction, AuthService} from '../auth/auth.service';
+import {AuthFunction} from '../auth/auth.service';
+import {BaseGuard} from "shared/base.guard";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class OtpGuard implements CanActivate, CanActivateChild, CanLoad {
-	private readonly stage: string;
 
-	constructor(
-		private readonly translate: TranslateService,
-		private readonly authService: AuthService,
-		@Inject(WINDOW) private readonly window
-	) {
-		this.stage = environment.stage;
+	constructor(private readonly baseGuard: BaseGuard) {
 	}
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-		return this.checkExpectedRole();
+		return this.baseGuard.checkExpectedRole(AuthFunction.OTP_GENERATION);
 	}
 
 	canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-		return this.checkExpectedRole();
+		return this.baseGuard.checkExpectedRole(AuthFunction.OTP_GENERATION);
 	}
 
 	canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
-		return this.checkExpectedRole();
-	}
-
-	private checkExpectedRole(): Observable<boolean> {
-		return this.authService.hasAuthorizationFor$(AuthFunction.OTP_GENERATION).pipe(
-			take(1),
-			tap(isAuthorized => {
-				if (!isAuthorized) {
-					this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-				}
-			})
-		);
+		return this.baseGuard.checkExpectedRole(AuthFunction.OTP_GENERATION);
 	}
 }
