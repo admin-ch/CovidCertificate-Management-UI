@@ -16,15 +16,6 @@ describe('CreateGuard', () => {
 	const authServiceMock = {
 		hasAuthorizationFor$: hasAuthorizationFor$Mock
 	};
-	const ALL_CREATE_AUTH_FUNCTIONS = [
-		AuthFunction.CREATE_VACCINATION_CERTIFICATE,
-		AuthFunction.CREATE_VACCINATION_TOURIST,
-		AuthFunction.CREATE_TEST_CERTIFICATE,
-		AuthFunction.CREATE_RECOVERY_CERTIFICATE,
-		AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
-		AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
-		AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
-	];
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -68,11 +59,11 @@ describe('CreateGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${ALL_CREATE_AUTH_FUNCTIONS}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CERTIFICATE_GENERATION}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_GENERATION);
 					done();
 				});
 			});
@@ -81,7 +72,7 @@ describe('CreateGuard', () => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(() => {
-					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_GENERATION);
 					// @ts-ignore
 					expect(service.window.location.href).toBe('');
 					done();
@@ -106,11 +97,11 @@ describe('CreateGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${ALL_CREATE_AUTH_FUNCTIONS}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CERTIFICATE_GENERATION}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(...ALL_CREATE_AUTH_FUNCTIONS);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_GENERATION);
 					done();
 				});
 			});
@@ -123,6 +114,7 @@ describe('CreateGuard', () => {
 				obs$.subscribe(() => {
 					// @ts-ignore
 					expect(service.window.location.href).toBe(
+						// @ts-ignore
 						`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
 					);
 					done();

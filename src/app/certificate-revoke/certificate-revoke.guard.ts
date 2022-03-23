@@ -42,7 +42,7 @@ export class CertificateRevokeGuard implements CanActivate, CanActivateChild, Ca
 	}
 
 	private checkExpectedRole(): Observable<boolean> {
-		return this.authService.hasAuthorizationFor$(AuthFunction.REVOKE_CERTIFICATE).pipe(
+		return this.authService.hasAuthorizationFor$(AuthFunction.CERTIFICATE_REVOCATION).pipe(
 			take(1),
 			tap(isAuthorized => {
 				if (!isAuthorized) {

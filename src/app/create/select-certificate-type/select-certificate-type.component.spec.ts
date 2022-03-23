@@ -6,15 +6,38 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
+import {AuthFunction, AuthService} from "../../auth/auth.service";
 
 describe.skip('SelectCertificateTypeComponent', () => {
 	let component: SelectCertificateTypeComponent;
 	let fixture: ComponentFixture<SelectCertificateTypeComponent>;
 	let creationDataService: CreationDataService;
+	const authServiceMock = {
+		authorizedFunctions$: {
+			pipe: () => ({
+				subscribe: (fn) => fn([
+					AuthFunction.CREATE_CERTIFICATE_WEB,
+					AuthFunction.CREATE_VACCINATION_CERTIFICATE,
+					AuthFunction.CREATE_VACCINATION_TOURIST,
+					AuthFunction.CREATE_TEST_CERTIFICATE,
+					AuthFunction.CREATE_RECOVERY_CERTIFICATE,
+					AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
+					AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+					AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE,
+				])
+			})
+		}
+	}
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [ObliqueTestingModule, ReactiveFormsModule, MatRadioModule],
+			providers: [
+				{
+					provide: AuthService,
+					useValue: authServiceMock
+				}
+			],
 			declarations: [SelectCertificateTypeComponent],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
@@ -31,7 +54,7 @@ describe.skip('SelectCertificateTypeComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have the default certificate type to vaccination', () => {
+	it('should have the default certificate type to vaccination if authorized for all', () => {
 		expect(component.certificateTypeSelectionForm.get('type').value).toBe('vaccination');
 	});
 

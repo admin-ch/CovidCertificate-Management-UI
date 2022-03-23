@@ -59,11 +59,11 @@ describe('CertificateRevokeGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.REVOKE_CERTIFICATE}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CERTIFICATE_REVOCATION}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.REVOKE_CERTIFICATE);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_REVOCATION);
 					done();
 				});
 			});
@@ -72,7 +72,7 @@ describe('CertificateRevokeGuard', () => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(() => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.REVOKE_CERTIFICATE);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_REVOCATION);
 					// @ts-ignore
 					expect(service.window.location.href).toBe('');
 					done();
@@ -97,11 +97,11 @@ describe('CertificateRevokeGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.REVOKE_CERTIFICATE}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.CERTIFICATE_REVOCATION}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.REVOKE_CERTIFICATE);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.CERTIFICATE_REVOCATION);
 					done();
 				});
 			});
@@ -113,9 +113,7 @@ describe('CertificateRevokeGuard', () => {
 
 				obs$.subscribe(() => {
 					// @ts-ignore
-					expect(service.window.location.href).toBe(
-						`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
-					);
+					expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
 					done();
 				});
 			});

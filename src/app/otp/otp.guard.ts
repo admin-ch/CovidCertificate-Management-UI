@@ -42,7 +42,7 @@ export class OtpGuard implements CanActivate, CanActivateChild, CanLoad {
 	}
 
 	private checkExpectedRole(): Observable<boolean> {
-		return this.authService.hasAuthorizationFor$(AuthFunction.CREATE_OTP).pipe(
+		return this.authService.hasAuthorizationFor$(AuthFunction.OTP_GENERATION).pipe(
 			take(1),
 			tap(isAuthorized => {
 				if (!isAuthorized) {

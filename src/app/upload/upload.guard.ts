@@ -42,7 +42,7 @@ export class UploadGuard implements CanActivate, CanActivateChild, CanLoad {
 	}
 
 	private checkExpectedRole(): Observable<boolean> {
-		return this.authService.hasAuthorizationFor$(AuthFunction.BULK_CREATE_CERTIFICATES).pipe(
+		return this.authService.hasAuthorizationFor$(AuthFunction.BULK_OPERATIONS).pipe(
 			take(1),
 			tap(isAuthorized => {
 				if (!isAuthorized) {

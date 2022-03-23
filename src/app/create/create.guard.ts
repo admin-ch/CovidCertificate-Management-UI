@@ -43,15 +43,7 @@ export class CreateGuard implements CanActivate, CanActivateChild, CanLoad {
 
 	private checkExpectedRole(): Observable<boolean> {
 		return this.authService
-			.hasAuthorizationFor$(
-				AuthFunction.CREATE_VACCINATION_CERTIFICATE,
-				AuthFunction.CREATE_VACCINATION_TOURIST,
-				AuthFunction.CREATE_TEST_CERTIFICATE,
-				AuthFunction.CREATE_RECOVERY_CERTIFICATE,
-				AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
-				AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
-				AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
-			)
+			.hasAuthorizationFor$(AuthFunction.CERTIFICATE_GENERATION)
 			.pipe(
 				take(1),
 				tap(isAuthorized => {

@@ -59,11 +59,11 @@ describe('UploadGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.BULK_CREATE_CERTIFICATES}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.BULK_OPERATIONS}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_CREATE_CERTIFICATES);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_OPERATIONS);
 					done();
 				});
 			});
@@ -72,7 +72,7 @@ describe('UploadGuard', () => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(() => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_CREATE_CERTIFICATES);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_OPERATIONS);
 					// @ts-ignore
 					expect(service.window.location.href).toBe('');
 					done();
@@ -97,11 +97,11 @@ describe('UploadGuard', () => {
 					done();
 				});
 			});
-			it(`should call hasAuthorizationFor$ with ${AuthFunction.BULK_CREATE_CERTIFICATES}`, done => {
+			it(`should call hasAuthorizationFor$ with ${AuthFunction.BULK_OPERATIONS}`, done => {
 				const obs$ = service[name]();
 
 				obs$.subscribe(_ => {
-					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_CREATE_CERTIFICATES);
+					expect(spy).toHaveBeenCalledWith(AuthFunction.BULK_OPERATIONS);
 					done();
 				});
 			});
@@ -113,9 +113,7 @@ describe('UploadGuard', () => {
 
 				obs$.subscribe(() => {
 					// @ts-ignore
-					expect(service.window.location.href).toBe(
-						`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
-					);
+					expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
 					done();
 				});
 			});
