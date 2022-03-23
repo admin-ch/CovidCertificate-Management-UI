@@ -63,14 +63,14 @@ describe('HasAuthorizationForDirective', () => {
 
 			expect(fixture.debugElement.query(By.css('#ecHasAuthorizationForDiv'))).toBeFalsy();
 		});
-	}
+	};
 
 	describe('ecHasAuthorizationFor', () => {
 		it('should call hasAuthorizationFor$ with correct params', () => {
 			fixture.detectChanges();
 			expect(hasAuthorizationFor$Mock).toHaveBeenCalledWith(AuthFunction.CREATE_CERTIFICATE_WEB);
 		});
-		expectShouldRender()
+		expectShouldRender();
 	});
 	describe('ecHasAuthorizationForAny', () => {
 		it('should call hasAuthorizationFor$ with correct params', () => {
@@ -81,6 +81,6 @@ describe('HasAuthorizationForDirective', () => {
 				AuthFunction.OTP_GENERATION
 			);
 		});
-		expectShouldRender()
+		expectShouldRender();
 	});
 });
