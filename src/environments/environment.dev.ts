@@ -24,7 +24,8 @@ export const environment = {
 			'/v1/valuesets',
 			'/v1/feature-toggle/features',
 			'/v1/otp',
-			'/v1/revocation'
+			'/v1/revocation',
+			'/v1/authorization/current/web-ui'
 		]
 	} as OIdC
 };
