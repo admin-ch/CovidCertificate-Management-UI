@@ -124,6 +124,7 @@
     "home.support": "General support information",
     "home.title": "Hello",
     "home.training": "User training for COVID certificate",
+    "i18n.oblique.http.error.status.403": "You don't have permission to access the service on this server.",
     "i18n.validation.date": "A valid date is needed",
     "i18n.validation.dateAfterToday": "The date cannot be in the future",
     "i18n.validation.dateBeforeAntibodyCertificateMinDate": "Date of sample collection must not be before 16.11.2021.",
