@@ -83,6 +83,7 @@
     "certificateRevoke.title": "Zertifikat sperren",
     "certificateRevoke.uvci": "UVCI",
     "certificateRevoke.uvci.info": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
+    "certificateRevoke.warning": "<p>Ausstellerinnen und Aussteller sind verpflichtet die folgenden Angaben bei sich zu dokumentieren, falls sie ein Zertifikat widerrufen:</p><ul><li>Die eindeutige Zertifikatskennung (UVCI) des widerrufenen Zertifikats;</li><li>Angaben, welche die Nachvollziehbarkeit des Entscheides über den Widerruf ermöglichen.</li></ul>",
     "common.back": "Zurück",
     "common.important": "Wichtig",
     "common.language.de": "Deutsch",

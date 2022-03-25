@@ -83,6 +83,7 @@
     "certificateRevoke.title": "Revoke certificate",
     "certificateRevoke.uvci": "UVCI",
     "certificateRevoke.uvci.info": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
+    "certificateRevoke.warning": "<p>Issuers are obliged to document the following information in their own records if they revoke a certificate:</p><ul><li>the unique certificate identifier (UVCI);</li><li>details that enables comprehensibility regarding the decision to revoke a certificate.</li></ul>",
     "common.back": "Back",
     "common.important": "Important",
     "common.language.de": "German",
