@@ -83,6 +83,7 @@
     "certificateRevoke.title": "Verrouiller le certificat",
     "certificateRevoke.uvci": "UVCI",
     "certificateRevoke.uvci.info": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
+    "certificateRevoke.warning": "<p>Les émetteurs documentent la révocation de certificats en consignant les informations suivantes:</p><ul><li>l’identifiant unique du certificat (UVCI);</li><li>des indications permettant de comprendre la décision de révocation du certificat.</li></ul>",
     "common.back": "Retour",
     "common.important": "Important",
     "common.language.de": "Allemand",

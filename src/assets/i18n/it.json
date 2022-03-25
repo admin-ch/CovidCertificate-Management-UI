@@ -83,6 +83,7 @@
     "certificateRevoke.title": "Bloccare il certificato",
     "certificateRevoke.uvci": "UVCI",
     "certificateRevoke.uvci.info": "Formato: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
+    "certificateRevoke.warning": "<p>Gli emittenti documentano la revoca dei certificati con le seguenti informazioni:</p><ul><li>identificativo univoco del certificato (UVCI);</li><li>dati che garantiscono la trasparenza della decisione relativa alla revoca.</li></ul>",
     "common.back": "Indietro",
     "common.important": "Importante",
     "common.language.de": "Tedesco",
