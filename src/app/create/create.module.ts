@@ -42,6 +42,7 @@ import {VaccinationImportantInformationComponent} from './components/vaccination
 import {PersonalDataComponent} from './components/personal-data/personal-data.component';
 import {ExceptionalFormComponent} from './exceptional-form/exceptional-form.component';
 import {CreateGuard} from './create.guard';
+import { RetroactiveRadioComponent } from './components/retroactive-radio/retroactive-radio.component';
 
 @NgModule({
 	declarations: [
@@ -60,7 +61,8 @@ import {CreateGuard} from './create.guard';
 		DeliveryCodeCleanerDirective,
 		PersonalDataComponent,
 		ExceptionalFormComponent,
-		VaccinationImportantInformationComponent
+		VaccinationImportantInformationComponent,
+  RetroactiveRadioComponent
 	],
 	imports: [
 		SharedModule,
