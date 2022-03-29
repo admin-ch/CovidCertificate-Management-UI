@@ -8,7 +8,7 @@ import { RetroactiveRadioComponent } from './retroactive-radio.component';
 describe('RetroactiveRadioComponent', () => {
   let component: RetroactiveRadioComponent;
   let fixture: ComponentFixture<RetroactiveRadioComponent>;
-  
+
   beforeEach(async () => {
 	  await TestBed.configureTestingModule({
       declarations: [RetroactiveRadioComponent],
