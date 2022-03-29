@@ -16,7 +16,8 @@ const FIRST_POSITIVE_TEST_VALIDATORS = [
 
 @Component({
 	selector: 'ec-recovery-form',
-	templateUrl: './recovery-form.component.html'
+	templateUrl: './recovery-form.component.html',
+	styleUrls: ['./recovery-form.component.scss']
 })
 export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	@Output() back = new EventEmitter<void>();
@@ -95,7 +96,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		this.recoveryForm = this.formBuilder.group({
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
 			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required],
-			checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
+			confirmation: ['']
 		});
 
 		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
@@ -104,15 +105,6 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 					DateValidators.dateMoreThanBirthday(),
 					...FIRST_POSITIVE_TEST_VALIDATORS
 				]);
-			}
-		});
-
-		this.recoveryForm.get('countryOfTest').valueChanges.subscribe(selectedCountryOfTest => {
-			if (selectedCountryOfTest && selectedCountryOfTest.code !== 'CH') {
-				this.recoveryForm.get('checkBox').enable();
-				this.recoveryForm.get('checkBox').setValue(false);
-			} else {
-				this.recoveryForm.get('checkBox').disable();
 			}
 		});
 	}
@@ -148,7 +140,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		this.recoveryForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			countryOfTest: this.getDefaultCountryOfRecovery(),
-			checkBox: {value: false, disabled: true}
+			confirmation: ['']
 		});
 	}
 }
