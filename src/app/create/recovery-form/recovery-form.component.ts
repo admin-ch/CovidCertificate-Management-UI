@@ -95,7 +95,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	private createForm(): void {
 		this.recoveryForm = this.formBuilder.group({
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
-			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required],
+			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required]
 		});
 
 		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
@@ -138,7 +138,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
 			certificateLanguage: previousCertificateLanguage,
-			countryOfTest: this.getDefaultCountryOfRecovery(),
+			countryOfTest: this.getDefaultCountryOfRecovery()
 		});
 	}
 }

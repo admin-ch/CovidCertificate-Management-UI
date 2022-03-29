@@ -62,7 +62,7 @@ import { RetroactiveRadioComponent } from './components/retroactive-radio/retroa
 		PersonalDataComponent,
 		ExceptionalFormComponent,
 		VaccinationImportantInformationComponent,
-  RetroactiveRadioComponent
+		RetroactiveRadioComponent
 	],
 	imports: [
 		SharedModule,

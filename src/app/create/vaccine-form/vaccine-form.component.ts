@@ -107,7 +107,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
-				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required],
+				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required]
 			},
 			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
 		);
@@ -160,7 +160,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
-			countryOfVaccination: this.getDefaultCountryOfVaccination(),
+			countryOfVaccination: this.getDefaultCountryOfVaccination()
 		});
 	}
 }

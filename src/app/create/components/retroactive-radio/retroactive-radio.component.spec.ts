@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RetroactiveRadioComponent } from './retroactive-radio.component';
+import {RetroactiveRadioComponent} from './retroactive-radio.component';
 
 describe('RetroactiveRadioComponent', () => {
-  let component: RetroactiveRadioComponent;
-  let fixture: ComponentFixture<RetroactiveRadioComponent>;
+	let component: RetroactiveRadioComponent;
+	let fixture: ComponentFixture<RetroactiveRadioComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RetroactiveRadioComponent ]
-    })
-    .compileComponents();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [RetroactiveRadioComponent]
+		}).compileComponents();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RetroactiveRadioComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(RetroactiveRadioComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });
