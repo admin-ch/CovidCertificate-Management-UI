@@ -41,6 +41,7 @@ import {WhoCheckboxComponent} from './components/who-checkbox/who-checkbox.compo
 import {VaccinationImportantInformationComponent} from './components/vaccination-important-information/vaccination-important-information.component';
 import {PersonalDataComponent} from './components/personal-data/personal-data.component';
 import {ExceptionalFormComponent} from './exceptional-form/exceptional-form.component';
+import {CreateGuard} from './create.guard';
 
 @NgModule({
 	declarations: [
@@ -84,7 +85,7 @@ import {ExceptionalFormComponent} from './exceptional-form/exceptional-form.comp
 		MatTooltipModule,
 		MatIconModule,
 		ReactiveFormsModule,
-		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService]}]),
+		RouterModule.forChild([{path: '', component: CreateComponent, canActivate: [AuthGuardService, CreateGuard]}]),
 		ObCollapseModule
 	]
 })

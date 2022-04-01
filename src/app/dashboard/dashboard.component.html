@@ -1,5 +1,5 @@
 <div class="dashboard">
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.CERTIFICATE_GENERATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="qrcode" class="ob-icon"></mat-icon>
 		</div>
@@ -17,7 +17,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.CERTIFICATE_REVOCATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="ban" class="ob-icon"></mat-icon>
 		</div>
@@ -35,7 +35,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.OTP_GENERATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="unlock" class="ob-icon"></mat-icon>
 		</div>
@@ -51,7 +51,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.BULK_OPERATIONS">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="upload" class="ob-icon"></mat-icon>
 		</div>
