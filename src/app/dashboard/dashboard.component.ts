@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {CertificateService} from 'shared/certificate.service';
+import {AuthFunction} from '../auth/auth.service';
 
 @Component({
 	selector: 'ec-dashboard',
@@ -8,6 +8,8 @@ import {CertificateService} from 'shared/certificate.service';
 	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+	AuthFunction: typeof AuthFunction = AuthFunction;
+
 	constructor(private readonly router: Router) {}
 
 	goToCertificateCreate() {

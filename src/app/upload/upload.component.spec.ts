@@ -19,7 +19,8 @@ describe('UploadComponent', () => {
 	};
 
 	const mockCertificateService = {
-		verifyFeatureAvailability: jest.fn().mockReturnValue(true)
+		verifyFeatureAvailability: jest.fn().mockReturnValue(true),
+		getFeatureToggleSets: jest.fn().mockReturnValue(of({}))
 	};
 
 	beforeEach(async () => {

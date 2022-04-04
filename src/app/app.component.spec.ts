@@ -3,16 +3,17 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule, ObMasterLayoutService} from '@oblique/oblique';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
-import {of} from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
+import {AuthFunction, AuthService} from './auth/auth.service';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
 	let fixture;
 
 	describe('Authenticated and authorized', () => {
-		const mock = {
+		const oauthServiceMock = {
 			name$: of('name'),
 			isAuthenticated$: of(true),
 			claims$: of({}),
@@ -20,6 +21,16 @@ describe('AppComponent', () => {
 			logout: jest.fn(),
 			initialize: jest.fn(),
 			loadClaims: jest.fn()
+		};
+		const authServiceMock = {
+			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(true).asObservable()),
+			authorizedFunctions$: {
+				pipe: () => ({
+					subscribe: fn => {
+						fn([AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION, AuthFunction.BULK_OPERATIONS]);
+					}
+				})
+			}
 		};
 		beforeEach(
 			waitForAsync(() => {
@@ -32,7 +43,8 @@ describe('AppComponent', () => {
 					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 					providers: [
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: mock},
+						{provide: OauthService, useValue: oauthServiceMock},
+						{provide: AuthService, useValue: authServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();
@@ -83,13 +95,18 @@ describe('AppComponent', () => {
 			let oAuth: OauthService;
 			beforeEach(() => {
 				oAuth = TestBed.inject(OauthService);
-				app.ngAfterViewInit();
 			});
 			it('should call initialize', () => {
+				app.ngAfterViewInit();
 				expect(oAuth.initialize).toHaveBeenCalled();
 			});
 			it('should call loadClaims', () => {
+				app.ngAfterViewInit();
 				expect(oAuth.loadClaims).toHaveBeenCalled();
+			});
+			it('should setup navigation', () => {
+				app.ngAfterViewInit();
+				expect(['dashboard', 'certificate-revoke', 'upload']).toEqual(app.navigation.map(n => n.url));
 			});
 		});
 
@@ -103,7 +120,7 @@ describe('AppComponent', () => {
 	});
 
 	describe('Authenticated and unauthorized', () => {
-		const mock = {
+		const oauthServiceMock = {
 			name$: of('name'),
 			isAuthenticated$: of(true),
 			claims$: of({}),
@@ -112,6 +129,10 @@ describe('AppComponent', () => {
 			initialize: jest.fn(),
 			loadClaims: jest.fn()
 		};
+		const authServiceMock = {
+			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(false).asObservable())
+		};
+
 		beforeEach(
 			waitForAsync(() => {
 				TestBed.configureTestingModule({
@@ -123,7 +144,8 @@ describe('AppComponent', () => {
 					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 					providers: [
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: mock},
+						{provide: OauthService, useValue: oauthServiceMock},
+						{provide: AuthService, useValue: authServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();
@@ -159,11 +181,14 @@ describe('AppComponent', () => {
 	});
 
 	describe('Unauthenticated', () => {
-		const mock = {
+		const oauthServiceMock = {
 			name$: of('name'),
 			isAuthenticated$: of(false),
 			initialize: jest.fn(),
 			loadClaims: jest.fn()
+		};
+		const authServiceMock = {
+			hasAuthorizationFor$: jest.fn().mockReturnValue(of())
 		};
 		beforeEach(
 			waitForAsync(() => {
@@ -176,7 +201,8 @@ describe('AppComponent', () => {
 					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 					providers: [
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: mock},
+						{provide: OauthService, useValue: oauthServiceMock},
+						{provide: AuthService, useValue: authServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();

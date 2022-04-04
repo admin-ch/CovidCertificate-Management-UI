@@ -1,6 +1,10 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from './auth/auth-guard.service';
+import {CreateGuard} from './create/create.guard';
+import {CertificateRevokeGuard} from './certificate-revoke/certificate-revoke.guard';
+import {OtpGuard} from './otp/otp.guard';
+import {UploadGuard} from './upload/upload.guard';
 
 const routes: Routes = [
 	{
@@ -20,27 +24,27 @@ const routes: Routes = [
 	{
 		path: 'certificate-create',
 		loadChildren: () => import('./create/create.module').then(m => m.CreateModule),
-		canLoad: [AuthGuardService],
-		canActivate: [AuthGuardService]
+		canLoad: [AuthGuardService, CreateGuard],
+		canActivate: [AuthGuardService, CreateGuard]
 	},
 	{
 		path: 'certificate-revoke',
 		loadChildren: () =>
 			import('./certificate-revoke/certificate-revoke.module').then(m => m.CertificateRevokeModule),
-		canLoad: [AuthGuardService],
-		canActivate: [AuthGuardService]
+		canLoad: [AuthGuardService, CertificateRevokeGuard],
+		canActivate: [AuthGuardService, CertificateRevokeGuard]
 	},
 	{
 		path: 'otp',
 		loadChildren: () => import('./otp/otp.module').then(m => m.OtpModule),
-		canLoad: [AuthGuardService],
-		canActivate: [AuthGuardService]
+		canLoad: [AuthGuardService, OtpGuard],
+		canActivate: [AuthGuardService, OtpGuard]
 	},
 	{
 		path: 'upload',
 		loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule),
-		canLoad: [AuthGuardService],
-		canActivate: [AuthGuardService]
+		canLoad: [AuthGuardService, UploadGuard],
+		canActivate: [AuthGuardService, UploadGuard]
 	},
 	{path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];

@@ -1,0 +1,18 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+.radio-button-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+    min-width: 550px;
+
+	.radio-button {
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		border-bottom: 0.0625rem solid $gray-light;
+	}
+
+	.label-container {
+		white-space: normal;
+	}
+}
