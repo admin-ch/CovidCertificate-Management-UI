@@ -7,7 +7,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
 import * as moment from 'moment';
-import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
@@ -15,7 +14,6 @@ import {VaccineFormComponent} from './vaccine-form.component';
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
-	let personalDataComponent: PersonalDataComponent;
 	let fixture: ComponentFixture<VaccineFormComponent>;
 	let creationDataService: CreationDataService;
 
@@ -183,7 +181,6 @@ describe('VaccineFormComponent', () => {
 				component.vaccineForm.get('totalDoses').setValue(2);
 				component.vaccineForm.get('dateOfVaccination').setValue({date: datePast});
 				component.vaccineForm.get('countryOfVaccination').setValue('CH');
-				component.vaccineForm.get('checkBox').setValue(true);
 
 				expect(component.vaccineForm.invalid).toBeFalsy();
 			});
@@ -227,7 +224,6 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('totalDoses').setValue(2);
 			component.vaccineForm.get('dateOfVaccination').setValue({date: moment(datePast)});
 			component.vaccineForm.get('countryOfVaccination').setValue('CH');
-			component.vaccineForm.get('checkBox').setValue(true);
 
 			component.goNext();
 		});
