@@ -262,7 +262,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			};
 
 			if (!this.rapid) {
-				additionalData.test.center = this.testForm.value.center
+				additionalData.test.center = this.testForm.value.center;
 			}
 		}
 
