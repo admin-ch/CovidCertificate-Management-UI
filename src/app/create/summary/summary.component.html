@@ -28,7 +28,9 @@
 </ng-container>
 
 <ng-container *ngIf="patient?.test">
-	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
+	<h5>{{(GenerationType.RECOVERY_RAT == certificateType
+		? "certificateCreate.step-one.enum.recovery-rat"
+		: "certificateCreate.form.group.test") | translate }}</h5>
 	<dl>
 		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
 		<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
