@@ -163,7 +163,7 @@
     "gracePeriodMessage": "Questo prodotto per il test antigenico rapido può essere utilizzato fino al {{validUntil}}. Dopo tale data non è più possibile generare certificati COVID con questo prodotto.",
     "i18n.validation.dosesNotValid": "L'indicazione della dose deve essere conforme alle regole menzionate qui sotto.\n",
     "certificateCreate.step-one.enum.recovery-rat": "Guarigione (Test antigenico rapido positivo)",
-    "i18n.validation.rapidDateTooSmall": "La data del prelievo non può essere anteriore al 24.01.2022.",
+    "i18n.validation.rapidDateTooSmall": "La data del prelievo non può essere anteriore al 01.10.2021.",
     "vaccination.doses.rules": "Regole sulle dosi di vaccinazione",
     "certificateCreate.step-three.defaultCountrySwitzerland": "Svizzera",
     "home.faq": "Domande frequenti (FAQ)",
