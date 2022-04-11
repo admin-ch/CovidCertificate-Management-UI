@@ -163,7 +163,7 @@
     "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen.",
     "i18n.validation.dosesNotValid": "Die Angaben zu den Dosen müssen den Regeln oben entsprechen.",
     "certificateCreate.step-one.enum.recovery-rat": "Genesen (Antigen-Schnelltest positiv)",
-    "i18n.validation.rapidDateTooSmall": "Das Datum der Probenentnahme darf nicht vor dem 24.01.2022 liegen.",
+    "i18n.validation.rapidDateTooSmall": "Das Datum der Probenentnahme darf nicht vor dem 01.10.2021 liegen.",
     "vaccination.doses.rules": "Regeln zu den Impfdosen",
     "certificateCreate.step-three.defaultCountrySwitzerland": "Schweiz",
     "home.faq": "Häufig gestellte Fragen (FAQ)",

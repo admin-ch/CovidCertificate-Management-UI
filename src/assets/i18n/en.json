@@ -163,7 +163,7 @@
     "gracePeriodMessage": "This rapid test product can be used until {{validUntil}}; after that date, it can no longer be used to generate certificates.",
     "i18n.validation.dosesNotValid": "The dose entries must comply with the rules above.",
     "certificateCreate.step-one.enum.recovery-rat": "Recovered (Rapid antigen test positive)",
-    "i18n.validation.rapidDateTooSmall": "Date of sample collection can't be before 24.01.2022.",
+    "i18n.validation.rapidDateTooSmall": "Date of sample collection can't be before 01.10.2021.",
     "vaccination.doses.rules": "Rules regarding vaccination doses",
     "certificateCreate.step-three.defaultCountrySwitzerland": "Switzerland",
     "home.faq": "FAQ",

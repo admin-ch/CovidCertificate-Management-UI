@@ -163,7 +163,7 @@
     "gracePeriodMessage": "Ce matériel de test rapide peut être utilisé jusqu’au {{validUntil}}; après cette date, il ne permettra plus d’établir des certificats.",
     "i18n.validation.dosesNotValid": "Les indications des doses doivent être conformes aux règles ci-dessus.",
     "certificateCreate.step-one.enum.recovery-rat": "Guérison (Test rapide antigénique positif)",
-    "i18n.validation.rapidDateTooSmall": "Le prélèvement de l'échantillon ne doit pas dater d'avant le 24.01.2022.",
+    "i18n.validation.rapidDateTooSmall": "Le prélèvement de l'échantillon ne doit pas dater d'avant le 01.10.2021.",
     "vaccination.doses.rules": "Règles concernant les doses de vaccination",
     "certificateCreate.step-three.defaultCountrySwitzerland": "Suisse",
     "home.faq": "Questions fréquemment posées",
