@@ -19,7 +19,6 @@ export class DownloadComponent implements OnInit {
 	get showChOnlyBanner(): boolean {
 		return (
 			this.type === GenerationType.ANTIBODY ||
-			this.type === GenerationType.RECOVERY_RAT ||
 			this.type === GenerationType.VACCINATION_TOURIST ||
 			this.type === GenerationType.EXCEPTIONAL
 		);

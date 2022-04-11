@@ -28,7 +28,14 @@
 </ng-container>
 
 <ng-container *ngIf="patient?.test">
-	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
+	<h5>
+		{{
+			(GenerationType.RECOVERY_RAT == certificateType
+				? "certificateCreate.step-one.enum.recovery-rat"
+				: "certificateCreate.form.group.test"
+			) | translate
+		}}
+	</h5>
 	<dl>
 		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
 		<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
@@ -38,8 +45,10 @@
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDateTime" | translate }}</dt>
 		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm" }}</dd>
-		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
-		<dd id="center">{{ patient?.test.center }}</dd>
+		<dt *ngIf="GenerationType.RECOVERY_RAT != certificateType">
+			{{ "certificateCreate.form.label.test.center" | translate }}
+		</dt>
+		<dd *ngIf="GenerationType.RECOVERY_RAT != certificateType" id="center">{{ patient?.test.center }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
 		<dd id="countryOfTest">{{ getTranslatedCountry() }}</dd>
 	</dl>
