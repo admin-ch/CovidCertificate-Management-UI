@@ -114,7 +114,6 @@
     "home.more": "Instructions pour",
     "home.support": "Informations générales sur le soutien",
     "home.title": "Bonjour",
-    "home.training": "Formation des utilisateurs pour Certificat COVID",
     "i18n.validation.required": "Champ obligatoire",
     "i18n.validation.maxlength": "Veuillez saisir {{requiredLength}} caractères maximum",
     "i18n.validation.dosesTooBig": "Doit être inférieur ou égal au nombre de doses requises",

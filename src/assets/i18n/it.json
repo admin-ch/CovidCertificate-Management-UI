@@ -114,7 +114,6 @@
     "home.more": "Istruzioni per",
     "home.support": "Informazioni generali di supporto",
     "home.title": "Benvenuti",
-    "home.training": "Formazione degli utenti per Certificato Covid",
     "i18n.validation.required": "Campo obbligatorio",
     "i18n.validation.maxlength": "Si prega di inserire un massimo di {{requiredLength}} caratteri",
     "i18n.validation.dosesTooBig": "Deve essere inferiore o uguale alle dosi necessarie",

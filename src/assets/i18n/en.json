@@ -114,7 +114,6 @@
     "home.more": "Instructions for",
     "home.support": "General support information",
     "home.title": "Hello",
-    "home.training": "User training for COVID certificate",
     "i18n.validation.required": "Mandatory field",
     "i18n.validation.maxlength": "Please enter a maximum of {{requiredLength}} characters",
     "i18n.validation.dosesTooBig": "Must be smaller or equal than required doses",
