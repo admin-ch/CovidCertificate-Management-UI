@@ -114,7 +114,6 @@
     "home.more": "Anleitung für",
     "home.support": "Allgemeine Supportangaben",
     "home.title": "Guten Tag",
-    "home.training": "Anwenderschulung für Covid-Zertifikat",
     "i18n.validation.required": "Pflichtfeld",
     "i18n.validation.maxlength": "Bitte geben Sie höchstens {{requiredLength}} Zeichen ein",
     "i18n.validation.dosesTooBig": "Muss kleiner oder gleich als erforderliche Dosen sein",
