@@ -13,6 +13,27 @@ describe('AppComponent', () => {
 	let app: AppComponent;
 	let fixture;
 
+	const configureTestingModule = (oauthServiceMock, authServiceMock) => () => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
+				ObliqueTestingModule
+			],
+			declarations: [AppComponent],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
+				{provide: OauthService, useValue: oauthServiceMock},
+				{provide: AuthService, useValue: authServiceMock},
+				{provide: NotificationService, useValue: notificationServiceMock},
+				{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
+			]
+		}).compileComponents();
+		fixture = TestBed.createComponent(AppComponent);
+		app = fixture.componentInstance;
+		notificationServiceMock.fetchNotifications.mockClear()
+	}
+
 	const notificationServiceMock = {
 		fetchNotifications: jest.fn()
 	};
@@ -38,27 +59,7 @@ describe('AppComponent', () => {
 			}
 		};
 		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: NotificationService, useValue: notificationServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-				notificationServiceMock.fetchNotifications.mockClear()
-
-			})
+			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
 		);
 
 		it('should create the app', () => {
@@ -151,26 +152,7 @@ describe('AppComponent', () => {
 		};
 
 		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: NotificationService, useValue: notificationServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-				notificationServiceMock.fetchNotifications.mockClear()
-			})
+			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
 		);
 
 		it('should create the app', () => {
@@ -220,26 +202,7 @@ describe('AppComponent', () => {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(of())
 		};
 		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: NotificationService, useValue: notificationServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-				notificationServiceMock.fetchNotifications.mockClear()
-			})
+			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
 		);
 
 		it('should create the app', () => {
