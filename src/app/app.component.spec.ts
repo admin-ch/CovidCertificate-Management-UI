@@ -7,10 +7,15 @@ import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
 import {AuthFunction, AuthService} from './auth/auth.service';
+import {NotificationService} from "shared/notification.service";
 
 describe('AppComponent', () => {
 	let app: AppComponent;
 	let fixture;
+
+	const notificationServiceMock = {
+		fetchNotifications: jest.fn()
+	};
 
 	describe('Authenticated and authorized', () => {
 		const oauthServiceMock = {
@@ -45,11 +50,14 @@ describe('AppComponent', () => {
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
 						{provide: OauthService, useValue: oauthServiceMock},
 						{provide: AuthService, useValue: authServiceMock},
+						{provide: NotificationService, useValue: notificationServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();
 				fixture = TestBed.createComponent(AppComponent);
 				app = fixture.componentInstance;
+				notificationServiceMock.fetchNotifications.mockClear()
+
 			})
 		);
 
@@ -86,6 +94,15 @@ describe('AppComponent', () => {
 				const config = TestBed.inject(ObMasterLayoutService);
 				app.isAuthenticated$.subscribe(() => {
 					expect(config.layout.hasMainNavigation).toBe(true);
+					done();
+				});
+			});
+		});
+
+		describe('fetchNotifications', () => {
+			it('should be called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalled();
 					done();
 				});
 			});
@@ -146,11 +163,13 @@ describe('AppComponent', () => {
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
 						{provide: OauthService, useValue: oauthServiceMock},
 						{provide: AuthService, useValue: authServiceMock},
+						{provide: NotificationService, useValue: notificationServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();
 				fixture = TestBed.createComponent(AppComponent);
 				app = fixture.componentInstance;
+				notificationServiceMock.fetchNotifications.mockClear()
 			})
 		);
 
@@ -178,6 +197,16 @@ describe('AppComponent', () => {
 				});
 			});
 		});
+
+		describe('fetchNotifications', () => {
+			it('should be called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalled();
+					done();
+				});
+			});
+		});
+
 	});
 
 	describe('Unauthenticated', () => {
@@ -203,11 +232,13 @@ describe('AppComponent', () => {
 						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
 						{provide: OauthService, useValue: oauthServiceMock},
 						{provide: AuthService, useValue: authServiceMock},
+						{provide: NotificationService, useValue: notificationServiceMock},
 						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
 					]
 				}).compileComponents();
 				fixture = TestBed.createComponent(AppComponent);
 				app = fixture.componentInstance;
+				notificationServiceMock.fetchNotifications.mockClear()
 			})
 		);
 
@@ -235,5 +266,14 @@ describe('AppComponent', () => {
 				});
 			});
 		});
+		describe('fetchNotifications', () => {
+			it('should be called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).not.toHaveBeenCalled();
+					done();
+				});
+			});
+		});
+
 	});
 });
