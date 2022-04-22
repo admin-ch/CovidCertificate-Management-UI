@@ -12,7 +12,6 @@ import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
 import {AuthFunction, AuthService} from './auth/auth.service';
-import {ApiService} from 'shared/api.service';
 import {NotificationService} from 'shared/notification.service';
 
 @Component({

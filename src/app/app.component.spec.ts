@@ -96,9 +96,9 @@ describe('AppComponent', () => {
 		});
 
 		describe('fetchNotifications', () => {
-			it('should be called', done => {
+			it('should have been called', done => {
 				app.isAuthenticated$.subscribe(() => {
-					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalled();
+					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalledTimes(1);
 					done();
 				});
 			});
@@ -220,7 +220,7 @@ describe('AppComponent', () => {
 			});
 		});
 		describe('fetchNotifications', () => {
-			it('should be called', done => {
+			it('should not be called', done => {
 				app.isAuthenticated$.subscribe(() => {
 					expect(notificationServiceMock.fetchNotifications).not.toHaveBeenCalled();
 					done();
