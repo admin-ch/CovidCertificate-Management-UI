@@ -43,19 +43,6 @@
 				</mat-radio-button>
 			</ng-container>
 
-			<ng-container
-				*ecHasAuthorizationForAny="[
-					AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE,
-					AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
-					AuthFunction.CREATE_VACCINATION_TOURIST,
-					AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
-				]"
-			>
-				<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
-					{{ "certificateCreate.step-one.enum.chOnly" | translate }}
-				</legend>
-			</ng-container>
-
 			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_RECOVERY_RAT_CERTIFICATE">
 				<mat-radio-button
 					*ngIf="verifyFeatureAvailability(GenerationType.RECOVERY_RAT)"
@@ -66,6 +53,18 @@
 				>
 					{{ "certificateCreate.step-one.enum.recovery-rat" | translate }}
 				</mat-radio-button>
+			</ng-container>
+
+			<ng-container
+				*ecHasAuthorizationForAny="[
+					AuthFunction.CREATE_ANTIBODY_CERTIFICATE,
+					AuthFunction.CREATE_VACCINATION_TOURIST,
+					AuthFunction.CREATE_EXCEPTIONAL_CERTIFICATE
+				]"
+			>
+				<legend class="group-header" *ngIf="isAnyChOnlyCertificateAvailable()">
+					{{ "certificateCreate.step-one.enum.chOnly" | translate }}
+				</legend>
 			</ng-container>
 
 			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_ANTIBODY_CERTIFICATE">

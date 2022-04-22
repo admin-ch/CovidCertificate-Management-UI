@@ -104,7 +104,7 @@ export interface Test {
 	typeOfTest: ProductInfo;
 	manufacturer: ProductInfo;
 	sampleDate: Date; // format 2000-12-31T17:29 / < today
-	center: string; // maxChar 50
+	center?: string; // maxChar 50
 	countryOfTest: ProductInfo; // CH preselect
 }
 

@@ -60,7 +60,6 @@ export class SelectCertificateTypeComponent implements OnInit {
 		return (
 			this.certificateService.verifyFeatureAvailability(GenerationType.ANTIBODY) ||
 			this.certificateService.verifyFeatureAvailability(GenerationType.EXCEPTIONAL) ||
-			this.certificateService.verifyFeatureAvailability(GenerationType.RECOVERY_RAT) ||
 			this.certificateService.verifyFeatureAvailability(GenerationType.VACCINATION_TOURIST)
 		);
 	}

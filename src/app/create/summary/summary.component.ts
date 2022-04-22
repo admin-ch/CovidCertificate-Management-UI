@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CertificateService} from 'shared/certificate.service';
-import {Patient, Shipping} from 'shared/model';
+import {GenerationType, Patient, Shipping} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
 
@@ -17,8 +17,9 @@ export class SummaryComponent implements OnInit {
 	validFrom: Date;
 	validUntil: Date;
 	shipping: Shipping;
-	patientTypeOfTest: string;
-	patientVaccinationCountry: string;
+	certificateType: GenerationType;
+
+	GenerationType = GenerationType;
 
 	private readonly RECOVERY_CERTIFICATE_VALIDITY_IN_DAYS = 364;
 	private readonly DAYS_UNTIL_VALID = 10;
@@ -54,6 +55,10 @@ export class SummaryComponent implements OnInit {
 
 		this.dataService.shippingChanged.subscribe(shipping => {
 			this.shipping = shipping;
+		});
+
+		this.dataService.certificateTypeChanged.subscribe(certificateType => {
+			this.certificateType = certificateType;
 		});
 	}
 
