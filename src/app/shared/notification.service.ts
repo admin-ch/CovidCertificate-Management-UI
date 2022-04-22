@@ -48,7 +48,6 @@ export class NotificationService implements OnDestroy {
 				// If status is "304 Not Modified", there have been no changes since the last pull.
 				if (response.status !== 304) {
 					localStorage.setItem(this.LOCALSTORAGE_KEY, response.headers.get('ETag'));
-					// TODO: Provide new notifications to the user.
 				}
 			});
 	}
