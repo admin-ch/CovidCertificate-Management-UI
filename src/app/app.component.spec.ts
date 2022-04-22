@@ -7,7 +7,7 @@ import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
 import {AuthFunction, AuthService} from './auth/auth.service';
-import {NotificationService} from "shared/notification.service";
+import {NotificationService} from 'shared/notification.service';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
@@ -15,10 +15,7 @@ describe('AppComponent', () => {
 
 	const configureTestingModule = (oauthServiceMock, authServiceMock) => () => {
 		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-				ObliqueTestingModule
-			],
+			imports: [RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]), ObliqueTestingModule],
 			declarations: [AppComponent],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 			providers: [
@@ -31,8 +28,8 @@ describe('AppComponent', () => {
 		}).compileComponents();
 		fixture = TestBed.createComponent(AppComponent);
 		app = fixture.componentInstance;
-		notificationServiceMock.fetchNotifications.mockClear()
-	}
+		notificationServiceMock.fetchNotifications.mockClear();
+	};
 
 	const notificationServiceMock = {
 		fetchNotifications: jest.fn()
@@ -58,9 +55,7 @@ describe('AppComponent', () => {
 				})
 			}
 		};
-		beforeEach(
-			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -151,9 +146,7 @@ describe('AppComponent', () => {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(false).asObservable())
 		};
 
-		beforeEach(
-			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -188,7 +181,6 @@ describe('AppComponent', () => {
 				});
 			});
 		});
-
 	});
 
 	describe('Unauthenticated', () => {
@@ -201,9 +193,7 @@ describe('AppComponent', () => {
 		const authServiceMock = {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(of())
 		};
-		beforeEach(
-			waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock))
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -237,6 +227,5 @@ describe('AppComponent', () => {
 				});
 			});
 		});
-
 	});
 });

@@ -12,8 +12,8 @@ import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
 import {AuthFunction, AuthService} from './auth/auth.service';
-import {ApiService} from "shared/api.service";
-import {NotificationService} from "shared/notification.service";
+import {ApiService} from 'shared/api.service';
+import {NotificationService} from 'shared/notification.service';
 
 @Component({
 	selector: 'ec-root',
@@ -60,13 +60,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			startWith(translate.currentLang)
 		);
 
-		this.isAuthenticated$.pipe(
-			takeUntil(this.unsubscribe)
-		).subscribe(isAuthenticated => {
+		this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
 			if (isAuthenticated) {
-				this.notificationService.fetchNotifications()
+				this.notificationService.fetchNotifications();
 			}
-		})
+		});
 	}
 
 	ngOnDestroy() {
