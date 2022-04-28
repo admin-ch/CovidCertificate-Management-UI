@@ -12,6 +12,7 @@ import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
 import {AuthFunction, AuthService} from './auth/auth.service';
+import {NotificationService} from 'shared/notification.service';
 
 @Component({
 	selector: 'ec-root',
@@ -30,7 +31,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		private readonly oauthService: OauthService,
 		private readonly authService: AuthService,
 		private readonly config: ObMasterLayoutService,
-		private readonly notificationService: ObNotificationService,
+		private readonly obNotificationService: ObNotificationService,
+		private readonly notificationService: NotificationService,
 		interceptor: ObHttpApiInterceptorEvents,
 		router: Router,
 		translate: TranslateService
@@ -56,6 +58,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			map(lang => lang.lang),
 			startWith(translate.currentLang)
 		);
+
+		this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
+			if (isAuthenticated) {
+				this.notificationService.fetchNotifications();
+			}
+		});
 	}
 
 	ngOnDestroy() {
@@ -68,7 +76,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		this.oauthService.loadClaims();
 		this.setNavigation();
 		if (!supportedBrowsers.test(navigator.userAgent)) {
-			this.notificationService.info({
+			this.obNotificationService.info({
 				title: 'notifications.unsupportedBrowser.title',
 				message: 'notifications.unsupportedBrowser.message',
 				sticky: true

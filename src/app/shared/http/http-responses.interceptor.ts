@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {ObHttpApiInterceptorEvents, ObNotificationService} from '@oblique/oblique';
@@ -35,7 +35,9 @@ export class HttpResponsesInterceptor implements HttpInterceptor {
 	}
 
 	private handleHttpError(error: ObIObliqueHttpErrorResponse): Observable<never> {
-		return this.handleError(error, true, () => this.notify(error.error));
+		// 304 Not Modified is handled as an error status by Angular even though it's an OK status, so let's
+		// ignore the error.
+		return this.handleError(error, error.error.status !== 304, () => this.notify(error.error));
 	}
 
 	private handleError(error: ObIObliqueHttpErrorResponse, hasError: boolean, action: () => void) {
