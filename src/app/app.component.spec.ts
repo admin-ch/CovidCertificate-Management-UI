@@ -7,7 +7,7 @@ import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
 import {AuthFunction, AuthService} from './auth/auth.service';
-import {NotificationService} from 'shared/notification.service';
+import {NotificationService} from './notifications/notification.service';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
