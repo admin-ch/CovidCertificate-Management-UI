@@ -59,11 +59,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			startWith(translate.currentLang)
 		);
 
-		this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
-			if (isAuthenticated) {
-				this.notificationService.fetchNotifications();
-			}
-		});
+		// this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
+		// 	if (isAuthenticated) {
+		// 		this.notificationService.fetchNotifications();
+		// 	}
+		// });
 	}
 
 	ngOnDestroy() {
