@@ -112,16 +112,16 @@ describe('DashboardComponent', () => {
 					{
 						type: 'INFO',
 						message: {
-							de: 'Deutsch',
-							en: 'English',
-							fr: 'Francais',
-							it: 'Italiano',
+							de: 'Deutsch 1',
+							en: 'English 1',
+							fr: 'Francais 1',
+							it: 'Italiano 1',
 						},
-						start: '',
-						end: ''
+						start: 'start 1',
+						end: 'end 1'
 					}
 				])
-				expect(obNotificationServiceMock.info).toHaveBeenCalledWith({message: 'English', sticky: true})
+				expect(obNotificationServiceMock.info).toHaveBeenCalledWith({message: 'English 1', sticky: true})
 				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled()
 			});
 
@@ -130,16 +130,16 @@ describe('DashboardComponent', () => {
 					{
 						type: 'WARNING',
 						message: {
-							de: 'Deutsch',
-							en: 'English',
-							fr: 'Francais',
-							it: 'Italiano',
+							de: 'Deutsch 2',
+							en: 'English 2',
+							fr: 'Francais 2',
+							it: 'Italiano 2',
 						},
-						start: '',
-						end: ''
+						start: 'start 2',
+						end: 'end 2'
 					}
 				])
-				expect(obNotificationServiceMock.warning).toHaveBeenCalledWith({message: 'English', sticky: true})
+				expect(obNotificationServiceMock.warning).toHaveBeenCalledWith({message: 'English 2', sticky: true})
 				expect(obNotificationServiceMock.info).not.toHaveBeenCalled()
 			});
 
@@ -148,58 +148,58 @@ describe('DashboardComponent', () => {
 					{
 						type: 'WARNING',
 						message: {
-							de: 'Deutsch 1',
-							en: 'English 1',
-							fr: 'Francais 1',
-							it: 'Italiano 1',
-						},
-						start: '',
-						end: ''
-					},
-					{
-						type: 'WARNING',
-						message: {
-							de: 'Deutsch 2',
-							en: 'English 2',
-							fr: 'Francais 2',
-							it: 'Italiano 2',
-						},
-						start: '',
-						end: ''
-					},
-					{
-						type: 'INFO',
-						message: {
 							de: 'Deutsch 3',
 							en: 'English 3',
 							fr: 'Francais 3',
 							it: 'Italiano 3',
 						},
-						start: '',
-						end: ''
+						start: 'start 3',
+						end: 'start 3'
 					},
 					{
-						type: 'INFO',
+						type: 'WARNING',
 						message: {
 							de: 'Deutsch 4',
 							en: 'English 4',
 							fr: 'Francais 4',
 							it: 'Italiano 4',
 						},
-						start: '',
-						end: ''
+						start: 'start 4',
+						end: 'end 4'
+					},
+					{
+						type: 'INFO',
+						message: {
+							de: 'Deutsch 5',
+							en: 'English 5',
+							fr: 'Francais 5',
+							it: 'Italiano 5',
+						},
+						start: 'start 5',
+						end: 'end 5'
+					},
+					{
+						type: 'INFO',
+						message: {
+							de: 'Deutsch 6',
+							en: 'English 6',
+							fr: 'Francais 6',
+							it: 'Italiano 6',
+						},
+						start: 'start 6',
+						end: 'end 6'
 					},
 				])
 				expect(obNotificationServiceMock.warning).toHaveBeenNthCalledWith(1, {
-					message: 'English 1',
+					message: 'English 3',
 					sticky: true
 				})
 				expect(obNotificationServiceMock.warning).toHaveBeenNthCalledWith(2, {
-					message: 'English 2',
+					message: 'English 4',
 					sticky: true
 				})
-				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(1, {message: 'English 3', sticky: true})
-				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(2, {message: 'English 4', sticky: true})
+				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(1, {message: 'English 5', sticky: true})
+				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(2, {message: 'English 6', sticky: true})
 			});
 
 			it('should call no function of obNotificationService', () => {
