@@ -1,0 +1,49 @@
+<form [formGroup]="reportTypeSelectionForm">
+	<ng-container>
+		<mat-radio-group
+			formControlName="type"
+			id="reportType"
+			name="reportType"
+			aria-label="Select an option"
+			class="radio-button-container"
+		>
+			<ng-container *ecHasAuthorizationFor="AuthFunction.REPORT_A2">
+				<mat-radio-button
+					id="reportType-A2"
+					value="report-a2"
+					name="report-a2"
+					class="radio-button"
+				>
+					{{ "report.step-one.enum.report-a2" | translate }}
+				</mat-radio-button>
+			</ng-container>
+
+			<ng-container *ecHasAuthorizationFor="AuthFunction.REPORT_A3">
+				<mat-radio-button
+					id="reportType-A3"
+					value="report-a3"
+					name="report-a3"
+					class="radio-button"
+				>
+					{{ "certificateCreate.step-one.enum.test" | translate }}
+				</mat-radio-button>
+			</ng-container>
+		</mat-radio-group>
+	</ng-container>
+
+	<div class="stepper-footer">
+		<section class="stepper-footer-content">
+			<button
+				id="cert-create-next"
+				type="button"
+				[disabled]="reportTypeSelectionForm.invalid"
+				(click)="goNext()"
+				mat-button
+				obButton="primary"
+				class="right"
+			>
+				{{ "common.next" | translate }}
+			</button>
+		</section>
+	</div>
+</form>

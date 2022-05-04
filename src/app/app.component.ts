@@ -98,6 +98,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			if (authFunctions.includes(AuthFunction.BULK_OPERATIONS)) {
 				navigation.push({url: 'upload', label: 'upload.link'});
 			}
+			if (authFunctions.includes(AuthFunction.REPORTING_SELF_SERVICE)) {
+				navigation.push({url: 'report', label: 'report.link'});
+			}
 			this.navigation = navigation;
 		});
 	}

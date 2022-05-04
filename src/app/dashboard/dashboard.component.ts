@@ -27,4 +27,8 @@ export class DashboardComponent {
 	goToGenerateMultipleCertificates() {
 		this.router.navigateByUrl('upload');
 	}
+
+	goToGenerateReports() {
+		this.router.navigateByUrl('report');
+	}
 }
