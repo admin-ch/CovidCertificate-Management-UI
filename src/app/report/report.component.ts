@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatStepper} from '@angular/material/stepper';
-import {ReportType} from "shared/model";
+import {ReportType} from 'shared/model';
 
 @Component({
 	selector: 'ec-report',
@@ -12,11 +12,9 @@ export class ReportComponent implements OnInit {
 
 	selectedForm: ReportType;
 
-	constructor(
-	) {}
+	constructor() {}
 
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
 	backCalled(): void {
 		this.stepper.previous();

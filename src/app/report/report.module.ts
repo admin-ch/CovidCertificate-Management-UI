@@ -9,15 +9,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReportGuard} from './report.guard';
-import {MatStepperModule} from "@angular/material/stepper";
-import {SelectReportTypeComponent} from "./select-report-type/select-report-type.component";
-import {MatRadioButton} from "@angular/material/radio";
+import {MatStepperModule} from '@angular/material/stepper';
+import {SelectReportTypeComponent} from './select-report-type/select-report-type.component';
+import {MatRadioButton} from '@angular/material/radio';
 
 @NgModule({
-	declarations: [
-		ReportComponent,
-		SelectReportTypeComponent
-	],
+	declarations: [ReportComponent, SelectReportTypeComponent],
 	imports: [
 		SharedModule,
 		ObButtonModule,

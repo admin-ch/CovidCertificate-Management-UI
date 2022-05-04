@@ -3,7 +3,7 @@ import {GenerationType, ReportType} from 'shared/model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
 import {take} from 'rxjs/operators';
-import {ReportDataService} from "../../create/utils/report-data.service";
+import {ReportDataService} from '../../create/utils/report-data.service';
 
 const AUTH_FUNCTION_REPORT_TYPE_MAP = {
 	[AuthFunction.REPORT_A2]: ReportType.REPORT_A2,
