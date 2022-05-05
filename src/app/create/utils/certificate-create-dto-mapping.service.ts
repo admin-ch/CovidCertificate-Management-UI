@@ -52,7 +52,7 @@ export class CertificateCreateDtoMappingService {
 			},
 			dateOfBirth: this.toJSONDateString(patient.birthdate),
 			language: patient.language,
-			systemSource: patient.certificateType === 'recovery-rat' ? 'ApiGateway' : 'WebUI'
+			systemSource: 'WebUI'
 		};
 	}
 
