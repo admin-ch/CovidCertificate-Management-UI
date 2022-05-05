@@ -11,7 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReportGuard} from './report.guard';
 import {MatStepperModule} from '@angular/material/stepper';
 import {SelectReportTypeComponent} from './select-report-type/select-report-type.component';
-import {MatRadioButton} from '@angular/material/radio';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
 	declarations: [ReportComponent, SelectReportTypeComponent],
@@ -20,12 +20,12 @@ import {MatRadioButton} from '@angular/material/radio';
 		ObButtonModule,
 		ObIconModule,
 		MatButtonModule,
-		MatRadioButton,
 		MatFormFieldModule,
 		MatIconModule,
 		MatSelectModule,
 		RouterModule.forChild([{path: '', component: ReportComponent, canActivate: [AuthGuardService, ReportGuard]}]),
-		MatStepperModule
+		MatStepperModule,
+		MatRadioModule
 	]
 })
 export class ReportModule {}
