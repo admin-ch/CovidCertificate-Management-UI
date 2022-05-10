@@ -13,7 +13,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
-import {GenerationType, ProductInfo} from 'shared/model';
+import {ProductInfo} from 'shared/model';
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -115,37 +115,11 @@ describe('TestFormComponent', () => {
 					component.certificateTypeChanged({value: pcrTest});
 				});
 
-				it('should mark the product as valid if empty', () => {
-					component.testForm.get('product').setValue('');
-					expect(component.testForm.get('product').invalid).toBeFalsy();
-				});
-
-				it('should hide product selection', () => {
-					expect(component.displayTestProducts).toBeFalsy();
-				});
-
-				it('should set the product as empty string', () => {
-					expect(component.testForm.get('product').value).toBe('');
-				});
 			});
 
 			describe('rapid test', () => {
 				beforeEach(() => {
 					component.certificateTypeChanged({value: rapidTest});
-				});
-
-				it('should mark the product as invalid if empty', () => {
-					component.testForm.get('product').setValue('');
-					expect(component.testForm.get('product').invalid).toBeTruthy();
-				});
-
-				it('should show product selection', () => {
-					expect(component.displayTestProducts).toBeTruthy();
-				});
-
-				it('should mark string input as invalid', () => {
-					component.rapidTestCompleteControl.setValue('test');
-					expect(component.rapidTestCompleteControl.invalid).toBeTruthy();
 				});
 			});
 		});
@@ -242,7 +216,6 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue('CH');
@@ -257,7 +230,6 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue('CH');
@@ -272,7 +244,6 @@ describe('TestFormComponent', () => {
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
 			});
-			component.testForm.get('product').setValue('');
 			component.testForm.get('sampleDate').setValue({date: moment(datePast), time: timeNoon});
 			component.testForm.get('center').setValue('Testcenter');
 			component.testForm.get('countryOfTest').setValue({code: 'CH', display: 'test-CH'});
@@ -313,12 +284,6 @@ describe('TestFormComponent', () => {
 			component.testForm.get('typeOfTest').setValue({display: 'TEST', code: 'typeOfTest'});
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value.typeOfTest).toEqual({display: 'TEST', code: 'typeOfTest'});
-		});
-
-		it('should reset the product correctly', () => {
-			component.testForm.get('product').setValue({display: 'TEST', code: 'product'});
-			creationDataService.emitResetCalled();
-			expect(component.testForm.value.product).toEqual({display: 'TEST', code: 'product'});
 		});
 
 		it('should reset the sampleDate correctly', () => {

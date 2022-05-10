@@ -1,15 +1,14 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
-import {GenerationType, Patient, ProductInfo, RapidTestProductInfoWithToString} from 'shared/model';
+import {GenerationType, Patient, ProductInfo} from 'shared/model';
 import {DateValidators} from '../utils/date-validators';
 import {TimeValidators} from '../utils/time-validators';
 import {CreationDataService} from '../utils/creation-data.service';
 import {DateMapper} from '../utils/date-mapper';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
-import {RapidTestValidator} from '../utils/rapid-test-validator';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 const BASE_DATE_VALIDATORS = [
@@ -54,21 +53,13 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 
 	personalDataForm: FormGroup;
 
-	rapidTestCompleteControl: FormControl;
-	filteredRapidTests: RapidTestProductInfoWithToString[];
-
-	private rapidTests: RapidTestProductInfoWithToString[];
-
-	get displayTestProducts(): boolean {
-		return this.testType.code === RAPID_TEST_CODE;
-	}
-
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
-	) {}
+	) {
+	}
 
 	ngOnInit(): void {
 		this.testType = this.rapid ? this.getTestTypeOptions()[1] : this.getTestTypeOptions()[0];
@@ -88,14 +79,6 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 				)
 			});
 		});
-		this.rapidTestCompleteControl = this.createAutocompleteControl();
-		this.rapidTests = this.valueSetsService
-			.getRapidTests()
-			.map(
-				productInfo =>
-					new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil)
-			);
-		this.filteredRapidTests = this.rapidTests;
 	}
 
 	ngAfterViewInit() {
@@ -145,19 +128,13 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		};
 	}
 
-	onRapidTestCompleteClear() {
-		this.testForm.controls.product.reset();
-		this.filteredRapidTests = this.rapidTests;
-	}
-
-	certificateTypeChanged(changeEvent: {value: ProductInfo}) {
+	certificateTypeChanged(changeEvent: { value: ProductInfo }) {
 		const testType = changeEvent.value;
 		const isValidTestType = testType.code === PCR_TEST_CODE || testType.code === RAPID_TEST_CODE;
 		if (isValidTestType) {
 			this.testType = testType;
 			this.testForm.patchValue({
-				typeOfTest: testType,
-				product: ''
+				typeOfTest: testType
 			});
 			this.updateProductValidators(testType.code);
 		}
@@ -193,7 +170,6 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			typeOfTest: [this.testType, Validators.required],
 			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
-			...(this.rapid ? {product: ['', Validators.required]} : {product: ['']}),
 			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
 		});
 
@@ -204,26 +180,6 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 					...sampleDateValidators
 				]);
 			}
-		});
-	}
-
-	private createAutocompleteControl(): FormControl {
-		const autocompleteControl = new FormControl('', RapidTestValidator.testRequired);
-		autocompleteControl.valueChanges.subscribe(value => {
-			if (typeof value === 'string') {
-				this.filteredRapidTests = this.filterRapidTests(value);
-			} else if (value instanceof RapidTestProductInfoWithToString) {
-				this.testForm.patchValue({product: value});
-			}
-		});
-		return autocompleteControl;
-	}
-
-	private filterRapidTests(query: string) {
-		query = query.toLowerCase();
-		return this.rapidTests.filter(product => {
-			const productDisplay = product.display.toLowerCase();
-			return productDisplay.startsWith(query);
 		});
 	}
 
@@ -255,9 +211,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 				certificateType: this.rapid ? GenerationType.RECOVERY_RAT : GenerationType.TEST,
 				test: {
 					countryOfTest: this.testForm.value.countryOfTest,
-					manufacturer: this.testForm.value.product,
+					manufacturer: this.rapid ? null : this.testForm.value.product,
 					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
-					typeOfTest: this.testForm.value.typeOfTest
+					typeOfTest: this.rapid ? null : this.testForm.value.typeOfTest
 				}
 			};
 
@@ -298,6 +254,5 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			sampleDate: this.getCurrentDateTime()
 		});
 
-		this.filteredRapidTests = this.rapidTests;
 	}
 }
