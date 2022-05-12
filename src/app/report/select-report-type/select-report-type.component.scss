@@ -1,19 +1,75 @@
 @import "~@oblique/oblique/styles/scss/core/variables";
 
-.radio-button-container {
+.container {
 	display: flex;
-	flex-direction: column;
-	width: 30%;
-	min-width: min-content;
+	flex-direction: row;
+	justify-content: space-between;
 
-	.radio-button {
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-		border-bottom: 0.0625rem solid $gray-light;
+	.collapse-container {
+		flex: 0 1 70%;
+	}
+
+	.help-container {
+		flex: 0 1 30%;
+		mat-card {
+			margin: 2em
+		}
 	}
 }
 
-.group-header {
-	margin-top: 24px;
-	margin-bottom: 16px;
+ob-collapse {
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+[obCollapseHeader] {
+	font-weight: bold;
+}
+
+[obCollapseMain] {
+	.radio-button-container {
+		display: flex;
+		flex-direction: column;
+		margin-left: 2em;
+		margin-right: 2em;
+		flex: 1 0 auto;
+
+		.report-item {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			.button-container {
+				mat-radio-button {
+					margin-top: 0.5em;
+					margin-bottom: 0.5em;
+				}
+			}
+			.info-container {
+				align-self: stretch;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				margin-left: 2em;
+
+				button {
+					mat-icon {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
+
+
+}
+
+.popover-content {
+	max-width: 40em;
+}
+
+.divider {
+	border-top: 1px #d5d5d5 solid;
 }

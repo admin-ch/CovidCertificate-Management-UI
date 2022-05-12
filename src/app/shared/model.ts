@@ -159,14 +159,17 @@ export enum GenerationType {
 }
 
 export enum ReportType {
-	REPORT_A2 = 'report-a2',
-	REPORT_A3 = 'report-a3',
-	REPORT_A4 = 'report-a4',
-	REPORT_A7 = 'report-a7',
-	REPORT_A8 = 'report-a8',
-	REPORT_A9 = 'report-a9',
-	REPORT_A11 = 'report-a11',
-	REPORT_A12 = 'report-a12'
+	A2 = 'report-a2',
+	A3 = 'report-a3',
+	A4 = 'report-a4',
+	A5 = 'report-a5',
+	A6 = 'report-a6',
+	A7 = 'report-a7',
+	A8 = 'report-a8',
+	A9 = 'report-a9',
+	A10 = 'report-a10',
+	A11 = 'report-a11',
+	A12 = 'report-a12'
 }
 
 export enum ShippingOptions {

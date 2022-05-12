@@ -1,25 +1,7 @@
-test
 <mat-horizontal-stepper linear labelPosition="bottom" #stepper class="mat-stepper-lg">
 	<mat-step>
-		<!-- choose the report type -->
-		<ec-select-report-type (next)="nextCalled()"></ec-select-report-type>
+		<ec-select-report-type (next)="stepper.next()"></ec-select-report-type>
 	</mat-step>
-	<!--	<mat-step>-->
-	<!-- enter report parameters -->
-	<!--		<ec-test-form-->
-	<!--			*ngIf="selectedForm === 'recovery-rat'"-->
-	<!--			[antibody]="false"-->
-	<!--			[rapid]="true"-->
-	<!--			(back)="resetCalled()"-->
-	<!--			(next)="nextCalled()"-->
-	<!--		></ec-test-form>-->
-	<!-- reset & generate report parameters -->
-	<!--		<ec-download [type]="selectedForm" (resetEmitter)="resetCalled()"></ec-download>-->
-	<!--	</mat-step>-->
-	<!--	<mat-step>-->
-	<!-- processing -->
-	<!--		<ec-summary (back)="backCalled()" (next)="nextCalled()"></ec-summary>-->
-	<!--	</mat-step>-->
 	<ng-template matStepperIcon="edit">
 		<span class="fa fa-pen"></span>
 	</ng-template>
