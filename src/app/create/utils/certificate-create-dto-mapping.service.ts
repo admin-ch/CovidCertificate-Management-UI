@@ -52,7 +52,7 @@ export class CertificateCreateDtoMappingService {
 			},
 			dateOfBirth: this.toJSONDateString(patient.birthdate),
 			language: patient.language,
-			systemSource: patient.certificateType === 'recovery-rat' ? 'ApiGateway' : 'WebUI'
+			systemSource: 'WebUI'
 		};
 	}
 
@@ -71,7 +71,7 @@ export class CertificateCreateDtoMappingService {
 	private mapTestData(patient: Patient): TestDto[] {
 		return [
 			{
-				typeCode: patient.test.typeOfTest.code,
+				typeCode: patient.test.typeOfTest?.code,
 				manufacturerCode: patient.test.manufacturer?.code,
 				sampleDateTime: this.toJSONDateTimeString(patient.test.sampleDate),
 				testingCentreOrFacility: patient.test.center,

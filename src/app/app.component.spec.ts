@@ -7,10 +7,33 @@ import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
 import {AuthFunction, AuthService} from './auth/auth.service';
+import {NotificationService} from 'shared/notification.service';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
 	let fixture;
+
+	const configureTestingModule = (oauthServiceMock, authServiceMock) => () => {
+		TestBed.configureTestingModule({
+			imports: [RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]), ObliqueTestingModule],
+			declarations: [AppComponent],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
+				{provide: OauthService, useValue: oauthServiceMock},
+				{provide: AuthService, useValue: authServiceMock},
+				{provide: NotificationService, useValue: notificationServiceMock},
+				{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
+			]
+		}).compileComponents();
+		fixture = TestBed.createComponent(AppComponent);
+		app = fixture.componentInstance;
+		notificationServiceMock.fetchNotifications.mockClear();
+	};
+
+	const notificationServiceMock = {
+		fetchNotifications: jest.fn()
+	};
 
 	describe('Authenticated and authorized', () => {
 		const oauthServiceMock = {
@@ -32,26 +55,7 @@ describe('AppComponent', () => {
 				})
 			}
 		};
-		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-			})
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -86,6 +90,15 @@ describe('AppComponent', () => {
 				const config = TestBed.inject(ObMasterLayoutService);
 				app.isAuthenticated$.subscribe(() => {
 					expect(config.layout.hasMainNavigation).toBe(true);
+					done();
+				});
+			});
+		});
+
+		describe.skip('fetchNotifications', () => {
+			it('should have been called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalledTimes(1);
 					done();
 				});
 			});
@@ -133,26 +146,7 @@ describe('AppComponent', () => {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(new BehaviorSubject(false).asObservable())
 		};
 
-		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-			})
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -178,6 +172,15 @@ describe('AppComponent', () => {
 				});
 			});
 		});
+
+		describe.skip('fetchNotifications', () => {
+			it('should be called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).toHaveBeenCalled();
+					done();
+				});
+			});
+		});
 	});
 
 	describe('Unauthenticated', () => {
@@ -190,26 +193,7 @@ describe('AppComponent', () => {
 		const authServiceMock = {
 			hasAuthorizationFor$: jest.fn().mockReturnValue(of())
 		};
-		beforeEach(
-			waitForAsync(() => {
-				TestBed.configureTestingModule({
-					imports: [
-						RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]),
-						ObliqueTestingModule
-					],
-					declarations: [AppComponent],
-					schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-					providers: [
-						{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
-						{provide: OauthService, useValue: oauthServiceMock},
-						{provide: AuthService, useValue: authServiceMock},
-						{provide: ObMasterLayoutService, useValue: {layout: {hasMainNavigation: undefined}}}
-					]
-				}).compileComponents();
-				fixture = TestBed.createComponent(AppComponent);
-				app = fixture.componentInstance;
-			})
-		);
+		beforeEach(waitForAsync(configureTestingModule(oauthServiceMock, authServiceMock)));
 
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
@@ -231,6 +215,14 @@ describe('AppComponent', () => {
 				const config = TestBed.inject(ObMasterLayoutService);
 				app.isAuthenticated$.subscribe(() => {
 					expect(config.layout.hasMainNavigation).toBe(false);
+					done();
+				});
+			});
+		});
+		describe.skip('fetchNotifications', () => {
+			it('should not be called', done => {
+				app.isAuthenticated$.subscribe(() => {
+					expect(notificationServiceMock.fetchNotifications).not.toHaveBeenCalled();
 					done();
 				});
 			});

@@ -82,7 +82,6 @@ export class OauthService {
 			)
 			.subscribe(claims => {
 				this.logger.logDebug(`Claims are ${claims}`);
-				console.log(`Claims are ${claims}`);
 				this.claims.next(claims);
 			});
 	}

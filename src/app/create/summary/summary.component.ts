@@ -65,7 +65,7 @@ export class SummaryComponent implements OnInit {
 	getTranslatedTypeOfTest(): string {
 		return this.valueSetsService
 			.getTypeOfTests()
-			.filter(elem => elem.code === this.patient?.test.typeOfTest.code)
+			.filter(elem => elem.code === this.patient?.test.typeOfTest?.code)
 			.map(item => item.display)[0];
 	}
 
