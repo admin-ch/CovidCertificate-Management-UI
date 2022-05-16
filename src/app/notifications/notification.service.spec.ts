@@ -66,7 +66,7 @@ describe('NotificationService', () => {
 
 			service.fetchNotifications();
 
-			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications/`, {
+			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications`, {
 				headers: {},
 				observe: 'response'
 			});
@@ -76,7 +76,7 @@ describe('NotificationService', () => {
 			localStorage.getItem = jest.fn(() => 'ETag')
 
 			service.fetchNotifications();
-			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications/`, {
+			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications`, {
 				headers: {'If-None-Match': 'ETag'},
 				observe: 'response'
 			});
