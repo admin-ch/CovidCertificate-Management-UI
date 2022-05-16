@@ -48,7 +48,7 @@ export class NotificationService implements OnDestroy {
 						if (storedHash) {
 							headers['If-None-Match'] = storedHash;
 						}
-						return this.http.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications`, {
+						return this.http.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications/`, {
 							headers,
 							observe: 'response'
 						});
