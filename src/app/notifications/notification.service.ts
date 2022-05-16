@@ -46,7 +46,7 @@ export class NotificationService implements OnDestroy {
 						const storedHash = localStorage.getItem(this.ETAG_LOCALSTORAGE_KEY);
 						const headers = {};
 						if (storedHash) {
-							headers['If-None-Match'] = localStorage.getItem(this.ETAG_LOCALSTORAGE_KEY);
+							headers['If-None-Match'] = storedHash;
 						}
 						return this.http.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications/`, {
 							headers,
