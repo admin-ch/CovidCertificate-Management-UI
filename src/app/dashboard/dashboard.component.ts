@@ -39,6 +39,10 @@ export class DashboardComponent implements  OnInit, OnDestroy {
 		this.router.navigateByUrl('upload');
 	}
 
+	goToRevokeMultipleCertificates() {
+		this.router.navigateByUrl('bulk-revocation');
+	}
+
 	ngOnInit() {
 		this.subscription = this.notificationService.upcomingNotifications$.subscribe(notifications => {
 			for (const notification of notifications) {
