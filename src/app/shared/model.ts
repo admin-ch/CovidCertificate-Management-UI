@@ -223,6 +223,10 @@ export interface CsvResponseDto {
 	zip: ArrayBuffer;
 }
 
+export interface CsvRevocationResponseDto {
+	csv: string;
+}
+
 export interface ValueSetsResponse {
 	countryCodes: CountryCodesDto;
 	vaccinationSets: VaccinationValueSets[];
