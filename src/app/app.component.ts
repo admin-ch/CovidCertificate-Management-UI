@@ -105,6 +105,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			}
 			if (authFunctions.includes(AuthFunction.BULK_OPERATIONS)) {
 				navigation.push({url: 'upload', label: 'upload.link'});
+				navigation.push({url: 'bulk-revocation', label: 'bulk.revocation.link'});
 			}
 			this.navigation = navigation;
 		});
