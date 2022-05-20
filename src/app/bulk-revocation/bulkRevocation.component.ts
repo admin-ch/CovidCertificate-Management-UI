@@ -76,7 +76,11 @@ export class BulkRevocationComponent implements OnInit {
 			.subscribe(
 				response => {
 					BulkRevocationComponent.downloadCsv(response?.csv);
-					this.notificationService.success('bulk.revocation.success');
+					if (response?.uvcisWithErrorMessageCount === 0) {
+						this.notificationService.success('bulk.revocation.success');
+					} else {
+						this.notificationService.warning('bulk.revocation.warning');
+					}
 				},
 				error => {
 					console.log(error)
