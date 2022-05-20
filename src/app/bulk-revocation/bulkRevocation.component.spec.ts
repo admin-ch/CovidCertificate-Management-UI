@@ -1,12 +1,14 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BulkRevocationComponent} from './bulkRevocation.component';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {of} from 'rxjs';
-import {BulkRevocationService} from './bulkRevocation.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {GenerationType} from 'shared/model';
+import {CertificateService} from 'shared/certificate.service';
+import {BulkRevocationComponent} from "./bulkRevocation.component";
+import {BulkRevocationService} from "./bulkRevocation.service";
 
 describe('UploadComponent', () => {
 	let component: BulkRevocationComponent;
@@ -29,6 +31,10 @@ describe('UploadComponent', () => {
 				{
 					provide: BulkRevocationService,
 					useValue: mockUploadService
+				},
+				{
+					provide: CertificateService,
+					useValue: mockCertificateService
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA]
@@ -63,15 +69,9 @@ describe('UploadComponent', () => {
 		expect(component.getSelectedFileName()).toBe('test-file');
 	});
 
-	it('should call the BulkRevocationService for uploading the selected file', () => {
+	it('should call the UploadService for uploading the selected file', () => {
 		component.onFileSelected({target: {files: [new File([], 'test-file')]}});
 		component.uploadSelectedFile();
 		expect(mockUploadService.uploadSelectedFile).toHaveBeenCalledTimes(1);
-	});
-
-	describe('Certificate types for CSV', () => {
-		it('should have 5 certificate types for selection', () => {
-			expect(component.getCsvCertificateTypes().length).toBe(6);
-		});
 	});
 });
