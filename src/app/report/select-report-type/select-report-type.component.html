@@ -1,6 +1,6 @@
-<form [formGroup]="reportTypeSelectionForm">
+<form>
 	<mat-radio-group
-		formControlName="type"
+		[formControl]="formControl"
 		id="reportType"
 		name="reportType"
 		aria-label="Select an option"
@@ -271,7 +271,7 @@
 			<button
 				id="cert-create-next"
 				type="button"
-				[disabled]="reportTypeSelectionForm.invalid"
+				[disabled]="formControl.invalid"
 				(click)="goNext()"
 				mat-button
 				obButton="primary"

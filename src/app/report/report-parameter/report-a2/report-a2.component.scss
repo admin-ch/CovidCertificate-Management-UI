@@ -1,0 +1,13 @@
+#reset-a2-input {
+	margin-bottom: 3em;
+}
+
+::ng-deep ec-report-a2 mat-icon svg {
+	// Remove vertical align, otherwise the X is not in the middle.
+	vertical-align: unset;
+}
+
+mat-chip.error [matChipRemove] {
+	color: white;
+	opacity: 1
+}

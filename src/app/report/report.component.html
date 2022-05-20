@@ -2,6 +2,9 @@
 	<mat-step>
 		<ec-select-report-type (next)="stepper.next()"></ec-select-report-type>
 	</mat-step>
+	<mat-step>
+		<ec-report-parameter (next)="stepper.next()" (back)="stepper.previous()"></ec-report-parameter>
+	</mat-step>
 	<ng-template matStepperIcon="edit">
 		<span class="fa fa-pen"></span>
 	</ng-template>
