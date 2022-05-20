@@ -8,8 +8,7 @@ export const environment = {
 	stage: 'a',
 	host: 'https://covidcertificate-management-a.bag.admin.ch',
 	notificationHost: 'https://covidcertificate-notification-a.bag.admin.ch',
-	eiamSelfAdmin:
-		'https://sts-a.pts.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate-a.admin.chCURRENT_PAGE&language=LANGUAGE',
+	eiamSelfAdmin: 'https://sts006-a.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate-a.admin.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',
