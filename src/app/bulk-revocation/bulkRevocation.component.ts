@@ -56,8 +56,7 @@ export class BulkRevocationComponent implements OnInit {
 	}
 
 	canUploadFile(): boolean {
-		const result = !!this.selectedFile
-		return result;
+		return !!this.selectedFile;
 	}
 
 	getSelectedFileName(): string {
@@ -81,10 +80,10 @@ export class BulkRevocationComponent implements OnInit {
 					} else {
 						this.notificationService.warning('bulk.revocation.warning');
 					}
+					this.resetSelectedFile();
 				},
 				error => {
 					console.log(error)
-				}, () => {
 					this.resetSelectedFile();
 				}
 			)

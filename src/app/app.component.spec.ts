@@ -119,7 +119,7 @@ describe('AppComponent', () => {
 			});
 			it('should setup navigation', () => {
 				app.ngAfterViewInit();
-				expect(['dashboard', 'certificate-revoke', 'upload', 'bulk-revocation']).toEqual(app.navigation.map(n => n.url));
+				expect(['dashboard', 'certificate-revoke', 'upload']).toEqual(app.navigation.map(n => n.url));
 			});
 		});
 
