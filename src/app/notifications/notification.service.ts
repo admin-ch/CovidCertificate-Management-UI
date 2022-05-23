@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable, of, ReplaySubject, Subscription, throwError, timer} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import {Observable, of, ReplaySubject, Subject, Subscription, throwError, timer} from 'rxjs';
+import {catchError, skipWhile, switchMap, tap} from 'rxjs/operators';
 import * as moment from "moment";
 
 export interface Notification {
@@ -24,7 +24,7 @@ export class NotificationService implements OnDestroy {
 	public upcomingNotifications$: Observable<Notification[]>
 
 	private imminentNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1)
-	private upcomingNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1)
+	private upcomingNotifications: Subject<Notification[]> = new Subject<Notification[]>()
 	private readonly ETAG_LOCALSTORAGE_KEY = 'ecNotificationETag';
 	private readonly NOTIFICATIONS_LOCALSTORAGE_KEY = 'ecNotifications';
 	private readonly NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY = 'ecUpcomingNotificationsShown';
