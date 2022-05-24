@@ -4,7 +4,7 @@
     "bulk.revocation.file.upload": "Zertifikate sperren",
     "bulk.revocation.instructions": "Sie können hier mehrere Zertifikate sperren. Laden Sie dazu bitte die CSV-Datei mit den entsprechenden Daten hoch.",
     "bulk.revocation.link": "Mehrere Zertifikate sperren",
-    "bulk.revocation.success": "Die Zertifikaten wurden erfolgreich widerrufen.",
+    "bulk.revocation.success": "Die Zertifikate wurden erfolgreich widerrufen.",
     "bulk.revocation.title": "Mehrere Zertifikate sperren",
     "bulk.revocation.warning": "Nicht alle Sperrungen waren erfolgreich. Bitte prüfen Sie die generierte CSV-Datei, um Details zu erfahren.",
     "certificateCreate.form.group.personalData": "Personalien",
