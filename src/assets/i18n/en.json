@@ -241,5 +241,5 @@
     "validation.error.http.482": "The CSV was not processed due to an invalid size. It must contain 1 to 100 entries.",
     "validation.error.http.485": "One or more of the requests in the CSV contain invalid data. For more detailed error messages check the returned CSV file.",
     "validation.error.http.489": "Invalid date of birth. Please check your input in step two.",
-    "validation.error.http.497": "Your file contains duplicates. No revocation has been performed. Corrected the file and restarted the operation.\t"
+    "validation.error.http.497": "Your file contains duplicates. No certificates have been revoked. Please correct the file and repeat the process."
 }

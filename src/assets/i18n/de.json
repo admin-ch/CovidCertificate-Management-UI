@@ -221,7 +221,7 @@
     "support.instructions": "Sollten Sie Probleme mit dem CSV Upload haben, wenden Sie sich bitte an den BIT-Helpdesk:",
     "support.instructionsUpdated": "Sollten Sie technische Probleme mit der Ausstellung haben, können Sie sich an den BIT-Helpdesk wenden.",
     "support.title": "Support",
-    "upload.file.noneSelected": "Kein CSV Datei ausgewählt.",
+    "upload.file.noneSelected": "Keine CSV Datei ausgewählt.",
     "upload.file.select": "CSV Datei auswählen",
     "upload.file.select.limit": "Maximale Grösse: 40 Kb. Maximale Einträge: 100",
     "upload.file.upload": "Zertifikate generieren",
@@ -241,5 +241,5 @@
     "validation.error.http.482": "Das CSV konnte nicht verarbeitet werden aufgrund einer ungültigen Grösse. Es müssen 1 bis 100 Einträge enthalten sein.",
     "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
     "validation.error.http.489": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
-    "validation.error.http.497": "Ihre Datei enthält Duplikate. Es wurde kein Widerruf durchgeführt. Korrigieren Sie die Datei und wiederholen Sie den Vorgang."
+    "validation.error.http.497": "Ihre Datei enthält Duplikate. Es wurden keine Zertifikate revoziert. Bitte korrigieren Sie die Datei und wiederholen Sie den Vorgang."
 }
