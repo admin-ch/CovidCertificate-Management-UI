@@ -195,10 +195,10 @@
     "reports.a9.description.long": "<strongWie viele Zertifikate der verschiedenen Zertifikatstypen wurden bisher über den gesamten Ausstellungszeitraum über welche Kanäle ausgestellt?></strong></br></br>Dieser Report liefert Ihnen die Gesamtanzahl der ausgestellten Zertifikate eines Typs und die Kanäle, über welche sie ausgestellt wurden.",
     "reports.a9.description.short": "Gesamtanzahl Zertifikate eines Typs im gesamten Ausstellungszeitraum, gegliedert nach Ausstellkanal.",
     "reports.a9.title": "A9",
-    "reports.aggregation.header": "Sie möchten einen Verdachtsfall entdecken? Wählen Sie dazu einen Aggregationsreport.",
+    "reports.aggregation.header": "Sie möchten prüfen, ob die Zahlen zur Zertifikatsausstellung in Ihrem Kanton auf einen allfälligen Missbrauchsfall hinweisen? Erstellen Sie dazu einen Aggregationsreport.",
     "reports.aggregation.info": "Es wird ein Report erstellt, der statistische Werte über einen bestimmten Zeitraum ausweist. Verdächtige Werte können auf einen allfälligen Missbrauchsfall von einzelnen Aussteller/innen oder Organisationen hinweisen.",
     "reports.aggregation.title": "Aggregation",
-    "reports.detail.header": "Sie möchten einen Verdachtsfall analysieren? Wählen Sie dazu einen Detailreport.",
+    "reports.detail.header": "Sie möchten einen konkreten Verdachtsfall belegen oder widerlegen, indem Sie die einzelnen Aktionen einer Ausstellerin/eines Ausstellers analysieren? Erstellen Sie dazu einen Detailreport.",
     "reports.detail.info": "In einem konkreten Verdachtsfall wird ein Report erstellt, der jede einzelne Aktion einer Ausstellerin oder eines Ausstellers oder einer ausstellenden Organisation ausweist. Mit dem Nachweis kann der konkrete Missbrauchsfall widerlegt oder bewiesen werden.",
     "reports.detail.title": "Detail",
     "reports.generate": "Report generieren",
@@ -212,7 +212,7 @@
     "reports.param-help.description": "Falls Sie Fragen zu den Parametern haben, finden Sie hier zu jedem Parameter eine Erklärung.",
     "reports.param-help.download": "Download Hilfestellung",
     "reports.param-help.title": "Hilfestellung Parameter",
-    "reports.statistic.header": "Sie möchten eine statistische Auswertung? Wählen Sie dazu einen Statistikreport.",
+    "reports.statistic.header": "Sie möchten einen allgemeinen Überblick über die Zertifikatsausstellung in der Schweiz in Form einer statistischen Auswertung erhalten? Erstellen Sie dazu einen Statistikreport.",
     "reports.statistic.info": "Mit dem Statistikreport werden die Gesamtzahlen der in der Schweiz erstellten Covid-Zertifikaten pro Zertifikatstyp ausgewiesen.",
     "reports.statistic.title": "Statistik",
     "reports.uvci.format": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
@@ -240,5 +240,6 @@
     "validation.error.http.480": "UVCI wurde bereits gesperrt",
     "validation.error.http.482": "Das CSV konnte nicht verarbeitet werden aufgrund einer ungültigen Grösse. Es müssen 1 bis 100 Einträge enthalten sein.",
     "validation.error.http.485": "Eine oder mehrere der Anfragen in der CSV enthalten ungültige Daten. Für detailliertere Fehlermeldungen prüfen Sie die zurückgegebene CSV Datei.",
-    "validation.error.http.489": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei."
+    "validation.error.http.489": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
+    "validation.error.http.497": "Ihre Datei enthält Duplikate. Es wurde kein Widerruf durchgeführt. Korrigieren Sie die Datei und wiederholen Sie den Vorgang."
 }
