@@ -1,16 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthFunction} from '../auth/auth.service';
+import {ObNotificationService} from "@oblique/oblique";
+import {NotificationService} from "../notifications/notification.service";
+import {ObINotification} from "@oblique/oblique/lib/notification/notification.model";
+import {TranslateService} from "@ngx-translate/core";
+import {Subscription} from "rxjs";
 
 @Component({
 	selector: 'ec-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements  OnInit, OnDestroy {
 	AuthFunction: typeof AuthFunction = AuthFunction;
 
-	constructor(private readonly router: Router) {}
+	private subscription: Subscription
+
+	constructor(private readonly router: Router,
+				private readonly notificationService: NotificationService,
+				private readonly obNotificationService: ObNotificationService,
+				private readonly translateService: TranslateService) {
+	}
 
 	goToCertificateCreate() {
 		this.router.navigateByUrl('certificate-create');
@@ -30,5 +41,29 @@ export class DashboardComponent {
 
 	goToGenerateReports() {
 		this.router.navigateByUrl('report');
+	}
+
+	goToRevokeMultipleCertificates() {
+		this.router.navigateByUrl('bulk-revocation');
+	}
+
+	ngOnInit() {
+		this.subscription = this.notificationService.upcomingNotifications$.subscribe(notifications => {
+			for (const notification of notifications) {
+				let notificationFn: (config: ObINotification | string) => ObINotification;
+				switch (notification.type) {
+					case "INFO": notificationFn = this.obNotificationService.info.bind(this.obNotificationService)
+						break;
+					case "WARNING": notificationFn = this.obNotificationService.warning.bind(this.obNotificationService)
+						break;
+				}
+				notificationFn({message: notification.message[this.translateService.currentLang], sticky: true});
+			}
+		})
+
+	}
+
+	ngOnDestroy() {
+		this.subscription?.unsubscribe()
 	}
 }

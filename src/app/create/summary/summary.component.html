@@ -37,8 +37,10 @@
 		}}
 	</h5>
 	<dl>
-		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
-		<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
+		<ng-container *ngIf="GenerationType.RECOVERY_RAT != certificateType">
+			<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
+			<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
+		</ng-container>
 		<ng-container *ngIf="patient?.test.manufacturer">
 			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
@@ -73,7 +75,7 @@
 </ng-container>
 
 <ng-container *ngIf="patient?.recovery">
-	<h5>{{ "certificateCreate.form.group.recovery" | translate }}</h5>
+	<h5>{{ "certificateCreate.step-one.enum.recovery" | translate }}</h5>
 	<dl>
 		<dt>{{ "certificateCreate.form.label.recovery.dateFirstPositiveTestResult" | translate }}</dt>
 		<dd id="dateFirstPositiveTestResult">{{ patient?.recovery.dateFirstPositiveTestResult | date }}</dd>

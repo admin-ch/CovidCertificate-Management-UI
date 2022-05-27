@@ -68,7 +68,8 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
-	) {}
+	) {
+	}
 
 	ngOnInit(): void {
 		this.testType = this.rapid ? this.getTestTypeOptions()[1] : this.getTestTypeOptions()[0];
@@ -193,7 +194,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			typeOfTest: [this.testType, Validators.required],
 			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
-			...(this.rapid ? {product: ['', Validators.required]} : {product: ['']}),
+			product: [''],
 			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
 		});
 
@@ -255,9 +256,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 				certificateType: this.rapid ? GenerationType.RECOVERY_RAT : GenerationType.TEST,
 				test: {
 					countryOfTest: this.testForm.value.countryOfTest,
-					manufacturer: this.testForm.value.product,
+					manufacturer: this.rapid ? null : this.testForm.value.product,
 					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
-					typeOfTest: this.testForm.value.typeOfTest
+					typeOfTest: this.rapid ? null : this.testForm.value.typeOfTest
 				}
 			};
 

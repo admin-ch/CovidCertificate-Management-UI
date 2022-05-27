@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {SelectReportTypeComponent} from "./select-report-type.component";
@@ -8,6 +8,7 @@ import {ReportType} from "shared/model";
 import {ReportService} from "../report.service";
 import {MatRadioModule} from "@angular/material/radio";
 import {CommonModule} from "@angular/common";
+import {MatHorizontalStepper} from "@angular/material/stepper";
 
 @Directive({
 	selector: '[ecHasAuthorizationFor],[ecHasAuthorizationForAny]'
@@ -37,6 +38,10 @@ describe('SelectReportTypeComponent', () => {
 		await TestBed.configureTestingModule({
 			imports: [ObliqueTestingModule, CommonModule, MatRadioModule],
 			providers: [
+				{
+					provide: MatHorizontalStepper,
+					useValue: MatHorizontalStepper
+				},
 				{
 					provide: AuthService,
 					useValue: authServiceMock
@@ -80,6 +85,14 @@ describe('SelectReportTypeComponent', () => {
 				component.formControl.setValue(null)
 				expect(component.formControl.invalid).toBe(true)
 			}));
+		})
+
+		describe('formGroup', () => {
+			it('should be invalid if no type is selected', fakeAsync(() => {
+				tick()
+				component.formControl.setValue(null)
+				expect(component.formControl.invalid).toBe(true)
+			}));
 		});
 	});
 
@@ -94,5 +107,4 @@ describe('SelectReportTypeComponent', () => {
 			expect(reportServiceMock.selectedReportType).toBe(ReportType.A4)
 		}));
 	});
-
 });

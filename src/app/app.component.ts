@@ -12,7 +12,7 @@ import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
 import {AuthFunction, AuthService} from './auth/auth.service';
-import {NotificationService} from 'shared/notification.service';
+import {NotificationService} from './notifications/notification.service';
 
 @Component({
 	selector: 'ec-root',
@@ -20,6 +20,33 @@ import {NotificationService} from 'shared/notification.service';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
+	static configs = [
+		{
+			functions: [AuthFunction.MAIN],
+			params: {url: 'dashboard', label: 'dashboard.link'}
+		},
+		{
+			functions: [AuthFunction.CERTIFICATE_GENERATION],
+			params: {url: 'certificate-create', label: 'certificateCreate.link'}
+		},
+		{
+			functions: [AuthFunction.CERTIFICATE_REVOCATION],
+			params: {url: 'certificate-revoke', label: 'certificateRevoke.link'}
+		},
+		{
+			functions: [AuthFunction.OTP_GENERATION],
+			params: {url: 'otp', label: 'otp.link'}
+		},
+		{
+			functions: [AuthFunction.BULK_OPERATIONS],
+			params: {url: 'upload', label: 'upload.link'}
+		},
+		{
+			functions: [AuthFunction.BULK_OPERATIONS, AuthFunction.BULK_REVOKE_CERTIFICATES],
+			params: {url: 'bulk-revocation', label: 'bulk.revocation.link'}
+		}
+	]
+
 	navigation: ObINavigationLink[] = [];
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;
@@ -59,11 +86,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			startWith(translate.currentLang)
 		);
 
-		// this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
-		// 	if (isAuthenticated) {
-		// 		this.notificationService.fetchNotifications();
-		// 	}
-		// });
+		this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
+			if (isAuthenticated) {
+				this.notificationService.fetchNotifications();
+			}
+		});
 	}
 
 	ngOnDestroy() {
@@ -88,32 +115,23 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		this.oauthService.logout();
 	}
 
+
 	private setNavigation(): void {
 		this.authService.authorizedFunctions$.pipe(delay(0), takeUntil(this.unsubscribe)).subscribe(authFunctions => {
 			const navigation: ObINavigationLink[] = [];
-			if (authFunctions.includes(AuthFunction.MAIN)) {
-				navigation.push({url: 'dashboard', label: 'dashboard.link'});
+
+			const addTabIfFunctionsIncluded = (cfg) => {
+				if (cfg.functions.every(fn => authFunctions.includes(fn))) {
+					navigation.push(cfg.params);
+				}
 			}
-			if (authFunctions.includes(AuthFunction.CERTIFICATE_GENERATION)) {
-				navigation.push({url: 'certificate-create', label: 'certificateCreate.link'});
-			}
-			if (authFunctions.includes(AuthFunction.CERTIFICATE_REVOCATION)) {
-				navigation.push({url: 'certificate-revoke', label: 'certificateRevoke.link'});
-			}
-			if (authFunctions.includes(AuthFunction.OTP_GENERATION)) {
-				navigation.push({url: 'otp', label: 'otp.link'});
-			}
-			if (authFunctions.includes(AuthFunction.BULK_OPERATIONS)) {
-				navigation.push({url: 'upload', label: 'upload.link'});
-			}
-			if (authFunctions.includes(AuthFunction.REPORTING_SELF_SERVICE)) {
-				navigation.push({url: 'report', label: 'report.link'});
-			}
+
+			AppComponent.configs.forEach(cfg => addTabIfFunctionsIncluded(cfg))
 			this.navigation = navigation;
 		});
 	}
 
-	private isAuthorized(isAuthenticated: boolean): Observable<{isAuthenticated: boolean; isAuthorized: boolean}> {
+	private isAuthorized(isAuthenticated: boolean): Observable<{ isAuthenticated: boolean; isAuthorized: boolean }> {
 		if (!isAuthenticated) {
 			return of({isAuthenticated, isAuthorized: false});
 		}
