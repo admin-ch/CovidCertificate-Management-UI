@@ -1,0 +1,40 @@
+<h1>{{ "bulk.revocation.title" | translate }}</h1>
+<p>
+	{{ "bulk.revocation.instructions" | translate }}
+	<a
+		href="https://github.com/admin-ch/CovidCertificate-UIdoc#how-to-revoke-multiple-covid-certificates-"
+		target="_blank"
+		rel="noopener noreferrer"
+		id="templates-link"
+	><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+	>{{ "upload.templates" | translate }}</a
+	>
+</p>
+
+<ob-alert class="warning-message" [type]="'warning'">
+	<span [innerHTML]="'certificateRevoke.warning' | translate"></span>
+</ob-alert>
+
+
+	<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileBulkRevocationUpload />
+
+
+<div class="file-selection">
+	<button id="select-file-bulk-revocation-button" mat-button obButton="secondary" (click)="fileBulkRevocationUpload.click()" class="margin-right">
+		{{ "upload.file.select" | translate }}
+	</button>
+
+	<p class="file-info" *ngIf="canUploadFile()">{{ getSelectedFileName() }}</p>
+	<p class="file-info" *ngIf="!canUploadFile()">{{ "upload.file.noneSelected" | translate }}</p>
+</div>
+<p class="hint">{{ "upload.file.select.limit" | translate }}</p>
+
+<button
+	id="upload-file-button"
+	mat-button
+	obButton="primary"
+	(click)="uploadSelectedFile()"
+	[disabled]="!canUploadFile()"
+>
+	{{ "bulk.revocation.file.upload" | translate }}
+</button>

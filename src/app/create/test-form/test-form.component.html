@@ -40,7 +40,7 @@
 				</div>
 			</div>
 
-			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts || rapid">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts && !rapid">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
 				<input
 					type="text"

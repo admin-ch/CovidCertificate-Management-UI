@@ -6,6 +6,7 @@ import {CertificateRevokeGuard} from './certificate-revoke/certificate-revoke.gu
 import {OtpGuard} from './otp/otp.guard';
 import {UploadGuard} from './upload/upload.guard';
 import {ReportGuard} from './report/report.guard';
+import {BulkRevocationGuard} from "./bulk-revocation/bulkRevocation.guard";
 
 const routes: Routes = [
 	{
@@ -52,6 +53,12 @@ const routes: Routes = [
 		loadChildren: () => import('./report/report.module').then(m => m.ReportModule),
 		canLoad: [AuthGuardService, ReportGuard],
 		canActivate: [AuthGuardService, ReportGuard]
+	},
+	{
+		path: 'bulk-revocation',
+		loadChildren: () => import('./bulk-revocation/bulkRevocation.module').then(m => m.BulkRevocationModule),
+		canLoad: [AuthGuardService, BulkRevocationGuard],
+		canActivate: [AuthGuardService, BulkRevocationGuard]
 	},
 	{path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];

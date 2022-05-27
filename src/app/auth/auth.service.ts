@@ -77,6 +77,12 @@ export class AuthService implements OnDestroy {
 		);
 	}
 
+	public hasAuthorizationForAll$(...neededAuthorizedFunctions: AuthFunction[]): Observable<boolean> {
+		return this.authorizedFunctions$.pipe(
+			map(authorizedFunctions => neededAuthorizedFunctions.every(authFun => authorizedFunctions.includes(authFun)))
+		);
+	}
+
 	private getAuthorizedFunctions(claims: Claims): Observable<AuthFunction[]> {
 		if (claims?.userroles?.length) {
 			const params = new HttpParams().set('roles', claims.userroles.join(','));
