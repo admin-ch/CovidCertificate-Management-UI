@@ -1,9 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ReportType} from 'shared/model';
 import {FormControl, Validators} from '@angular/forms';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
 import {take} from 'rxjs/operators';
 import {ReportService} from "../report.service";
+import {MatHorizontalStepper} from "@angular/material/stepper";
 
 const AUTH_FUNCTION_REPORT_TYPE_MAP = {
 	[AuthFunction.REPORT_A3]: ReportType.A3,
@@ -26,14 +27,13 @@ const AUTH_FUNCTION_REPORT_TYPE_MAP = {
 })
 export class SelectReportTypeComponent implements OnInit {
 
-	@Output() next = new EventEmitter<void>();
-
 	ReportType = ReportType;
 	AuthFunction = AuthFunction;
 
 	formControl = new FormControl('', Validators.required)
 
 	constructor(
+		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
 		private readonly authService: AuthService,
 		private readonly reportService: ReportService
 	) {
@@ -46,7 +46,7 @@ export class SelectReportTypeComponent implements OnInit {
 	goNext(): void {
 		if (this.formControl.valid) {
 			this.reportService.selectedReportType = this.formControl.value
-			this.next.emit();
+			this.stepper.next()
 		}
 	}
 

@@ -3,7 +3,7 @@
 </ng-container>
 <div class="stepper-footer">
 	<section class="stepper-footer-content">
-		<button id="report-generate-back" type="button" (click)="back.emit()" mat-button obButton="secondary">
+		<button id="report-generate-back" type="button" (click)="stepper.previous()" mat-button obButton="secondary">
 			{{ "common.back" | translate }}
 		</button>
 		<button id="report-generate-next" mat-button (click)="goNext()" obButton="primary" class="right">

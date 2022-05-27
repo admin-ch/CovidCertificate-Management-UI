@@ -1,9 +1,9 @@
 <mat-horizontal-stepper linear labelPosition="bottom" #stepper class="mat-stepper-lg">
 	<mat-step>
-		<ec-select-report-type (next)="stepper.next()"></ec-select-report-type>
+		<ec-select-report-type></ec-select-report-type>
 	</mat-step>
 	<mat-step>
-		<ec-report-parameter (next)="stepper.next()" (back)="stepper.previous()"></ec-report-parameter>
+		<ec-report-parameter></ec-report-parameter>
 	</mat-step>
 	<ng-template matStepperIcon="edit">
 		<span class="fa fa-pen"></span>

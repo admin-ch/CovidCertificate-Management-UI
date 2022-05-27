@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {ReportService} from "../report.service";
 import {ReportType} from "shared/model";
+import {MatHorizontalStepper} from "@angular/material/stepper";
 
 @Component({
 	selector: 'ec-report-parameter',
@@ -9,19 +10,15 @@ import {ReportType} from "shared/model";
 })
 export class ReportParameterComponent {
 
-	@Output()
-	next: EventEmitter<void> = new EventEmitter<void>()
-
-	@Output()
-	back: EventEmitter<void> = new EventEmitter<void>()
-
 	ReportType = ReportType
 
-	constructor(public readonly reportService: ReportService) {
+	constructor(@Inject(MatHorizontalStepper) public readonly stepper: MatHorizontalStepper,
+				public readonly reportService: ReportService) {
 	}
 
 	goNext(): void {
-		this.next.emit();
+		this.reportService.generateReport$.next()
+		this.stepper.next();
 	}
 }
 
