@@ -39,6 +39,10 @@ export class DashboardComponent implements  OnInit, OnDestroy {
 		this.router.navigateByUrl('upload');
 	}
 
+	goToGenerateReports() {
+		this.router.navigateByUrl('report');
+	}
+
 	goToRevokeMultipleCertificates() {
 		this.router.navigateByUrl('bulk-revocation');
 	}

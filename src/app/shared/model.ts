@@ -160,6 +160,20 @@ export enum GenerationType {
 	EXCEPTIONAL = 'exceptional'
 }
 
+export enum ReportType {
+	A2 = 'report-a2',
+	A3 = 'report-a3',
+	A4 = 'report-a4',
+	A5 = 'report-a5',
+	A6 = 'report-a6',
+	A7 = 'report-a7',
+	A8 = 'report-a8',
+	A9 = 'report-a9',
+	A10 = 'report-a10',
+	A11 = 'report-a11',
+	A12 = 'report-a12'
+}
+
 export enum ShippingOptions {
 	APP = 'app',
 	PDF = 'pdf',

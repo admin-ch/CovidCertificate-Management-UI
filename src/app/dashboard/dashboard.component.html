@@ -97,4 +97,20 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.REPORTING_SELF_SERVICE">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="chart" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.reports.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.reports.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-reports" mat-button obButton="primary" (click)="goToGenerateReports()">
+				{{ "dashboard.reports.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>
