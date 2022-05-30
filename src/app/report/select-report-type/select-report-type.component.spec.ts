@@ -25,13 +25,14 @@ export class MockDirective {
 describe('SelectReportTypeComponent', () => {
 	let component: SelectReportTypeComponent;
 	let fixture: ComponentFixture<SelectReportTypeComponent>;
+	let reportService: ReportService
+
+	const stepperMock = {
+		next: jest.fn()
+	}
 
 	const authServiceMock = {
 		authorizedFunctions$: new Subject()
-	}
-
-	const reportServiceMock = {
-		selectedReportType: null
 	}
 
 	beforeEach(async () => {
@@ -40,7 +41,7 @@ describe('SelectReportTypeComponent', () => {
 			providers: [
 				{
 					provide: MatHorizontalStepper,
-					useValue: MatHorizontalStepper
+					useValue: stepperMock
 				},
 				{
 					provide: AuthService,
@@ -48,7 +49,9 @@ describe('SelectReportTypeComponent', () => {
 				},
 				{
 					provide: ReportService,
-					useValue: reportServiceMock
+					useValue: {
+						selectedReportType: null
+					}
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
@@ -60,7 +63,8 @@ describe('SelectReportTypeComponent', () => {
 		fixture = TestBed.createComponent(SelectReportTypeComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges()
-		reportServiceMock.selectedReportType = null
+		reportService = TestBed.inject(ReportService)
+
 	});
 
 	describe('initializing form', () => {
@@ -97,14 +101,32 @@ describe('SelectReportTypeComponent', () => {
 	});
 
 	describe('goNext()', () => {
-		it('should not do anything if type is invalid', waitForAsync(() => {
+
+		beforeEach(() => {
+			stepperMock.next.mockReset()
+		})
+
+		it('should not do anything if type is invalid', () => {
 			component.formControl.setValue(null)
-			reportServiceMock.selectedReportType = ReportType.A4
-			component.next.subscribe(() => {
-				fail('next should not have been called')
-			})
+			reportService.selectedReportType = ReportType.A4
 			component.goNext()
-			expect(reportServiceMock.selectedReportType).toBe(ReportType.A4)
-		}));
+			expect(stepperMock.next).not.toHaveBeenCalled()
+			expect(reportService.selectedReportType).toBe(ReportType.A4)
+		});
+
+		it('should set report type to the selected one', () => {
+			component.formControl.setValue(ReportType.A5)
+			reportService.selectedReportType = ReportType.A4
+
+			component.goNext()
+			expect(reportService.selectedReportType).toBe(ReportType.A5)
+		});
+
+		it('should call stepper.next()', () => {
+			component.formControl.setValue(ReportType.A5)
+			reportService.selectedReportType = ReportType.A4
+			component.goNext()
+			expect(stepperMock.next).toHaveBeenCalled()
+		});
 	});
 });
