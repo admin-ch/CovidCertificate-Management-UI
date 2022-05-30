@@ -8,6 +8,7 @@ export const environment = {
 	stage: 'p',
 	host: 'https://covidcertificate-management.bag.admin.ch',
 	notificationHost: 'https://covidcertificate-notification.bag.admin.ch',
+	reportHost: 'https://covidcertificate-report.bag.admin.ch',
 	eiamSelfAdmin: 'https://sts006.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate.admin.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
 		clientId: 'cc-management-ui',
@@ -26,7 +27,8 @@ export const environment = {
 			'/v1/otp',
 			'/v1/revocation.*',
 			'/v1/authorization/current.*',
-			'/v1/notifications'
+			'/v1/notifications',
+			'/v2/report.*',
 		]
 	} as OIdC
 };

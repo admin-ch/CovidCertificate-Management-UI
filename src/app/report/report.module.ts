@@ -18,9 +18,11 @@ import {ReportA2Component} from './report-parameter/report-a2/report-a2.componen
 import {MatChipsModule} from "@angular/material/chips";
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {ReportGenerationComponent} from "./report-generation/report-generation.component";
+import {ReportEndComponent} from './report-end/report-end.component';
 
 @NgModule({
-	declarations: [ReportComponent, SelectReportTypeComponent, ReportParameterComponent, ReportA2Component],
+	declarations: [ReportComponent, SelectReportTypeComponent, ReportParameterComponent, ReportGenerationComponent, ReportA2Component, ReportEndComponent],
 	imports: [
 		SharedModule,
 		ObButtonModule,
