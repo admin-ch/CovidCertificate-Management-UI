@@ -3,30 +3,20 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReportA2Component} from './report-a2.component';
 import {MatChipInputEvent} from "@angular/material/chips";
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
-import {TranslateModule} from "@ngx-translate/core";
 import {ObliqueTestingModule} from "@oblique/oblique";
-import {ReportType} from "shared/model";
 import {ReportService} from "../../report.service";
+import {ReportType} from "shared/model";
 
 describe('ReportA2Component', () => {
 	let component: ReportA2Component;
 	let fixture: ComponentFixture<ReportA2Component>;
-
-	const reportServiceMock = {
-		formGroup: {
-			contains: jest.fn().mockReturnValue(false),
-			registerControl: jest.fn()
-		}
-	}
+	let reportService: ReportService
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [ObliqueTestingModule],
 			declarations: [ReportA2Component],
-			providers: [{
-				provide: ReportService,
-				useValue: reportServiceMock
-			}],
+			providers: [],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		})
 			.compileComponents();
@@ -35,6 +25,7 @@ describe('ReportA2Component', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ReportA2Component);
 		component = fixture.componentInstance;
+		reportService = TestBed.inject(ReportService)
 		fixture.detectChanges();
 	});
 
@@ -58,7 +49,7 @@ describe('ReportA2Component', () => {
 		});
 		it('should push the selectedUvcis', () => {
 			component.add(event)
-			expect(component.selectedUvcis).toEqual([event.value])
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([event.value])
 		});
 		describe('if value is valid', () => {
 			it('should not push to errorUvcis', () => {
@@ -95,7 +86,7 @@ describe('ReportA2Component', () => {
 
 	describe('remove()', () => {
 		beforeEach(() => {
-			component.selectedUvcis = ['test-uvci']
+			reportService.parameter[ReportType.A2].uvcis = ['test-uvci']
 		})
 
 		it('should remove from errorUvcis if exists', () => {
@@ -112,12 +103,12 @@ describe('ReportA2Component', () => {
 
 		it('should remove from selectedUvcis if exists', () => {
 			component.remove('test-uvci')
-			expect(component.selectedUvcis).toEqual([])
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([])
 		});
 
 		it('should not remove any from selectedUvcis if not exists', () => {
 			component.remove('test-uvci-1')
-			expect(component.selectedUvcis).toEqual(['test-uvci'])
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual(['test-uvci'])
 		});
 
 		it('should set chipList.errorState to false if no errorUvcis exists', () => {
@@ -145,9 +136,9 @@ describe('ReportA2Component', () => {
 			expect(component.errorUvcis).toEqual([])
 		});
 		it('should reset the selectedUvcis', () => {
-			component.selectedUvcis = ['1', '2', '3']
+			reportService.parameter[ReportType.A2].uvcis = ['1', '2', '3']
 			component.resetInput()
-			expect(component.selectedUvcis).toEqual([])
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([])
 		});
 		it('should setchipList.errorState to false', () => {
 			component.chipList.errorState = true

@@ -4,12 +4,22 @@ import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from "shared/shared.module";
 import {ReportService} from "../report.service";
 import {ReportParameterComponent} from "./report-parameter.component";
+import {MatHorizontalStepper} from "@angular/material/stepper";
 
 describe('ReportParameterComponent', () => {
 	let component: ReportParameterComponent;
 	let fixture: ComponentFixture<ReportParameterComponent>;
+	let stepper: MatHorizontalStepper
 
-	const reportServiceMock = {}
+	const reportServiceMock = {
+		generateReport$: {
+			next: jest.fn()
+		}
+	}
+
+	const stepperMock = {
+		next: jest.fn()
+	}
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -18,6 +28,10 @@ describe('ReportParameterComponent', () => {
 				{
 					provide: ReportService,
 					useValue: reportServiceMock
+				},
+				{
+					provide: MatHorizontalStepper,
+					useValue: stepperMock
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
@@ -29,13 +43,19 @@ describe('ReportParameterComponent', () => {
 		fixture = TestBed.createComponent(ReportParameterComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges()
+		stepper = TestBed.inject(MatHorizontalStepper)
 	});
 
 	describe('goNext()', () => {
 		it('should should emit next()', waitForAsync(() => {
-			const emit = spyOn(component.next, 'emit')
 			component.goNext()
-			expect(emit).toHaveBeenCalled()
+			expect(reportServiceMock.generateReport$.next).toHaveBeenCalled()
+		}));
+
+		it('call next on stepper', waitForAsync(() => {
+			const nextSpy = spyOn(stepper, 'next')
+			component.goNext()
+			expect(nextSpy).toHaveBeenCalled()
 		}));
 	});
 });
