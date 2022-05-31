@@ -23,7 +23,7 @@ describe('ReportGenerationComponent', () => {
 		fixture.detectChanges()
 	});
 
-	it('should fail', () => {
-		fail('implement tests')
+	it('should create', () => {
+		expect(component).toBeTruthy()
 	});
 });

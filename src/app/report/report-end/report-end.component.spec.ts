@@ -22,8 +22,4 @@ describe('ReportEndComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
-
-	it('should fail', () => {
-		fail('implement tests')
-	});
 });
