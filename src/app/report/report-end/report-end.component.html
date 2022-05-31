@@ -1,0 +1,34 @@
+<ng-container *ngIf="reportService.reportFinished$ | async as status">
+	<ng-container [ngSwitch]="status">
+		<ng-container *ngSwitchCase="GenerationResponseStatus.OK">
+			<h3>{{'reports.generation.success.title' | translate}}</h3>
+			<div class="info-container">
+				<mat-icon svgIcon="checkmark"></mat-icon>
+				<div class="text-container">
+					<p>{{'reports.generation.success' | translate}}</p>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="GenerationResponseStatus.PARTIAL">
+			<h3>{{'reports.generation.success.title' | translate}}</h3>
+			<div class="info-container">
+				<mat-icon svgIcon="checkmark"></mat-icon>
+				<div class="text-container">
+					<p>{{'reports.generation.success' | translate}}</p>
+					<ob-alert [type]="'warning'">
+						<span>{{'reports.generation.success.warning' | translate}}</span>
+					</ob-alert>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="GenerationResponseStatus.TOO_BIG">
+			<h3>{{'reports.generation.too-big.title' | translate}}</h3>
+			<div class="info-container">
+				<mat-icon svgIcon="warning-triangle"></mat-icon>
+				<div class="text-container">
+					<p>{{'reports.generation.too-big' | translate}}</p>
+				</div>
+			</div>
+		</ng-container>
+	</ng-container>
+</ng-container>
