@@ -212,6 +212,7 @@
     "reports.uvci.format": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
     "reports.uvci.format.error": "L’UVCI doit être rédigé au format urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx.",
     "reports.uvci.info": "Veuillez indiquer l’UVCI du certificat.\nSi vous souhaitez faire vérifier plusieurs UVCI à la fois, séparez-les avec une espace, un retour à la ligne (touche Enter) ou une virgule.",
+    "reports.uvci.too-many": "Un maximum de 100 entrées est autorisé",
     "support.instructions": "Si vous rencontrez des problèmes avec l'envoi de CSV, veuillez contacter le helpdesk de l'OFIT:",
     "support.instructionsUpdated": "Si vous rencontrez des problèmes techniques pour émettre des certificats Covid, veuillez contacter le Helpdesk de l'OFIT.",
     "support.title": "Support",

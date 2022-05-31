@@ -212,6 +212,7 @@
     "reports.uvci.format": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
     "reports.uvci.format.error": "The UVCI must be in the following format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx.",
     "reports.uvci.info": "Please enter the certificate’s UVCI. If you want to have multiple UVCIs verified simultaneously, you can separate them with a space, the enter key or a comma.",
+    "reports.uvci.too-many": "A maximum of 100 entries are allowed",
     "support.instructions": "If you have any problems with the CSV upload, please contact the BIT Helpdesk:",
     "support.instructionsUpdated": "If you are facing technical problems issuing Covid-certificates, please contact the FOITT helpdesk.",
     "support.title": "Support",

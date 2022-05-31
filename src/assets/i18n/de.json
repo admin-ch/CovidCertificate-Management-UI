@@ -212,6 +212,7 @@
     "reports.uvci.format": "Format: urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx",
     "reports.uvci.format.error": "Die UVCI muss im Format urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx sein.",
     "reports.uvci.info": "Bitte geben Sie die UVCI des Zertifikats ein.</br>Falls Sie mehrere UVCI gleichzeitig überprüfen lassen möchten, können Sie diese mit Leerschlag, Enter oder Komma trennen.",
+    "reports.uvci.too-many": "Es sind maximal 100 Einträge erlaubt",
     "support.instructions": "Sollten Sie Probleme mit dem CSV Upload haben, wenden Sie sich bitte an den BIT-Helpdesk:",
     "support.instructionsUpdated": "Sollten Sie technische Probleme mit der Ausstellung haben, können Sie sich an den BIT-Helpdesk wenden.",
     "support.title": "Support",
