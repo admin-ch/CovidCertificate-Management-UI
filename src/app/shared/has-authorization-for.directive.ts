@@ -22,11 +22,9 @@ export class HasAuthorizationForDirective implements OnInit, OnDestroy {
 		private readonly view: ViewContainerRef,
 		private readonly template: TemplateRef<any>,
 		private authService: AuthService
-	) {
-	}
+	) {}
 
 	ngOnInit() {
-
 		if (this.allFunctionNames && this.allFunctionNames.length > 0) {
 			this.subscription = this.authService
 				.hasAuthorizationForAll$(...this.allFunctionNames.filter(fn => !!fn))
@@ -37,9 +35,9 @@ export class HasAuthorizationForDirective implements OnInit, OnDestroy {
 					}
 				});
 		} else {
-			let functionNames = [this.functionName]
+			let functionNames = [this.functionName];
 			if (this.anyFunctionNames && this.anyFunctionNames.length > 0) {
-				functionNames = this.anyFunctionNames
+				functionNames = this.anyFunctionNames;
 			}
 			this.subscription = this.authService
 				.hasAuthorizationFor$(...functionNames.filter(fn => !!fn))

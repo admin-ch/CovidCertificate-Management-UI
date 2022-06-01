@@ -68,8 +68,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
-	) {
-	}
+	) {}
 
 	ngOnInit(): void {
 		this.testType = this.rapid ? this.getTestTypeOptions()[1] : this.getTestTypeOptions()[0];

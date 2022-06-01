@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportEndComponent} from './report-end.component';
-import {ObliqueTestingModule} from "@oblique/oblique";
-import {SharedModule} from "shared/shared.module";
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
-import {MatHorizontalStepper} from "@angular/material/stepper";
+import {ObliqueTestingModule} from '@oblique/oblique';
+import {SharedModule} from 'shared/shared.module';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {MatHorizontalStepper} from '@angular/material/stepper';
 
 describe('ReportEndComponent', () => {
 	let component: ReportEndComponent;
@@ -12,8 +12,7 @@ describe('ReportEndComponent', () => {
 
 	const stepperMock = {
 		next: jest.fn()
-	}
-
+	};
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -24,11 +23,9 @@ describe('ReportEndComponent', () => {
 					provide: MatHorizontalStepper,
 					useValue: stepperMock
 				}
-
 			],
-			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-		})
-			.compileComponents();
+			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

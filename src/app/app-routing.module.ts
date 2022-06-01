@@ -6,7 +6,7 @@ import {CertificateRevokeGuard} from './certificate-revoke/certificate-revoke.gu
 import {OtpGuard} from './otp/otp.guard';
 import {UploadGuard} from './upload/upload.guard';
 import {ReportGuard} from './report/report.guard';
-import {BulkRevocationGuard} from "./bulk-revocation/bulkRevocation.guard";
+import {BulkRevocationGuard} from './bulk-revocation/bulkRevocation.guard';
 
 const routes: Routes = [
 	{

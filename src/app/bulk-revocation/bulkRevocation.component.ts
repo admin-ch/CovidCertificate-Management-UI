@@ -19,8 +19,7 @@ export class BulkRevocationComponent implements OnInit {
 		private readonly bulkRevocationService: BulkRevocationService,
 		private readonly notificationService: ObNotificationService,
 		private readonly certificateService: CertificateService
-	) {
-	}
+	) {}
 
 	private static downloadCsv(csvToDownload: string): void {
 		if (csvToDownload) {
@@ -70,23 +69,21 @@ export class BulkRevocationComponent implements OnInit {
 	}
 
 	uploadSelectedFile(): void {
-		this.bulkRevocationService
-			.uploadSelectedFile(this.selectedFile)
-			.subscribe(
-				response => {
-					BulkRevocationComponent.downloadCsv(response?.csv);
-					if (response?.uvcisWithErrorMessageCount === 0) {
-						this.notificationService.success('bulk.revocation.success');
-					} else {
-						this.notificationService.warning('bulk.revocation.warning');
-					}
-					this.resetSelectedFile();
-				},
-				error => {
-					console.log(error)
-					this.resetSelectedFile();
+		this.bulkRevocationService.uploadSelectedFile(this.selectedFile).subscribe(
+			response => {
+				BulkRevocationComponent.downloadCsv(response?.csv);
+				if (response?.uvcisWithErrorMessageCount === 0) {
+					this.notificationService.success('bulk.revocation.success');
+				} else {
+					this.notificationService.warning('bulk.revocation.warning');
 				}
-			)
+				this.resetSelectedFile();
+			},
+			error => {
+				console.log(error);
+				this.resetSelectedFile();
+			}
+		);
 	}
 
 	private resetSelectedFile(): void {

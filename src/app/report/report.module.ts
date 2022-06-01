@@ -11,18 +11,25 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReportGuard} from './report.guard';
 import {MatStepperModule} from '@angular/material/stepper';
 import {SelectReportTypeComponent} from './select-report-type/select-report-type.component';
-import {MatRadioModule} from "@angular/material/radio";
-import {MatCardModule} from "@angular/material/card";
-import {ReportParameterComponent} from "./report-parameter/report-parameter.component";
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
+import {ReportParameterComponent} from './report-parameter/report-parameter.component';
 import {ReportA2Component} from './report-parameter/report-a2/report-a2.component';
-import {MatChipsModule} from "@angular/material/chips";
-import {MatInputModule} from "@angular/material/input";
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {ReportGenerationComponent} from "./report-generation/report-generation.component";
+import {MatChipsModule} from '@angular/material/chips';
+import {MatInputModule} from '@angular/material/input';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {ReportGenerationComponent} from './report-generation/report-generation.component';
 import {ReportEndComponent} from './report-end/report-end.component';
 
 @NgModule({
-	declarations: [ReportComponent, SelectReportTypeComponent, ReportParameterComponent, ReportGenerationComponent, ReportA2Component, ReportEndComponent],
+	declarations: [
+		ReportComponent,
+		SelectReportTypeComponent,
+		ReportParameterComponent,
+		ReportGenerationComponent,
+		ReportA2Component,
+		ReportEndComponent
+	],
 	imports: [
 		SharedModule,
 		ObButtonModule,
@@ -43,5 +50,4 @@ import {ReportEndComponent} from './report-end/report-end.component';
 		ObAlertModule
 	]
 })
-export class ReportModule {
-}
+export class ReportModule {}

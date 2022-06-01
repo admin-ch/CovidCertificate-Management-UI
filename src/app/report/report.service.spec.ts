@@ -1,5 +1,5 @@
-import {TestBed} from "@angular/core/testing";
-import {ReportService} from "./report.service";
+import {TestBed} from '@angular/core/testing';
+import {ReportService} from './report.service';
 
 describe('ReportService', () => {
 	let service: ReportService;
@@ -12,4 +12,4 @@ describe('ReportService', () => {
 	it('should be created', () => {
 		expect(service).toBeTruthy();
 	});
-})
+});

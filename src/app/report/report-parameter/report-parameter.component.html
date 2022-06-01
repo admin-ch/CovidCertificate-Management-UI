@@ -4,11 +4,23 @@
 	</ng-container>
 	<div class="stepper-footer">
 		<section class="stepper-footer-content">
-			<button id="report-generate-back" type="button" (click)="stepper.previous()" mat-button
-					obButton="secondary">
+			<button
+				id="report-generate-back"
+				type="button"
+				(click)="stepper.previous()"
+				mat-button
+				obButton="secondary"
+			>
 				{{ "common.back" | translate }}
 			</button>
-			<button id="report-generate-next" [disabled]="formGroup.get(reportService.selectedReportType).invalid" mat-button (click)="goNext()" obButton="primary" class="right">
+			<button
+				id="report-generate-next"
+				[disabled]="formGroup.get(reportService.selectedReportType).invalid"
+				mat-button
+				(click)="goNext()"
+				obButton="primary"
+				class="right"
+			>
 				{{ "reports.generate" | translate }}
 			</button>
 		</section>

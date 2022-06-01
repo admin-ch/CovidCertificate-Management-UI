@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {ObNotificationService} from "@oblique/oblique";
-import {Notification, NotificationService} from "./notification.service";
-import {TranslateService} from "@ngx-translate/core";
-import {Observable} from "rxjs";
+import {ObNotificationService} from '@oblique/oblique';
+import {Notification, NotificationService} from './notification.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Observable} from 'rxjs';
 
 @Component({
 	selector: 'ec-notifications',
@@ -10,16 +10,17 @@ import {Observable} from "rxjs";
 	styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent {
-
-	imminentNotifications$: Observable<Notification[]>
+	imminentNotifications$: Observable<Notification[]>;
 
 	get currentLang() {
-		return this.translateService.currentLang
+		return this.translateService.currentLang;
 	}
 
-	constructor(private readonly notificationService: NotificationService,
-				private readonly obNotificationService: ObNotificationService,
-				private readonly translateService: TranslateService) {
-		this.imminentNotifications$ = notificationService.imminentNotifications$
+	constructor(
+		private readonly notificationService: NotificationService,
+		private readonly obNotificationService: ObNotificationService,
+		private readonly translateService: TranslateService
+	) {
+		this.imminentNotifications$ = notificationService.imminentNotifications$;
 	}
 }

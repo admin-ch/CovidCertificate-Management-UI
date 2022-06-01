@@ -79,7 +79,9 @@ export class AuthService implements OnDestroy {
 
 	public hasAuthorizationForAll$(...neededAuthorizedFunctions: AuthFunction[]): Observable<boolean> {
 		return this.authorizedFunctions$.pipe(
-			map(authorizedFunctions => neededAuthorizedFunctions.every(authFun => authorizedFunctions.includes(authFun)))
+			map(authorizedFunctions =>
+				neededAuthorizedFunctions.every(authFun => authorizedFunctions.includes(authFun))
+			)
 		);
 	}
 

@@ -49,7 +49,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			functions: [AuthFunction.REPORTING_SELF_SERVICE],
 			params: {url: 'report', label: 'reports.link'}
 		}
-	]
+	];
 
 	navigation: ObINavigationLink[] = [];
 	isAuthenticated$: Observable<boolean>;
@@ -119,23 +119,22 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		this.oauthService.logout();
 	}
 
-
 	private setNavigation(): void {
 		this.authService.authorizedFunctions$.pipe(delay(0), takeUntil(this.unsubscribe)).subscribe(authFunctions => {
 			const navigation: ObINavigationLink[] = [];
 
-			const addTabIfFunctionsIncluded = (cfg) => {
+			const addTabIfFunctionsIncluded = cfg => {
 				if (cfg.functions.every(fn => authFunctions.includes(fn))) {
 					navigation.push(cfg.params);
 				}
-			}
+			};
 
-			AppComponent.configs.forEach(cfg => addTabIfFunctionsIncluded(cfg))
+			AppComponent.configs.forEach(cfg => addTabIfFunctionsIncluded(cfg));
 			this.navigation = navigation;
 		});
 	}
 
-	private isAuthorized(isAuthenticated: boolean): Observable<{ isAuthenticated: boolean; isAuthorized: boolean }> {
+	private isAuthorized(isAuthenticated: boolean): Observable<{isAuthenticated: boolean; isAuthorized: boolean}> {
 		if (!isAuthenticated) {
 			return of({isAuthenticated, isAuthorized: false});
 		}
