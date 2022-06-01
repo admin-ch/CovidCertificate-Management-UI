@@ -4,16 +4,23 @@ import {ReportType} from 'shared/model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {MatHorizontalStepper} from '@angular/material/stepper';
+import {ObNotificationService} from "@oblique/oblique";
 
 export enum GenerationResponseStatus {
 	OK = 'OK',
 	INCOMPLETE = 'INCOMPLETE'
 }
 
+export interface Details {
+	infoCode: number; // Base64 encoded
+	message: string;
+}
+
 export interface ReportResponse {
 	report: string; // Base64 encoded
 	httpStatus: string;
 	error?: any;
+	details?: any;
 }
 
 @Component({
@@ -29,7 +36,8 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
-		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
+		@Inject('REPORT_HOST') private readonly REPORT_HOST: string,
+		private readonly notificationService: ObNotificationService,
 	) {}
 
 	ngOnInit() {
@@ -42,8 +50,14 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 			}
 			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
 				next: (response: ReportResponse) => {
+
+					if(response.details)
+					{
+						this.notificationService.warning(`report.response.details.code.${response.details?.infoCode}`);
+					}
+
 					this.reportService.reportFinished$.next(
-						response.error ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
+						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
 					);
 					const link = document.createElement('a');
 					link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
