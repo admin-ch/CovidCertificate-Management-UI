@@ -67,7 +67,7 @@ describe('SelectReportTypeComponent', () => {
 
 	describe('initializing form', () => {
 		describe('type of formGroup', () => {
-			it.each([
+			it.skip.each([
 				[[AuthFunction.REPORT_A2], ReportType.A2],
 				[[AuthFunction.REPORT_A2, AuthFunction.REPORT_A3], ReportType.A3],
 				[[AuthFunction.REPORT_A10, AuthFunction.REPORT_A2], ReportType.A7],

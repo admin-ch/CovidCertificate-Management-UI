@@ -6,7 +6,9 @@ import {take} from 'rxjs/operators';
 import {ReportService} from '../report.service';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 
+// Note: Keep order!
 // Re-uncomment entries when reports are being added.
+// Remove "skip" from tests when all reports have been added.
 const AUTH_FUNCTION_REPORT_TYPE_MAP = {
 	// [AuthFunction.REPORT_A3]: ReportType.A3,
 	// [AuthFunction.REPORT_A5]: ReportType.A3,
