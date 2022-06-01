@@ -44,6 +44,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		{
 			functions: [AuthFunction.BULK_OPERATIONS, AuthFunction.BULK_REVOKE_CERTIFICATES],
 			params: {url: 'bulk-revocation', label: 'bulk.revocation.link'}
+		},
+		{
+			functions: [AuthFunction.REPORTING_SELF_SERVICE],
+			params: {url: 'report', label: 'reports.link'}
 		}
 	]
 

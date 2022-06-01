@@ -6,6 +6,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
 import {ObliqueTestingModule} from "@oblique/oblique";
 import {ReportService} from "../../report.service";
 import {ReportType} from "shared/model";
+import {FormGroup} from "@angular/forms";
 
 describe('ReportA2Component', () => {
 	let component: ReportA2Component;
@@ -26,6 +27,9 @@ describe('ReportA2Component', () => {
 		fixture = TestBed.createComponent(ReportA2Component);
 		component = fixture.componentInstance;
 		reportService = TestBed.inject(ReportService)
+		component.reportFormGroup = new FormGroup({
+			[ReportType.A2]: new FormGroup({})
+		})
 		fixture.detectChanges();
 	});
 
@@ -86,40 +90,41 @@ describe('ReportA2Component', () => {
 
 	describe('remove()', () => {
 		beforeEach(() => {
-			reportService.parameter[ReportType.A2].uvcis = ['test-uvci']
+			reportService.parameter[ReportType.A2].uvcis = ['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC','urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']
+			component.formControl.markAsTouched()
 		})
 
 		it('should remove from errorUvcis if exists', () => {
-			component.errorUvcis = ['test-uvci']
-			component.remove('test-uvci')
+			component.errorUvcis = ['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC']
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC')
 			expect(component.errorUvcis).toEqual([])
 		});
 
 		it('should not remove any from errorUvcis if not exists', () => {
-			component.errorUvcis = ['test-uvci-1']
-			component.remove('test-uvci')
-			expect(component.errorUvcis).toEqual(['test-uvci-1'])
+			component.errorUvcis = ['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC-1']
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC')
+			expect(component.errorUvcis).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC-1'])
 		});
 
 		it('should remove from selectedUvcis if exists', () => {
-			component.remove('test-uvci')
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([])
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC')
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'])
 		});
 
 		it('should not remove any from selectedUvcis if not exists', () => {
-			component.remove('test-uvci-1')
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual(['test-uvci'])
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC-1')
+			expect(reportService.parameter[ReportType.A2].uvcis).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC','urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'])
 		});
 
 		it('should set chipList.errorState to false if no errorUvcis exists', () => {
 			component.chipList.errorState = true
-			component.remove('test-uvci')
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC')
 			expect(component.chipList.errorState).toBe(false)
 		});
 		it('should set chipList.errorState to true if errorUvcis exist', () => {
 			component.chipList.errorState = false
 			component.errorUvcis = ['error-uvci']
-			component.remove('test-uvci')
+			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC')
 			expect(component.chipList.errorState).toBe(true)
 		});
 	});

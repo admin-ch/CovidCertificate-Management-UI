@@ -7,8 +7,13 @@ import {MatHorizontalStepper} from "@angular/material/stepper";
 
 export enum GenerationResponseStatus {
 	OK = 'OK',
-	PARTIAL = 'PARTIAL',
-	TOO_BIG = 'TOO_BIG'
+	INCOMPLETE = 'INCOMPLETE'
+}
+
+export interface ReportResponse {
+	report: string, // Base64 encoded
+	httpStatus: string,
+	error?: any
 }
 
 @Component({
@@ -35,14 +40,11 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					url += '/fraud/a2/by_uvci'
 					break
 			}
-			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType], {
-				responseType: 'blob'
-			}).subscribe({
-				next: blob => {
-					// TODO: Implement emitters for status other than OK when backend is ready.
-					this.reportService.reportFinished$.next(GenerationResponseStatus.OK)
+			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
+				next: (response: ReportResponse) => {
+					this.reportService.reportFinished$.next(response.error ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK)
 					const link = document.createElement('a');
-					link.href = window.URL.createObjectURL(blob);
+					link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
 					link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
 					link.click();
 					link.remove()

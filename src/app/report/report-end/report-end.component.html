@@ -9,7 +9,7 @@
 				</div>
 			</div>
 		</ng-container>
-		<ng-container *ngSwitchCase="GenerationResponseStatus.PARTIAL">
+		<ng-container *ngSwitchCase="GenerationResponseStatus.INCOMPLETE">
 			<h3>{{'reports.generation.success.title' | translate}}</h3>
 			<div class="info-container">
 				<mat-icon svgIcon="checkmark"></mat-icon>
@@ -21,14 +21,12 @@
 				</div>
 			</div>
 		</ng-container>
-		<ng-container *ngSwitchCase="GenerationResponseStatus.TOO_BIG">
-			<h3>{{'reports.generation.too-big.title' | translate}}</h3>
-			<div class="info-container">
-				<mat-icon svgIcon="warning-triangle"></mat-icon>
-				<div class="text-container">
-					<p>{{'reports.generation.too-big' | translate}}</p>
-				</div>
-			</div>
-		</ng-container>
 	</ng-container>
 </ng-container>
+<div class="stepper-footer">
+	<section class="stepper-footer-content">
+		<button id="report-generate-next" mat-button (click)="stepper.steps.get(0).select()" obButton="primary" class="right">
+			{{ "reports.generate.new" | translate }}
+		</button>
+	</section>
+</div>
