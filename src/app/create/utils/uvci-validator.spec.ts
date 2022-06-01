@@ -11,9 +11,8 @@ describe('UvciValidator', () => {
 		[{format: true}, 'urn:uvci:01:CH:12345678912345678912345'],
 		[{format: true}, 'urn:uvci:01:CH:1234567891234567891234511'],
 		[{format: true}, 'urn:uvci:01:CH:132195F10059B681BS459DB41'],
-		[{format: true}, 'urn:uvci:01:CH:132195F10059B681BS459DB'],
-	])
-	("should return %p for uvci %p", (expectedReturnValue, uvciTotest) => {
-		expect(uvciValidator(new FormControl(uvciTotest))).toEqual(expectedReturnValue)
+		[{format: true}, 'urn:uvci:01:CH:132195F10059B681BS459DB']
+	])('should return %p for uvci %p', (expectedReturnValue, uvciTotest) => {
+		expect(uvciValidator(new FormControl(uvciTotest))).toEqual(expectedReturnValue);
 	});
 });

@@ -29,7 +29,7 @@ export const environment = {
 			'/v1/revocation.*',
 			'/v1/authorization/current.*',
 			'/v1/notifications',
-			'/v2/report.*',
+			'/v2/report.*'
 		]
 	} as OIdC
 };

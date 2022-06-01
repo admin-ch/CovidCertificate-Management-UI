@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {ReportService} from "../report.service";
-import {GenerationResponseStatus} from "../report-generation/report-generation.component";
+import {Component, Inject} from '@angular/core';
+import {ReportService} from '../report.service';
+import {GenerationResponseStatus} from '../report-generation/report-generation.component';
+import {MatHorizontalStepper} from '@angular/material/stepper';
 
 @Component({
 	selector: 'ec-report-end',
@@ -8,9 +9,10 @@ import {GenerationResponseStatus} from "../report-generation/report-generation.c
 	styleUrls: ['./report-end.component.scss']
 })
 export class ReportEndComponent {
+	GenerationResponseStatus = GenerationResponseStatus;
 
-	GenerationResponseStatus = GenerationResponseStatus
-
-	constructor(public readonly reportService: ReportService) {
-	}
+	constructor(
+		@Inject(MatHorizontalStepper) public readonly stepper: MatHorizontalStepper,
+		public readonly reportService: ReportService
+	) {}
 }

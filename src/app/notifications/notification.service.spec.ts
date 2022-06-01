@@ -3,7 +3,7 @@ import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as rxjs from 'rxjs';
 import {interval, of} from 'rxjs';
-import * as moment from "moment";
+import * as moment from 'moment';
 
 describe('NotificationService', () => {
 	let service: NotificationService;
@@ -48,29 +48,21 @@ describe('NotificationService', () => {
 			expect(service.upcomingNotifications$).toBeTruthy();
 		});
 
-		it.each([
-			null,
-			'null',
-			undefined,
-			'undefined',
-			1,
-			'1',
-			false,
-			'false'
-		])
-		('should emit if localStorage key for already shown is %p', waitForAsync((localStorageValue) => {
-			localStorage.getItem = jest.fn(() => localStorageValue)
-			const expectedValue = [1, 2, 3]
-			service.upcomingNotifications$.subscribe(value => {
-				expect(value).toEqual(expectedValue)
+		it.each([null, 'null', undefined, 'undefined', 1, '1', false, 'false'])(
+			'should emit if localStorage key for already shown is %p',
+			waitForAsync(localStorageValue => {
+				localStorage.getItem = jest.fn(() => localStorageValue);
+				const expectedValue = [1, 2, 3];
+				service.upcomingNotifications$.subscribe(value => {
+					expect(value).toEqual(expectedValue);
+				});
+				// @ts-ignore
+				service.upcomingNotifications.next(expectedValue);
 			})
-			// @ts-ignore
-			service.upcomingNotifications.next(expectedValue)
-		}));
+		);
 	});
 
 	describe('fetchNotifications', () => {
-
 		beforeEach(() => {
 			getMock.mockClear();
 		});
@@ -82,7 +74,7 @@ describe('NotificationService', () => {
 		});
 
 		it('should call get without If-None-Match header', () => {
-			localStorage.getItem = jest.fn(() => null)
+			localStorage.getItem = jest.fn(() => null);
 
 			service.fetchNotifications();
 
@@ -93,7 +85,7 @@ describe('NotificationService', () => {
 		});
 
 		it('should call get with If-None-Match header', () => {
-			localStorage.getItem = jest.fn(() => 'ETag')
+			localStorage.getItem = jest.fn(() => 'ETag');
 
 			service.fetchNotifications();
 			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications/`, {
@@ -107,31 +99,38 @@ describe('NotificationService', () => {
 			[[], [{value: 1}, {value: 2}], [true, true]],
 			[[{value: 2}], [{value: 1}, {value: 2}], [true, false]],
 			[[{value: 2}], [{value: 1}, {value: 2}, {value: 3}], [true, false, true]],
-			[[{value: 1}, {value: 2}, {value: 3}], [{value: 1}, {value: 2}, {value: 3}], [false, false, false]],
-			[[{value: 1}, {value: 2}, {value: 3}], [{value: 1}, {value: 2}, {value: 3}], [false, false, false]]
-		])
-		('should emit %o if saved notifications are %o and shown-map is %o', waitForAsync((expected, notifications, shownMap) => {
-			JSON.parse = jest.fn()
-				.mockReturnValueOnce(notifications)
-				.mockReturnValueOnce(shownMap)
+			[
+				[{value: 1}, {value: 2}, {value: 3}],
+				[{value: 1}, {value: 2}, {value: 3}],
+				[false, false, false]
+			],
+			[
+				[{value: 1}, {value: 2}, {value: 3}],
+				[{value: 1}, {value: 2}, {value: 3}],
+				[false, false, false]
+			]
+		])(
+			'should emit %o if saved notifications are %o and shown-map is %o',
+			waitForAsync((expected, notifications, shownMap) => {
+				JSON.parse = jest.fn().mockReturnValueOnce(notifications).mockReturnValueOnce(shownMap);
 
-			service.fetchNotifications();
+				service.fetchNotifications();
 
-			service.upcomingNotifications$.subscribe(value => {
-				expect(value).toEqual(expected)
+				service.upcomingNotifications$.subscribe(value => {
+					expect(value).toEqual(expected);
+				});
 			})
-		}));
+		);
 
 		describe('if response status is 304', () => {
-
 			beforeEach(() => {
 				mockResponse.status = 304;
 				getMock.mockReturnValue(of(mockResponse));
-				localStorage.setItem = jest.fn()
-			})
+				localStorage.setItem = jest.fn();
+			});
 
 			it('should not set localStorage item from ETag header', () => {
-				localStorage.getItem = jest.fn(() => 'ETag')
+				localStorage.getItem = jest.fn(() => 'ETag');
 
 				service.fetchNotifications();
 
@@ -139,101 +138,106 @@ describe('NotificationService', () => {
 			});
 
 			it('should not set shown-map for already shown to %o if responseBody is %o', () => {
-				mockResponse.body = [{value: 1}, {value: 2}, {value: 3},]
+				mockResponse.body = [{value: 1}, {value: 2}, {value: 3}];
 				getMock.mockReturnValue(of(mockResponse));
-				localStorage.setItem = jest.fn()
+				localStorage.setItem = jest.fn();
 
 				service.fetchNotifications();
-
 
 				expect(localStorage.setItem).not.toHaveBeenCalled();
 			});
 
+			const oneDayAgoMoment = moment();
+			const oneHourAgoMoment = moment();
+			const inOneDayMoment = moment();
+			const inOneHourMoment = moment();
+			oneDayAgoMoment.subtract(1, 'days');
+			oneHourAgoMoment.subtract(1, 'hours');
+			inOneDayMoment.add(1, 'days');
+			inOneHourMoment.add(1, 'hours');
 
-			const oneDayAgoMoment = moment()
-			const oneHourAgoMoment = moment()
-			const inOneDayMoment = moment()
-			const inOneHourMoment = moment()
-			oneDayAgoMoment.subtract(1, 'days')
-			oneHourAgoMoment.subtract(1, 'hours')
-			inOneDayMoment.add(1, 'days')
-			inOneHourMoment.add(1, 'hours')
-
-			const oneDayAgo = oneDayAgoMoment.toISOString()
-			const oneHourAgo = oneHourAgoMoment.toISOString()
-			const inOneDay = inOneDayMoment.toISOString()
-			const inOneHour = inOneHourMoment.toISOString()
+			const oneDayAgo = oneDayAgoMoment.toISOString();
+			const oneHourAgo = oneHourAgoMoment.toISOString();
+			const inOneDay = inOneDayMoment.toISOString();
+			const inOneHour = inOneHourMoment.toISOString();
 
 			it.each([
+				[1, [{start: oneHourAgo, end: inOneHour, shouldShow: true}]],
 				[
-					1,
-					[{start: oneHourAgo, end: inOneHour, shouldShow: true}],
-
+					2,
+					[
+						{start: oneHourAgo, end: inOneHour, shouldShow: true},
+						{start: oneDayAgo, end: inOneHour, shouldShow: true}
+					]
 				],
 				[
 					2,
-					[{start: oneHourAgo, end: inOneHour, shouldShow: true},
-						{start: oneDayAgo, end: inOneHour, shouldShow: true}],
-
-				],
-				[
-					2,
-					[{start: oneHourAgo, end: inOneHour, shouldShow: true},
+					[
+						{start: oneHourAgo, end: inOneHour, shouldShow: true},
 						{start: oneDayAgo, end: inOneHour, shouldShow: true},
 						{start: inOneHour, end: inOneDay, shouldShow: false},
-						{start: inOneHour, end: inOneDay, shouldShow: false}],
+						{start: inOneHour, end: inOneDay, shouldShow: false}
+					]
+				]
+			])(
+				'should emit %s notifications for %o}',
+				fakeAsync(
+					(
+						expectedNotificationLength: number,
+						notifications: {start: string; end: string; shouldShow: boolean}[]
+					) => {
+						JSON.parse = jest.fn(() => notifications);
+						service.fetchNotifications();
 
-				],
-			])('should emit %s notifications for %o}', fakeAsync((expectedNotificationLength: number, notifications: { start: string, end: string, shouldShow: boolean }[]) => {
+						service.imminentNotifications$.subscribe(notificationsUnderTest => {
+							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
+							// @ts-ignore
+							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
+						});
 
-				JSON.parse = jest.fn(() => notifications)
-				service.fetchNotifications();
-
-				service.imminentNotifications$.subscribe((notificationsUnderTest) => {
-					expect(notificationsUnderTest.length).toBe(expectedNotificationLength)
-					// @ts-ignore
-					expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true)
-				})
-
-				tick()
-			}));
+						tick();
+					}
+				)
+			);
 		});
 
 		describe('if response status is not 304', () => {
-
 			beforeEach(() => {
 				mockResponse.status = 200;
 				getMock.mockReturnValue(of(mockResponse));
-				localStorage.setItem = jest.fn()
-			})
+				localStorage.setItem = jest.fn();
+			});
 
 			it.each([
 				[[], []],
-				[[false, false, false], [{value: 1}, {value: 2}, {value: 3},]]
-			])
-			('should set shown-map for already shown to %o if responseBody is %o', (expected, responseBody) => {
-				mockResponse.body = responseBody
+				[
+					[false, false, false],
+					[{value: 1}, {value: 2}, {value: 3}]
+				]
+			])('should set shown-map for already shown to %o if responseBody is %o', (expected, responseBody) => {
+				mockResponse.body = responseBody;
 				getMock.mockReturnValue(of(mockResponse));
-				localStorage.setItem = jest.fn()
+				localStorage.setItem = jest.fn();
 
 				service.fetchNotifications();
 
-
-				expect(localStorage.setItem).toHaveBeenLastCalledWith('ecUpcomingNotificationsShown', JSON.stringify(expected));
+				expect(localStorage.setItem).toHaveBeenLastCalledWith(
+					'ecUpcomingNotificationsShown',
+					JSON.stringify(expected)
+				);
 			});
 
 			it('should set localStorage item from ETag header', () => {
-				localStorage.getItem = jest.fn(() => 'ETag')
+				localStorage.getItem = jest.fn(() => 'ETag');
 
 				service.fetchNotifications();
-
 
 				expect(localStorage.setItem).toHaveBeenNthCalledWith(1, 'ecNotificationETag', 'ETag');
 			});
 
 			it('should set localStorage item from body', () => {
-				localStorage.getItem = jest.fn(() => 'ETag')
-				mockResponse.body = []
+				localStorage.getItem = jest.fn(() => 'ETag');
+				mockResponse.body = [];
 				getMock.mockReturnValue(of(mockResponse));
 
 				service.fetchNotifications();
@@ -241,60 +245,65 @@ describe('NotificationService', () => {
 				expect(localStorage.setItem).toHaveBeenNthCalledWith(2, 'ecNotifications', JSON.stringify([]));
 			});
 
-			const oneDayAgoMoment = moment()
-			const oneHourAgoMoment = moment()
-			const inOneDayMoment = moment()
-			const in7DaysMoment = moment()
-			const in14DaysMoment = moment()
-			const inOneHourMoment = moment()
-			oneDayAgoMoment.subtract(1, 'days')
-			oneHourAgoMoment.subtract(1, 'hours')
-			inOneDayMoment.add(1, 'days')
-			in7DaysMoment.add(7, 'days')
-			in14DaysMoment.add(14, 'days')
-			inOneHourMoment.add(1, 'hours')
+			const oneDayAgoMoment = moment();
+			const oneHourAgoMoment = moment();
+			const inOneDayMoment = moment();
+			const in7DaysMoment = moment();
+			const in14DaysMoment = moment();
+			const inOneHourMoment = moment();
+			oneDayAgoMoment.subtract(1, 'days');
+			oneHourAgoMoment.subtract(1, 'hours');
+			inOneDayMoment.add(1, 'days');
+			in7DaysMoment.add(7, 'days');
+			in14DaysMoment.add(14, 'days');
+			inOneHourMoment.add(1, 'hours');
 
-			const oneDayAgo = oneDayAgoMoment.toISOString()
-			const oneHourAgo = oneHourAgoMoment.toISOString()
-			const inOneDay = inOneDayMoment.toISOString()
-			const inOneHour = inOneHourMoment.toISOString()
+			const oneDayAgo = oneDayAgoMoment.toISOString();
+			const oneHourAgo = oneHourAgoMoment.toISOString();
+			const inOneDay = inOneDayMoment.toISOString();
+			const inOneHour = inOneHourMoment.toISOString();
 
 			it.each([
+				[1, [{start: inOneHour, end: in7DaysMoment, shouldShow: true}]],
 				[
-					1,
-					[{start: inOneHour, end: in7DaysMoment, shouldShow: true}],
-
+					2,
+					[
+						{start: inOneHour, end: in7DaysMoment, shouldShow: true},
+						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}
+					]
 				],
 				[
 					2,
-					[{start: inOneHour, end: in7DaysMoment, shouldShow: true},
-						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}],
-
-				],
-				[
-					2,
-					[{start: oneHourAgo, end: inOneHour, shouldShow: false},
+					[
+						{start: oneHourAgo, end: inOneHour, shouldShow: false},
 						{start: oneDayAgo, end: inOneHour, shouldShow: false},
 						{start: inOneHour, end: inOneDay, shouldShow: true},
-						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}],
+						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}
+					]
+				]
+			])(
+				'should emit %s notifications for %o',
+				fakeAsync(
+					(
+						expectedNotificationLength: number,
+						notifications: {start: string; end: string; shouldShow: boolean}[]
+					) => {
+						JSON.parse = jest
+							.fn()
+							.mockReturnValueOnce(notifications)
+							.mockReturnValueOnce([...notifications.map(_ => false)]);
 
-				],
-			])('should emit %s notifications for %o', fakeAsync((expectedNotificationLength: number, notifications: { start: string, end: string, shouldShow: boolean }[]) => {
+						service.upcomingNotifications$.subscribe(notificationsUnderTest => {
+							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
+							// @ts-ignore
+							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
+						});
 
-				JSON.parse = jest.fn()
-					.mockReturnValueOnce(notifications)
-					.mockReturnValueOnce([...notifications.map(_ => false)])
-
-				service.upcomingNotifications$.subscribe((notificationsUnderTest) => {
-					expect(notificationsUnderTest.length).toBe(expectedNotificationLength)
-					// @ts-ignore
-					expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true)
-				})
-
-				service.fetchNotifications();
-				tick()
-			}));
-
+						service.fetchNotifications();
+						tick();
+					}
+				)
+			);
 		});
 	});
 

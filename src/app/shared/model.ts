@@ -77,8 +77,7 @@ export interface ProductInfo {
 }
 
 export class ProductInfoWithToString implements ProductInfo {
-	constructor(public code: string, public display: string) {
-	}
+	constructor(public code: string, public display: string) {}
 
 	public toString() {
 		return this.display;
@@ -86,8 +85,7 @@ export class ProductInfoWithToString implements ProductInfo {
 }
 
 export class RapidTestProductInfoWithToString {
-	constructor(public code: string, public display: string, public validUntil: string) {
-	}
+	constructor(public code: string, public display: string, public validUntil: string) {}
 
 	public toString() {
 		return this.display;
@@ -197,7 +195,7 @@ export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select
 
 export class FormField {
 	public readonly angularFormControl: FormControl;
-	public readonly selectableOptions?: { display: string; code: any }[];
+	public readonly selectableOptions?: {display: string; code: any}[];
 	public readonly tooltipTranslationKey?: string;
 	public readonly defaultValue: any;
 	public readonly cssClasses: string;
@@ -208,7 +206,7 @@ export class FormField {
 		options?: {
 			defaultValue?: any;
 			validators?: ValidatorFn | ValidatorFn[];
-			selectableOptions?: { display: string; code: any }[];
+			selectableOptions?: {display: string; code: any}[];
 			tooltipTranslationKey?: string;
 			cssClasses?: string;
 		}
@@ -232,7 +230,7 @@ export interface CreateCertificateResponse {
 	pdf: string; // base64 encoded pdf string
 	qrCode: string;
 	uvci: string;
-	appDeliveryError?: { errorCode: number; errorMessage: string };
+	appDeliveryError?: {errorCode: number; errorMessage: string};
 }
 
 export interface CsvResponseDto {
@@ -240,8 +238,8 @@ export interface CsvResponseDto {
 }
 
 export interface CsvRevocationResponseDto {
-	uvcisWithErrorMessageCount: number
-	revokedUvcisCount: number
+	uvcisWithErrorMessageCount: number;
+	revokedUvcisCount: number;
 	csv: string;
 }
 
