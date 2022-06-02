@@ -30,7 +30,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
-		@Inject('REPORT_HOST') private readonly REPORT_HOST: string,
+		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
 	) {}
 
 	ngOnInit() {
