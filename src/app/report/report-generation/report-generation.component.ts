@@ -13,8 +13,8 @@ export enum GenerationResponseStatus {
 export interface ReportResponse {
 	report: string; // Base64 encoded
 	httpStatus: string;
-	error?: any;
-	details?: any;
+	error?: any; // Currently not explicitly used
+	details?: any; // If present, the report is only partially complete
 }
 
 @Component({
@@ -52,7 +52,8 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					link.click();
 					link.remove();
 				},
-				complete: () => this.stepper.next()
+				complete: () => this.stepper.next(),
+				error: () => this.stepper.previous(),
 			});
 		});
 	}
