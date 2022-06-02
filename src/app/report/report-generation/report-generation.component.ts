@@ -4,16 +4,10 @@ import {ReportType} from 'shared/model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {MatHorizontalStepper} from '@angular/material/stepper';
-import {ObNotificationService} from "@oblique/oblique";
 
 export enum GenerationResponseStatus {
 	OK = 'OK',
 	INCOMPLETE = 'INCOMPLETE'
-}
-
-export interface Details {
-	infoCode: number; // Base64 encoded
-	message: string;
 }
 
 export interface ReportResponse {
@@ -37,7 +31,6 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string,
-		private readonly notificationService: ObNotificationService,
 	) {}
 
 	ngOnInit() {
@@ -50,12 +43,6 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 			}
 			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
 				next: (response: ReportResponse) => {
-
-					if(response.details)
-					{
-						this.notificationService.warning(`report.response.details.code.${response.details?.infoCode}`);
-					}
-
 					this.reportService.reportFinished$.next(
 						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
 					);
