@@ -200,7 +200,7 @@
     "reports.generate": "Genera il rapporto",
     "reports.generate.new": "",
     "reports.generation.info": "La richiesta è in fase di elaborazione e il rapporto verrà generato a breve. In caso di grandi quantità di dati possono essere necessari diversi minuti. Si prega di attendere.\nAttenzione: non chiudere questa finestra durante il processo di elaborazione e non ricaricare la pagina per non annullare la generazione del rapporto.",
-    "reports.generation.success": "Grazie dell’attesa. Il rapporto è stato ultimato ed è pronto per il download.",
+    "reports.generation.success": "Grazie dell’attesa. Il rapporto è stato ultimato.",
     "reports.generation.success.title": "Creazione avvenuta con successo",
     "reports.generation.success.warning": "Tenga presente che non per tutti i parametri di ricerca è stato possibile trovare o emettere dati. Per indicazioni più dettagliate esamini il rapporto creato.",
     "reports.generation.title": "Generazione del rapporto in corso",

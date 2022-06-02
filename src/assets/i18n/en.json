@@ -200,7 +200,7 @@
     "reports.generate": "Generate report",
     "reports.generate.new": "Generate new report",
     "reports.generation.info": "Your query is being processed and the report created. If there are large volumes of data involved this can take several minutes. We ask you to be patient.\nImportant: Please do not close this window while the report is being created and do not reload, as this will cancel the creation of the report.",
-    "reports.generation.success": "Many thanks for your patience. The report has now been generated and is ready for you to download.",
+    "reports.generation.success": "Many thanks for your patience. The report has now been generated.",
     "reports.generation.success.title": "Report successfully generated",
     "reports.generation.success.warning": "Please note that data could not be found or displayed for all search parameters. For more detailed information, check the generated report.",
     "reports.generation.title": "Your report is being generated",

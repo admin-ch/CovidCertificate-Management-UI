@@ -200,7 +200,7 @@
     "reports.generate": "Générer le rapport",
     "reports.generate.new": "",
     "reports.generation.info": "Votre requête est en cours d’exécution et le rapport est généré. Si la quantité de données est importante, cela peut prendre plusieurs minutes. Nous vous prions de faire preuve de patience. Attention : veuillez ne pas fermer cette fenêtre pendant le processus de création et ne pas faire de nouveau téléchargement, car cela interromprait la création du rapport.",
-    "reports.generation.success": "Merci de votre patience. Le rapport est maintenant terminé et peut être téléchargé.",
+    "reports.generation.success": "Merci de votre patience. Le rapport est maintenant terminé.",
     "reports.generation.success.title": "Génération des données réussie",
     "reports.generation.success.warning": "Attention : les données n’ont pas pu être trouvées ou générées pour tous les paramètres de recherche. Pour de plus amples informations, veuillez consulter le rapport établi.",
     "reports.generation.title": "Génération du rapport en cours",

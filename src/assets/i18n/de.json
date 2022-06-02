@@ -200,7 +200,7 @@
     "reports.generate": "Report generieren",
     "reports.generate.new": "Neuen Report generieren",
     "reports.generation.info": "Ihre Abfrage wird ausgeführt und der Report erstellt. Bei grossen Datenmengen, kann dies mehrere Minuten in Anspruch nehmen. Wir bitten Sie um etwas Geduld. Achtung: Bitte schliessen Sie dieses Fenster während dieser Zeit nicht und machen Sie keinen Reload, da das Erstellen des Reports dadurch abgebrochen wird.",
-    "reports.generation.success": "Vielen Dank für Ihre Geduld. Der Report ist nun fertiggestellt und steht Ihnen zum Download zur Verfügung.",
+    "reports.generation.success": "Vielen Dank für Ihre Geduld. Der Report wurde fertiggestellt.",
     "reports.generation.success.title": "Ihr Report wurde generiert",
     "reports.generation.success.warning": "Bitte beachten Sie, dass nicht für alle Suchparameter Daten gefunden oder ausgegeben werden konnten. Für detailliertere Hinweise prüfen Sie den erstellten Report.",
     "reports.generation.title": "Ihr Report wird generiert",

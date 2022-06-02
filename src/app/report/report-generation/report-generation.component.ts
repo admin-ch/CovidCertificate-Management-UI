@@ -14,6 +14,7 @@ export interface ReportResponse {
 	report: string; // Base64 encoded
 	httpStatus: string;
 	error?: any;
+	details?: any;
 }
 
 @Component({
@@ -43,7 +44,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
 				next: (response: ReportResponse) => {
 					this.reportService.reportFinished$.next(
-						response.error ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
+						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
 					);
 					const link = document.createElement('a');
 					link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
