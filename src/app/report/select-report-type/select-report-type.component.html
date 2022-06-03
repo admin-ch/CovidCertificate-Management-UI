@@ -7,12 +7,12 @@
 >
 	<div class="container">
 		<div class="collapse-container">
-			<!--			<ob-collapse *ecHasAuthorizationForAny="[AuthFunction.REPORT_A7,AuthFunction.REPORT_A3]">-->
+			<!--			<ob-collapse *ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5,AuthFunction.REPORT_A7,AuthFunction.REPORT_A10]">-->
 			<!--				<span obCollapseHeader> {{'reports.aggregation.header' | translate}} </span>-->
 			<!--				<div obCollapseMain>-->
 			<!--					<div class="radio-button-container">-->
 			<!--						<div>-->
-			<!--							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A3">-->
+			<!--							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5]">-->
 			<!--								<div class="button-container">-->
 			<!--									<mat-radio-button id="report-type-A3" [value]="ReportType.A3"-->
 			<!--													  [name]="ReportType.A3"-->
@@ -39,7 +39,7 @@
 			<!--							<div class="divider"></div>-->
 			<!--						</div>-->
 			<!--						<div>-->
-			<!--							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A7">-->
+			<!--							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A7,AuthFunction.REPORT_A10]">-->
 			<!--								<div class="button-container">-->
 			<!--									<mat-radio-button id="report-type-A7" [value]="ReportType.A7"-->
 			<!--													  [name]="ReportType.A7"-->
@@ -70,12 +70,13 @@
 			<!--			</ob-collapse>-->
 			<ob-collapse
 				*ecHasAuthorizationForAny="[
-					AuthFunction.REPORT_A2,
-					AuthFunction.REPORT_A4,
-					AuthFunction.REPORT_A11,
-					AuthFunction.REPORT_A12
-				]"
-			>
+					AuthFunction.REPORT_A2]">
+				<!--					AuthFunction.REPORT_A4,-->
+				<!-- 					AuthFunction.REPORT_A6,-->
+				<!-- 					AuthFunction.REPORT_A11,-->
+				<!-- 					AuthFunction.REPORT_A12,-->
+				<!-- 				]"-->
+				<!--			>-->
 				<span obCollapseHeader> {{ "reports.detail.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
@@ -106,7 +107,7 @@
 							<div class="divider"></div>
 						</div>
 						<!--						<div>-->
-						<!--							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A4">-->
+						<!--							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A4,AuthFunction.REPORT_A6]">-->
 						<!--								<div class="button-container">-->
 						<!--									<mat-radio-button id="report-type-A4" [value]="ReportType.A4"-->
 						<!--													  [name]="ReportType.A4"-->
