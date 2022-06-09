@@ -198,7 +198,7 @@
     "reports.aggregation.header": "Vous souhaitez vérifier si le nombre de certificats établis dans votre canton révèle d’éventuels abus ? Rédigez un rapport d’agrégation.",
     "reports.detail.header": "Vous souhaitez confirmer ou infirmer un soupçon concret en analysant les activités d’un émetteur précis ? Rédigez un rapport de détail.",
     "reports.generate": "Générer le rapport",
-    "reports.generate.new": "",
+    "reports.generate.new": "Générer un nouveau rapport",
     "reports.generation.info": "Votre requête est en cours d’exécution et le rapport est généré. Si la quantité de données est importante, cela peut prendre plusieurs minutes. Nous vous prions de faire preuve de patience. Attention : veuillez ne pas fermer cette fenêtre pendant le processus de création et ne pas faire de nouveau téléchargement, car cela interromprait la création du rapport.",
     "reports.generation.success": "Merci de votre patience. Le rapport est maintenant terminé.",
     "reports.generation.success.title": "Génération des données réussie",
