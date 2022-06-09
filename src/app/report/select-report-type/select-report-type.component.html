@@ -68,9 +68,7 @@
 			<!--					</div>-->
 			<!--				</div>-->
 			<!--			</ob-collapse>-->
-			<ob-collapse
-				*ecHasAuthorizationForAny="[
-					AuthFunction.REPORT_A2]">
+			<ob-collapse *ecHasAuthorizationForAny="[AuthFunction.REPORT_A2]">
 				<!--					AuthFunction.REPORT_A4,-->
 				<!-- 					AuthFunction.REPORT_A6,-->
 				<!-- 					AuthFunction.REPORT_A11,-->
@@ -261,7 +259,10 @@
 					<p>
 						{{ "reports.param-help.description" | translate }}
 					</p>
-					<a [icon]="'right'" href="https://www2.cms.admin.ch/content/dam/bag/en/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/2019-nCoV/parameter-explanation.pdf">
+					<a
+						[icon]="'right'"
+						href="https://www2.cms.admin.ch/content/dam/bag/en/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/2019-nCoV/parameter-explanation.pdf"
+					>
 						{{ "reports.param-help.download" | translate }}
 					</a>
 				</mat-card-content>

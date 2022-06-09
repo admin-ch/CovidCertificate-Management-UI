@@ -5,12 +5,12 @@ import {RouterModule} from '@angular/router';
 import {AuthGuardService} from '../auth/auth-guard.service';
 import {MatIconModule} from '@angular/material/icon';
 import {
-    ObAlertModule,
-    ObButtonModule,
-    ObCollapseModule,
-    ObExternalLinkModule,
-    ObIconModule,
-    ObPopoverModule
+	ObAlertModule,
+	ObButtonModule,
+	ObCollapseModule,
+	ObExternalLinkModule,
+	ObIconModule,
+	ObPopoverModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
@@ -37,25 +37,25 @@ import {ReportEndComponent} from './report-end/report-end.component';
 		ReportA2Component,
 		ReportEndComponent
 	],
-    imports: [
-        SharedModule,
-        ObButtonModule,
-        ObIconModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
-        RouterModule.forChild([{path: '', component: ReportComponent, canActivate: [AuthGuardService, ReportGuard]}]),
-        MatStepperModule,
-        MatRadioModule,
-        ObCollapseModule,
-        ObPopoverModule,
-        MatCardModule,
-        MatChipsModule,
-        MatInputModule,
-        MatProgressBarModule,
-        ObAlertModule,
-        ObExternalLinkModule
-    ]
+	imports: [
+		SharedModule,
+		ObButtonModule,
+		ObIconModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatIconModule,
+		MatSelectModule,
+		RouterModule.forChild([{path: '', component: ReportComponent, canActivate: [AuthGuardService, ReportGuard]}]),
+		MatStepperModule,
+		MatRadioModule,
+		ObCollapseModule,
+		ObPopoverModule,
+		MatCardModule,
+		MatChipsModule,
+		MatInputModule,
+		MatProgressBarModule,
+		ObAlertModule,
+		ObExternalLinkModule
+	]
 })
 export class ReportModule {}

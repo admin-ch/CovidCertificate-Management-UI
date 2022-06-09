@@ -53,7 +53,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					link.remove();
 				},
 				complete: () => this.stepper.next(),
-				error: () => this.stepper.previous(),
+				error: () => this.stepper.previous()
 			});
 		});
 	}
