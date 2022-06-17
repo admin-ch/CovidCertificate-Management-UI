@@ -23,6 +23,9 @@ export interface Claims {
 	sub: string;
 	typ: string;
 	allowedOrigins: string[];
+	realm_access: {
+		roles: string[]
+	}
 	userroles: string[];
 	resourceAccess: {
 		account: {

@@ -31,7 +31,8 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
-	) {}
+	) {
+	}
 
 	ngOnInit() {
 		this.subscription = this.reportService.generateReport$.subscribe(() => {
@@ -40,8 +41,13 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				case ReportType.A2:
 					url += '/fraud/a2/by_uvci';
 					break;
+				case ReportType.A7:
+					url += 'TODO';
+					break;
+				default:
+					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`)
 			}
-			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
+			this.http.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value).subscribe({
 				next: (response: ReportResponse) => {
 					this.reportService.reportFinished$.next(
 						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK

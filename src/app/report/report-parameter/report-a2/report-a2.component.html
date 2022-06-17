@@ -4,7 +4,7 @@
 <mat-form-field *ngIf="formControl" appearance="fill">
 	<mat-chip-list #chipList>
 		<mat-chip
-			*ngFor="let uvci of reportService.parameter[ReportType.A2].uvcis"
+			*ngFor="let uvci of this.a2FormGroup.get('uvcis').value"
 			[ngClass]="{ error: errorUvcis.includes(uvci) }"
 			(removed)="remove(uvci)"
 		>
@@ -24,5 +24,5 @@
 	<mat-error *ngIf="formControl.hasError('required')">{{ "i18n.validation.required" | translate }}</mat-error>
 </mat-form-field>
 <button id="reset-a2-input" mat-button (click)="resetInput()" obButton="tertiary">
-	{{ "reports.a2.reset-input" | translate }}
+	{{ "reports.reset-input" | translate }}
 </button>

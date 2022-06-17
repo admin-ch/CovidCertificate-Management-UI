@@ -9,7 +9,7 @@ import {
 	ObButtonModule,
 	ObCollapseModule,
 	ObExternalLinkModule,
-	ObIconModule,
+	ObIconModule, ObLanguageService, ObMockErrorMessagesModule,
 	ObPopoverModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,11 +22,16 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import {ReportParameterComponent} from './report-parameter/report-parameter.component';
 import {ReportA2Component} from './report-parameter/report-a2/report-a2.component';
+import {ReportA7Component} from './report-parameter/report-a7/report-a7.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {ReportGenerationComponent} from './report-generation/report-generation.component';
 import {ReportEndComponent} from './report-end/report-end.component';
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {DateAdapter} from "@angular/material/core";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
 	declarations: [
@@ -35,6 +40,7 @@ import {ReportEndComponent} from './report-end/report-end.component';
 		ReportParameterComponent,
 		ReportGenerationComponent,
 		ReportA2Component,
+		ReportA7Component,
 		ReportEndComponent
 	],
 	imports: [
@@ -55,7 +61,15 @@ import {ReportEndComponent} from './report-end/report-end.component';
 		MatInputModule,
 		MatProgressBarModule,
 		ObAlertModule,
-		ObExternalLinkModule
+		ObExternalLinkModule,
+		MatDatepickerModule,
+		MatMomentDateModule,
+		ObMockErrorMessagesModule,
+		MatCheckboxModule
 	]
 })
-export class ReportModule {}
+export class ReportModule {
+	constructor(language: ObLanguageService, adapter: DateAdapter<any>) {
+		language.setLocaleOnAdapter(adapter);
+	}
+}
