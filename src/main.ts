@@ -11,7 +11,8 @@ platformBrowserDynamic([
 	{provide: 'HOST', useValue: environment.host},
 	{provide: 'NOTIFICATION_HOST', useValue: environment.notificationHost},
 	{provide: 'REPORT_HOST', useValue: environment.reportHost},
-	{provide: 'EIAM_SELF_ADMIN', useValue: environment.eiamSelfAdmin}
+	{provide: 'EIAM_SELF_ADMIN', useValue: environment.eiamSelfAdmin},
+	{provide: 'IS_PRODUCTION', useValue: environment.production},
 ])
 	.bootstrapModule(AppModule)
 	.catch(err => console.error(err));

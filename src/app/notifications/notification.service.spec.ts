@@ -23,6 +23,11 @@ describe('NotificationService', () => {
 			providers: [
 				{provide: 'NOTIFICATION_HOST', useValue: 'NOTIFICATION_HOST'},
 				{
+					provide: 'IS_PRODUCTION',
+					useValue: true
+
+				},
+				{
 					provide: HttpClient,
 					useValue: {
 						get: getMock
@@ -65,6 +70,14 @@ describe('NotificationService', () => {
 	describe('fetchNotifications', () => {
 		beforeEach(() => {
 			getMock.mockClear();
+			timerMock.mockClear()
+		});
+
+		it('should not pull if it is not in production', () => {
+			// @ts-ignore
+			service.isProduction = false
+			service.fetchNotifications();
+			expect(timerMock).not.toHaveBeenCalled()
 		});
 
 		it('should call pull every 15 minutes', () => {
@@ -184,7 +197,7 @@ describe('NotificationService', () => {
 				fakeAsync(
 					(
 						expectedNotificationLength: number,
-						notifications: {start: string; end: string; shouldShow: boolean}[]
+						notifications: { start: string; end: string; shouldShow: boolean }[]
 					) => {
 						JSON.parse = jest.fn(() => notifications);
 						service.fetchNotifications();
@@ -286,7 +299,7 @@ describe('NotificationService', () => {
 				fakeAsync(
 					(
 						expectedNotificationLength: number,
-						notifications: {start: string; end: string; shouldShow: boolean}[]
+						notifications: { start: string; end: string; shouldShow: boolean }[]
 					) => {
 						JSON.parse = jest
 							.fn()
