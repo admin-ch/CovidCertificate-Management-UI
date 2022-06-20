@@ -23,7 +23,7 @@ describe('NotificationService', () => {
 			providers: [
 				{provide: 'NOTIFICATION_HOST', useValue: 'NOTIFICATION_HOST'},
 				{
-					provide: 'IS_PRODUCTION',
+					provide: 'IS_NOTIFICATION_SERVICE_ENABLED',
 					useValue: true
 
 				},
@@ -73,9 +73,9 @@ describe('NotificationService', () => {
 			timerMock.mockClear()
 		});
 
-		it('should not pull if it is not in production', () => {
+		it('should not pull if it is not in DEV, ABN or PROD stage', () => {
 			// @ts-ignore
-			service.isProduction = false
+			service.isNotificationServiceEnabled = false
 			service.fetchNotifications();
 			expect(timerMock).not.toHaveBeenCalled()
 		});

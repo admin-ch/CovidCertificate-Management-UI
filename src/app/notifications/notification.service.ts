@@ -33,7 +33,7 @@ export class NotificationService implements OnDestroy {
 	constructor(
 		private readonly http: HttpClient,
 		@Inject('NOTIFICATION_HOST') private NOTIFICATION_HOST: string,
-		@Inject('IS_PRODUCTION') private isProduction: boolean,
+		@Inject('IS_NOTIFICATION_SERVICE_ENABLED') private isNotificationServiceEnabled: boolean,
 	) {
 		this.imminentNotifications$ = this.imminentNotifications.asObservable();
 		this.upcomingNotifications$ = this.upcomingNotifications.asObservable();
@@ -44,8 +44,8 @@ export class NotificationService implements OnDestroy {
 	}
 
 	fetchNotifications() {
-		// Only pull notifications in production mode. This is true for DEV, ABN and PROD.
-		if (this.isProduction) {
+		// this will only pull notifications on DEV, ABN and PROD.
+		if (this.isNotificationServiceEnabled) {
 			// Pull every 15 minutes.
 			this.subscription = timer(0, 1000 * 60 * 15)
 				.pipe(
