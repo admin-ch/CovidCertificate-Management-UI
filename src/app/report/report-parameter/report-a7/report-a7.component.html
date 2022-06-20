@@ -13,7 +13,7 @@
 				<mat-datepicker #pickerFrom></mat-datepicker>
 				<mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
 				<mat-error *ngIf="a7FormGroup.get('from').hasError('startDateAfterEndDate')">
-					Test
+					{{ "reports.a7.startDateBeforeEndDate" | translate }}
 				</mat-error>
 			</mat-form-field>
 			<mat-form-field obErrorMessages>

@@ -12,7 +12,7 @@ import {MatHorizontalStepper} from '@angular/material/stepper';
 const AUTH_FUNCTION_REPORT_TYPE_MAP = {
 	// [AuthFunction.REPORT_A3]: ReportType.A3,
 	// [AuthFunction.REPORT_A5]: ReportType.A3,
-	// [AuthFunction.REPORT_A7]: ReportType.A7,
+	[AuthFunction.REPORT_A7]: ReportType.A7,
 	// [AuthFunction.REPORT_A10]: ReportType.A7,
 	[AuthFunction.REPORT_A2]: ReportType.A2
 	// [AuthFunction.REPORT_A4]: ReportType.A4,
