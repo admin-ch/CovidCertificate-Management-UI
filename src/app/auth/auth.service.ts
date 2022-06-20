@@ -107,12 +107,12 @@ export class AuthService implements OnDestroy {
 	}
 
 	private emitAuthorizedDataRooms(claims: Claims): void {
-		if (claims?.realm_access?.roles?.length) {
+		if (claims?.userroles?.length) {
 			const authorizedDataRooms: DataRoomCode[] = []
-			for (const role of claims.realm_access.roles) {
+			for (const role of claims.userroles) {
 				Object.values(DataRoomCode).forEach(code => {
 					const lowerCaseCode = code.toLocaleLowerCase()
-					if (role.endsWith(`dr_${lowerCaseCode}`)) {
+					if (role.endsWith(`bag-cc-dr_${lowerCaseCode}`)) {
 						authorizedDataRooms.push(code)
 					}
 				})
