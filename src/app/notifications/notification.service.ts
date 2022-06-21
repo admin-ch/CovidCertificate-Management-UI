@@ -33,7 +33,7 @@ export class NotificationService implements OnDestroy {
 	constructor(
 		private readonly http: HttpClient,
 		@Inject('NOTIFICATION_HOST') private NOTIFICATION_HOST: string,
-		@Inject('IS_NOTIFICATION_SERVICE_ENABLED') private isNotificationServiceEnabled: boolean,
+		@Inject('IS_NOTIFICATION_SERVICE_ENABLED') private isNotificationServiceEnabled: boolean
 	) {
 		this.imminentNotifications$ = this.imminentNotifications.asObservable();
 		this.upcomingNotifications$ = this.upcomingNotifications.asObservable();
