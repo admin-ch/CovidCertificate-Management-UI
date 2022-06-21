@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable, of, ReplaySubject, Subject, Subscription, throwError, timer} from 'rxjs';
-import {catchError, skipWhile, switchMap, tap} from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 import * as moment from 'moment';
 
 export interface Notification {
@@ -30,7 +30,11 @@ export class NotificationService implements OnDestroy {
 	private readonly NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY = 'ecUpcomingNotificationsShown';
 	private subscription: Subscription;
 
-	constructor(private readonly http: HttpClient, @Inject('NOTIFICATION_HOST') private NOTIFICATION_HOST: string) {
+	constructor(
+		private readonly http: HttpClient,
+		@Inject('NOTIFICATION_HOST') private NOTIFICATION_HOST: string,
+		@Inject('IS_NOTIFICATION_SERVICE_ENABLED') private isNotificationServiceEnabled: boolean,
+	) {
 		this.imminentNotifications$ = this.imminentNotifications.asObservable();
 		this.upcomingNotifications$ = this.upcomingNotifications.asObservable();
 	}
@@ -40,46 +44,49 @@ export class NotificationService implements OnDestroy {
 	}
 
 	fetchNotifications() {
-		// Pull every 15 minutes.
-		this.subscription = timer(0, 1000 * 60 * 15)
-			.pipe(
-				switchMap(() => {
-					const storedHash = localStorage.getItem(this.ETAG_LOCALSTORAGE_KEY);
-					const headers = {};
-					if (storedHash) {
-						headers['If-None-Match'] = storedHash;
-					}
-					return this.http
-						.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications/`, {
-							headers,
-							observe: 'response'
-						})
-						.pipe(
-							// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
-							// by the `HttpResponsesInterceptor`.
-							catchError(response => (response.status === 304 ? of(response) : throwError(response)))
-						);
-				})
-			)
-			.subscribe((response: HttpResponse<Notification[]>) => {
-				// If status is "304 Not Modified", there have been no changes since the last pull.
-				if (response.status !== 304) {
-					localStorage.setItem(this.ETAG_LOCALSTORAGE_KEY, response.headers.get('ETag'));
-					localStorage.setItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY, JSON.stringify(response.body));
+		// this will only pull notifications on DEV, ABN and PROD.
+		if (this.isNotificationServiceEnabled) {
+			// Pull every 15 minutes.
+			this.subscription = timer(0, 1000 * 60 * 15)
+				.pipe(
+					switchMap(() => {
+						const storedHash = localStorage.getItem(this.ETAG_LOCALSTORAGE_KEY);
+						const headers = {};
+						if (storedHash) {
+							headers['If-None-Match'] = storedHash;
+						}
+						return this.http
+							.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications/`, {
+								headers,
+								observe: 'response'
+							})
+							.pipe(
+								// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
+								// by the `HttpResponsesInterceptor`.
+								catchError(response => (response.status === 304 ? of(response) : throwError(response)))
+							);
+					})
+				)
+				.subscribe((response: HttpResponse<Notification[]>) => {
+					// If status is "304 Not Modified", there have been no changes since the last pull.
+					if (response.status !== 304) {
+						localStorage.setItem(this.ETAG_LOCALSTORAGE_KEY, response.headers.get('ETag'));
+						localStorage.setItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY, JSON.stringify(response.body));
 
-					// We create a map which its index is the index of the notification and its value is true or false
-					// to define if the notification has already been shown to the user. We initialize it here, setting
-					// all to false.
-					const shownNotificationsMap = [];
-					response.body?.forEach((_, i) => (shownNotificationsMap[i] = false));
-					localStorage.setItem(
-						this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY,
-						JSON.stringify(shownNotificationsMap)
-					);
-				}
-				this.emitUpcomingIfExisting();
-				this.emitImminentIfExisting();
-			});
+						// We create a map which its index is the index of the notification and its value is true or false
+						// to define if the notification has already been shown to the user. We initialize it here, setting
+						// all to false.
+						const shownNotificationsMap = [];
+						response.body?.forEach((_, i) => (shownNotificationsMap[i] = false));
+						localStorage.setItem(
+							this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY,
+							JSON.stringify(shownNotificationsMap)
+						);
+					}
+					this.emitUpcomingIfExisting();
+					this.emitImminentIfExisting();
+				});
+		}
 	}
 
 	private emitImminentIfExisting() {
