@@ -46,7 +46,7 @@
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDateTime" | translate }}</dt>
-		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm" }}</dd>
+		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY"}}</dd>
 		<dt *ngIf="GenerationType.RECOVERY_RAT != certificateType">
 			{{ "certificateCreate.form.label.test.center" | translate }}
 		</dt>
