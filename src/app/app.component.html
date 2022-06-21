@@ -80,8 +80,17 @@
 		</p>
 	</ng-container>
 	<ng-template #obFooterLink>
+		<a
+			[href]="'footer.privacyStatement.url' | translate"
+			target="_blank"
+			role="menuitem"
+			rel="noopener noreferrer"
+			>{{ "footer.privacyStatement" | translate }}</a
+		>
+	</ng-template>
+	<ng-template #obFooterLink>
 		<a [href]="'footer.legal.url' | translate" target="_blank" role="menuitem" rel="noopener noreferrer">{{
 			"footer.legal" | translate
-		}}</a>
+			}}</a>
 	</ng-template>
 </ob-master-layout>
