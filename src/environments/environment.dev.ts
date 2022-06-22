@@ -2,7 +2,7 @@ import {OIdC} from '../app/auth/open-id-config-service';
 import {LogLevel} from 'angular-auth-oidc-client';
 
 export const environment = {
-	banner: {text: ''},
+	banner: {text: 'DEV'},
 	production: true,
 	showWarning: true,
 	stage: 'd',

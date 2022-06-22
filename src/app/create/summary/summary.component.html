@@ -30,10 +30,10 @@
 <ng-container *ngIf="patient?.test">
 	<h5>
 		{{
-			(GenerationType.RECOVERY_RAT == certificateType
+		(GenerationType.RECOVERY_RAT == certificateType
 				? "certificateCreate.step-one.enum.recovery-rat"
 				: "certificateCreate.form.group.test"
-			) | translate
+		) | translate
 		}}
 	</h5>
 	<dl>
@@ -46,7 +46,13 @@
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDateTime" | translate }}</dt>
-		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY" }}</dd>
+		<dd id="sampleDate">
+			{{
+			(GenerationType.RECOVERY_RAT == certificateType
+					? (patient?.test.sampleDate | date: "dd.MM.YYYY")
+					: (patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm")
+			)
+			}}</dd>
 		<dt *ngIf="GenerationType.RECOVERY_RAT != certificateType">
 			{{ "certificateCreate.form.label.test.center" | translate }}
 		</dt>
