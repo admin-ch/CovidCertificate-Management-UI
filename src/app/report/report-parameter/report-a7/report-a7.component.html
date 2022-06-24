@@ -34,7 +34,7 @@
 		<legend>{{ "reports.a7.selected-dataroom" | translate }}</legend>
 		<mat-form-field obErrorMessages>
 			<mat-select formControlName="canton">
-				<mat-option *ngFor="let dataRoom of auth.authorizedDataRooms$ | async"
+				<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async"
 							[value]="dataRoom">{{ ("dataroom." + (dataRoom | lowercase)) | translate }}</mat-option>
 			</mat-select>
 			<mat-error></mat-error>

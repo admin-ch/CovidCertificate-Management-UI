@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {ReportService} from '../../report.service';
-import {ReportType} from 'shared/model';
+import {DataRoomCode, ReportType} from 'shared/model';
 import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "../../../auth/auth.service";
+import {tap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 export enum CertificateType {
 	// EU compatible certs
@@ -32,14 +34,24 @@ export class ReportA7Component implements OnInit, OnDestroy {
 	isSelectAllChecked = false
 	isSelectAllIndeterminate = false
 
+	authorizedDataRooms$: Observable<DataRoomCode[]>
+
 	constructor(public readonly reportService: ReportService,
-				public readonly auth: AuthService,
+				private readonly auth: AuthService,
 				public readonly translate: TranslateService) {
 	}
 
 	ngOnInit(): void {
 		this.a7FormGroup = this.reportService.formGroup.get(ReportType.A7) as FormGroup
 		this.a7FormGroup.enable()
+		this.authorizedDataRooms$ = this.auth.authorizedDataRooms$.pipe(
+			tap(dataRooms => {
+				// Pre-select the canton if there is only one available.
+				if (dataRooms?.length === 1) {
+					this.a7FormGroup.get('canton').setValue(dataRooms[0])
+				}
+			})
+		)
 	}
 
 	ngOnDestroy() {

@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 
 import {CertificateType, ReportA7Component} from './report-a7.component';
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../auth/auth.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import * as moment from "moment";
+import {Subject} from "rxjs";
 
 describe('ReportA7Component', () => {
 	let component: ReportA7Component;
@@ -30,6 +31,7 @@ describe('ReportA7Component', () => {
 				{
 					provide: AuthService,
 					useValue: {
+						authorizedDataRooms$: new Subject<DataRoomCode[]>()
 					}
 				},
 			],
@@ -54,6 +56,30 @@ describe('ReportA7Component', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	describe('authorizedDataRooms$', () => {
+		let authService: AuthService
+		beforeEach(() => {
+			authService = TestBed.inject(AuthService)
+		})
+
+		it('should set canton automatically if there is only one available to the user', fakeAsync(() => {
+			component.a7FormGroup.get('canton').setValue(null)
+			// @ts-ignore
+			authService.authorizedDataRooms$.next([DataRoomCode.AG])
+			tick()
+
+			expect(component.a7FormGroup.get('canton').value).toEqual(DataRoomCode.AG)
+		}));
+		it('should not set canton automatically if there are multiple cantons available to the user', fakeAsync(() => {
+			component.a7FormGroup.get('canton').setValue(null)
+			// @ts-ignore
+			authService.authorizedDataRooms$.next([DataRoomCode.AG, DataRoomCode.BE])
+			tick()
+
+			expect(component.a7FormGroup.get('canton').value).toBe(null)
+		}));
 	});
 
 	describe('certTypeCheckboxChanged', () => {
