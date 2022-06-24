@@ -151,6 +151,8 @@
     "footer.built.suffix": "construit",
     "footer.legal": "Conditions d'utilisation",
     "footer.legal.url": "https://www.admin.ch/gov/fr/accueil/conditions-utilisation.html",
+    "footer.privacyStatement": "Politique de confidentialité",
+    "footer.privacyStatement.url": "https://www.bit.admin.ch/bit/fr/home/documentation/covid-certificate-app.html",
     "gracePeriodMessage": "Ce matériel de test rapide peut être utilisé jusqu’au {{validUntil}}; après cette date, il ne permettra plus d’établir des certificats.",
     "home.administration": "Instructions pour l'administration des utilisateurs (gestion déléguée) par le superutilisateur",
     "home.faq": "Questions fréquemment posées",

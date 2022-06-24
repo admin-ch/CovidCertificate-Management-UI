@@ -70,7 +70,7 @@ export class ReportA7Component implements OnInit, OnDestroy {
 		this.a7FormGroup.reset({
 			from: '',
 			to: '',
-			dataRoom: '',
+			canton: '',
 			types: []
 		});
 		this.setSelectAllCheckboxState()

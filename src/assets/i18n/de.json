@@ -151,6 +151,8 @@
     "footer.built.suffix": "gebaut",
     "footer.legal": "Rechtliches",
     "footer.legal.url": "https://www.admin.ch/gov/de/start/rechtliches.html",
+    "footer.privacyStatement": "Datenschutzerklärung",
+    "footer.privacyStatement.url": "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-app.html",
     "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen.",
     "home.administration": "Anleitungen zur Benutzerverwaltung (delegiertes Management) durch Superuser",
     "home.faq": "Häufig gestellte Fragen (FAQ)",

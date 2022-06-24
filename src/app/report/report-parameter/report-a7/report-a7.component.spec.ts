@@ -45,7 +45,7 @@ describe('ReportA7Component', () => {
 			[ReportType.A7]: new FormGroup({
 				from: new FormControl('', Validators.required),
 				to: new FormControl('', Validators.required),
-				dataRoom: new FormControl('', Validators.required),
+				canton: new FormControl('', Validators.required),
 				types: new FormControl([]),
 			})
 		});
@@ -90,14 +90,14 @@ describe('ReportA7Component', () => {
 		it('should clear all inputs', () => {
 			component.a7FormGroup.get('from').setValue(moment('2022-01-01'))
 			component.a7FormGroup.get('to').setValue(moment('2022-01-01'))
-			component.a7FormGroup.get('dataRoom').setValue(DataRoomCode.AG)
+			component.a7FormGroup.get('canton').setValue(DataRoomCode.AG)
 			component.a7FormGroup.get('types').setValue(Object.values(CertificateType))
 
 			component.resetInput()
 
 			expect(component.a7FormGroup.get('from').value).toEqual('')
 			expect(component.a7FormGroup.get('to').value).toEqual('')
-			expect(component.a7FormGroup.get('dataRoom').value).toEqual('')
+			expect(component.a7FormGroup.get('canton').value).toEqual('')
 			expect(component.a7FormGroup.get('types').value).toEqual([])
 		});
 	});

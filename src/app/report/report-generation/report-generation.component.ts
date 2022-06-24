@@ -42,7 +42,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					url += '/fraud/a2/by_uvci';
 					break;
 				case ReportType.A7:
-					url += 'TODO';
+					url += '/fraud/a7';
 					break;
 				default:
 					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`)

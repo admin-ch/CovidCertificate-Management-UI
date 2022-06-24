@@ -22,7 +22,7 @@ export class ReportService {
 			[ReportType.A7]: this.fb.group({
 					from: ['', Validators.required],
 					to: ['', Validators.required],
-					dataRoom: ['', Validators.required],
+					canton: ['', Validators.required],
 					types: [[]],
 				},
 				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),

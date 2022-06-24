@@ -151,6 +151,8 @@
     "footer.built.suffix": "built",
     "footer.legal": "Terms and conditions",
     "footer.legal.url": "https://www.admin.ch/gov/en/start/terms-and-conditions.html",
+    "footer.privacyStatement": "Privacy statement",
+    "footer.privacyStatement.url": "https://www.bit.admin.ch/bit/en/home/documentation/covid-certificate-app.html",
     "gracePeriodMessage": "This rapid test product can be used until {{validUntil}}; after that date, it can no longer be used to generate certificates.",
     "home.administration": "Instructions for user administration (delegated management) by superuser",
     "home.faq": "FAQ",
