@@ -191,7 +191,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
-			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
+			sampleDate: [this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(), sampleDateValidators],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
 			product: [''],
 			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
@@ -295,7 +295,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			typeOfTest: previousTypeOfTest,
 			product: previousProduct,
 			center: previousCenter,
-			sampleDate: this.getCurrentDateTime()
+			sampleDate: this.rapid ? this.getCurrentDate() : this.getCurrentDateTime()
 		});
 
 		this.filteredRapidTests = this.rapidTests;

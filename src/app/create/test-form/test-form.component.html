@@ -90,8 +90,8 @@
 					required
 					[errors]="testForm.get('sampleDate').errors"
 					id="sampleDate"
-					[defaultValue]="antibody ? getCurrentDate() : getCurrentDateTime()"
-					[showTime]="!antibody"
+					[defaultValue]="antibody || rapid ? getCurrentDate() : getCurrentDateTime()"
+					[showTime]="!antibody && !rapid"
 					[minDate]="getMinDate()"
 				>
 				</ec-datetimepicker>
