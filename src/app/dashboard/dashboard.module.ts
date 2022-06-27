@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {ObButtonModule, ObIconModule} from '@oblique/oblique';
-import {NotificationsModule} from "../notifications/notifications.module";
+import {NotificationsModule} from '../notifications/notifications.module';
 
 @NgModule({
 	declarations: [DashboardComponent],

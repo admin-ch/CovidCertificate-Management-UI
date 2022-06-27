@@ -4,9 +4,9 @@ import {ObliqueTestingModule, ObNotificationService} from '@oblique/oblique';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
-import {Notification, NotificationService} from "../notifications/notification.service";
-import {TranslateService} from "@ngx-translate/core";
-import {Subject} from "rxjs";
+import {Notification, NotificationService} from '../notifications/notification.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Subject} from 'rxjs';
 
 @Directive({
 	selector: '[ecHasAuthorizationFor],[ecHasAuthorizationForAny],[ecHasAuthorizationForAll]'
@@ -31,16 +31,16 @@ describe('DashboardComponent', () => {
 
 	const notificationServiceMock = {
 		upcomingNotifications$: new Subject<Notification[]>()
-	}
+	};
 
 	const obNotificationServiceMock = {
 		info: jest.fn(),
 		warning: jest.fn()
-	}
+	};
 
 	const translateServiceMock = {
-		currentLang: 'en',
-	}
+		currentLang: 'en'
+	};
 
 	beforeEach(
 		waitForAsync(() => {
@@ -60,7 +60,7 @@ describe('DashboardComponent', () => {
 					{provide: Router, useValue: router},
 					{provide: NotificationService, useValue: notificationServiceMock},
 					{provide: ObNotificationService, useValue: obNotificationServiceMock},
-					{provide: TranslateService, useValue: translateServiceMock},
+					{provide: TranslateService, useValue: translateServiceMock}
 				]
 			}).compileComponents();
 		})
@@ -103,15 +103,14 @@ describe('DashboardComponent', () => {
 	describe('ngOnInit', () => {
 		it('should set subscription', () => {
 			// @ts-ignore
-			expect(component.subscription).toBeTruthy()
+			expect(component.subscription).toBeTruthy();
 		});
 
 		describe('when upcoming notifications are emitted', () => {
-
 			beforeEach(() => {
-				obNotificationServiceMock.info.mockClear()
-				obNotificationServiceMock.warning.mockClear()
-			})
+				obNotificationServiceMock.info.mockClear();
+				obNotificationServiceMock.warning.mockClear();
+			});
 
 			it('should call info function of obNotificationService once', () => {
 				notificationServiceMock.upcomingNotifications$.next([
@@ -121,14 +120,14 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch',
 							en: 'English',
 							fr: 'Francais',
-							it: 'Italiano',
+							it: 'Italiano'
 						},
 						start: '',
 						end: ''
 					}
-				])
-				expect(obNotificationServiceMock.info).toHaveBeenCalledWith({message: 'English', sticky: true})
-				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled()
+				]);
+				expect(obNotificationServiceMock.info).toHaveBeenCalledWith({message: 'English', sticky: true});
+				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled();
 			});
 
 			it('should call warning function of obNotificationService once', () => {
@@ -139,14 +138,14 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch',
 							en: 'English',
 							fr: 'Francais',
-							it: 'Italiano',
+							it: 'Italiano'
 						},
 						start: '',
 						end: ''
 					}
-				])
-				expect(obNotificationServiceMock.warning).toHaveBeenCalledWith({message: 'English', sticky: true})
-				expect(obNotificationServiceMock.info).not.toHaveBeenCalled()
+				]);
+				expect(obNotificationServiceMock.warning).toHaveBeenCalledWith({message: 'English', sticky: true});
+				expect(obNotificationServiceMock.info).not.toHaveBeenCalled();
 			});
 
 			it('should call warning and info function of obNotificationService twice', () => {
@@ -157,7 +156,7 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch 1',
 							en: 'English 1',
 							fr: 'Francais 1',
-							it: 'Italiano 1',
+							it: 'Italiano 1'
 						},
 						start: '',
 						end: ''
@@ -168,7 +167,7 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch 2',
 							en: 'English 2',
 							fr: 'Francais 2',
-							it: 'Italiano 2',
+							it: 'Italiano 2'
 						},
 						start: '',
 						end: ''
@@ -179,7 +178,7 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch 3',
 							en: 'English 3',
 							fr: 'Francais 3',
-							it: 'Italiano 3',
+							it: 'Italiano 3'
 						},
 						start: '',
 						end: ''
@@ -190,30 +189,29 @@ describe('DashboardComponent', () => {
 							de: 'Deutsch 4',
 							en: 'English 4',
 							fr: 'Francais 4',
-							it: 'Italiano 4',
+							it: 'Italiano 4'
 						},
 						start: '',
 						end: ''
-					},
-				])
+					}
+				]);
 				expect(obNotificationServiceMock.warning).toHaveBeenNthCalledWith(1, {
 					message: 'English 1',
 					sticky: true
-				})
+				});
 				expect(obNotificationServiceMock.warning).toHaveBeenNthCalledWith(2, {
 					message: 'English 2',
 					sticky: true
-				})
-				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(1, {message: 'English 3', sticky: true})
-				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(2, {message: 'English 4', sticky: true})
+				});
+				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(1, {message: 'English 3', sticky: true});
+				expect(obNotificationServiceMock.info).toHaveBeenNthCalledWith(2, {message: 'English 4', sticky: true});
 			});
 
 			it('should call no function of obNotificationService', () => {
-				notificationServiceMock.upcomingNotifications$.next([])
-				expect(obNotificationServiceMock.info).not.toHaveBeenCalled()
-				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled()
+				notificationServiceMock.upcomingNotifications$.next([]);
+				expect(obNotificationServiceMock.info).not.toHaveBeenCalled();
+				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled();
 			});
 		});
-
-	})
+	});
 });

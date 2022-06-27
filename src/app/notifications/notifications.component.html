@@ -1,5 +1,5 @@
 <ng-container *ngIf="imminentNotifications$ | async as notifications">
 	<ob-alert *ngFor="let notification of notifications" [type]="notification.type == 'INFO' ? 'info' : 'warning'">
-		{{notification.message[currentLang]}}
+		{{ notification.message[currentLang] }}
 	</ob-alert>
 </ng-container>

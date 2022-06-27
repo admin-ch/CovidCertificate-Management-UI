@@ -1,0 +1,15 @@
+.info-container {
+	display: flex;
+	flex-direction: row;
+
+	mat-icon {
+		height: 13em;
+		width: 13em;
+	}
+
+	.text-container {
+		flex: 0 1 50em;
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+}

@@ -6,8 +6,8 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		id="templates-link"
-	><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-	>{{ "upload.templates" | translate }}</a
+		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
+		>{{ "upload.templates" | translate }}</a
 	>
 </p>
 
@@ -15,12 +15,16 @@
 	<span [innerHTML]="'certificateRevoke.warning' | translate"></span>
 </ob-alert>
 
-
-	<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileBulkRevocationUpload />
-
+<input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileBulkRevocationUpload />
 
 <div class="file-selection">
-	<button id="select-file-bulk-revocation-button" mat-button obButton="secondary" (click)="fileBulkRevocationUpload.click()" class="margin-right">
+	<button
+		id="select-file-bulk-revocation-button"
+		mat-button
+		obButton="secondary"
+		(click)="fileBulkRevocationUpload.click()"
+		class="margin-right"
+	>
 		{{ "upload.file.select" | translate }}
 	</button>
 

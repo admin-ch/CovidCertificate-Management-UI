@@ -77,8 +77,7 @@ export interface ProductInfo {
 }
 
 export class ProductInfoWithToString implements ProductInfo {
-	constructor(public code: string, public display: string) {
-	}
+	constructor(public code: string, public display: string) {}
 
 	public toString() {
 		return this.display;
@@ -86,8 +85,7 @@ export class ProductInfoWithToString implements ProductInfo {
 }
 
 export class RapidTestProductInfoWithToString {
-	constructor(public code: string, public display: string, public validUntil: string) {
-	}
+	constructor(public code: string, public display: string, public validUntil: string) {}
 
 	public toString() {
 		return this.display;
@@ -160,6 +158,20 @@ export enum GenerationType {
 	EXCEPTIONAL = 'exceptional'
 }
 
+export enum ReportType {
+	A2 = 'report-a2',
+	A3 = 'report-a3',
+	A4 = 'report-a4',
+	A5 = 'report-a5',
+	A6 = 'report-a6',
+	A7 = 'report-a7',
+	A8 = 'report-a8',
+	A9 = 'report-a9',
+	A10 = 'report-a10',
+	A11 = 'report-a11',
+	A12 = 'report-a12'
+}
+
 export enum ShippingOptions {
 	APP = 'app',
 	PDF = 'pdf',
@@ -183,7 +195,7 @@ export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select
 
 export class FormField {
 	public readonly angularFormControl: FormControl;
-	public readonly selectableOptions?: { display: string; code: any }[];
+	public readonly selectableOptions?: {display: string; code: any}[];
 	public readonly tooltipTranslationKey?: string;
 	public readonly defaultValue: any;
 	public readonly cssClasses: string;
@@ -194,7 +206,7 @@ export class FormField {
 		options?: {
 			defaultValue?: any;
 			validators?: ValidatorFn | ValidatorFn[];
-			selectableOptions?: { display: string; code: any }[];
+			selectableOptions?: {display: string; code: any}[];
 			tooltipTranslationKey?: string;
 			cssClasses?: string;
 		}
@@ -218,7 +230,7 @@ export interface CreateCertificateResponse {
 	pdf: string; // base64 encoded pdf string
 	qrCode: string;
 	uvci: string;
-	appDeliveryError?: { errorCode: number; errorMessage: string };
+	appDeliveryError?: {errorCode: number; errorMessage: string};
 }
 
 export interface CsvResponseDto {
@@ -226,8 +238,8 @@ export interface CsvResponseDto {
 }
 
 export interface CsvRevocationResponseDto {
-	uvcisWithErrorMessageCount: number
-	revokedUvcisCount: number
+	uvcisWithErrorMessageCount: number;
+	revokedUvcisCount: number;
 	csv: string;
 }
 
