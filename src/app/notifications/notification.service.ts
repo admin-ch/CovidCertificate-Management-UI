@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable, of, ReplaySubject, Subscription, throwError, timer} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
+import {Observable, of, ReplaySubject, Subject, Subscription, throwError, timer} from 'rxjs';
+import {catchError, skipWhile, switchMap, tap} from 'rxjs/operators';
 import * as moment from "moment";
 
 export interface Notification {
@@ -24,9 +24,10 @@ export class NotificationService implements OnDestroy {
 	public upcomingNotifications$: Observable<Notification[]>
 
 	private imminentNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1)
-	private upcomingNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1)
+	private upcomingNotifications: Subject<Notification[]> = new Subject<Notification[]>()
 	private readonly ETAG_LOCALSTORAGE_KEY = 'ecNotificationETag';
 	private readonly NOTIFICATIONS_LOCALSTORAGE_KEY = 'ecNotifications';
+	private readonly NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY = 'ecUpcomingNotificationsShown';
 	private subscription: Subscription;
 
 	constructor(private readonly http: HttpClient, @Inject('NOTIFICATION_HOST') private NOTIFICATION_HOST: string) {
@@ -51,20 +52,28 @@ export class NotificationService implements OnDestroy {
 						return this.http.get<HttpResponse<Notification[]>>(`${this.NOTIFICATION_HOST}/api/v1/notifications/`, {
 							headers,
 							observe: 'response'
-						});
+						}).pipe(
+							// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
+							// by the `HttpResponsesInterceptor`.
+							catchError(response => response.status === 304 ? of(response) : throwError(response))
+						);
 					}
 				),
-				// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
-				// by the `HttpResponsesInterceptor`.
-				catchError(response => response.status === 304 ? of(response) : throwError(response))
 			)
 			.subscribe((response: HttpResponse<Notification[]>) => {
 				// If status is "304 Not Modified", there have been no changes since the last pull.
 				if (response.status !== 304) {
 					localStorage.setItem(this.ETAG_LOCALSTORAGE_KEY, response.headers.get('ETag'));
 					localStorage.setItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY, JSON.stringify(response.body));
-					this.emitUpcomingIfExisting()
+
+					// We create a map which its index is the index of the notification and its value is true or false
+					// to define if the notification has already been shown to the user. We initialize it here, setting
+					// all to false.
+					const shownNotificationsMap = []
+					response.body?.forEach((_, i) => shownNotificationsMap[i] = false)
+					localStorage.setItem(this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY, JSON.stringify(shownNotificationsMap));
 				}
+				this.emitUpcomingIfExisting()
 				this.emitImminentIfExisting()
 			});
 	}
@@ -82,15 +91,18 @@ export class NotificationService implements OnDestroy {
 					imminentNotifications.push(notification)
 				}
 			}
-			this.imminentNotifications.next(imminentNotifications)
 		}
+		this.imminentNotifications.next(imminentNotifications)
 	}
 
 	private emitUpcomingIfExisting() {
-		const notifications = JSON.parse(localStorage.getItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY));
+		const notifications: Notification[] = JSON.parse(localStorage.getItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY));
+		const shownNotificationsMap = JSON.parse(localStorage.getItem(this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY));
 		const upcomingNotifications = []
-		if (notifications) {
-			for (const notification of notifications) {
+
+		notifications?.forEach((notification, i) => {
+			// We only want to emit notifications which have not been shown to the user yet.
+			if (shownNotificationsMap[i] !== true) {
 				const now = moment()
 				const start = moment(notification.start)
 				const rangeEnd = moment()
@@ -98,10 +110,12 @@ export class NotificationService implements OnDestroy {
 
 				if (start.isBetween(now, rangeEnd)) {
 					upcomingNotifications.push(notification)
+					shownNotificationsMap[i] = true
+					localStorage.setItem(this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY, JSON.stringify(shownNotificationsMap));
 				}
 			}
-			this.upcomingNotifications.next(upcomingNotifications)
-		}
+		})
+		this.upcomingNotifications.next(upcomingNotifications)
 	}
 
 }

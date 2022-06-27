@@ -9,11 +9,17 @@ import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
 
 @Directive({
-	selector: '[ecHasAuthorizationFor]'
+	selector: '[ecHasAuthorizationFor],[ecHasAuthorizationForAny],[ecHasAuthorizationForAll]'
 })
 export class HasAuthorizationForMockDirective {
 	@Input()
 	ecHasAuthorizationFor;
+
+	@Input()
+	ecHasAuthorizationForAny;
+
+	@Input()
+	ecHasAuthorizationForAll;
 }
 
 describe('DashboardComponent', () => {
