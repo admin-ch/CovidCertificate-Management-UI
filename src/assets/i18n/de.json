@@ -229,7 +229,7 @@
     "reports.a7.date-to": "Enddatum",
     "reports.a7.description.long": "<strong>Welche/r Aussteller/in hat welche Anzahl eines spezifischen Zertifikatstyps in einem definierten Zeitraum ausgestellt? </strong></br></br>Dieser Report liefert Ihnen, nach Auswahl eines Zertifikatstyps, eine Liste von Aussteller/innen und die jeweilige Anzahl ausgestellter Zertifikate dieses Typs. ",
     "reports.a7.description.short": "Übersicht aller Aussteller/innen eines bestimmten Zertifikatstyps inkl. Ausstellkanal für einen definierten Zeitraum.",
-    "reports.a7.eu-compatible-certs": "EU-kompatible Zertifikate",
+    "reports.a7.eu-compatible-certs": "EU-kompatible Zertifikate:",
     "reports.a7.period-text": "Bitte wählen Sie ein Anfangs- und ein Enddatum des Ausstellungszeitraums für den Report aus:",
     "reports.a7.select-all-cert-types": "Alle Zertifikatstypen auswählen",
     "reports.a7.select-cert-types": "Bitte wählen Sie den/die Zertifikatstypen aus, für den/die Sie den Report generieren wollen:",
