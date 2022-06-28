@@ -40,7 +40,7 @@
 				</div>
 			</div>
 
-			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts || rapid">
+			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts && !rapid">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
 				<input
 					type="text"
@@ -90,14 +90,14 @@
 					required
 					[errors]="testForm.get('sampleDate').errors"
 					id="sampleDate"
-					[defaultValue]="antibody ? getCurrentDate() : getCurrentDateTime()"
-					[showTime]="!antibody"
+					[defaultValue]="antibody || rapid ? getCurrentDate() : getCurrentDateTime()"
+					[showTime]="!antibody && !rapid"
 					[minDate]="getMinDate()"
 				>
 				</ec-datetimepicker>
 			</ob-nested-form>
 
-			<p class="form-field-info">
+			<p *ngIf="!rapid" class="form-field-info">
 				{{
 					(antibody
 						? "certificateCreate.form.label.test.center.numberInfo"
@@ -105,7 +105,8 @@
 					) | translate
 				}}
 			</p>
-			<mat-form-field obErrorMessages class="mat-form-field-lg">
+
+			<mat-form-field *ngIf="!rapid" obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{
 					(antibody
 						? "certificateCreate.form.label.test.center.number"
@@ -126,6 +127,7 @@
 				<mat-error></mat-error>
 			</mat-form-field>
 		</div>
+		<ec-retroactive-radio *ngIf="rapid"></ec-retroactive-radio>
 	</fieldset>
 
 	<div class="stepper-footer">

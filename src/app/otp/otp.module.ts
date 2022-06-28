@@ -8,12 +8,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {OtpGuard} from './otp.guard';
 
 @NgModule({
 	declarations: [OtpComponent],
 	imports: [
 		SharedModule,
-		RouterModule.forChild([{path: '', component: OtpComponent, canActivate: [AuthGuardService]}]),
+		RouterModule.forChild([{path: '', component: OtpComponent, canActivate: [AuthGuardService, OtpGuard]}]),
 		ClipboardModule,
 		ObButtonModule,
 		ObColumnLayoutModule,

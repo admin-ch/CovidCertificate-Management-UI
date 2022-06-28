@@ -1,0 +1,31 @@
+@import "~@oblique/oblique/styles/scss/core/variables";
+
+.file-input {
+	display: none;
+}
+
+.file-selection {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+
+.margin-left {
+	margin-left: 1em;
+}
+
+.warning-message {
+	width: fit-content;
+}
+
+.margin-right {
+	margin-right: 1em;
+}
+
+.hint {
+	font-size: $font-size-smallest;
+}
+
+.file-info {
+	margin-bottom: 0;
+}

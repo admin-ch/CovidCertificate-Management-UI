@@ -9,9 +9,10 @@ import {
 import {Observable, of, Subject} from 'rxjs';
 import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {OauthService} from './auth/oauth.service';
-import {Role} from './auth/auth-guard.service';
 import {TranslateService} from '@ngx-translate/core';
 import {supportedBrowsers} from './supportedBrowsers';
+import {AuthFunction, AuthService} from './auth/auth.service';
+import {NotificationService} from './notifications/notification.service';
 
 @Component({
 	selector: 'ec-root',
@@ -19,13 +20,38 @@ import {supportedBrowsers} from './supportedBrowsers';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-	navigation: ObINavigationLink[] = [
-		{url: 'dashboard', label: 'dashboard.link'},
-		{url: 'certificate-create', label: 'certificateCreate.link'},
-		{url: 'certificate-revoke', label: 'certificateRevoke.link'},
-		{url: 'otp', label: 'otp.link'},
-		{url: 'upload', label: 'upload.link'}
+	static configs = [
+		{
+			functions: [AuthFunction.MAIN],
+			params: {url: 'dashboard', label: 'dashboard.link'}
+		},
+		{
+			functions: [AuthFunction.CERTIFICATE_GENERATION],
+			params: {url: 'certificate-create', label: 'certificateCreate.link'}
+		},
+		{
+			functions: [AuthFunction.CERTIFICATE_REVOCATION],
+			params: {url: 'certificate-revoke', label: 'certificateRevoke.link'}
+		},
+		{
+			functions: [AuthFunction.OTP_GENERATION],
+			params: {url: 'otp', label: 'otp.link'}
+		},
+		{
+			functions: [AuthFunction.BULK_OPERATIONS],
+			params: {url: 'upload', label: 'upload.link'}
+		},
+		{
+			functions: [AuthFunction.BULK_OPERATIONS, AuthFunction.BULK_REVOKE_CERTIFICATES],
+			params: {url: 'bulk-revocation', label: 'bulk.revocation.link'}
+		},
+		{
+			functions: [AuthFunction.REPORTING_SELF_SERVICE],
+			params: {url: 'report', label: 'reports.link'}
+		}
 	];
+
+	navigation: ObINavigationLink[] = [];
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;
 	currentPage: string;
@@ -34,8 +60,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
 	constructor(
 		private readonly oauthService: OauthService,
+		private readonly authService: AuthService,
 		private readonly config: ObMasterLayoutService,
-		private readonly notificationService: ObNotificationService,
+		private readonly obNotificationService: ObNotificationService,
+		private readonly notificationService: NotificationService,
 		interceptor: ObHttpApiInterceptorEvents,
 		router: Router,
 		translate: TranslateService
@@ -61,6 +89,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 			map(lang => lang.lang),
 			startWith(translate.currentLang)
 		);
+
+		this.isAuthenticated$.pipe(takeUntil(this.unsubscribe)).subscribe(isAuthenticated => {
+			if (isAuthenticated) {
+				this.notificationService.fetchNotifications();
+			}
+		});
 	}
 
 	ngOnDestroy() {
@@ -71,8 +105,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 	ngAfterViewInit(): void {
 		this.oauthService.initialize();
 		this.oauthService.loadClaims();
+		this.setNavigation();
 		if (!supportedBrowsers.test(navigator.userAgent)) {
-			this.notificationService.info({
+			this.obNotificationService.info({
 				title: 'notifications.unsupportedBrowser.title',
 				message: 'notifications.unsupportedBrowser.message',
 				sticky: true
@@ -84,13 +119,27 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		this.oauthService.logout();
 	}
 
+	private setNavigation(): void {
+		this.authService.authorizedFunctions$.pipe(delay(0), takeUntil(this.unsubscribe)).subscribe(authFunctions => {
+			const navigation: ObINavigationLink[] = [];
+
+			const addTabIfFunctionsIncluded = cfg => {
+				if (cfg.functions.every(fn => authFunctions.includes(fn))) {
+					navigation.push(cfg.params);
+				}
+			};
+
+			AppComponent.configs.forEach(cfg => addTabIfFunctionsIncluded(cfg));
+			this.navigation = navigation;
+		});
+	}
+
 	private isAuthorized(isAuthenticated: boolean): Observable<{isAuthenticated: boolean; isAuthorized: boolean}> {
 		if (!isAuthenticated) {
 			return of({isAuthenticated, isAuthorized: false});
 		}
-		return this.oauthService.claims$.pipe(
-			map(claims => this.oauthService.hasUserRole(Role.CERTIFICATE_CREATOR, claims)),
-			map(isAuthorized => ({isAuthenticated, isAuthorized}))
-		);
+		return this.authService
+			.hasAuthorizationFor$(AuthFunction.MAIN)
+			.pipe(map(isAuthorized => ({isAuthenticated, isAuthorized})));
 	}
 }

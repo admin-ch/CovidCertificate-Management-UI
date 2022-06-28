@@ -2,11 +2,13 @@ import {OIdC} from '../app/auth/open-id-config-service';
 import {LogLevel} from 'angular-auth-oidc-client';
 
 export const environment = {
-	banner: {text: ''},
+	banner: {text: 'DEV'},
 	production: true,
 	showWarning: true,
 	stage: 'd',
 	host: 'https://covidcertificate-management-d.bag.admin.ch',
+	notificationHost: 'https://covidcertificate-notification-d.bag.admin.ch',
+	reportHost: 'https://covidcertificate-report-d.bag.admin.ch',
 	eiamSelfAdmin:
 		'https://sts006-r.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate-d.admin.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
@@ -24,7 +26,10 @@ export const environment = {
 			'/v1/valuesets',
 			'/v1/feature-toggle/features',
 			'/v1/otp',
-			'/v1/revocation'
+			'/v1/revocation.*',
+			'/v1/authorization/current.*',
+			'/v1/notifications',
+			'/v2/report.*'
 		]
 	} as OIdC
 };

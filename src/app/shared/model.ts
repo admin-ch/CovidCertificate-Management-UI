@@ -104,7 +104,7 @@ export interface Test {
 	typeOfTest: ProductInfo;
 	manufacturer: ProductInfo;
 	sampleDate: Date; // format 2000-12-31T17:29 / < today
-	center: string; // maxChar 50
+	center?: string; // maxChar 50
 	countryOfTest: ProductInfo; // CH preselect
 }
 
@@ -156,6 +156,20 @@ export enum GenerationType {
 	ANTIBODY = 'antibody',
 	VACCINATION_TOURIST = 'vaccination-tourist',
 	EXCEPTIONAL = 'exceptional'
+}
+
+export enum ReportType {
+	A2 = 'report-a2',
+	A3 = 'report-a3',
+	A4 = 'report-a4',
+	A5 = 'report-a5',
+	A6 = 'report-a6',
+	A7 = 'report-a7',
+	A8 = 'report-a8',
+	A9 = 'report-a9',
+	A10 = 'report-a10',
+	A11 = 'report-a11',
+	A12 = 'report-a12'
 }
 
 export enum ShippingOptions {
@@ -223,6 +237,12 @@ export interface CsvResponseDto {
 	zip: ArrayBuffer;
 }
 
+export interface CsvRevocationResponseDto {
+	uvcisWithErrorMessageCount: number;
+	revokedUvcisCount: number;
+	csv: string;
+}
+
 export interface ValueSetsResponse {
 	countryCodes: CountryCodesDto;
 	vaccinationSets: VaccinationValueSets[];
@@ -270,6 +290,7 @@ export interface VaccinationValueSets {
 export interface RevokeDto {
 	uvci: string;
 	fraud: boolean;
+	systemSource: string;
 }
 
 export interface MomentWrapper {

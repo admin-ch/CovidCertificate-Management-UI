@@ -28,18 +28,35 @@
 </ng-container>
 
 <ng-container *ngIf="patient?.test">
-	<h5>{{ "certificateCreate.form.group.test" | translate }}</h5>
+	<h5>
+		{{
+		(GenerationType.RECOVERY_RAT == certificateType
+				? "certificateCreate.step-one.enum.recovery-rat"
+				: "certificateCreate.form.group.test"
+		) | translate
+		}}
+	</h5>
 	<dl>
-		<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
-		<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
+		<ng-container *ngIf="GenerationType.RECOVERY_RAT != certificateType">
+			<dt>{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</dt>
+			<dd id="typeOfTest">{{ getTranslatedTypeOfTest() }}</dd>
+		</ng-container>
 		<ng-container *ngIf="patient?.test.manufacturer">
 			<dt>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</dt>
 			<dd id="manufacturer">{{ patient?.test.manufacturer.display }}</dd>
 		</ng-container>
 		<dt>{{ "certificateCreate.form.label.test.sampleDateTime" | translate }}</dt>
-		<dd id="sampleDate">{{ patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm" }}</dd>
-		<dt>{{ "certificateCreate.form.label.test.center" | translate }}</dt>
-		<dd id="center">{{ patient?.test.center }}</dd>
+		<dd id="sampleDate">
+			{{
+			(GenerationType.RECOVERY_RAT == certificateType
+					? (patient?.test.sampleDate | date: "dd.MM.YYYY")
+					: (patient?.test.sampleDate | date: "dd.MM.YYYY HH:mm")
+			)
+			}}</dd>
+		<dt *ngIf="GenerationType.RECOVERY_RAT != certificateType">
+			{{ "certificateCreate.form.label.test.center" | translate }}
+		</dt>
+		<dd *ngIf="GenerationType.RECOVERY_RAT != certificateType" id="center">{{ patient?.test.center }}</dd>
 		<dt>{{ "certificateCreate.form.label.test.countryOfTest" | translate }}</dt>
 		<dd id="countryOfTest">{{ getTranslatedCountry() }}</dd>
 	</dl>
@@ -64,7 +81,7 @@
 </ng-container>
 
 <ng-container *ngIf="patient?.recovery">
-	<h5>{{ "certificateCreate.form.group.recovery" | translate }}</h5>
+	<h5>{{ "certificateCreate.step-one.enum.recovery" | translate }}</h5>
 	<dl>
 		<dt>{{ "certificateCreate.form.label.recovery.dateFirstPositiveTestResult" | translate }}</dt>
 		<dd id="dateFirstPositiveTestResult">{{ patient?.recovery.dateFirstPositiveTestResult | date }}</dd>

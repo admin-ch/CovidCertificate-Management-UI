@@ -7,6 +7,8 @@ export const environment = {
 	showWarning: true,
 	stage: '',
 	host: 'http://localhost:8120',
+	notificationHost: 'http://localhost:8123',
+	reportHost: 'http://localhost:8126',
 	eiamSelfAdmin: 'https://eiam.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
 		clientId: 'cc-management-ui',
@@ -23,7 +25,10 @@ export const environment = {
 			'/v1/valuesets',
 			'/v1/feature-toggle/features',
 			'/v1/otp',
-			'/v1/revocation'
+			'/v1/revocation.*',
+			'/v1/authorization/current.*',
+			'/v1/notifications',
+			'/v2/report.*'
 		]
 	} as OIdC
 };

@@ -11,12 +11,9 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
-import {GenerationType} from 'shared/model';
-import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
-	let personalDataComponent: PersonalDataComponent;
 	let fixture: ComponentFixture<RecoveryFormComponent>;
 	let creationDataService: CreationDataService;
 
@@ -134,7 +131,6 @@ describe('RecoveryFormComponent', () => {
 
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
-			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 		});
@@ -144,7 +140,6 @@ describe('RecoveryFormComponent', () => {
 
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
-			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 		});
@@ -154,7 +149,6 @@ describe('RecoveryFormComponent', () => {
 
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
-			component.recoveryForm.get('checkBox').setValue(true);
 
 			component.goNext();
 		});

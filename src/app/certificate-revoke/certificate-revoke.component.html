@@ -2,6 +2,10 @@
 	<h1>{{ "certificateRevoke.title" | translate }}</h1>
 	<p>{{ "certificateRevoke.instructions" | translate }}</p>
 
+	<ob-alert class="warning-message" [type]="'warning'">
+		<span [innerHTML]="'certificateRevoke.warning' | translate"></span>
+	</ob-alert>
+
 	<form [formGroup]="revocationForm" (submit)="revoke()">
 		<p class="form-field-info">
 			{{ "certificateRevoke.uvci.info" | translate }}

@@ -191,10 +191,10 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
-			sampleDate: [this.getCurrentDateTime(), sampleDateValidators],
-			center: ['', [Validators.required, Validators.maxLength(50)]],
+			sampleDate: [this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(), sampleDateValidators],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
-			...(this.rapid ? {product: ['', Validators.required]} : {product: ['']})
+			product: [''],
+			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
 		});
 
 		this.testForm.get('sampleDate').valueChanges.subscribe(_ => {
@@ -254,13 +254,16 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			additionalData = {
 				certificateType: this.rapid ? GenerationType.RECOVERY_RAT : GenerationType.TEST,
 				test: {
-					center: this.testForm.value.center,
 					countryOfTest: this.testForm.value.countryOfTest,
-					manufacturer: this.testForm.value.product,
+					manufacturer: this.rapid ? null : this.testForm.value.product,
 					sampleDate: DateMapper.getDate(this.testForm.value.sampleDate),
-					typeOfTest: this.testForm.value.typeOfTest
+					typeOfTest: this.rapid ? null : this.testForm.value.typeOfTest
 				}
 			};
+
+			if (!this.rapid) {
+				additionalData.test.center = this.testForm.value.center;
+			}
 		}
 
 		return {
@@ -292,7 +295,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 			typeOfTest: previousTypeOfTest,
 			product: previousProduct,
 			center: previousCenter,
-			sampleDate: this.getCurrentDateTime()
+			sampleDate: this.rapid ? this.getCurrentDate() : this.getCurrentDateTime()
 		});
 
 		this.filteredRapidTests = this.rapidTests;

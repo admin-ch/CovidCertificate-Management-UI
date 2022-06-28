@@ -9,6 +9,12 @@ if (environment.production) {
 
 platformBrowserDynamic([
 	{provide: 'HOST', useValue: environment.host},
+	{provide: 'NOTIFICATION_HOST', useValue: environment.notificationHost},
+	{
+		provide: 'IS_NOTIFICATION_SERVICE_ENABLED',
+		useFactory: () => environment.stage === 'd' || environment.stage === 'a' || environment.stage === 'p'
+	},
+	{provide: 'REPORT_HOST', useValue: environment.reportHost},
 	{provide: 'EIAM_SELF_ADMIN', useValue: environment.eiamSelfAdmin}
 ])
 	.bootstrapModule(AppModule)

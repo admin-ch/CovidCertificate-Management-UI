@@ -6,7 +6,7 @@
 			<ng-container dropdown-content>
 				<h4>{{ "support.title" | translate }}</h4>
 				<ng-container *ngIf="isAuthenticated$ | async">
-					<p>{{ "support.instructions" | translate }}</p>
+					<p>{{ "support.instructionsUpdated" | translate }}</p>
 					<a href="tel:+41584658888">058 465 88 88</a>
 				</ng-container>
 				<section *ngIf="lang$ | async as lang">
@@ -30,17 +30,6 @@
 						>
 							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
 							>{{ "home.administration" | translate }}
-						</a>
-					</div>
-					<div class="help-link">
-						<a
-							[href]="'https://www.eiam.admin.ch/covidcertificatetrainer?l=' + lang"
-							target="_blank"
-							rel="noopener noreferrer"
-							id="training_link"
-						>
-							<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-							>{{ "home.training" | translate }}
 						</a>
 					</div>
 					<div class="help-link">
@@ -90,6 +79,15 @@
 			{{ "footer.built.suffix" | translate }}
 		</p>
 	</ng-container>
+	<ng-template #obFooterLink>
+		<a
+			[href]="'footer.privacyStatement.url' | translate"
+			target="_blank"
+			role="menuitem"
+			rel="noopener noreferrer"
+			>{{ "footer.privacyStatement" | translate }}</a
+		>
+	</ng-template>
 	<ng-template #obFooterLink>
 		<a [href]="'footer.legal.url' | translate" target="_blank" role="menuitem" rel="noopener noreferrer">{{
 			"footer.legal" | translate

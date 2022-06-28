@@ -103,7 +103,12 @@ export class OauthService {
 	}
 
 	private getClaims(isAuthorized: boolean): Observable<Claims> {
-		return this.oidcSecurityService.userData$.pipe(map(claims => this.validateClaims(isAuthorized, claims)));
+		return this.oidcSecurityService.userData$.pipe(
+			map(claims => {
+				console.log('Claims (getClaims) are', claims);
+				return this.validateClaims(isAuthorized, claims);
+			})
+		);
 	}
 
 	private validateClaims(isAuthorized: boolean, claims: Claims): Claims {

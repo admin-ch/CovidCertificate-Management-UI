@@ -1,5 +1,6 @@
+<ec-notifications></ec-notifications>
 <div class="dashboard">
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.CERTIFICATE_GENERATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="qrcode" class="ob-icon"></mat-icon>
 		</div>
@@ -17,7 +18,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.CERTIFICATE_REVOCATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="ban" class="ob-icon"></mat-icon>
 		</div>
@@ -35,7 +36,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.OTP_GENERATION">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="unlock" class="ob-icon"></mat-icon>
 		</div>
@@ -51,7 +52,7 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
-	<mat-card class="dashboard-card">
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.BULK_OPERATIONS">
 		<div class="dashboard-icon">
 			<mat-icon svgIcon="upload" class="ob-icon"></mat-icon>
 		</div>
@@ -69,6 +70,46 @@
 				(click)="goToGenerateMultipleCertificates()"
 			>
 				{{ "dashboard.upload.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+	<mat-card
+		class="dashboard-card"
+		*ecHasAuthorizationForAll="[AuthFunction.BULK_OPERATIONS, AuthFunction.BULK_REVOKE_CERTIFICATES]"
+	>
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="upload" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.bulk.revocation.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.bulk.revocation.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button
+				id="dashboard-button-bulk-revoke"
+				mat-button
+				obButton="primary"
+				(click)="goToRevokeMultipleCertificates()"
+			>
+				{{ "dashboard.bulk.revocation.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.REPORTING_SELF_SERVICE">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="chart" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.reports.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.reports.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-reports" mat-button obButton="primary" (click)="goToGenerateReports()">
+				{{ "dashboard.reports.action" | translate }}
 			</button>
 		</mat-card-actions>
 	</mat-card>

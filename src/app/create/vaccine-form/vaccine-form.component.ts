@@ -107,8 +107,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
-				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required],
-				checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
+				countryOfVaccination: [this.getDefaultCountryOfVaccination(), Validators.required]
 			},
 			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
 		);
@@ -119,15 +118,6 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 					DateValidators.dateMoreThanBirthday(),
 					...VACCINE_DATE_VALIDATORS
 				]);
-			}
-		});
-
-		this.vaccineForm.get('countryOfVaccination').valueChanges.subscribe(selectedCountryOfVaccination => {
-			if (selectedCountryOfVaccination && selectedCountryOfVaccination.code !== 'CH') {
-				this.vaccineForm.get('checkBox').enable();
-				this.vaccineForm.get('checkBox').setValue(false);
-			} else {
-				this.vaccineForm.get('checkBox').disable();
 			}
 		});
 	}
@@ -170,8 +160,7 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
 			dateOfVaccination: this.getDefaultDateOfVaccination(),
-			countryOfVaccination: this.getDefaultCountryOfVaccination(),
-			checkBox: {value: false, disabled: true}
+			countryOfVaccination: this.getDefaultCountryOfVaccination()
 		});
 	}
 }
