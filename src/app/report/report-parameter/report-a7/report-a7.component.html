@@ -1,0 +1,72 @@
+<form [formGroup]="a7FormGroup">
+	<h3>{{ "reports.a7.title" | translate }}</h3>
+	<fieldset>
+		<legend>{{ "reports.a7.period-text" | translate }}</legend>
+		<div class="period-container">
+			<mat-form-field>
+				<input
+					matInput
+					[matDatepicker]="pickerFrom"
+					[placeholder]="translate.get('reports.a7.date-from') | async"
+					formControlName="from"
+				/>
+				<mat-datepicker #pickerFrom></mat-datepicker>
+				<mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+				<mat-error *ngIf="a7FormGroup.get('from').hasError('startDateAfterEndDate')">
+					{{ "reports.a7.startDateBeforeEndDate" | translate }}
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field obErrorMessages>
+				<input
+					matInput
+					[matDatepicker]="pickerTo"
+					[placeholder]="translate.get('reports.a7.date-to') | async"
+					formControlName="to"
+				/>
+				<mat-datepicker #pickerTo></mat-datepicker>
+				<mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+				<mat-error></mat-error>
+			</mat-form-field>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{ "reports.a7.selected-dataroom" | translate }}</legend>
+		<mat-form-field obErrorMessages>
+			<mat-select formControlName="canton">
+				<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async"
+							[value]="dataRoom">{{ ("dataroom." + (dataRoom | lowercase)) | translate }}</mat-option>
+			</mat-select>
+			<mat-error></mat-error>
+		</mat-form-field>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{ "reports.a7.select-cert-types" | translate }}</legend>
+		<mat-checkbox
+					  [checked]="isSelectAllChecked"
+					  [indeterminate]="isSelectAllIndeterminate"
+					  (change)="checkAllCertTypes($event.checked)">
+			{{'reports.a7.select-all-cert-types' | translate}}
+		</mat-checkbox>
+		<ul>
+			<li *ngFor="let certificateType of CERTIFICATE_TYPES; let i = index">
+				<div *ngIf="i === 0">
+					{{'reports.a7.eu-compatible-certs' | translate}}:
+				</div>
+				<div *ngIf="i === 4">
+					{{'reports.a7.ch-certs' | translate}}:
+				</div>
+				<mat-checkbox
+					[checked]="a7FormGroup.get('types').value.includes(certificateType)"
+					(change)="certTypeCheckboxChanged($event.checked, certificateType)">
+					{{('reports.a7.cert-type.' + (certificateType | lowercase)) | translate}}
+				</mat-checkbox>
+			</li>
+		</ul>
+	</fieldset>
+
+	<button id="reset-a7-input" mat-button (click)="resetInput()" obButton="tertiary">
+		{{ "reports.reset-input" | translate }}
+	</button>
+</form>

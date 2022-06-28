@@ -77,7 +77,8 @@ export interface ProductInfo {
 }
 
 export class ProductInfoWithToString implements ProductInfo {
-	constructor(public code: string, public display: string) {}
+	constructor(public code: string, public display: string) {
+	}
 
 	public toString() {
 		return this.display;
@@ -85,7 +86,8 @@ export class ProductInfoWithToString implements ProductInfo {
 }
 
 export class RapidTestProductInfoWithToString {
-	constructor(public code: string, public display: string, public validUntil: string) {}
+	constructor(public code: string, public display: string, public validUntil: string) {
+	}
 
 	public toString() {
 		return this.display;
@@ -172,6 +174,40 @@ export enum ReportType {
 	A12 = 'report-a12'
 }
 
+export enum DataRoomCode {
+	AG = 'AG',
+	AI = 'AI',
+	AR = 'AR',
+	BE = 'BE',
+	BL = 'BL',
+	BS = 'BS',
+	FR = 'FR',
+	GE = 'GE',
+	GL = 'GL',
+	GR = 'GR',
+	JU = 'JU',
+	LU = 'LU',
+	NE = 'NE',
+	NW = 'NW',
+	OW = 'OW',
+	SG = 'SG',
+	SH = 'SH',
+	SO = 'SO',
+	SZ = 'SZ',
+	TG = 'TG',
+	TI = 'TI',
+	UR = 'UR',
+	VD = 'VD',
+	VS = 'VS',
+	ZG = 'ZG',
+	ZH = 'ZH',
+	MI = 'MI',
+	ARMEE = "ARMEE",
+	BV_INTERN = "BV-INTERN",
+	GGG = "GGG"
+}
+
+
 export enum ShippingOptions {
 	APP = 'app',
 	PDF = 'pdf',
@@ -195,7 +231,7 @@ export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select
 
 export class FormField {
 	public readonly angularFormControl: FormControl;
-	public readonly selectableOptions?: {display: string; code: any}[];
+	public readonly selectableOptions?: { display: string; code: any }[];
 	public readonly tooltipTranslationKey?: string;
 	public readonly defaultValue: any;
 	public readonly cssClasses: string;
@@ -206,7 +242,7 @@ export class FormField {
 		options?: {
 			defaultValue?: any;
 			validators?: ValidatorFn | ValidatorFn[];
-			selectableOptions?: {display: string; code: any}[];
+			selectableOptions?: { display: string; code: any }[];
 			tooltipTranslationKey?: string;
 			cssClasses?: string;
 		}
@@ -230,7 +266,7 @@ export interface CreateCertificateResponse {
 	pdf: string; // base64 encoded pdf string
 	qrCode: string;
 	uvci: string;
-	appDeliveryError?: {errorCode: number; errorMessage: string};
+	appDeliveryError?: { errorCode: number; errorMessage: string };
 }
 
 export interface CsvResponseDto {

@@ -4,7 +4,7 @@
 <mat-form-field *ngIf="formControl" appearance="fill">
 	<mat-chip-list #chipList>
 		<mat-chip
-			*ngFor="let uvci of reportService.parameter[ReportType.A2].uvcis"
+			*ngFor="let uvci of this.a2FormGroup.get('uvcis').value"
 			[ngClass]="{ error: errorUvcis.includes(uvci) }"
 			(removed)="remove(uvci)"
 		>

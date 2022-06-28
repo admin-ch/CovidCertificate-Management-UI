@@ -4,6 +4,7 @@ import {Claims, OauthService} from './oauth.service';
 import {Observable, of, ReplaySubject, Subscription} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {HttpParams} from '@angular/common/http';
+import {DataRoomCode} from "shared/model";
 
 export enum AuthFunction {
 	// Navigation
@@ -51,20 +52,29 @@ export enum AuthFunction {
 })
 export class AuthService implements OnDestroy {
 	public authorizedFunctions$: Observable<AuthFunction[]>;
+	public authorizedDataRooms$: Observable<DataRoomCode[]>;
 	private authorizedFunctions: ReplaySubject<AuthFunction[]> = new ReplaySubject<AuthFunction[]>(1);
+	private authorizedDataRooms: ReplaySubject<DataRoomCode[]> = new ReplaySubject<DataRoomCode[]>(1);
 	private claimsSubscription: Subscription;
 
 	private readonly URL: string = 'authorization/current/web-ui';
 
 	constructor(private http: ApiService, private oauthService: OauthService) {
 		this.authorizedFunctions$ = this.authorizedFunctions.asObservable();
-		this.claimsSubscription = oauthService.claims$
-			.pipe(switchMap(claims => this.getAuthorizedFunctions(claims)))
+		this.authorizedDataRooms$ = this.authorizedDataRooms.asObservable();
+		this.claimsSubscription = oauthService.claims$.subscribe(claims => {
+			this.emitAuthorizedDataRooms(claims)
+		})
+
+		this.claimsSubscription.add(oauthService.claims$
+			.pipe(
+				switchMap(claims => this.getAuthorizedFunctions(claims)),
+			)
 			.subscribe(authorizedFunctions => {
 				if (authorizedFunctions != null) {
 					this.authorizedFunctions.next(authorizedFunctions);
 				}
-			});
+			}));
 	}
 
 	ngOnDestroy(): void {
@@ -93,6 +103,23 @@ export class AuthService implements OnDestroy {
 			});
 		} else {
 			return of(null);
+		}
+	}
+
+	private emitAuthorizedDataRooms(claims: Claims): void {
+		if (claims?.userroles?.length) {
+			const authorizedDataRooms: DataRoomCode[] = []
+			for (const role of claims.userroles) {
+				Object.values(DataRoomCode).forEach(code => {
+					const lowerCaseCode = code.toLocaleLowerCase()
+					if (role.endsWith(`bag-cc-dr_${lowerCaseCode}`)) {
+						authorizedDataRooms.push(code)
+					}
+				})
+			}
+			this.authorizedDataRooms.next(authorizedDataRooms);
+		} else {
+			this.authorizedDataRooms.next([]);
 		}
 	}
 }
