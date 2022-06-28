@@ -229,7 +229,7 @@
     "reports.a7.date-to": "Date de fin",
     "reports.a7.description.long": "<strong>Quel émetteur a délivré quelle quantité d’un type de certificat spécifique au cours d’une période donnée?</strong></br></br>Après sélection d’un type de certificat, ce rapport vous fournit une liste des émetteurs et le nombre de certificats délivrés pour ce type de certificat.",
     "reports.a7.description.short": "Aperçu de tous les émetteurs d’un certain type de certificat, y compris le canal d’émission pour une période donnée.",
-    "reports.a7.eu-compatible-certs": "Certificats compatibles avec l’UE",
+    "reports.a7.eu-compatible-certs": "Certificats compatibles avec l’UE:",
     "reports.a7.period-text": "Veuillez sélectionner une date de début et une date de fin de la période d’émission pour le rapport:",
     "reports.a7.select-all-cert-types": "Alle Zertifikatstypen auswählen",
     "reports.a7.select-cert-types": "Veuillez sélectionner le(s) type(s) de certificat pour le(s)quel(s) vous souhaitez générer le rapport:",

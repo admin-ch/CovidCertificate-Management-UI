@@ -52,10 +52,10 @@
 		<ul>
 			<li *ngFor="let certificateType of CERTIFICATE_TYPES; let i = index">
 				<div *ngIf="i === 0">
-					{{'reports.a7.eu-compatible-certs' | translate}}:
+					{{'reports.a7.eu-compatible-certs' | translate}}
 				</div>
 				<div *ngIf="i === 4">
-					{{'reports.a7.ch-certs' | translate}}:
+					{{'reports.a7.ch-certs' | translate}}
 				</div>
 				<mat-checkbox
 					[checked]="a7FormGroup.get('types').value.includes(certificateType)"
