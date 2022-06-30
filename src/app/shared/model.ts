@@ -203,7 +203,7 @@ export enum DataRoomCode {
 	ZH = 'ZH',
 	MI = 'MI',
 	ARMEE = "ARMEE",
-	BV_INTERN = "BV-INTERN",
+	BV_INTERN = "BV_INTERN",
 	GGG = "GGG"
 }
 
