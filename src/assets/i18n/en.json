@@ -230,6 +230,7 @@
     "reports.a7.description.long": "<strong>What issuer issued what number of a specific certificate type in a defined period?</strong></br></br>After you select a certificate type this report provides you with a list of issuers and the number of certificates of this type issued in each case.",
     "reports.a7.description.short": "Overview of all issuers of a specific certificate type, including issuing channel, for a defined period.",
     "reports.a7.eu-compatible-certs": "EU-compatible certificates:",
+    "reports.a7.oneCertTypeHasToBeSelected": "At least one certificate type must be selected",
     "reports.a7.period-text": "Please select a start and end date for the issue period for the report:",
     "reports.a7.select-all-cert-types": "Select all certificate types",
     "reports.a7.select-cert-types": "Please choose the certificate type(s) for which you want to generate the report:",

@@ -7,6 +7,7 @@ import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Subject} from "rxjs";
 
 describe('ReportA2Component', () => {
 	let component: ReportA2Component;
@@ -21,7 +22,8 @@ describe('ReportA2Component', () => {
 				{
 					provide: ReportService,
 					useValue: {
-						formGroup: new FormGroup({})
+						formGroup: new FormGroup({}),
+						reset$: new Subject()
 					}
 				}
 			],

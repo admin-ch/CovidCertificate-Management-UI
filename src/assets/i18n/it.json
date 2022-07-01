@@ -230,6 +230,7 @@
     "reports.a7.description.long": "<strong>Quale emittente ha rilasciato uno specifico tipo di certificato in un determinato periodo di tempo e quanti di questi certificati ha rilasciato? </strong></br></br>Dopo che è stato selezionato un tipo di certificato, questo rapporto fornisce un elenco di emittenti e il numero di certificati rilasciati del tipo in questione.",
     "reports.a7.description.short": "Panoramica di tutti gli emittenti di uno specifico tipo di certificato, compreso il canale di emissione, per un determinato periodo di tempo.",
     "reports.a7.eu-compatible-certs": "Certificati compatibili con l’UE:",
+    "reports.a7.oneCertTypeHasToBeSelected": "È necessario selezionare almeno un tipo di certificato",
     "reports.a7.period-text": "Selezionare una data di inizio e una data di fine del periodo di emissione per il rapporto:",
     "reports.a7.select-all-cert-types": "Selezionare tutti i tipi di certificato",
     "reports.a7.select-cert-types": "Selezionare il tipo o i tipi di certificato per cui si desidera generare il rapporto:",

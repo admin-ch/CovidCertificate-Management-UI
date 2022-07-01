@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {ReportType} from 'shared/model';
 import {Subject} from 'rxjs';
 import {GenerationResponseStatus} from './report-generation/report-generation.component';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {getStartDateBeforeEndDateValidator} from "shared/validators/date-time.validator";
+import * as moment from "moment";
 
 @Injectable({
 	providedIn: 'root'
@@ -13,6 +14,7 @@ export class ReportService {
 	reportFinished$ = new Subject<GenerationResponseStatus>();
 	selectedReportType: ReportType;
 	formGroup: FormGroup
+	reset$ = new Subject<void>()
 
 	constructor(private readonly fb: FormBuilder) {
 		this.formGroup = fb.group({
@@ -20,14 +22,23 @@ export class ReportService {
 				uvcis: [[], Validators.required]
 			}),
 			[ReportType.A7]: this.fb.group({
-					from: ['', Validators.required],
-					to: ['', Validators.required],
+					from: ['',[ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
 					canton: ['', Validators.required],
-					types: [[]],
+					types: new FormArray([], Validators.required),
 				},
 				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
 		})
 		this.formGroup.disable()
 	}
 
+	private static isDateValidator(control: AbstractControl): ValidationErrors | null {
+		const isMoment: boolean = moment.isMoment(control.value);
+		const isDateObject: boolean = control.value instanceof Date;
+		return isDateObject || isMoment ? null : {invalidDate: true}
+	}
+
+	private static certificateTypeValidator(control: AbstractControl): ValidationErrors | null {
+		return control.value.length > 0 ? null : {required: true}
+	}
 }
