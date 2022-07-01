@@ -25,4 +25,8 @@ export class ReportParameterComponent {
 			this.reportService.formGroup.markAllAsTouched()
 		}
 	}
+
+	resetInput(): void {
+		this.reportService.reset$.next()
+	}
 }

@@ -6,7 +6,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {DataRoomCode, ReportType} from 'shared/model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../auth/auth.service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import * as moment from "moment";
@@ -25,7 +25,8 @@ describe('ReportA7Component', () => {
 				{
 					provide: ReportService,
 					useValue: {
-						formGroup: new FormGroup({})
+						formGroup: new FormGroup({}),
+						reset$: new Subject()
 					}
 				},
 				{
@@ -48,7 +49,7 @@ describe('ReportA7Component', () => {
 				from: new FormControl('', Validators.required),
 				to: new FormControl('', Validators.required),
 				canton: new FormControl('', Validators.required),
-				types: new FormControl([]),
+				types: new FormArray([]),
 			})
 		});
 		fixture.detectChanges();
@@ -84,13 +85,15 @@ describe('ReportA7Component', () => {
 
 	describe('certTypeCheckboxChanged', () => {
 		it('should should add passed certificate to the formGroup if checked is true', () => {
-			component.a7FormGroup.get('types').setValue([CertificateType.A, CertificateType.RR])
+			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.A));
+			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.RR));
 			component.certTypeCheckboxChanged(true, CertificateType.ME)
 
 			expect(component.a7FormGroup.get('types').value).toEqual([CertificateType.A, CertificateType.RR, CertificateType.ME])
 		});
 		it('should should remove passed certificate from the formGroup if checked is false', () => {
-			component.a7FormGroup.get('types').setValue([CertificateType.A, CertificateType.RR])
+			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.A));
+			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.RR));
 			component.certTypeCheckboxChanged(false, CertificateType.RR)
 
 			expect(component.a7FormGroup.get('types').value).toEqual([CertificateType.A])
@@ -99,13 +102,15 @@ describe('ReportA7Component', () => {
 
 	describe('checkAllCertTypes', () => {
 		it('should should add all certificate types to the formGroup if checked is true', () => {
-			component.a7FormGroup.get('types').setValue([])
+			(component.a7FormGroup.get('types') as FormArray).clear()
 			component.checkAllCertTypes(true)
 
 			expect(component.a7FormGroup.get('types').value).toEqual(Object.values(CertificateType))
 		});
 		it('should should remove all certificate types from the formGroup if checked is false', () => {
-			component.a7FormGroup.get('types').setValue(Object.values(CertificateType))
+			Object.values(CertificateType).forEach((type, index) => {
+				(component.a7FormGroup.get('types') as FormArray).insert(index, new FormControl(type));
+			})
 			component.checkAllCertTypes(false)
 
 			expect(component.a7FormGroup.get('types').value).toEqual([])
@@ -117,7 +122,9 @@ describe('ReportA7Component', () => {
 			component.a7FormGroup.get('from').setValue(moment('2022-01-01'))
 			component.a7FormGroup.get('to').setValue(moment('2022-01-01'))
 			component.a7FormGroup.get('canton').setValue(DataRoomCode.AG)
-			component.a7FormGroup.get('types').setValue(Object.values(CertificateType))
+			Object.values(CertificateType).forEach((type, index) => {
+				(component.a7FormGroup.get('types') as FormArray).insert(index, new FormControl(type));
+			})
 
 			component.resetInput()
 

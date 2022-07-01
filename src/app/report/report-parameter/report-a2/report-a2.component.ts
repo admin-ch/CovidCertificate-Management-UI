@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {uvciValidator} from '../../../create/utils/uvci-validator';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
+import {Subscription} from "rxjs";
 
 @Component({
 	selector: 'ec-report-a2',
@@ -21,6 +22,8 @@ export class ReportA2Component implements OnInit, OnDestroy {
 	formControl = new FormControl('', {updateOn: 'submit'});
 	errorUvcis: string[] = [];
 
+	subscription: Subscription;
+
 	constructor(public readonly reportService: ReportService) {
 	}
 
@@ -28,6 +31,7 @@ export class ReportA2Component implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.a2FormGroup = this.reportService.formGroup.get(ReportType.A2) as FormGroup
 		this.a2FormGroup.enable()
+		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
 
 		// Trigger new change detection run because updateErrorState() changes formGroup validity
 		// which is used in a component higher in the tree resulting in ExpressionChangedAfterItHasBeenCheckedError.
@@ -36,6 +40,7 @@ export class ReportA2Component implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
 		this.a2FormGroup.disable()
+		this.subscription?.unsubscribe()
 	}
 
 	onPaste(event: ClipboardEvent): void {

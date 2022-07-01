@@ -12,11 +12,16 @@
 				/>
 				<mat-datepicker #pickerFrom></mat-datepicker>
 				<mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-				<mat-error *ngIf="a7FormGroup.get('from').hasError('startDateAfterEndDate')">
-					{{ "reports.a7.startDateBeforeEndDate" | translate }}
-				</mat-error>
+					<mat-error *ngIf="a7FormGroup.get('from').hasError('invalidDate'); else startBeforeEndFrom">
+						{{ "i18n.validation.date" | translate }}
+					</mat-error>
+					<ng-template #startBeforeEndFrom>
+						<mat-error *ngIf="a7FormGroup.get('from').hasError('startDateAfterEndDate'); ">
+							{{ "reports.a7.startDateBeforeEndDate" | translate }}
+						</mat-error>
+					</ng-template>
 			</mat-form-field>
-			<mat-form-field obErrorMessages>
+			<mat-form-field>
 				<input
 					matInput
 					[matDatepicker]="pickerTo"
@@ -25,28 +30,33 @@
 				/>
 				<mat-datepicker #pickerTo></mat-datepicker>
 				<mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-				<mat-error></mat-error>
+				<mat-error *ngIf="a7FormGroup.get('to').hasError('invalidDate')">
+					{{ "i18n.validation.date" | translate }}
+				</mat-error>
 			</mat-form-field>
 		</div>
 	</fieldset>
 
 	<fieldset>
 		<legend>{{ "reports.a7.selected-dataroom" | translate }}</legend>
-		<mat-form-field obErrorMessages>
+		<mat-form-field>
 			<mat-select formControlName="canton">
 				<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async"
 							[value]="dataRoom">{{ ("dataroom." + (dataRoom | lowercase)) | translate }}</mat-option>
 			</mat-select>
-			<mat-error></mat-error>
+			<mat-error *ngIf="a7FormGroup.get('canton').hasError('required')">
+				{{ "i18n.validation.required" | translate }}
+			</mat-error>
+
 		</mat-form-field>
 	</fieldset>
 
-	<fieldset>
+	<fieldset [formArrayName]="'types'">
 		<legend>{{ "reports.a7.select-cert-types" | translate }}</legend>
 		<mat-checkbox
-					  [checked]="isSelectAllChecked"
-					  [indeterminate]="isSelectAllIndeterminate"
-					  (change)="checkAllCertTypes($event.checked)">
+			[checked]="isSelectAllChecked"
+			[indeterminate]="isSelectAllIndeterminate"
+			(change)="checkAllCertTypes($event.checked)">
 			{{'reports.a7.select-all-cert-types' | translate}}
 		</mat-checkbox>
 		<ul>
@@ -58,15 +68,15 @@
 					{{'reports.a7.ch-certs' | translate}}
 				</div>
 				<mat-checkbox
+					[value]="certificateType"
 					[checked]="a7FormGroup.get('types').value.includes(certificateType)"
 					(change)="certTypeCheckboxChanged($event.checked, certificateType)">
 					{{('reports.a7.cert-type.' + (certificateType | lowercase)) | translate}}
 				</mat-checkbox>
 			</li>
 		</ul>
+		<mat-error *ngIf="a7FormGroup.get('types').touched && a7FormGroup.get('types').hasError('required')">
+			{{'reports.a7.oneCertTypeHasToBeSelected' | translate}}
+		</mat-error>
 	</fieldset>
-
-	<button id="reset-a7-input" mat-button (click)="resetInput()" obButton="tertiary">
-		{{ "reports.reset-input" | translate }}
-	</button>
 </form>

@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ReportService} from '../../report.service';
 import {DataRoomCode, ReportType} from 'shared/model';
 import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "../../../auth/auth.service";
-import {tap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {take, tap} from "rxjs/operators";
+import {Observable, Subscription} from "rxjs";
 
 export enum CertificateType {
 	// EU compatible certs
@@ -36,6 +36,8 @@ export class ReportA7Component implements OnInit, OnDestroy {
 
 	authorizedDataRooms$: Observable<DataRoomCode[]>
 
+	subscription: Subscription
+
 	constructor(public readonly reportService: ReportService,
 				private readonly auth: AuthService,
 				public readonly translate: TranslateService) {
@@ -44,6 +46,8 @@ export class ReportA7Component implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.a7FormGroup = this.reportService.formGroup.get(ReportType.A7) as FormGroup
 		this.a7FormGroup.enable()
+		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
+		this.setSelectAllCheckboxState()
 		this.authorizedDataRooms$ = this.auth.authorizedDataRooms$.pipe(
 			tap(dataRooms => {
 				// Pre-select the canton if there is only one available.
@@ -56,25 +60,34 @@ export class ReportA7Component implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
 		this.a7FormGroup.disable()
+		this.subscription?.unsubscribe()
 	}
 
 	certTypeCheckboxChanged(checked: boolean, certType: CertificateType) {
+		const typesFormArray: FormArray = this.a7FormGroup.get('types') as FormArray;
+
 		if (checked) {
-			this.a7FormGroup.get('types').setValue([...this.a7FormGroup.get('types').value, certType])
+			typesFormArray.push(new FormControl(certType));
 		} else {
-			const toRemoveIndex = this.a7FormGroup.get('types').value.indexOf(certType);
-			if (toRemoveIndex >= 0) {
-				const newCertTypes = [...this.a7FormGroup.get('types').value]
-				newCertTypes.splice(toRemoveIndex, 1)
-				this.a7FormGroup.get('types').setValue(newCertTypes);
-			}
+			typesFormArray.controls.forEach((ctrl: FormControl, i) => {
+				if (ctrl.value === certType) {
+					typesFormArray.removeAt(i);
+				}
+			});
 		}
+		this.a7FormGroup.get('types').markAsTouched()
 		this.setSelectAllCheckboxState()
 	}
 
 	checkAllCertTypes(checked: boolean) {
-		const value = checked ? this.CERTIFICATE_TYPES : []
-		this.a7FormGroup.get('types').setValue(value)
+		const certTypeFormArray: FormArray = this.a7FormGroup.get('types') as FormArray
+		certTypeFormArray.clear()
+		if (checked) {
+			this.CERTIFICATE_TYPES.forEach((certType, i) => {
+				certTypeFormArray.insert(i, new FormControl(certType))
+			})
+		}
+		certTypeFormArray.markAsTouched()
 		this.setSelectAllCheckboxState()
 	}
 
@@ -83,15 +96,20 @@ export class ReportA7Component implements OnInit, OnDestroy {
 			from: '',
 			to: '',
 			canton: '',
-			types: []
+			types: new FormArray([])
 		});
+
+		// The `tap()` function defined in the constructor takes care of populating the the `canton` formControl.
+		this.authorizedDataRooms$.pipe(take(1)).subscribe()
+		this.checkAllCertTypes(false)
 		this.setSelectAllCheckboxState()
 		this.a7FormGroup.markAsUntouched()
 	}
 
 	private setSelectAllCheckboxState() {
-		this.isSelectAllChecked = this.a7FormGroup.get('types').value.length === this.CERTIFICATE_TYPES.length
-		this.isSelectAllIndeterminate = this.a7FormGroup.get('types').value.length > 0 && this.a7FormGroup.get('types').value.length < this.CERTIFICATE_TYPES.length
+		const typesFormArray = this.a7FormGroup.get('types') as FormArray;
+		this.isSelectAllChecked = typesFormArray.value.length === this.CERTIFICATE_TYPES.length
+		this.isSelectAllIndeterminate = typesFormArray.value.length > 0 && typesFormArray.value.length < this.CERTIFICATE_TYPES.length
 
 	}
 }
