@@ -110,10 +110,10 @@ export class AuthService implements OnDestroy {
 		if (claims?.userroles?.length) {
 			const authorizedDataRooms: DataRoomCode[] = []
 			for (const role of claims.userroles) {
-				Object.values(DataRoomCode).forEach(code => {
+				Object.keys(DataRoomCode).forEach(code => {
 					const lowerCaseCode = code.toLocaleLowerCase()
 					if (role.endsWith(`bag-cc-dr_${lowerCaseCode}`)) {
-						authorizedDataRooms.push(code)
+						authorizedDataRooms.push(DataRoomCode[code])
 					}
 				})
 			}

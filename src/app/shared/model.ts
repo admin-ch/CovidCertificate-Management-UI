@@ -174,6 +174,9 @@ export enum ReportType {
 	A12 = 'report-a12'
 }
 
+// CAUTION:
+// The key is the value in the JWT prefixed with `bag-cc-dr_`.
+// The value is the value which needs to be sent to the backend.
 export enum DataRoomCode {
 	AG = 'AG',
 	AI = 'AI',
@@ -202,8 +205,8 @@ export enum DataRoomCode {
 	ZG = 'ZG',
 	ZH = 'ZH',
 	MI = 'MI',
-	ARMEE = "ARMEE",
-	BV_INTERN = "BV_INTERN",
+	ARMEE = "ARM",
+	BV_INTERN = "BUV",
 	GGG = "GGG"
 }
 
