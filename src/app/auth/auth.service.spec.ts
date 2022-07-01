@@ -177,6 +177,7 @@ describe('AuthService', () => {
 					DataRoomCode.LU,
 					DataRoomCode.NW,
 					DataRoomCode.BL,
+					DataRoomCode.BV_INTERN,
 					DataRoomCode.JU,
 					DataRoomCode.FR,
 					DataRoomCode.BE,
