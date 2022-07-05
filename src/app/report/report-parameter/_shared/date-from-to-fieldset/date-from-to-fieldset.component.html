@@ -1,0 +1,36 @@
+<fieldset>
+	<legend>{{ "reports.dateFromTo.text" | translate }}</legend>
+	<div class="period-container">
+		<mat-form-field>
+			<input
+				matInput
+				[matDatepicker]="pickerFrom"
+				[placeholder]="translate.get('reports.dateFromTo.date-from') | async"
+				[formControl]="dateFromFormControl"
+			/>
+			<mat-datepicker #pickerFrom></mat-datepicker>
+			<mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+			<mat-error *ngIf="dateFromFormControl.hasError('invalidDate'); else startBeforeEndFrom">
+				{{ "i18n.validation.date" | translate }}
+			</mat-error>
+			<ng-template #startBeforeEndFrom>
+				<mat-error *ngIf="dateFromFormControl.hasError('startDateAfterEndDate'); ">
+					{{ "reports.dateFromTo.startDateBeforeEndDate" | translate }}
+				</mat-error>
+			</ng-template>
+		</mat-form-field>
+		<mat-form-field>
+			<input
+				matInput
+				[matDatepicker]="pickerTo"
+				[placeholder]="translate.get('reports.dateFromTo.date-to') | async"
+				[formControl]="dateToFormControl"
+			/>
+			<mat-datepicker #pickerTo></mat-datepicker>
+			<mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+			<mat-error *ngIf="dateToFormControl.hasError('invalidDate')">
+				{{ "i18n.validation.date" | translate }}
+			</mat-error>
+		</mat-form-field>
+	</div>
+</fieldset>

@@ -9,7 +9,9 @@ import {
 	ObButtonModule,
 	ObCollapseModule,
 	ObExternalLinkModule,
-	ObIconModule, ObLanguageService, ObMockErrorMessagesModule,
+	ObIconModule,
+	ObLanguageService,
+	ObMockErrorMessagesModule,
 	ObPopoverModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';
@@ -32,6 +34,16 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {
+	DataRoomSelectionFieldsetComponent
+} from './report-parameter/_shared/data-room-selection-fieldset/data-room-selection-fieldset.component';
+import {
+	DateFromToFieldsetComponent
+} from './report-parameter/_shared/date-from-to-fieldset/date-from-to-fieldset.component';
+import {
+	CertTypeSelectionFieldsetComponent
+} from './report-parameter/_shared/cert-type-selection-fieldset/cert-type-selection-fieldset.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -41,7 +53,10 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 		ReportGenerationComponent,
 		ReportA2Component,
 		ReportA7Component,
-		ReportEndComponent
+		ReportEndComponent,
+		DataRoomSelectionFieldsetComponent,
+		DateFromToFieldsetComponent,
+		CertTypeSelectionFieldsetComponent,
 	],
 	imports: [
 		SharedModule,
@@ -65,7 +80,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 		MatDatepickerModule,
 		MatMomentDateModule,
 		ObMockErrorMessagesModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		FormsModule
 	]
 })
 export class ReportModule {

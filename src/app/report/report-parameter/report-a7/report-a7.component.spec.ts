@@ -59,64 +59,6 @@ describe('ReportA7Component', () => {
 		expect(component).toBeTruthy();
 	});
 
-	describe('authorizedDataRooms$', () => {
-		let authService: AuthService
-		beforeEach(() => {
-			authService = TestBed.inject(AuthService)
-		})
-
-		it('should set canton automatically if there is only one available to the user', fakeAsync(() => {
-			component.a7FormGroup.get('canton').setValue(null)
-			// @ts-ignore
-			authService.authorizedDataRooms$.next([DataRoomCode.AG])
-			tick()
-
-			expect(component.a7FormGroup.get('canton').value).toEqual(DataRoomCode.AG)
-		}));
-		it('should not set canton automatically if there are multiple cantons available to the user', fakeAsync(() => {
-			component.a7FormGroup.get('canton').setValue(null)
-			// @ts-ignore
-			authService.authorizedDataRooms$.next([DataRoomCode.AG, DataRoomCode.BE])
-			tick()
-
-			expect(component.a7FormGroup.get('canton').value).toBe(null)
-		}));
-	});
-
-	describe('certTypeCheckboxChanged', () => {
-		it('should should add passed certificate to the formGroup if checked is true', () => {
-			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.A));
-			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.RR));
-			component.certTypeCheckboxChanged(true, CertificateType.ME)
-
-			expect(component.a7FormGroup.get('types').value).toEqual([CertificateType.A, CertificateType.RR, CertificateType.ME])
-		});
-		it('should should remove passed certificate from the formGroup if checked is false', () => {
-			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.A));
-			(component.a7FormGroup.get('types') as FormArray).insert(1, new FormControl(CertificateType.RR));
-			component.certTypeCheckboxChanged(false, CertificateType.RR)
-
-			expect(component.a7FormGroup.get('types').value).toEqual([CertificateType.A])
-		});
-	});
-
-	describe('checkAllCertTypes', () => {
-		it('should should add all certificate types to the formGroup if checked is true', () => {
-			(component.a7FormGroup.get('types') as FormArray).clear()
-			component.checkAllCertTypes(true)
-
-			expect(component.a7FormGroup.get('types').value).toEqual(Object.values(CertificateType))
-		});
-		it('should should remove all certificate types from the formGroup if checked is false', () => {
-			Object.values(CertificateType).forEach((type, index) => {
-				(component.a7FormGroup.get('types') as FormArray).insert(index, new FormControl(type));
-			})
-			component.checkAllCertTypes(false)
-
-			expect(component.a7FormGroup.get('types').value).toEqual([])
-		});
-	});
-
 	describe('resetInput', () => {
 		it('should clear all inputs', () => {
 			component.a7FormGroup.get('from').setValue(moment('2022-01-01'))
