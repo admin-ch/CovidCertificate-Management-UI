@@ -1,0 +1,30 @@
+<ng-container [formGroup]="formGroup">
+	<fieldset [formArrayName]="certTypesFormArrayName">
+		<legend>{{ "reports.certTypesSelection.title" | translate }}</legend>
+		<mat-checkbox
+			[checked]="isSelectAllChecked"
+			[indeterminate]="isSelectAllIndeterminate"
+			(change)="checkAllCertTypes($event.checked)">
+			{{'reports.certTypesSelection.select-all' | translate}}
+		</mat-checkbox>
+		<ul>
+			<li *ngFor="let certificateType of CERTIFICATE_TYPES; let i = index">
+				<div *ngIf="i === 0">
+					{{'reports.certTypesSelection.eu-compatible-certs' | translate}}
+				</div>
+				<div *ngIf="i === 4">
+					{{'reports.certTypesSelection.ch-certs' | translate}}
+				</div>
+				<mat-checkbox
+					[value]="certificateType"
+					[checked]="certTypesFormArray.value.includes(certificateType)"
+					(change)="certTypeCheckboxChanged($event.checked, certificateType)">
+					{{('reports.certTypesSelection.cert-type.' + (certificateType | lowercase)) | translate}}
+				</mat-checkbox>
+			</li>
+		</ul>
+		<mat-error *ngIf="certTypesFormArray.touched &&certTypesFormArray.hasError('required')">
+			{{'reports.certTypesSelection.oneCertTypeHasToBeSelected' | translate}}
+		</mat-error>
+	</fieldset>
+</ng-container>
