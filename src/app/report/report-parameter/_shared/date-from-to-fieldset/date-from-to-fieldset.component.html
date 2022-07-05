@@ -2,8 +2,9 @@
 	<legend>{{ "reports.dateFromTo.text" | translate }}</legend>
 	<div class="period-container">
 		<mat-form-field>
-			<input
+			<input obErrorMessages
 				matInput
+				[min]="MIN_DATE"
 				[matDatepicker]="pickerFrom"
 				[placeholder]="translate.get('reports.dateFromTo.date-from') | async"
 				[formControl]="dateFromFormControl"
@@ -14,23 +15,34 @@
 				{{ "i18n.validation.date" | translate }}
 			</mat-error>
 			<ng-template #startBeforeEndFrom>
-				<mat-error *ngIf="dateFromFormControl.hasError('startDateAfterEndDate'); ">
+				<mat-error *ngIf="dateFromFormControl.hasError('startDateAfterEndDate'); else dateFromTooSmall">
 					{{ "reports.dateFromTo.startDateBeforeEndDate" | translate }}
 				</mat-error>
+				<ng-template #dateFromTooSmall>
+					<mat-error *ngIf="dateFromFormControl.hasError('matDatepickerMin')">
+						{{ "reports.dateFromTo.dateTooSmall" | translate }}
+					</mat-error>
+				</ng-template>
 			</ng-template>
 		</mat-form-field>
 		<mat-form-field>
 			<input
 				matInput
+				[min]="MIN_DATE"
 				[matDatepicker]="pickerTo"
 				[placeholder]="translate.get('reports.dateFromTo.date-to') | async"
 				[formControl]="dateToFormControl"
 			/>
 			<mat-datepicker #pickerTo></mat-datepicker>
 			<mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-			<mat-error *ngIf="dateToFormControl.hasError('invalidDate')">
+			<mat-error *ngIf="dateToFormControl.hasError('invalidDate'); else dateToTooSmall">
 				{{ "i18n.validation.date" | translate }}
 			</mat-error>
+			<ng-template #dateToTooSmall>
+				<mat-error *ngIf="dateToFormControl.hasError('matDatepickerMin')">
+					{{ "reports.dateFromTo.dateTooSmall" | translate }}
+				</mat-error>
+			</ng-template>
 		</mat-form-field>
 	</div>
 </fieldset>

@@ -260,6 +260,7 @@
     "reports.dataRoomSelection": "Canton/area selected:",
     "reports.dateFromTo.date-from": "Start date",
     "reports.dateFromTo.date-to": "End date",
+    "reports.dateFromTo.dateTooSmall": "The date must be after 30.04.2021",
     "reports.dateFromTo.startDateBeforeEndDate": "Start date must not be after the end date",
     "reports.dateFromTo.text": "Please select a start and end date for the issue period for the report:",
     "reports.detail.header": "Want to prove or refute a concrete case of suspicion by analysing the individual actions of an issuer? Then create an detailed report.",
