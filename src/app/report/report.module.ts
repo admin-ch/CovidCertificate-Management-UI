@@ -30,7 +30,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {ReportGenerationComponent} from './report-generation/report-generation.component';
 import {ReportEndComponent} from './report-end/report-end.component';
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -82,6 +82,9 @@ import {FormsModule} from "@angular/forms";
 		ObMockErrorMessagesModule,
 		MatCheckboxModule,
 		FormsModule
+	],
+	providers: [
+		{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
 	]
 })
 export class ReportModule {
