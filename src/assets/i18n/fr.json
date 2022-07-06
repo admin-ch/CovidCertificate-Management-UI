@@ -260,6 +260,7 @@
     "reports.dataRoomSelection": "Canton/domaine sélectionné:",
     "reports.dateFromTo.date-from": "Date de début",
     "reports.dateFromTo.date-to": "Date de fin",
+    "reports.dateFromTo.dateTooSmall": "La date doit être située après le 30.04.2021",
     "reports.dateFromTo.startDateBeforeEndDate": "La date de début ne doit pas être postérieure à la date de fin",
     "reports.dateFromTo.text": "Veuillez sélectionner une date de début et une date de fin de la période d’émission pour le rapport:",
     "reports.detail.header": "Vous souhaitez confirmer ou infirmer un soupçon concret en analysant les activités d’un émetteur précis ? Rédigez un rapport de détail.",

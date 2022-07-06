@@ -260,6 +260,7 @@
     "reports.dataRoomSelection": "Ausgewählter Kanton/Bereich:",
     "reports.dateFromTo.date-from": "Anfangsdatum",
     "reports.dateFromTo.date-to": "Enddatum",
+    "reports.dateFromTo.dateTooSmall": "Das Datum muss nach dem 30.04.2021 liegen",
     "reports.dateFromTo.startDateBeforeEndDate": "Anfangsdatum darf nicht nach dem Enddatum liegen",
     "reports.dateFromTo.text": "Bitte wählen Sie ein Anfangs- und ein Enddatum des Ausstellungszeitraums für den Report aus:",
     "reports.detail.header": "Sie möchten einen konkreten Verdachtsfall belegen oder widerlegen, indem Sie die einzelnen Aktionen einer Ausstellerin/eines Ausstellers analysieren? Erstellen Sie dazu einen Detailreport.",
