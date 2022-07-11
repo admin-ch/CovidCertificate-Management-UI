@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {ReportA4A6Component} from './report-a4-a6.component';
 import {ObliqueTestingModule} from "@oblique/oblique";
@@ -12,10 +12,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReportService} from "../../report.service";
 import {Subject} from "rxjs";
 import {MatRadioModule} from "@angular/material/radio";
+import {SelectedProfilesService} from "./selected-profiles.service";
 
 describe('ReportA4A6Component', () => {
 	let component: ReportA4A6Component;
 	let fixture: ComponentFixture<ReportA4A6Component>;
+	let selectedProfilesService: SelectedProfilesService
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -30,7 +32,7 @@ describe('ReportA4A6Component', () => {
 								new FormGroup({
 									from: new FormControl(''),
 									to: new FormControl(''),
-									canton: new FormControl(''),
+									canton: new FormControl('buv'),
 									types: new FormArray([]),
 									userIds: new FormArray([]),
 								}),
@@ -38,7 +40,8 @@ describe('ReportA4A6Component', () => {
 						reset$: new Subject()
 					}
 
-				}
+				},
+				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 			declarations: [ReportA4A6Component]
@@ -49,6 +52,8 @@ describe('ReportA4A6Component', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ReportA4A6Component);
 		component = fixture.componentInstance;
+
+		selectedProfilesService = TestBed.inject(SelectedProfilesService)
 
 		fixture.detectChanges();
 	});
@@ -69,6 +74,30 @@ describe('ReportA4A6Component', () => {
 			expect(component.a4a6FormGroup.get('to').value).toEqual('')
 			expect(component.a4a6FormGroup.get('canton').value).toEqual('')
 		});
+	});
+
+	describe('cantonFormControl.valueChanges observer', () => {
+		let clear: jest.SpyInstance
+
+		beforeEach(() => {
+			clear = jest.spyOn(selectedProfilesService, 'clear')
+		})
+
+		it('should call selectedProfilesService.clear() when the canton value changes', fakeAsync(() => {
+			component.cantonFormControl.setValue('be')
+			tick()
+			expect(clear).toHaveBeenCalled()
+		}));
+
+		it('should not call selectedProfilesService.clear() when the canton value does not change (emitting same value as last)', fakeAsync(() => {
+			component.cantonFormControl.setValue('buv')
+			tick()
+			clear.mockClear()
+			component.cantonFormControl.setValue('buv')
+			tick()
+
+			expect(clear).not.toHaveBeenCalled()
+		}));
 	});
 
 });

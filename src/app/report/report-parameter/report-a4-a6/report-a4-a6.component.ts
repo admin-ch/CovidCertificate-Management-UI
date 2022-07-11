@@ -3,7 +3,8 @@ import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {ReportService} from "../../report.service";
 import {ReportType} from 'shared/model';
 import {ReplaySubject, Subscription} from "rxjs";
-import {delay} from "rxjs/operators";
+import {delay, distinctUntilChanged, tap} from "rxjs/operators";
+import {SelectedProfilesService} from "./selected-profiles.service";
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	subscription: Subscription
 
 
-	constructor(public readonly reportService: ReportService) {
+	constructor(public readonly reportService: ReportService,
+				private readonly selectedProfilesService: SelectedProfilesService) {
 	}
 
 	ngOnInit(): void {
@@ -36,10 +38,17 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 		this.userIdsFormArray = this.a4a6FormGroup.get('userIds') as FormArray
 		this.a4a6FormGroup.enable()
 
-		// Delay changes for unit search to emit after next tick since the async pipe for the authority
-		// input may cause ExpressionChangedAfterItHasBeenChecked if asynced without delay.
 		// We emit through ReplaySubject to emit latest emitted value on subscription.
-		this.subscription = this.cantonFormControl.valueChanges.pipe(delay(0)).subscribe(this.unitSearchAuthority$)
+		this.subscription = this.cantonFormControl.valueChanges.pipe(
+			distinctUntilChanged(),
+
+			// Clear selected profiles to prevent having selected profiles from different data rooms.
+			tap(_ => this.selectedProfilesService.clear()),
+
+			// Delay changes for unit search to emit after next tick since the async pipe for the authority
+			// input may cause ExpressionChangedAfterItHasBeenChecked if asynced without delay.
+			delay(0)
+		).subscribe(this.unitSearchAuthority$)
 	}
 
 	ngOnDestroy() {
