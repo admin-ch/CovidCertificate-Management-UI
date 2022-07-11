@@ -5,7 +5,6 @@
 		[dateToFormControl]="dateToFormControl">
 	</ec-date-from-to-fieldset>
 	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
-	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
 
 	<fieldset>
 		<legend>{{ "reports.a4a6.organisationOrIssuer" | translate }}</legend>
@@ -44,4 +43,6 @@
 	</ng-template>
 
 	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>
+	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
+
 </form>
