@@ -44,6 +44,9 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				case ReportType.A7:
 					url += '/fraud/a7';
 					break;
+				case ReportType.A4:
+					url += '/fraud/a4/by_users_and_types';
+					break;
 				default:
 					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`)
 			}

@@ -2,7 +2,8 @@
 	<ng-container [ngSwitch]="reportService.selectedReportType">
 		<ec-report-a2 *ngSwitchCase="ReportType.A2"></ec-report-a2>
 		<ec-report-a7 *ngSwitchCase="ReportType.A7"></ec-report-a7>
-		<button class="reset-button" mat-button (click)="resetInput()" obButton="tertiary">
+		<ec-report-a4-a6 *ngSwitchCase="ReportType.A4"></ec-report-a4-a6>
+		<button type="button" class="reset-button" mat-button (click)="resetInput()" obButton="tertiary">
 			{{ "reports.reset-input" | translate }}
 		</button>
 	</ng-container>
@@ -19,6 +20,7 @@
 			</button>
 			<button
 				id="report-generate-next"
+				type="button"
 				mat-button
 				(click)="goNext()"
 				obButton="primary"

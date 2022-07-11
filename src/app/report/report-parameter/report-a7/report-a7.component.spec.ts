@@ -64,16 +64,12 @@ describe('ReportA7Component', () => {
 			component.a7FormGroup.get('from').setValue(moment('2022-01-01'))
 			component.a7FormGroup.get('to').setValue(moment('2022-01-01'))
 			component.a7FormGroup.get('canton').setValue(DataRoomCode.AG)
-			Object.values(CertificateType).forEach((type, index) => {
-				(component.a7FormGroup.get('types') as FormArray).insert(index, new FormControl(type));
-			})
 
 			component.resetInput()
 
 			expect(component.a7FormGroup.get('from').value).toEqual('')
 			expect(component.a7FormGroup.get('to').value).toEqual('')
 			expect(component.a7FormGroup.get('canton').value).toEqual('')
-			expect(component.a7FormGroup.get('types').value).toEqual([])
 		});
 	});
 });
