@@ -222,7 +222,7 @@
     "reports.a4a6.organisation": "Search by organisation",
     "reports.a4a6.organisationOrIssuer": "Please choose whether you want to search by organisation or by issuer:",
     "reports.a4a6.search": "Search",
-    "reports.a4a6.selectedUser": "Added units",
+    "reports.a4a6.selectedUser": "Hinzugefügte Benutzer/innen (EN)",
     "reports.a4a6.surName": "Last name",
     "reports.a4a6.title": "A4 / A6",
     "reports.a5.description.long": "<strong>How many certificates of what type did individual issuers in a unit issue via what channels in a defined period?</strong></br></br>After the relevant units (organisation/issuer) have been selected and searched for, this report provides you with a list, broken down by issuer, of the total certificate types and issuing channels.",

@@ -222,7 +222,7 @@
     "reports.a4a6.organisation": "Suche nach Organisation",
     "reports.a4a6.organisationOrIssuer": "Bitte wählen Sie aus, ob Sie nach Organisation oder nach Aussteller/in suchen wollen:",
     "reports.a4a6.search": "Suchen",
-    "reports.a4a6.selectedUser": "Hinzugefügte Einheiten",
+    "reports.a4a6.selectedUser": "Hinzugefügte Benutzer/innen",
     "reports.a4a6.surName": "Nachname",
     "reports.a4a6.title": "A4 / A6",
     "reports.a5.description.long": "<strong>Wie viele Zertifikate welchen Typs haben die einzelnen Aussteller/innen einer Unit in einem definierten Zeitraum über welche Kanäle ausgestellt?</strong></br></br>Nach der Auswahl und Suche der entsprechenden Einheiten (Organisation / Aussteller/in) liefert Ihnen dieser Report eine nach Aussteller/in gegliederte Liste mit der Summe der ausgestellten Zertifikatstypen und Ausstellkanäle.",

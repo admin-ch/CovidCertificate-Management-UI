@@ -222,7 +222,7 @@
     "reports.a4a6.organisation": "Ricerca per organizzazione",
     "reports.a4a6.organisationOrIssuer": "Selezionare se effettuare una ricerca per organizzazione o per emittente:",
     "reports.a4a6.search": "Ricerca",
-    "reports.a4a6.selectedUser": "Unità aggiunti",
+    "reports.a4a6.selectedUser": "Hinzugefügte Benutzer/innen (IT)",
     "reports.a4a6.surName": "Cognome",
     "reports.a4a6.title": "A4 / A6",
     "reports.a5.description.long": "<strong>Quanti certificati di quale tipo sono stati rilasciati da uno specifico emittente di un’unità in un determinato periodo di tempo e attraverso quali canali?</strong></br></br>Dopo che è stata selezionata e cercata la rispettiva unità (organizzazione, emittente), questo rapporto fornisce un elenco, suddiviso per emittenti, con il numero totale di tipi di certificati rilasciati e i relativi canali di emissione.",
