@@ -149,6 +149,7 @@ export class UnitSearchComponent implements OnChanges {
 				unitTree.hidden = false;
 				this.setHiddenOfAncestorsOf(unitTree, unitTree.hidden);
 				this.setHiddenOfDescendantsOf(unitTree, unitTree.hidden);
+				this.treeControl.expand(unitTree)
 			});
 	}
 
@@ -174,6 +175,9 @@ export class UnitSearchComponent implements OnChanges {
 		if (unitTree.parent) {
 			if (unitTree.parent.hidden === undefined || unitTree.parent.hidden === true) {
 				unitTree.parent.hidden = hidden
+				if (!hidden) {
+					this.treeControl.expand(unitTree.parent)
+				}
 			}
 			this.setHiddenOfAncestorsOf(unitTree.parent, hidden)
 		}
