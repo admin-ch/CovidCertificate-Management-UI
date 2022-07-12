@@ -28,6 +28,14 @@ export class ReportService {
 					types: new FormArray([], Validators.required),
 				},
 				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
+			[ReportType.A4]: this.fb.group({
+					from: ['', [ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
+					canton: ['', Validators.required],
+					types: new FormArray([], Validators.required),
+					userIds: new FormArray([], Validators.required),
+				},
+				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
 		})
 		this.formGroup.disable()
 	}
@@ -36,9 +44,5 @@ export class ReportService {
 		const isMoment: boolean = moment.isMoment(control.value);
 		const isDateObject: boolean = control.value instanceof Date;
 		return isDateObject || isMoment ? null : {invalidDate: true}
-	}
-
-	private static certificateTypeValidator(control: AbstractControl): ValidationErrors | null {
-		return control.value.length > 0 ? null : {required: true}
 	}
 }

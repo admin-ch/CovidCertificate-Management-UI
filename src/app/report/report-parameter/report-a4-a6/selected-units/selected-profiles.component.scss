@@ -1,0 +1,4 @@
+::ng-deep ec-selected-units mat-icon svg {
+	// Remove vertical align, otherwise the X is not in the middle.
+	vertical-align: unset;
+}

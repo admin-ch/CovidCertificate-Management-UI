@@ -59,7 +59,5 @@ export class ReportA7Component implements OnInit, OnDestroy {
 			to: '',
 			canton: ''
 		});
-		this.certTypesFormArray.clear()
-		this.a7FormGroup.markAsUntouched()
 	}
 }

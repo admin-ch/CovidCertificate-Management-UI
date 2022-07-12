@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CertificateType} from "../../report-a7/report-a7.component";
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {ReportService} from "../../../report.service";
 
 @Component({
   selector: 'ec-cert-type-selection-fieldset',
@@ -23,8 +24,14 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 
 	subscription: Subscription
 
+	constructor(private readonly reportService: ReportService) {
+	}
+
 	ngOnInit(): void {
         this.subscription = this.certTypesFormArray.valueChanges.subscribe(_ => this.setSelectAllCheckboxState());
+		this.subscription.add(
+			this.reportService.reset$.subscribe(_ => this.certTypesFormArray.clear())
+		)
 		Object.entries((this.certTypesFormArray.parent as FormGroup).controls).some(([controlName, control]) => {
 			if (control === this.certTypesFormArray) {
 				this.certTypesFormArrayName = controlName

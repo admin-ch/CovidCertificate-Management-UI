@@ -1,0 +1,20 @@
+<fieldset>
+	<legend>{{"reports.a4a6.selectedUser" | translate}}</legend>
+	<ec-field-wrapper>
+		<div *ngIf="!Object.values(selectedProfilesService.changes$ | async).length">
+			{{"reports.a4a6.noUserSelected" | translate}}
+		</div>
+		<mat-chip-list [selectable]="true">
+			<mat-chip
+				*ngFor="let profile of Object.values(selectedProfilesService.changes$ | async); trackBy:trackBy"
+				(click)="selectedChip === profile ? selectedChip = null : selectedChip = profile"
+				[selected]="selectedChip === profile"
+				(removed)="remove(profile)">
+				{{profile.firstname}} {{profile.name}}
+				<ng-container *ngIf="selectedChip === profile">| {{profile.email}}
+					| {{profile.userExtId}}</ng-container>
+				<mat-icon svgIcon="cancel" matChipRemove></mat-icon>
+			</mat-chip>
+		</mat-chip-list>
+	</ec-field-wrapper>
+</fieldset>

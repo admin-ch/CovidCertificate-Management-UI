@@ -1,0 +1,48 @@
+<form [formGroup]="a4a6FormGroup">
+	<h3>{{ "reports.a4a6.title" | translate }}</h3>
+	<ec-date-from-to-fieldset
+		[dateFromFormControl]="dateFromFormControl"
+		[dateToFormControl]="dateToFormControl">
+	</ec-date-from-to-fieldset>
+	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
+
+	<fieldset>
+		<legend>{{ "reports.a4a6.organisationOrIssuer" | translate }}</legend>
+		<mat-radio-group
+			[(ngModel)]="searchType"
+			[ngModelOptions]="{standalone: true}"
+			name="searchType"
+			class="search-type"
+		>
+			<mat-radio-button
+				id="searchType-organisation"
+				value="organisation"
+				name="organisation"
+			>
+				{{ "reports.a4a6.organisation" | translate }}
+			</mat-radio-button>
+
+			<mat-radio-button
+				id="searchType-issuer"
+				value="issuer"
+				name="issuer"
+			>
+				{{ "reports.a4a6.issuer" | translate }}
+			</mat-radio-button>
+		</mat-radio-group>
+	</fieldset>
+
+	<ng-container *ngIf="searchType === 'organisation'; else issuerSearch">
+		<ec-unit-search
+			[authority]="unitSearchAuthority$ | async"
+			[userIdsFormArray]="userIdsFormArray">
+		</ec-unit-search>
+	</ng-container>
+	<ng-template #issuerSearch>
+
+	</ng-template>
+
+	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>
+	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
+
+</form>
