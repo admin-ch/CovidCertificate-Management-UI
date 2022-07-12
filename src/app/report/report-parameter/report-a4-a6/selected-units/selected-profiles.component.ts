@@ -13,6 +13,8 @@ export class SelectedProfilesComponent implements OnInit, OnDestroy {
 	@Input()
 	userIdsFormArray: FormArray
 
+	selectedChip: EiamProfile
+
 	readonly Object = Object
 	private subscription: Subscription
 

@@ -6,7 +6,6 @@ export interface EiamProfile {
 	name: string
 	firstname: string
 	email: string
-	mobilePhone: string
 }
 
 export type EiamProfileSelection = {
