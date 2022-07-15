@@ -1,10 +1,12 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {take, tap} from "rxjs/operators";
 import {AuthService} from "../../../../auth/auth.service";
 import {Observable, Subscription} from "rxjs";
 import {DataRoomCode} from "shared/model";
 import {FormControl} from "@angular/forms";
 import {ReportService} from "../../../report.service";
+import {ErrorStateMatcher} from "@angular/material/core";
+import {REPORT_ERROR_STATE_MATCHER} from "../../../errorStateMatcher";
 
 @Component({
 	selector: 'ec-data-room-selection-fieldset',
@@ -21,7 +23,8 @@ export class DataRoomSelectionFieldsetComponent implements OnInit, OnDestroy {
 	subscription: Subscription
 
 	constructor(private readonly auth: AuthService,
-				private readonly reportService: ReportService) {
+				private readonly reportService: ReportService,
+				@Inject(REPORT_ERROR_STATE_MATCHER) public readonly matcher: ErrorStateMatcher) {
 	}
 
 	ngOnInit(): void {
@@ -41,6 +44,8 @@ export class DataRoomSelectionFieldsetComponent implements OnInit, OnDestroy {
 	}
 
 	resetControl() {
+		this.dataRoomFormControl.reset()
+
 		// The `tap()` function defined in `ngOnInit()` takes care of populating the `canton` formControl.
 		this.authorizedDataRooms$.pipe(take(1)).subscribe()
 	}

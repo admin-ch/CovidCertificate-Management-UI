@@ -1,14 +1,13 @@
-import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CertificateType, ReportA7Component} from './report-a7.component';
-import {MatChipInputEvent} from '@angular/material/chips';
+import {ReportA7Component} from './report-a7.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {DataRoomCode, ReportType} from 'shared/model';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from "../../../auth/auth.service";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateModule} from "@ngx-translate/core";
 import * as moment from "moment";
 import {Subject} from "rxjs";
 
@@ -19,7 +18,7 @@ describe('ReportA7Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule],
+			imports: [ObliqueTestingModule, TranslateModule, FormsModule, ReactiveFormsModule],
 			declarations: [ReportA7Component],
 			providers: [
 				{

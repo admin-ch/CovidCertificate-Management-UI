@@ -6,6 +6,7 @@ export interface EiamProfile {
 	name: string
 	firstname: string
 	email: string
+	unitName: string
 }
 
 export type EiamProfileSelection = {
@@ -23,6 +24,35 @@ export class SelectedProfilesService {
 
 	constructor() {
 		this.changes$ = this.changes.asObservable()
+	}
+
+	toggleAll(profiles: EiamProfile[]) {
+		if (this.isAllSelected(profiles)) {
+			this.remove(...profiles)
+		} else {
+			this.add(...profiles)
+		}
+	}
+
+	isAllSelected(profiles: EiamProfile[]) {
+		return !!profiles?.length && profiles.every(profile => this.exists(profile))
+	}
+
+	isSomeSelected(profiles: EiamProfile[]) {
+		return !!profiles?.length && profiles.some(profile => this.exists(profile))
+	}
+
+	toggle(profile: EiamProfile) {
+		const currentlySelected = this.exists(profile)
+		if (currentlySelected) {
+			this.remove(profile)
+		} else {
+			this.add(profile)
+		}
+	}
+
+	isSelected(profile: EiamProfile): boolean {
+		return !!this.exists(profile)
 	}
 
 	exists(profile: EiamProfile) {

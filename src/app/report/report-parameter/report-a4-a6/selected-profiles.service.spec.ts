@@ -1,6 +1,7 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {EiamProfile, SelectedProfilesService} from './selected-profiles.service';
+import {MatTableDataSource} from "@angular/material/table";
 
 describe('UnitDataService', () => {
 	let service: SelectedProfilesService;
@@ -12,6 +13,128 @@ describe('UnitDataService', () => {
 
 	it('should be created', () => {
 		expect(service).toBeTruthy();
+	});
+
+	describe('isAllSelected', () => {
+		it('should return true', () => {
+			const users: EiamProfile[] = [
+				{
+					userExtId: '1',
+					name: '1',
+					email: '1',
+					firstname: '1',
+					unitName: '1'
+				},
+				{
+					userExtId: '2',
+					name: '2',
+					email: '2',
+					firstname: '2',
+					unitName: '2'
+				},
+				{
+					userExtId: '3',
+					name: '3',
+					email: '3',
+					firstname: '3',
+					unitName: '3'
+				},
+			]
+
+			service.add(...users)
+
+			expect(service.isAllSelected(users)).toBe(true)
+		});
+		it('should return false', () => {
+			const users: EiamProfile[] = [
+				{
+					userExtId: '1',
+					name: '1',
+					email: '1',
+					firstname: '1',
+					unitName: '1'
+				},
+				{
+					userExtId: '2',
+					name: '2',
+					email: '2',
+					firstname: '2',
+					unitName: '2'
+				},
+				{
+					userExtId: '3',
+					name: '3',
+					email: '3',
+					firstname: '3',
+					unitName: '3'
+				},
+			]
+
+			service.add(...users.filter((user, index) => index === 0))
+
+			expect(service.isAllSelected(users)).toBe(false)
+		});
+	});
+
+	describe('isSomeSelected', () => {
+		it('should return false', () => {
+			const users: EiamProfile[] = [
+				{
+					userExtId: '1',
+					name: '1',
+					email: '1',
+					firstname: '1',
+					unitName: '1'
+				},
+				{
+					userExtId: '2',
+					name: '2',
+					email: '2',
+					firstname: '2',
+					unitName: '2'
+				},
+				{
+					userExtId: '3',
+					name: '3',
+					email: '3',
+					firstname: '3',
+					unitName: '3'
+				},
+			]
+
+			service.clear()
+
+			expect(service.isSomeSelected(users)).toBe(false)
+		});
+		it('should return true', () => {
+			const users: EiamProfile[] = [
+				{
+					userExtId: '1',
+					name: '1',
+					email: '1',
+					firstname: '1',
+					unitName: '1'
+				},
+				{
+					userExtId: '2',
+					name: '2',
+					email: '2',
+					firstname: '2',
+					unitName: '2'
+				},
+				{
+					userExtId: '3',
+					name: '3',
+					email: '3',
+					firstname: '3',
+					unitName: '3'
+				},
+			]
+
+			service.add(...users.filter((user, index) => index === 0))
+
+			expect(service.isSomeSelected(users)).toBe(true)
+		});
 	});
 
 	describe('exists', () => {

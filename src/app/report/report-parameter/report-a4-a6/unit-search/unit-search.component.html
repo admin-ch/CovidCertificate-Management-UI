@@ -59,15 +59,15 @@
 										<ng-container matColumnDef="select">
 											<th mat-header-cell *matHeaderCellDef>
 												<mat-checkbox #checkAllCb
-															  (change)="$event ? toggleAllRows(profilesDataSource) : null"
-															  [checked]="isAllSelected(profilesDataSource)"
-															  [indeterminate]="!checkAllCb.checked && isSomeSelected(profilesDataSource)">
+															  (change)="$event ? selectedProfilesService.toggleAll(profilesDataSource.data) : null"
+															  [checked]="selectedProfilesService.isAllSelected(profilesDataSource.data)"
+															  [indeterminate]="!checkAllCb.checked && selectedProfilesService.isSomeSelected(profilesDataSource.data)">
 												</mat-checkbox>
 											</th>
 											<td mat-cell *matCellDef="let profile">
 												<mat-checkbox (click)="$event.stopPropagation()"
-															  (change)="$event ? toggleProfile(profile) : null"
-															  [checked]="isProfileSelected(profile)">
+															  (change)="$event ? selectedProfilesService.toggle(profile) : null"
+															  [checked]="selectedProfilesService.isSelected(profile)">
 												</mat-checkbox>
 											</td>
 										</ng-container>
@@ -93,7 +93,7 @@
 
 										<tr mat-header-row *matHeaderRowDef="TABLE_ROWS; sticky: true"></tr>
 										<tr mat-row *matRowDef="let profile; columns: TABLE_ROWS;"
-											(click)="toggleProfile(profile)">
+											(click)="selectedProfilesService.toggle(profile)">
 										</tr>
 									</table>
 								</div>

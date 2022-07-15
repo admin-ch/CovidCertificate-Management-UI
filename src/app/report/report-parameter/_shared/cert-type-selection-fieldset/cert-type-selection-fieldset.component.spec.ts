@@ -1,11 +1,11 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import {CertTypeSelectionFieldsetComponent} from './cert-type-selection-fieldset.component';
-import {CertificateType} from "../../report-a7/report-a7.component";
+import {CertificateType, CertTypeSelectionFieldsetComponent} from './cert-type-selection-fieldset.component';
 import {ObliqueTestingModule} from "@oblique/oblique";
 import {TranslateModule} from "@ngx-translate/core";
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReportService} from "../../../report.service";
 
 describe('CertTypeSelectionFieldsetComponent', () => {
 	let component: CertTypeSelectionFieldsetComponent;
@@ -13,8 +13,9 @@ describe('CertTypeSelectionFieldsetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule],
+			imports: [ObliqueTestingModule, TranslateModule, FormsModule, ReactiveFormsModule],
 			declarations: [CertTypeSelectionFieldsetComponent],
+			providers: [{provide: ReportService, useClass: ReportService}],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		})
 			.compileComponents();

@@ -9,6 +9,8 @@ import {ObliqueTestingModule} from "@oblique/oblique";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormControl} from "@angular/forms";
 import {ReportService} from "../../../report.service";
+import {REPORT_ERROR_STATE_MATCHER} from "../../../errorStateMatcher";
+import {ErrorStateMatcher} from "@angular/material/core";
 
 describe('DataRoomSelectionComponent', () => {
 	let component: DataRoomSelectionFieldsetComponent;
@@ -32,6 +34,7 @@ describe('DataRoomSelectionComponent', () => {
 						reset$: new Subject<void>()
 					}
 				},
+				{provide: REPORT_ERROR_STATE_MATCHER, useClass: ErrorStateMatcher}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		})

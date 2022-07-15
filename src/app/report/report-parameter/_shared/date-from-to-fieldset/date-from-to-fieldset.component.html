@@ -2,8 +2,9 @@
 	<legend>{{ "reports.dateFromTo.text" | translate }}</legend>
 	<div class="period-container">
 		<mat-form-field>
-			<input obErrorMessages
+			<input
 				matInput
+				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
 				[matDatepicker]="pickerFrom"
 				[placeholder]="translate.get('reports.dateFromTo.date-from') | async"
@@ -28,6 +29,7 @@
 		<mat-form-field>
 			<input
 				matInput
+				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
 				[matDatepicker]="pickerTo"
 				[placeholder]="translate.get('reports.dateFromTo.date-to') | async"

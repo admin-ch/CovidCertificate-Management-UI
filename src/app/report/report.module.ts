@@ -32,7 +32,7 @@ import {ReportGenerationComponent} from './report-generation/report-generation.c
 import {ReportEndComponent} from './report-end/report-end.component';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DateAdapter} from "@angular/material/core";
+import {DateAdapter, ErrorStateMatcher} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {
 	DataRoomSelectionFieldsetComponent
@@ -43,14 +43,18 @@ import {
 import {
 	CertTypeSelectionFieldsetComponent
 } from './report-parameter/_shared/cert-type-selection-fieldset/cert-type-selection-fieldset.component';
-import { ReportA4A6Component } from './report-parameter/report-a4-a6/report-a4-a6.component';
+import {ReportA4A6Component} from './report-parameter/report-a4-a6/report-a4-a6.component';
 import {MatTreeModule} from "@angular/material/tree";
 import {UnitSearchComponent} from "./report-parameter/report-a4-a6/unit-search/unit-search.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
-import { SelectedProfilesComponent } from './report-parameter/report-a4-a6/selected-units/selected-profiles.component';
-import { FieldWrapperComponent } from './report-parameter/report-a4-a6/field-wrapper/field-wrapper.component';
+import {SelectedProfilesComponent} from './report-parameter/report-a4-a6/selected-units/selected-profiles.component';
+import {FieldWrapperComponent} from './report-parameter/report-a4-a6/field-wrapper/field-wrapper.component';
+import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-search/issuer-search.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
 
 @NgModule({
 	declarations: [
@@ -71,8 +75,9 @@ import { FieldWrapperComponent } from './report-parameter/report-a4-a6/field-wra
 		CertTypeSelectionFieldsetComponent,
 		ReportA4A6Component,
 		UnitSearchComponent,
-  SelectedProfilesComponent,
-  FieldWrapperComponent
+		SelectedProfilesComponent,
+		FieldWrapperComponent,
+		IssuerSearchComponent
 	],
 	imports: [
 		SharedModule,
@@ -99,10 +104,14 @@ import { FieldWrapperComponent } from './report-parameter/report-a4-a6/field-wra
 		MatCheckboxModule,
 		FormsModule,
 		MatTreeModule,
-		MatTableModule
+		MatTableModule,
+		MatProgressSpinnerModule,
+		MatPaginatorModule,
+		MatSortModule,
 	],
 	providers: [
 		{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
+		{provide: REPORT_ERROR_STATE_MATCHER, useClass: ErrorStateMatcher},
 		MatCheckboxModule,
 		FormsModule,
 		MatTreeModule,
@@ -114,3 +123,4 @@ export class ReportModule {
 		language.setLocaleOnAdapter(adapter);
 	}
 }
+

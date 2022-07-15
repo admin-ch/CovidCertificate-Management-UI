@@ -53,7 +53,7 @@ export class UnitSearchComponent implements OnChanges {
 	constructor(
 		private readonly translate: TranslateService,
 		private readonly http: HttpClient,
-		private readonly selectedProfilesService: SelectedProfilesService,
+		public readonly selectedProfilesService: SelectedProfilesService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string) {
 		this.UNIT_TREE_URL = REPORT_HOST + '/api/v1/unit/tree'
 		this.PROFILES_URL = REPORT_HOST + '/api/v1/unit/profiles'
@@ -71,35 +71,6 @@ export class UnitSearchComponent implements OnChanges {
 				this.setHiddenBySearchValue(this.treeDataSource.data)
 				this.isUnitTreeLoading = false
 			})
-		}
-	}
-
-	isAllSelected(dataSource: MatTableDataSource<EiamProfile>) {
-		return dataSource.data.every(profile => this.selectedProfilesService.exists(profile))
-	}
-
-	isSomeSelected(dataSource: MatTableDataSource<EiamProfile>) {
-		return dataSource.data.some(profile => this.selectedProfilesService.exists(profile))
-	}
-
-	toggleProfile(profile: EiamProfile) {
-		const currentlySelected = this.selectedProfilesService.exists(profile)
-		if (currentlySelected) {
-			this.selectedProfilesService.remove(profile)
-		} else {
-			this.selectedProfilesService.add(profile)
-		}
-	}
-
-	isProfileSelected(profile: EiamProfile): boolean {
-		return !!this.selectedProfilesService.exists(profile)
-	}
-
-	toggleAllRows(dataSource: MatTableDataSource<EiamProfile>) {
-		if (this.isAllSelected(dataSource)) {
-			this.selectedProfilesService.remove(...dataSource.data)
-		} else {
-			this.selectedProfilesService.add(...dataSource.data)
 		}
 	}
 
