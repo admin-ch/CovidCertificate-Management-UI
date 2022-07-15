@@ -66,9 +66,13 @@ export class UnitSearchComponent implements OnChanges {
 				authority: this.authority,
 				language: this.translate.currentLang
 			}).subscribe((unitTree: UnitTree) => {
-				this.setUnitTreeParents(unitTree, null)
-				this.treeDataSource.data = unitTree.children
-				this.setHiddenBySearchValue(this.treeDataSource.data)
+				if (unitTree) {
+					this.setUnitTreeParents(unitTree, null)
+					this.treeDataSource.data = unitTree.children
+					this.setHiddenBySearchValue(this.treeDataSource.data)
+				} else {
+					this.treeDataSource.data = []
+				}
 				this.isUnitTreeLoading = false
 			})
 		}

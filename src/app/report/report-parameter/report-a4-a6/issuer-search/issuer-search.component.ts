@@ -6,7 +6,7 @@ import {EiamProfile, SelectedProfilesService} from "../selected-profiles.service
 import {merge, Subject, Subscription} from "rxjs";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {skipWhile, switchMap} from "rxjs/operators";
+import {filter, skipWhile, switchMap} from "rxjs/operators";
 import {MatTableDataSource} from "@angular/material/table";
 
 interface ProfilesPage {
@@ -94,7 +94,7 @@ export class IssuerSearchComponent implements OnChanges, AfterViewInit {
 	ngAfterViewInit() {
 		merge(this.sort.sortChange, this.paginator.page, this.applySearch$)
 			.pipe(
-				skipWhile(_ => !this.authority),
+				filter(_ => !!this.authority && this.searchFieldsFormGroup.valid),
 				switchMap(_ => {
 					this.isIssuerLoading = true;
 
