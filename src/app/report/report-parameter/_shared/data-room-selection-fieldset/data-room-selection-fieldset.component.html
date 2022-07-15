@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>{{ "reports.a7.selected-dataroom" | translate }}</legend>
 	<mat-form-field>
-		<mat-select [formControl]="dataRoomFormControl">
+		<mat-select [formControl]="dataRoomFormControl" [errorStateMatcher]="matcher">
 			<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async"
 						[value]="dataRoom">{{ ("dataroom." + (dataRoom | lowercase)) | translate }}</mat-option>
 		</mat-select>

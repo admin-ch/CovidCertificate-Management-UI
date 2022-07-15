@@ -5,6 +5,8 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
 import {ObliqueTestingModule} from "@oblique/oblique";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormControl} from "@angular/forms";
+import {REPORT_ERROR_STATE_MATCHER} from "../../../errorStateMatcher";
+import {ErrorStateMatcher} from "@angular/material/core";
 
 describe('DateFromToFieldsetComponent', () => {
 	let component: DateFromToFieldsetComponent;
@@ -12,8 +14,11 @@ describe('DateFromToFieldsetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule,],
+			imports: [ObliqueTestingModule, TranslateModule],
 			declarations: [DateFromToFieldsetComponent],
+			providers: [
+				{provide: REPORT_ERROR_STATE_MATCHER, useClass: ErrorStateMatcher}
+			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		})
 			.compileComponents();

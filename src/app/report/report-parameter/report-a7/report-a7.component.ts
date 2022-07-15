@@ -1,23 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
 import {TranslateService} from "@ngx-translate/core";
 import {Subscription} from "rxjs";
-
-export enum CertificateType {
-	// EU compatible certs
-	T = "T",       // Tested
-	V = "V",       // Vaccinated
-	R = "R",       // Recovered
-	RREU = "RREU", // Recovered (Rapid Antigen Test EU)
-
-	// CH certs
-	ME = "ME",     // Medical Exception
-	A = "A",       // Antibody
-	RR = "RR",     // Recovered (Rapid Antigen Test)
-	VT = "VT",     // Vaccinated Tourists
-}
 
 @Component({
 	selector: 'ec-report-a7',
@@ -25,6 +11,7 @@ export enum CertificateType {
 	styleUrls: ['./report-a7.component.scss']
 })
 export class ReportA7Component implements OnInit, OnDestroy {
+	@ViewChild('ngForm') ngForm: NgForm
 
 	a7FormGroup: FormGroup;
 	cantonFormControl: FormControl;
@@ -46,6 +33,7 @@ export class ReportA7Component implements OnInit, OnDestroy {
 		this.certTypesFormArray = this.a7FormGroup.get('types') as FormArray
 		this.a7FormGroup.enable()
 		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
+		setTimeout(() => this.ngForm.resetForm(this.a7FormGroup.value))
 	}
 
 	ngOnDestroy() {

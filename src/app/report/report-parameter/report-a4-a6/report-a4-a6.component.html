@@ -1,4 +1,4 @@
-<form [formGroup]="a4a6FormGroup">
+<form [formGroup]="a4a6FormGroup" #ngForm="ngForm">
 	<h3>{{ "reports.a4a6.title" | translate }}</h3>
 	<ec-date-from-to-fieldset
 		[dateFromFormControl]="dateFromFormControl"
@@ -39,7 +39,8 @@
 		</ec-unit-search>
 	</ng-container>
 	<ng-template #issuerSearch>
-
+		<ec-issuer-search [authority]="unitSearchAuthority$ | async"
+						  [userIdsFormArray]="userIdsFormArray"></ec-issuer-search>
 	</ng-template>
 
 	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>

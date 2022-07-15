@@ -1,4 +1,4 @@
-<form [formGroup]="a7FormGroup">
+<form [formGroup]="a7FormGroup" #ngForm="ngForm">
 	<h3>{{ "reports.a7.title" | translate }}</h3>
 	<ec-date-from-to-fieldset
 		[dateFromFormControl]="dateFromFormControl"

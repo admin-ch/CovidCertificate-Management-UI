@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
 import {ReportService} from "../../report.service";
 import {ReportType} from 'shared/model';
 import {ReplaySubject, Subscription} from "rxjs";
@@ -13,6 +13,9 @@ import {SelectedProfilesService} from "./selected-profiles.service";
 	styleUrls: ['./report-a4-a6.component.scss']
 })
 export class ReportA4A6Component implements OnInit, OnDestroy {
+
+	@ViewChild('ngForm') ngForm: NgForm
+
 	a4a6FormGroup: FormGroup;
 	dateFromFormControl: FormControl;
 	dateToFormControl: FormControl;
@@ -30,6 +33,7 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
+		console.log(this.reportService.formGroup.get(ReportType.A4))
 		this.a4a6FormGroup = this.reportService.formGroup.get(ReportType.A4) as FormGroup
 		this.dateFromFormControl = this.a4a6FormGroup.get('from') as FormControl
 		this.dateToFormControl = this.a4a6FormGroup.get('to') as FormControl
@@ -37,6 +41,7 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 		this.certTypesFormArray = this.a4a6FormGroup.get('types') as FormArray
 		this.userIdsFormArray = this.a4a6FormGroup.get('userIds') as FormArray
 		this.a4a6FormGroup.enable()
+		setTimeout(() => this.ngForm.resetForm(this.a4a6FormGroup.value))
 
 		// We emit through ReplaySubject to emit latest emitted value on subscription.
 		this.subscription = this.cantonFormControl.valueChanges.pipe(
@@ -49,6 +54,9 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 			// input may cause ExpressionChangedAfterItHasBeenChecked if asynced without delay.
 			delay(0)
 		).subscribe(this.unitSearchAuthority$)
+		this.subscription.add(
+			this.reportService.reset$.subscribe(_ => this.resetInput())
+		)
 	}
 
 	ngOnDestroy() {

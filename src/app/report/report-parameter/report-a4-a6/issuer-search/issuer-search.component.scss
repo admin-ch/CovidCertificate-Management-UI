@@ -1,0 +1,60 @@
+.search-inputs-container {
+	display: flex;
+
+	mat-form-field {
+		max-width: 20em;
+		margin-right: 1em;
+	}
+
+	button {
+		flex-shrink: 0;
+		height: fit-content;
+		margin-top: 0.4em;
+		margin-left: 1em;
+	}
+}
+
+.profiles-container {
+	position: relative;
+}
+
+.profiles-table-container {
+	position: relative;
+	min-height: 20em;
+	max-height: 100em;
+	padding: 1em;
+	overflow: auto;
+}
+
+table {
+	width: 100%;
+
+	.firstname-column {
+		width: 15%;
+	}
+	.name-column {
+		width: 15%;
+	}
+	.userExtId-column {
+		width: 5%;
+	}
+	.email-column {
+		width: 30%;
+	}
+	.unitName-column {
+		width: 30%;
+	}
+}
+
+.profiles-loading-shade {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 56px;
+	right: 0;
+	background: rgba(0, 0, 0, 0.15);
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

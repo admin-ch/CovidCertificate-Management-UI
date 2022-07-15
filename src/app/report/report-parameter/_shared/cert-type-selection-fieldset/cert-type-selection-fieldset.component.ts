@@ -1,8 +1,21 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CertificateType} from "../../report-a7/report-a7.component";
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {ReportService} from "../../../report.service";
+
+export enum CertificateType {
+	// EU compatible certs
+	T = "T",       // Tested
+	V = "V",       // Vaccinated
+	R = "R",       // Recovered
+	RREU = "RREU", // Recovered (Rapid Antigen Test EU)
+
+	// CH certs
+	ME = "ME",     // Medical Exception
+	A = "A",       // Antibody
+	RR = "RR",     // Recovered (Rapid Antigen Test)
+	VT = "VT",     // Vaccinated Tourists
+}
 
 @Component({
   selector: 'ec-cert-type-selection-fieldset',
