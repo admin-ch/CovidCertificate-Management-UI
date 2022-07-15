@@ -1,5 +1,5 @@
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Inject, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -79,10 +79,11 @@ export class AppModule {
 	constructor(
 		private readonly config: ObMasterLayoutConfig,
 		meta: ObDocumentMetaService,
-		interceptor: ObHttpApiInterceptorConfig
+		interceptor: ObHttpApiInterceptorConfig,
+		@Inject('HOST') private readonly managementServiceHost: string
 	) {
 		ObLanguageService.locales.en = 'en-GB';
-		interceptor.api.url = '/v1';
+		interceptor.api.url = `${managementServiceHost}/api/v1`;
 		interceptor.api.notification.active = false;
 		meta.titleSuffix = 'application.title';
 		config.homePageRoute = '/dashboard';
