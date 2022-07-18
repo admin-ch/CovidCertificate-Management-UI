@@ -64,13 +64,13 @@ describe('UnitSearchComponent', () => {
 		it('should perform post request if its the first change', () => {
 			component.ngOnChanges({authority: new SimpleChange('de', 'de', true)})
 
-			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v1/unit/tree", {authority: 'buv', language: 'de'})
+			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v2/unit/tree", {authority: 'buv', language: 'de'})
 		});
 
 		it('should perform post request if authority has changed', () => {
 			component.ngOnChanges({authority: new SimpleChange('be', 'buv', false)})
 
-			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v1/unit/tree", {authority: 'buv', language: 'de'})
+			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v2/unit/tree", {authority: 'buv', language: 'de'})
 		});
 
 		it('should not perform post request if authority is null', () => {
