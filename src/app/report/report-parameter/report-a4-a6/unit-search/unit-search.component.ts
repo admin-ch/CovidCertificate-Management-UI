@@ -55,8 +55,8 @@ export class UnitSearchComponent implements OnChanges {
 		private readonly http: HttpClient,
 		public readonly selectedProfilesService: SelectedProfilesService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string) {
-		this.UNIT_TREE_URL = REPORT_HOST + '/api/v1/unit/tree'
-		this.PROFILES_URL = REPORT_HOST + '/api/v1/unit/profiles'
+		this.UNIT_TREE_URL = REPORT_HOST + '/api/v2/unit/tree'
+		this.PROFILES_URL = REPORT_HOST + '/api/v2/unit/profiles'
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
