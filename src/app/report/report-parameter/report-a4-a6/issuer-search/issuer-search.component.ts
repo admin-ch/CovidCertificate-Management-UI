@@ -82,7 +82,7 @@ export class IssuerSearchComponent implements OnChanges, AfterViewInit {
 		private readonly http: HttpClient,
 		public readonly selectedProfilesService: SelectedProfilesService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string) {
-		this.PROFILE_SEARCH_URL = REPORT_HOST + '/api/v1/profile/search'
+		this.PROFILE_SEARCH_URL = REPORT_HOST + '/api/v2/report/profile/search'
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
