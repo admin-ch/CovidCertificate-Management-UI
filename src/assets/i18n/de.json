@@ -226,6 +226,7 @@
     "reports.a4a6.organisationOrIssuer": "Bitte wählen Sie aus, ob Sie nach Organisation oder nach Aussteller/in suchen wollen:",
     "reports.a4a6.search": "Suchen",
     "reports.a4a6.searchByParameter": "Schränken Sie Ihre Suche durch die Eingabe der Parameter ein:",
+    "reports.a4a6.searchByUnitName": "Schränken Sie Ihre Eingabe durch die Eingabe der gesuchten Organisation ein",
     "reports.a4a6.selectedUser": "Hinzugefügte Benutzer/innen",
     "reports.a4a6.surName": "Nachname",
     "reports.a4a6.title": "A4 / A6",

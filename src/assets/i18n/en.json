@@ -226,6 +226,7 @@
     "reports.a4a6.organisationOrIssuer": "Please choose whether you want to search by organisation or by issuer:",
     "reports.a4a6.search": "Search",
     "reports.a4a6.searchByParameter": "Limit your search by entering parameters:",
+    "reports.a4a6.searchByUnitName": "Limit your search by entering the organisation you are searching for",
     "reports.a4a6.selectedUser": "Users added",
     "reports.a4a6.surName": "Last name",
     "reports.a4a6.title": "A4 / A6",

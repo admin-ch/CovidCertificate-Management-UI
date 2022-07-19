@@ -226,6 +226,7 @@
     "reports.a4a6.organisationOrIssuer": "Veuillez indiquer si vous souhaitez effectuer votre recherche par organisation ou par émetteur:",
     "reports.a4a6.search": "Rechercher",
     "reports.a4a6.searchByParameter": "Affinez votre recherche en saisissant les paramètres suivants:",
+    "reports.a4a6.searchByUnitName": "Limitez votre saisie en indiquant l’organisation recherchée",
     "reports.a4a6.selectedUser": "Utilisateurs ajoutés",
     "reports.a4a6.surName": "Nom",
     "reports.a4a6.title": "A4 / A6",
