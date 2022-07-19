@@ -55,30 +55,33 @@ import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-sear
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
+import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
 
 @NgModule({
-	declarations: [
-		ReportComponent,
-		SelectReportTypeComponent,
-		ReportParameterComponent,
-		ReportGenerationComponent,
-		ReportA2Component,
-		ReportA7Component,
-		ReportEndComponent,
-		DataRoomSelectionFieldsetComponent,
-		DateFromToFieldsetComponent,
-		CertTypeSelectionFieldsetComponent,
-		ReportEndComponent,
-		UnitSearchComponent,
-		DataRoomSelectionFieldsetComponent,
-		DateFromToFieldsetComponent,
-		CertTypeSelectionFieldsetComponent,
-		ReportA4A6Component,
-		UnitSearchComponent,
-		SelectedProfilesComponent,
-		FieldWrapperComponent,
-		IssuerSearchComponent
-	],
+    declarations: [
+        ReportComponent,
+        SelectReportTypeComponent,
+        ReportParameterComponent,
+        ReportGenerationComponent,
+        ReportA2Component,
+        ReportA7Component,
+        ReportEndComponent,
+        DataRoomSelectionFieldsetComponent,
+        DateFromToFieldsetComponent,
+        CertTypeSelectionFieldsetComponent,
+        ReportEndComponent,
+        UnitSearchComponent,
+        DataRoomSelectionFieldsetComponent,
+        DateFromToFieldsetComponent,
+        CertTypeSelectionFieldsetComponent,
+        ReportA4A6Component,
+        UnitSearchComponent,
+        SelectedProfilesComponent,
+        FieldWrapperComponent,
+        IssuerSearchComponent,
+        ProfilesTableComponent,
+        ProfilesTableComponent
+    ],
 	imports: [
 		SharedModule,
 		ObButtonModule,

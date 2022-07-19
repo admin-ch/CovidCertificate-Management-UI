@@ -3,10 +3,7 @@ import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {MatTableDataSource} from "@angular/material/table";
-import {map} from "rxjs/operators";
-import {EiamProfile, SelectedProfilesService} from "../selected-profiles.service";
+import {SelectedProfilesService} from "../selected-profiles.service";
 import {FormArray} from "@angular/forms";
 
 export interface UnitTree {
@@ -15,10 +12,6 @@ export interface UnitTree {
 	children: UnitTree[]
 	hidden?: boolean
 	parent?: UnitTree
-}
-
-type ProfilesObservableStore = {
-	[unitId: string]: Observable<MatTableDataSource<EiamProfile>>
 }
 
 @Component({
@@ -38,17 +31,8 @@ export class UnitSearchComponent implements OnChanges {
 	treeControl = new NestedTreeControl<UnitTree>(node => node.children);
 	treeDataSource = new MatTreeNestedDataSource<UnitTree>();
 	organisationSearchValue = ''
-	profileObservablesStore: ProfilesObservableStore = {}
 
-	readonly TABLE_ROWS = [
-		'select',
-		'firstname',
-		'name',
-		'userExtId',
-		'email',
-	]
 	private readonly UNIT_TREE_URL: string
-	private readonly PROFILES_URL: string
 
 	constructor(
 		private readonly translate: TranslateService,
@@ -56,7 +40,6 @@ export class UnitSearchComponent implements OnChanges {
 		public readonly selectedProfilesService: SelectedProfilesService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string) {
 		this.UNIT_TREE_URL = REPORT_HOST + '/api/v2/report/unit/tree'
-		this.PROFILES_URL = REPORT_HOST + '/api/v2/report/unit/profiles'
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -79,18 +62,6 @@ export class UnitSearchComponent implements OnChanges {
 	}
 
 	isVisible = (_: number, node: UnitTree) => !!node.children && node.children.length > 0;
-
-	/** Stores and returns the Observables for fetching Eiam profiles. We store them in order to avoid creating
-	 * new Observables, causing infinite loop of the change detection because of how the async pipe works. */
-	getProfiles$(unit: UnitTree): Observable<MatTableDataSource<EiamProfile>> {
-		if (!this.profileObservablesStore[unit.id]) {
-			this.profileObservablesStore[unit.id] = this.http.post<EiamProfile[]>(this.PROFILES_URL, {
-				id: unit.id,
-				authority: this.authority
-			}).pipe(map(profiles => new MatTableDataSource<EiamProfile>(profiles)))
-		}
-		return this.profileObservablesStore[unit.id]
-	}
 
 	/** Sets `hidden` property on the unit trees based on the search value. */
 	setHiddenBySearchValue(unitTrees: UnitTree[], first = true): void {
