@@ -32,16 +32,13 @@
 		</mat-radio-group>
 	</fieldset>
 
-	<ng-container *ngIf="searchType === 'organisation'; else issuerSearch">
-		<ec-unit-search
-			[authority]="unitSearchAuthority$ | async"
-			[userIdsFormArray]="userIdsFormArray">
-		</ec-unit-search>
-	</ng-container>
-	<ng-template #issuerSearch>
-		<ec-issuer-search [authority]="unitSearchAuthority$ | async"
-						  [userIdsFormArray]="userIdsFormArray"></ec-issuer-search>
-	</ng-template>
+	<ec-unit-search [hidden]="searchType !== 'organisation'"
+					[authority]="unitSearchAuthority$ | async"
+					[userIdsFormArray]="userIdsFormArray">
+	</ec-unit-search>
+	<ec-issuer-search [hidden]="searchType !== 'issuer'"
+					  [authority]="unitSearchAuthority$ | async"
+					  [userIdsFormArray]="userIdsFormArray"></ec-issuer-search>
 
 	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>
 	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
