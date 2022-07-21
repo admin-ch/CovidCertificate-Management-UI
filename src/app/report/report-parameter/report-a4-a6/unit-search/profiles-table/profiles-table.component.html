@@ -1,5 +1,5 @@
 <ng-container
-	*ngIf="treeControl.isExpanded(node) && getProfiles$(node) | async as profilesDataSource; else profilesLoading">
+	*ngIf="!!authority && treeControl.isExpanded(node) && getProfiles$(node) | async as profilesDataSource; else profilesLoading">
 	<ng-container *ngIf="profilesDataSource.data?.length">
 		<div class="table-container">
 			<table class="ob-table ob-table-hover ob-table-sm" mat-table [dataSource]="profilesDataSource">
