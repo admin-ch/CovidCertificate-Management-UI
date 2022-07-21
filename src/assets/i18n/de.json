@@ -154,7 +154,7 @@
     "footer.privacyStatement": "Datenschutzerklärung",
     "footer.privacyStatement.url": "https://www.bit.admin.ch/bit/de/home/dokumentation/covid-certificate-app.html",
     "gracePeriodMessage": "Dieses Schnelltest-Produkt kann bis {{validUntil}} verwendet werden, nach diesem Datum ist es nicht mehr möglich, Zertifikate mit diesem Produkt zu erstellen.",
-    "home.administration": "Anleitungen zur Benutzerverwaltung (delegiertes Management) durch Superuser",
+    "home.administration": "Anleitungen und Informationen zur Benutzerverwaltung",
     "home.faq": "Häufig gestellte Fragen (FAQ)",
     "home.faq.url": "https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/faq-gesundheitsfachpersonen.html#-40000965",
     "home.instructions": "Sie befinden sich auf der Internetseite zum Erstellen von Covid Zertifikaten.",
