@@ -3,7 +3,7 @@ import {ReportType} from 'shared/model';
 import {Subject} from 'rxjs';
 import {GenerationResponseStatus} from './report-generation/report-generation.component';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {getStartDateBeforeEndDateValidator} from "shared/validators/date-time.validator";
+import {getMaxPeriodValidator, getStartDateBeforeEndDateValidator} from "shared/validators/date-time.validator";
 import * as moment from "moment";
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ReportService {
 				uvcis: [[], Validators.required]
 			}),
 			[ReportType.A7]: this.fb.group({
-					from: ['',[ReportService.isDateValidator]],
+					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
 					canton: ['', Validators.required],
 					types: new FormArray([], Validators.required),
@@ -33,9 +33,14 @@ export class ReportService {
 					to: ['', [ReportService.isDateValidator]],
 					canton: ['', Validators.required],
 					types: new FormArray([], Validators.required),
-					userIds: new FormArray([], Validators.required),
+					userIds: new FormArray([], [Validators.required, Validators.maxLength(200)]),
 				},
-				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
+				{
+					validators: [
+						getStartDateBeforeEndDateValidator('from', 'to'),
+						getMaxPeriodValidator('from', 'to', 30),
+					]
+				}),
 		})
 		this.formGroup.disable()
 	}

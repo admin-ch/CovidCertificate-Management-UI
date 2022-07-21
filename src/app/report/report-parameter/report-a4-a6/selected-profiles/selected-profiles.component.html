@@ -1,6 +1,6 @@
 <fieldset>
 	<legend>{{"reports.a4a6.selectedUser" | translate}}</legend>
-	<ec-field-wrapper>
+	<ec-field-wrapper [isError]="userIdsFormArray.hasError('maxlength')">
 		<div *ngIf="!Object.values(selectedProfilesService.changes$ | async).length">
 			{{"reports.a4a6.noUserSelected" | translate}}
 		</div>
@@ -16,5 +16,8 @@
 				<mat-icon svgIcon="cancel" matChipRemove></mat-icon>
 			</mat-chip>
 		</mat-chip-list>
+		<mat-error *ngIf="userIdsFormArray.hasError('maxlength')">
+			{{'reports.a4a6.tooManyUsers' | translate:userIdsFormArray.errors['maxlength'] }}
+		</mat-error>
 	</ec-field-wrapper>
 </fieldset>
