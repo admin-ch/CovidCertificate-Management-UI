@@ -38,7 +38,7 @@ export class ReportService {
 				{
 					validators: [
 						getStartDateBeforeEndDateValidator('from', 'to'),
-						getMaxPeriodValidator('from', 'to', 30),
+						getMaxPeriodValidator('from', 'to', 90),
 					]
 				}),
 		})
