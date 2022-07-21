@@ -1,10 +1,12 @@
-import {Component, Inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {SelectedProfilesService} from "../selected-profiles.service";
 import {FormArray} from "@angular/forms";
+import {ReportService} from "../../../report.service";
+import {Subscription} from "rxjs";
 
 export interface UnitTree {
 	id: string
@@ -19,7 +21,7 @@ export interface UnitTree {
 	templateUrl: './unit-search.component.html',
 	styleUrls: ['./unit-search.component.scss']
 })
-export class UnitSearchComponent implements OnChanges {
+export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 
 	@Input()
 	authority: string;
@@ -32,14 +34,21 @@ export class UnitSearchComponent implements OnChanges {
 	treeDataSource = new MatTreeNestedDataSource<UnitTree>();
 	organisationSearchValue = ''
 
+	subscription: Subscription
+
 	private readonly UNIT_TREE_URL: string
 
 	constructor(
 		private readonly translate: TranslateService,
 		private readonly http: HttpClient,
 		public readonly selectedProfilesService: SelectedProfilesService,
+		private readonly reportService: ReportService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string) {
 		this.UNIT_TREE_URL = REPORT_HOST + '/api/v2/report/unit/tree'
+	}
+
+	ngOnInit() {
+		this.subscription = this.reportService.reset$.subscribe(_ => this.treeControl.collapseAll())
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -59,6 +68,10 @@ export class UnitSearchComponent implements OnChanges {
 				this.isUnitTreeLoading = false
 			})
 		}
+	}
+
+	ngOnDestroy() {
+		this.subscription?.unsubscribe()
 	}
 
 	isVisible = (_: number, node: UnitTree) => !!node.children && node.children.length > 0;

@@ -5,12 +5,13 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from "@angular/c
 import {ObliqueTestingModule} from "@oblique/oblique";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {EiamProfile, SelectedProfilesService} from "../selected-profiles.service";
+import {SelectedProfilesService} from "../selected-profiles.service";
 import {MatTreeModule} from "@angular/material/tree";
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatTableModule} from "@angular/material/table";
 import {HttpClient} from "@angular/common/http";
-import {of} from "rxjs";
+import {of, Subject} from "rxjs";
 import {FormArray} from "@angular/forms";
+import {ReportService} from "../../../report.service";
 
 describe('UnitSearchComponent', () => {
 	let component: UnitSearchComponent;
@@ -26,6 +27,9 @@ describe('UnitSearchComponent', () => {
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},
 				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()},
+				{provide: ReportService, useValue: {
+					reset$: new Subject()
+					}},
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 
@@ -163,7 +167,6 @@ describe('UnitSearchComponent', () => {
 			}));
 		});
 	});
-
 
 
 	describe('setHiddenBySearchValue', () => {

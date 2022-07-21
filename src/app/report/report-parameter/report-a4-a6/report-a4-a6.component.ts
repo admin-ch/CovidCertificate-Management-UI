@@ -33,7 +33,6 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		console.log(this.reportService.formGroup.get(ReportType.A4))
 		this.a4a6FormGroup = this.reportService.formGroup.get(ReportType.A4) as FormGroup
 		this.dateFromFormControl = this.a4a6FormGroup.get('from') as FormControl
 		this.dateToFormControl = this.a4a6FormGroup.get('to') as FormControl
