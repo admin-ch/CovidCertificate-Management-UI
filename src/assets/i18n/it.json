@@ -285,6 +285,7 @@
     "reports.dateFromTo.startDateBeforeEndDate": "La data di inizio non deve essere successiva alla data di fine",
     "reports.dateFromTo.text": "Selezionare una data di inizio e una data di fine del periodo di emissione per il rapporto:",
     "reports.detail.header": "Desidera confermare o confutare un caso concreto di sospetto abuso analizzando le singole azioni di un dato emittente? Crei un rapporto di dettaglio.",
+    "reports.excelLimitExceeded": "Il limite della tabella Excel è stato superato. Si prega di limitare maggiormente la ricerca.",
     "reports.generate": "Genera il rapporto",
     "reports.generate.new": "Generare un nuovo rapporto",
     "reports.generation.info": "La richiesta è in fase di elaborazione e il rapporto verrà generato a breve. In caso di grandi quantità di dati possono essere necessari diversi minuti. Si prega di attendere.\nAttenzione: non chiudere questa finestra durante il processo di elaborazione e non ricaricare la pagina per non annullare la generazione del rapporto.",

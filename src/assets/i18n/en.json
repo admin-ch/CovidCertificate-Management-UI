@@ -285,6 +285,7 @@
     "reports.dateFromTo.startDateBeforeEndDate": "Start date must not be after the end date",
     "reports.dateFromTo.text": "Please select a start and end date for the issue period for the report:",
     "reports.detail.header": "Want to prove or refute a concrete case of suspicion by analysing the individual actions of an issuer? Then create an detailed report.",
+    "reports.excelLimitExceeded": "The limit of the Excel table has been exceeded. Please limit your search more.",
     "reports.generate": "Generate report",
     "reports.generate.new": "Generate new report",
     "reports.generation.info": "Your query is being processed and the report created. If there are large volumes of data involved this can take several minutes. We ask you to be patient.\nImportant: Please do not close this window while the report is being created and do not reload, as this will cancel the creation of the report.",

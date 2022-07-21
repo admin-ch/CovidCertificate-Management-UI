@@ -285,6 +285,7 @@
     "reports.dateFromTo.startDateBeforeEndDate": "La date de début ne doit pas être postérieure à la date de fin",
     "reports.dateFromTo.text": "Veuillez sélectionner une date de début et une date de fin de la période d’émission pour le rapport:",
     "reports.detail.header": "Vous souhaitez confirmer ou infirmer un soupçon concret en analysant les activités d’un émetteur précis ? Rédigez un rapport de détail.",
+    "reports.excelLimitExceeded": "La limite de la feuille de calcul Excel a été dépassée. Veuillez restreindre davantage votre recherche.",
     "reports.generate": "Générer le rapport",
     "reports.generate.new": "Générer un nouveau rapport",
     "reports.generation.info": "Votre requête est en cours d’exécution et le rapport est généré. Si la quantité de données est importante, cela peut prendre plusieurs minutes. Nous vous prions de faire preuve de patience. Attention : veuillez ne pas fermer cette fenêtre pendant le processus de création et ne pas faire de nouveau téléchargement, car cela interromprait la création du rapport.",

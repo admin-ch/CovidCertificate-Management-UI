@@ -5,6 +5,7 @@ import {SharedModule} from 'shared/shared.module';
 import {ReportGenerationComponent} from './report-generation.component';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from "@ngx-translate/core";
 
 describe('ReportGenerationComponent', () => {
 	let component: ReportGenerationComponent;
@@ -16,7 +17,7 @@ describe('ReportGenerationComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule, HttpClientTestingModule],
+			imports: [ObliqueTestingModule, SharedModule, HttpClientTestingModule, TranslateModule],
 			providers: [
 				{
 					provide: MatHorizontalStepper,

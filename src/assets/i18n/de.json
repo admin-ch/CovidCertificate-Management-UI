@@ -285,6 +285,7 @@
     "reports.dateFromTo.startDateBeforeEndDate": "Anfangsdatum darf nicht nach dem Enddatum liegen",
     "reports.dateFromTo.text": "Bitte wählen Sie ein Anfangs- und ein Enddatum des Ausstellungszeitraums für den Report aus:",
     "reports.detail.header": "Sie möchten einen konkreten Verdachtsfall belegen oder widerlegen, indem Sie die einzelnen Aktionen einer Ausstellerin/eines Ausstellers analysieren? Erstellen Sie dazu einen Detailreport.",
+    "reports.excelLimitExceeded": "Das Limit der Excel-Tabelle wurde überschritten. Bitte schränken Sie Ihre suche mehr ein.",
     "reports.generate": "Report generieren",
     "reports.generate.new": "Neuen Report generieren",
     "reports.generation.info": "Ihre Abfrage wird ausgeführt und der Report erstellt. Bei grossen Datenmengen, kann dies mehrere Minuten in Anspruch nehmen. Wir bitten Sie um etwas Geduld. Achtung: Bitte schliessen Sie dieses Fenster während dieser Zeit nicht und machen Sie keinen Reload, da das Erstellen des Reports dadurch abgebrochen wird.",
