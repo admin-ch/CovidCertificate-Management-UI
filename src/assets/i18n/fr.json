@@ -154,7 +154,7 @@
     "footer.privacyStatement": "Politique de confidentialité",
     "footer.privacyStatement.url": "https://www.bit.admin.ch/bit/fr/home/documentation/covid-certificate-app.html",
     "gracePeriodMessage": "Ce matériel de test rapide peut être utilisé jusqu’au {{validUntil}}; après cette date, il ne permettra plus d’établir des certificats.",
-    "home.administration": "Instructions pour l'administration des utilisateurs (gestion déléguée) par le superutilisateur",
+    "home.administration": "Instructions et informations sur la gestion des utilisateurs",
     "home.faq": "Questions fréquemment posées",
     "home.faq.url": "https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/information-fuer-die-aerzteschaft/faq-gesundheitsfachpersonen.html#93945287",
     "home.instructions": "Vous vous trouvez sur la page Internet permettant d'établir des certificats COVID.",
