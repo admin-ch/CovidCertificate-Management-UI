@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, Inject, Injectable, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	Inject,
+	Injectable,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	SimpleChanges,
+	ViewChild
+} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
@@ -6,7 +17,7 @@ import {EiamProfile, SelectedProfilesService} from "../selected-profiles.service
 import {merge, Subject, Subscription} from "rxjs";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {filter, skipWhile, switchMap} from "rxjs/operators";
+import {filter, switchMap} from "rxjs/operators";
 import {MatTableDataSource} from "@angular/material/table";
 
 interface ProfilesPage {
@@ -49,7 +60,7 @@ export class CustomPaginatorIntl implements MatPaginatorIntl {
 	styleUrls: ['./issuer-search.component.scss'],
 	providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
 })
-export class IssuerSearchComponent implements OnChanges, AfterViewInit {
+export class IssuerSearchComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
 	@Input()
 	authority: string;
@@ -74,6 +85,7 @@ export class IssuerSearchComponent implements OnChanges, AfterViewInit {
 
 	isIssuerLoading = true
 	applySearch$ = new Subject<void>()
+	subscription = new Subscription()
 
 	private readonly PROFILE_SEARCH_URL: string
 
@@ -85,6 +97,10 @@ export class IssuerSearchComponent implements OnChanges, AfterViewInit {
 		this.PROFILE_SEARCH_URL = REPORT_HOST + '/api/v2/report/profile/search'
 	}
 
+	ngOnInit() {
+		this.subscription.add(this.applySearch$.subscribe(_ => this.paginator.firstPage()))
+	}
+
 	ngOnChanges(changes: SimpleChanges) {
 		if ((changes.authority.firstChange || changes.authority.currentValue !== changes.authority.previousValue) && !!changes.authority.currentValue) {
 			this.applySearch$.next()
@@ -92,36 +108,41 @@ export class IssuerSearchComponent implements OnChanges, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		merge(this.sort.sortChange, this.paginator.page, this.applySearch$)
-			.pipe(
-				filter(_ => !!this.authority && this.searchFieldsFormGroup.valid),
-				switchMap(_ => {
-					this.isIssuerLoading = true;
+		this.subscription.add(
+			merge(this.sort.sortChange, this.paginator.page, this.applySearch$)
+				.pipe(
+					filter(_ => !!this.authority && this.searchFieldsFormGroup.valid),
+					switchMap(_ => {
+						this.isIssuerLoading = true;
 
-					return this.http.post<ProfilesPage>(this.PROFILE_SEARCH_URL, {
-						pageNumber: this.paginator.pageIndex,
-						pageSize: this.paginator.pageSize,
-						orderBy: this.sort.active,
-						orderAscending: this.sort.direction === "asc",
-						authority: this.authority,
-						language: this.translate.currentLang,
-						searchUserExtId: this.searchFieldsFormGroup.get('userExtId').value || null,
-						searchName: this.searchFieldsFormGroup.get('name').value || null,
-						searchFirstname: this.searchFieldsFormGroup.get('firstName').value || null,
-						searchEmail: this.searchFieldsFormGroup.get('email').value || null
+						return this.http.post<ProfilesPage>(this.PROFILE_SEARCH_URL, {
+							pageNumber: this.paginator.pageIndex,
+							pageSize: this.paginator.pageSize,
+							orderBy: this.sort.active,
+							orderAscending: this.sort.direction === "asc",
+							authority: this.authority,
+							language: this.translate.currentLang,
+							searchUserExtId: this.searchFieldsFormGroup.get('userExtId').value || null,
+							searchName: this.searchFieldsFormGroup.get('name').value || null,
+							searchFirstname: this.searchFieldsFormGroup.get('firstName').value || null,
+							searchEmail: this.searchFieldsFormGroup.get('email').value || null
+						})
 					})
-				})
-			)
-			.subscribe(data => {
-				this.profilesDataSource.data = data.profiles
-				this.totalHits = data.totalHits
-				this.isIssuerLoading = false;
-			});
+				)
+				.subscribe(data => {
+					this.profilesDataSource.data = data.profiles
+					this.totalHits = data.totalHits
+					this.isIssuerLoading = false;
+				}));
 		setTimeout(() => {
 			if (this.authority) {
 				this.applySearch$.next()
 			}
 		})
+	}
+
+	ngOnDestroy() {
+		this.subscription?.unsubscribe()
 	}
 }
 
