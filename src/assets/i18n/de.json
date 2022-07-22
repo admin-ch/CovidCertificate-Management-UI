@@ -230,7 +230,7 @@
     "reports.a4a6.selectedUser": "Hinzugefügte Benutzer/innen",
     "reports.a4a6.surName": "Nachname",
     "reports.a4a6.title": "A4 / A6",
-    "reports.a4a6.tooManyUsers": "Bitte reduzieren Sie die Auswahl auf maximal 200 Aussteller/Ausstellerinnen",
+    "reports.a4a6.tooManyUsers": "Bitte reduzieren Sie die Auswahl auf maximal 200 Aussteller/Ausstellerinnen, Sie haben {{actualLength}} ausgewählt",
     "reports.a4a6.unit": "Einheit",
     "reports.a5.description.long": "<strong>Wie viele Zertifikate welchen Typs haben die einzelnen Aussteller/innen einer Unit in einem definierten Zeitraum über welche Kanäle ausgestellt?</strong></br></br>Nach der Auswahl und Suche der entsprechenden Einheiten (Organisation / Aussteller/in) liefert Ihnen dieser Report eine nach Aussteller/in gegliederte Liste mit der Summe der ausgestellten Zertifikatstypen und Ausstellkanäle.",
     "reports.a5.description.short": "Anzahl und Typ aller ausgestellten Zertifikate einer spezifischen Ausstellerin, eines spezifischen Ausstellers oder einer Organisationseinheit (Unit).",

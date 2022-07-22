@@ -230,7 +230,7 @@
     "reports.a4a6.selectedUser": "Users added",
     "reports.a4a6.surName": "Last name",
     "reports.a4a6.title": "A4 / A6",
-    "reports.a4a6.tooManyUsers": "Please limit the selection to no more than 200 issuers",
+    "reports.a4a6.tooManyUsers": "Please limit the selection to no more than 200 issuers, you have selected {{actualLength}}",
     "reports.a4a6.unit": "Unit",
     "reports.a5.description.long": "<strong>How many certificates of what type did individual issuers in a unit issue via what channels in a defined period?</strong></br></br>After the relevant units (organisation/issuer) have been selected and searched for, this report provides you with a list, broken down by issuer, of the total certificate types and issuing channels.",
     "reports.a5.description.short": "Number and type of all certificates issued by a specific issuer or an organisational unit.",

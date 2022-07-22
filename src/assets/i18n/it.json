@@ -230,7 +230,7 @@
     "reports.a4a6.selectedUser": "Utenti aggiunti",
     "reports.a4a6.surName": "Cognome",
     "reports.a4a6.title": "A4 / A6",
-    "reports.a4a6.tooManyUsers": "Si prega di limitare la selezione a non più di 200 emittenti",
+    "reports.a4a6.tooManyUsers": "Si prega di limitare la selezione a non più di 200 emittenti, sono stati selezionati {{actualLength}}",
     "reports.a4a6.unit": "Unità",
     "reports.a5.description.long": "<strong>Quanti certificati di quale tipo sono stati rilasciati da uno specifico emittente di un’unità in un determinato periodo di tempo e attraverso quali canali?</strong></br></br>Dopo che è stata selezionata e cercata la rispettiva unità (organizzazione, emittente), questo rapporto fornisce un elenco, suddiviso per emittenti, con il numero totale di tipi di certificati rilasciati e i relativi canali di emissione.",
     "reports.a5.description.short": "Numero e tipo di tutti i certificati rilasciati da uno specifico emittente o da una specifica unità organizzativa (Unit).",
