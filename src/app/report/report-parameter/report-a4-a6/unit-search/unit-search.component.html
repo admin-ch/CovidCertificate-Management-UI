@@ -28,55 +28,60 @@
 
 		<div class="divider"></div>
 
-		<div *ngIf="isUnitTreeLoading; else hasAuthority">
+		<div *ngIf="isUnitTreeLoading && !!authority; else hasAuthority">
 			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 		</div>
 		<ng-template #hasAuthority>
-			<div *ngIf="!authority; else noFound">
+			<div *ngIf="!authority; else hasNoFound">
 				{{ "reports.a4a6.chooseDataroom" | translate }}
 			</div>
-			<ng-template #noFound>
-				<div *ngIf="isNoneDisplayed()">
+			<ng-template #hasNoFound>
+				<div *ngIf="isNoneDisplayed(); else matTree">
 					{{ "reports.a4a6.noUnitsFound" | translate }}
 				</div>
+				<ng-template #matTree>
+					<mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl" class="unit-tree">
+						<mat-tree-node class="no-padding" *matTreeNodeDef="let node"
+									   [class.unit-tree-invisible]="node.hidden">
+							<div class="profiles-container">
+								<div class="profiles-node">
+									<button type="button" mat-icon-button matTreeNodeToggle>
+										<mat-icon
+											svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
+									</button>
+									<div
+										[style.font-weight]="treeControl.isExpanded(node) ? 'bold' : ''">{{node.name}}</div>
+								</div>
+								<div class="profiles-list-container">
+									<ng-container *ngIf="treeControl.isExpanded(node)">
+										<ec-profiles-table [authority]="authority" [node]="node"
+														   [treeControl]="treeControl">
+										</ec-profiles-table>
+									</ng-container>
+								</div>
+							</div>
+						</mat-tree-node>
+
+						<mat-nested-tree-node *matTreeNodeDef="let node; when: isVisible"
+											  [class.unit-tree-invisible]="node.hidden">
+							<div class="mat-tree-node">
+								<button type="button" mat-icon-button matTreeNodeToggle>
+									<mat-icon
+										svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
+								</button>
+								{{node.name}}
+							</div>
+							<div [class.unit-tree-invisible]="node.hidden || !treeControl.isExpanded(node)"
+								 role="group">
+								<ng-container matTreeNodeOutlet></ng-container>
+								<ec-profiles-table [authority]="authority" [node]="node"
+												   [treeControl]="treeControl"></ec-profiles-table>
+							</div>
+						</mat-nested-tree-node>
+					</mat-tree>
+				</ng-template>
 			</ng-template>
 		</ng-template>
-		<mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl" class="unit-tree">
-			<mat-tree-node class="no-padding" *matTreeNodeDef="let node" [class.unit-tree-invisible]="node.hidden">
-				<div class="profiles-container">
-					<div class="profiles-node">
-						<button type="button" mat-icon-button matTreeNodeToggle>
-							<mat-icon
-								svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
-						</button>
-						<div [style.font-weight]="treeControl.isExpanded(node) ? 'bold' : ''">{{node.name}}</div>
-					</div>
-					<div class="profiles-list-container">
-						<ng-container *ngIf="treeControl.isExpanded(node)">
-							<ec-profiles-table [authority]="authority" [node]="node"
-											   [treeControl]="treeControl">
-							</ec-profiles-table>
-						</ng-container>
-					</div>
-				</div>
-			</mat-tree-node>
-
-			<mat-nested-tree-node *matTreeNodeDef="let node; when: isVisible" [class.unit-tree-invisible]="node.hidden">
-				<div class="mat-tree-node">
-					<button type="button" mat-icon-button matTreeNodeToggle>
-						<mat-icon
-							svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
-					</button>
-					{{node.name}}
-				</div>
-				<div [class.unit-tree-invisible]="node.hidden || !treeControl.isExpanded(node)"
-					 role="group">
-					<ng-container matTreeNodeOutlet></ng-container>
-					<ec-profiles-table [authority]="authority" [node]="node"
-									   [treeControl]="treeControl"></ec-profiles-table>
-				</div>
-			</mat-nested-tree-node>
-		</mat-tree>
 		<mat-error>
 			{{'reports.a4a6.oneUserHasToBeSelected' | translate}}
 		</mat-error>
