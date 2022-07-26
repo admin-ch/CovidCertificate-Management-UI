@@ -28,6 +28,17 @@ export class ReportService {
 					types: new FormArray([], Validators.required),
 				},
 				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
+			[ReportType.A8]: this.fb.group({
+					from: ['', [ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
+					types: new FormArray([], Validators.required),
+				},
+				{
+					validators: [
+						getStartDateBeforeEndDateValidator('from', 'to'),
+						getMaxPeriodValidator('from', 'to', 90),
+					]
+				}),
 			[ReportType.A4]: this.fb.group({
 					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
