@@ -65,41 +65,6 @@ describe('SelectReportTypeComponent', () => {
 		reportService = TestBed.inject(ReportService);
 	});
 
-	describe('initializing form', () => {
-		describe('type of formGroup', () => {
-			it.skip.each([
-				[[AuthFunction.REPORT_A2], ReportType.A2],
-				[[AuthFunction.REPORT_A2, AuthFunction.REPORT_A3], ReportType.A3],
-				[[AuthFunction.REPORT_A10, AuthFunction.REPORT_A2], ReportType.A7],
-				[[AuthFunction.REPORT_A12, AuthFunction.REPORT_A3], ReportType.A3],
-				[[AuthFunction.REPORT_A12, AuthFunction.REPORT_A4, AuthFunction.REPORT_A8], ReportType.A4]
-			])(
-				'should be set correctly according to authorization',
-				fakeAsync((ownedAuthFunctions, expectedReportType) => {
-					authServiceMock.authorizedFunctions$.next(ownedAuthFunctions);
-					tick();
-					expect(component.formControl.value).toBe(expectedReportType);
-				})
-			);
-		});
-
-		describe('formGroup', () => {
-			it('should be invalid if no type is selected', fakeAsync(() => {
-				tick();
-				component.formControl.setValue(null);
-				expect(component.formControl.invalid).toBe(true);
-			}));
-		});
-
-		describe('formGroup', () => {
-			it('should be invalid if no type is selected', fakeAsync(() => {
-				tick();
-				component.formControl.setValue(null);
-				expect(component.formControl.invalid).toBe(true);
-			}));
-		});
-	});
-
 	describe('goNext()', () => {
 		beforeEach(() => {
 			stepperMock.next.mockReset();
