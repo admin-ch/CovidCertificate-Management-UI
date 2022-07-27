@@ -56,6 +56,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
 import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
+import { ReportA8Component } from './report-parameter/report-a8/report-a8.component';
 
 @NgModule({
     declarations: [
@@ -80,7 +81,8 @@ import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-sea
         FieldWrapperComponent,
         IssuerSearchComponent,
         ProfilesTableComponent,
-        ProfilesTableComponent
+        ProfilesTableComponent,
+        ReportA8Component
     ],
 	imports: [
 		SharedModule,
