@@ -57,6 +57,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
 import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
 import { ReportA8Component } from './report-parameter/report-a8/report-a8.component';
+import { ReportA11Component } from './report-parameter/report-a11/report-a11.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +83,8 @@ import { ReportA8Component } from './report-parameter/report-a8/report-a8.compon
         IssuerSearchComponent,
         ProfilesTableComponent,
         ProfilesTableComponent,
-        ReportA8Component
+        ReportA8Component,
+        ReportA11Component
     ],
 	imports: [
 		SharedModule,
