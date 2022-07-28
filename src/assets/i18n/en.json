@@ -263,7 +263,7 @@
     "reports.a9.description.long": "<strong>How many certificates of the various certificate types have been issued so far over the entire issue period via which channels?</strong></br></br>This report provides you with the total number of certificates of one type issued and the channels by via which they were issued.",
     "reports.a9.description.short": "Total number of certificates of a type, broken down by issuing channel, in the entire issue period.",
     "reports.a9.title": "A9",
-    "reports.aggregation.header": "Desidera ottenere una panoramica generale dei certificati emessi in Svizzera sotto forma di analisi statistica? Crei un rapporto statistico.",
+    "reports.aggregation.header": "Want to check whether the figures for the issue of certificates in your canton point to the possibility of abuse? Then create an aggregated report.",
     "reports.certTypesSelection.cert-type.a": "Recovery certificates (antibody) – issue period in Switzerland: 16.11.2021 to 16.02.2022",
     "reports.certTypesSelection.cert-type.me": "Exemption certificates – issue period in Switzerland: 10.01.2022 to 16.02.2022",
     "reports.certTypesSelection.cert-type.r": "Recovery certificates (PCR) – issue period in Switzerland: as of 07.06.2021",
