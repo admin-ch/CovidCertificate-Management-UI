@@ -1,0 +1,51 @@
+<ng-container
+	*ngIf="!!authority && treeControl.isExpanded(node) && getProfiles$(node) | async as profilesDataSource; else profilesLoading">
+	<ng-container *ngIf="profilesDataSource.data?.length">
+		<div class="table-container">
+			<table class="ob-table ob-table-hover ob-table-sm" mat-table [dataSource]="profilesDataSource">
+				<ng-container matColumnDef="select">
+					<th mat-header-cell *matHeaderCellDef>
+						<mat-checkbox #checkAllCb
+									  (change)="$event ? selectedProfilesService.toggleAll(profilesDataSource.data) : null"
+									  [checked]="selectedProfilesService.isAllSelected(profilesDataSource.data)"
+									  [indeterminate]="!checkAllCb.checked && selectedProfilesService.isSomeSelected(profilesDataSource.data)">
+						</mat-checkbox>
+					</th>
+					<td mat-cell *matCellDef="let profile">
+						<mat-checkbox (click)="$event.stopPropagation()"
+									  (change)="$event ? selectedProfilesService.toggle(profile) : null"
+									  [checked]="selectedProfilesService.isSelected(profile)">
+						</mat-checkbox>
+					</td>
+				</ng-container>
+				<ng-container matColumnDef="firstname">
+					<th mat-header-cell
+						*matHeaderCellDef>{{"reports.a4a6.firstName" | translate}}</th>
+					<td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+				</ng-container>
+				<ng-container matColumnDef="name">
+					<th mat-header-cell
+						*matHeaderCellDef>{{"reports.a4a6.surName" | translate}}</th>
+					<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+				</ng-container>
+				<ng-container matColumnDef="userExtId">
+					<th mat-header-cell *matHeaderCellDef>Ext_ID</th>
+					<td mat-cell *matCellDef="let element"> {{element.userExtId}} </td>
+				</ng-container>
+				<ng-container matColumnDef="email">
+					<th mat-header-cell
+						*matHeaderCellDef>{{"reports.a4a6.email" | translate}}</th>
+					<td mat-cell *matCellDef="let element"> {{element.email}} </td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="TABLE_ROWS; sticky: true"></tr>
+				<tr mat-row *matRowDef="let profile; columns: TABLE_ROWS;"
+					(click)="selectedProfilesService.toggle(profile)">
+				</tr>
+			</table>
+		</div>
+	</ng-container>
+</ng-container>
+<ng-template #profilesLoading>
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

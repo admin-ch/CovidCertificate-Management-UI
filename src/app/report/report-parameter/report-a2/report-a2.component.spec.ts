@@ -6,7 +6,8 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Subject} from "rxjs";
 
 describe('ReportA2Component', () => {
 	let component: ReportA2Component;
@@ -17,7 +18,15 @@ describe('ReportA2Component', () => {
 		await TestBed.configureTestingModule({
 			imports: [ObliqueTestingModule],
 			declarations: [ReportA2Component],
-			providers: [],
+			providers: [
+				{
+					provide: ReportService,
+					useValue: {
+						formGroup: new FormGroup({}),
+						reset$: new Subject()
+					}
+				}
+			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		}).compileComponents();
 	});
@@ -26,8 +35,10 @@ describe('ReportA2Component', () => {
 		fixture = TestBed.createComponent(ReportA2Component);
 		component = fixture.componentInstance;
 		reportService = TestBed.inject(ReportService);
-		component.reportFormGroup = new FormGroup({
-			[ReportType.A2]: new FormGroup({})
+		reportService.formGroup = new FormGroup({
+			[ReportType.A2]: new FormGroup({
+				uvcis: new FormControl([])
+			})
 		});
 		fixture.detectChanges();
 	});
@@ -52,7 +63,7 @@ describe('ReportA2Component', () => {
 		});
 		it('should push the selectedUvcis', () => {
 			component.add(event);
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([event.value]);
+			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual([event.value]);
 		});
 		describe('if value is valid', () => {
 			it('should not push to errorUvcis', () => {
@@ -89,10 +100,10 @@ describe('ReportA2Component', () => {
 
 	describe('remove()', () => {
 		beforeEach(() => {
-			reportService.parameter[ReportType.A2].uvcis = [
+			reportService.formGroup.get(ReportType.A2).get('uvcis').setValue([
 				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC',
 				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'
-			];
+			])
 			component.formControl.markAsTouched();
 		});
 
@@ -110,12 +121,12 @@ describe('ReportA2Component', () => {
 
 		it('should remove from selectedUvcis if exists', () => {
 			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC');
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']);
+			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']);
 		});
 
 		it('should not remove any from selectedUvcis if not exists', () => {
 			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC-1');
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([
+			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual([
 				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC',
 				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'
 			]);
@@ -146,9 +157,9 @@ describe('ReportA2Component', () => {
 			expect(component.errorUvcis).toEqual([]);
 		});
 		it('should reset the selectedUvcis', () => {
-			reportService.parameter[ReportType.A2].uvcis = ['1', '2', '3'];
+			reportService.formGroup.get(ReportType.A2).get('uvcis').setValue(['1', '2', '3'])
 			component.resetInput();
-			expect(reportService.parameter[ReportType.A2].uvcis).toEqual([]);
+			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual([]);
 		});
 		it('should setchipList.errorState to false', () => {
 			component.chipList.errorState = true;

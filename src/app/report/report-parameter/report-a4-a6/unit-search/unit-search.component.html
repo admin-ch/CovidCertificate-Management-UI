@@ -1,0 +1,89 @@
+<fieldset>
+	<ec-field-wrapper [isError]="userIdsFormArray.touched && userIdsFormArray.hasError('required')">
+		<p>{{'reports.a4a6.searchByUnitName' | translate}}</p>
+		<div class="tree-search-input-container">
+			<mat-form-field class="tree-search-input">
+				<mat-label>{{ "reports.a4a6.search" | translate }}</mat-label>
+				<input type="text" matInput
+					   (keydown.enter)="setHiddenBySearchValue(treeDataSource.data)"
+					   [(ngModel)]="organisationSearchValue"
+					   [ngModelOptions]="{standalone: true}"
+				/>
+				<button *ngIf="organisationSearchValue" type="button" matSuffix mat-icon-button
+						(click)="clearOrganisationSearch()">
+					<mat-icon
+						svgIcon="{{'cancel'}}">
+					</mat-icon>
+				</button>
+			</mat-form-field>
+			<button
+				type="button"
+				mat-button
+				(click)="setHiddenBySearchValue(treeDataSource.data)"
+				obButton="secondary"
+			>
+				{{ "reports.a4a6.search" | translate }}
+			</button>
+		</div>
+
+		<div class="divider"></div>
+
+		<div *ngIf="isUnitTreeLoading && !!authority; else hasAuthority">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</div>
+		<ng-template #hasAuthority>
+			<div *ngIf="!authority; else hasNoFound">
+				{{ "reports.a4a6.chooseDataroom" | translate }}
+			</div>
+			<ng-template #hasNoFound>
+				<div *ngIf="isNoneDisplayed(); else matTree">
+					{{ "reports.a4a6.noUnitsFound" | translate }}
+				</div>
+				<ng-template #matTree>
+					<mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl" class="unit-tree">
+						<mat-tree-node class="no-padding" *matTreeNodeDef="let node"
+									   [class.unit-tree-invisible]="node.hidden">
+							<div class="profiles-container">
+								<div class="profiles-node">
+									<button type="button" mat-icon-button matTreeNodeToggle>
+										<mat-icon
+											svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
+									</button>
+									<div
+										[style.font-weight]="treeControl.isExpanded(node) ? 'bold' : ''">{{node.name}}</div>
+								</div>
+								<div class="profiles-list-container">
+									<ng-container *ngIf="treeControl.isExpanded(node)">
+										<ec-profiles-table [authority]="authority" [node]="node"
+														   [treeControl]="treeControl">
+										</ec-profiles-table>
+									</ng-container>
+								</div>
+							</div>
+						</mat-tree-node>
+
+						<mat-nested-tree-node *matTreeNodeDef="let node; when: isVisible"
+											  [class.unit-tree-invisible]="node.hidden">
+							<div class="mat-tree-node">
+								<button type="button" mat-icon-button matTreeNodeToggle>
+									<mat-icon
+										svgIcon="{{treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'}}"></mat-icon>
+								</button>
+								{{node.name}}
+							</div>
+							<div [class.unit-tree-invisible]="node.hidden || !treeControl.isExpanded(node)"
+								 role="group">
+								<ng-container matTreeNodeOutlet></ng-container>
+								<ec-profiles-table [authority]="authority" [node]="node"
+												   [treeControl]="treeControl"></ec-profiles-table>
+							</div>
+						</mat-nested-tree-node>
+					</mat-tree>
+				</ng-template>
+			</ng-template>
+		</ng-template>
+		<mat-error>
+			{{'reports.a4a6.oneUserHasToBeSelected' | translate}}
+		</mat-error>
+	</ec-field-wrapper>
+</fieldset>

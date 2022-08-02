@@ -1,0 +1,12 @@
+mat-form-field {
+	max-width: 30em;
+}
+
+.period-container {
+	display: flex;
+	flex-direction: row;
+
+	mat-form-field {
+		margin-right: 2em;
+	}
+}

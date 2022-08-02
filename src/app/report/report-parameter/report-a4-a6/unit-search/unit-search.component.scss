@@ -1,0 +1,111 @@
+:host {
+	display: flex;
+	flex-direction: column;
+}
+.tree-search-input {
+	max-width: 40em;
+}
+
+.tree-search-input-container {
+	display: flex;
+	flex-direction: row;
+
+	button {
+		height: fit-content;
+		margin-top: 0.4em;
+		margin-left: 1em;
+	}
+}
+
+::ng-deep ec-report-a4-a6 mat-tree {
+
+	.mat-tree-node {
+		min-height: unset;
+	}
+
+	[mat-icon-button] {
+		height: 2em;
+		width: 2em;
+	}
+	mat-progress-spinner {
+		margin: auto;
+	}
+
+	.mat-icon {
+		vertical-align: unset !important;
+		line-height: 0;
+		height: 1.5em;
+		width: 1.5em;
+
+		svg {
+			// Remove vertical align, otherwise the X is not in the middle.
+			vertical-align: unset;
+		}
+	}
+}
+
+.unit-tree-invisible {
+	display: none;
+}
+
+.unit-tree ul,
+.unit-tree li {
+	margin-top: 0;
+	margin-bottom: 0;
+	list-style-type: none;
+}
+
+/** Padding for nested nodes. */
+.unit-tree .mat-nested-tree-node div[role=group] {
+	padding-left: 2em;
+}
+
+/** Padding for leaf nodes, excluding the last with the EIAM profiles */
+.unit-tree div[role=group] > .mat-tree-node:not(.no-padding) {
+	padding-left: 2em;
+}
+
+.profiles-container {
+	width: 100%;
+
+	.profiles-node {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.profiles-list-container {
+	padding-left: 2em;
+
+	.profile-checkbox-container {
+		.custom-checkbox-label {
+			display: flex;
+			cursor: pointer;
+		}
+	}
+
+	mat-progress-bar {
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
+
+	table {
+		width: 100%;
+	}
+}
+
+.bordered-wrapper {
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 4px;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+.divider {
+	border-top: 1px solid rgba(0,0,0,.2);
+	margin-bottom: 1em
+}
+
+mat-error {
+	margin-top: 1em
+}

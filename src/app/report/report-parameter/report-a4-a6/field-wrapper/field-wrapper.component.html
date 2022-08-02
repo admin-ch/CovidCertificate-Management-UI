@@ -1,0 +1,6 @@
+<div class="wrapper" [ngClass]="{'is-error': isError}">
+	<ng-content></ng-content>
+	<ng-container *ngIf="isError">
+		<ng-content select="mat-error"></ng-content>
+	</ng-container>
+</div>

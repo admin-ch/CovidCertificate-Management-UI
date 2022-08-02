@@ -4,6 +4,8 @@ import {ReportType} from 'shared/model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {MatHorizontalStepper} from '@angular/material/stepper';
+import {ObNotificationService} from "@oblique/oblique";
+import {TranslateService} from "@ngx-translate/core";
 
 export enum GenerationResponseStatus {
 	OK = 'OK',
@@ -14,7 +16,9 @@ export interface ReportResponse {
 	report: string; // Base64 encoded
 	httpStatus: string;
 	error?: any; // Currently not explicitly used
-	details?: any; // If present, the report is only partially complete
+	details?: {
+		infoCode: number
+	};
 }
 
 @Component({
@@ -30,8 +34,11 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
+		private readonly obNotificationService: ObNotificationService,
+		private readonly translate: TranslateService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
-	) {}
+	) {
+	}
 
 	ngOnInit() {
 		this.subscription = this.reportService.generateReport$.subscribe(() => {
@@ -40,9 +47,23 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				case ReportType.A2:
 					url += '/fraud/a2/by_uvci';
 					break;
+				case ReportType.A7:
+					url += '/fraud/a7';
+					break;
+				case ReportType.A4:
+					url += '/fraud/a4/by_users_and_types';
+					break;
+				default:
+					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`)
 			}
-			this.http.post(url, this.reportService.parameter[this.reportService.selectedReportType]).subscribe({
+			this.http.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value).subscribe({
 				next: (response: ReportResponse) => {
+					if (response.details?.infoCode === 1005) {
+						this.obNotificationService.error(this.translate.instant('reports.excelLimitExceeded'))
+						this.stepper.previous()
+						return
+					}
+
 					this.reportService.reportFinished$.next(
 						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
 					);
@@ -51,8 +72,8 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
 					link.click();
 					link.remove();
+					this.stepper.next()
 				},
-				complete: () => this.stepper.next(),
 				error: () => this.stepper.previous()
 			});
 		});
