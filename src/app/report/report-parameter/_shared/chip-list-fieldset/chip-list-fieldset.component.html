@@ -1,0 +1,25 @@
+<fieldset>
+	<ng-content></ng-content>
+	<mat-form-field *ngIf="formControl" appearance="fill">
+		<mat-chip-list #chipList>
+			<mat-chip
+				*ngFor="let uvci of chipDataFormControl.value"
+				[ngClass]="{ error: errorUvcis.includes(uvci) }"
+				(removed)="remove(uvci)"
+			>
+				{{ uvci }}
+				<mat-icon class="" svgIcon="cancel" matChipRemove></mat-icon>
+			</mat-chip>
+			<input
+				[formControl]="formControl"
+				[matChipInputFor]="chipList"
+				[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+				(matChipInputTokenEnd)="add($event)"
+				(paste)="onPaste($event)"
+			/>
+		</mat-chip-list>
+		<mat-error>
+			<ng-content select="[chipListFieldsetErrors]"></ng-content>
+		</mat-error>
+	</mat-form-field>
+</fieldset>

@@ -1,0 +1,11 @@
+<h3>{{ "reports.a12.title" | translate }}</h3>
+<ec-chip-list-fieldset [chipDataFormControl]="transferCodesFormControl" [formatValidator]="transferCodesValidator">
+	<p [innerHTML]="'reports.transferCodes.info' | translate"></p>
+	<p>{{ "reports.transferCodes.format" | translate }}</p>
+	<ng-container chipListFieldsetErrors>
+		<ng-container
+			*ngIf="transferCodesFormControl.hasError('format')">{{ "reports.transferCodes.format.error" | translate }}</ng-container>
+		<ng-container
+			*ngIf="transferCodesFormControl.hasError('required')">{{ "i18n.validation.required" | translate }}</ng-container>
+	</ng-container>
+</ec-chip-list-fieldset>

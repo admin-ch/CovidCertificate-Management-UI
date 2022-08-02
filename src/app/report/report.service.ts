@@ -21,6 +21,9 @@ export class ReportService {
 			[ReportType.A2]: this.fb.group({
 				uvcis: [[], Validators.required]
 			}),
+			[ReportType.A12]: this.fb.group({
+				transferCodes: [[], Validators.required]
+			}),
 			[ReportType.A7]: this.fb.group({
 					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
