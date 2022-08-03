@@ -5,7 +5,7 @@ import {SharedModule} from 'shared/shared.module';
 import {ReportGenerationComponent} from './report-generation.component';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportGenerationComponent', () => {
 	let component: ReportGenerationComponent;

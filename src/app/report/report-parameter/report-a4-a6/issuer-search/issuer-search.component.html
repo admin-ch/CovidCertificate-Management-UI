@@ -4,86 +4,102 @@
 			{{ "reports.a4a6.chooseDataroom" | translate }}
 		</div>
 		<div [hidden]="!authority">
-			<p>{{'reports.a4a6.searchByParameter' | translate}}</p>
+			<p>{{ "reports.a4a6.searchByParameter" | translate }}</p>
 			<form [formGroup]="searchFieldsFormGroup" class="search-inputs-container">
 				<mat-form-field>
 					<mat-label>{{ "reports.a4a6.firstName" | translate }}</mat-label>
-					<input type="text" matInput
-						   (keydown.enter)="applySearch$.next()"
-						   formControlName="firstName"
-					/>
-					<button *ngIf="searchFieldsFormGroup.get('firstName').value" type="button" matSuffix mat-icon-button
-							tabindex="-1"
-							(click)="searchFieldsFormGroup.get('firstName').reset(''); applySearch$.next()">
-						<mat-icon
-							svgIcon="{{'cancel'}}">
-						</mat-icon>
+					<input type="text" matInput (keydown.enter)="applySearch$.next()" formControlName="firstName" />
+					<button
+						*ngIf="searchFieldsFormGroup.get('firstName').value"
+						type="button"
+						matSuffix
+						mat-icon-button
+						tabindex="-1"
+						(click)="searchFieldsFormGroup.get('firstName').reset(''); applySearch$.next()"
+					>
+						<mat-icon svgIcon="{{ 'cancel' }}"> </mat-icon>
 					</button>
 					<mat-error *ngIf="searchFieldsFormGroup.get('firstName').value?.length < 3">
-						{{'i18n.validation.minlength' | translate:{
-						requiredLength: 3,
-						actualLength: searchFieldsFormGroup.get('firstName').value?.length
-					} }}
+						{{
+							"i18n.validation.minlength"
+								| translate
+									: {
+											requiredLength: 3,
+											actualLength: searchFieldsFormGroup.get("firstName").value?.length
+									  }
+						}}
 					</mat-error>
 				</mat-form-field>
 				<mat-form-field>
 					<mat-label>{{ "reports.a4a6.surName" | translate }}</mat-label>
-					<input type="text" matInput
-						   (keydown.enter)="applySearch$.next()"
-						   formControlName="name"
-					/>
-					<button *ngIf="searchFieldsFormGroup.get('name').value" type="button" matSuffix mat-icon-button
-							tabindex="-1"
-							(click)="searchFieldsFormGroup.get('name').reset(''); applySearch$.next()">
-						<mat-icon
-							svgIcon="{{'cancel'}}">
-						</mat-icon>
+					<input type="text" matInput (keydown.enter)="applySearch$.next()" formControlName="name" />
+					<button
+						*ngIf="searchFieldsFormGroup.get('name').value"
+						type="button"
+						matSuffix
+						mat-icon-button
+						tabindex="-1"
+						(click)="searchFieldsFormGroup.get('name').reset(''); applySearch$.next()"
+					>
+						<mat-icon svgIcon="{{ 'cancel' }}"> </mat-icon>
 					</button>
 					<mat-error *ngIf="searchFieldsFormGroup.get('name').value?.length < 3">
-						{{'i18n.validation.minlength' | translate:{
-						requiredLength: 3,
-						actualLength: searchFieldsFormGroup.get('name').value?.length
-					} }}
+						{{
+							"i18n.validation.minlength"
+								| translate
+									: {
+											requiredLength: 3,
+											actualLength: searchFieldsFormGroup.get("name").value?.length
+									  }
+						}}
 					</mat-error>
 				</mat-form-field>
 				<mat-form-field>
 					<mat-label>EXT_ID</mat-label>
-					<input type="text" matInput
-						   (keydown.enter)="applySearch$.next()"
-						   formControlName="userExtId"
-					/>
-					<button *ngIf="searchFieldsFormGroup.get('userExtId').value" type="button" matSuffix mat-icon-button
-							tabindex="-1"
-							(click)="searchFieldsFormGroup.get('userExtId').reset(''); applySearch$.next()">
-						<mat-icon
-							svgIcon="{{'cancel'}}">
-						</mat-icon>
+					<input type="text" matInput (keydown.enter)="applySearch$.next()" formControlName="userExtId" />
+					<button
+						*ngIf="searchFieldsFormGroup.get('userExtId').value"
+						type="button"
+						matSuffix
+						mat-icon-button
+						tabindex="-1"
+						(click)="searchFieldsFormGroup.get('userExtId').reset(''); applySearch$.next()"
+					>
+						<mat-icon svgIcon="{{ 'cancel' }}"> </mat-icon>
 					</button>
 					<mat-error *ngIf="searchFieldsFormGroup.get('userExtId').value?.length < 3">
-						{{'i18n.validation.minlength' | translate:{
-						requiredLength: 3,
-						actualLength: searchFieldsFormGroup.get('userExtId').value?.length
-					} }}
+						{{
+							"i18n.validation.minlength"
+								| translate
+									: {
+											requiredLength: 3,
+											actualLength: searchFieldsFormGroup.get("userExtId").value?.length
+									  }
+						}}
 					</mat-error>
 				</mat-form-field>
 				<mat-form-field>
 					<mat-label>{{ "reports.a4a6.email" | translate }}</mat-label>
-					<input type="text" matInput
-						   (keydown.enter)="applySearch$.next()"
-						   formControlName="email"
-					/>
-					<button *ngIf="searchFieldsFormGroup.get('email').value" type="button" matSuffix mat-icon-button
-							tabindex="-1"
-							(click)="searchFieldsFormGroup.get('email').reset(''); applySearch$.next()">
-						<mat-icon
-							svgIcon="{{'cancel'}}">
-						</mat-icon>
+					<input type="text" matInput (keydown.enter)="applySearch$.next()" formControlName="email" />
+					<button
+						*ngIf="searchFieldsFormGroup.get('email').value"
+						type="button"
+						matSuffix
+						mat-icon-button
+						tabindex="-1"
+						(click)="searchFieldsFormGroup.get('email').reset(''); applySearch$.next()"
+					>
+						<mat-icon svgIcon="{{ 'cancel' }}"> </mat-icon>
 					</button>
 					<mat-error *ngIf="searchFieldsFormGroup.get('email').value?.length < 3">
-						{{'i18n.validation.minlength' | translate:{
-						requiredLength: 3,
-						actualLength: searchFieldsFormGroup.get('email').value?.length
-					} }}
+						{{
+							"i18n.validation.minlength"
+								| translate
+									: {
+											requiredLength: 3,
+											actualLength: searchFieldsFormGroup.get("email").value?.length
+									  }
+						}}
 					</mat-error>
 				</mat-form-field>
 				<button
@@ -100,67 +116,76 @@
 			<div class="divider"></div>
 
 			<div class="profiles-container">
-				<div class="profiles-loading-shade"
-					 *ngIf="isIssuerLoading && !!authority">
+				<div class="profiles-loading-shade" *ngIf="isIssuerLoading && !!authority">
 					<mat-spinner></mat-spinner>
 				</div>
 
 				<div class="profiles-table-container">
-					<table mat-table class="ob-table ob-table-hover ob-table-sm" [dataSource]="profilesDataSource"
-						   matSort matSortActive="name"
-						   matSortDirection="asc"
-						   matSortDisableClear>
+					<table
+						mat-table
+						class="ob-table ob-table-hover ob-table-sm"
+						[dataSource]="profilesDataSource"
+						matSort
+						matSortActive="name"
+						matSortDirection="asc"
+						matSortDisableClear
+					>
 						<ng-container matColumnDef="select">
-							<th mat-header-cell *matHeaderCellDef class="select-column">
-							</th>
+							<th mat-header-cell *matHeaderCellDef class="select-column"></th>
 							<td mat-cell *matCellDef="let profile">
-								<mat-checkbox (click)="$event.stopPropagation()"
-											  (change)="$event ? selectedProfilesService.toggle(profile) : null"
-											  [checked]="selectedProfilesService.isSelected(profile)">
+								<mat-checkbox
+									(click)="$event.stopPropagation()"
+									(change)="$event ? selectedProfilesService.toggle(profile) : null"
+									[checked]="selectedProfilesService.isSelected(profile)"
+								>
 								</mat-checkbox>
 							</td>
 						</ng-container>
 						<ng-container matColumnDef="firstname">
-							<th mat-header-cell mat-sort-header disableClear class="firstname-column"
-								*matHeaderCellDef>{{"reports.a4a6.firstName" | translate}}</th>
-							<td mat-cell *matCellDef="let profile">{{profile.firstname}}</td>
+							<th mat-header-cell mat-sort-header disableClear class="firstname-column" *matHeaderCellDef>
+								{{ "reports.a4a6.firstName" | translate }}
+							</th>
+							<td mat-cell *matCellDef="let profile">{{ profile.firstname }}</td>
 						</ng-container>
 						<ng-container matColumnDef="name">
-							<th mat-header-cell mat-sort-header disableClear class="name-column"
-								*matHeaderCellDef>{{"reports.a4a6.surName" | translate}}</th>
-							<td mat-cell *matCellDef="let profile">{{profile.name}}</td>
+							<th mat-header-cell mat-sort-header disableClear class="name-column" *matHeaderCellDef>
+								{{ "reports.a4a6.surName" | translate }}
+							</th>
+							<td mat-cell *matCellDef="let profile">{{ profile.name }}</td>
 						</ng-container>
 						<ng-container matColumnDef="userExtId">
-							<th mat-header-cell mat-sort-header disableClear class="userExtId-column"
-								*matHeaderCellDef>Ext_ID
+							<th mat-header-cell mat-sort-header disableClear class="userExtId-column" *matHeaderCellDef>
+								Ext_ID
 							</th>
-							<td mat-cell *matCellDef="let profile">{{profile.userExtId}}</td>
+							<td mat-cell *matCellDef="let profile">{{ profile.userExtId }}</td>
 						</ng-container>
 						<ng-container matColumnDef="email">
-							<th mat-header-cell mat-sort-header disableClear class="email-column"
-								*matHeaderCellDef>{{"reports.a4a6.email" | translate}}</th>
-							<td mat-cell *matCellDef="let profile">{{profile.email}}</td>
+							<th mat-header-cell mat-sort-header disableClear class="email-column" *matHeaderCellDef>
+								{{ "reports.a4a6.email" | translate }}
+							</th>
+							<td mat-cell *matCellDef="let profile">{{ profile.email }}</td>
 						</ng-container>
 						<ng-container matColumnDef="unitName">
-							<th mat-header-cell mat-sort-header disableClear class="unitName-column"
-								*matHeaderCellDef>{{"reports.a4a6.unit" | translate}}</th>
-							<td mat-cell *matCellDef="let profile">{{profile.unitName}}</td>
+							<th mat-header-cell mat-sort-header disableClear class="unitName-column" *matHeaderCellDef>
+								{{ "reports.a4a6.unit" | translate }}
+							</th>
+							<td mat-cell *matCellDef="let profile">{{ profile.unitName }}</td>
 						</ng-container>
 
 						<tr mat-header-row *matHeaderRowDef="TABLE_ROWS; sticky: true"></tr>
-						<tr mat-row *matRowDef="let profile; columns: TABLE_ROWS;"
-							(click)="selectedProfilesService.toggle(profile)"></tr>
+						<tr
+							mat-row
+							*matRowDef="let profile; columns: TABLE_ROWS"
+							(click)="selectedProfilesService.toggle(profile)"
+						></tr>
 					</table>
 				</div>
 
-				<mat-paginator
-					[hidePageSize]="true"
-					[length]="totalHits"
-					pageSize="25"></mat-paginator>
+				<mat-paginator [hidePageSize]="true" [length]="totalHits" pageSize="25"></mat-paginator>
 			</div>
 		</div>
 		<mat-error>
-			{{'reports.a4a6.oneUserHasToBeSelected' | translate}}
+			{{ "reports.a4a6.oneUserHasToBeSelected" | translate }}
 		</mat-error>
 	</ec-field-wrapper>
 </fieldset>

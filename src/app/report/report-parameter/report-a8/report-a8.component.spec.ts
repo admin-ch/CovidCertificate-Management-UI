@@ -6,10 +6,10 @@ import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {DataRoomCode, ReportType} from 'shared/model';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from "../../../auth/auth.service";
-import {TranslateModule} from "@ngx-translate/core";
-import * as moment from "moment";
-import {Subject} from "rxjs";
+import {AuthService} from '../../../auth/auth.service';
+import {TranslateModule} from '@ngx-translate/core';
+import * as moment from 'moment';
+import {Subject} from 'rxjs';
 
 describe('ReportA8Component', () => {
 	let component: ReportA8Component;
@@ -33,7 +33,7 @@ describe('ReportA8Component', () => {
 					useValue: {
 						authorizedDataRooms$: new Subject<DataRoomCode[]>()
 					}
-				},
+				}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 		}).compileComponents();
@@ -48,7 +48,7 @@ describe('ReportA8Component', () => {
 				from: new FormControl('', Validators.required),
 				to: new FormControl('', Validators.required),
 				canton: new FormControl('', Validators.required),
-				types: new FormArray([]),
+				types: new FormArray([])
 			})
 		});
 		fixture.detectChanges();
@@ -60,13 +60,13 @@ describe('ReportA8Component', () => {
 
 	describe('resetInput', () => {
 		it('should clear all inputs', () => {
-			component.a8FormGroup.get('from').setValue(moment('2022-01-01'))
-			component.a8FormGroup.get('to').setValue(moment('2022-01-01'))
+			component.a8FormGroup.get('from').setValue(moment('2022-01-01'));
+			component.a8FormGroup.get('to').setValue(moment('2022-01-01'));
 
-			component.resetInput()
+			component.resetInput();
 
-			expect(component.a8FormGroup.get('from').value).toEqual('')
-			expect(component.a8FormGroup.get('to').value).toEqual('')
+			expect(component.a8FormGroup.get('from').value).toEqual('');
+			expect(component.a8FormGroup.get('to').value).toEqual('');
 		});
 	});
 });

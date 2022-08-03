@@ -13,6 +13,8 @@ platformBrowserDynamic([
 	{
 		provide: 'IS_NOTIFICATION_SERVICE_ENABLED',
 		useFactory: () => environment.stage === 'd' || environment.stage === 'a' || environment.stage === 'p'
+		// use to test notification service locally
+		// useFactory: () => true
 	},
 	{provide: 'REPORT_HOST', useValue: environment.reportHost},
 	{provide: 'EIAM_SELF_ADMIN', useValue: environment.eiamSelfAdmin}

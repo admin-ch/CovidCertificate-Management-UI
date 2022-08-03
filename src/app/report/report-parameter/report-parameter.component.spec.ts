@@ -5,7 +5,7 @@ import {SharedModule} from 'shared/shared.module';
 import {ReportService} from '../report.service';
 import {ReportParameterComponent} from './report-parameter.component';
 import {MatHorizontalStepper} from '@angular/material/stepper';
-import {FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 
 describe('ReportParameterComponent', () => {
 	let component: ReportParameterComponent;
@@ -14,7 +14,7 @@ describe('ReportParameterComponent', () => {
 
 	const reportServiceMock = {
 		generateReport$: {
-			next: jest.fn(),
+			next: jest.fn()
 		},
 		formGroup: new FormGroup({})
 	};
@@ -68,9 +68,9 @@ describe('ReportParameterComponent', () => {
 		});
 		describe('when formGroup is invalid', () => {
 			beforeEach(() => {
-				reportServiceMock.generateReport$.next.mockReset()
-				reportServiceMock.formGroup.setErrors({hasError: true})
-			})
+				reportServiceMock.generateReport$.next.mockReset();
+				reportServiceMock.formGroup.setErrors({hasError: true});
+			});
 
 			it(
 				'should not emit next()',
@@ -90,7 +90,7 @@ describe('ReportParameterComponent', () => {
 			it(
 				'should call formGroup.markAllAsTouched()',
 				waitForAsync(() => {
-					const spy = jest.spyOn(reportServiceMock.formGroup, 'markAllAsTouched')
+					const spy = jest.spyOn(reportServiceMock.formGroup, 'markAllAsTouched');
 					component.goNext();
 					expect(spy).toHaveBeenCalled();
 				})

@@ -4,7 +4,7 @@ import {Claims, OauthService} from './oauth.service';
 import {Observable, of, ReplaySubject, Subscription} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {HttpParams} from '@angular/common/http';
-import {DataRoomCode} from "shared/model";
+import {DataRoomCode} from 'shared/model';
 
 export enum AuthFunction {
 	// Navigation
@@ -63,18 +63,18 @@ export class AuthService implements OnDestroy {
 		this.authorizedFunctions$ = this.authorizedFunctions.asObservable();
 		this.authorizedDataRooms$ = this.authorizedDataRooms.asObservable();
 		this.claimsSubscription = oauthService.claims$.subscribe(claims => {
-			this.emitAuthorizedDataRooms(claims)
-		})
+			this.emitAuthorizedDataRooms(claims);
+		});
 
-		this.claimsSubscription.add(oauthService.claims$
-			.pipe(
-				switchMap(claims => this.getAuthorizedFunctions(claims)),
-			)
-			.subscribe(authorizedFunctions => {
-				if (authorizedFunctions != null) {
-					this.authorizedFunctions.next(authorizedFunctions);
-				}
-			}));
+		this.claimsSubscription.add(
+			oauthService.claims$
+				.pipe(switchMap(claims => this.getAuthorizedFunctions(claims)))
+				.subscribe(authorizedFunctions => {
+					if (authorizedFunctions != null) {
+						this.authorizedFunctions.next(authorizedFunctions);
+					}
+				})
+		);
 	}
 
 	ngOnDestroy(): void {
@@ -108,14 +108,14 @@ export class AuthService implements OnDestroy {
 
 	private emitAuthorizedDataRooms(claims: Claims): void {
 		if (claims?.userroles?.length) {
-			const authorizedDataRooms: DataRoomCode[] = []
+			const authorizedDataRooms: DataRoomCode[] = [];
 			for (const role of claims.userroles) {
 				Object.keys(DataRoomCode).forEach(code => {
-					const lowerCaseCode = code.toLocaleLowerCase()
+					const lowerCaseCode = code.toLocaleLowerCase();
 					if (role.endsWith(`bag-cc-dr_${lowerCaseCode}`)) {
-						authorizedDataRooms.push(DataRoomCode[code])
+						authorizedDataRooms.push(DataRoomCode[code]);
 					}
-				})
+				});
 			}
 			this.authorizedDataRooms.next(authorizedDataRooms);
 		} else {

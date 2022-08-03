@@ -20,15 +20,14 @@ export class SelectReportTypeComponent {
 		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
 		private readonly authService: AuthService,
 		private readonly reportService: ReportService
-	) {
-	}
+	) {}
 
 	goNext(): void {
 		if (this.formControl.valid) {
 			this.reportService.selectedReportType = this.formControl.value;
 			this.stepper.next();
 		} else {
-			this.formControl.markAsTouched()
+			this.formControl.markAsTouched();
 		}
 	}
 }

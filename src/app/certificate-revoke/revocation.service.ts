@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from 'shared/api.service';
 import {Observable} from 'rxjs';
-import {RevokeDto} from 'shared/model';
+import {RevocationResponseDto, RevokeDto} from 'shared/model';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,7 +11,7 @@ export class RevocationService {
 
 	constructor(private readonly http: ApiService) {}
 
-	revoke(uvci: RevokeDto): Observable<void> {
-		return this.http.post<void>(this.revokeApi, uvci);
+	revoke(uvci: RevokeDto): Observable<RevocationResponseDto> {
+		return this.http.post<RevocationResponseDto>(this.revokeApi, uvci);
 	}
 }

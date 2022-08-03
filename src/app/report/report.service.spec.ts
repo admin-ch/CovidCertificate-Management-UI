@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ReportService} from './report.service';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('ReportService', () => {
 	let service: ReportService;

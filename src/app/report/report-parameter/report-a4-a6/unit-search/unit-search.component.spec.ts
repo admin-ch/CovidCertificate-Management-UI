@@ -1,51 +1,59 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {UnitSearchComponent, UnitTree} from './unit-search.component';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from "@angular/core";
-import {ObliqueTestingModule} from "@oblique/oblique";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {SelectedProfilesService} from "../selected-profiles.service";
-import {MatTreeModule} from "@angular/material/tree";
-import {MatTableModule} from "@angular/material/table";
-import {HttpClient} from "@angular/common/http";
-import {of, Subject} from "rxjs";
-import {FormArray} from "@angular/forms";
-import {ReportService} from "../../../report.service";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
+import {ObliqueTestingModule} from '@oblique/oblique';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {SelectedProfilesService} from '../selected-profiles.service';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatTableModule} from '@angular/material/table';
+import {HttpClient} from '@angular/common/http';
+import {of, Subject} from 'rxjs';
+import {FormArray} from '@angular/forms';
+import {ReportService} from '../../../report.service';
 
 describe('UnitSearchComponent', () => {
 	let component: UnitSearchComponent;
 	let fixture: ComponentFixture<UnitSearchComponent>;
-	let http: HttpClient
-	let translateService: TranslateService
-	let selectedProfilesService: SelectedProfilesService
+	let http: HttpClient;
+	let translateService: TranslateService;
+	let selectedProfilesService: SelectedProfilesService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule, HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule, MatTreeModule],
+			imports: [
+				ObliqueTestingModule,
+				TranslateModule,
+				HttpClientTestingModule,
+				TranslateModule.forRoot(),
+				MatTableModule,
+				MatTreeModule
+			],
 			declarations: [UnitSearchComponent],
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},
 				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()},
-				{provide: ReportService, useValue: {
-					reset$: new Subject()
-					}},
+				{
+					provide: ReportService,
+					useValue: {
+						reset$: new Subject()
+					}
+				}
 			],
-			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-
-		})
-			.compileComponents();
+			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+		}).compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(UnitSearchComponent);
 		component = fixture.componentInstance;
 
-		http = TestBed.inject(HttpClient)
-		translateService = TestBed.inject(TranslateService)
-		selectedProfilesService = TestBed.inject(SelectedProfilesService)
+		http = TestBed.inject(HttpClient);
+		translateService = TestBed.inject(TranslateService);
+		selectedProfilesService = TestBed.inject(SelectedProfilesService);
 
-		component.userIdsFormArray = new FormArray([])
+		component.userIdsFormArray = new FormArray([]);
 
 		fixture.detectChanges();
 	});
@@ -55,36 +63,42 @@ describe('UnitSearchComponent', () => {
 	});
 
 	describe('ngOnChanges', () => {
-		let post: jest.SpyInstance
+		let post: jest.SpyInstance;
 
 		beforeEach(() => {
-			post = jest.spyOn(http, 'post')
-			post.mockReturnValue(of({}))
-			const currentLang = jest.spyOn(translateService, 'currentLang', 'get')
-			currentLang.mockReturnValue('de')
-			component.authority = 'buv'
-		})
+			post = jest.spyOn(http, 'post');
+			post.mockReturnValue(of({}));
+			const currentLang = jest.spyOn(translateService, 'currentLang', 'get');
+			currentLang.mockReturnValue('de');
+			component.authority = 'buv';
+		});
 
 		it('should perform post request if its the first change', () => {
-			component.ngOnChanges({authority: new SimpleChange('de', 'de', true)})
+			component.ngOnChanges({authority: new SimpleChange('de', 'de', true)});
 
-			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v2/report/unit/tree", {authority: 'buv', language: 'de'})
+			expect(post).toHaveBeenCalledWith('REPORT_HOST/api/v2/report/unit/tree', {
+				authority: 'buv',
+				language: 'de'
+			});
 		});
 
 		it('should perform post request if authority has changed', () => {
-			component.ngOnChanges({authority: new SimpleChange('be', 'buv', false)})
+			component.ngOnChanges({authority: new SimpleChange('be', 'buv', false)});
 
-			expect(post).toHaveBeenCalledWith("REPORT_HOST/api/v2/report/unit/tree", {authority: 'buv', language: 'de'})
+			expect(post).toHaveBeenCalledWith('REPORT_HOST/api/v2/report/unit/tree', {
+				authority: 'buv',
+				language: 'de'
+			});
 		});
 
 		it('should not perform post request if authority is null', () => {
-			component.ngOnChanges({authority: new SimpleChange('be', null, true)})
+			component.ngOnChanges({authority: new SimpleChange('be', null, true)});
 
-			expect(post).not.toHaveBeenCalled()
+			expect(post).not.toHaveBeenCalled();
 		});
 
 		describe('in subscribe', () => {
-			let sentUnitTree: UnitTree
+			let sentUnitTree: UnitTree;
 			beforeEach(() => {
 				sentUnitTree = {
 					id: '1',
@@ -108,7 +122,7 @@ describe('UnitSearchComponent', () => {
 									id: '1.1.3',
 									name: '1.1.3',
 									children: []
-								},
+								}
 							]
 						},
 
@@ -130,94 +144,97 @@ describe('UnitSearchComponent', () => {
 									id: '1.2.3',
 									name: '1.2.3',
 									children: []
-								},
+								}
 							]
-						},
+						}
 					]
-				}
-				post.mockReturnValue(of(sentUnitTree))
-			})
+				};
+				post.mockReturnValue(of(sentUnitTree));
+			});
 
 			it('should set parents of unit trees', fakeAsync(() => {
-				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)})
+				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)});
 
-				tick()
+				tick();
 
 				const expectCorrectParents = (unitTree: UnitTree, expectedParent: UnitTree) => {
-					expect(unitTree.parent).toBe(expectedParent)
-					unitTree.children.forEach(child => expectCorrectParents(child, unitTree))
-				}
+					expect(unitTree.parent).toBe(expectedParent);
+					unitTree.children.forEach(child => expectCorrectParents(child, unitTree));
+				};
 			}));
 
 			it('should treeDataSource.data', fakeAsync(() => {
-				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)})
+				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)});
 
-				tick()
+				tick();
 
-				expect(component.treeDataSource.data).toBe(sentUnitTree.children)
+				expect(component.treeDataSource.data).toBe(sentUnitTree.children);
 			}));
 
 			it('should set isUnitTreeLoading to false', fakeAsync(() => {
 				component.isUnitTreeLoading = true;
-				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)})
+				component.ngOnChanges({authority: new SimpleChange('buv', 'be', true)});
 
-				tick()
+				tick();
 
-				expect(component.isUnitTreeLoading).toBe(false)
+				expect(component.isUnitTreeLoading).toBe(false);
 			}));
 		});
 	});
-
 
 	describe('setHiddenBySearchValue', () => {
 		it.each([
 			/** case 1 */
 			[
 				// expected
-				[{
-					id: '__1',
-					name: '__1',
-					hidden: false,
-					parent: expect.anything(),
-					children: [
-						{
-							id: '__1.1',
-							name: '__1.1',
-							hidden: false,
-							parent: expect.anything(),
-							children: [
-								{
-									id: '__1.1.1',
-									name: '__1.1.1',
-									hidden: false,
-									parent: expect.anything(),
-									children: []
-								},
-							]
-						},
-					]
-				}],
-				// unitTree
-				{
-					id: '__0',
-					name: '__0',
-					children: [{
+				[
+					{
 						id: '__1',
 						name: '__1',
+						hidden: false,
+						parent: expect.anything(),
 						children: [
 							{
 								id: '__1.1',
 								name: '__1.1',
+								hidden: false,
+								parent: expect.anything(),
 								children: [
 									{
 										id: '__1.1.1',
 										name: '__1.1.1',
+										hidden: false,
+										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					}]
+					}
+				],
+				// unitTree
+				{
+					id: '__0',
+					name: '__0',
+					children: [
+						{
+							id: '__1',
+							name: '__1',
+							children: [
+								{
+									id: '__1.1',
+									name: '__1.1',
+									children: [
+										{
+											id: '__1.1.1',
+											name: '__1.1.1',
+											children: []
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				// searchValue
 				'1.1.1'
@@ -226,50 +243,54 @@ describe('UnitSearchComponent', () => {
 			/** case 2 */
 			[
 				// expected
-				[{
-					id: '__1',
-					name: '__1',
-					hidden: false,
-					parent: expect.anything(),
-					children: [
-						{
-							id: '__1.1',
-							name: '__1.1',
-							hidden: false,
-							parent: expect.anything(),
-							children: [
-								{
-									id: '__1.1.1',
-									name: '__1.1.1',
-									hidden: false,
-									parent: expect.anything(),
-									children: []
-								},
-							]
-						},
-					]
-				}],
-				// unitTree
-				{
-					id: '__0',
-					name: '__0',
-					children: [{
+				[
+					{
 						id: '__1',
 						name: '__1',
+						hidden: false,
+						parent: expect.anything(),
 						children: [
 							{
 								id: '__1.1',
 								name: '__1.1',
+								hidden: false,
+								parent: expect.anything(),
 								children: [
 									{
 										id: '__1.1.1',
 										name: '__1.1.1',
+										hidden: false,
+										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					}]
+					}
+				],
+				// unitTree
+				{
+					id: '__0',
+					name: '__0',
+					children: [
+						{
+							id: '__1',
+							name: '__1',
+							children: [
+								{
+									id: '__1.1',
+									name: '__1.1',
+									children: [
+										{
+											id: '__1.1.1',
+											name: '__1.1.1',
+											children: []
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				// searchValue
 				'__1'
@@ -278,50 +299,54 @@ describe('UnitSearchComponent', () => {
 			/** case 3 */
 			[
 				// expected
-				[{
-					id: '__1',
-					name: '__1',
-					hidden: true,
-					parent: expect.anything(),
-					children: [
-						{
-							id: '__1.1',
-							name: '__1.1',
-							hidden: true,
-							parent: expect.anything(),
-							children: [
-								{
-									id: '__1.1.1',
-									name: '__1.1.1',
-									hidden: true,
-									parent: expect.anything(),
-									children: []
-								},
-							]
-						},
-					]
-				}],
-				// unitTree
-				{
-					id: '__0',
-					name: '__0',
-					children: [{
+				[
+					{
 						id: '__1',
 						name: '__1',
+						hidden: true,
+						parent: expect.anything(),
 						children: [
 							{
 								id: '__1.1',
 								name: '__1.1',
+								hidden: true,
+								parent: expect.anything(),
 								children: [
 									{
 										id: '__1.1.1',
 										name: '__1.1.1',
+										hidden: true,
+										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					}]
+					}
+				],
+				// unitTree
+				{
+					id: '__0',
+					name: '__0',
+					children: [
+						{
+							id: '__1',
+							name: '__1',
+							children: [
+								{
+									id: '__1.1',
+									name: '__1.1',
+									children: [
+										{
+											id: '__1.1.1',
+											name: '__1.1.1',
+											children: []
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				// searchValue
 				'___'
@@ -330,76 +355,80 @@ describe('UnitSearchComponent', () => {
 			/** case 4 */
 			[
 				// expected
-				[{
-					id: '__1',
-					name: '__1',
-					hidden: false,
-					parent: expect.anything(),
-					children: [
-						{
-							id: '__1.1',
-							name: '__1.1',
-							hidden: true,
-							parent: expect.anything(),
-							children: [
-								{
-									id: '__1.1.1',
-									name: '__1.1.1',
-									hidden: true,
-									parent: expect.anything(),
-									children: []
-								},
-							]
-						},
-						{
-							id: '__1.2',
-							name: '__1.2',
-							hidden: false,
-							parent: expect.anything(),
-							children: [
-								{
-									id: '__1.2.1',
-									name: '__1.2.1',
-									hidden: false,
-									parent: expect.anything(),
-									children: []
-								},
-							]
-						},
-					]
-				}],
-				// unitTree
-				{
-					id: '__0',
-					name: '__0',
-					children: [{
+				[
+					{
 						id: '__1',
 						name: '__1',
+						hidden: false,
+						parent: expect.anything(),
 						children: [
 							{
 								id: '__1.1',
 								name: '__1.1',
+								hidden: true,
+								parent: expect.anything(),
 								children: [
 									{
 										id: '__1.1.1',
 										name: '__1.1.1',
+										hidden: true,
+										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
 								id: '__1.2',
 								name: '__1.2',
+								hidden: false,
+								parent: expect.anything(),
 								children: [
 									{
 										id: '__1.2.1',
 										name: '__1.2.1',
+										hidden: false,
+										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					}]
+					}
+				],
+				// unitTree
+				{
+					id: '__0',
+					name: '__0',
+					children: [
+						{
+							id: '__1',
+							name: '__1',
+							children: [
+								{
+									id: '__1.1',
+									name: '__1.1',
+									children: [
+										{
+											id: '__1.1.1',
+											name: '__1.1.1',
+											children: []
+										}
+									]
+								},
+								{
+									id: '__1.2',
+									name: '__1.2',
+									children: [
+										{
+											id: '__1.2.1',
+											name: '__1.2.1',
+											children: []
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				// searchValue
 				'1.2'
@@ -427,7 +456,7 @@ describe('UnitSearchComponent', () => {
 										hidden: true,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -442,9 +471,9 @@ describe('UnitSearchComponent', () => {
 										hidden: true,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
 					},
 					{
@@ -465,7 +494,7 @@ describe('UnitSearchComponent', () => {
 										hidden: false,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -480,9 +509,9 @@ describe('UnitSearchComponent', () => {
 										hidden: true,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
 					},
 					{
@@ -503,7 +532,7 @@ describe('UnitSearchComponent', () => {
 										hidden: false,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -518,13 +547,12 @@ describe('UnitSearchComponent', () => {
 										hidden: false,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					},
-				]
-				,
+					}
+				],
 				// unitTree
 				{
 					id: '__0',
@@ -542,7 +570,7 @@ describe('UnitSearchComponent', () => {
 											id: '__1.1.1',
 											name: '__1.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -553,9 +581,9 @@ describe('UnitSearchComponent', () => {
 											id: '__1.2.1',
 											name: '__1.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
 						},
 						{
@@ -570,7 +598,7 @@ describe('UnitSearchComponent', () => {
 											id: '__2.1.1',
 											name: '__2.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -581,9 +609,9 @@ describe('UnitSearchComponent', () => {
 											id: '__2.2.1',
 											name: '__2.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
 						},
 						{
@@ -598,7 +626,7 @@ describe('UnitSearchComponent', () => {
 											id: '__3.1.1',
 											name: '__3.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -609,11 +637,11 @@ describe('UnitSearchComponent', () => {
 											id: '__3.2.1',
 											name: '__3.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
-						},
+						}
 					]
 				},
 				// searchValue
@@ -642,7 +670,7 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -657,9 +685,9 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
 					},
 					{
@@ -680,7 +708,7 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -695,9 +723,9 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
 					},
 					{
@@ -718,7 +746,7 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
 							},
 							{
@@ -733,11 +761,11 @@ describe('UnitSearchComponent', () => {
 										hidden: undefined,
 										parent: expect.anything(),
 										children: []
-									},
+									}
 								]
-							},
+							}
 						]
-					},
+					}
 				],
 				// unitTree
 				{
@@ -756,7 +784,7 @@ describe('UnitSearchComponent', () => {
 											id: '__1.1.1',
 											name: '__1.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -767,9 +795,9 @@ describe('UnitSearchComponent', () => {
 											id: '__1.2.1',
 											name: '__1.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
 						},
 						{
@@ -784,7 +812,7 @@ describe('UnitSearchComponent', () => {
 											id: '__2.1.1',
 											name: '__2.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -795,9 +823,9 @@ describe('UnitSearchComponent', () => {
 											id: '__2.2.1',
 											name: '__2.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
 						},
 						{
@@ -812,7 +840,7 @@ describe('UnitSearchComponent', () => {
 											id: '__3.1.1',
 											name: '__3.1.1',
 											children: []
-										},
+										}
 									]
 								},
 								{
@@ -823,25 +851,27 @@ describe('UnitSearchComponent', () => {
 											id: '__3.2.1',
 											name: '__3.2.1',
 											children: []
-										},
+										}
 									]
-								},
+								}
 							]
-						},
+						}
 					]
 				},
 				// searchValue
 				''
 			]
-		])
-		('should set treeDataSource.data to %o if fullUnitTree is %o and searchValue is "%s"', (expected, unitTree, searchValue) => {
-			// @ts-ignore
-			component.setUnitTreeParents(unitTree, null)
-			component.organisationSearchValue = searchValue
+		])(
+			'should set treeDataSource.data to %o if fullUnitTree is %o and searchValue is "%s"',
+			(expected, unitTree, searchValue) => {
+				// @ts-ignore
+				component.setUnitTreeParents(unitTree, null);
+				component.organisationSearchValue = searchValue;
 
-			component.setHiddenBySearchValue(unitTree.children)
+				component.setHiddenBySearchValue(unitTree.children);
 
-			expect(unitTree.children).toEqual(expected)
-		});
+				expect(unitTree.children).toEqual(expected);
+			}
+		);
 	});
 });

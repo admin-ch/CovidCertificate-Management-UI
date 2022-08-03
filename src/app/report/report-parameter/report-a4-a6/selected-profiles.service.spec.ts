@@ -1,7 +1,7 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {EiamProfile, SelectedProfilesService} from './selected-profiles.service';
-import {MatTableDataSource} from "@angular/material/table";
+import {MatTableDataSource} from '@angular/material/table';
 
 describe('UnitDataService', () => {
 	let service: SelectedProfilesService;
@@ -38,12 +38,12 @@ describe('UnitDataService', () => {
 					email: '3',
 					firstname: '3',
 					unitName: '3'
-				},
-			]
+				}
+			];
 
-			service.add(...users)
+			service.add(...users);
 
-			expect(service.isAllSelected(users)).toBe(true)
+			expect(service.isAllSelected(users)).toBe(true);
 		});
 		it('should return false', () => {
 			const users: EiamProfile[] = [
@@ -67,12 +67,12 @@ describe('UnitDataService', () => {
 					email: '3',
 					firstname: '3',
 					unitName: '3'
-				},
-			]
+				}
+			];
 
-			service.add(...users.filter((user, index) => index === 0))
+			service.add(...users.filter((user, index) => index === 0));
 
-			expect(service.isAllSelected(users)).toBe(false)
+			expect(service.isAllSelected(users)).toBe(false);
 		});
 	});
 
@@ -99,12 +99,12 @@ describe('UnitDataService', () => {
 					email: '3',
 					firstname: '3',
 					unitName: '3'
-				},
-			]
+				}
+			];
 
-			service.clear()
+			service.clear();
 
-			expect(service.isSomeSelected(users)).toBe(false)
+			expect(service.isSomeSelected(users)).toBe(false);
 		});
 		it('should return true', () => {
 			const users: EiamProfile[] = [
@@ -128,155 +128,169 @@ describe('UnitDataService', () => {
 					email: '3',
 					firstname: '3',
 					unitName: '3'
-				},
-			]
+				}
+			];
 
-			service.add(...users.filter((user, index) => index === 0))
+			service.add(...users.filter((user, index) => index === 0));
 
-			expect(service.isSomeSelected(users)).toBe(true)
+			expect(service.isSomeSelected(users)).toBe(true);
 		});
 	});
 
 	describe('exists', () => {
 		it('should return true', () => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
 				// @ts-ignore
-				1: user1, 2: user2, 3: user3,
-			}
+				1: user1,
+				2: user2,
+				3: user3
+			};
 
-			expect(service.exists(user1)).toBe(true)
+			expect(service.exists(user1)).toBe(true);
 		});
 		it('should return false', () => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
-			const user4 = {userExtId: '4'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
+			const user4 = {userExtId: '4'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
 				// @ts-ignore
-				1: user1, 2: user2, 3: user3,
-			}
+				1: user1,
+				2: user2,
+				3: user3
+			};
 
-			expect(service.exists(user4)).toBe(false)
+			expect(service.exists(user4)).toBe(false);
 		});
 	});
 
 	describe('add', () => {
 		it('should add all passed users', () => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
 
 			// @ts-ignore
-			service.selectedProfiles = {
-			}
+			service.selectedProfiles = {};
 
-			service.add(user1, user2, user3)
+			service.add(user1, user2, user3);
 
-			expect(service.exists(user1)).toBe(true)
-			expect(service.exists(user2)).toBe(true)
-			expect(service.exists(user3)).toBe(true)
+			expect(service.exists(user1)).toBe(true);
+			expect(service.exists(user2)).toBe(true);
+			expect(service.exists(user3)).toBe(true);
 		});
 		it('should emit changes', fakeAsync(() => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
 
 			// @ts-ignore
-			service.selectedProfiles = {
-			}
+			service.selectedProfiles = {};
 
-			service.add(user1, user2, user3)
+			service.add(user1, user2, user3);
 
 			service.changes$.subscribe(changes => {
-				expect(changes).toEqual({1: user1, 2: user2, 3: user3})
-			})
+				expect(changes).toEqual({1: user1, 2: user2, 3: user3});
+			});
 
-			tick()
+			tick();
 		}));
 	});
 
 	describe('remove', () => {
 		it('should remove all passed users', () => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
-			const user4 = {userExtId: '4'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
+			const user4 = {userExtId: '4'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
-				1: user1, 2: user2, 3: user3, 4: user4
-			}
+				1: user1,
+				2: user2,
+				3: user3,
+				4: user4
+			};
 
-			service.remove(user1, user2, user3)
+			service.remove(user1, user2, user3);
 
-			expect(service.exists(user1)).toBe(false)
-			expect(service.exists(user2)).toBe(false)
-			expect(service.exists(user3)).toBe(false)
-			expect(service.exists(user4)).toBe(true)
+			expect(service.exists(user1)).toBe(false);
+			expect(service.exists(user2)).toBe(false);
+			expect(service.exists(user3)).toBe(false);
+			expect(service.exists(user4)).toBe(true);
 		});
 		it('should emit changes', fakeAsync(() => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
-			const user4 = {userExtId: '4'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
+			const user4 = {userExtId: '4'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
-				1: user1, 2: user2, 3: user3, 4: user4
-			}
+				1: user1,
+				2: user2,
+				3: user3,
+				4: user4
+			};
 
-			service.remove(user1, user2, user3)
+			service.remove(user1, user2, user3);
 
 			service.changes$.subscribe(changes => {
-				expect(changes).toEqual({4: user4})
-			})
+				expect(changes).toEqual({4: user4});
+			});
 
-			tick()
+			tick();
 		}));
 	});
 
 	describe('clear', () => {
 		it('should remove all users', () => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
-			const user4 = {userExtId: '4'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
+			const user4 = {userExtId: '4'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
-				1: user1, 2: user2, 3: user3, 4: user4
-			}
+				1: user1,
+				2: user2,
+				3: user3,
+				4: user4
+			};
 
-			service.clear()
+			service.clear();
 
 			// @ts-ignore
-			expect(service.selectedProfiles).toEqual({})
+			expect(service.selectedProfiles).toEqual({});
 		});
 		it('should emit changes', fakeAsync(() => {
-			const user1 = {userExtId: '1'} as EiamProfile
-			const user2 = {userExtId: '2'} as EiamProfile
-			const user3 = {userExtId: '3'} as EiamProfile
-			const user4 = {userExtId: '4'} as EiamProfile
+			const user1 = {userExtId: '1'} as EiamProfile;
+			const user2 = {userExtId: '2'} as EiamProfile;
+			const user3 = {userExtId: '3'} as EiamProfile;
+			const user4 = {userExtId: '4'} as EiamProfile;
 
 			// @ts-ignore
 			service.selectedProfiles = {
-				1: user1, 2: user2, 3: user3, 4: user4
-			}
+				1: user1,
+				2: user2,
+				3: user3,
+				4: user4
+			};
 
-			service.clear()
+			service.clear();
 
 			service.changes$.subscribe(changes => {
-				expect(changes).toEqual({})
-			})
+				expect(changes).toEqual({});
+			});
 
-			tick()
+			tick();
 		}));
 	});
 });

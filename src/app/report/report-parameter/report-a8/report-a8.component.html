@@ -1,8 +1,6 @@
 <form [formGroup]="a8FormGroup" #ngForm="ngForm">
 	<h3>{{ "reports.a8.title" | translate }}</h3>
-	<ec-date-from-to-fieldset
-		[dateFromFormControl]="dateFromFormControl"
-		[dateToFormControl]="dateToFormControl">
+	<ec-date-from-to-fieldset [dateFromFormControl]="dateFromFormControl" [dateToFormControl]="dateToFormControl">
 	</ec-date-from-to-fieldset>
 	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
 </form>
