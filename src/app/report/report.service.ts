@@ -52,6 +52,13 @@ export class ReportService {
 						getMaxPeriodValidator('from', 'to', 90),
 					]
 				}),
+			[ReportType.A11]: this.fb.group({
+					from: ['', [ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
+					canton: ['', Validators.required],
+				},
+				{validators: getStartDateBeforeEndDateValidator('from', 'to')}),
+
 		})
 		this.formGroup.disable()
 	}
