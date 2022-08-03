@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RevocationService} from './revocation.service';
 import {ObNotificationService} from '@oblique/oblique';
-import {RevocationStatus} from "shared/model";
+import {RevocationStatus} from 'shared/model';
 
 @Component({
 	selector: 'ec-certificate-revoke',
@@ -61,7 +61,7 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 		this.revocationService
 			.revoke({uvci: this.uvciUsed, fraud: this.isFraud, systemSource: 'WebUI'})
 			.subscribe(response => {
-				if(response?.status === RevocationStatus.OK) {
+				if (response?.status === RevocationStatus.OK) {
 					this.previouslyRevoked = false;
 					this.revoked = true;
 				} else {
