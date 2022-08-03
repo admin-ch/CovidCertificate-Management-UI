@@ -272,6 +272,16 @@ export interface CreateCertificateResponse {
 	appDeliveryError?: { errorCode: number; errorMessage: string };
 }
 
+export enum RevocationStatus {
+	OK = 'OK',
+	ALREADY_REVOKED = 'ALREADY_REVOKED'
+}
+
+export interface RevocationResponseDto {
+	status: RevocationStatus;
+	revocationDateTime: Date; // format 2000-12-31T17:29.80209
+}
+
 export interface CsvResponseDto {
 	zip: ArrayBuffer;
 }
