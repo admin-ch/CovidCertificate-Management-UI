@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit, TrackByFunction} from '@angular/core';
-import {EiamProfile, SelectedProfilesService} from "../selected-profiles.service";
-import {FormArray, FormControl} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {ReportService} from "../../../report.service";
+import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
+import {FormArray, FormControl} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {ReportService} from '../../../report.service';
 
 @Component({
 	selector: 'ec-selected-units',
@@ -11,34 +11,37 @@ import {ReportService} from "../../../report.service";
 })
 export class SelectedProfilesComponent implements OnInit, OnDestroy {
 	@Input()
-	userIdsFormArray: FormArray
+	userIdsFormArray: FormArray;
 
-	selectedChip: EiamProfile
+	selectedChip: EiamProfile;
 
-	readonly Object = Object
-	private subscription: Subscription
+	readonly Object = Object;
+	private subscription: Subscription;
 
-	constructor(public readonly selectedProfilesService: SelectedProfilesService,
-				private readonly reportService: ReportService) {
-	}
+	constructor(
+		public readonly selectedProfilesService: SelectedProfilesService,
+		private readonly reportService: ReportService
+	) {}
 
-	readonly trackBy: TrackByFunction<EiamProfile> = ((_, item) => item.userExtId)
+	readonly trackBy: TrackByFunction<EiamProfile> = (_, item) => item.userExtId;
 
 	remove(profile: EiamProfile) {
-		this.selectedProfilesService.remove(profile)
+		this.selectedProfilesService.remove(profile);
 	}
 
 	ngOnInit(): void {
-		this.subscription = this.reportService.reset$.subscribe(() => this.selectedProfilesService.clear())
+		this.subscription = this.reportService.reset$.subscribe(() => this.selectedProfilesService.clear());
 		this.subscription.add(
 			this.selectedProfilesService.changes$.subscribe(selectedProfiles => {
-				this.userIdsFormArray.clear()
-				Object.values(selectedProfiles).map(p => p.userExtId).forEach(userExtId => this.userIdsFormArray.push(new FormControl(userExtId)))
+				this.userIdsFormArray.clear();
+				Object.values(selectedProfiles)
+					.map(p => p.userExtId)
+					.forEach(userExtId => this.userIdsFormArray.push(new FormControl(userExtId)));
 			})
-		)
+		);
 	}
 
 	ngOnDestroy() {
-		this.subscription?.unsubscribe()
+		this.subscription?.unsubscribe();
 	}
 }
