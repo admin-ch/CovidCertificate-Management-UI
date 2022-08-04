@@ -46,40 +46,40 @@ import {MatTableModule} from '@angular/material/table';
 import {SelectedProfilesComponent} from './report-parameter/report-a4-a6/selected-profiles/selected-profiles.component';
 import {FieldWrapperComponent} from './report-parameter/report-a4-a6/field-wrapper/field-wrapper.component';
 import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-search/issuer-search.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatSortModule} from "@angular/material/sort";
-import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
-import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
-import { ReportA8Component } from './report-parameter/report-a8/report-a8.component';
-import { ReportA11Component } from './report-parameter/report-a11/report-a11.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {REPORT_ERROR_STATE_MATCHER} from './errorStateMatcher';
+import {ProfilesTableComponent} from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
+import {ReportA8Component} from './report-parameter/report-a8/report-a8.component';
+import {ReportA11Component} from './report-parameter/report-a11/report-a11.component';
 
 @NgModule({
-    declarations: [
-        ReportComponent,
-        SelectReportTypeComponent,
-        ReportParameterComponent,
-        ReportGenerationComponent,
-        ReportA2Component,
-        ReportA7Component,
-        ReportEndComponent,
-        DataRoomSelectionFieldsetComponent,
-        DateFromToFieldsetComponent,
-        CertTypeSelectionFieldsetComponent,
-        ReportEndComponent,
-        UnitSearchComponent,
-        DataRoomSelectionFieldsetComponent,
-        DateFromToFieldsetComponent,
-        CertTypeSelectionFieldsetComponent,
-        ReportA4A6Component,
-        UnitSearchComponent,
-        SelectedProfilesComponent,
-        FieldWrapperComponent,
-        IssuerSearchComponent,
-        ProfilesTableComponent,
-        ProfilesTableComponent,
-        ReportA8Component,
-        ReportA11Component
-    ],
+	declarations: [
+		ReportComponent,
+		SelectReportTypeComponent,
+		ReportParameterComponent,
+		ReportGenerationComponent,
+		ReportA2Component,
+		ReportA7Component,
+		ReportEndComponent,
+		DataRoomSelectionFieldsetComponent,
+		DateFromToFieldsetComponent,
+		CertTypeSelectionFieldsetComponent,
+		ReportEndComponent,
+		UnitSearchComponent,
+		DataRoomSelectionFieldsetComponent,
+		DateFromToFieldsetComponent,
+		CertTypeSelectionFieldsetComponent,
+		ReportA4A6Component,
+		UnitSearchComponent,
+		SelectedProfilesComponent,
+		FieldWrapperComponent,
+		IssuerSearchComponent,
+		ProfilesTableComponent,
+		ProfilesTableComponent,
+		ReportA8Component,
+		ReportA11Component
+	],
 	imports: [
 		SharedModule,
 		ObButtonModule,

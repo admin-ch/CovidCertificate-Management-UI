@@ -145,19 +145,18 @@
 						<div>
 							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A11">
 								<div class="button-container">
-									<mat-radio-button id="report-type-A11" [value]="ReportType.A11"
-													  [name]="ReportType.A11"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A11"
+										[value]="ReportType.A11"
+										[name]="ReportType.A11"
+										class="radio-button"
+									>
 										{{ "reports.a11.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a11.description.short' | translate}}</p>
+									<p>{{ "reports.a11.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
