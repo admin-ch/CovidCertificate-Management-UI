@@ -67,20 +67,6 @@ describe('ReportA4A6Component', () => {
 		expect(component).toBeTruthy();
 	});
 
-	describe('resetInput', () => {
-		it('should clear all inputs', () => {
-			component.a4a6FormGroup.get('from').setValue(moment('2022-01-01'));
-			component.a4a6FormGroup.get('to').setValue(moment('2022-01-01'));
-			component.a4a6FormGroup.get('canton').setValue(DataRoomCode.AG);
-
-			component.resetInput();
-
-			expect(component.a4a6FormGroup.get('from').value).toEqual('');
-			expect(component.a4a6FormGroup.get('to').value).toEqual('');
-			expect(component.a4a6FormGroup.get('canton').value).toEqual('');
-		});
-	});
-
 	describe('cantonFormControl.valueChanges observer', () => {
 		let clear: jest.SpyInstance;
 

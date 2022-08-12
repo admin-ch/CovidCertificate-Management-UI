@@ -11,7 +11,7 @@ describe('CertificateRevokeComponent', () => {
 	let fixture: ComponentFixture<CertificateRevokeComponent>;
 
 	const mockRevocationService = {
-		revoke: jest.fn().mockReturnValue(of({'status': 'OK'}))
+		revoke: jest.fn().mockReturnValue(of({status: 'OK'}))
 	};
 
 	beforeEach(async () => {

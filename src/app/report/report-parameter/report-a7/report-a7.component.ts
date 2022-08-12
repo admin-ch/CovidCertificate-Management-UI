@@ -19,8 +19,6 @@ export class ReportA7Component implements OnInit, OnDestroy {
 	dateToFormControl: FormControl;
 	certTypesFormArray: FormArray;
 
-	subscription: Subscription;
-
 	constructor(public readonly reportService: ReportService, public readonly translate: TranslateService) {}
 
 	ngOnInit(): void {
@@ -30,20 +28,10 @@ export class ReportA7Component implements OnInit, OnDestroy {
 		this.dateToFormControl = this.a7FormGroup.get('to') as FormControl;
 		this.certTypesFormArray = this.a7FormGroup.get('types') as FormArray;
 		this.a7FormGroup.enable();
-		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput());
 		setTimeout(() => this.ngForm.resetForm(this.a7FormGroup.value));
 	}
 
 	ngOnDestroy() {
 		this.a7FormGroup.disable();
-		this.subscription?.unsubscribe();
-	}
-
-	resetInput(): void {
-		this.a7FormGroup.reset({
-			from: '',
-			to: '',
-			canton: ''
-		});
 	}
 }
