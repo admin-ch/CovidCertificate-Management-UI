@@ -6,6 +6,7 @@
 				matInput
 				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
+				[max]="TODAY"
 				[matDatepicker]="pickerFrom"
 				[placeholder]="translate.get('reports.dateFromTo.date-from') | async"
 				[formControl]="dateFromFormControl"
@@ -39,6 +40,7 @@
 				matInput
 				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
+				[max]="TODAY"
 				[matDatepicker]="pickerTo"
 				[placeholder]="translate.get('reports.dateFromTo.date-to') | async"
 				[formControl]="dateToFormControl"

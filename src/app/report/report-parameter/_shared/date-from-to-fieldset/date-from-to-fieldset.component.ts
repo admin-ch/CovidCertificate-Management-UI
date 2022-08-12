@@ -18,6 +18,7 @@ export class DateFromToFieldsetComponent {
 	dateToFormControl: FormControl;
 
 	readonly MIN_DATE = moment('2021-05-01');
+	readonly TODAY = moment();
 
 	constructor(
 		public readonly translate: TranslateService,
