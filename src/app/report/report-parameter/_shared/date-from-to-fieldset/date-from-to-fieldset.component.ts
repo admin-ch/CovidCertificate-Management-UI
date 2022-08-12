@@ -22,6 +22,7 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	subscription: Subscription;
 
 	readonly MIN_DATE = moment('2021-05-01');
+	readonly TODAY = moment();
 
 	constructor(
 		public readonly translate: TranslateService,
