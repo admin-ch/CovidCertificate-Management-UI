@@ -52,6 +52,7 @@ import {ReportA2Component} from './report-parameter/report-a2/report-a2.componen
 import {ReportA7Component} from './report-parameter/report-a7/report-a7.component';
 import {ReportA4A6Component} from './report-parameter/report-a4-a6/report-a4-a6.component';
 import { ReportA8Component } from './report-parameter/report-a8/report-a8.component';
+import { ReportA9Component } from './report-parameter/report-a9/report-a9.component';
 import {ReportA11Component} from './report-parameter/report-a11/report-a11.component';
 import { ReportA12Component } from './report-parameter/report-a12/report-a12.component';
 
@@ -81,6 +82,7 @@ import { ReportA12Component } from './report-parameter/report-a12/report-a12.com
 		ReportA4A6Component,
 		ReportA7Component,
 		ReportA8Component,
+		ReportA9Component,
 		ReportA11Component,
 		ReportA12Component
 	],

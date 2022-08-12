@@ -18,33 +18,33 @@
 				<span obCollapseHeader> {{ "reports.aggregation.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
-						<div>
-							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5]">
-								<div class="button-container">
-									<mat-radio-button id="report-type-A3" [value]="ReportType.A3"
-													  [name]="ReportType.A3"
-													  class="radio-button">
-										{{ "reports.a3.title" | translate }}
-									</mat-radio-button>
-									<p>{{'reports.a3.description.short' | translate}}</p>
-								</div>
-								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
-										<mat-icon svgIcon="help-circle"></mat-icon>
-									</button>
-									<ng-template #popoverM>
-										<div class="popover-content">
-											<p [innerHTML]="'reports.a3.description.long' | translate"></p>
-										</div>
-									</ng-template>
-								</div>
-							</div>
-							<div class="divider"></div>
-						</div>
+<!--						<div>-->
+<!--							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5]">-->
+<!--								<div class="button-container">-->
+<!--									<mat-radio-button id="report-type-A3" [value]="ReportType.A3"-->
+<!--													  [name]="ReportType.A3"-->
+<!--													  class="radio-button">-->
+<!--										{{ "reports.a3.title" | translate }}-->
+<!--									</mat-radio-button>-->
+<!--									<p>{{'reports.a3.description.short' | translate}}</p>-->
+<!--								</div>-->
+<!--								<div class="info-container">-->
+<!--									<button-->
+<!--										mat-icon-button-->
+<!--										obButton="tertiary"-->
+<!--										[obPopover]="popoverM"-->
+<!--									>-->
+<!--										<mat-icon svgIcon="help-circle"></mat-icon>-->
+<!--									</button>-->
+<!--									<ng-template #popoverM>-->
+<!--										<div class="popover-content">-->
+<!--											<p [innerHTML]="'reports.a3.description.long' | translate"></p>-->
+<!--										</div>-->
+<!--									</ng-template>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="divider"></div>-->
+<!--						</div>-->
 						<div>
 							<div
 								class="report-item"
