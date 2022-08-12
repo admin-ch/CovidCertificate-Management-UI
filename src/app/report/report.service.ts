@@ -41,6 +41,9 @@ export class ReportService {
 						getMaxPeriodValidator('from', 'to', 90),
 					]
 				}),
+			[ReportType.A9]: this.fb.group({
+					types: new FormArray([], Validators.required),
+				}),
 		})
 		this.formGroup.disable()
 	}
