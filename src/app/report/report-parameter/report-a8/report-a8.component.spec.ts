@@ -57,16 +57,4 @@ describe('ReportA8Component', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
-
-	describe('resetInput', () => {
-		it('should clear all inputs', () => {
-			component.a8FormGroup.get('from').setValue(moment('2022-01-01'));
-			component.a8FormGroup.get('to').setValue(moment('2022-01-01'));
-
-			component.resetInput();
-
-			expect(component.a8FormGroup.get('from').value).toEqual('');
-			expect(component.a8FormGroup.get('to').value).toEqual('');
-		});
-	});
 });

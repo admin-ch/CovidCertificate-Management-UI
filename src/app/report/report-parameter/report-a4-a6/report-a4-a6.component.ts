@@ -53,19 +53,10 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 				delay(0)
 			)
 			.subscribe(this.unitSearchAuthority$);
-		this.subscription.add(this.reportService.reset$.subscribe(_ => this.resetInput()));
 	}
 
 	ngOnDestroy() {
 		this.a4a6FormGroup.disable();
 		this.subscription?.unsubscribe();
-	}
-
-	resetInput(): void {
-		this.a4a6FormGroup.reset({
-			from: '',
-			to: '',
-			canton: ''
-		});
 	}
 }

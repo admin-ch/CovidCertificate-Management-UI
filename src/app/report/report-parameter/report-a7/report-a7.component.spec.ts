@@ -57,18 +57,4 @@ describe('ReportA7Component', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
-
-	describe('resetInput', () => {
-		it('should clear all inputs', () => {
-			component.a7FormGroup.get('from').setValue(moment('2022-01-01'));
-			component.a7FormGroup.get('to').setValue(moment('2022-01-01'));
-			component.a7FormGroup.get('canton').setValue(DataRoomCode.AG);
-
-			component.resetInput();
-
-			expect(component.a7FormGroup.get('from').value).toEqual('');
-			expect(component.a7FormGroup.get('to').value).toEqual('');
-			expect(component.a7FormGroup.get('canton').value).toEqual('');
-		});
-	});
 });
