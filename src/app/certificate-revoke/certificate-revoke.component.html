@@ -37,6 +37,6 @@
 	}}</ob-alert>
 
 	<ob-alert *ngIf="previouslyRevoked" type="warning">{{
-		"certificateRevoke.alreadyRevoked" | obTranslateParams: { date: revocationDate | date: "dd.MM.YYYY" }
+		"certificateRevoke.alreadyRevoked" | obTranslateParams: { date: revocationDate | date: "dd.MM.YYYY HH:mm" }
 	}}</ob-alert>
 </div>
