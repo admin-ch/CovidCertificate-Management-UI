@@ -59,7 +59,7 @@ describe('ReportA2Component', () => {
 
 		it('should set the formControls value', () => {
 			component.add(event);
-			expect(component.formControl.value).toBe(event.value);
+			expect(component.uvcisFormControl.value).toBe(event.value);
 		});
 		it('should push the selectedUvcis', () => {
 			component.add(event);
@@ -104,7 +104,7 @@ describe('ReportA2Component', () => {
 				.get(ReportType.A2)
 				.get('uvcis')
 				.setValue(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC', 'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']);
-			component.formControl.markAsTouched();
+			component.uvcisFormControl.markAsTouched();
 		});
 
 		it('should remove from errorUvcis if exists', () => {
@@ -149,9 +149,9 @@ describe('ReportA2Component', () => {
 
 	describe('resetInput()', () => {
 		it('should set the formControls value to null', () => {
-			component.formControl.setValue('value');
+			component.uvcisFormControl.setValue('value');
 			component.resetInput();
-			expect(component.formControl.value).toBe(null);
+			expect(component.uvcisFormControl.value).toBe(null);
 		});
 		it('should reset the errorUvcis', () => {
 			component.errorUvcis = ['1', '2', '3'];
