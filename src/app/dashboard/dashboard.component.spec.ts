@@ -42,29 +42,27 @@ describe('DashboardComponent', () => {
 		currentLang: 'en'
 	};
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [
-					RouterTestingModule.withRoutes([
-						{
-							path: 'test',
-							component: DashboardComponent
-						}
-					]),
-					ObliqueTestingModule
-				],
-				declarations: [DashboardComponent, HasAuthorizationForMockDirective],
-				schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-				providers: [
-					{provide: Router, useValue: router},
-					{provide: NotificationService, useValue: notificationServiceMock},
-					{provide: ObNotificationService, useValue: obNotificationServiceMock},
-					{provide: TranslateService, useValue: translateServiceMock}
-				]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule.withRoutes([
+					{
+						path: 'test',
+						component: DashboardComponent
+					}
+				]),
+				ObliqueTestingModule
+			],
+			declarations: [DashboardComponent, HasAuthorizationForMockDirective],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{provide: Router, useValue: router},
+				{provide: NotificationService, useValue: notificationServiceMock},
+				{provide: ObNotificationService, useValue: obNotificationServiceMock},
+				{provide: TranslateService, useValue: translateServiceMock}
+			]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DashboardComponent);

@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ReportA7Component} from './report-a7.component';
+import {ReportA8Component} from './report-a8.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
@@ -11,15 +11,15 @@ import {TranslateModule} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {Subject} from 'rxjs';
 
-describe('ReportA7Component', () => {
-	let component: ReportA7Component;
-	let fixture: ComponentFixture<ReportA7Component>;
+describe('ReportA8Component', () => {
+	let component: ReportA8Component;
+	let fixture: ComponentFixture<ReportA8Component>;
 	let reportService: ReportService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [ObliqueTestingModule, TranslateModule, FormsModule, ReactiveFormsModule],
-			declarations: [ReportA7Component],
+			declarations: [ReportA8Component],
 			providers: [
 				{
 					provide: ReportService,
@@ -40,11 +40,11 @@ describe('ReportA7Component', () => {
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(ReportA7Component);
+		fixture = TestBed.createComponent(ReportA8Component);
 		component = fixture.componentInstance;
 		reportService = TestBed.inject(ReportService);
 		reportService.formGroup = new FormGroup({
-			[ReportType.A7]: new FormGroup({
+			[ReportType.A8]: new FormGroup({
 				from: new FormControl('', Validators.required),
 				to: new FormControl('', Validators.required),
 				canton: new FormControl('', Validators.required),

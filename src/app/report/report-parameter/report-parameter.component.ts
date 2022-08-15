@@ -14,19 +14,18 @@ export class ReportParameterComponent {
 	constructor(
 		@Inject(MatHorizontalStepper) public readonly stepper: MatHorizontalStepper,
 		public readonly reportService: ReportService
-	) {
-	}
+	) {}
 
 	goNext(): void {
 		if (this.reportService.formGroup.valid) {
 			this.reportService.generateReport$.next();
 			this.stepper.next();
 		} else {
-			this.reportService.formGroup.markAllAsTouched()
+			this.reportService.formGroup.markAllAsTouched();
 		}
 	}
 
 	resetInput(): void {
-		this.reportService.reset$.next()
+		this.reportService.reset$.next();
 	}
 }
