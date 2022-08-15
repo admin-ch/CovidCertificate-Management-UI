@@ -8,8 +8,14 @@
 	<div class="container">
 		<div class="collapse-container">
 			<ob-collapse
-				*ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5,AuthFunction.REPORT_A7,AuthFunction.REPORT_A10]">
-				<span obCollapseHeader> {{'reports.aggregation.header' | translate}} </span>
+				*ecHasAuthorizationForAny="[
+					AuthFunction.REPORT_A3,
+					AuthFunction.REPORT_A5,
+					AuthFunction.REPORT_A7,
+					AuthFunction.REPORT_A10
+				]"
+			>
+				<span obCollapseHeader> {{ "reports.aggregation.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
 						<!--									<div>-->
@@ -40,22 +46,23 @@
 						<!--										<div class="divider"></div>-->
 						<!--									</div>-->
 						<div>
-							<div class="report-item"
-								 *ecHasAuthorizationForAny="[AuthFunction.REPORT_A7,AuthFunction.REPORT_A10]">
+							<div
+								class="report-item"
+								*ecHasAuthorizationForAny="[AuthFunction.REPORT_A7, AuthFunction.REPORT_A10]"
+							>
 								<div class="button-container">
-									<mat-radio-button id="report-type-A7" [value]="ReportType.A7"
-													  [name]="ReportType.A7"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A7"
+										[value]="ReportType.A7"
+										[name]="ReportType.A7"
+										class="radio-button"
+									>
 										{{ "reports.a7.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a7.description.short' | translate}}</p>
+									<p>{{ "reports.a7.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
@@ -71,8 +78,14 @@
 				</div>
 			</ob-collapse>
 			<ob-collapse
-				*ecHasAuthorizationForAny="[AuthFunction.REPORT_A2, AuthFunction.REPORT_A4, AuthFunction.REPORT_A6,AuthFunction.REPORT_A11,
-				 					AuthFunction.REPORT_A12,]">
+				*ecHasAuthorizationForAny="[
+									AuthFunction.REPORT_A2,
+									AuthFunction.REPORT_A4,
+									AuthFunction.REPORT_A6,
+				 					AuthFunction.REPORT_A11,
+				 					AuthFunction.REPORT_A12,
+				 				]"
+							>
 				<span obCollapseHeader> {{ "reports.detail.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
@@ -103,22 +116,23 @@
 							<div class="divider"></div>
 						</div>
 						<div>
-							<div class="report-item"
-								 *ecHasAuthorizationForAny="[AuthFunction.REPORT_A4,AuthFunction.REPORT_A6]">
+							<div
+								class="report-item"
+								*ecHasAuthorizationForAny="[AuthFunction.REPORT_A4, AuthFunction.REPORT_A6]"
+							>
 								<div class="button-container">
-									<mat-radio-button id="report-type-A4" [value]="ReportType.A4"
-													  [name]="ReportType.A4"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A4"
+										[value]="ReportType.A4"
+										[name]="ReportType.A4"
+										class="radio-button"
+									>
 										{{ "reports.a4.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a4.description.short' | translate}}</p>
+									<p>{{ "reports.a4.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
@@ -130,33 +144,32 @@
 							</div>
 							<div class="divider"></div>
 						</div>
-						<!--						<div>-->
-						<!--							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A11">-->
-						<!--								<div class="button-container">-->
-						<!--									<mat-radio-button id="report-type-A11" [value]="ReportType.A11"-->
-						<!--													  [name]="ReportType.A11"-->
-						<!--													  class="radio-button">-->
-						<!--										{{ "reports.a11.title" | translate }}-->
-						<!--									</mat-radio-button>-->
-						<!--									<p>{{'reports.a11.description.short' | translate}}</p>-->
-						<!--								</div>-->
-						<!--								<div class="info-container">-->
-						<!--									<button-->
-						<!--										mat-icon-button-->
-						<!--										obButton="tertiary"-->
-						<!--										[obPopover]="popoverM"-->
-						<!--									>-->
-						<!--										<mat-icon svgIcon="help-circle"></mat-icon>-->
-						<!--									</button>-->
-						<!--									<ng-template #popoverM>-->
-						<!--										<div class="popover-content">-->
-						<!--											<p [innerHTML]="'reports.a11.description.long' | translate"></p>-->
-						<!--										</div>-->
-						<!--									</ng-template>-->
-						<!--								</div>-->
-						<!--							</div>-->
-						<!--							<div class="divider"></div>-->
-						<!--						</div>-->
+						<div>
+							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A11">
+								<div class="button-container">
+									<mat-radio-button
+										id="report-type-A11"
+										[value]="ReportType.A11"
+										[name]="ReportType.A11"
+										class="radio-button"
+									>
+										{{ "reports.a11.title" | translate }}
+									</mat-radio-button>
+									<p>{{ "reports.a11.description.short" | translate }}</p>
+								</div>
+								<div class="info-container">
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
+										<mat-icon svgIcon="help-circle"></mat-icon>
+									</button>
+									<ng-template #popoverM>
+										<div class="popover-content">
+											<p [innerHTML]="'reports.a11.description.long' | translate"></p>
+										</div>
+									</ng-template>
+								</div>
+							</div>
+							<div class="divider"></div>
+						</div>
 						<div>
 							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A12">
 								<div class="button-container">
@@ -187,26 +200,25 @@
 					</div>
 				</div>
 			</ob-collapse>
-			<ob-collapse *ecHasAuthorizationForAny="[AuthFunction.REPORT_A8,AuthFunction.REPORT_A9]">
-				<span obCollapseHeader> {{'reports.statistic.header' | translate}} </span>
+			<ob-collapse *ecHasAuthorizationForAny="[AuthFunction.REPORT_A8, AuthFunction.REPORT_A9]">
+				<span obCollapseHeader> {{ "reports.statistic.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
 						<div>
 							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A8">
 								<div class="button-container">
-									<mat-radio-button id="report-type-A8" [value]="ReportType.A8"
-													  [name]="ReportType.A8"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A8"
+										[value]="ReportType.A8"
+										[name]="ReportType.A8"
+										class="radio-button"
+									>
 										{{ "reports.a8.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a8.description.short' | translate}}</p>
+									<p>{{ "reports.a8.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
