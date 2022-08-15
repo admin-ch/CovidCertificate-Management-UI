@@ -19,16 +19,18 @@ export class ReportA2Component implements OnInit, OnDestroy {
 
 	ReportType = ReportType;
 	separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
-	formControl = new FormControl('', {updateOn: 'submit'});
+	uvcisFormControl = new FormControl('', {updateOn: 'submit'});
 	errorUvcis: string[] = [];
 
 	subscription: Subscription;
+	uvciValidator = uvciValidator;
 
 	constructor(public readonly reportService: ReportService) {}
 
 	ngOnInit(): void {
 		this.a2FormGroup = this.reportService.formGroup.get(ReportType.A2) as FormGroup;
 		this.a2FormGroup.enable();
+		this.uvcisFormControl = this.a2FormGroup.get('uvcis') as FormControl
 		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput());
 
 		// Trigger new change detection run because updateErrorState() changes formGroup validity
@@ -53,22 +55,22 @@ export class ReportA2Component implements OnInit, OnDestroy {
 			.split(/, |,| |\n/)
 			.forEach(uvciToAdd => {
 				uvciToAdd = uvciToAdd.trim();
-				this.formControl.setValue(uvciToAdd);
+				this.uvcisFormControl.setValue(uvciToAdd);
 				this.a2FormGroup.get('uvcis').setValue([...this.a2FormGroup.get('uvcis').value, uvciToAdd]);
-				if (uvciValidator(this.formControl)) {
+				if (uvciValidator(this.uvcisFormControl)) {
 					this.errorUvcis.push(uvciToAdd);
 				}
 			});
-		this.formControl.markAsTouched();
-		this.formControl.setValue(null);
+		this.uvcisFormControl.markAsTouched();
+		this.uvcisFormControl.setValue(null);
 		this.updateErrorState();
 	}
 
 	add(event: MatChipInputEvent): void {
 		const input = event.input;
 		const uvciToAdd = event.value.trim();
-		this.formControl.setValue(uvciToAdd);
-		this.formControl.markAsTouched();
+		this.uvcisFormControl.setValue(uvciToAdd);
+		this.uvcisFormControl.markAsTouched();
 
 		this.a2FormGroup.get('uvcis').setValue([...this.a2FormGroup.get('uvcis').value, uvciToAdd]);
 
@@ -76,7 +78,7 @@ export class ReportA2Component implements OnInit, OnDestroy {
 			input.value = '';
 		}
 
-		if (uvciValidator(this.formControl)) {
+		if (uvciValidator(this.uvcisFormControl)) {
 			this.errorUvcis.push(uvciToAdd);
 		}
 
@@ -96,12 +98,12 @@ export class ReportA2Component implements OnInit, OnDestroy {
 			newUvcis.splice(toRemoveIndex, 1);
 			this.a2FormGroup.get('uvcis').setValue(newUvcis);
 		}
-		this.formControl.markAsTouched();
+		this.uvcisFormControl.markAsTouched();
 		this.updateErrorState();
 	}
 
 	resetInput(): void {
-		this.formControl.setValue(null);
+		this.uvcisFormControl.setValue(null);
 		this.errorUvcis = [];
 		this.a2FormGroup.reset({
 			uvcis: []
@@ -124,12 +126,12 @@ export class ReportA2Component implements OnInit, OnDestroy {
 		} else {
 			errors = {format: true};
 		}
-		this.formControl.setErrors(errors, {
+		this.uvcisFormControl.setErrors(errors, {
 			emitEvent: true
 		});
-		this.a2FormGroup.setErrors(this.formControl.errors, {
+		this.a2FormGroup.setErrors(this.uvcisFormControl.errors, {
 			emitEvent: true
 		});
-		this.chipList.errorState = this.formControl.invalid && this.formControl.touched;
+		this.chipList.errorState = this.uvcisFormControl.invalid && this.uvcisFormControl.touched;
 	}
 }

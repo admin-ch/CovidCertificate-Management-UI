@@ -327,6 +327,7 @@
     "validation.error.http.458": "Prénom invalide! Ne pas dépasser 80 signes ni saisir des caractères non valides.",
     "validation.error.http.459": "Nom de famille invalide! Ne pas dépasser 80 signes ni saisir des caractères non valides.",
     "validation.error.http.470": "Format de l'UVCI invalide",
+    "validation.error.http.480": "UVCI déjà verrouillé: {{date}}",
     "validation.error.http.482": "Le CSV n'a pas été traité en raison d'une taille non valide. Il doit contenir de 1 à 100 entrées.",
     "validation.error.http.485": "Une ou plusieurs des requêtes du CSV contiennent des données non valides. Pour des messages d'erreur plus détaillés, vérifiez le fichier CSV retourné.",
     "validation.error.http.489": "Date de naissance non valide. Veuillez vérifier votre saisie à l'étape 2.",
