@@ -17,10 +17,18 @@ export class ReportService {
 	reset$ = new Subject<void>();
 
 	constructor(private readonly fb: FormBuilder) {
-		this.formGroup = fb.group({
-			[ReportType.A2]: this.fb.group({
-				uvcis: [[], Validators.required]
-			}),
+		this.formGroup = fb.group(
+			{
+			[ReportType.A2]: this.fb.group(
+				{
+					uvcis: [[], Validators.required]
+				}
+			),
+			[ReportType.A12]: this.fb.group(
+				{
+						transferCodes: [[], Validators.required]
+				}
+			),
 			[ReportType.A7]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],

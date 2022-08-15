@@ -51,7 +51,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {REPORT_ERROR_STATE_MATCHER} from './errorStateMatcher';
 import {ProfilesTableComponent} from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
 import {ReportA8Component} from './report-parameter/report-a8/report-a8.component';
+import { ReportA12Component } from './report-parameter/report-a12/report-a12.component';
 import {ReportA11Component} from './report-parameter/report-a11/report-a11.component';
+import { ChipListFieldsetComponent } from './report-parameter/_shared/chip-list-fieldset/chip-list-fieldset.component';
 
 @NgModule({
 	declarations: [
@@ -78,7 +80,9 @@ import {ReportA11Component} from './report-parameter/report-a11/report-a11.compo
 		ProfilesTableComponent,
 		ProfilesTableComponent,
 		ReportA8Component,
-		ReportA11Component
+		ReportA11Component,
+		ReportA12Component,
+		ChipListFieldsetComponent
 	],
 	imports: [
 		SharedModule,
