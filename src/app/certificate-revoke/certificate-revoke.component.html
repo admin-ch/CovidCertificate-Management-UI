@@ -35,4 +35,8 @@
 	<ob-alert *ngIf="revoked" type="success">{{
 		"certificateRevoke.success" | obTranslateParams: { uvci: uvciUsed }
 	}}</ob-alert>
+
+	<ob-alert *ngIf="previouslyRevoked" type="warning">{{
+		"certificateRevoke.alreadyRevoked" | obTranslateParams: { date: revocationDate | date: "dd.MM.YYYY HH:mm" }
+	}}</ob-alert>
 </div>

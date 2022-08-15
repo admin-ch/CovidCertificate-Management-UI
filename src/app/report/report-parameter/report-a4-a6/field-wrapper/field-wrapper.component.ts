@@ -6,7 +6,6 @@ import {Component, Input} from '@angular/core';
 	styleUrls: ['./field-wrapper.component.scss']
 })
 export class FieldWrapperComponent {
-
 	@Input()
-	isError: boolean
+	isError: boolean;
 }

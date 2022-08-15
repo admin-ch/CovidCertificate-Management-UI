@@ -10,25 +10,23 @@ describe('NotificationsComponent', () => {
 	let component: NotificationsComponent;
 	let fixture: ComponentFixture<NotificationsComponent>;
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [],
-				declarations: [NotificationsComponent],
-				schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-				providers: [
-					{
-						provide: NotificationService,
-						useValue: {
-							imminentNotifications$: new Subject()
-						}
-					},
-					{provide: ObNotificationService, useValue: {}},
-					{provide: TranslateService, useValue: {}}
-				]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [],
+			declarations: [NotificationsComponent],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{
+					provide: NotificationService,
+					useValue: {
+						imminentNotifications$: new Subject()
+					}
+				},
+				{provide: ObNotificationService, useValue: {}},
+				{provide: TranslateService, useValue: {}}
+			]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(NotificationsComponent);

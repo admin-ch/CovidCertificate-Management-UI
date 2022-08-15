@@ -4,8 +4,8 @@ import {ReportType} from 'shared/model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {MatHorizontalStepper} from '@angular/material/stepper';
-import {ObNotificationService} from "@oblique/oblique";
-import {TranslateService} from "@ngx-translate/core";
+import {ObNotificationService} from '@oblique/oblique';
+import {TranslateService} from '@ngx-translate/core';
 
 export enum GenerationResponseStatus {
 	OK = 'OK',
@@ -17,7 +17,7 @@ export interface ReportResponse {
 	httpStatus: string;
 	error?: any; // Currently not explicitly used
 	details?: {
-		infoCode: number
+		infoCode: number;
 	};
 }
 
@@ -37,8 +37,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 		private readonly obNotificationService: ObNotificationService,
 		private readonly translate: TranslateService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
-	) {
-	}
+	) {}
 
 	ngOnInit() {
 		this.subscription = this.reportService.generateReport$.subscribe(() => {
@@ -50,32 +49,40 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				case ReportType.A7:
 					url += '/fraud/a7';
 					break;
+				case ReportType.A8:
+					url += '/certificate/statistics/a8/for_timerange_by_week';
+					break;
+				case ReportType.A11:
+					url += '/fraud/a11/for_timerange_by_canton';
+					break;
 				case ReportType.A4:
 					url += '/fraud/a4/by_users_and_types';
 					break;
 				default:
-					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`)
+					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`);
 			}
-			this.http.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value).subscribe({
-				next: (response: ReportResponse) => {
-					if (response.details?.infoCode === 1005) {
-						this.obNotificationService.error(this.translate.instant('reports.excelLimitExceeded'))
-						this.stepper.previous()
-						return
-					}
+			this.http
+				.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value)
+				.subscribe({
+					next: (response: ReportResponse) => {
+						if (response.details?.infoCode === 1005) {
+							this.obNotificationService.error(this.translate.instant('reports.excelLimitExceeded'));
+							this.stepper.previous();
+							return;
+						}
 
-					this.reportService.reportFinished$.next(
-						response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
-					);
-					const link = document.createElement('a');
-					link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
-					link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
-					link.click();
-					link.remove();
-					this.stepper.next()
-				},
-				error: () => this.stepper.previous()
-			});
+						this.reportService.reportFinished$.next(
+							response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
+						);
+						const link = document.createElement('a');
+						link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
+						link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
+						link.click();
+						link.remove();
+						this.stepper.next();
+					},
+					error: () => this.stepper.previous()
+				});
 		});
 	}
 

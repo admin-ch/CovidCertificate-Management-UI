@@ -8,15 +8,13 @@ describe('DateTimePickerComponent', () => {
 	let component: DateTimePickerComponent;
 	let fixture: ComponentFixture<DateTimePickerComponent>;
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [ObliqueTestingModule, ReactiveFormsModule],
-				declarations: [DateTimePickerComponent],
-				schemas: [NO_ERRORS_SCHEMA]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [ObliqueTestingModule, ReactiveFormsModule],
+			declarations: [DateTimePickerComponent],
+			schemas: [NO_ERRORS_SCHEMA]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DateTimePickerComponent);
