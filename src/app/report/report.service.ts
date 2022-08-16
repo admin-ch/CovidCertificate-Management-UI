@@ -66,6 +66,9 @@ export class ReportService {
 					]
 				}
 			),
+			[ReportType.A9]: this.fb.group({
+				types: new FormArray([], Validators.required),
+			}),
 			[ReportType.A11]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
