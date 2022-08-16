@@ -9,13 +9,15 @@ describe('WhoCheckboxComponent', () => {
 	let component: VaccinationImportantInformationComponent;
 	let fixture: ComponentFixture<VaccinationImportantInformationComponent>;
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, ReactiveFormsModule, MatCheckboxModule],
-			declarations: [VaccinationImportantInformationComponent],
-			schemas: [NO_ERRORS_SCHEMA]
-		}).compileComponents();
-	}));
+	beforeEach(
+		waitForAsync(() => {
+			TestBed.configureTestingModule({
+				imports: [ObliqueTestingModule, ReactiveFormsModule, MatCheckboxModule],
+				declarations: [VaccinationImportantInformationComponent],
+				schemas: [NO_ERRORS_SCHEMA]
+			}).compileComponents();
+		})
+	);
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(VaccinationImportantInformationComponent);

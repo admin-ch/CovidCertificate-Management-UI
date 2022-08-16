@@ -4,8 +4,8 @@ import {FormControl} from '@angular/forms';
 import * as moment from 'moment/moment';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
-import {ReportService} from "../../../report.service";
-import {Subscription} from "rxjs";
+import {ReportService} from '../../../report.service';
+import {Subscription} from 'rxjs';
 
 @Component({
 	selector: 'ec-date-from-to-fieldset',
@@ -15,7 +15,7 @@ import {Subscription} from "rxjs";
 export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	@Input() dateFromFormControl: FormControl;
 	@Input() dateToFormControl: FormControl;
-	@Input() label: string
+	@Input() label: string;
 
 	subscription: Subscription;
 
@@ -30,12 +30,12 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subscription = this.reportService.reset$.subscribe(_ => {
-			this.dateFromFormControl.reset()
-			this.dateToFormControl.reset()
-		})
+			this.dateFromFormControl.reset();
+			this.dateToFormControl.reset();
+		});
 	}
 
 	ngOnDestroy() {
-		this.subscription?.unsubscribe()
+		this.subscription?.unsubscribe();
 	}
 }
