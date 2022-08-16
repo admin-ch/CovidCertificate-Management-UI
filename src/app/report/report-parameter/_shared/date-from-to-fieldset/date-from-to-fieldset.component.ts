@@ -13,11 +13,9 @@ import {Subscription} from "rxjs";
 	styleUrls: ['./date-from-to-fieldset.component.scss']
 })
 export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
-	@Input()
-	dateFromFormControl: FormControl;
-
-	@Input()
-	dateToFormControl: FormControl;
+	@Input() dateFromFormControl: FormControl;
+	@Input() dateToFormControl: FormControl;
+	@Input() label: string
 
 	subscription: Subscription;
 
