@@ -1,11 +1,10 @@
-<form [formGroup]="a7FormGroup" #ngForm="ngForm">
-	<h3>{{ "reports.a7.title" | translate }}</h3>
+<form [formGroup]="a8FormGroup" #ngForm="ngForm">
+	<h3>{{ "reports.a8.title" | translate }}</h3>
 	<ec-date-from-to-fieldset
 		[dateFromFormControl]="dateFromFormControl"
 		[dateToFormControl]="dateToFormControl"
 		[label]="'reports.dateFromTo.text' | translate"
 	>
 	</ec-date-from-to-fieldset>
-	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
 	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
 </form>

@@ -1,11 +1,12 @@
 <fieldset>
-	<legend>{{ "reports.dateFromTo.text" | translate }}</legend>
+	<legend>{{ label }}</legend>
 	<div class="period-container">
 		<mat-form-field>
 			<input
 				matInput
 				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
+				[max]="TODAY"
 				[matDatepicker]="pickerFrom"
 				[placeholder]="translate.get('reports.dateFromTo.date-from') | async"
 				[formControl]="dateFromFormControl"
@@ -25,10 +26,12 @@
 					</mat-error>
 					<ng-template #periodTooBig>
 						<mat-error *ngIf="dateFromFormControl.hasError('maxPeriodDays')">
-							{{ "reports.dateFromTo.maxPeriodDays" | translate:{maxPeriodDays: dateFromFormControl.errors['maxPeriodDays']} }}
+							{{
+								"reports.dateFromTo.maxPeriodDays"
+									| translate: { maxPeriodDays: dateFromFormControl.errors["maxPeriodDays"] }
+							}}
 						</mat-error>
 					</ng-template>
-
 				</ng-template>
 			</ng-template>
 		</mat-form-field>
@@ -37,6 +40,7 @@
 				matInput
 				[errorStateMatcher]="matcher"
 				[min]="MIN_DATE"
+				[max]="TODAY"
 				[matDatepicker]="pickerTo"
 				[placeholder]="translate.get('reports.dateFromTo.date-to') | async"
 				[formControl]="dateToFormControl"
