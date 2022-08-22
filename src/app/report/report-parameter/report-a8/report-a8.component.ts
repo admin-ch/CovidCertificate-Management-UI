@@ -17,8 +17,7 @@ export class ReportA8Component implements OnInit, OnDestroy {
 	dateToFormControl: FormControl;
 	certTypesFormArray: FormArray;
 
-	constructor(public readonly reportService: ReportService, public readonly translate: TranslateService) {
-	}
+	constructor(public readonly reportService: ReportService, public readonly translate: TranslateService) {}
 
 	ngOnInit(): void {
 		this.a8FormGroup = this.reportService.formGroup.get(ReportType.A8) as FormGroup;
