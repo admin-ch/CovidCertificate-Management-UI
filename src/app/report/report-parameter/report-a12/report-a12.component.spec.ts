@@ -1,12 +1,12 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportA12Component} from './report-a12.component';
-import {ReportService} from '../../report.service';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Subject} from 'rxjs';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
-import {ReportType} from 'shared/model';
+import {ReportService} from "../../report.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Subject} from "rxjs";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
+import {ObliqueTestingModule} from "@oblique/oblique";
+import {ReportType} from "shared/model";
 
 describe('ReportA12Component', () => {
 	let component: ReportA12Component;
@@ -27,7 +27,8 @@ describe('ReportA12Component', () => {
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-		}).compileComponents();
+		})
+			.compileComponents();
 	});
 
 	beforeEach(() => {

@@ -43,17 +43,17 @@ import {MatTableModule} from '@angular/material/table';
 import {SelectedProfilesComponent} from './report-parameter/report-a4-a6/selected-profiles/selected-profiles.component';
 import {FieldWrapperComponent} from './report-parameter/report-a4-a6/field-wrapper/field-wrapper.component';
 import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-search/issuer-search.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {REPORT_ERROR_STATE_MATCHER} from './errorStateMatcher';
-import {ProfilesTableComponent} from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
-import {ChipListFieldsetComponent} from './report-parameter/_shared/chip-list-fieldset/chip-list-fieldset.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
+import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
+import { ChipListFieldsetComponent } from './report-parameter/_shared/chip-list-fieldset/chip-list-fieldset.component';
 import {ReportA2Component} from './report-parameter/report-a2/report-a2.component';
 import {ReportA7Component} from './report-parameter/report-a7/report-a7.component';
 import {ReportA4A6Component} from './report-parameter/report-a4-a6/report-a4-a6.component';
-import {ReportA8Component} from './report-parameter/report-a8/report-a8.component';
+import { ReportA8Component } from './report-parameter/report-a8/report-a8.component';
 import {ReportA11Component} from './report-parameter/report-a11/report-a11.component';
-import {ReportA12Component} from './report-parameter/report-a12/report-a12.component';
+import { ReportA12Component } from './report-parameter/report-a12/report-a12.component';
 
 @NgModule({
 	declarations: [

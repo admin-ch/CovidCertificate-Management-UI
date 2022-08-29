@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormControl, ValidatorFn} from '@angular/forms';
-import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
+import {FormControl, ValidatorFn} from "@angular/forms";
+import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
 import {ReportType} from 'shared/model';
-import {MatChipInputEvent, MatChipList} from '@angular/material/chips';
-import {Subscription} from 'rxjs';
-import {ReportService} from '../../../report.service';
+import {MatChipInputEvent, MatChipList} from "@angular/material/chips";
+import {Subscription} from "rxjs";
+import {ReportService} from "../../../report.service";
 
 @Component({
 	selector: 'ec-chip-list-fieldset',
@@ -12,11 +12,12 @@ import {ReportService} from '../../../report.service';
 	styleUrls: ['./chip-list-fieldset.component.scss']
 })
 export class ChipListFieldsetComponent implements OnInit, OnDestroy {
-	@Input()
-	chipDataFormControl: FormControl;
 
 	@Input()
-	formatValidator: ValidatorFn;
+	chipDataFormControl: FormControl
+
+	@Input()
+	formatValidator: ValidatorFn
 
 	@ViewChild('chipList')
 	chipList: MatChipList;
@@ -30,10 +31,11 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 
 	subscription: Subscription;
 
-	constructor(private readonly reportService: ReportService) {}
+	constructor(private readonly reportService: ReportService) {
+	}
 
 	ngOnInit(): void {
-		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput());
+		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
 
 		// Trigger new change detection run because updateErrorState() changes formGroup validity
 		// which is used in a component higher in the tree resulting in ExpressionChangedAfterItHasBeenCheckedError.
@@ -41,7 +43,7 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.subscription?.unsubscribe();
+		this.subscription?.unsubscribe()
 	}
 
 	onPaste(event: ClipboardEvent): void {
@@ -95,8 +97,8 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 		const toRemoveIndex = this.chipDataFormControl.value.indexOf(uvciToRemove);
 
 		if (toRemoveIndex >= 0) {
-			const newUvcis = [...this.chipDataFormControl.value];
-			newUvcis.splice(toRemoveIndex, 1);
+			const newUvcis = [...this.chipDataFormControl.value]
+			newUvcis.splice(toRemoveIndex, 1)
 			this.chipDataFormControl.setValue(newUvcis);
 		}
 		this.formControl.markAsTouched();
@@ -130,7 +132,7 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 		});
 		this.chipDataFormControl.setErrors(this.formControl.errors, {
 			emitEvent: true
-		});
+		})
 		this.chipList.errorState = this.formControl.invalid && this.formControl.touched;
 	}
 }

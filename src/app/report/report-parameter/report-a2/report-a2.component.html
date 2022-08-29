@@ -3,14 +3,11 @@
 	<p [innerHTML]="'reports.uvci.info' | translate"></p>
 	<p>{{ "reports.uvci.format" | translate }}</p>
 	<ng-container chipListFieldsetErrors>
-		<ng-container *ngIf="uvcisFormControl.hasError('tooManyUvcis')">{{
-			"reports.uvci.too-many" | translate
-		}}</ng-container>
-		<ng-container *ngIf="uvcisFormControl.hasError('format')">{{
-			"reports.uvci.format.error" | translate
-		}}</ng-container>
-		<ng-container *ngIf="uvcisFormControl.hasError('required')">{{
-			"i18n.validation.required" | translate
-		}}</ng-container>
+		<ng-container
+			*ngIf="uvcisFormControl.hasError('tooManyUvcis')">{{ "reports.uvci.too-many" | translate }}</ng-container>
+		<ng-container
+			*ngIf="uvcisFormControl.hasError('format')">{{ "reports.uvci.format.error" | translate }}</ng-container>
+		<ng-container
+			*ngIf="uvcisFormControl.hasError('required')">{{ "i18n.validation.required" | translate }}</ng-container>
 	</ng-container>
 </ec-chip-list-fieldset>

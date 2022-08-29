@@ -18,12 +18,16 @@ export class ReportService {
 
 	constructor(private readonly fb: FormBuilder) {
 		this.formGroup = fb.group({
-			[ReportType.A2]: this.fb.group({
-				uvcis: [[], Validators.required]
-			}),
-			[ReportType.A12]: this.fb.group({
-				transferCodes: [[], Validators.required]
-			}),
+			[ReportType.A2]: this.fb.group(
+				{
+					uvcis: [[], Validators.required]
+				}
+			),
+			[ReportType.A12]: this.fb.group(
+				{
+					transferCodes: [[], Validators.required]
+				}
+			),
 			[ReportType.A7]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
@@ -31,10 +35,9 @@ export class ReportService {
 					canton: ['', Validators.required],
 					types: new FormArray([], Validators.required)
 				},
-				{validators: getStartDateBeforeEndDateValidator('from', 'to')}
-			),
-			[ReportType.A8]: this.fb.group(
-				{
+				{validators: getStartDateBeforeEndDateValidator('from', 'to')
+				}),
+			[ReportType.A8]: this.fb.group({
 					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
 					types: new FormArray([], Validators.required)
@@ -44,8 +47,7 @@ export class ReportService {
 						getStartDateBeforeEndDateValidator('from', 'to'),
 						getMaxPeriodValidator('from', 'to', 90)
 					]
-				}
-			),
+				}),
 			[ReportType.A4]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
@@ -59,8 +61,7 @@ export class ReportService {
 						getStartDateBeforeEndDateValidator('from', 'to'),
 						getMaxPeriodValidator('from', 'to', 90)
 					]
-				}
-			),
+				}),
 			[ReportType.A11]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],

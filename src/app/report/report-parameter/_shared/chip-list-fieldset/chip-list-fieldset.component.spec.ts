@@ -1,13 +1,13 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ChipListFieldsetComponent} from './chip-list-fieldset.component';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {ReportType} from 'shared/model';
-import {ReportService} from '../../../report.service';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Subject} from 'rxjs';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
+import {MatChipInputEvent} from "@angular/material/chips";
+import {ReportType} from "shared/model";
+import {ReportService} from "../../../report.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Subject} from "rxjs";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
+import {ObliqueTestingModule} from "@oblique/oblique";
 
 describe('ChipListFieldsetComponent', () => {
 	let component: ChipListFieldsetComponent;
@@ -28,7 +28,8 @@ describe('ChipListFieldsetComponent', () => {
 				}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-		}).compileComponents();
+		})
+			.compileComponents();
 	});
 
 	beforeEach(() => {
@@ -40,8 +41,8 @@ describe('ChipListFieldsetComponent', () => {
 				uvcis: new FormControl([])
 			})
 		});
-		component.chipDataFormControl = reportService.formGroup.get(ReportType.A2).get('uvcis') as FormControl;
-		component.formatValidator = () => null;
+		component.chipDataFormControl = reportService.formGroup.get(ReportType.A2).get('uvcis') as FormControl
+		component.formatValidator = () => null
 
 		fixture.detectChanges();
 	});
@@ -66,7 +67,7 @@ describe('ChipListFieldsetComponent', () => {
 		});
 		describe('if value is valid', () => {
 			beforeEach(() => {
-				component.formatValidator = control => (control.value === 'valid' ? null : {format: true});
+				component.formatValidator = (control) => control.value === 'valid' ? null : {format: true}
 				event.value = 'valid';
 			});
 			it('should not push to errorUvcis', () => {
@@ -87,7 +88,7 @@ describe('ChipListFieldsetComponent', () => {
 		});
 		describe('if value is invalid', () => {
 			beforeEach(() => {
-				component.formatValidator = control => (control.value === 'valid' ? null : {format: true});
+				component.formatValidator = (control) => control.value === 'valid' ? null : {format: true}
 				event.value = 'invalid';
 			});
 			it('should push to errorUvcis', () => {
@@ -104,10 +105,10 @@ describe('ChipListFieldsetComponent', () => {
 
 	describe('remove()', () => {
 		beforeEach(() => {
-			reportService.formGroup
-				.get(ReportType.A2)
-				.get('uvcis')
-				.setValue(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC', 'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']);
+			reportService.formGroup.get(ReportType.A2).get('uvcis').setValue([
+				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC',
+				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'
+			])
 			component.formControl.markAsTouched();
 		});
 
@@ -125,9 +126,7 @@ describe('ChipListFieldsetComponent', () => {
 
 		it('should remove from selectedUvcis if exists', () => {
 			component.remove('urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA7CC');
-			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual([
-				'urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722'
-			]);
+			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual(['urn:uvci:01:CH:3E8FF2E41754EB4BCD4BA722']);
 		});
 
 		it('should not remove any from selectedUvcis if not exists', () => {
@@ -163,7 +162,7 @@ describe('ChipListFieldsetComponent', () => {
 			expect(component.errorUvcis).toEqual([]);
 		});
 		it('should reset the selectedUvcis', () => {
-			reportService.formGroup.get(ReportType.A2).get('uvcis').setValue(['1', '2', '3']);
+			reportService.formGroup.get(ReportType.A2).get('uvcis').setValue(['1', '2', '3'])
 			component.resetInput();
 			expect(reportService.formGroup.get(ReportType.A2).get('uvcis').value).toEqual([]);
 		});
