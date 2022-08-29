@@ -19,21 +19,23 @@
 				<div obCollapseMain>
 					<div class="radio-button-container">
 						<div>
-							<div class="report-item" *ecHasAuthorizationForAny="[AuthFunction.REPORT_A3,AuthFunction.REPORT_A5]">
+							<div
+								class="report-item"
+								*ecHasAuthorizationForAny="[AuthFunction.REPORT_A3, AuthFunction.REPORT_A5]"
+							>
 								<div class="button-container">
-									<mat-radio-button id="report-type-A3" [value]="ReportType.A3"
-													  [name]="ReportType.A3"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A3"
+										[value]="ReportType.A3"
+										[name]="ReportType.A3"
+										class="radio-button"
+									>
 										{{ "reports.a3.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a3.description.short' | translate}}</p>
+									<p>{{ "reports.a3.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
@@ -83,7 +85,9 @@
 					AuthFunction.REPORT_A4,
 					AuthFunction.REPORT_A6,
 					AuthFunction.REPORT_A11,
-				 	AuthFunction.REPORT_A12]">
+					AuthFunction.REPORT_A12
+				]"
+			>
 				<span obCollapseHeader> {{ "reports.detail.header" | translate }} </span>
 				<div obCollapseMain>
 					<div class="radio-button-container">
@@ -114,11 +118,10 @@
 							<div class="divider"></div>
 						</div>
 						<div>
-							<div class="report-item"
-								*ecHasAuthorizationForAny="[
-									AuthFunction.REPORT_A4,
-									AuthFunction.REPORT_A6
-								]">
+							<div
+								class="report-item"
+								*ecHasAuthorizationForAny="[AuthFunction.REPORT_A4, AuthFunction.REPORT_A6]"
+							>
 								<div class="button-container">
 									<mat-radio-button
 										id="report-type-A4"
@@ -172,19 +175,18 @@
 						<div>
 							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A12">
 								<div class="button-container">
-									<mat-radio-button id="report-type-A12" [value]="ReportType.A12"
-													  [name]="ReportType.A12"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A12"
+										[value]="ReportType.A12"
+										[name]="ReportType.A12"
+										class="radio-button"
+									>
 										{{ "reports.a12.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a12.description.short' | translate}}</p>
+									<p>{{ "reports.a12.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>
@@ -232,19 +234,18 @@
 						<div>
 							<div class="report-item" *ecHasAuthorizationFor="AuthFunction.REPORT_A9">
 								<div class="button-container">
-									<mat-radio-button id="report-type-A9" [value]="ReportType.A9"
-													  [name]="ReportType.A9"
-													  class="radio-button">
+									<mat-radio-button
+										id="report-type-A9"
+										[value]="ReportType.A9"
+										[name]="ReportType.A9"
+										class="radio-button"
+									>
 										{{ "reports.a9.title" | translate }}
 									</mat-radio-button>
-									<p>{{'reports.a9.description.short' | translate}}</p>
+									<p>{{ "reports.a9.description.short" | translate }}</p>
 								</div>
 								<div class="info-container">
-									<button
-										mat-icon-button
-										obButton="tertiary"
-										[obPopover]="popoverM"
-									>
+									<button mat-icon-button obButton="tertiary" [obPopover]="popoverM">
 										<mat-icon svgIcon="help-circle"></mat-icon>
 									</button>
 									<ng-template #popoverM>

@@ -50,21 +50,15 @@ describe('ReportParameterComponent', () => {
 
 	describe('goNext()', () => {
 		describe('when formGroup is valid', () => {
-			it(
-				'should emit next()',
-				waitForAsync(() => {
-					component.goNext();
-					expect(reportServiceMock.generateReport$.next).toHaveBeenCalled();
-				})
-			);
-			it(
-				'call next on stepper',
-				waitForAsync(() => {
-					const nextSpy = spyOn(stepper, 'next');
-					component.goNext();
-					expect(nextSpy).toHaveBeenCalled();
-				})
-			);
+			it('should emit next()', waitForAsync(() => {
+				component.goNext();
+				expect(reportServiceMock.generateReport$.next).toHaveBeenCalled();
+			}));
+			it('call next on stepper', waitForAsync(() => {
+				const nextSpy = spyOn(stepper, 'next');
+				component.goNext();
+				expect(nextSpy).toHaveBeenCalled();
+			}));
 		});
 		describe('when formGroup is invalid', () => {
 			beforeEach(() => {
@@ -72,29 +66,20 @@ describe('ReportParameterComponent', () => {
 				reportServiceMock.formGroup.setErrors({hasError: true});
 			});
 
-			it(
-				'should not emit next()',
-				waitForAsync(() => {
-					component.goNext();
-					expect(reportServiceMock.generateReport$.next).not.toHaveBeenCalled();
-				})
-			);
-			it(
-				'not call next on stepper',
-				waitForAsync(() => {
-					const nextSpy = spyOn(stepper, 'next');
-					component.goNext();
-					expect(nextSpy).not.toHaveBeenCalled();
-				})
-			);
-			it(
-				'should call formGroup.markAllAsTouched()',
-				waitForAsync(() => {
-					const spy = jest.spyOn(reportServiceMock.formGroup, 'markAllAsTouched');
-					component.goNext();
-					expect(spy).toHaveBeenCalled();
-				})
-			);
+			it('should not emit next()', waitForAsync(() => {
+				component.goNext();
+				expect(reportServiceMock.generateReport$.next).not.toHaveBeenCalled();
+			}));
+			it('not call next on stepper', waitForAsync(() => {
+				const nextSpy = spyOn(stepper, 'next');
+				component.goNext();
+				expect(nextSpy).not.toHaveBeenCalled();
+			}));
+			it('should call formGroup.markAllAsTouched()', waitForAsync(() => {
+				const spy = jest.spyOn(reportServiceMock.formGroup, 'markAllAsTouched');
+				component.goNext();
+				expect(spy).toHaveBeenCalled();
+			}));
 		});
 	});
 });
