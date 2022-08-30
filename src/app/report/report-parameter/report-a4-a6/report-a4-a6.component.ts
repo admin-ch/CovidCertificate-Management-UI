@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ReportService} from '../../report.service';
-import {ReportType} from 'shared/model';
+import {ReportType, IssuerType} from 'shared/model';
 import {ReplaySubject, Subscription} from 'rxjs';
 import {delay, distinctUntilChanged, tap} from 'rxjs/operators';
 import {SelectedProfilesService} from './selected-profiles.service';
@@ -14,6 +14,8 @@ import {SelectedProfilesService} from './selected-profiles.service';
 export class ReportA4A6Component implements OnInit, OnDestroy {
 	@ViewChild('ngForm') ngForm: NgForm;
 
+	IssuerType = IssuerType;
+
 	a4a6FormGroup: FormGroup;
 	dateFromFormControl: FormControl;
 	dateToFormControl: FormControl;
@@ -21,7 +23,7 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	certTypesFormArray: FormArray;
 	userIdsFormArray: FormArray;
 
-	searchType: 'organisation' | 'issuer' = 'organisation';
+	searchType = IssuerType.ORGANISATION;
 	unitSearchAuthority$: ReplaySubject<string> = new ReplaySubject<string>();
 	subscription: Subscription;
 
