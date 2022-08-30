@@ -4,7 +4,7 @@ import {ReportService} from '../../report.service';
 import {ReportType, IssuerType} from 'shared/model';
 import {ReplaySubject, Subscription} from 'rxjs';
 import {delay, distinctUntilChanged, tap} from 'rxjs/operators';
-import {SelectedProfilesService} from './selected-profiles.service';
+import {SelectedProfilesService} from '../_shared/selected-profiles.service';
 
 @Component({
 	selector: 'ec-report-a4-a6',

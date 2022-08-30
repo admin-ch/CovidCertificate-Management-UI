@@ -13,7 +13,7 @@ import {
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
-import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
+import {EiamProfile, SelectedProfilesService} from '../../_shared/selected-profiles.service';
 import {merge, Subject, Subscription} from 'rxjs';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';

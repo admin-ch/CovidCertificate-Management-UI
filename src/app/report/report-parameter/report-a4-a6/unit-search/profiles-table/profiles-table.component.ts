@@ -1,7 +1,7 @@
 import {Component, Inject, Input} from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {UnitTree} from '../unit-search.component';
-import {EiamProfile, SelectedProfilesService} from '../../selected-profiles.service';
+import {EiamProfile, SelectedProfilesService} from '../../../_shared/selected-profiles.service';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {map} from 'rxjs/operators';

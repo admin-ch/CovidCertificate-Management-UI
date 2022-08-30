@@ -2,7 +2,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 
 import {SelectedProfilesComponent} from './selected-profiles.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {SelectedProfilesService} from '../selected-profiles.service';
+import {SelectedProfilesService} from '../../_shared/selected-profiles.service';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../../report.service';
 import {FormArray, FormGroup} from '@angular/forms';

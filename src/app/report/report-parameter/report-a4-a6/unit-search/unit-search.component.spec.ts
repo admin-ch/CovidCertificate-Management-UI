@@ -5,7 +5,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/c
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {SelectedProfilesService} from '../selected-profiles.service';
+import {SelectedProfilesService} from '../../_shared/selected-profiles.service';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatTableModule} from '@angular/material/table';
 import {HttpClient} from '@angular/common/http';
