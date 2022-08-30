@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, TrackByFunction} from '@angular/core';
-import {EiamProfile, SelectedProfilesService} from '../../_shared/selected-profiles.service';
+import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
 import {FormArray, FormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ReportService} from '../../../report.service';
