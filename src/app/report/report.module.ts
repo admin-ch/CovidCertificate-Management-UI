@@ -42,7 +42,7 @@ import {FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {SelectedProfilesComponent} from './report-parameter/_shared/selected-profiles/selected-profiles.component';
 import {FieldWrapperComponent} from './report-parameter/report-a4-a6/field-wrapper/field-wrapper.component';
-import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-search/issuer-search.component';
+import {IssuerSearchComponent} from './report-parameter/_shared/issuer-search/issuer-search.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";

@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {IssuerSearchComponent} from './issuer-search.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {SelectedProfilesService} from '../../_shared/selected-profiles.service';
+import {SelectedProfilesService} from '../selected-profiles.service';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {MatTableModule} from '@angular/material/table';
