@@ -55,6 +55,7 @@ import { ReportA8Component } from './report-parameter/report-a8/report-a8.compon
 import { ReportA9Component } from './report-parameter/report-a9/report-a9.component';
 import {ReportA11Component} from './report-parameter/report-a11/report-a11.component';
 import { ReportA12Component } from './report-parameter/report-a12/report-a12.component';
+import { ReportA3A5Component } from './report-parameter/report-a3-a5/report-a3-a5.component';
 
 @NgModule({
 	declarations: [
@@ -84,7 +85,8 @@ import { ReportA12Component } from './report-parameter/report-a12/report-a12.com
 		ReportA8Component,
 		ReportA9Component,
 		ReportA11Component,
-		ReportA12Component
+		ReportA12Component,
+  ReportA3A5Component
 	],
 	imports: [
 		SharedModule,

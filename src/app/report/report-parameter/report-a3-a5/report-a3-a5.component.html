@@ -1,0 +1,10 @@
+<form [formGroup]="a3a5FormGroup" #ngForm="ngForm">
+	<h3>{{ "reports.a3.title" | translate }}</h3>
+	<ec-date-from-to-fieldset
+		[dateFromFormControl]="dateFromFormControl"
+		[dateToFormControl]="dateToFormControl"
+		[label]="'reports.dateFromTo.text' | translate"
+	>
+	</ec-date-from-to-fieldset>
+	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
+</form>
