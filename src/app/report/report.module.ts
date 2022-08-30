@@ -36,7 +36,7 @@ import {DataRoomSelectionFieldsetComponent} from './report-parameter/_shared/dat
 import {DateFromToFieldsetComponent} from './report-parameter/_shared/date-from-to-fieldset/date-from-to-fieldset.component';
 import {CertTypeSelectionFieldsetComponent} from './report-parameter/_shared/cert-type-selection-fieldset/cert-type-selection-fieldset.component';
 import {MatTreeModule} from '@angular/material/tree';
-import {UnitSearchComponent} from './report-parameter/report-a4-a6/unit-search/unit-search.component';
+import {UnitSearchComponent} from './report-parameter/_shared/unit-search/unit-search.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
@@ -46,7 +46,7 @@ import {IssuerSearchComponent} from './report-parameter/report-a4-a6/issuer-sear
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {REPORT_ERROR_STATE_MATCHER} from "./errorStateMatcher";
-import { ProfilesTableComponent } from './report-parameter/report-a4-a6/unit-search/profiles-table/profiles-table.component';
+import { ProfilesTableComponent } from './report-parameter/_shared/unit-search/profiles-table/profiles-table.component';
 import { ChipListFieldsetComponent } from './report-parameter/_shared/chip-list-fieldset/chip-list-fieldset.component';
 import {ReportA2Component} from './report-parameter/report-a2/report-a2.component';
 import {ReportA7Component} from './report-parameter/report-a7/report-a7.component';

@@ -5,7 +5,7 @@ import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MatTableModule} from '@angular/material/table';
-import {SelectedProfilesService} from '../../../_shared/selected-profiles.service';
+import {SelectedProfilesService} from '../../selected-profiles.service';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {UnitTree} from '../unit-search.component';
 import {NestedTreeControl} from '@angular/cdk/tree';

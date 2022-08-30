@@ -3,7 +3,7 @@ import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
-import {SelectedProfilesService} from '../../_shared/selected-profiles.service';
+import {SelectedProfilesService} from '../selected-profiles.service';
 import {FormArray} from '@angular/forms';
 import {ReportService} from '../../../report.service';
 import {Subscription} from 'rxjs';
