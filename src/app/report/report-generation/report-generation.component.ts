@@ -46,6 +46,9 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				case ReportType.A2:
 					url += '/fraud/a2/by_uvci';
 					break;
+				case ReportType.A3:
+					url += '/fraud/a3/for_timerange_by_users';
+					break;
 				case ReportType.A4:
 					url += '/fraud/a4/by_users_and_types';
 					break;
