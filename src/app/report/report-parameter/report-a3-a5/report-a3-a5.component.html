@@ -7,4 +7,36 @@
 	>
 	</ec-date-from-to-fieldset>
 	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
+
+	<fieldset>
+		<legend>{{ "reports.a4a6.organisationOrIssuer" | translate }}</legend>
+		<mat-radio-group
+			[(ngModel)]="searchType"
+			[ngModelOptions]="{ standalone: true }"
+			name="searchType"
+			class="search-type"
+		>
+			<mat-radio-button id="searchType-organisation" value="organisation" name="organisation">
+				{{ "reports.a4a6.organisation" | translate }}
+			</mat-radio-button>
+
+			<mat-radio-button id="searchType-issuer" value="issuer" name="issuer">
+				{{ "reports.a4a6.issuer" | translate }}
+			</mat-radio-button>
+		</mat-radio-group>
+	</fieldset>
+
+	<ec-unit-search
+		[hidden]="searchType !== IssuerType.ORGANISATION"
+		[authority]="unitSearchAuthority$ | async"
+		[userIdsFormArray]="userIdsFormArray"
+	>
+	</ec-unit-search>
+	<ec-issuer-search
+		[hidden]="searchType !== IssuerType.ISSUER"
+		[authority]="unitSearchAuthority$ | async"
+		[userIdsFormArray]="userIdsFormArray"
+	></ec-issuer-search>
+
+	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>
 </form>
