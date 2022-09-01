@@ -352,3 +352,8 @@ export interface Shipping {
 	cantonCodeSender?: string;
 	zipCode?: number;
 }
+
+export enum IssuerType {
+	ORGANISATION = 'organisation',
+	ISSUER = 'issuer',
+}

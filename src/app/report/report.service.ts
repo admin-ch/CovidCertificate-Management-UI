@@ -23,6 +23,20 @@ export class ReportService {
 					uvcis: [[], Validators.required]
 				}
 			),
+			[ReportType.A3]: this.fb.group(
+				{
+					from: ['', [ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
+					canton: ['', Validators.required],
+					userIds: new FormArray([], [Validators.required, Validators.maxLength(200)])
+				},
+				{
+					validators: [
+						getStartDateBeforeEndDateValidator('from', 'to'),
+						getMaxPeriodValidator('from', 'to', 90)
+					]
+				}
+			),
 			[ReportType.A4]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],

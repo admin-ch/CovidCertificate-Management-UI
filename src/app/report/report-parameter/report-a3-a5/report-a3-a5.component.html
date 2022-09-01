@@ -1,5 +1,5 @@
-<form [formGroup]="a4a6FormGroup" #ngForm="ngForm">
-	<h3>{{ "reports.a4a6.title" | translate }}</h3>
+<form [formGroup]="a3a5FormGroup" #ngForm="ngForm">
+	<h3>{{ "reports.a3.title" | translate }}</h3>
 	<ec-date-from-to-fieldset
 		[dateFromFormControl]="dateFromFormControl"
 		[dateToFormControl]="dateToFormControl"
@@ -39,5 +39,4 @@
 	></ec-issuer-search>
 
 	<ec-selected-units [userIdsFormArray]="userIdsFormArray"></ec-selected-units>
-	<ec-cert-type-selection-fieldset [certTypesFormArray]="certTypesFormArray"></ec-cert-type-selection-fieldset>
 </form>
