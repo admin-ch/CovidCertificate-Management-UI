@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import { ReportA3A5Component } from './report-a3-a5.component';
 import {ObliqueTestingModule} from "@oblique/oblique";
 import {SharedModule} from "shared/shared.module";
-import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReportService} from "../../report.service";
 import {ReportType} from "shared/model";
@@ -11,6 +11,8 @@ import {Subject} from "rxjs";
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
 import * as moment from "moment";
 import {SelectedProfilesService} from "../_shared/selected-profiles.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MatRadioModule} from "@angular/material/radio";
 
 describe('ReportA3A5Component', () => {
 	let component: ReportA3A5Component;
@@ -19,7 +21,15 @@ describe('ReportA3A5Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
+			imports: [
+				ObliqueTestingModule,
+				SharedModule,
+				HttpClientTestingModule,
+				FormsModule,
+				ReactiveFormsModule,
+				MatFormFieldModule,
+				MatRadioModule
+			],
 			providers: [
 				{
 					provide: ReportService,
@@ -29,7 +39,7 @@ describe('ReportA3A5Component', () => {
 								from: new FormControl(''),
 								to: new FormControl(''),
 								canton: new FormControl('buv'),
-								userIds: new FormArray([]),
+								userIds: new FormControl([]),
 							})
 						}),
 						reset$: new Subject()
@@ -48,6 +58,7 @@ describe('ReportA3A5Component', () => {
 		selectedProfilesService = TestBed.inject(SelectedProfilesService);
 		fixture.detectChanges();
 	});
+
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
@@ -82,7 +93,7 @@ describe('ReportA3A5Component', () => {
 			component.a3a5FormGroup.get('from').setValue(moment('2022-01-01'));
 			component.a3a5FormGroup.get('to').setValue(moment('2022-01-01'));
 			component.a3a5FormGroup.get('canton').setValue('buv');
-			component.a3a5FormGroup.get('userIds').setValue([1,2,3]);
+			component.a3a5FormGroup.get('userIds').setValue(['1', '2', '3']);
 			component.resetInput();
 
 			expect(component.a3a5FormGroup.get('from').value).toEqual('');

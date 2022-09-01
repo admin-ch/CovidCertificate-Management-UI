@@ -66,7 +66,7 @@ export class ReportA3A5Component implements OnInit, OnDestroy {
 			from: '',
 			to: '',
 			canton: '',
-			userIdsFormArray: []
+			userIds: []
 		});
 	}
 }
