@@ -147,11 +147,13 @@ export class VaccineFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private resetForm(): void {
-		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value.certificateLanguage;
+		const previousCertificateLanguage: ProductInfo = this.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage;
 
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
-			certificateLanguage: previousCertificateLanguage,
+			[PersonalDataComponent.FORM_GROUP_NAME]: {
+				certificateLanguage: previousCertificateLanguage
+			},
 			dateOfVaccination: VaccineFormComponent.getDefaultDateOfVaccination(),
 			countryOfVaccination: this.getDefaultCountryOfVaccination()
 		});

@@ -126,11 +126,13 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private resetForm(): void {
-		const previousCertificateLanguage: ProductInfo = this.recoveryForm.value.certificateLanguage;
+		const previousCertificateLanguage: ProductInfo = this.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage;
 
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
-			certificateLanguage: previousCertificateLanguage,
+			[PersonalDataComponent.FORM_GROUP_NAME]: {
+				certificateLanguage: previousCertificateLanguage
+			},
 			countryOfTest: this.getDefaultCountryOfRecovery()
 		});
 	}

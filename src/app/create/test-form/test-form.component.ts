@@ -277,14 +277,16 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private resetForm(): void {
-		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
+		const previousCertificateLanguage: ProductInfo = this.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage;
 		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
 		const previousProduct: ProductInfo = this.testForm.value.product;
 		const previousCenter: string = this.testForm.value.center;
 
 		this.formDirective.resetForm();
 		this.testForm.reset({
-			certificateLanguage: previousCertificateLanguage,
+			[PersonalDataComponent.FORM_GROUP_NAME]: {
+				certificateLanguage: previousCertificateLanguage
+			},
 			countryOfTest: this.getDefaultCountryOfTest(),
 			typeOfTest: previousTypeOfTest,
 			product: previousProduct,
