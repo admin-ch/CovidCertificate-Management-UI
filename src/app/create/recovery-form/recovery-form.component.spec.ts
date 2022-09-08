@@ -11,6 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
@@ -28,7 +29,7 @@ describe('RecoveryFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [RecoveryFormComponent, DateTimePickerComponent],
+			declarations: [RecoveryFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -129,28 +130,49 @@ describe('RecoveryFormComponent', () => {
 		it('should emit next if the form is valid', () => {
 			const nextSpy = jest.spyOn(component.next, 'emit');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 	});
 });

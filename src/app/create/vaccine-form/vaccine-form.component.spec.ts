@@ -11,6 +11,7 @@ import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.comp
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {VaccineFormComponent} from './vaccine-form.component';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
@@ -29,7 +30,7 @@ describe('VaccineFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [VaccineFormComponent, DateTimePickerComponent],
+			declarations: [VaccineFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -176,6 +177,11 @@ describe('VaccineFormComponent', () => {
 
 		describe('Cross field validation', () => {
 			it('should marks the form as valid if all fields are filled correctly', () => {
+				component.vaccineForm.get('personalData.firstName').setValue('John');
+				component.vaccineForm.get('personalData.surName').setValue('Doe');
+				component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+				component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 				component.vaccineForm.get('medicalProduct').setValue('testproduct');
 				component.vaccineForm.get('doseNumber').setValue(2);
 				component.vaccineForm.get('totalDoses').setValue(2);
@@ -219,6 +225,11 @@ describe('VaccineFormComponent', () => {
 		it('should emit next if the type is selected', () => {
 			const nextSpy = jest.spyOn(component.next, 'emit');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue('testproduct');
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -226,11 +237,18 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue({code: '42', display: 'test-product'});
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -238,11 +256,18 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue({code: '42', display: 'test-product'});
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -250,6 +275,8 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 	});
 	describe('Form reset', () => {

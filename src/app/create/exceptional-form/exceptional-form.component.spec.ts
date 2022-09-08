@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('ExceptionalFormComponent', () => {
 	let component: ExceptionalFormComponent;
@@ -17,7 +18,7 @@ describe('ExceptionalFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [ExceptionalFormComponent, DateTimePickerComponent],
+			declarations: [ExceptionalFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,

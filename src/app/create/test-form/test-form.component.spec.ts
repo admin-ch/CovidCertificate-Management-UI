@@ -13,7 +13,8 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
-import {GenerationType, ProductInfo} from 'shared/model';
+import {ProductInfo} from 'shared/model';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -40,7 +41,7 @@ describe('TestFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TestFormComponent, DateTimePickerComponent],
+			declarations: [TestFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -237,7 +238,13 @@ describe('TestFormComponent', () => {
 		});
 
 		it('should emit next if the type is selected', () => {
-			const nextMock = jest.spyOn(component.next, 'emit');
+			const nextSpy = jest.spyOn(component.next, 'emit');
+
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
@@ -248,11 +255,18 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
@@ -263,10 +277,17 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
+
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
 
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
@@ -281,6 +302,8 @@ describe('TestFormComponent', () => {
 
 			const sampleDate: Date = moment(datePast).toDate();
 			sampleDate.setHours(12);
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 	});
 

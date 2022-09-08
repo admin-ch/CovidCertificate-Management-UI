@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 import {WhoCheckboxComponent} from '../components/who-checkbox/who-checkbox.component';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe.skip('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;
@@ -31,7 +32,7 @@ describe.skip('TouristVaccineFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TouristVaccineFormComponent, DateTimePickerComponent, WhoCheckboxComponent],
+			declarations: [TouristVaccineFormComponent, DateTimePickerComponent, WhoCheckboxComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
