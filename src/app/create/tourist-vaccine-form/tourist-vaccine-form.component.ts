@@ -14,7 +14,8 @@ import {ValueSetsService} from '../utils/value-sets.service';
 const VACCINE_DATE_VALIDATORS = [
 	Validators.required,
 	DateValidators.dateLessThanToday(),
-	DateValidators.dateMoreThanMinDate()
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateMoreThanBirthday(PersonalDataComponent.FORM_GROUP_NAME)
 ];
 
 @Component({
@@ -30,7 +31,6 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	@ViewChild('touristPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	vaccineForm: FormGroup;
-	personalDataForm: FormGroup;
 
 	public maxDose = 9;
 	public minDose = 0;
@@ -41,6 +41,10 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
 	) {}
+
+	private static getDefaultDateOfVaccination(): MomentWrapper {
+		return {date: moment(new Date(), DATE_FORMAT)};
+	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -60,10 +64,17 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngAfterViewInit() {
-		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
-			this.personalDataForm = this.personalDataChild.vaccineForm;
-		}
+	ngAfterViewInit(): void {
+		// revalidate the 'dateOfVaccination' field when birthdate is change
+		this.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+			// timeout is needed to ensure that the validator gets called after the field contains the new value
+			setTimeout(() => {
+				const control = this.vaccineForm.get('dateOfVaccination');
+				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
+				// will contain an object-path for subfield of the ec-datetimepicker
+				control.patchValue(control.value)
+			})
+		});
 	}
 
 	goBack(): void {
@@ -72,12 +83,9 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		this.vaccineForm.markAllAsTouched();
-		if (this.personalDataForm) {
-			this.personalDataChild.touchDatepicker();
-			this.personalDataForm.markAllAsTouched();
-		}
+		this.personalDataChild.touchDatepicker();
 
-		if (this.vaccineForm.valid && this.personalDataForm && this.personalDataForm.valid) {
+		if (this.vaccineForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
@@ -108,21 +116,12 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 				medicalProduct: ['', Validators.required],
 				doseNumber: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
 				totalDoses: ['', [Validators.required, Validators.max(9), Validators.min(1)]],
-				dateOfVaccination: [this.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
+				dateOfVaccination: [TouristVaccineFormComponent.getDefaultDateOfVaccination(), VACCINE_DATE_VALIDATORS],
 				countryOfVaccination: ['', Validators.required],
 				checkBox: [false, Validators.requiredTrue]
 			},
 			{validators: [DosesValidators.validateDoses, IssuableProductValidator.validateProduct]}
 		);
-
-		this.vaccineForm.get('dateOfVaccination').valueChanges.subscribe(_ => {
-			if (!!this.vaccineForm.get('birthdate')) {
-				this.vaccineForm.controls.dateOfVaccination.setValidators([
-					DateValidators.dateMoreThanBirthday(),
-					...VACCINE_DATE_VALIDATORS
-				]);
-			}
-		});
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -131,16 +130,9 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 			: this.getCertificateLanguages().find(lang => lang.code === this.translateService.currentLang);
 	}
 
-	private getDefaultDateOfVaccination(): MomentWrapper {
-		return {date: moment(new Date(), DATE_FORMAT)};
-	}
-
 	private mapFormToPatientData(): Patient {
 		return {
-			firstName: this.personalDataForm.value.firstName,
-			surName: this.personalDataForm.value.surName,
-			birthdate: DateMapper.getBirthdate(this.personalDataForm.value.birthdate),
-			language: this.personalDataForm.value.certificateLanguage.code,
+			...this.personalDataChild.mapFormToPersonalData(),
 			vaccination: {
 				countryOfVaccination: this.vaccineForm.value.countryOfVaccination,
 				dateOfVaccination: DateMapper.getDate(this.vaccineForm.value.dateOfVaccination),
@@ -158,7 +150,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 		this.formDirective.resetForm();
 		this.vaccineForm.reset({
 			certificateLanguage: previousCertificateLanguage,
-			dateOfVaccination: this.getDefaultDateOfVaccination(),
+			dateOfVaccination: TouristVaccineFormComponent.getDefaultDateOfVaccination(),
 			checkBox: false
 		});
 	}
