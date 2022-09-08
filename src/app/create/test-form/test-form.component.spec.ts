@@ -182,7 +182,20 @@ describe('TestFormComponent', () => {
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
 
-			it('should marks the sampleDate as valid if set correctly', () => {
+			it('should mark the sampleDate as valid if set correctly', () => {
+				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
+			});
+
+			it('should mark the sampleDate as invalid if set before birthdate', () => {
+				const dateAhead = moment(datePast).clone().add({days: 1})
+				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as valid if set after/equal birthdate', () => {
+				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
 				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});

@@ -21,6 +21,7 @@ describe('VaccineFormComponent', () => {
 	const dateFuture: Date = new Date('9999-04-29');
 	const datePast: Date = new Date('2000-04-29');
 	const dateToOld: Date = new Date('1899-12-31');
+	const timeNoon = '12:00';
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
@@ -200,6 +201,19 @@ describe('VaccineFormComponent', () => {
 
 				expect(component.vaccineForm.invalid).toBeTruthy();
 			});
+		});
+
+		it('should mark the dateOfVaccination as invalid if set before birthdate', () => {
+			const dateAhead = moment(datePast).clone().add({days: 1})
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
+			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
+		});
+
+		it('should mark the dateOfVaccination as valid if set after/equal birthdate', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
+			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeFalsy();
 		});
 	});
 

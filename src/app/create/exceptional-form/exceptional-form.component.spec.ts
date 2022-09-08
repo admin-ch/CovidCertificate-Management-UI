@@ -10,7 +10,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 import {CreationDataService} from "../utils/creation-data.service";
 import * as moment from "moment";
 import {ValueSetsService} from "../utils/value-sets.service";
@@ -20,6 +19,11 @@ describe('ExceptionalFormComponent', () => {
 	let fixture: ComponentFixture<ExceptionalFormComponent>;
 	let creationDataService: CreationDataService;
 
+	const dateFuture: Date = new Date('9999-04-29');
+	const datePast: Date = new Date('2021-10-01');
+	const dateToOld: Date = new Date('1899-12-31');
+	const timeNoon = '12:00';
+
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
 		getVaccines: jest.fn().mockReturnValue([]),
@@ -28,7 +32,7 @@ describe('ExceptionalFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [ExceptionalFormComponent, DateTimePickerComponent, PersonalDataComponent],
+			declarations: [ExceptionalFormComponent, DateTimePickerComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -58,6 +62,164 @@ describe('ExceptionalFormComponent', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	describe('Form validation', () => {
+		describe('sampleDate validation', () => {
+			it('should mark the sampleDate as invalid if empty', () => {
+				component.exceptionalForm.get('sampleDate').setValue(null);
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as invalid if in the future', () => {
+				component.exceptionalForm.get('sampleDate').setValue({date: dateFuture});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as invalid if too old', () => {
+				component.exceptionalForm.get('sampleDate').setValue({date: dateToOld});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as invalid if before EXCEPTIONAL_CERTIFICATE_MIN_DATE', () => {
+				const invalidDate = moment(datePast).clone().add({days: -1});
+				component.exceptionalForm.get('sampleDate').setValue({date: invalidDate});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as valid if set correctly', () => {
+				component.exceptionalForm.get('sampleDate').setValue({date: datePast});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeFalsy();
+			});
+
+			it('should mark the sampleDate as invalid if set before birthdate', () => {
+				const dateAhead = moment(datePast).clone().add({days: 1})
+				component.exceptionalForm.get('birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				component.exceptionalForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as valid if set after/equal birthdate', () => {
+				component.exceptionalForm.get('birthdate').setValue(datePast);
+				component.exceptionalForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.exceptionalForm.get('sampleDate').invalid).toBeFalsy();
+			});
+		});
+
+		describe('countryOfTest validation', () => {
+			it('should mark the countryOfTest as invalid if empty', () => {
+				component.exceptionalForm.get('countryOfTest').setValue('');
+				expect(component.exceptionalForm.get('countryOfTest').invalid).toBeTruthy();
+			});
+
+			it('should mark the countryOfTest as valid if filled', () => {
+				component.exceptionalForm.get('countryOfTest').setValue('CH');
+				expect(component.exceptionalForm.get('countryOfTest').invalid).toBeFalsy();
+			});
+		});
+
+		describe('checkBox validation', () => {
+			it('should mark the checkBox as invalid if empty', () => {
+				component.exceptionalForm.get('checkBox').setValue(null);
+				expect(component.exceptionalForm.get('checkBox').invalid).toBeTruthy();
+			});
+
+			it('should mark the center as valid if filled correctly', () => {
+				component.exceptionalForm.get('checkBox').setValue(true);
+				expect(component.exceptionalForm.get('checkBox').invalid).toBeFalsy();
+			});
+		});
+
+		describe('center validation', () => {
+			it('should mark the center as invalid if empty', () => {
+				component.exceptionalForm.get('center').setValue('');
+				expect(component.exceptionalForm.get('center').invalid).toBeTruthy();
+			});
+
+			it('should mark the center as invalid if length is over 50', () => {
+				component.exceptionalForm.get('center').setValue('012345678901234567890123456789012345678901234567891');
+				expect(component.exceptionalForm.get('center').invalid).toBeTruthy();
+			});
+
+			it('should mark the center as valid if filled correctly', () => {
+				component.exceptionalForm.get('center').setValue('John');
+				expect(component.exceptionalForm.get('center').invalid).toBeFalsy();
+			});
+		});
+	});
+
+	describe('Handling of goBack()', () => {
+		it('should emit back', () => {
+			const backSpy = jest.spyOn(component.back, 'emit');
+
+			component.goBack();
+
+			expect(backSpy).toHaveBeenCalledTimes(1);
+		});
+	});
+
+	describe('Handling of goNext()', () => {
+		it('should not emit next if the form is invalid', () => {
+			const nextSpy = jest.spyOn(component.next, 'emit');
+
+			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(0);
+		});
+
+		it('should emit next if the form is valid', () => {
+			const nextSpy = jest.spyOn(component.next, 'emit');
+
+			component.exceptionalForm.get('firstName').setValue('John');
+			component.exceptionalForm.get('surName').setValue('Doe');
+			component.exceptionalForm.get('birthdate').setValue({date: datePast});
+			component.exceptionalForm.get('certificateLanguage').setValue('DE');
+
+			component.exceptionalForm.get('sampleDate').setValue({date: moment(datePast)});
+			component.exceptionalForm.get('countryOfTest').setValue('CH');
+			component.exceptionalForm.get('center').setValue('Testcenter');
+			component.exceptionalForm.get('checkBox').setValue(true);
+
+			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
+		});
+
+		it('should call the CreationDataService for setting the new patient data', () => {
+			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
+
+			component.exceptionalForm.get('firstName').setValue('John');
+			component.exceptionalForm.get('surName').setValue('Doe');
+			component.exceptionalForm.get('birthdate').setValue({date: datePast});
+			component.exceptionalForm.get('certificateLanguage').setValue('DE');
+
+			component.exceptionalForm.get('sampleDate').setValue({date: moment(datePast)});
+			component.exceptionalForm.get('countryOfTest').setValue('CH');
+			component.exceptionalForm.get('center').setValue('Testcenter');
+			component.exceptionalForm.get('checkBox').setValue(true);
+
+			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
+		});
+
+		it('should map the new patient data correctly', () => {
+			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
+
+			component.exceptionalForm.get('firstName').setValue('John');
+			component.exceptionalForm.get('surName').setValue('Doe');
+			component.exceptionalForm.get('birthdate').setValue({date: datePast});
+			component.exceptionalForm.get('certificateLanguage').setValue('DE');
+
+			component.exceptionalForm.get('sampleDate').setValue({date: moment(datePast)});
+			component.exceptionalForm.get('countryOfTest').setValue('CH');
+			component.exceptionalForm.get('center').setValue('Testcenter');
+			component.exceptionalForm.get('checkBox').setValue(true);
+
+			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
+		});
 	});
 
 	describe('Form reset', () => {

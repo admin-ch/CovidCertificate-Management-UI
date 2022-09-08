@@ -21,6 +21,7 @@ describe('RecoveryFormComponent', () => {
 	const dateFuture: Date = new Date('9999-04-29');
 	const datePast: Date = new Date('2000-04-29');
 	const dateToOld: Date = new Date('1899-12-31');
+	const timeNoon = '12:00';
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
@@ -91,6 +92,19 @@ describe('RecoveryFormComponent', () => {
 
 			it('should marks the dateFirstPositiveTestResult as valid if set correctly', () => {
 				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast});
+				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
+			});
+
+			it('should mark the dateFirstPositiveTestResult as invalid if set before birthdate', () => {
+				const dateAhead = moment(datePast).clone().add({days: 1})
+				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
+				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
+			});
+
+			it('should mark the dateFirstPositiveTestResult as valid if set after/equal birthdate', () => {
+				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
 			});
 		});
