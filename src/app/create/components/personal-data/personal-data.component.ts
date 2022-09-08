@@ -55,9 +55,9 @@ export class PersonalDataComponent implements OnInit {
 	public mapFormToPersonalData(): PersonalData {
 		return {
 			firstName: this.vaccineForm.value.firstName,
-			surName: this.vaccineForm.value.personal.value.surName,
-			birthdate: DateMapper.getBirthdate(this.vaccineForm.value.personal.value.birthdate),
-			language: this.vaccineForm.value.personal.value.certificateLanguage.code,
+			surName: this.vaccineForm.value.surName,
+			birthdate: DateMapper.getBirthdate(this.vaccineForm.value.birthdate),
+			language: this.vaccineForm.value.certificateLanguage.code,
 		};
 	}
 
