@@ -49,10 +49,19 @@ export class DateValidators {
 		};
 	}
 
-	static dateMoreThanBirthday(formName: string) {
+	static dateMoreThanBirthday(formName?: string) {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
 			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
-			const birthdate = this.getMomentDate(control?.parent?.value[formName]?.birthdate?.date);
+			let formValue = control?.parent?.value;
+			if (!formValue) {
+				return null;
+			}
+
+			if (formName) {
+				formValue = formValue[formName];
+			}
+
+			const birthdate = this.getMomentDate(formValue?.birthdate?.date);
 			if (!birthdate || !birthdate.isValid()) {
 				return null;
 			}
