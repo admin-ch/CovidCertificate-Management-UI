@@ -308,29 +308,29 @@ describe('TestFormComponent', () => {
 	});
 
 	describe('Form reset', () => {
-		/*		it('should reset the firstName correctly', () => {
-			component.testForm.get('firstName').setValue('TEST');
+		it('should reset the firstName correctly', () => {
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.firstName).toBeNull();
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
 		});
 
 		it('should reset the surName correctly', () => {
-			component.testForm.get('surName').setValue('TEST');
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.surName).toBeNull();
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
 		});
 
 		it('should reset the birthdate correctly', () => {
-			component.testForm.get('birthdate').setValue('TEST');
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.birthdate).toEqual({date: null, time: null});
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
 		});
 
 		it('should reset the certificateLanguage correctly', () => {
-			component.testForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
-		});*/
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
 
 		it('should reset the typeOfTest correctly', () => {
 			component.testForm.get('typeOfTest').setValue({display: 'TEST', code: 'typeOfTest'});

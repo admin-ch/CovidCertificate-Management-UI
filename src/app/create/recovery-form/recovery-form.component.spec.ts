@@ -24,7 +24,7 @@ describe('RecoveryFormComponent', () => {
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([])
+		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}, {code: 'DE', display: 'TEST-DE'}])
 	};
 
 	beforeEach(async () => {
@@ -173,6 +173,44 @@ describe('RecoveryFormComponent', () => {
 			component.goNext();
 
 			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
+		});
+	});
+
+	describe('Form reset', () => {
+		it('should reset the firstName correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
+		});
+
+		it('should reset the surName correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
+		});
+
+		it('should reset the birthdate correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the certificateLanguage correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
+
+		it('should reset the dateFirstPositiveTestResult correctly', () => {
+			component.recoveryForm.get('dateFirstPositiveTestResult').setValue(datePast);
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value.dateFirstPositiveTestResult).toEqual({date: null, time: null});
+		});
+
+		it('should reset the countryOfTest correctly', () => {
+			component.recoveryForm.get('countryOfTest').setValue('DE');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value.countryOfTest).toEqual({code: 'CH', display: 'TEST-CH'});
 		});
 	});
 });
