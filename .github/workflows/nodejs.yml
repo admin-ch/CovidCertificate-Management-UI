@@ -6,13 +6,11 @@ name: Node.js CI
 on:
     workflow_dispatch:
     push:
-        branches:
-          - 'release/**'
-          - 'master'
         tags:        
           - '*.*.*'
     pull_request:
         branches:
+          - 'release/**'
           - 'feature/**'
           - 'bugfix/**'
 
