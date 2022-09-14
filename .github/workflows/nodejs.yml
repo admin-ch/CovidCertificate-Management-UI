@@ -11,6 +11,10 @@ on:
           - 'master'
         tags:        
           - '*.*.*'
+    pull_request:
+        branches:
+          - 'feature/**'
+          - 'bugfix/**'
 
 jobs:
     build:
