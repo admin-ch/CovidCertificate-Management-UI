@@ -1,22 +1,22 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import {ReportA4A6Component} from './report-a4-a6.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
-import {SharedModule} from 'shared/shared.module';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import * as moment from 'moment';
-import {DataRoomCode, ReportType} from 'shared/model';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReportService} from '../../report.service';
-import {Subject} from 'rxjs';
-import {MatRadioModule} from '@angular/material/radio';
-import {SelectedProfilesService} from '../_shared/selected-profiles.service';
+import { ReportA3A5Component } from './report-a3-a5.component';
+import {ObliqueTestingModule} from "@oblique/oblique";
+import {SharedModule} from "shared/shared.module";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReportService} from "../../report.service";
+import {ReportType} from "shared/model";
+import {Subject} from "rxjs";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
+import * as moment from "moment";
+import {SelectedProfilesService} from "../_shared/selected-profiles.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MatRadioModule} from "@angular/material/radio";
 
-describe('ReportA4A6Component', () => {
-	let component: ReportA4A6Component;
-	let fixture: ComponentFixture<ReportA4A6Component>;
+describe('ReportA3A5Component', () => {
+	let component: ReportA3A5Component;
+	let fixture: ComponentFixture<ReportA3A5Component>;
 	let selectedProfilesService: SelectedProfilesService;
 
 	beforeEach(async () => {
@@ -31,17 +31,15 @@ describe('ReportA4A6Component', () => {
 				MatRadioModule
 			],
 			providers: [
-				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},
 				{
 					provide: ReportService,
 					useValue: {
 						formGroup: new FormGroup({
-							[ReportType.A4]: new FormGroup({
+							[ReportType.A3]: new FormGroup({
 								from: new FormControl(''),
 								to: new FormControl(''),
 								canton: new FormControl('buv'),
-								types: new FormArray([]),
-								userIds: new FormArray([])
+								userIds: new FormControl([]),
 							})
 						}),
 						reset$: new Subject()
@@ -50,18 +48,17 @@ describe('ReportA4A6Component', () => {
 				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()}
 			],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-			declarations: [ReportA4A6Component]
+			declarations: [ReportA3A5Component]
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(ReportA4A6Component);
+		fixture = TestBed.createComponent(ReportA3A5Component);
 		component = fixture.componentInstance;
-
 		selectedProfilesService = TestBed.inject(SelectedProfilesService);
-
 		fixture.detectChanges();
 	});
+
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
@@ -89,5 +86,20 @@ describe('ReportA4A6Component', () => {
 
 			expect(clear).not.toHaveBeenCalled();
 		}));
+	});
+
+	describe('resetInput', () => {
+		it('should clear all inputs', () => {
+			component.a3a5FormGroup.get('from').setValue(moment('2022-01-01'));
+			component.a3a5FormGroup.get('to').setValue(moment('2022-01-01'));
+			component.a3a5FormGroup.get('canton').setValue('buv');
+			component.a3a5FormGroup.get('userIds').setValue(['1', '2', '3']);
+			component.resetInput();
+
+			expect(component.a3a5FormGroup.get('from').value).toEqual('');
+			expect(component.a3a5FormGroup.get('to').value).toEqual('');
+			expect(component.a3a5FormGroup.get('canton').value).toEqual('');
+			expect(component.a3a5FormGroup.get('userIds').value).toEqual([]);
+		});
 	});
 });
