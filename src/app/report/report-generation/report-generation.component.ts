@@ -59,7 +59,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 					url += '/certificate/statistics/a8/for_timerange_by_week';
 					break;
 				case ReportType.A9:
-					url += '/certificate/statistics/a9/full_period';
+					url += '/certificate/statistics/a9/for_timerange_by_types';
 					break;
 				case ReportType.A11:
 					url += '/fraud/a11/for_timerange_by_canton';

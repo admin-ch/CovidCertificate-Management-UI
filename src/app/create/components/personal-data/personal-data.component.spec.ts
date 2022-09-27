@@ -1,6 +1,6 @@
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormGroupDirective, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,6 +21,12 @@ describe('PersonalDataComponent', () => {
 	const dateToOld: Date = new Date('1899-12-31');
 
 	beforeEach(async () => {
+		const fb = new FormBuilder();
+		const formGroupDirective = new FormGroupDirective([], []);
+		formGroupDirective.form = fb.group({
+			test: fb.control(null)
+		});
+
 		await TestBed.configureTestingModule({
 			declarations: [PersonalDataComponent, DateTimePickerComponent],
 			imports: [
@@ -32,6 +38,10 @@ describe('PersonalDataComponent', () => {
 				MatFormFieldModule,
 				MatInputModule,
 				MatAutocompleteModule
+			],
+			providers: [
+				FormGroupDirective,
+				{provide: FormGroupDirective, useValue: formGroupDirective}
 			],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();

@@ -11,7 +11,8 @@ import {PersonalDataComponent} from '../components/personal-data/personal-data.c
 const FIRST_POSITIVE_TEST_VALIDATORS = [
 	Validators.required,
 	DateValidators.dateLessThanToday(),
-	DateValidators.dateMoreThanMinDate()
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateMoreThanBirthday(PersonalDataComponent.FORM_GROUP_NAME)
 ];
 
 @Component({
@@ -27,8 +28,6 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	@ViewChild('recoveryPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
 	recoveryForm: FormGroup;
-
-	personalDataForm: FormGroup;
 
 	constructor(
 		private readonly formBuilder: FormBuilder,
@@ -53,10 +52,17 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngAfterViewInit() {
-		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
-			this.personalDataForm = this.personalDataChild.vaccineForm;
-		}
+	ngAfterViewInit(): void {
+		// revalidate the 'dateOfVaccination' field when birthdate is change
+		this.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+			// timeout is needed to ensure that the validator gets called after the field contains the new value
+			setTimeout(() => {
+				const control = this.recoveryForm.get('dateFirstPositiveTestResult');
+				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
+				// will contain an object-path for subfield of the ec-datetimepicker
+				control.patchValue(control.value)
+			})
+		});
 	}
 
 	goBack(): void {
@@ -70,11 +76,10 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		) {
 			this.recoveryForm.markAllAsTouched();
 		}
-		if (this.personalDataForm) {
-			this.personalDataChild.touchDatepicker();
-			this.personalDataForm.markAllAsTouched();
-		}
-		if (this.recoveryForm.valid && this.personalDataForm && this.personalDataForm.valid) {
+
+		this.personalDataChild.touchDatepicker();
+
+		if (this.recoveryForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
@@ -97,15 +102,6 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 			dateFirstPositiveTestResult: ['', FIRST_POSITIVE_TEST_VALIDATORS],
 			countryOfTest: [this.getDefaultCountryOfRecovery(), Validators.required]
 		});
-
-		this.recoveryForm.get('dateFirstPositiveTestResult').valueChanges.subscribe(_ => {
-			if (!!this.recoveryForm.get('birthdate')) {
-				this.recoveryForm.controls.dateFirstPositiveTestResult.setValidators([
-					DateValidators.dateMoreThanBirthday(),
-					...FIRST_POSITIVE_TEST_VALIDATORS
-				]);
-			}
-		});
 	}
 
 	private getDefaultCertificateLanguage(): ProductInfo {
@@ -120,10 +116,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 
 	private mapFormToPatientData(): Patient {
 		return {
-			firstName: this.personalDataForm.value.firstName,
-			surName: this.personalDataForm.value.surName,
-			birthdate: DateMapper.getBirthdate(this.personalDataForm.value.birthdate),
-			language: this.personalDataForm.value.certificateLanguage.code,
+			...this.personalDataChild.mapFormToPersonalData(),
 			recovery: {
 				countryOfTest: this.recoveryForm.value.countryOfTest,
 				dateFirstPositiveTestResult: DateMapper.getDate(this.recoveryForm.value.dateFirstPositiveTestResult)
@@ -133,11 +126,13 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private resetForm(): void {
-		const previousCertificateLanguage: ProductInfo = this.recoveryForm.value.certificateLanguage;
+		const previousCertificateLanguage: ProductInfo = this.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage;
 
 		this.formDirective.resetForm();
 		this.recoveryForm.reset({
-			certificateLanguage: previousCertificateLanguage,
+			[PersonalDataComponent.FORM_GROUP_NAME]: {
+				certificateLanguage: previousCertificateLanguage
+			},
 			countryOfTest: this.getDefaultCountryOfRecovery()
 		});
 	}

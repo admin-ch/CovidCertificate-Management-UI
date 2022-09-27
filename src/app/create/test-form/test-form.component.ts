@@ -52,8 +52,6 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	testForm: FormGroup;
 	testType: ProductInfo;
 
-	personalDataForm: FormGroup;
-
 	rapidTestCompleteControl: FormControl;
 	filteredRapidTests: RapidTestProductInfoWithToString[];
 
@@ -98,10 +96,17 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		this.filteredRapidTests = this.rapidTests;
 	}
 
-	ngAfterViewInit() {
-		if (this.personalDataChild && this.personalDataChild.vaccineForm) {
-			this.personalDataForm = this.personalDataChild.vaccineForm;
-		}
+	ngAfterViewInit(): void {
+		// revalidate the 'sampleDate' field when birthdate is change
+		this.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+			// timeout is needed to ensure that the validator gets called after the field contains the new value
+			setTimeout(() => {
+				const control = this.testForm.get('sampleDate');
+				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
+				// will contain an object-path for subfield of the ec-datetimepicker
+				control.patchValue(control.value)
+			})
+		});
 	}
 
 	goBack(): void {
@@ -109,11 +114,9 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	goNext(): void {
-		if (this.personalDataForm) {
-			this.personalDataChild.touchDatepicker();
-			this.personalDataForm.markAllAsTouched();
-		}
-		if (this.testForm.valid && this.personalDataForm && this.personalDataForm.valid) {
+		this.personalDataChild.touchDatepicker();
+
+		if (this.testForm.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
@@ -191,19 +194,13 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
-			sampleDate: [this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(), sampleDateValidators],
+			sampleDate: [this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(), [
+				DateValidators.dateMoreThanBirthday(PersonalDataComponent.FORM_GROUP_NAME),
+				...sampleDateValidators
+			]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
 			product: [''],
 			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
-		});
-
-		this.testForm.get('sampleDate').valueChanges.subscribe(_ => {
-			if (!!this.testForm.get('birthdate')) {
-				this.testForm.controls.sampleDate.setValidators([
-					DateValidators.dateMoreThanBirthday(),
-					...sampleDateValidators
-				]);
-			}
 		});
 	}
 
@@ -267,10 +264,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 
 		return {
-			firstName: this.personalDataForm.value.firstName,
-			surName: this.personalDataForm.value.surName,
-			birthdate: DateMapper.getBirthdate(this.personalDataForm.value.birthdate),
-			language: this.personalDataForm.value.certificateLanguage.code,
+			...this.personalDataChild.mapFormToPersonalData(),
 			...additionalData
 		};
 	}
@@ -283,14 +277,16 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private resetForm(): void {
-		const previousCertificateLanguage: ProductInfo = this.testForm.value.certificateLanguage;
+		const previousCertificateLanguage: ProductInfo = this.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage;
 		const previousTypeOfTest: ProductInfo = this.testForm.value.typeOfTest;
 		const previousProduct: ProductInfo = this.testForm.value.product;
 		const previousCenter: string = this.testForm.value.center;
 
 		this.formDirective.resetForm();
 		this.testForm.reset({
-			certificateLanguage: previousCertificateLanguage,
+			[PersonalDataComponent.FORM_GROUP_NAME]: {
+				certificateLanguage: previousCertificateLanguage
+			},
 			countryOfTest: this.getDefaultCountryOfTest(),
 			typeOfTest: previousTypeOfTest,
 			product: previousProduct,
