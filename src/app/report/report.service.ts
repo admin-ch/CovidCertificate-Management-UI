@@ -16,6 +16,9 @@ export class ReportService {
 	formGroup: FormGroup;
 	reset$ = new Subject<void>();
 
+	// Workaround to validate that chiplist is not empty
+	validateChiplist$ = new Subject<void>()
+
 	constructor(private readonly fb: FormBuilder) {
 		this.formGroup = fb.group({
 			[ReportType.A2]: this.fb.group(

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import {FormControl, ValidatorFn} from "@angular/forms";
 import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
 import {ReportType} from 'shared/model';
@@ -31,11 +31,24 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 
 	subscription: Subscription;
 
-	constructor(private readonly reportService: ReportService) {
+	constructor(private readonly reportService: ReportService,
+				private readonly cd: ChangeDetectorRef) {
 	}
 
 	ngOnInit(): void {
 		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
+		this.subscription.add(
+
+			// Workaround to validate that chiplist is not empty
+			this.reportService.validateChiplist$.subscribe(_ => {
+				this.chipList.focus()
+				this.chipDataFormControl.markAsTouched()
+				this.chipDataFormControl.markAsDirty()
+				this.formControl.markAsTouched()
+				this.formControl.markAsDirty()
+				this.updateErrorState()
+			})
+		)
 
 		// Trigger new change detection run because updateErrorState() changes formGroup validity
 		// which is used in a component higher in the tree resulting in ExpressionChangedAfterItHasBeenCheckedError.
