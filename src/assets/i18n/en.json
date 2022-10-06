@@ -324,6 +324,7 @@
     "upload.title": "Generate multiple certificates",
     "upload.type": "Select certificate type",
     "vaccination.doses.rules": "Rules regarding vaccination doses",
+    "validation.error.http.1004": "Date of birth must be before the certificate date",
     "validation.error.http.453": "Invalid date of birth. Please check your input in step two.",
     "validation.error.http.458": "Invalid given name! Must not exceed 80 chars and/or not contain any invalid characters.",
     "validation.error.http.459": "Invalid family name! Must not exceed 80 chars and/or not contain any invalid characters.",

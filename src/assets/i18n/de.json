@@ -324,6 +324,7 @@
     "upload.title": "Mehrere Zertifikate generieren",
     "upload.type": "Zertifikatstype auswählen",
     "vaccination.doses.rules": "Regeln zu den Impfdosen",
+    "validation.error.http.1004": "Geburtsdatum muss vor dem Zertifikatsdatum",
     "validation.error.http.453": "Ungültiges Geburtsdatum. Bitte überprüfen Sie Ihre Eingabe in Schritt zwei.",
     "validation.error.http.458": "Ungültiger Vorname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
     "validation.error.http.459": "Ungültiger Familienname! Darf nicht mehr als 80 Zeichen und/oder keine ungültigen Zeichen enthalten.",
