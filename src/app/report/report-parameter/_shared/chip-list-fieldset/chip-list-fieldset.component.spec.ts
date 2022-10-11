@@ -23,7 +23,8 @@ describe('ChipListFieldsetComponent', () => {
 					provide: ReportService,
 					useValue: {
 						formGroup: new FormGroup({}),
-						reset$: new Subject()
+						reset$: new Subject(),
+						validateChiplist$: new Subject()
 					}
 				}
 			],
