@@ -64,7 +64,7 @@ export class DateValidators {
 			let birthdate = this.getMomentDate(formValue?.birthdate?.date);
 			if (!birthdate || !birthdate.isValid()) {
 
-				const [year, month, day] = (formValue?.birthdate?.date as string).split('-')
+				const [year, month, day] = (formValue?.birthdate?.date as string)?.split('-') || []
 
 				if (!year || (!!day && !month)) {
 					return null;
