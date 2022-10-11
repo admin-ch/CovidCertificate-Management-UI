@@ -324,6 +324,7 @@
     "upload.title": "Générer plusieurs certificats",
     "upload.type": "Sélectionnez le type de certificat",
     "vaccination.doses.rules": "Règles concernant les doses de vaccination",
+    "validation.error.http.1004": "La date de naissance doit être antérieure à la date du certificat",
     "validation.error.http.453": "Date de naissance non valide. Veuillez vérifier votre saisie à l'étape 2.",
     "validation.error.http.458": "Prénom invalide! Ne pas dépasser 80 signes ni saisir des caractères non valides.",
     "validation.error.http.459": "Nom de famille invalide! Ne pas dépasser 80 signes ni saisir des caractères non valides.",

@@ -324,6 +324,7 @@
     "upload.title": "Generare più certificati",
     "upload.type": "Seleziona il tipo di certificato",
     "vaccination.doses.rules": "Regole sulle dosi di vaccinazione",
+    "validation.error.http.1004": "La data di nascita deve essere precedente alla data del certificato",
     "validation.error.http.453": "Data di nascita non valida. Si prega di controllare i dati inseriti nella fase due.",
     "validation.error.http.458": "Il nome non è valido! Il nome non può eccedere 80 caratteri e/o contenere caratteri non validi.",
     "validation.error.http.459": "Il cognome non è valido!! Il cognome non può eccedere 80 caratteri e/o contenere caratteri non validi.",

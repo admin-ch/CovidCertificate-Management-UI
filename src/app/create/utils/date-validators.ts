@@ -61,9 +61,21 @@ export class DateValidators {
 				formValue = formValue[formName];
 			}
 
-			const birthdate = this.getMomentDate(formValue?.birthdate?.date);
+			let birthdate = this.getMomentDate(formValue?.birthdate?.date);
 			if (!birthdate || !birthdate.isValid()) {
-				return null;
+
+				const [year, month, day] = (formValue?.birthdate?.date as string)?.split('-') || []
+
+				if (!year || (!!day && !month)) {
+					return null;
+				}
+				if (!month) {
+					birthdate = moment(`${year}-01-01`)
+				} else if (!day) {
+					birthdate = moment(`${year}-${month}-01`)
+				} else {
+					birthdate = moment(`${year}-${month}-${day}`)
+				}
 			}
 			if (!!dateValue && dateValue.isBefore(birthdate)) {
 				return {dateBeforeBirthday: true};
