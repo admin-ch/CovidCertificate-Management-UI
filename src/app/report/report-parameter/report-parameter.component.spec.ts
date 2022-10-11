@@ -16,6 +16,9 @@ describe('ReportParameterComponent', () => {
 		generateReport$: {
 			next: jest.fn()
 		},
+		validateChiplist$: {
+			next: jest.fn()
+		},
 		formGroup: new FormGroup({})
 	};
 
