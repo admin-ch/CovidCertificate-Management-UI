@@ -115,8 +115,11 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 
 	goNext(): void {
 		this.personalDataChild.touchDatepicker();
+		if (this.personalDataChild.vaccineForm) {
+			this.personalDataChild.vaccineForm.markAllAsTouched();
+		}
 
-		if (this.testForm.valid) {
+		if (this.testForm.valid && this.personalDataChild.vaccineForm?.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
