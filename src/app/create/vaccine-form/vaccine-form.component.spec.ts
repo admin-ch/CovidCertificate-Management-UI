@@ -11,6 +11,7 @@ import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.comp
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {VaccineFormComponent} from './vaccine-form.component';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
@@ -20,6 +21,7 @@ describe('VaccineFormComponent', () => {
 	const dateFuture: Date = new Date('9999-04-29');
 	const datePast: Date = new Date('2000-04-29');
 	const dateToOld: Date = new Date('1899-12-31');
+	const timeNoon = '12:00';
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
@@ -29,7 +31,7 @@ describe('VaccineFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [VaccineFormComponent, DateTimePickerComponent],
+			declarations: [VaccineFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -176,6 +178,11 @@ describe('VaccineFormComponent', () => {
 
 		describe('Cross field validation', () => {
 			it('should marks the form as valid if all fields are filled correctly', () => {
+				component.vaccineForm.get('personalData.firstName').setValue('John');
+				component.vaccineForm.get('personalData.surName').setValue('Doe');
+				component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+				component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 				component.vaccineForm.get('medicalProduct').setValue('testproduct');
 				component.vaccineForm.get('doseNumber').setValue(2);
 				component.vaccineForm.get('totalDoses').setValue(2);
@@ -194,6 +201,19 @@ describe('VaccineFormComponent', () => {
 
 				expect(component.vaccineForm.invalid).toBeTruthy();
 			});
+		});
+
+		it('should mark the dateOfVaccination as invalid if set before birthdate', () => {
+			const dateAhead = moment(datePast).clone().add({days: 1})
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
+			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
+		});
+
+		it('should mark the dateOfVaccination as valid if set after/equal birthdate', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
+			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeFalsy();
 		});
 	});
 
@@ -219,6 +239,11 @@ describe('VaccineFormComponent', () => {
 		it('should emit next if the type is selected', () => {
 			const nextSpy = jest.spyOn(component.next, 'emit');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue('testproduct');
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -226,11 +251,18 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue({code: '42', display: 'test-product'});
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -238,11 +270,18 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.vaccineForm.get('personalData.firstName').setValue('John');
+			component.vaccineForm.get('personalData.surName').setValue('Doe');
+			component.vaccineForm.get('personalData.birthdate').setValue({date: datePast});
+			component.vaccineForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.vaccineForm.get('medicalProduct').setValue({code: '42', display: 'test-product'});
 			component.vaccineForm.get('doseNumber').setValue(2);
 			component.vaccineForm.get('totalDoses').setValue(2);
@@ -250,9 +289,36 @@ describe('VaccineFormComponent', () => {
 			component.vaccineForm.get('countryOfVaccination').setValue({code: 'CH', display: 'test-CH'});
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 	});
+
 	describe('Form reset', () => {
+		it('should reset the firstName correctly', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
+		});
+
+		it('should reset the surName correctly', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
+		});
+
+		it('should reset the birthdate correctly', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the certificateLanguage correctly', () => {
+			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			creationDataService.emitResetCalled();
+			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
+
 		it.skip('should reset the medicalProduct correctly', () => {
 			component.vaccineForm.get('medicalProduct').setValue({display: 'TEST', code: 'medicalProduct'});
 			creationDataService.emitResetCalled();

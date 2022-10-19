@@ -11,6 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
@@ -20,15 +21,16 @@ describe('RecoveryFormComponent', () => {
 	const dateFuture: Date = new Date('9999-04-29');
 	const datePast: Date = new Date('2000-04-29');
 	const dateToOld: Date = new Date('1899-12-31');
+	const timeNoon = '12:00';
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([])
+		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}, {code: 'DE', display: 'TEST-DE'}])
 	};
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [RecoveryFormComponent, DateTimePickerComponent],
+			declarations: [RecoveryFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -92,6 +94,19 @@ describe('RecoveryFormComponent', () => {
 				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast});
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
 			});
+
+			it('should mark the dateFirstPositiveTestResult as invalid if set before birthdate', () => {
+				const dateAhead = moment(datePast).clone().add({days: 1})
+				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
+				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
+			});
+
+			it('should mark the dateFirstPositiveTestResult as valid if set after/equal birthdate', () => {
+				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
+				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
+			});
 		});
 
 		describe('countryOfTest validation', () => {
@@ -129,28 +144,87 @@ describe('RecoveryFormComponent', () => {
 		it('should emit next if the form is valid', () => {
 			const nextSpy = jest.spyOn(component.next, 'emit');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.recoveryForm.get('personalData.firstName').setValue('John');
+			component.recoveryForm.get('personalData.surName').setValue('Doe');
+			component.recoveryForm.get('personalData.birthdate').setValue({date: datePast});
+			component.recoveryForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: moment(datePast)});
 			component.recoveryForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
+		});
+	});
+
+	describe('Form reset', () => {
+		it('should reset the firstName correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
+		});
+
+		it('should reset the surName correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
+		});
+
+		it('should reset the birthdate correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
+		});
+
+		it('should reset the certificateLanguage correctly', () => {
+			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
+
+		it('should reset the dateFirstPositiveTestResult correctly', () => {
+			component.recoveryForm.get('dateFirstPositiveTestResult').setValue(datePast);
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value.dateFirstPositiveTestResult).toEqual({date: null, time: null});
+		});
+
+		it('should reset the countryOfTest correctly', () => {
+			component.recoveryForm.get('countryOfTest').setValue('DE');
+			creationDataService.emitResetCalled();
+			expect(component.recoveryForm.value.countryOfTest).toEqual({code: 'CH', display: 'TEST-CH'});
 		});
 	});
 });
