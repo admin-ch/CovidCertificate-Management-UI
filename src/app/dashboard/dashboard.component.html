@@ -113,4 +113,20 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.NOTIFICATION_MANAGEMENT">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="info" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.notificationsManagement.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.notificationsManagement.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-notificationsManagement" mat-button obButton="primary" (click)="goToNotificationsManagement()">
+				{{ "dashboard.notificationsManagement.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>

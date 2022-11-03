@@ -14,6 +14,7 @@ export enum AuthFunction {
 	OTP_GENERATION = 'main-one-time-password-generation',
 	BULK_OPERATIONS = 'main-bulk-operations',
 	REPORTING_SELF_SERVICE = 'main-reporting-self-service',
+	NOTIFICATION_MANAGEMENT = 'main-notification-management',
 
 	// Create/Revoke Certificates
 	CREATE_CERTIFICATE_WEB = 'create-certificate-web',
