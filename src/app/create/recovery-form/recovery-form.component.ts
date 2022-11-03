@@ -77,9 +77,11 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 			this.recoveryForm.markAllAsTouched();
 		}
 
-		this.personalDataChild.touchDatepicker();
-
-		if (this.recoveryForm.valid) {
+		if (this.personalDataChild?.vaccineForm) {
+			this.personalDataChild.touchDatepicker();
+			this.personalDataChild?.vaccineForm.markAllAsTouched();
+		}
+		if (this.recoveryForm.valid && this.personalDataChild?.vaccineForm?.valid) {
 			this.dataService.setNewPatient(this.mapFormToPatientData());
 			this.next.emit();
 		}
