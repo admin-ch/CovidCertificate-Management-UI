@@ -27,13 +27,13 @@
 	</fieldset>
 
 	<ec-unit-search
-		[hidden]="searchType !== 'organisation'"
+		[hidden]="searchType !== IssuerType.ORGANISATION"
 		[authority]="unitSearchAuthority$ | async"
 		[userIdsFormArray]="userIdsFormArray"
 	>
 	</ec-unit-search>
 	<ec-issuer-search
-		[hidden]="searchType !== 'issuer'"
+		[hidden]="searchType !== IssuerType.ISSUER"
 		[authority]="unitSearchAuthority$ | async"
 		[userIdsFormArray]="userIdsFormArray"
 	></ec-issuer-search>

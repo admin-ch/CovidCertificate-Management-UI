@@ -1,0 +1,61 @@
+::ng-deep ec-notifications-management mat-icon svg {
+	// Remove vertical align, otherwise the X is not in the middle.
+	vertical-align: unset;
+}
+
+.actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	button {
+		margin-right: 0.5em;
+	}
+
+	[obButton="primary"] {
+		// oblique-material overwrites the color of the header to black, so we need to set it back to white.
+		color: #fff
+	}
+}
+
+.container {
+	position: relative;
+}
+
+.table-container {
+	position: relative;
+	padding: 1em;
+	overflow: auto;
+}
+
+.loading-shade {
+	height: 100%;
+	min-height: 20em;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 56px;
+	right: 0;
+	background: rgba(0, 0, 0, 0.15);
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.mat-column-startTime {
+	width: 9em;
+}
+.mat-column-endTime {
+	width: 9em;
+}
+.mat-column-type {
+	width: 7em;
+}
+.mat-column-isClosable {
+	width: 8em;
+}

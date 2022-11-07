@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -13,7 +13,8 @@ const SAMPLE_DATE_VALIDATORS = [
 	Validators.required,
 	TimeValidators.validateTime(),
 	DateValidators.dateLessThanToday(),
-	DateValidators.dateMoreThanMinDate()
+	DateValidators.dateMoreThanMinDate(),
+	DateValidators.dateMoreThanBirthday()
 ];
 
 @Component({
@@ -21,7 +22,7 @@ const SAMPLE_DATE_VALIDATORS = [
 	templateUrl: './exceptional-form.component.html',
 	styleUrls: ['./exceptional-form.component.scss']
 })
-export class ExceptionalFormComponent implements OnInit {
+export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 	@Output() back = new EventEmitter<void>();
 	@Output() next = new EventEmitter<void>();
 
@@ -49,6 +50,19 @@ export class ExceptionalFormComponent implements OnInit {
 				certificateLanguage: this.getDefaultCertificateLanguage(),
 				countryOfTest: this.getDefaultCountryOfTest()
 			});
+		});
+	}
+
+	ngAfterViewInit(): void {
+		// revalidate the 'sampleDate' field when birthdate is change
+		this.exceptionalForm.get('birthdate').valueChanges.subscribe(() => {
+			// timeout is needed to ensure that the validator gets called after the field contains the new value
+			setTimeout(() => {
+				const control = this.exceptionalForm.get('sampleDate');
+				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
+				// will contain an object-path for subfield of the ec-datetimepicker
+				control.patchValue(control.value)
+			})
 		});
 	}
 
@@ -115,15 +129,6 @@ export class ExceptionalFormComponent implements OnInit {
 			center: ['', [Validators.required, Validators.maxLength(50)]],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
 			checkBox: [false, Validators.requiredTrue]
-		});
-
-		this.exceptionalForm.get('sampleDate').valueChanges.subscribe(_ => {
-			if (!!this.exceptionalForm.get('birthdate')) {
-				this.exceptionalForm.controls.sampleDate.setValidators([
-					DateValidators.dateMoreThanBirthday(),
-					...SAMPLE_DATE_VALIDATORS
-				]);
-			}
 		});
 	}
 

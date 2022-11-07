@@ -2,7 +2,7 @@
 
 The management UI allows the authorized user to create and revoke a COVID certificate. It allows also an authorized to generate an OneTime password.
 
-This project is released by the the Federal Office of Information Technology, Systems and Telecommunication FOITT on behalf of the Federal Office of Public Health FOPH.
+This project is released by the Federal Office of Information Technology, Systems and Telecommunication FOITT on behalf of the Federal Office of Public Health FOPH.
 
 ## Technical information
 This repository contains everything to build & test the project.

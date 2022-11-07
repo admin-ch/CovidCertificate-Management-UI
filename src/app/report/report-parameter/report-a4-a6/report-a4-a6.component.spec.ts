@@ -12,7 +12,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReportService} from '../../report.service';
 import {Subject} from 'rxjs';
 import {MatRadioModule} from '@angular/material/radio';
-import {SelectedProfilesService} from './selected-profiles.service';
+import {SelectedProfilesService} from '../_shared/selected-profiles.service';
 
 describe('ReportA4A6Component', () => {
 	let component: ReportA4A6Component;

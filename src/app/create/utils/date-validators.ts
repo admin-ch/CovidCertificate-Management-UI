@@ -49,10 +49,34 @@ export class DateValidators {
 		};
 	}
 
-	static dateMoreThanBirthday() {
+	static dateMoreThanBirthday(formName?: string) {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
 			const dateValue: moment.Moment = this.getMomentDate(control.value?.date);
-			const birthdate = this.getMomentDate(control.parent.value.birthdate?.date);
+			let formValue = control?.parent?.value;
+			if (!formValue) {
+				return null;
+			}
+
+			if (formName) {
+				formValue = formValue[formName];
+			}
+
+			let birthdate = this.getMomentDate(formValue?.birthdate?.date);
+			if (!birthdate || !birthdate.isValid()) {
+
+				const [year, month, day] = (formValue?.birthdate?.date as string)?.split('-') || []
+
+				if (!year || (!!day && !month)) {
+					return null;
+				}
+				if (!month) {
+					birthdate = moment(`${year}-01-01`)
+				} else if (!day) {
+					birthdate = moment(`${year}-${month}-01`)
+				} else {
+					birthdate = moment(`${year}-${month}-${day}`)
+				}
+			}
 			if (!!dateValue && dateValue.isBefore(birthdate)) {
 				return {dateBeforeBirthday: true};
 			}

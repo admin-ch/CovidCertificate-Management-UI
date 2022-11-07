@@ -1,21 +1,26 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {ProductInfo} from 'shared/model';
+import {PersonalData, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../../utils/creation-data.service';
 import {DateValidators} from '../../utils/date-validators';
 import {ValueSetsService} from '../../utils/value-sets.service';
+import {DateMapper} from "../../utils/date-mapper";
 
 @Component({
 	selector: 'ec-personal-data',
 	templateUrl: './personal-data.component.html',
-	styleUrls: ['./personal-data.component.scss']
+	styleUrls: ['./personal-data.component.scss'],
+	viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class PersonalDataComponent implements OnInit {
+	public static readonly FORM_GROUP_NAME = 'personalData';
+
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	public vaccineForm: FormGroup;
 
 	constructor(
+		private parent: FormGroupDirective,
 		private readonly formBuilder: FormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
@@ -47,6 +52,15 @@ export class PersonalDataComponent implements OnInit {
 		element.blur();
 	}
 
+	public mapFormToPersonalData(): PersonalData {
+		return {
+			firstName: this.vaccineForm.value.firstName,
+			surName: this.vaccineForm.value.surName,
+			birthdate: DateMapper.getBirthdate(this.vaccineForm.value.birthdate),
+			language: this.vaccineForm.value.certificateLanguage.code,
+		};
+	}
+
 	private getDefaultCertificateLanguage(): ProductInfo {
 		return this.translateService.currentLang === 'en'
 			? this.getCertificateLanguages().find(lang => lang.code === 'de')
@@ -69,6 +83,8 @@ export class PersonalDataComponent implements OnInit {
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			checkBox: [{value: false, disabled: true}, Validators.requiredTrue]
 		});
+
+		this.parent.form.addControl(PersonalDataComponent.FORM_GROUP_NAME, this.vaccineForm);
 	}
 
 	private resetForm(): void {

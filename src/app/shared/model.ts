@@ -3,16 +3,19 @@ import {Moment} from 'moment';
 
 export const DATE_FORMAT = 'dd.MM.YYYY';
 
-export interface Patient {
+export interface PersonalData {
 	firstName: string; // maxChar 50
 	surName: string; // maxChar 50
 	birthdate: Date | string; // between 1900-01-01 and 2099-12-31 (this format)
+	language: string;
+}
+
+export interface Patient extends PersonalData {
 	vaccination?: Vaccination;
 	test?: Test;
 	recovery?: Recovery;
 	antibody?: Antibody;
 	exceptional?: Exceptional;
-	language: string;
 	certificateType: GenerationType;
 }
 
@@ -351,4 +354,9 @@ export interface Shipping {
 	city?: string;
 	cantonCodeSender?: string;
 	zipCode?: number;
+}
+
+export enum IssuerType {
+	ORGANISATION = 'organisation',
+	ISSUER = 'issuer',
 }

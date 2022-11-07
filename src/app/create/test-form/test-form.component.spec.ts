@@ -13,7 +13,8 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
-import {GenerationType, ProductInfo} from 'shared/model';
+import {ProductInfo} from 'shared/model';
+import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -40,7 +41,7 @@ describe('TestFormComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TestFormComponent, DateTimePickerComponent],
+			declarations: [TestFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
 				NoopAnimationsModule,
 				ObliqueTestingModule,
@@ -181,7 +182,20 @@ describe('TestFormComponent', () => {
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
 
-			it('should marks the sampleDate as valid if set correctly', () => {
+			it('should mark the sampleDate as valid if set correctly', () => {
+				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
+			});
+
+			it('should mark the sampleDate as invalid if set before birthdate', () => {
+				const dateAhead = moment(datePast).clone().add({days: 1})
+				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
+				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
+			});
+
+			it('should mark the sampleDate as valid if set after/equal birthdate', () => {
+				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
 				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
@@ -237,7 +251,13 @@ describe('TestFormComponent', () => {
 		});
 
 		it('should emit next if the type is selected', () => {
-			const nextMock = jest.spyOn(component.next, 'emit');
+			const nextSpy = jest.spyOn(component.next, 'emit');
+
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
@@ -248,11 +268,18 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(nextSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call the CreationDataService for setting the new patient data', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
 
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
+
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
 				display: 'Nucleic acid amplification with probe detection'
@@ -263,10 +290,17 @@ describe('TestFormComponent', () => {
 			component.testForm.get('countryOfTest').setValue('CH');
 
 			component.goNext();
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it('should map the new patient data correctly', () => {
 			const setNewPatientSpy = jest.spyOn(creationDataService, 'setNewPatient');
+
+			component.testForm.get('personalData.firstName').setValue('John');
+			component.testForm.get('personalData.surName').setValue('Doe');
+			component.testForm.get('personalData.birthdate').setValue({date: datePast});
+			component.testForm.get('personalData.certificateLanguage').setValue('DE');
 
 			component.testForm.get('typeOfTest').setValue({
 				code: 'LP6464-4',
@@ -281,33 +315,35 @@ describe('TestFormComponent', () => {
 
 			const sampleDate: Date = moment(datePast).toDate();
 			sampleDate.setHours(12);
+
+			expect(setNewPatientSpy).toHaveBeenCalledTimes(1);
 		});
 	});
 
 	describe('Form reset', () => {
-		/*		it('should reset the firstName correctly', () => {
-			component.testForm.get('firstName').setValue('TEST');
+		it('should reset the firstName correctly', () => {
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.firstName).toBeNull();
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
 		});
 
 		it('should reset the surName correctly', () => {
-			component.testForm.get('surName').setValue('TEST');
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.surName).toBeNull();
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
 		});
 
 		it('should reset the birthdate correctly', () => {
-			component.testForm.get('birthdate').setValue('TEST');
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.birthdate).toEqual({date: null, time: null});
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
 		});
 
 		it('should reset the certificateLanguage correctly', () => {
-			component.testForm.get('certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
 			creationDataService.emitResetCalled();
-			expect(component.testForm.value.certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
-		});*/
+			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
+		});
 
 		it('should reset the typeOfTest correctly', () => {
 			component.testForm.get('typeOfTest').setValue({display: 'TEST', code: 'typeOfTest'});
