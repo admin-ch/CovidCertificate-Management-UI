@@ -30,7 +30,7 @@ describe('DashboardComponent', () => {
 	};
 
 	const notificationServiceMock = {
-		upcomingNotifications$: new Subject<Notification[]>()
+		closableNotifications$: new Subject<Notification[]>()
 	};
 
 	const obNotificationServiceMock = {
@@ -113,17 +113,19 @@ describe('DashboardComponent', () => {
 			});
 
 			it('should call info function of obNotificationService once', () => {
-				notificationServiceMock.upcomingNotifications$.next([
+				notificationServiceMock.closableNotifications$.next([
 					{
+						id: 'id',
 						type: 'INFO',
-						message: {
+						content: {
 							de: 'Deutsch',
 							en: 'English',
 							fr: 'Francais',
 							it: 'Italiano'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					}
 				]);
 				expect(obNotificationServiceMock.info).toHaveBeenCalledWith({message: 'English', sticky: true});
@@ -131,17 +133,19 @@ describe('DashboardComponent', () => {
 			});
 
 			it('should call warning function of obNotificationService once', () => {
-				notificationServiceMock.upcomingNotifications$.next([
+				notificationServiceMock.closableNotifications$.next([
 					{
+						id: 'id',
 						type: 'WARNING',
-						message: {
+						content: {
 							de: 'Deutsch',
 							en: 'English',
 							fr: 'Francais',
 							it: 'Italiano'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					}
 				]);
 				expect(obNotificationServiceMock.warning).toHaveBeenCalledWith({message: 'English', sticky: true});
@@ -149,50 +153,58 @@ describe('DashboardComponent', () => {
 			});
 
 			it('should call warning and info function of obNotificationService twice', () => {
-				notificationServiceMock.upcomingNotifications$.next([
+				notificationServiceMock.closableNotifications$.next([
 					{
+						id: 'id',
 						type: 'WARNING',
-						message: {
+						content: {
 							de: 'Deutsch 1',
 							en: 'English 1',
 							fr: 'Francais 1',
 							it: 'Italiano 1'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					},
 					{
+						id: 'id',
 						type: 'WARNING',
-						message: {
+						content: {
 							de: 'Deutsch 2',
 							en: 'English 2',
 							fr: 'Francais 2',
 							it: 'Italiano 2'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					},
 					{
+						id: 'id',
 						type: 'INFO',
-						message: {
+						content: {
 							de: 'Deutsch 3',
 							en: 'English 3',
 							fr: 'Francais 3',
 							it: 'Italiano 3'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					},
 					{
+						id: 'id',
 						type: 'INFO',
-						message: {
+						content: {
 							de: 'Deutsch 4',
 							en: 'English 4',
 							fr: 'Francais 4',
 							it: 'Italiano 4'
 						},
-						start: '',
-						end: ''
+						isClosable: true,
+						startTime: '',
+						endTime: ''
 					}
 				]);
 				expect(obNotificationServiceMock.warning).toHaveBeenNthCalledWith(1, {
@@ -208,7 +220,7 @@ describe('DashboardComponent', () => {
 			});
 
 			it('should call no function of obNotificationService', () => {
-				notificationServiceMock.upcomingNotifications$.next([]);
+				notificationServiceMock.closableNotifications$.next([]);
 				expect(obNotificationServiceMock.info).not.toHaveBeenCalled();
 				expect(obNotificationServiceMock.warning).not.toHaveBeenCalled();
 			});

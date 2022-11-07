@@ -43,13 +43,13 @@ describe('NotificationService', () => {
 
 	describe('imminentNotifications$', () => {
 		it('should be initialized', () => {
-			expect(service.imminentNotifications$).toBeTruthy();
+			expect(service.nonClosableNotifications$).toBeTruthy();
 		});
 	});
 
 	describe('upcomingNotifications$', () => {
 		it('should be initialized', () => {
-			expect(service.upcomingNotifications$).toBeTruthy();
+			expect(service.closableNotifications$).toBeTruthy();
 		});
 
 		it.each([null, 'null', undefined, 'undefined', 1, '1', false, 'false'])(
@@ -57,11 +57,11 @@ describe('NotificationService', () => {
 			waitForAsync(localStorageValue => {
 				localStorage.getItem = jest.fn(() => localStorageValue);
 				const expectedValue = [1, 2, 3];
-				service.upcomingNotifications$.subscribe(value => {
+				service.closableNotifications$.subscribe(value => {
 					expect(value).toEqual(expectedValue);
 				});
 				// @ts-ignore
-				service.upcomingNotifications.next(expectedValue);
+				service.closableNotifications.next(expectedValue);
 			})
 		);
 	});
@@ -128,7 +128,7 @@ describe('NotificationService', () => {
 
 				service.fetchNotifications();
 
-				service.upcomingNotifications$.subscribe(value => {
+				service.closableNotifications$.subscribe(value => {
 					expect(value).toEqual(expected);
 				});
 			})
@@ -174,21 +174,21 @@ describe('NotificationService', () => {
 			const inOneHour = inOneHourMoment.toISOString();
 
 			it.each([
-				[1, [{start: oneHourAgo, end: inOneHour, shouldShow: true}]],
+				[1, [{isClosable: false, startTime: oneHourAgo, endTime: inOneHour, shouldShow: true}]],
 				[
 					2,
 					[
-						{start: oneHourAgo, end: inOneHour, shouldShow: true},
-						{start: oneDayAgo, end: inOneHour, shouldShow: true}
+						{isClosable: false, startTime: oneHourAgo, endTime: inOneHour, shouldShow: true},
+						{isClosable: false, startTime: oneDayAgo, endTime: inOneHour, shouldShow: true}
 					]
 				],
 				[
 					2,
 					[
-						{start: oneHourAgo, end: inOneHour, shouldShow: true},
-						{start: oneDayAgo, end: inOneHour, shouldShow: true},
-						{start: inOneHour, end: inOneDay, shouldShow: false},
-						{start: inOneHour, end: inOneDay, shouldShow: false}
+						{isClosable: false, startTime: oneHourAgo, endTime: inOneHour, shouldShow: true},
+						{isClosable: false, startTime: oneDayAgo, endTime: inOneHour, shouldShow: true},
+						{isClosable: false, startTime: inOneHour, endTime: inOneDay, shouldShow: false},
+						{isClosable: false, startTime: inOneHour, endTime: inOneDay, shouldShow: false}
 					]
 				]
 			])(
@@ -196,12 +196,12 @@ describe('NotificationService', () => {
 				fakeAsync(
 					(
 						expectedNotificationLength: number,
-						notifications: {start: string; end: string; shouldShow: boolean}[]
+						notifications: {startTime: string; endTime: string; shouldShow: boolean}[]
 					) => {
 						JSON.parse = jest.fn(() => notifications);
 						service.fetchNotifications();
 
-						service.imminentNotifications$.subscribe(notificationsUnderTest => {
+						service.nonClosableNotifications$.subscribe(notificationsUnderTest => {
 							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
 							// @ts-ignore
 							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
@@ -234,7 +234,7 @@ describe('NotificationService', () => {
 				service.fetchNotifications();
 
 				expect(localStorage.setItem).toHaveBeenLastCalledWith(
-					'ecUpcomingNotificationsShown',
+					'ecClosableNotificationsShown',
 					JSON.stringify(expected)
 				);
 			});
@@ -276,21 +276,21 @@ describe('NotificationService', () => {
 			const inOneHour = inOneHourMoment.toISOString();
 
 			it.each([
-				[1, [{start: inOneHour, end: in7DaysMoment, shouldShow: true}]],
+				[1, [{isClosable: true, startTime: oneHourAgo, endTime: in7DaysMoment, shouldShow: true}]],
 				[
-					2,
+					0,
 					[
-						{start: inOneHour, end: in7DaysMoment, shouldShow: true},
-						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}
+						{isClosable: true, startTime: inOneHour, endTime: in7DaysMoment, shouldShow: false},
+						{isClosable: true, startTime: in7DaysMoment, endTime: in14DaysMoment, shouldShow: false}
 					]
 				],
 				[
 					2,
 					[
-						{start: oneHourAgo, end: inOneHour, shouldShow: false},
-						{start: oneDayAgo, end: inOneHour, shouldShow: false},
-						{start: inOneHour, end: inOneDay, shouldShow: true},
-						{start: in7DaysMoment, end: in14DaysMoment, shouldShow: true}
+						{isClosable: true, startTime: oneHourAgo, endTime: inOneHour, shouldShow: true},
+						{isClosable: true, startTime: oneDayAgo, endTime: inOneHour, shouldShow: true},
+						{isClosable: true, startTime: inOneHour, endTime: inOneDay, shouldShow: false},
+						{isClosable: true, startTime: in7DaysMoment, endTime: in14DaysMoment, shouldShow: false}
 					]
 				]
 			])(
@@ -298,14 +298,14 @@ describe('NotificationService', () => {
 				fakeAsync(
 					(
 						expectedNotificationLength: number,
-						notifications: {start: string; end: string; shouldShow: boolean}[]
+						notifications: {startTime: string; endTime: string; shouldShow: boolean}[]
 					) => {
 						JSON.parse = jest
 							.fn()
 							.mockReturnValueOnce(notifications)
 							.mockReturnValueOnce([...notifications.map(_ => false)]);
 
-						service.upcomingNotifications$.subscribe(notificationsUnderTest => {
+						service.closableNotifications$.subscribe(notificationsUnderTest => {
 							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
 							// @ts-ignore
 							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);

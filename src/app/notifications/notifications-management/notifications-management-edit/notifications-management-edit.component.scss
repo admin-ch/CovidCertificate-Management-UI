@@ -1,0 +1,32 @@
+mat-form-field {
+	max-width: 30em;
+}
+
+.period-container {
+	display: flex;
+	flex-direction: row;
+
+	.time-form-field {
+		margin-left: 2em;
+		width: 10em;
+	}
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+}
+.is-closable-checkbox {
+	margin-bottom: 2em;
+}
+
+.save-button {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	mat-spinner {
+		margin-left: 1em;
+	}
+}
