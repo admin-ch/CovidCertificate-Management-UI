@@ -1,0 +1,96 @@
+<h4>{{('notificationsManagement.title.' + (type === 'EDIT' ? 'edit' : 'create')) | translate}}</h4>
+<form [formGroup]="formGroup">
+	<fieldset>
+		<legend>{{ 'notificationsManagement.period' | translate }}</legend>
+		<div class="period-container">
+			<mat-form-field obErrorMessages>
+				<input
+					matInput
+					formControlName="startDate"
+					[min]="MIN_DATE"
+					[matDatepicker]="pickerStart"
+					[placeholder]="'notificationsManagement.notification.start' | translate"
+				/>
+				<mat-datepicker #pickerStart></mat-datepicker>
+				<mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+				<mat-error *ngIf="formGroup.get('startDate').hasError('invalidDate'); else startBeforeEndFrom">
+					{{ "i18n.validation.date" | translate }}
+				</mat-error>
+				<ng-template #startBeforeEndFrom>
+					<mat-error
+						*ngIf="formGroup.get('startDate').hasError('startDateAfterEndDate'); else matErrorTmpl">
+						{{ "notificationsManagement.startDateBeforeEndDate" | translate }}
+					</mat-error>
+					<ng-template #matErrorTmpl>
+						<mat-error></mat-error>
+					</ng-template>
+				</ng-template>
+			</mat-form-field>
+			<mat-form-field obErrorMessages class="time-form-field">
+				<input type="time" matInput formControlName="startTime" />
+				<mat-error></mat-error>
+			</mat-form-field>
+
+		</div>
+		<div class="period-container">
+			<mat-form-field obErrorMessages>
+				<input
+					matInput
+					formControlName="endDate"
+					[min]="MIN_DATE"
+					[matDatepicker]="pickerEnd"
+					[placeholder]="'notificationsManagement.notification.end' | translate"
+				/>
+				<mat-datepicker #pickerEnd></mat-datepicker>
+				<mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+				<mat-error *ngIf="formGroup.get('endDate').hasError('invalidDate'); else matErrorTmpl">
+					{{ "i18n.validation.date" | translate }}
+				</mat-error>
+				<ng-template #matErrorTmpl>
+					<mat-error></mat-error>
+				</ng-template>
+			</mat-form-field>
+			<mat-form-field obErrorMessages class="time-form-field">
+				<input type="time" matInput formControlName="endTime" />
+				<mat-error></mat-error>
+			</mat-form-field>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>{{ 'notificationsManagement.notification.type' | translate }}</legend>
+		<mat-form-field obErrorMessages>
+			<mat-label>{{ 'notificationsManagement.notification.type' | translate }}</mat-label>
+			<mat-select formControlName="type">
+				<mat-option value="INFO">
+					{{ 'notificationsManagement.notification.type.info' | translate }}
+				</mat-option>
+				<mat-option value="WARNING">
+					{{ 'notificationsManagement.notification.type.warning' | translate }}
+				</mat-option>
+			</mat-select>
+			<mat-error></mat-error>
+		</mat-form-field>
+	</fieldset>
+	<mat-checkbox class="is-closable-checkbox" formControlName="isClosable">
+		<span>{{ 'notificationsManagement.notification.isClosable' | translate }}</span>
+	</mat-checkbox>
+	<fieldset>
+		<legend>{{ 'notificationsManagement.notification.content' | translate }}</legend>
+		<div class="content-container">
+			<ng-container *ngFor="let lang of translate.langs">
+				<mat-form-field obErrorMessages>
+					<mat-label>{{ ('notificationsManagement.notification.content.' + lang) | translate }}</mat-label>
+					<textarea matInput [formControlName]="'content_' + lang"></textarea>
+					<mat-error></mat-error>
+				</mat-form-field>
+			</ng-container>
+		</div>
+	</fieldset>
+</form>
+<button mat-button obButton="primary" type="button" [disabled]="isLoading" (click)="save()">
+	<div class="save-button">
+		{{'notificationsManagement.save' | translate}}
+		<mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+	</div>
+</button>
+

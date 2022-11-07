@@ -39,8 +39,4 @@ describe('NotificationsComponent', () => {
 	it('should be created', () => {
 		expect(component).toBeTruthy();
 	});
-
-	it('should set imminentNotifications$', () => {
-		expect(component.imminentNotifications$).toBeTruthy();
-	});
 });
