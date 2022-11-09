@@ -67,10 +67,40 @@ export class NotificationsManagementEditComponent implements OnInit {
 			},
 			{
 				validators: [
-					getStartDateBeforeEndDateValidator("startDate", "endDate")
+					getStartDateBeforeEndDateValidator("startDate", "endDate", "startTime", "endTime")
 				]
 			}
 		);
+
+		this.formGroup.get("startDate").valueChanges.subscribe(value => {
+			if (value) {
+				this.formGroup.get("startDate").setValue(moment((value as Moment).format("YYYY-MM-DD") + " " + this.formGroup.value.startTime, "YYYY-MM-DD HH:mm"), {
+					emitEvent: false
+				});
+			}
+		});
+		this.formGroup.get("startTime").valueChanges.subscribe(value => {
+			if (value) {
+				this.formGroup.get("startDate").setValue(moment((this.formGroup.value.startDate as Moment).format("YYYY-MM-DD") + " " + value, "YYYY-MM-DD HH:mm"), {
+					emitEvent: false
+				});
+			}
+		});
+		this.formGroup.get("endDate").valueChanges.subscribe(value => {
+			if (value) {
+				this.formGroup.get("endDate").setValue(moment((value as Moment).format("YYYY-MM-DD") + " " + this.formGroup.value.endTime, "YYYY-MM-DD HH:mm"), {
+					emitEvent: false
+				});
+			}
+		});
+		this.formGroup.get("endTime").valueChanges.subscribe(value => {
+			if (value) {
+				this.formGroup.get("endDate").setValue(moment((this.formGroup.value.endDate as Moment).format("YYYY-MM-DD") + " " + value, "YYYY-MM-DD HH:mm"), {
+					emitEvent: false
+				});
+			}
+		});
+
 		this.translate.langs.forEach(lang =>
 			this.formGroup.addControl(`content_${lang}`, new FormControl(content[lang], [Validators.required]))
 		);
@@ -85,8 +115,8 @@ export class NotificationsManagementEditComponent implements OnInit {
 
 			const body: Notification = {
 				id: this.notificationManagementService.currentNotification?.id,
-				startTime: moment((this.formGroup.value.startDate as Moment).format("YYYY-MM-DD") + " " + this.formGroup.value.startTime, "YYYY-MM-DD HH:mm").utc().format("YYYY-MM-DDTHH:mm"),
-				endTime: moment((this.formGroup.value.endDate as Moment).format("YYYY-MM-DD") + " " + this.formGroup.value.endTime, "YYYY-MM-DD HH:mm").utc().format("YYYY-MM-DDTHH:mm"),
+				startTime: this.formGroup.get("startDate").value.utc().format("YYYY-MM-DDTHH:mm"),
+				endTime: this.formGroup.get("endDate").value.utc().format("YYYY-MM-DDTHH:mm"),
 				type: this.formGroup.value.type,
 				isClosable: this.formGroup.value.isClosable,
 				content

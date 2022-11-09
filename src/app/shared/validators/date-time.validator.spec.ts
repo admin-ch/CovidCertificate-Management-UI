@@ -4,15 +4,15 @@ import * as moment from 'moment';
 
 describe('getStartDateBeforeEndDateValidator', () => {
 	let formGroup: FormGroup;
-	let startControl: FormControl;
-	let endControl: FormControl;
+	let startDateControl: FormControl;
+	let endDateControl: FormControl;
 
 	beforeEach(() => {
-		startControl = new FormControl('');
-		endControl = new FormControl('');
+		startDateControl = new FormControl('');
+		endDateControl = new FormControl('');
 		formGroup = new FormGroup({
-			start: startControl,
-			end: endControl
+			start: startDateControl,
+			end: endDateControl
 		});
 	});
 
@@ -23,41 +23,45 @@ describe('getStartDateBeforeEndDateValidator', () => {
 		[moment('2022-06-16'), moment('2022-06-15'), false],
 		[moment(''), moment('2022-06-15'), true],
 		[moment('2022-06-15'), moment(''), true],
-		[null, null, true]
-	])('when start is %s, and end is %s, control.valid should be %s', (start, end, valid) => {
-		startControl.setValue(start);
-		endControl.setValue(end);
-		startControl.updateValueAndValidity();
-		endControl.updateValueAndValidity();
+		[null, null, true],
+		[moment('2022-06-15T15:00'), moment('2022-06-15T15:00'), true],
+		[moment('2022-06-15T15:00'), moment('2022-06-15T16:00'), true],
+		[moment('2022-06-15T15:00'), moment('2022-06-15T14:00'), false],
+		[moment('2022-06-15T15:00'), moment('2022-06-15T14:59'), false],
+	])('when startDate is %s, endDate is %s, startTime is %s, endTime is %s, control.valid should be %s', (startDate, endDate, valid) => {
+		startDateControl.setValue(startDate);
+		endDateControl.setValue(endDate);
+		startDateControl.updateValueAndValidity();
+		endDateControl.updateValueAndValidity();
 
 		getStartDateBeforeEndDateValidator('start', 'end')(formGroup);
 
-		expect(startControl.valid).toBe(valid);
-		expect(endControl.valid).toBe(valid);
+		expect(startDateControl.valid).toBe(valid);
+		expect(endDateControl.valid).toBe(valid);
 	});
 
 	it("should set formControl's error to null if no other errors are present", () => {
-		startControl.setValue(moment('2022-06-15'));
-		endControl.setValue(moment('2022-06-15'));
-		startControl.setErrors({startDateAfterEndDate: true});
-		endControl.setErrors({startDateAfterEndDate: true});
+		startDateControl.setValue(moment('2022-06-15'));
+		endDateControl.setValue(moment('2022-06-15'));
+		startDateControl.setErrors({startDateAfterEndDate: true});
+		endDateControl.setErrors({startDateAfterEndDate: true});
 
 		getStartDateBeforeEndDateValidator('start', 'end')(formGroup);
 
-		expect(startControl.errors).toBe(null);
-		expect(endControl.errors).toBe(null);
+		expect(startDateControl.errors).toBe(null);
+		expect(endDateControl.errors).toBe(null);
 	});
 
 	it("should remove only the startDateAfterEndDate error if formControl's have other errors", () => {
-		startControl.setValue(moment('2022-06-15'));
-		endControl.setValue(moment('2022-06-15'));
-		startControl.setErrors({startDateAfterEndDate: true, otherError: true});
-		endControl.setErrors({startDateAfterEndDate: true, otherError: true});
+		startDateControl.setValue(moment('2022-06-15'));
+		endDateControl.setValue(moment('2022-06-15'));
+		startDateControl.setErrors({startDateAfterEndDate: true, otherError: true});
+		endDateControl.setErrors({startDateAfterEndDate: true, otherError: true});
 
 		getStartDateBeforeEndDateValidator('start', 'end')(formGroup);
 
-		expect(startControl.errors).toEqual({otherError: true});
-		expect(endControl.errors).toEqual({otherError: true});
+		expect(startDateControl.errors).toEqual({otherError: true});
+		expect(endDateControl.errors).toEqual({otherError: true});
 	});
 });
 
