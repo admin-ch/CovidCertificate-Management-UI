@@ -180,6 +180,7 @@
     "i18n.validation.dosesTooBig": "Doit être inférieur ou égal au nombre de doses requises",
     "i18n.validation.invalidAppDeliveryCode": "Code d'envoi invalide",
     "i18n.validation.invalidShortDate": "Format de date invalide, merci d'utiliser \"jjjj\" ou \"jjjj-mm\"",
+    "i18n.validation.matDatepickerMin": "Date trop petite",
     "i18n.validation.matDatepickerParse": "Format de date invalide, merci d'utiliser \"jj.mm.aaaa hh:mm\"",
     "i18n.validation.maxlength": "Veuillez saisir {{requiredLength}} caractères maximum",
     "i18n.validation.notIssuableInSwitzerland": "Le vaccin sélectionné n'est pas autorisé en Suisse.",
