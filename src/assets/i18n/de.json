@@ -42,7 +42,7 @@
     "certificateCreate.from.label.antibody": "SARS-CoV-2 Antibody Panel, Blood",
     "certificateCreate.link": "Neues Zertifikat erstellen",
     "certificateCreate.shipping.app.code": "Zustellungscode",
-    "certificateCreate.shipping.app.code.info": "Bitte beachten Sie das die folgenden Zeichen kein Teil des Codes sein können: \"G, I, J, L, O, Q, V\"",
+    "certificateCreate.shipping.app.code.info": "Bitte beachten Sie, dass die folgenden Zeichen kein Teil des Codes sein können: \"G, I, J, L, O, Q, V\"",
     "certificateCreate.shipping.options": "Versand option auswählen",
     "certificateCreate.shipping.options.app": "Zertifikat in die App liefern",
     "certificateCreate.shipping.options.pdf": "Zertifikat im PDF-Format liefern",
