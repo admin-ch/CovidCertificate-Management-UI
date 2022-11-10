@@ -42,7 +42,7 @@
     "certificateCreate.from.label.antibody": "SARS-CoV-2 Antibody Panel, Blood",
     "certificateCreate.link": "Crea nuovo certificato",
     "certificateCreate.shipping.app.code": "Codice di spedizione",
-    "certificateCreate.shipping.app.code.info": "Note that the following characters are left out to reduce confusion: \"G, I, J, L, O, Q, V\"",
+    "certificateCreate.shipping.app.code.info": "Si prega di notare che il codice non può contenere i seguenti caratteri: \"G, I, J, L, O, Q, V\"",
     "certificateCreate.shipping.options": "Selezionare l'opzione di invio",
     "certificateCreate.shipping.options.app": "Rilasciare il certificato nell'applicazione",
     "certificateCreate.shipping.options.pdf": "Rilasciare il certificato in formato PDF",

@@ -203,7 +203,7 @@
     "notificationsManagement.notification.content.it": "Italian",
     "notificationsManagement.notification.end": "End time\n",
     "notificationsManagement.notification.isClosable": "Closable",
-    "notificationsManagement.notification.start": "Heure de début\t",
+    "notificationsManagement.notification.start": "Start time",
     "notificationsManagement.notification.type": "Type",
     "notificationsManagement.notification.type.info": "Information",
     "notificationsManagement.notification.type.warning": "Warning",
