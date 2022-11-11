@@ -37,7 +37,7 @@
     "@angular/platform-browser-dynamic": "^12.2.16",
     "@angular/router": "^12.2.16",
     "@ngx-translate/core": "^13.0.0",
-    "@oblique/oblique": "^6.1.5",
+    "@oblique/oblique": "^7.1.2",
     "@popperjs/core": "^2.9.2",
     "angular-auth-oidc-client": "^11.6.8",
     "moment": "^2.29.1",
