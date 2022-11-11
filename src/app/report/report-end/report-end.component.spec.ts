@@ -4,7 +4,7 @@ import {ReportEndComponent} from './report-end.component';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {MatHorizontalStepper} from '@angular/material/stepper';
+import {MatStepper} from '@angular/material/stepper';
 
 describe('ReportEndComponent', () => {
 	let component: ReportEndComponent;
@@ -20,7 +20,7 @@ describe('ReportEndComponent', () => {
 			declarations: [ReportEndComponent],
 			providers: [
 				{
-					provide: MatHorizontalStepper,
+					provide: MatStepper,
 					useValue: stepperMock
 				}
 			],

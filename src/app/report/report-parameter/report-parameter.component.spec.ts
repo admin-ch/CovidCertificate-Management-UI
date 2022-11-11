@@ -4,13 +4,13 @@ import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {ReportService} from '../report.service';
 import {ReportParameterComponent} from './report-parameter.component';
-import {MatHorizontalStepper} from '@angular/material/stepper';
+import {MatStepper} from '@angular/material/stepper';
 import {FormGroup} from '@angular/forms';
 
 describe('ReportParameterComponent', () => {
 	let component: ReportParameterComponent;
 	let fixture: ComponentFixture<ReportParameterComponent>;
-	let stepper: MatHorizontalStepper;
+	let stepper: MatStepper;
 
 	const reportServiceMock = {
 		generateReport$: {
@@ -35,7 +35,7 @@ describe('ReportParameterComponent', () => {
 					useValue: reportServiceMock
 				},
 				{
-					provide: MatHorizontalStepper,
+					provide: MatStepper,
 					useValue: stepperMock
 				}
 			],
@@ -48,7 +48,7 @@ describe('ReportParameterComponent', () => {
 		fixture = TestBed.createComponent(ReportParameterComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
-		stepper = TestBed.inject(MatHorizontalStepper);
+		stepper = TestBed.inject(MatStepper);
 	});
 
 	describe('goNext()', () => {

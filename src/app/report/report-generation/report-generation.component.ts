@@ -3,7 +3,7 @@ import {ReportService} from '../report.service';
 import {ReportType} from 'shared/model';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
-import {MatHorizontalStepper} from '@angular/material/stepper';
+import {MatStepper} from '@angular/material/stepper';
 import {ObNotificationService} from '@oblique/oblique';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -31,7 +31,7 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 	private subscription: Subscription;
 
 	constructor(
-		@Inject(MatHorizontalStepper) private readonly stepper: MatHorizontalStepper,
+		@Inject(MatStepper) private readonly stepper: MatStepper,
 		private readonly reportService: ReportService,
 		private readonly http: HttpClient,
 		private readonly obNotificationService: ObNotificationService,

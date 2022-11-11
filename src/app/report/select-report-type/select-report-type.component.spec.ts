@@ -8,7 +8,7 @@ import {ReportType} from 'shared/model';
 import {ReportService} from '../report.service';
 import {MatRadioModule} from '@angular/material/radio';
 import {CommonModule} from '@angular/common';
-import {MatHorizontalStepper} from '@angular/material/stepper';
+import {MatStepper} from '@angular/material/stepper';
 
 @Directive({
 	selector: '[ecHasAuthorizationFor],[ecHasAuthorizationForAny]'
@@ -39,7 +39,7 @@ describe('SelectReportTypeComponent', () => {
 			imports: [ObliqueTestingModule, CommonModule, MatRadioModule],
 			providers: [
 				{
-					provide: MatHorizontalStepper,
+					provide: MatStepper,
 					useValue: stepperMock
 				},
 				{
