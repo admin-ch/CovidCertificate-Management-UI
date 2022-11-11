@@ -1,4 +1,5 @@
 {
+  "title": "cc-management-ui",
   "name": "cc-management-ui",
   "version": "4.8.3",
   "scripts": {
@@ -37,11 +38,11 @@
     "@angular/platform-browser-dynamic": "^14.2.10",
     "@angular/router": "^14.2.10",
     "@ngx-translate/core": "^14.0.0",
-    "@oblique/oblique": "^8.2.4",
+    "@oblique/oblique": "^9.3.0",
     "@popperjs/core": "^2.9.2",
     "angular-auth-oidc-client": "^11.6.8",
     "moment": "^2.29.1",
-    "rxjs": "~6.6.7",
+    "rxjs": "~7.5.7",
     "time-input-polyfill": "^1.0.10",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4"
