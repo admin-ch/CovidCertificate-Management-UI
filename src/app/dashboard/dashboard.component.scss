@@ -3,7 +3,7 @@
 .dashboard {
 	display: flex;
 	flex-wrap: wrap;
-	gap: $spacing-default;
+	gap: $ob-spacing-default;
 
 	.dashboard-card {
 		flex-basis: 400px;
@@ -11,11 +11,11 @@
 		.dashboard-icon {
 			display: flex;
 			justify-content: center;
-			color: $brand-primary;
-			background-color: $gray-extra-light;
+			color: $ob-primary;
+			background-color: $ob-gray-extra-light;
 			font-size: 75px;
 			padding: 50px 100px;
-			margin: (-$spacing-default) (-$spacing-default) $spacing-default;
+			margin: (-$ob-spacing-default) (-$ob-spacing-default) $ob-spacing-default;
 		}
 
 		.dashboard-title {
