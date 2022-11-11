@@ -13,7 +13,7 @@ export const environment = {
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',
-		stsServer: 'http://localhost:8180',
+		authority: 'http://localhost:8180',
 		applicationUrl: 'http://localhost:4201/',
 		loginFeedback: 'auth/login-feedback/',
 		maxIdTokenIatOffsetAllowedInSeconds: 7200,

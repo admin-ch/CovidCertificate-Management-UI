@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LoggerService, OidcSecurityService} from 'angular-auth-oidc-client';
+import {AbstractLoggerService, OidcSecurityService} from 'angular-auth-oidc-client';
 import {Observable, ReplaySubject} from 'rxjs';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {OpenIdConfigService} from './open-id-config-service';
@@ -51,7 +51,7 @@ export class OauthService {
 	protected constructor(
 		private readonly oidcSecurityService: OidcSecurityService,
 		private readonly config: OpenIdConfigService,
-		private readonly logger: LoggerService
+		private readonly logger: AbstractLoggerService
 	) {
 		this.claims$ = this.claims.asObservable();
 		this.isAuthenticated$ = this.isAuthenticated.asObservable();
@@ -78,10 +78,10 @@ export class OauthService {
 		this.oidcSecurityService.isAuthenticated$
 			.pipe(
 				// take(1),
-				tap(isAuthorized => this.autoLogin(isAuthorized)),
-				tap(isAuthorized => this.emitIsAuthorized(isAuthorized)),
-				filter(isAuthorized => isAuthorized || !this.config.autoLogin),
-				switchMap(isAuthorized => this.getClaims(isAuthorized))
+				tap(loginResponse => this.autoLogin(loginResponse.isAuthenticated)),
+				tap(loginResponse => this.emitIsAuthorized(loginResponse.isAuthenticated)),
+				filter(loginResponse => loginResponse.isAuthenticated || !this.config.autoLogin),
+				switchMap(loginResponse => this.getClaims(loginResponse.isAuthenticated))
 			)
 			.subscribe(claims => {
 				this.logger.logDebug(`Claims are ${claims}`);
@@ -90,7 +90,11 @@ export class OauthService {
 	}
 
 	hasUserRole(role: string, claims: unknown): boolean {
-		return !!claims && !!claims.userroles && claims.userroles.indexOf(role) > -1;
+		return OauthService.isClaims(claims) && claims.userroles?.includes(role);
+	}
+
+	private static isClaims(claims: unknown | {userroles: string[]}): claims is {userroles: string[]} {
+		return !!(claims as {userroles: string[]})?.userroles;
 	}
 
 	private autoLogin(isAuthorized: boolean): void {
@@ -107,8 +111,8 @@ export class OauthService {
 
 	private getClaims(isAuthorized: boolean): Observable<Claims> {
 		return this.oidcSecurityService.userData$.pipe(
-			map(claims => {
-				return this.validateClaims(isAuthorized, claims);
+			map(userDataResult => {
+				return this.validateClaims(isAuthorized, userDataResult.userData);
 			})
 		);
 	}

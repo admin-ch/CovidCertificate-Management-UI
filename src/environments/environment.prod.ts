@@ -13,7 +13,7 @@ export const environment = {
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',
-		stsServer: 'https://identity.bit.admin.ch/realms/BAG-CovidCertificate',
+		authority: 'https://identity.bit.admin.ch/realms/BAG-CovidCertificate',
 		applicationUrl: 'https://www.covidcertificate.admin.ch/',
 		loginFeedback: 'auth/login-feedback/',
 		maxIdTokenIatOffsetAllowedInSeconds: 7200,

@@ -3,6 +3,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {TestBed} from '@angular/core/testing';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {HttpConfigInterceptor} from './http.config.interceptor';
+import {of} from 'rxjs';
 
 describe('HttpConfigInterceptor', () => {
 	let interceptor: HttpConfigInterceptor;
@@ -18,7 +19,7 @@ describe('HttpConfigInterceptor', () => {
 					multi: true
 				},
 				HttpConfigInterceptor,
-				{provide: OidcSecurityService, useValue: {getToken: () => 'token'}}
+				{provide: OidcSecurityService, useValue: {getAccessToken: () => 'token'}}
 			]
 		}).compileComponents();
 		interceptor = TestBed.inject(HttpConfigInterceptor);
@@ -40,7 +41,7 @@ describe('HttpConfigInterceptor', () => {
 		});
 		it("should not add Authorization to Headers if there's no token", () => {
 			const auth = TestBed.inject(OidcSecurityService);
-			jest.spyOn(auth, 'getToken').mockReturnValue('');
+			jest.spyOn(auth, 'getAccessToken').mockReturnValue(of(''));
 			const response = configTest('/v1/covidcertificate');
 			expect(response.headers.has('Authorization')).toBe(false);
 		});

@@ -19,7 +19,7 @@ describe('AppComponent', () => {
 			declarations: [AppComponent],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 			providers: [
-				{provide: OidcSecurityService, useValue: {isAuthenticated$: of(false)}},
+				{provide: OidcSecurityService, useValue: {isAuthenticated$: of({isAuthenticated: false})}},
 				{provide: OauthService, useValue: oauthServiceMock},
 				{provide: AuthService, useValue: authServiceMock},
 				{provide: NotificationService, useValue: notificationServiceMock},
@@ -38,7 +38,7 @@ describe('AppComponent', () => {
 	describe('Authenticated and authorized', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of(true),
+			isAuthenticated$: of({isAuthenticated: true}),
 			claims$: of({}),
 			hasUserRole: () => true,
 			logout: jest.fn(),
@@ -135,7 +135,7 @@ describe('AppComponent', () => {
 	describe('Authenticated and unauthorized', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of(true),
+			isAuthenticated$: of({isAuthenticated: true}),
 			claims$: of({}),
 			hasUserRole: () => false,
 			logout: jest.fn(),
@@ -186,7 +186,7 @@ describe('AppComponent', () => {
 	describe('Unauthenticated', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of(false),
+			isAuthenticated$: of({isAuthenticated: false}),
 			initialize: jest.fn(),
 			loadClaims: jest.fn()
 		};

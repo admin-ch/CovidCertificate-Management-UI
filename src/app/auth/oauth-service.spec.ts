@@ -1,7 +1,7 @@
 import {TestBed, fakeAsync} from '@angular/core/testing';
 import {EMPTY, of} from 'rxjs';
 import {skip} from 'rxjs/operators';
-import {LoggerService, OidcSecurityService} from 'angular-auth-oidc-client';
+import {AbstractLoggerService, OidcSecurityService} from 'angular-auth-oidc-client';
 import {OauthService} from './oauth.service';
 import {OpenIdConfigService} from './open-id-config-service';
 
@@ -23,7 +23,7 @@ describe('OauthService', () => {
 					}
 				},
 				{provide: OpenIdConfigService, useValue: {autoLogin: true}},
-				{provide: LoggerService, useValue: {logDebug: jest.fn()}}
+				{provide: AbstractLoggerService, useValue: {logDebug: jest.fn()}}
 			]
 		}).compileComponents();
 		service = TestBed.inject(OauthService);
@@ -114,7 +114,7 @@ describe('OauthService', () => {
 				// @ts-ignore
 				auth.isAuthenticated$ = of(false);
 				// @ts-ignore
-				auth.userData$ = of({});
+				auth.userData$ = of({userData: {}});
 			});
 			describe('with autoLogin', () => {
 				it('should call authorize', () => {
@@ -198,7 +198,7 @@ describe('OauthService', () => {
 
 			it('should emit empty claims with no user data', done => {
 				// @ts-ignore
-				auth.userData$ = of(undefined);
+				auth.userData$ = of({userData: undefined});
 				service.claims$.subscribe(claims => {
 					expect(claims).toEqual({});
 					done();
@@ -209,7 +209,7 @@ describe('OauthService', () => {
 			it('should emit claims with user data', done => {
 				const testClaims = {test: 'test'};
 				// @ts-ignore
-				auth.userData$ = of(testClaims);
+				auth.userData$ = of({userData: testClaims});
 				service.claims$.subscribe(claims => {
 					expect(claims).toEqual(testClaims);
 					done();

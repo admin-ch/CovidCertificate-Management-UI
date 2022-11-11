@@ -13,7 +13,7 @@ describe('AuthGuardService', () => {
 	const oauthServiceMock = {
 		claims$: new ReplaySubject(1),
 		hasUserRole: jest.fn(),
-		isAuthenticated$: of(true)
+		isAuthenticated$: of({isAuthenticated: true})
 	};
 	const hasAuthorizationForMock = new ReplaySubject(1);
 	const hasAuthorizationForObsMock = hasAuthorizationForMock.asObservable();

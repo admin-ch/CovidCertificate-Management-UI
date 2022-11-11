@@ -57,6 +57,11 @@
               "node_modules/@oblique/oblique/styles/css/frutiger.css",
               "src/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./node_modules"
+              ]
+            },
             "scripts": [
               "node_modules/@oblique/oblique/ob-features.js"
             ],

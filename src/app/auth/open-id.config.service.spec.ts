@@ -16,7 +16,7 @@ describe('OpenIdConfigService', () => {
 	});
 
 	it('should have a stsStagingUrl property', () => {
-		expect(service.stsStagingUrl).toBeDefined();
+		expect(service.authorityUrl).toBeDefined();
 	});
 
 	it('should have a autoLogin property', () => {

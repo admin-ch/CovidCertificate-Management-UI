@@ -1,5 +1,5 @@
-@import "~@oblique/oblique/styles/scss/core/variables";
-@import "~@oblique/oblique/styles/scss/core/mixins/layout";
+@import "@oblique/oblique/styles/scss/core/variables";
+@import "@oblique/oblique/styles/scss/core/mixins/layout";
 
 @include ob-media-breakpoint-up(sm) {
 	:host.datetime::ng-deep {
