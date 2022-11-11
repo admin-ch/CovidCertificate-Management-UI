@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from '@angular/forms';
+import {NgForm, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ReportType} from 'shared/model';
 import {ReportService} from '../../report.service';
 import {TranslateService} from '@ngx-translate/core';

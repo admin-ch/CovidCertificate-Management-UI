@@ -7,11 +7,11 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {
 	ObAlertModule,
 	ObButtonModule,
+	ObCollapseModule,
 	ObErrorMessagesModule,
+	ObInputClearModule,
 	ObNestedFormModule,
 	ObNumberFormatModule,
-	ObInputClearModule,
-	ObCollapseModule,
 	ObTranslateParamsModule
 } from '@oblique/oblique';
 import {MatButtonModule} from '@angular/material/button';

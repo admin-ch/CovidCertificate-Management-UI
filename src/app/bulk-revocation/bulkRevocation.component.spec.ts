@@ -5,7 +5,6 @@ import {of} from 'rxjs';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {GenerationType} from 'shared/model';
 import {CertificateService} from 'shared/certificate.service';
 import {BulkRevocationComponent} from './bulkRevocation.component';
 import {BulkRevocationService} from './bulkRevocation.service';

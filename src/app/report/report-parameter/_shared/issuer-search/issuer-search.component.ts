@@ -1,20 +1,9 @@
-import {
-	AfterViewInit,
-	Component,
-	Inject,
-	Injectable,
-	Input,
-	OnChanges,
-	OnDestroy,
-	OnInit,
-	SimpleChanges,
-	ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, Inject, Injectable, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
-import {merge, Subject, Subscription} from 'rxjs';
+import {Subject, Subscription, merge} from 'rxjs';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {filter, switchMap} from 'rxjs/operators';
@@ -42,9 +31,7 @@ export class CustomPaginatorIntl implements MatPaginatorIntl {
 
 	constructor(private readonly translate: TranslateService) {
 		this.subscription.add(translate.get('paginator.nextPage').subscribe(value => (this.nextPageLabel = value)));
-		this.subscription.add(
-			translate.get('paginator.previousPage').subscribe(value => (this.previousPageLabel = value))
-		);
+		this.subscription.add(translate.get('paginator.previousPage').subscribe(value => (this.previousPageLabel = value)));
 	}
 
 	getRangeLabel(page: number, pageSize: number, length: number): string {
@@ -96,18 +83,15 @@ export class IssuerSearchComponent implements OnInit, OnChanges, AfterViewInit, 
 		public readonly selectedProfilesService: SelectedProfilesService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
 	) {
-		this.PROFILE_SEARCH_URL = REPORT_HOST + '/api/v2/report/profile/search';
+		this.PROFILE_SEARCH_URL = `${REPORT_HOST}/api/v2/report/profile/search`;
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.applySearch$.subscribe(_ => this.paginator.firstPage()));
+		this.subscription.add(this.applySearch$.subscribe(() => this.paginator.firstPage()));
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (
-			(changes.authority.firstChange || changes.authority.currentValue !== changes.authority.previousValue) &&
-			!!changes.authority.currentValue
-		) {
+		if ((changes.authority.firstChange || changes.authority.currentValue !== changes.authority.previousValue) && !!changes.authority.currentValue) {
 			this.applySearch$.next();
 		}
 	}
@@ -116,8 +100,8 @@ export class IssuerSearchComponent implements OnInit, OnChanges, AfterViewInit, 
 		this.subscription.add(
 			merge(this.sort.sortChange, this.paginator.page, this.applySearch$)
 				.pipe(
-					filter(_ => !!this.authority && this.searchFieldsFormGroup.valid),
-					switchMap(_ => {
+					filter(() => !!this.authority && this.searchFieldsFormGroup.valid),
+					switchMap(() => {
 						this.isIssuerLoading = true;
 
 						return this.http.post<ProfilesPage>(this.PROFILE_SEARCH_URL, {

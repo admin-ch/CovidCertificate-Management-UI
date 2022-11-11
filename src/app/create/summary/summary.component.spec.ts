@@ -150,10 +150,7 @@ describe('SummaryComponent', () => {
 		});
 
 		it('should call the the CreationDataService for setting the certificate information', () => {
-			const setNewCreateCertificateResponseSpy = jest.spyOn(
-				creationDataService,
-				'setNewCreateCertificateResponse'
-			);
+			const setNewCreateCertificateResponseSpy = jest.spyOn(creationDataService, 'setNewCreateCertificateResponse');
 
 			component.goNext();
 
@@ -161,10 +158,7 @@ describe('SummaryComponent', () => {
 		});
 
 		it('should call the the CreationDataService for setting the certificate information with the correct values', () => {
-			const setNewCreateCertificateResponseSpy = jest.spyOn(
-				creationDataService,
-				'setNewCreateCertificateResponse'
-			);
+			const setNewCreateCertificateResponseSpy = jest.spyOn(creationDataService, 'setNewCreateCertificateResponse');
 
 			component.goNext();
 

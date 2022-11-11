@@ -1,15 +1,4 @@
-import {
-	GenerationType,
-	Patient,
-	PatientDto,
-	ProductInfo,
-	Recovery,
-	RecoveryDto,
-	Test,
-	TestDto,
-	Vaccination,
-	VaccinationDto
-} from 'shared/model';
+import {GenerationType, Patient, PatientDto, ProductInfo, Recovery, RecoveryDto, Test, TestDto, Vaccination, VaccinationDto} from 'shared/model';
 
 const VALUE_DATE_2021 = '2021-04-29';
 const VALUE_DATE_1989 = '1989-01-17';

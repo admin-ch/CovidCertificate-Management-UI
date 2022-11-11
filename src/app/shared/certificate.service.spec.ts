@@ -2,14 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {CertificateService} from './certificate.service';
 import {ApiService} from './api.service';
-import {
-	recoveryPatient,
-	recoveryPatientDto,
-	testPatient,
-	testPatientDto,
-	vaccinationPatienDto,
-	vaccinationPatient
-} from './mocks';
+import {recoveryPatient, recoveryPatientDto, testPatient, testPatientDto, vaccinationPatienDto, vaccinationPatient} from './mocks';
 import {Shipping, ShippingOptions} from 'shared/model';
 
 describe('CertificateService', () => {

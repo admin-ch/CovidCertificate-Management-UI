@@ -18,10 +18,7 @@ export class SelectedProfilesComponent implements OnInit, OnDestroy {
 	readonly Object = Object;
 	private subscription: Subscription;
 
-	constructor(
-		public readonly selectedProfilesService: SelectedProfilesService,
-		private readonly reportService: ReportService
-	) {}
+	constructor(public readonly selectedProfilesService: SelectedProfilesService, private readonly reportService: ReportService) {}
 
 	readonly trackBy: TrackByFunction<EiamProfile> = (_, item) => item.userExtId;
 

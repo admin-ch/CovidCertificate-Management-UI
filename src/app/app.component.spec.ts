@@ -1,7 +1,7 @@
 import {TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule, ObMasterLayoutService} from '@oblique/oblique';
+import {ObMasterLayoutService, ObliqueTestingModule} from '@oblique/oblique';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';

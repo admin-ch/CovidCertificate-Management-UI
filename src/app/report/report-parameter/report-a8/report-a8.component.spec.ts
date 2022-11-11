@@ -8,7 +8,6 @@ import {DataRoomCode, ReportType} from 'shared/model';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../../auth/auth.service';
 import {TranslateModule} from '@ngx-translate/core';
-import * as moment from 'moment';
 import {Subject} from 'rxjs';
 
 describe('ReportA8Component', () => {

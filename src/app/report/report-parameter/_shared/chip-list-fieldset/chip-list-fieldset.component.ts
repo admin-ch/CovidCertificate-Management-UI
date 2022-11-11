@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import {UntypedFormControl, ValidatorFn} from "@angular/forms";
-import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UntypedFormControl, ValidatorFn} from '@angular/forms';
+import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
 import {ReportType} from 'shared/model';
-import {MatChipInputEvent, MatChipList} from "@angular/material/chips";
-import {Subscription} from "rxjs";
-import {ReportService} from "../../../report.service";
+import {MatChipInputEvent, MatChipList} from '@angular/material/chips';
+import {Subscription} from 'rxjs';
+import {ReportService} from '../../../report.service';
 
 @Component({
 	selector: 'ec-chip-list-fieldset',
@@ -12,12 +12,11 @@ import {ReportService} from "../../../report.service";
 	styleUrls: ['./chip-list-fieldset.component.scss']
 })
 export class ChipListFieldsetComponent implements OnInit, OnDestroy {
+	@Input()
+	chipDataFormControl: UntypedFormControl;
 
 	@Input()
-	chipDataFormControl: UntypedFormControl
-
-	@Input()
-	formatValidator: ValidatorFn
+	formatValidator: ValidatorFn;
 
 	@ViewChild('chipList')
 	chipList: MatChipList;
@@ -31,24 +30,21 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 
 	subscription: Subscription;
 
-	constructor(private readonly reportService: ReportService,
-				private readonly cd: ChangeDetectorRef) {
-	}
+	constructor(private readonly reportService: ReportService, private readonly cd: ChangeDetectorRef) {}
 
 	ngOnInit(): void {
-		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
+		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput());
 		this.subscription.add(
-
 			// Workaround to validate that chiplist is not empty
-			this.reportService.validateChiplist$.subscribe(_ => {
-				this.chipList.focus()
-				this.chipDataFormControl.markAsTouched()
-				this.chipDataFormControl.markAsDirty()
-				this.formControl.markAsTouched()
-				this.formControl.markAsDirty()
-				this.updateErrorState()
+			this.reportService.validateChiplist$.subscribe(() => {
+				this.chipList.focus();
+				this.chipDataFormControl.markAsTouched();
+				this.chipDataFormControl.markAsDirty();
+				this.formControl.markAsTouched();
+				this.formControl.markAsDirty();
+				this.updateErrorState();
 			})
-		)
+		);
 
 		// Trigger new change detection run because updateErrorState() changes formGroup validity
 		// which is used in a component higher in the tree resulting in ExpressionChangedAfterItHasBeenCheckedError.
@@ -56,11 +52,11 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.subscription?.unsubscribe()
+		this.subscription?.unsubscribe();
 	}
 
 	onPaste(event: ClipboardEvent): void {
-		event.preventDefault(); //Prevents the default action
+		event.preventDefault(); // Prevents the default action
 		event.clipboardData
 			.getData('Text')
 			// Accepts:
@@ -110,8 +106,8 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 		const toRemoveIndex = this.chipDataFormControl.value.indexOf(uvciToRemove);
 
 		if (toRemoveIndex >= 0) {
-			const newUvcis = [...this.chipDataFormControl.value]
-			newUvcis.splice(toRemoveIndex, 1)
+			const newUvcis = [...this.chipDataFormControl.value];
+			newUvcis.splice(toRemoveIndex, 1);
 			this.chipDataFormControl.setValue(newUvcis);
 		}
 		this.formControl.markAsTouched();
@@ -145,7 +141,7 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 		});
 		this.chipDataFormControl.setErrors(this.formControl.errors, {
 			emitEvent: true
-		})
+		});
 		this.chipList.errorState = this.formControl.invalid && this.formControl.touched;
 	}
 }

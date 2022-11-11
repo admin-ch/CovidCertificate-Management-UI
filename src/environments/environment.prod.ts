@@ -9,8 +9,7 @@ export const environment = {
 	host: 'https://covidcertificate-management.bag.admin.ch',
 	notificationHost: 'https://covidcertificate-notification.bag.admin.ch',
 	reportHost: 'https://covidcertificate-report.bag.admin.ch',
-	eiamSelfAdmin:
-		'https://sts006.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate.admin.chCURRENT_PAGE&language=LANGUAGE',
+	eiamSelfAdmin: 'https://sts006.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate.admin.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',

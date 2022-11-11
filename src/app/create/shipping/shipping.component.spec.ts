@@ -14,14 +14,7 @@ describe('ShippingComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				NoopAnimationsModule,
-				ObliqueTestingModule,
-				ReactiveFormsModule,
-				MatSelectModule,
-				MatFormFieldModule,
-				MatInputModule
-			],
+			imports: [NoopAnimationsModule, ObliqueTestingModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 			declarations: [ShippingComponent],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();

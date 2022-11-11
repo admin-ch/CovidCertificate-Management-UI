@@ -1,4 +1,4 @@
-import {HttpRequest, HttpResponse, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpRequest, HttpResponse} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {OidcSecurityService} from 'angular-auth-oidc-client';

@@ -234,24 +234,24 @@ export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select
 
 export class FormField {
 	public readonly angularFormControl: UntypedFormControl;
-	public readonly selectableOptions?: {display: string; code: any}[];
+	public readonly selectableOptions?: {display: string; code: unknown}[];
 	public readonly tooltipTranslationKey?: string;
-	public readonly defaultValue: any;
+	public readonly defaultValue: unknown;
 	public readonly cssClasses: string;
 
 	constructor(
 		public readonly name: string,
 		public readonly fieldType: AllowedFieldType,
 		options?: {
-			defaultValue?: any;
+			defaultValue?: unknown;
 			validators?: ValidatorFn | ValidatorFn[];
-			selectableOptions?: {display: string; code: any}[];
+			selectableOptions?: {display: string; code: unknown}[];
 			tooltipTranslationKey?: string;
 			cssClasses?: string;
 		}
 	) {
 		let formControl: UntypedFormControl;
-		if (options && options.validators) {
+		if (options?.validators) {
 			formControl = new UntypedFormControl(options.defaultValue || '', options.validators);
 		} else {
 			formControl = new UntypedFormControl(options?.defaultValue || '');
@@ -358,5 +358,5 @@ export interface Shipping {
 
 export enum IssuerType {
 	ORGANISATION = 'organisation',
-	ISSUER = 'issuer',
+	ISSUER = 'issuer'
 }

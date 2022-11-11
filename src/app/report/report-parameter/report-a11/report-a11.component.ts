@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, NgForm} from '@angular/forms';
+import {NgForm, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';

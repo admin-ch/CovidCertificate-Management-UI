@@ -1,14 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {
-	ActivatedRouteSnapshot,
-	CanActivate,
-	CanActivateChild,
-	CanLoad,
-	Route,
-	Router,
-	RouterStateSnapshot,
-	UrlSegment
-} from '@angular/router';
+import {CanActivate, CanActivateChild, CanLoad, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {switchMap, take, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
@@ -33,15 +24,15 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 		this.stage = environment.stage;
 	}
 
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+	canActivate(): Observable<boolean> {
 		return this.checkExpectedRole();
 	}
 
-	canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+	canActivateChild(): Observable<boolean> {
 		return this.checkExpectedRole();
 	}
 
-	canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
+	canLoad(): Observable<boolean> {
 		return this.checkExpectedRole();
 	}
 
@@ -51,16 +42,15 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 				if (!isAuthenticated) {
 					this.router.navigate(['auth/auto-login']);
 					return of(false);
-				} else {
-					return this.authService.hasAuthorizationFor$(AuthFunction.MAIN).pipe(
-						take(1),
-						tap(isAuthorized => {
-							if (!isAuthorized) {
-								this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
-							}
-						})
-					);
 				}
+				return this.authService.hasAuthorizationFor$(AuthFunction.MAIN).pipe(
+					take(1),
+					tap(isAuthorized => {
+						if (!isAuthorized) {
+							this.window.location.href = `https://www.eiam.admin.ch/403ggg?l=${this.translate.currentLang}&stage=${this.stage}`;
+						}
+					})
+				);
 			})
 		);
 	}

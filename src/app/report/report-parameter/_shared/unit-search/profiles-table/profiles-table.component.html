@@ -1,9 +1,4 @@
-<ng-container
-	*ngIf="
-		!!authority && treeControl.isExpanded(node) && getProfiles$(node) | async as profilesDataSource;
-		else profilesLoading
-	"
->
+<ng-container *ngIf="!!authority && treeControl.isExpanded(node) && getProfiles$(node) | async as profilesDataSource; else profilesLoading">
 	<ng-container *ngIf="profilesDataSource.data?.length">
 		<div class="table-container">
 			<table class="ob-table ob-table-hover ob-table-sm" mat-table [dataSource]="profilesDataSource">
@@ -13,9 +8,7 @@
 							#checkAllCb
 							(change)="$event ? selectedProfilesService.toggleAll(profilesDataSource.data) : null"
 							[checked]="selectedProfilesService.isAllSelected(profilesDataSource.data)"
-							[indeterminate]="
-								!checkAllCb.checked && selectedProfilesService.isSomeSelected(profilesDataSource.data)
-							"
+							[indeterminate]="!checkAllCb.checked && selectedProfilesService.isSomeSelected(profilesDataSource.data)"
 						>
 						</mat-checkbox>
 					</th>
@@ -46,11 +39,7 @@
 				</ng-container>
 
 				<tr mat-header-row *matHeaderRowDef="TABLE_ROWS; sticky: true"></tr>
-				<tr
-					mat-row
-					*matRowDef="let profile; columns: TABLE_ROWS"
-					(click)="selectedProfilesService.toggle(profile)"
-				></tr>
+				<tr mat-row *matRowDef="let profile; columns: TABLE_ROWS" (click)="selectedProfilesService.toggle(profile)"></tr>
 			</table>
 		</div>
 	</ng-container>

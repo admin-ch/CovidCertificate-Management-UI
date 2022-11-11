@@ -16,8 +16,7 @@ export class DeliveryCodeValidatorValidators {
 			const n = DeliveryCodeValidatorValidators.numberOfValidInputCharacters();
 
 			for (let i = appDeliveryCode.length - 1; i >= 0; i--) {
-				const addend =
-					factor * DeliveryCodeValidatorValidators.codePointFromCharacter(appDeliveryCode.charAt(i));
+				const addend = factor * DeliveryCodeValidatorValidators.codePointFromCharacter(appDeliveryCode.charAt(i));
 				factor = factor === 2 ? 1 : 2;
 				sum += Math.floor(addend / n) + (addend % n);
 			}

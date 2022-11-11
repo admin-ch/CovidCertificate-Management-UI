@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RecoveryFormComponent} from './recovery-form.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -11,7 +11,7 @@ import {ValueSetsService} from '../utils/value-sets.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 describe('RecoveryFormComponent', () => {
 	let component: RecoveryFormComponent;
@@ -25,21 +25,16 @@ describe('RecoveryFormComponent', () => {
 
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}, {code: 'DE', display: 'TEST-DE'}])
+		getCountryOptions: jest.fn().mockReturnValue([
+			{code: 'CH', display: 'TEST-CH'},
+			{code: 'DE', display: 'TEST-DE'}
+		])
 	};
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [RecoveryFormComponent, DateTimePickerComponent, PersonalDataComponent],
-			imports: [
-				NoopAnimationsModule,
-				ObliqueTestingModule,
-				ObNestedFormModule,
-				ReactiveFormsModule,
-				MatSelectModule,
-				MatFormFieldModule,
-				MatInputModule
-			],
+			imports: [NoopAnimationsModule, ObliqueTestingModule, ObNestedFormModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 			providers: [
 				{
 					provide: ValueSetsService,
@@ -96,14 +91,14 @@ describe('RecoveryFormComponent', () => {
 			});
 
 			it('should mark the dateFirstPositiveTestResult as invalid if set before birthdate', () => {
-				const dateAhead = moment(datePast).clone().add({days: 1})
-				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				const dateAhead = moment(datePast).clone().add({days: 1});
+				component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue({date: dateAhead.toDate(), time: timeNoon});
 				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeTruthy();
 			});
 
 			it('should mark the dateFirstPositiveTestResult as valid if set after/equal birthdate', () => {
-				component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+				component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue(datePast);
 				component.recoveryForm.get('dateFirstPositiveTestResult').setValue({date: datePast, time: timeNoon});
 				expect(component.recoveryForm.get('dateFirstPositiveTestResult').invalid).toBeFalsy();
 			});
@@ -192,25 +187,25 @@ describe('RecoveryFormComponent', () => {
 
 	describe('Form reset', () => {
 		it('should reset the firstName correctly', () => {
-			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.firstName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
 		});
 
 		it('should reset the surName correctly', () => {
-			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.surName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
 		});
 
 		it('should reset the birthdate correctly', () => {
-			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
 		});
 
 		it('should reset the certificateLanguage correctly', () => {
-			component.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			component.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.certificateLanguage`).setValue({display: 'TEST', code: 'lang'});
 			creationDataService.emitResetCalled();
 			expect(component.recoveryForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
 		});

@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ConfirmDeleteComponent } from "./confirm-delete.component";
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import {ConfirmDeleteComponent} from './confirm-delete.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-describe("ConfirmDeleteComponent", () => {
+describe('ConfirmDeleteComponent', () => {
 	let component: ConfirmDeleteComponent;
 	let fixture: ComponentFixture<ConfirmDeleteComponent>;
 
@@ -14,8 +14,7 @@ describe("ConfirmDeleteComponent", () => {
 			declarations: [ConfirmDeleteComponent],
 			providers: [],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	});
 
 	beforeEach(() => {
@@ -24,7 +23,7 @@ describe("ConfirmDeleteComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });

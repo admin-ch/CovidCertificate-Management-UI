@@ -13,19 +13,11 @@
 				{{ "certificateCreate.step-one.enum.antibody" | translate }}
 			</div>
 		</legend>
-		<label *ngIf="antibody" class="additional-padding additional-width">{{
-			"certificateCreate.from.label.antibody" | translate
-		}}</label>
+		<label *ngIf="antibody" class="additional-padding additional-width">{{ "certificateCreate.from.label.antibody" | translate }}</label>
 
 		<div class="form-field">
-			<div
-				*ngIf="!antibody && !rapid"
-				class="radio-button-field"
-				[ngClass]="{ 'additional-padding': !displayTestProducts }"
-			>
-				<label class="radio-button-field--label">{{
-					"certificateCreate.form.label.test.typeOfTest" | translate
-				}}</label>
+			<div *ngIf="!antibody && !rapid" class="radio-button-field" [ngClass]="{ 'additional-padding': !displayTestProducts }">
+				<label class="radio-button-field--label">{{ "certificateCreate.form.label.test.typeOfTest" | translate }}</label>
 				<div>
 					<mat-radio-group id="typeOfTest" [value]="testType" (change)="certificateTypeChanged($event)">
 						<mat-radio-button
@@ -42,42 +34,21 @@
 
 			<mat-form-field class="mat-form-field-lg" obErrorMessages *ngIf="displayTestProducts && !rapid">
 				<mat-label>{{ "certificateCreate.form.label.test.manufacturerAndName" | translate }}</mat-label>
-				<input
-					type="text"
-					matInput
-					id="manufacturer"
-					[formControl]="rapidTestCompleteControl"
-					[matAutocomplete]="auto"
-					#rapidTestAutocomplete
-				/>
-				<button
-					type="button"
-					role="button"
-					[obInputClear]="rapidTestCompleteControl"
-					(onClear)="onRapidTestCompleteClear()"
-					class="clear-buton"
-				>
+				<input type="text" matInput id="manufacturer" [formControl]="rapidTestCompleteControl" [matAutocomplete]="auto" #rapidTestAutocomplete />
+				<button type="button" role="button" [obInputClear]="rapidTestCompleteControl" (onClear)="onRapidTestCompleteClear()" class="clear-buton">
 					<mat-icon svgIcon="cancel-circle" class="ob-icon clear-icon"></mat-icon>
 					<span class="sr-only">{{ "i18n.common.clear" | translate }}</span>
 				</button>
 				<mat-error></mat-error>
 				<mat-autocomplete #auto="matAutocomplete" panelWidth="max-content">
-					<mat-option
-						*ngFor="let option of filteredRapidTests"
-						[value]="option"
-						[ngStyle]="{ color: option.validUntil ? 'red' : 'black' }"
-					>
+					<mat-option *ngFor="let option of filteredRapidTests" [value]="option" [ngStyle]="{ color: option.validUntil ? 'red' : 'black' }">
 						{{ option.display }}
 					</mat-option>
 				</mat-autocomplete>
 			</mat-form-field>
 
 			<p id="gracePeriodMessage" *ngIf="this.testForm.get('product').value?.validUntil">
-				{{
-					"gracePeriodMessage"
-						| obTranslateParams
-							: { validUntil: this.testForm.get("product").value?.validUntil | date: "YYYY-MM-dd" }
-				}}
+				{{ "gracePeriodMessage" | obTranslateParams: { validUntil: this.testForm.get("product").value?.validUntil | date: "YYYY-MM-dd" } }}
 			</p>
 
 			<p class="form-field-info">
@@ -98,21 +69,11 @@
 			</ob-nested-form>
 
 			<p *ngIf="!rapid" class="form-field-info">
-				{{
-					(antibody
-						? "certificateCreate.form.label.test.center.numberInfo"
-						: "certificateCreate.form.label.test.center.info"
-					) | translate
-				}}
+				{{ (antibody ? "certificateCreate.form.label.test.center.numberInfo" : "certificateCreate.form.label.test.center.info") | translate }}
 			</p>
 
 			<mat-form-field *ngIf="!rapid" obErrorMessages class="mat-form-field-lg">
-				<mat-label>{{
-					(antibody
-						? "certificateCreate.form.label.test.center.number"
-						: "certificateCreate.form.label.test.center"
-					) | translate
-				}}</mat-label>
+				<mat-label>{{ (antibody ? "certificateCreate.form.label.test.center.number" : "certificateCreate.form.label.test.center") | translate }}</mat-label>
 				<input type="text" matInput formControlName="center" id="center" />
 				<mat-error></mat-error>
 			</mat-form-field>

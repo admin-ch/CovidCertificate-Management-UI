@@ -6,7 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
 import {DateTimePickerComponent} from '../../date-time-picker/date-time-picker.component';
 import {CreationDataService} from '../../utils/creation-data.service';
 import {PersonalDataComponent} from './personal-data.component';
@@ -39,10 +39,7 @@ describe('PersonalDataComponent', () => {
 				MatInputModule,
 				MatAutocompleteModule
 			],
-			providers: [
-				FormGroupDirective,
-				{provide: FormGroupDirective, useValue: formGroupDirective}
-			],
+			providers: [FormGroupDirective, {provide: FormGroupDirective, useValue: formGroupDirective}],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
 	});

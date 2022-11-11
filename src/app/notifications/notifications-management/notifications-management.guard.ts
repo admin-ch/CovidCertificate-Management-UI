@@ -1,33 +1,24 @@
-import { Injectable } from "@angular/core";
-import {
-	ActivatedRouteSnapshot,
-	CanActivate,
-	CanActivateChild,
-	CanLoad,
-	Route,
-	RouterStateSnapshot,
-	UrlSegment
-} from "@angular/router";
-import { Observable } from "rxjs";
-import { AuthFunction } from "../../auth/auth.service";
-import { BaseGuard } from "shared/base.guard";
+import {Injectable} from '@angular/core';
+import {CanActivate, CanActivateChild, CanLoad} from '@angular/router';
+import {Observable} from 'rxjs';
+import {AuthFunction} from '../../auth/auth.service';
+import {BaseGuard} from 'shared/base.guard';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class NotificationsManagementGuard implements CanActivate, CanActivateChild, CanLoad {
-	constructor(private readonly baseGuard: BaseGuard) {
-	}
+	constructor(private readonly baseGuard: BaseGuard) {}
 
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+	canActivate(): Observable<boolean> {
 		return this.baseGuard.checkExpectedRole(AuthFunction.NOTIFICATION_MANAGEMENT);
 	}
 
-	canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+	canActivateChild(): Observable<boolean> {
 		return this.baseGuard.checkExpectedRole(AuthFunction.NOTIFICATION_MANAGEMENT);
 	}
 
-	canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
+	canLoad(): Observable<boolean> {
 		return this.baseGuard.checkExpectedRole(AuthFunction.NOTIFICATION_MANAGEMENT);
 	}
 }

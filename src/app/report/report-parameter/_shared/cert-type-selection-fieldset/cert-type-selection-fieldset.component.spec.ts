@@ -1,6 +1,6 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
-import {CertificateType, CertTypeSelectionFieldsetComponent} from './cert-type-selection-fieldset.component';
+import {CertTypeSelectionFieldsetComponent, CertificateType} from './cert-type-selection-fieldset.component';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
@@ -44,11 +44,7 @@ describe('CertTypeSelectionFieldsetComponent', () => {
 			component.certTypesFormArray.insert(1, new FormControl(CertificateType.RR));
 			component.certTypeCheckboxChanged(true, CertificateType.ME);
 
-			expect(component.certTypesFormArray.value).toEqual([
-				CertificateType.A,
-				CertificateType.RR,
-				CertificateType.ME
-			]);
+			expect(component.certTypesFormArray.value).toEqual([CertificateType.A, CertificateType.RR, CertificateType.ME]);
 		});
 		it('should should remove passed certificate from the formGroup if checked is false', () => {
 			component.certTypesFormArray.insert(0, new FormControl(CertificateType.A));

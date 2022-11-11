@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {SelectedProfilesComponent} from './selected-profiles.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
@@ -61,7 +61,6 @@ describe('SelectedUnitsComponent', () => {
 			expect(clear).toHaveBeenCalled();
 		}));
 		it('should populate formArray', fakeAsync(() => {
-			const clear = jest.spyOn(component.userIdsFormArray, 'clear');
 			// @ts-ignore
 			selectedProfilesService.changes.next([
 				// @ts-ignore

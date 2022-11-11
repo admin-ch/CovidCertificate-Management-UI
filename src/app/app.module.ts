@@ -10,16 +10,16 @@ import localeITCH from '@angular/common/locales/it-CH';
 import localeENGB from '@angular/common/locales/en-GB';
 import {TranslateModule} from '@ngx-translate/core';
 import {
-	multiTranslateLoader,
+	OB_BANNER,
 	ObDocumentMetaService,
+	ObDropdownModule,
 	ObHttpApiInterceptor,
 	ObHttpApiInterceptorConfig,
+	ObIconModule,
 	ObMasterLayoutConfig,
 	ObMasterLayoutModule,
 	ObOffCanvasModule,
-	ObIconModule,
-	OB_BANNER,
-	ObDropdownModule
+	multiTranslateLoader
 } from '@oblique/oblique';
 import {AuthModule, OidcConfigService} from 'angular-auth-oidc-client';
 import {ObLanguageService} from 'shared/language.service';
@@ -33,7 +33,7 @@ import {environment} from '../environments/environment';
 import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
 
 export const loadConfig =
-	(oidcConfigService: OidcConfigService, openIdConfigService: OpenIdConfigService): (() => Promise<any>) =>
+	(oidcConfigService: OidcConfigService, openIdConfigService: OpenIdConfigService): (() => Promise<unknown>) =>
 	() =>
 		oidcConfigService.withConfig(openIdConfigService.config);
 

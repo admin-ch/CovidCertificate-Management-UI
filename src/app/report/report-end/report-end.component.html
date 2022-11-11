@@ -25,13 +25,7 @@
 </ng-container>
 <div class="stepper-footer">
 	<section class="stepper-footer-content">
-		<button
-			id="report-generate-next"
-			mat-button
-			(click)="stepper.steps.get(0).select()"
-			obButton="primary"
-			class="right"
-		>
+		<button id="report-generate-next" mat-button (click)="stepper.steps.get(0).select()" obButton="primary" class="right">
 			{{ "reports.generate.new" | translate }}
 		</button>
 	</section>

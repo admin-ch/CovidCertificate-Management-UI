@@ -58,17 +58,15 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	}
 
 	private callRevocation(): void {
-		this.revocationService
-			.revoke({uvci: this.uvciUsed, fraud: this.isFraud, systemSource: 'WebUI'})
-			.subscribe(response => {
-				if (response?.status === RevocationStatus.OK) {
-					this.previouslyRevoked = false;
-					this.revoked = true;
-				} else {
-					this.revoked = false;
-					this.previouslyRevoked = true;
-					this.revocationDate = response?.revocationDateTime;
-				}
-			});
+		this.revocationService.revoke({uvci: this.uvciUsed, fraud: this.isFraud, systemSource: 'WebUI'}).subscribe(response => {
+			if (response?.status === RevocationStatus.OK) {
+				this.previouslyRevoked = false;
+				this.revoked = true;
+			} else {
+				this.revoked = false;
+				this.previouslyRevoked = true;
+				this.revocationDate = response?.revocationDateTime;
+			}
+		});
 	}
 }

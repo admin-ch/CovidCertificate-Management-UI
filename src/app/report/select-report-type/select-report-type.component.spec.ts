@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {SelectReportTypeComponent} from './select-report-type.component';

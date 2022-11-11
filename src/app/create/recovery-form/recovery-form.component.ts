@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {DateValidators} from '../utils/date-validators';
@@ -21,8 +21,8 @@ const FIRST_POSITIVE_TEST_VALIDATORS = [
 	styleUrls: ['./recovery-form.component.scss']
 })
 export class RecoveryFormComponent implements OnInit, AfterViewInit {
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('recoveryPersonalDataComponent') personalDataChild: PersonalDataComponent;
@@ -44,7 +44,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
-		this.translateService.onLangChange.subscribe(_ => {
+		this.translateService.onLangChange.subscribe(() => {
 			this.recoveryForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage(),
 				countryOfTest: this.getDefaultCountryOfRecovery()
@@ -54,14 +54,14 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		// revalidate the 'dateOfVaccination' field when birthdate is change
-		this.recoveryForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+		this.recoveryForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).valueChanges.subscribe(() => {
 			// timeout is needed to ensure that the validator gets called after the field contains the new value
 			setTimeout(() => {
 				const control = this.recoveryForm.get('dateFirstPositiveTestResult');
 				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
 				// will contain an object-path for subfield of the ec-datetimepicker
-				control.patchValue(control.value)
-			})
+				control.patchValue(control.value);
+			});
 		});
 	}
 
@@ -70,10 +70,7 @@ export class RecoveryFormComponent implements OnInit, AfterViewInit {
 	}
 
 	goNext(): void {
-		if (
-			this.recoveryForm.controls.countryOfTest.value &&
-			this.recoveryForm.controls.countryOfTest.value.code !== 'CH'
-		) {
+		if (this.recoveryForm.controls.countryOfTest.value && this.recoveryForm.controls.countryOfTest.value.code !== 'CH') {
 			this.recoveryForm.markAllAsTouched();
 		}
 

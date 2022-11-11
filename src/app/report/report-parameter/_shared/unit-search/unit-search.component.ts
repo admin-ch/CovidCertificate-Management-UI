@@ -44,18 +44,15 @@ export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 		private readonly reportService: ReportService,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
 	) {
-		this.UNIT_TREE_URL = REPORT_HOST + '/api/v2/report/unit/tree';
+		this.UNIT_TREE_URL = `${REPORT_HOST}/api/v2/report/unit/tree`;
 	}
 
 	ngOnInit() {
-		this.subscription = this.reportService.reset$.subscribe(_ => this.treeControl.collapseAll());
+		this.subscription = this.reportService.reset$.subscribe(() => this.treeControl.collapseAll());
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (
-			(changes.authority.firstChange || changes.authority.currentValue !== changes.authority.previousValue) &&
-			!!changes.authority.currentValue
-		) {
+		if ((changes.authority.firstChange || changes.authority.currentValue !== changes.authority.previousValue) && !!changes.authority.currentValue) {
 			this.isUnitTreeLoading = true;
 			this.http
 				.post(this.UNIT_TREE_URL, {
@@ -98,7 +95,7 @@ export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 
 		// Set all nodes and their ascendants to hidden where search does not match.
 		unitTrees
-			.filter(unitTree => unitTree.name.toLowerCase().indexOf(this.organisationSearchValue.toLowerCase()) === -1)
+			.filter(unitTree => !unitTree.name.toLowerCase().includes(this.organisationSearchValue.toLowerCase()))
 			.forEach(unitTree => {
 				if (unitTree.hidden === undefined) {
 					unitTree.hidden = true;
@@ -108,7 +105,7 @@ export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 
 		// Set all nodes, their ascendants and descendants to not hidden where search does match.
 		unitTrees
-			.filter(unitTree => unitTree.name.toLowerCase().indexOf(this.organisationSearchValue.toLowerCase()) > -1)
+			.filter(unitTree => unitTree.name.toLowerCase().includes(this.organisationSearchValue.toLowerCase()))
 			.forEach(unitTree => {
 				unitTree.hidden = false;
 				this.setHiddenOfAncestorsOf(unitTree, unitTree.hidden);
@@ -137,7 +134,7 @@ export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 
 	private setHiddenOfAncestorsOf(unitTree: UnitTree, hidden: boolean) {
 		if (unitTree.parent) {
-			if (unitTree.parent.hidden === undefined || unitTree.parent.hidden === true) {
+			if (unitTree.parent.hidden === undefined || unitTree.parent.hidden) {
 				unitTree.parent.hidden = hidden;
 				if (!hidden) {
 					this.treeControl.expand(unitTree.parent);

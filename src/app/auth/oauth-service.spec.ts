@@ -1,4 +1,4 @@
-import {fakeAsync, TestBed} from '@angular/core/testing';
+import {TestBed, fakeAsync} from '@angular/core/testing';
 import {EMPTY, of} from 'rxjs';
 import {skip} from 'rxjs/operators';
 import {LoggerService, OidcSecurityService} from 'angular-auth-oidc-client';

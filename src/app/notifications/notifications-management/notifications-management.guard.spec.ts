@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AuthFunction} from '../../auth/auth.service';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {BaseGuard} from 'shared/base.guard';
-import { NotificationsManagementGuard } from "./notifications-management.guard";
+import {NotificationsManagementGuard} from './notifications-management.guard';
 
 describe('NotificationsManagementGuard', () => {
 	let service: NotificationsManagementGuard;

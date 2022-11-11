@@ -5,12 +5,7 @@ export class DosesValidators {
 		const doseNumber: AbstractControl = form.get('doseNumber');
 		const totalDoses: AbstractControl = form.get('totalDoses');
 
-		if (
-			!doseNumber ||
-			!totalDoses ||
-			doseNumber.value <= totalDoses.value ||
-			(doseNumber.value > totalDoses.value && totalDoses.value === 1)
-		) {
+		if (!doseNumber || !totalDoses || doseNumber.value <= totalDoses.value || (doseNumber.value > totalDoses.value && totalDoses.value === 1)) {
 			if (doseNumber.errors) {
 				delete doseNumber.errors[Object.keys({dosesNotValid: true})[0]];
 				if (Object.keys(doseNumber.errors).length === 0) {

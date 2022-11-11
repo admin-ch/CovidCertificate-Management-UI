@@ -1,7 +1,7 @@
-<h4>{{('notificationsManagement.title.' + (type === 'EDIT' ? 'edit' : 'create')) | translate}}</h4>
+<h4>{{ "notificationsManagement.title." + (type === "EDIT" ? "edit" : "create") | translate }}</h4>
 <form [formGroup]="formGroup">
 	<fieldset>
-		<legend>{{ 'notificationsManagement.period' | translate }}</legend>
+		<legend>{{ "notificationsManagement.period" | translate }}</legend>
 		<div class="period-container">
 			<mat-form-field obErrorMessages>
 				<input
@@ -17,8 +17,7 @@
 					{{ "i18n.validation.date" | translate }}
 				</mat-error>
 				<ng-template #startBeforeEndFrom>
-					<mat-error
-						*ngIf="formGroup.get('startDate').hasError('startDateAfterEndDate'); else matErrorTmpl">
+					<mat-error *ngIf="formGroup.get('startDate').hasError('startDateAfterEndDate'); else matErrorTmpl">
 						{{ "notificationsManagement.startDateBeforeEndDate" | translate }}
 					</mat-error>
 					<ng-template #matErrorTmpl>
@@ -30,7 +29,6 @@
 				<input type="time" matInput formControlName="startTime" />
 				<mat-error></mat-error>
 			</mat-form-field>
-
 		</div>
 		<div class="period-container">
 			<mat-form-field obErrorMessages>
@@ -57,29 +55,29 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend>{{ 'notificationsManagement.notification.type' | translate }}</legend>
+		<legend>{{ "notificationsManagement.notification.type" | translate }}</legend>
 		<mat-form-field obErrorMessages>
-			<mat-label>{{ 'notificationsManagement.notification.type' | translate }}</mat-label>
+			<mat-label>{{ "notificationsManagement.notification.type" | translate }}</mat-label>
 			<mat-select formControlName="type">
 				<mat-option value="INFO">
-					{{ 'notificationsManagement.notification.type.info' | translate }}
+					{{ "notificationsManagement.notification.type.info" | translate }}
 				</mat-option>
 				<mat-option value="WARNING">
-					{{ 'notificationsManagement.notification.type.warning' | translate }}
+					{{ "notificationsManagement.notification.type.warning" | translate }}
 				</mat-option>
 			</mat-select>
 			<mat-error></mat-error>
 		</mat-form-field>
 	</fieldset>
 	<mat-checkbox class="is-closable-checkbox" formControlName="isClosable">
-		<span>{{ 'notificationsManagement.notification.isClosable' | translate }}</span>
+		<span>{{ "notificationsManagement.notification.isClosable" | translate }}</span>
 	</mat-checkbox>
 	<fieldset>
-		<legend>{{ 'notificationsManagement.notification.content' | translate }}</legend>
+		<legend>{{ "notificationsManagement.notification.content" | translate }}</legend>
 		<div class="content-container">
 			<ng-container *ngFor="let lang of translate.langs">
 				<mat-form-field obErrorMessages>
-					<mat-label>{{ ('notificationsManagement.notification.content.' + lang) | translate }}</mat-label>
+					<mat-label>{{ "notificationsManagement.notification.content." + lang | translate }}</mat-label>
 					<textarea matInput [formControlName]="'content_' + lang"></textarea>
 					<mat-error></mat-error>
 				</mat-form-field>
@@ -89,8 +87,7 @@
 </form>
 <button mat-button obButton="primary" type="button" [disabled]="isLoading" (click)="save()">
 	<div class="save-button">
-		{{'notificationsManagement.save' | translate}}
+		{{ "notificationsManagement.save" | translate }}
 		<mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
 	</div>
 </button>
-

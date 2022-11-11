@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {UnitSearchComponent, UnitTree} from './unit-search.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
@@ -9,7 +9,7 @@ import {SelectedProfilesService} from '../selected-profiles.service';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatTableModule} from '@angular/material/table';
 import {HttpClient} from '@angular/common/http';
-import {of, Subject} from 'rxjs';
+import {Subject, of} from 'rxjs';
 import {FormArray} from '@angular/forms';
 import {ReportService} from '../../../report.service';
 
@@ -18,18 +18,10 @@ describe('UnitSearchComponent', () => {
 	let fixture: ComponentFixture<UnitSearchComponent>;
 	let http: HttpClient;
 	let translateService: TranslateService;
-	let selectedProfilesService: SelectedProfilesService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				ObliqueTestingModule,
-				TranslateModule,
-				HttpClientTestingModule,
-				TranslateModule.forRoot(),
-				MatTableModule,
-				MatTreeModule
-			],
+			imports: [ObliqueTestingModule, TranslateModule, HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule, MatTreeModule],
 			declarations: [UnitSearchComponent],
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},
@@ -51,7 +43,6 @@ describe('UnitSearchComponent', () => {
 
 		http = TestBed.inject(HttpClient);
 		translateService = TestBed.inject(TranslateService);
-		selectedProfilesService = TestBed.inject(SelectedProfilesService);
 
 		component.userIdsFormArray = new FormArray([]);
 
@@ -159,6 +150,7 @@ describe('UnitSearchComponent', () => {
 
 				const expectCorrectParents = (unitTree: UnitTree, expectedParent: UnitTree) => {
 					expect(unitTree.parent).toBe(expectedParent);
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
 					unitTree.children.forEach(child => expectCorrectParents(child, unitTree));
 				};
 			}));
@@ -861,17 +853,14 @@ describe('UnitSearchComponent', () => {
 				// searchValue
 				''
 			]
-		])(
-			'should set treeDataSource.data to %o if fullUnitTree is %o and searchValue is "%s"',
-			(expected, unitTree, searchValue) => {
-				// @ts-ignore
-				component.setUnitTreeParents(unitTree, null);
-				component.organisationSearchValue = searchValue;
+		])('should set treeDataSource.data to %o if fullUnitTree is %o and searchValue is "%s"', (expected, unitTree, searchValue) => {
+			// @ts-ignore
+			component.setUnitTreeParents(unitTree, null);
+			component.organisationSearchValue = searchValue;
 
-				component.setHiddenBySearchValue(unitTree.children);
+			component.setHiddenBySearchValue(unitTree.children);
 
-				expect(unitTree.children).toEqual(expected);
-			}
-		);
+			expect(unitTree.children).toEqual(expected);
+		});
 	});
 });

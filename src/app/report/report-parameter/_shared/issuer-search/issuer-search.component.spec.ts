@@ -1,7 +1,7 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {IssuerSearchComponent} from './issuer-search.component';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {SelectedProfilesService} from '../selected-profiles.service';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
@@ -11,25 +11,12 @@ import {HttpClient} from '@angular/common/http';
 import {FormArray} from '@angular/forms';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {of, Subject} from 'rxjs';
+import {of} from 'rxjs';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-
-class MatPaginatorStub {
-	page = new Subject();
-}
-
-class MatSortStub {
-	sortChange = new Subject();
-	active = true;
-	sort = 'asc';
-}
-
 describe('IssuerSearchComponent', () => {
 	let component: IssuerSearchComponent;
 	let fixture: ComponentFixture<IssuerSearchComponent>;
 	let http: HttpClient;
-	let translateService: TranslateService;
-	let selectedProfilesService: SelectedProfilesService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -56,8 +43,6 @@ describe('IssuerSearchComponent', () => {
 		component = fixture.componentInstance;
 
 		http = TestBed.inject(HttpClient);
-		translateService = TestBed.inject(TranslateService);
-		selectedProfilesService = TestBed.inject(SelectedProfilesService);
 
 		component.userIdsFormArray = new FormArray([]);
 

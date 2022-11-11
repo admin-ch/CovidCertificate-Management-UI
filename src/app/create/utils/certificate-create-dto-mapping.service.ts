@@ -133,9 +133,9 @@ export class CertificateCreateDtoMappingService {
 			return (norm < 10 ? '0' : '') + norm;
 		};
 
-		return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(
-			date.getMinutes()
-		)}:00.000${dif}${pad(tzo / 60)}:${pad(tzo % 60)}`;
+		return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00.000${dif}${pad(
+			tzo / 60
+		)}:${pad(tzo % 60)}`;
 	}
 
 	private toJSONDateString(date: Date | string): string {

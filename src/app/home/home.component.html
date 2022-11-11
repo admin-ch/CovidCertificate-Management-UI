@@ -20,20 +20,13 @@
 		<p>{{ "home.more" | translate }}</p>
 		<ul class="links">
 			<li>
-				<a
-					[href]="'https://www.eiam.admin.ch/index.php?c=f!supportggg!pub&l=' + lang"
-					target="_blank"
-					rel="noopener noreferrer"
-					id="support_link"
-				>
-					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-					>{{ "home.support" | translate }}
+				<a [href]="'https://www.eiam.admin.ch/index.php?c=f!supportggg!pub&l=' + lang" target="_blank" rel="noopener noreferrer" id="support_link">
+					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span>{{ "home.support" | translate }}
 				</a>
 			</li>
 			<li>
 				<a href="{{ 'home.faq.url' | translate }}" target="_blank" rel="noopener noreferrer" id="faq_link">
-					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-					>{{ "home.faq" | translate }}
+					<span class="icon-link"><span class="fas fa-external-link-alt"></span></span>{{ "home.faq" | translate }}
 				</a>
 			</li>
 		</ul>

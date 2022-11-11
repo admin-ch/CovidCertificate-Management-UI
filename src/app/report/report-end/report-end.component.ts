@@ -11,8 +11,5 @@ import {MatStepper} from '@angular/material/stepper';
 export class ReportEndComponent {
 	GenerationResponseStatus = GenerationResponseStatus;
 
-	constructor(
-		@Inject(MatStepper) public readonly stepper: MatStepper,
-		public readonly reportService: ReportService
-	) {}
+	constructor(@Inject(MatStepper) public readonly stepper: MatStepper, public readonly reportService: ReportService) {}
 }

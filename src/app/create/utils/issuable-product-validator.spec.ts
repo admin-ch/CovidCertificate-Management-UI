@@ -31,11 +31,8 @@ describe('IssuableProductValidator', () => {
 					countryOfVaccination: new FormControl(productInfo)
 				});
 
-				const isNotIssuableInSwitzerland =
-					productInfoWithGroup.issuable === 'ABROAD_ONLY' && productInfo.code === 'CH';
-				expect(IssuableProductValidator.validateProduct(testGroup)).toEqual(
-					isNotIssuableInSwitzerland ? {notIssuableInSwitzerland: true} : null
-				);
+				const isNotIssuableInSwitzerland = productInfoWithGroup.issuable === 'ABROAD_ONLY' && productInfo.code === 'CH';
+				expect(IssuableProductValidator.validateProduct(testGroup)).toEqual(isNotIssuableInSwitzerland ? {notIssuableInSwitzerland: true} : null);
 			});
 		});
 	});

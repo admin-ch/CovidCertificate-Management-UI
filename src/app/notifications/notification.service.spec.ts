@@ -1,4 +1,4 @@
-import {fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {TestBed, fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as rxjs from 'rxjs';
@@ -193,23 +193,18 @@ describe('NotificationService', () => {
 				]
 			])(
 				'should emit %s notifications for %o}',
-				fakeAsync(
-					(
-						expectedNotificationLength: number,
-						notifications: {startTime: string; endTime: string; shouldShow: boolean}[]
-					) => {
-						JSON.parse = jest.fn(() => notifications);
-						service.fetchNotifications();
+				fakeAsync((expectedNotificationLength: number, notifications: {startTime: string; endTime: string; shouldShow: boolean}[]) => {
+					JSON.parse = jest.fn(() => notifications);
+					service.fetchNotifications();
 
-						service.nonClosableNotifications$.subscribe(notificationsUnderTest => {
-							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
-							// @ts-ignore
-							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
-						});
+					service.nonClosableNotifications$.subscribe(notificationsUnderTest => {
+						expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
+						// @ts-ignore
+						expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
+					});
 
-						tick();
-					}
-				)
+					tick();
+				})
 			);
 		});
 
@@ -233,10 +228,7 @@ describe('NotificationService', () => {
 
 				service.fetchNotifications();
 
-				expect(localStorage.setItem).toHaveBeenLastCalledWith(
-					'ecClosableNotificationsShown',
-					JSON.stringify(expected)
-				);
+				expect(localStorage.setItem).toHaveBeenLastCalledWith('ecClosableNotificationsShown', JSON.stringify(expected));
 			});
 
 			it('should set localStorage item from ETag header', () => {
@@ -295,26 +287,21 @@ describe('NotificationService', () => {
 				]
 			])(
 				'should emit %s notifications for %o',
-				fakeAsync(
-					(
-						expectedNotificationLength: number,
-						notifications: {startTime: string; endTime: string; shouldShow: boolean}[]
-					) => {
-						JSON.parse = jest
-							.fn()
-							.mockReturnValueOnce(notifications)
-							.mockReturnValueOnce([...notifications.map(_ => false)]);
+				fakeAsync((expectedNotificationLength: number, notifications: {startTime: string; endTime: string; shouldShow: boolean}[]) => {
+					JSON.parse = jest
+						.fn()
+						.mockReturnValueOnce(notifications)
+						.mockReturnValueOnce([...notifications.map(() => false)]);
 
-						service.closableNotifications$.subscribe(notificationsUnderTest => {
-							expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
-							// @ts-ignore
-							expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
-						});
+					service.closableNotifications$.subscribe(notificationsUnderTest => {
+						expect(notificationsUnderTest.length).toBe(expectedNotificationLength);
+						// @ts-ignore
+						expect(notificationsUnderTest.every(n => n.shouldShow === true)).toBe(true);
+					});
 
-						service.fetchNotifications();
-						tick();
-					}
-				)
+					service.fetchNotifications();
+					tick();
+				})
 			);
 		});
 	});

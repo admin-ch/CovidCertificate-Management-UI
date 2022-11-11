@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from '@angular/forms';
+import {NgForm, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
-import {Subscription} from 'rxjs';
 
 @Component({
 	selector: 'ec-report-a7',

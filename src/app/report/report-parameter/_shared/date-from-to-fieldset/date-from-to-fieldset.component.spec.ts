@@ -4,7 +4,7 @@ import {DateFromToFieldsetComponent} from './date-from-to-fieldset.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ReportService} from '../../../report.service';

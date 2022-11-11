@@ -191,14 +191,12 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1736',
-				display:
-					'Anhui Deep Blue Medical Technology Co., Ltd, COVID-19 (SARS-CoV-2) Antigen Test Kit(Colloidal Gold)',
+				display: 'Anhui Deep Blue Medical Technology Co., Ltd, COVID-19 (SARS-CoV-2) Antigen Test Kit(Colloidal Gold)',
 				validUntil: null
 			},
 			{
 				code: '1815',
-				display:
-					'Anhui Deep Blue Medical Technology Co., Ltd, COVID-19 (SARS-CoV-2) Antigen Test Kit (Colloidal Gold) - Nasal Swab',
+				display: 'Anhui Deep Blue Medical Technology Co., Ltd, COVID-19 (SARS-CoV-2) Antigen Test Kit (Colloidal Gold) - Nasal Swab',
 				validUntil: null
 			},
 			{
@@ -238,8 +236,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '2010',
-				display:
-					'Atlas Link Technology Co., Ltd., NOVA Test® SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold Immunochromatography)',
+				display: 'Atlas Link Technology Co., Ltd., NOVA Test® SARS-CoV-2 Antigen Rapid Test Kit (Colloidal Gold Immunochromatography)',
 				validUntil: null
 			},
 			{
@@ -269,8 +266,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '2072',
-				display:
-					'Beijing Jinwofu Bioengineering Technology Co.,Ltd., Novel Coronavirus (SARS-CoV-2) Antigen Rapid Test Kit',
+				display: 'Beijing Jinwofu Bioengineering Technology Co.,Ltd., Novel Coronavirus (SARS-CoV-2) Antigen Rapid Test Kit',
 				validUntil: null
 			},
 			{
@@ -280,14 +276,12 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1485',
-				display:
-					'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, WANTAI SARS-CoV-2 Ag Rapid Test (Colloidal Gold)',
+				display: 'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, WANTAI SARS-CoV-2 Ag Rapid Test (Colloidal Gold)',
 				validUntil: null
 			},
 			{
 				code: '1484',
-				display:
-					'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, Wantai SARS-CoV-2 Ag Rapid Test (FIA)',
+				display: 'Beijing Wantai Biological Pharmacy Enterprise Co., Ltd, Wantai SARS-CoV-2 Ag Rapid Test (FIA)',
 				validUntil: null
 			},
 			{
@@ -297,8 +291,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1286',
-				display:
-					'BIOHIT HealthCare (Hefei) Co., Ltd, SARS-CoV-2 Antigen Rapid Test Kit (Fluorescence Immunochromatography)',
+				display: 'BIOHIT HealthCare (Hefei) Co., Ltd, SARS-CoV-2 Antigen Rapid Test Kit (Fluorescence Immunochromatography)',
 				validUntil: null
 			},
 			{
@@ -318,8 +311,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '2031',
-				display:
-					'Bio-Rad Laboratories / Zhejiang Orient Gene Biotech, Coronavirus Ag Rapid Test Cassette (Swab)',
+				display: 'Bio-Rad Laboratories / Zhejiang Orient Gene Biotech, Coronavirus Ag Rapid Test Cassette (Swab)',
 				validUntil: null
 			},
 			{
@@ -454,8 +446,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1324',
-				display:
-					'Guangzhou Decheng Biotechnology Co., LTD, V-CHEK, 2019-nCoV Ag Rapid Test Kit (Immunochromatography)',
+				display: 'Guangzhou Decheng Biotechnology Co., LTD, V-CHEK, 2019-nCoV Ag Rapid Test Kit (Immunochromatography)',
 				validUntil: null
 			},
 			{
@@ -485,8 +476,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1844',
-				display:
-					'Hangzhou Immuno Biotech Co.,Ltd, Immunobio SARS-CoV-2 Antigen ANTERIOR NASAL Rapid Test Kit (minimal invasive)',
+				display: 'Hangzhou Immuno Biotech Co.,Ltd, Immunobio SARS-CoV-2 Antigen ANTERIOR NASAL Rapid Test Kit (minimal invasive)',
 				validUntil: null
 			},
 			{
@@ -496,8 +486,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1215',
-				display:
-					'Hangzhou Laihe Biotech Co., Ltd, LYHER Novel Coronavirus (COVID-19) Antigen Test Kit(Colloidal Gold)',
+				display: 'Hangzhou Laihe Biotech Co., Ltd, LYHER Novel Coronavirus (COVID-19) Antigen Test Kit(Colloidal Gold)',
 				validUntil: null
 			},
 			{
@@ -527,14 +516,12 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '2107',
-				display:
-					'Jiangsu Bioperfectus Technologies Co., Ltd., Novel Corona Virus (SARS-CoV-2) Ag Rapid Test Kit',
+				display: 'Jiangsu Bioperfectus Technologies Co., Ltd., Novel Corona Virus (SARS-CoV-2) Ag Rapid Test Kit',
 				validUntil: null
 			},
 			{
 				code: '1920',
-				display:
-					'Jiangsu Diagnostics Biotechnology Co.,Ltd., COVID-19 Antigen Rapid Test Cassette (Colloidal Gold)',
+				display: 'Jiangsu Diagnostics Biotechnology Co.,Ltd., COVID-19 Antigen Rapid Test Cassette (Colloidal Gold)',
 				validUntil: null
 			},
 			{
@@ -649,8 +636,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '2116',
-				display:
-					'PerGrande BioTech Development Co., Ltd., SARS-CoV-2 Antigen Detection Kit (Colloidal Gold Immunochromatographic Assay)',
+				display: 'PerGrande BioTech Development Co., Ltd., SARS-CoV-2 Antigen Detection Kit (Colloidal Gold Immunochromatographic Assay)',
 				validUntil: null
 			},
 			{
@@ -695,8 +681,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1490',
-				display:
-					'Safecare Biotech (Hangzhou) Co. Ltd, Multi-Respiratory Virus Antigen Test Kit(Swab)  (Influenza A+B/ COVID-19)',
+				display: 'Safecare Biotech (Hangzhou) Co. Ltd, Multi-Respiratory Virus Antigen Test Kit(Swab)  (Influenza A+B/ COVID-19)',
 				validUntil: null
 			},
 			{
@@ -736,14 +721,12 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1967',
-				display:
-					'Shenzhen Microprofit Biotech Co., Ltd, SARS-CoV-2 Antigen Test Kit (Colloidal Gold Chromatographic Immunoassay)',
+				display: 'Shenzhen Microprofit Biotech Co., Ltd, SARS-CoV-2 Antigen Test Kit (Colloidal Gold Chromatographic Immunoassay)',
 				validUntil: null
 			},
 			{
 				code: '1178',
-				display:
-					'Shenzhen Microprofit Biotech Co., Ltd, SARS-CoV-2 Spike Protein Test Kit (Colloidal Gold Chromatographic Immunoassay)',
+				display: 'Shenzhen Microprofit Biotech Co., Ltd, SARS-CoV-2 Spike Protein Test Kit (Colloidal Gold Chromatographic Immunoassay)',
 				validUntil: null
 			},
 			{
@@ -808,8 +791,7 @@ export class ValueSetsResponseMock {
 			},
 			{
 				code: '1773',
-				display:
-					'Wuhan Life Origin Biotech Joint Stock Co., Ltd., The SARS-CoV-2 Antigen Assay Kit (Immunochromatography)',
+				display: 'Wuhan Life Origin Biotech Joint Stock Co., Ltd., The SARS-CoV-2 Antigen Assay Kit (Immunochromatography)',
 				validUntil: null
 			},
 			{

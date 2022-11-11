@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from '@angular/forms';
+import {NgForm, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ReportService} from '../../report.service';
-import {ReportType, IssuerType} from 'shared/model';
+import {IssuerType, ReportType} from 'shared/model';
 import {ReplaySubject, Subscription} from 'rxjs';
 import {delay, distinctUntilChanged, tap} from 'rxjs/operators';
 import {SelectedProfilesService} from '../_shared/selected-profiles.service';
@@ -27,10 +27,7 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	unitSearchAuthority$: ReplaySubject<string> = new ReplaySubject<string>();
 	subscription: Subscription;
 
-	constructor(
-		public readonly reportService: ReportService,
-		private readonly selectedProfilesService: SelectedProfilesService
-	) {}
+	constructor(public readonly reportService: ReportService, private readonly selectedProfilesService: SelectedProfilesService) {}
 
 	ngOnInit(): void {
 		this.a4a6FormGroup = this.reportService.formGroup.get(ReportType.A4) as UntypedFormGroup;
@@ -48,7 +45,7 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 				distinctUntilChanged(),
 
 				// Clear selected profiles to prevent having selected profiles from different data rooms.
-				tap(_ => this.selectedProfilesService.clear()),
+				tap(() => this.selectedProfilesService.clear()),
 
 				// Delay changes for unit search to emit after next tick since the async pipe for the authority
 				// input may cause ExpressionChangedAfterItHasBeenChecked if asynced without delay.

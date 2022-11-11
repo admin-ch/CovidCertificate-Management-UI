@@ -39,8 +39,8 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 	constructor(private readonly reportService: ReportService) {}
 
 	ngOnInit(): void {
-		this.subscription = this.certTypesFormArray.valueChanges.subscribe(_ => this.setSelectAllCheckboxState());
-		this.subscription.add(this.reportService.reset$.subscribe(_ => this.certTypesFormArray.clear()));
+		this.subscription = this.certTypesFormArray.valueChanges.subscribe(() => this.setSelectAllCheckboxState());
+		this.subscription.add(this.reportService.reset$.subscribe(() => this.certTypesFormArray.clear()));
 		Object.entries((this.certTypesFormArray.parent as UntypedFormGroup).controls).some(([controlName, control]) => {
 			if (control === this.certTypesFormArray) {
 				this.certTypesFormArrayName = controlName;
@@ -90,8 +90,6 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 
 	private setSelectAllCheckboxState() {
 		this.isSelectAllChecked = this.certTypesFormArray.value.length === this.CERTIFICATE_TYPES.length;
-		this.isSelectAllIndeterminate =
-			this.certTypesFormArray.value.length > 0 &&
-			this.certTypesFormArray.value.length < this.CERTIFICATE_TYPES.length;
+		this.isSelectAllIndeterminate = this.certTypesFormArray.value.length > 0 && this.certTypesFormArray.value.length < this.CERTIFICATE_TYPES.length;
 	}
 }

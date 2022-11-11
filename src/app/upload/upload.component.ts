@@ -26,38 +26,6 @@ export class UploadComponent implements OnInit {
 		private readonly certificateService: CertificateService
 	) {}
 
-	private static downloadZip(zipToDownload: ArrayBuffer): void {
-		if (zipToDownload) {
-			const linkSource = `data:application/zip;base64,${zipToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
-	private static downloadCsv(csvToDownload: string): void {
-		if (csvToDownload) {
-			const linkSource = `data:text/csv;base64,${csvToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
 	ngOnInit(): void {
 		this.createForm();
 		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
@@ -93,19 +61,49 @@ export class UploadComponent implements OnInit {
 	}
 
 	uploadSelectedFile(): void {
-		this.uploadService
-			.uploadSelectedFile(this.selectedFile, this.certificateTypeSelectionForm.get('type').value)
-			.subscribe(
-				response => {
-					this.resetSelectedFile();
-					UploadComponent.downloadZip(response?.zip);
-					this.notificationService.success('upload.file.upload.success');
-				},
-				error => {
-					this.resetSelectedFile();
-					UploadComponent.downloadCsv(error?.error?.csv);
-				}
-			);
+		this.uploadService.uploadSelectedFile(this.selectedFile, this.certificateTypeSelectionForm.get('type').value).subscribe(
+			response => {
+				this.resetSelectedFile();
+				UploadComponent.downloadZip(response?.zip);
+				this.notificationService.success('upload.file.upload.success');
+			},
+			error => {
+				this.resetSelectedFile();
+				UploadComponent.downloadCsv(error?.error?.csv);
+			}
+		);
+	}
+
+	private static downloadZip(zipToDownload: ArrayBuffer): void {
+		if (zipToDownload) {
+			const linkSource = `data:application/zip;base64,${zipToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificates-${Date.now()}.zip`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
+	}
+
+	private static downloadCsv(csvToDownload: string): void {
+		if (csvToDownload) {
+			const linkSource = `data:text/csv;base64,${csvToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificate-error-report-${Date.now()}.csv`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
 	}
 
 	private createForm(): void {

@@ -89,7 +89,7 @@ export class OauthService {
 			});
 	}
 
-	hasUserRole(role: string, claims: any): boolean {
+	hasUserRole(role: string, claims: unknown): boolean {
 		return !!claims && !!claims.userroles && claims.userroles.indexOf(role) > -1;
 	}
 
@@ -108,7 +108,6 @@ export class OauthService {
 	private getClaims(isAuthorized: boolean): Observable<Claims> {
 		return this.oidcSecurityService.userData$.pipe(
 			map(claims => {
-				console.log('Claims (getClaims) are', claims);
 				return this.validateClaims(isAuthorized, claims);
 			})
 		);

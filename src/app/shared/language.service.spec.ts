@@ -55,7 +55,7 @@ describe('LanguageService', () => {
 		});
 
 		it('should set the locale on the adapter', () => {
-			const adapter = {setLocale: jest.fn()} as unknown as DateAdapter<any>;
+			const adapter = {setLocale: jest.fn()} as unknown as DateAdapter<unknown>;
 			service.setAdapter(adapter);
 			expect(adapter.setLocale).toHaveBeenCalled();
 		});

@@ -17,15 +17,13 @@ export class ReportService {
 	reset$ = new Subject<void>();
 
 	// Workaround to validate that chiplist is not empty
-	validateChiplist$ = new Subject<void>()
+	validateChiplist$ = new Subject<void>();
 
 	constructor(private readonly fb: UntypedFormBuilder) {
 		this.formGroup = fb.group({
-			[ReportType.A2]: this.fb.group(
-				{
-					uvcis: [[], Validators.required]
-				}
-			),
+			[ReportType.A2]: this.fb.group({
+				uvcis: [[], Validators.required]
+			}),
 			[ReportType.A3]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
@@ -34,10 +32,7 @@ export class ReportService {
 					userIds: new UntypedFormArray([], [Validators.required, Validators.maxLength(200)])
 				},
 				{
-					validators: [
-						getStartDateBeforeEndDateValidator('from', 'to'),
-						getMaxPeriodValidator('from', 'to', 90)
-					]
+					validators: [getStartDateBeforeEndDateValidator('from', 'to'), getMaxPeriodValidator('from', 'to', 90)]
 				}
 			),
 			[ReportType.A4]: this.fb.group(
@@ -49,11 +44,9 @@ export class ReportService {
 					userIds: new UntypedFormArray([], [Validators.required, Validators.maxLength(200)])
 				},
 				{
-					validators: [
-						getStartDateBeforeEndDateValidator('from', 'to'),
-						getMaxPeriodValidator('from', 'to', 90)
-					]
-				}),
+					validators: [getStartDateBeforeEndDateValidator('from', 'to'), getMaxPeriodValidator('from', 'to', 90)]
+				}
+			),
 			[ReportType.A7]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
@@ -61,29 +54,28 @@ export class ReportService {
 					canton: ['', Validators.required],
 					types: new UntypedFormArray([], Validators.required)
 				},
-				{validators: getStartDateBeforeEndDateValidator('from', 'to')
-				}),
-			[ReportType.A8]: this.fb.group({
+				{validators: getStartDateBeforeEndDateValidator('from', 'to')}
+			),
+			[ReportType.A8]: this.fb.group(
+				{
 					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
 					types: new UntypedFormArray([], Validators.required)
 				},
 				{
-					validators: [
-						getStartDateBeforeEndDateValidator('from', 'to'),
-						getMaxPeriodValidator('from', 'to', 90)
-					]
-				}),
-			[ReportType.A9]: this.fb.group({
+					validators: [getStartDateBeforeEndDateValidator('from', 'to'), getMaxPeriodValidator('from', 'to', 90)]
+				}
+			),
+			[ReportType.A9]: this.fb.group(
+				{
 					from: ['', [ReportService.isDateValidator]],
 					to: ['', [ReportService.isDateValidator]],
-					types: new UntypedFormArray([], Validators.required),
+					types: new UntypedFormArray([], Validators.required)
 				},
 				{
-					validators: [
-						getStartDateBeforeEndDateValidator('from', 'to')
-					]
-				}),
+					validators: [getStartDateBeforeEndDateValidator('from', 'to')]
+				}
+			),
 			[ReportType.A11]: this.fb.group(
 				{
 					from: ['', [ReportService.isDateValidator]],
@@ -92,11 +84,9 @@ export class ReportService {
 				},
 				{validators: getStartDateBeforeEndDateValidator('from', 'to')}
 			),
-			[ReportType.A12]: this.fb.group(
-				{
-					transferCodes: [[], Validators.required]
-				}
-			)
+			[ReportType.A12]: this.fb.group({
+				transferCodes: [[], Validators.required]
+			})
 		});
 		this.formGroup.disable();
 	}

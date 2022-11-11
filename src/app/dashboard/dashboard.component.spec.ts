@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {DashboardComponent} from './dashboard.component';
-import {ObliqueTestingModule, ObNotificationService} from '@oblique/oblique';
+import {ObNotificationService, ObliqueTestingModule} from '@oblique/oblique';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
@@ -42,29 +42,27 @@ describe('DashboardComponent', () => {
 		currentLang: 'en'
 	};
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [
-					RouterTestingModule.withRoutes([
-						{
-							path: 'test',
-							component: DashboardComponent
-						}
-					]),
-					ObliqueTestingModule
-				],
-				declarations: [DashboardComponent, HasAuthorizationForMockDirective],
-				schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-				providers: [
-					{provide: Router, useValue: router},
-					{provide: NotificationService, useValue: notificationServiceMock},
-					{provide: ObNotificationService, useValue: obNotificationServiceMock},
-					{provide: TranslateService, useValue: translateServiceMock}
-				]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule.withRoutes([
+					{
+						path: 'test',
+						component: DashboardComponent
+					}
+				]),
+				ObliqueTestingModule
+			],
+			declarations: [DashboardComponent, HasAuthorizationForMockDirective],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{provide: Router, useValue: router},
+				{provide: NotificationService, useValue: notificationServiceMock},
+				{provide: ObNotificationService, useValue: obNotificationServiceMock},
+				{provide: TranslateService, useValue: translateServiceMock}
+			]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DashboardComponent);

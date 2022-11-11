@@ -8,6 +8,6 @@ export const REPORT_ERROR_STATE_MATCHER = new InjectionToken<ErrorStateMatcher>(
  * in inputs being shown as invalid initially. */
 export class ReportErrorStateMatcher implements ErrorStateMatcher {
 	isErrorState(control: UntypedFormControl | null): boolean {
-		return !!(control && control.invalid && control.touched);
+		return !!(control?.invalid && control.touched);
 	}
 }

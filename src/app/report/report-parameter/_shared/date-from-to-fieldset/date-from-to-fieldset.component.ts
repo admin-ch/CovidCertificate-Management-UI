@@ -29,7 +29,7 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
-		this.subscription = this.reportService.reset$.subscribe(_ => {
+		this.subscription = this.reportService.reset$.subscribe(() => {
 			this.dateFromFormControl.reset();
 			this.dateToFormControl.reset();
 		});

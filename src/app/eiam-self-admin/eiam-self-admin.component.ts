@@ -13,17 +13,12 @@ export class EiamSelfAdminComponent implements OnChanges, OnDestroy {
 	url: string;
 	private readonly unsubscribe = new Subject();
 
-	constructor(
-		@Inject('EIAM_SELF_ADMIN') private readonly eIAMSelfAdmin: string,
-		private readonly translate: TranslateService
-	) {
+	constructor(@Inject('EIAM_SELF_ADMIN') private readonly eIAMSelfAdmin: string, private readonly translate: TranslateService) {
 		translate.onLangChange.pipe(takeUntil(this.unsubscribe)).subscribe(() => this.ngOnChanges());
 	}
 
 	ngOnChanges(): void {
-		this.url = this.eIAMSelfAdmin
-			.replace('CURRENT_PAGE', this.page)
-			.replace('LANGUAGE', this.translate.currentLang);
+		this.url = this.eIAMSelfAdmin.replace('CURRENT_PAGE', this.page).replace('LANGUAGE', this.translate.currentLang);
 	}
 
 	ngOnDestroy() {

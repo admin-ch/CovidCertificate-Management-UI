@@ -1,12 +1,6 @@
 <form [formGroup]="certificateTypeSelectionForm">
 	<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_CERTIFICATE_WEB">
-		<mat-radio-group
-			formControlName="type"
-			id="generationType"
-			name="generationType"
-			aria-label="Select an option"
-			class="radio-button-container"
-		>
+		<mat-radio-group formControlName="type" id="generationType" name="generationType" aria-label="Select an option" class="radio-button-container">
 			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_VACCINATION_CERTIFICATE">
 				<mat-radio-button
 					*ngIf="verifyFeatureAvailability(GenerationType.VACCINATION)"
@@ -20,13 +14,7 @@
 			</ng-container>
 
 			<ng-container *ecHasAuthorizationFor="AuthFunction.CREATE_TEST_CERTIFICATE">
-				<mat-radio-button
-					*ngIf="verifyFeatureAvailability(GenerationType.TEST)"
-					id="generationType-test"
-					value="test"
-					name="test"
-					class="radio-button"
-				>
+				<mat-radio-button *ngIf="verifyFeatureAvailability(GenerationType.TEST)" id="generationType-test" value="test" name="test" class="radio-button">
 					{{ "certificateCreate.step-one.enum.test" | translate }}
 				</mat-radio-button>
 			</ng-container>

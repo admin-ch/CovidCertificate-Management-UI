@@ -22,7 +22,7 @@ const AUTH_FUNCTION_GEN_TYPE_MAP = {
 	styleUrls: ['./select-certificate-type.component.scss']
 })
 export class SelectCertificateTypeComponent implements OnInit {
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	GenerationType = GenerationType;
 
@@ -66,9 +66,7 @@ export class SelectCertificateTypeComponent implements OnInit {
 
 	private createForm(): void {
 		this.authService.authorizedFunctions$.pipe(take(1)).subscribe(authFunctions => {
-			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key =>
-				authFunctions.includes(key)
-			);
+			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key => authFunctions.includes(key));
 
 			const type = AUTH_FUNCTION_GEN_TYPE_MAP[authFunction];
 			this.certificateTypeSelectionForm = this.formBuilder.group({

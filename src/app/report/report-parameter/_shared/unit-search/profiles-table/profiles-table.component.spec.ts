@@ -32,7 +32,7 @@ describe('ProfilesTableComponent', () => {
 
 		component.authority = 'BUV';
 		component.node = {} as any;
-		component.treeControl = new NestedTreeControl<UnitTree>(_ => []);
+		component.treeControl = new NestedTreeControl<UnitTree>(() => []);
 
 		fixture.detectChanges();
 	});

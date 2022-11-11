@@ -8,7 +8,7 @@ import {OpenIdConfigService} from './open-id-config-service';
 export class HttpConfigInterceptor implements HttpInterceptor {
 	constructor(private readonly securityService: OidcSecurityService, private readonly config: OpenIdConfigService) {}
 
-	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const token = this.securityService.getToken();
 		return !this.config.urlPattern.filter(pattern => request.url.match(pattern)).length || !token
 			? next.handle(request)

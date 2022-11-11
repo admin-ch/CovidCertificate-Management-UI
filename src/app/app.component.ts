@@ -1,12 +1,7 @@
 import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {
-	ObHttpApiInterceptorEvents,
-	ObINavigationLink,
-	ObMasterLayoutService,
-	ObNotificationService
-} from '@oblique/oblique';
-import {Observable, of, Subject} from 'rxjs';
+import {ObHttpApiInterceptorEvents, ObINavigationLink, ObMasterLayoutService, ObNotificationService} from '@oblique/oblique';
+import {Observable, Subject, of} from 'rxjs';
 import {delay, filter, map, startWith, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {OauthService} from './auth/oauth.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -138,8 +133,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		if (!isAuthenticated) {
 			return of({isAuthenticated, isAuthorized: false});
 		}
-		return this.authService
-			.hasAuthorizationFor$(AuthFunction.MAIN)
-			.pipe(map(isAuthorized => ({isAuthenticated, isAuthorized})));
+		return this.authService.hasAuthorizationFor$(AuthFunction.MAIN).pipe(map(isAuthorized => ({isAuthenticated, isAuthorized})));
 	}
 }

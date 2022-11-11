@@ -1,5 +1,5 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
-import * as moment from "moment";
+import {AbstractControl, ValidatorFn} from '@angular/forms';
+import * as moment from 'moment';
 
 /**
  * Validates that the start date value of the controls with the passed names is not after the end date. This
@@ -11,7 +11,12 @@ import * as moment from "moment";
  * @param endTimeControlName
  * @returns null
  */
-export const getStartDateBeforeEndDateValidator: (startDateControlName: string, endDateControlName: string, startTimeControlName?: string, endTimeControlName?: string) => ValidatorFn =
+export const getStartDateBeforeEndDateValidator: (
+	startDateControlName: string,
+	endDateControlName: string,
+	startTimeControlName?: string,
+	endTimeControlName?: string
+) => ValidatorFn =
 	(startDateControlName: string, endDateControlName: string, startTimeControlName: string, endTimeControlName: string) => (control: AbstractControl) => {
 		if (!validateBothDatesAvailable(control, startDateControlName, endDateControlName, startTimeControlName, endTimeControlName)) {
 			return null;
@@ -25,9 +30,9 @@ export const getStartDateBeforeEndDateValidator: (startDateControlName: string, 
 		const endDate = moment(control.get(endDateControlName).value);
 
 		if (startDate.isAfter(endDate)) {
-			setError(startDateControl, endDateControl, startTimeControl, endTimeControl, "startDateAfterEndDate", true);
+			setError(startDateControl, endDateControl, startTimeControl, endTimeControl, 'startDateAfterEndDate', true);
 		} else {
-			removeError(startDateControl, endDateControl, startTimeControl, endTimeControl, "startDateAfterEndDate");
+			removeError(startDateControl, endDateControl, startTimeControl, endTimeControl, 'startDateAfterEndDate');
 		}
 	};
 
@@ -40,34 +45,29 @@ export const getStartDateBeforeEndDateValidator: (startDateControlName: string, 
  * @param maxPeriodInDays
  * @returns null
  */
-export const getMaxPeriodValidator: (
-	startDateControlName: string,
-	endDateControlName: string,
-	maxPeriodInDays: number
-) => ValidatorFn =
-	(startDateControlName: string, endDateControlName: string, maxPeriodInDays: number) =>
-		(control: AbstractControl) => {
-			// Safety checks
-			if (!validateBothDatesAvailable(control, startDateControlName, endDateControlName)) {
-				return null;
-			}
+export const getMaxPeriodValidator: (startDateControlName: string, endDateControlName: string, maxPeriodInDays: number) => ValidatorFn =
+	(startDateControlName: string, endDateControlName: string, maxPeriodInDays: number) => (control: AbstractControl) => {
+		// Safety checks
+		if (!validateBothDatesAvailable(control, startDateControlName, endDateControlName)) {
+			return null;
+		}
 
-			const startDate = moment(control.get(startDateControlName).value);
-			const endDate = moment(control.get(endDateControlName).value);
+		const startDate = moment(control.get(startDateControlName).value);
+		const endDate = moment(control.get(endDateControlName).value);
 
-			if (startDate.isAfter(endDate)) {
-				return null;
-			}
+		if (startDate.isAfter(endDate)) {
+			return null;
+		}
 
-			// Actual validation
-			const startControl = control.get(startDateControlName);
-			const endControl = control.get(endDateControlName);
-			if (endDate.diff(startDate, "days") >= maxPeriodInDays) {
-				setError(startControl, endControl, null, null, "maxPeriodDays", maxPeriodInDays);
-			} else {
-				removeError(startControl, endControl, null, null, "maxPeriodDays");
-			}
-		};
+		// Actual validation
+		const startControl = control.get(startDateControlName);
+		const endControl = control.get(endDateControlName);
+		if (endDate.diff(startDate, 'days') >= maxPeriodInDays) {
+			setError(startControl, endControl, null, null, 'maxPeriodDays', maxPeriodInDays);
+		} else {
+			removeError(startControl, endControl, null, null, 'maxPeriodDays');
+		}
+	};
 
 const validateBothDatesAvailable = (
 	control: AbstractControl,
@@ -86,24 +86,27 @@ const validateBothDatesAvailable = (
 				return false;
 			}
 		} else {
-			return false
+			return false;
 		}
 	}
-
 
 	const startDate = moment(control.get(startDateControlName).value);
 	const endDate = moment(control.get(endDateControlName).value);
 
-	if (
-		(!moment.isMoment(startDate) || !moment.isMoment(endDate)) &&
-		(!moment.isDate(startDate) || !moment.isDate(endDate))
-	) {
+	if ((!moment.isMoment(startDate) || !moment.isMoment(endDate)) && (!moment.isDate(startDate) || !moment.isDate(endDate))) {
 		return false;
 	}
 	return true;
 };
 
-const setError = (startDateControl: AbstractControl, endDateControl: AbstractControl, startTimeControl: AbstractControl | null, endTimeControl: AbstractControl | null, errorName: string, errorValue: any) => {
+const setError = (
+	startDateControl: AbstractControl,
+	endDateControl: AbstractControl,
+	startTimeControl: AbstractControl | null,
+	endTimeControl: AbstractControl | null,
+	errorName: string,
+	errorValue: unknown
+) => {
 	startDateControl.setErrors({
 		...(startDateControl.errors ?? {}),
 		[errorName]: errorValue
@@ -122,7 +125,13 @@ const setError = (startDateControl: AbstractControl, endDateControl: AbstractCon
 	});
 };
 
-const removeError = (startDateControl: AbstractControl, endDateControl: AbstractControl | null, startTimeControl: AbstractControl | null, endTimeControl: AbstractControl, errorName: string) => {
+const removeError = (
+	startDateControl: AbstractControl,
+	endDateControl: AbstractControl | null,
+	startTimeControl: AbstractControl | null,
+	endTimeControl: AbstractControl,
+	errorName: string
+) => {
 	if (startDateControl.errors?.[errorName] !== undefined) {
 		delete startDateControl.errors[errorName];
 		if (Object.entries(startDateControl.errors).length === 0) {

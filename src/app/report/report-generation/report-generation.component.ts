@@ -15,7 +15,7 @@ export enum GenerationResponseStatus {
 export interface ReportResponse {
 	report: string; // Base64 encoded
 	httpStatus: string;
-	error?: any; // Currently not explicitly used
+	error?: unknown; // Currently not explicitly used
 	details?: {
 		infoCode: number;
 	};
@@ -70,28 +70,24 @@ export class ReportGenerationComponent implements OnInit, OnDestroy {
 				default:
 					console.error(`Selected report type "${this.reportService.selectedReportType}" not found.`);
 			}
-			this.http
-				.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value)
-				.subscribe({
-					next: (response: ReportResponse) => {
-						if (response.details?.infoCode === 1005) {
-							this.obNotificationService.error(this.translate.instant('reports.excelLimitExceeded'));
-							this.stepper.previous();
-							return;
-						}
+			this.http.post(url, this.reportService.formGroup.get(this.reportService.selectedReportType).value).subscribe({
+				next: (response: ReportResponse) => {
+					if (response.details?.infoCode === 1005) {
+						this.obNotificationService.error(this.translate.instant('reports.excelLimitExceeded'));
+						this.stepper.previous();
+						return;
+					}
 
-						this.reportService.reportFinished$.next(
-							response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK
-						);
-						const link = document.createElement('a');
-						link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
-						link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
-						link.click();
-						link.remove();
-						this.stepper.next();
-					},
-					error: () => this.stepper.previous()
-				});
+					this.reportService.reportFinished$.next(response.details ? GenerationResponseStatus.INCOMPLETE : GenerationResponseStatus.OK);
+					const link = document.createElement('a');
+					link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${response.report}`;
+					link.download = `covid-certificate-${this.reportService.selectedReportType}-${Date.now()}.xlsx`;
+					link.click();
+					link.remove();
+					this.stepper.next();
+				},
+				error: () => this.stepper.previous()
+			});
 		});
 	}
 
