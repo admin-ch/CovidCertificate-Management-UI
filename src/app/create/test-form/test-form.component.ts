@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {GenerationType, Patient, ProductInfo, RapidTestProductInfoWithToString} from 'shared/model';
@@ -49,10 +49,10 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('testPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
-	testForm: FormGroup;
+	testForm: UntypedFormGroup;
 	testType: ProductInfo;
 
-	rapidTestCompleteControl: FormControl;
+	rapidTestCompleteControl: UntypedFormControl;
 	filteredRapidTests: RapidTestProductInfoWithToString[];
 
 	private rapidTests: RapidTestProductInfoWithToString[];
@@ -62,7 +62,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
@@ -207,8 +207,8 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	private createAutocompleteControl(): FormControl {
-		const autocompleteControl = new FormControl('', RapidTestValidator.testRequired);
+	private createAutocompleteControl(): UntypedFormControl {
+		const autocompleteControl = new UntypedFormControl('', RapidTestValidator.testRequired);
 		autocompleteControl.valueChanges.subscribe(value => {
 			if (typeof value === 'string') {
 				this.filteredRapidTests = this.filterRapidTests(value);

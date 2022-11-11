@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import * as moment from 'moment/moment';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
@@ -13,8 +13,8 @@ import {Subscription} from 'rxjs';
 	styleUrls: ['./date-from-to-fieldset.component.scss']
 })
 export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
-	@Input() dateFromFormControl: FormControl;
-	@Input() dateToFormControl: FormControl;
+	@Input() dateFromFormControl: UntypedFormControl;
+	@Input() dateToFormControl: UntypedFormControl;
 	@Input() label: string;
 
 	subscription: Subscription;

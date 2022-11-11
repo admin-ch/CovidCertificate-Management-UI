@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NotificationManagementService } from "../notification-management.service";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import * as moment from "moment/moment";
 import { NotificationApiService } from "../../notification-api.service";
@@ -17,14 +17,14 @@ import { getStartDateBeforeEndDateValidator } from "shared/validators/date-time.
 })
 export class NotificationsManagementEditComponent implements OnInit {
 
-	formGroup: FormGroup;
+	formGroup: UntypedFormGroup;
 	isLoading = false;
 	type: "CREATE" | "EDIT";
 	MIN_DATE = moment();
 
 	constructor(private readonly notificationManagementService: NotificationManagementService,
 				private readonly router: Router,
-				private readonly fb: FormBuilder,
+				private readonly fb: UntypedFormBuilder,
 				public readonly translate: TranslateService,
 				private readonly notificationsApiService: NotificationApiService,
 				private readonly obNotificationService: ObNotificationService) {
@@ -102,7 +102,7 @@ export class NotificationsManagementEditComponent implements OnInit {
 		});
 
 		this.translate.langs.forEach(lang =>
-			this.formGroup.addControl(`content_${lang}`, new FormControl(content[lang], [Validators.required]))
+			this.formGroup.addControl(`content_${lang}`, new UntypedFormControl(content[lang], [Validators.required]))
 		);
 	}
 

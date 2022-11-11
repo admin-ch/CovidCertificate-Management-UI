@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import {FormControl, ValidatorFn} from "@angular/forms";
+import {UntypedFormControl, ValidatorFn} from "@angular/forms";
 import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
 import {ReportType} from 'shared/model';
 import {MatChipInputEvent, MatChipList} from "@angular/material/chips";
@@ -14,7 +14,7 @@ import {ReportService} from "../../../report.service";
 export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 
 	@Input()
-	chipDataFormControl: FormControl
+	chipDataFormControl: UntypedFormControl
 
 	@Input()
 	formatValidator: ValidatorFn
@@ -26,7 +26,7 @@ export class ChipListFieldsetComponent implements OnInit, OnDestroy {
 	separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
 
 	// Used for currently entered data for a chip to be added.
-	formControl = new FormControl('', {updateOn: 'submit'});
+	formControl = new UntypedFormControl('', {updateOn: 'submit'});
 	errorUvcis: string[] = [];
 
 	subscription: Subscription;

@@ -1,7 +1,7 @@
-import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, UntypedFormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export class IssuableProductValidator {
-	static validateProduct: ValidatorFn = (form: FormGroup): ValidationErrors | null => {
+	static validateProduct: ValidatorFn = (form: UntypedFormGroup): ValidationErrors | null => {
 		const medicalProduct: AbstractControl = form.get('medicalProduct');
 		const countryOfVaccination: AbstractControl = form.get('countryOfVaccination');
 		if (

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
 import {uvciValidator} from "../../../create/utils/uvci-validator";
@@ -11,8 +11,8 @@ import {uvciValidator} from "../../../create/utils/uvci-validator";
 })
 export class ReportA2Component implements OnInit, OnDestroy {
 
-	a2FormGroup: FormGroup;
-	uvcisFormControl: FormControl
+	a2FormGroup: UntypedFormGroup;
+	uvcisFormControl: UntypedFormControl
 	uvciValidator = uvciValidator
 
 	constructor(public readonly reportService: ReportService) {
@@ -20,8 +20,8 @@ export class ReportA2Component implements OnInit, OnDestroy {
 
 
 	ngOnInit(): void {
-		this.a2FormGroup = this.reportService.formGroup.get(ReportType.A2) as FormGroup
-		this.uvcisFormControl = this.a2FormGroup.get('uvcis') as FormControl
+		this.a2FormGroup = this.reportService.formGroup.get(ReportType.A2) as UntypedFormGroup
+		this.uvcisFormControl = this.a2FormGroup.get('uvcis') as UntypedFormControl
 		this.a2FormGroup.enable()
 	}
 

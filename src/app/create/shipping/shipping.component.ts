@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType, Shipping, ShippingOptions} from 'shared/model';
 import {DeliveryCodeValidatorValidators} from './delivery-code-validator';
@@ -15,7 +15,7 @@ export class ShippingComponent implements OnInit {
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
-	shippingForm: FormGroup;
+	shippingForm: UntypedFormGroup;
 	shippingOptions: string[] = Object.values(ShippingOptions);
 	cantonCodes: string[] = [
 		'AG',
@@ -57,7 +57,7 @@ export class ShippingComponent implements OnInit {
 		V: 'U'
 	};
 
-	constructor(private readonly formBuilder: FormBuilder, private readonly dataService: CreationDataService) {}
+	constructor(private readonly formBuilder: UntypedFormBuilder, private readonly dataService: CreationDataService) {}
 
 	ngOnInit(): void {
 		this.createForm();

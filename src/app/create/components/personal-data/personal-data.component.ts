@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ControlContainer, UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {PersonalData, ProductInfo} from 'shared/model';
 import {CreationDataService} from '../../utils/creation-data.service';
@@ -17,11 +17,11 @@ export class PersonalDataComponent implements OnInit {
 	public static readonly FORM_GROUP_NAME = 'personalData';
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
-	public vaccineForm: FormGroup;
+	public vaccineForm: UntypedFormGroup;
 
 	constructor(
 		private parent: FormGroupDirective,
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors} from "@angular/forms";
+import {AbstractControl, UntypedFormControl, UntypedFormGroup, ValidationErrors} from "@angular/forms";
 import {ReportType} from "shared/model";
 import {ReportService} from "../../report.service";
 
@@ -10,15 +10,15 @@ import {ReportService} from "../../report.service";
 })
 export class ReportA12Component implements OnInit, OnDestroy {
 
-	a12FormGroup: FormGroup;
-	transferCodesFormControl: FormControl
+	a12FormGroup: UntypedFormGroup;
+	transferCodesFormControl: UntypedFormControl
 
 	constructor(public readonly reportService: ReportService) {
 	}
 
 	ngOnInit(): void {
-		this.a12FormGroup = this.reportService.formGroup.get(ReportType.A12) as FormGroup
-		this.transferCodesFormControl = this.a12FormGroup.get('transferCodes') as FormControl
+		this.a12FormGroup = this.reportService.formGroup.get(ReportType.A12) as UntypedFormGroup
+		this.transferCodesFormControl = this.a12FormGroup.get('transferCodes') as UntypedFormControl
 		this.a12FormGroup.enable()
 	}
 

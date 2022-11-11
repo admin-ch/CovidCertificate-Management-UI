@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {DATE_FORMAT, GenerationType, MomentWrapper, Patient, ProductInfo, Vaccine} from 'shared/model';
@@ -30,13 +30,13 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('touristPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
-	vaccineForm: FormGroup;
+	vaccineForm: UntypedFormGroup;
 
 	public maxDose = 9;
 	public minDose = 0;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService

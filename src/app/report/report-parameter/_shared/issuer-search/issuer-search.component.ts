@@ -10,7 +10,7 @@ import {
 	SimpleChanges,
 	ViewChild
 } from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
@@ -67,7 +67,7 @@ export class IssuerSearchComponent implements OnInit, OnChanges, AfterViewInit, 
 	authority: string;
 
 	@Input()
-	userIdsFormArray: FormArray;
+	userIdsFormArray: UntypedFormArray;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
@@ -75,11 +75,11 @@ export class IssuerSearchComponent implements OnInit, OnChanges, AfterViewInit, 
 	profilesDataSource: MatTableDataSource<EiamProfile> = new MatTableDataSource<EiamProfile>([]);
 
 	totalHits = 0;
-	searchFieldsFormGroup = new FormGroup({
-		firstName: new FormControl('', [Validators.minLength(3)]),
-		name: new FormControl('', [Validators.minLength(3)]),
-		userExtId: new FormControl('', [Validators.minLength(3)]),
-		email: new FormControl('', [Validators.minLength(3)])
+	searchFieldsFormGroup = new UntypedFormGroup({
+		firstName: new UntypedFormControl('', [Validators.minLength(3)]),
+		name: new UntypedFormControl('', [Validators.minLength(3)]),
+		userExtId: new UntypedFormControl('', [Validators.minLength(3)]),
+		email: new UntypedFormControl('', [Validators.minLength(3)])
 	});
 
 	TABLE_ROWS: (keyof EiamProfile | 'select')[] = ['select', 'firstname', 'name', 'userExtId', 'email', 'unitName'];

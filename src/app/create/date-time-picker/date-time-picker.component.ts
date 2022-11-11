@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostBinding, Input, OnChanges, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import timePolyfill from 'time-input-polyfill';
 import supportsTime from 'time-input-polyfill/supportsTime';
@@ -38,7 +38,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	@Input() shortDateAllowed: boolean;
 	@Input() minDate: Date = DateValidators.MIN_DATE;
 	@HostBinding('class.datetime') datetime = true;
-	form: FormGroup;
+	form: UntypedFormGroup;
 	maxDate: Date = new Date();
 
 	showShortDateInputField = false;
@@ -50,7 +50,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 		return false;
 	}
 
-	constructor(readonly fb: FormBuilder) {
+	constructor(readonly fb: UntypedFormBuilder) {
 		this.createForm();
 	}
 

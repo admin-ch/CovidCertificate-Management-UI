@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ReportService} from '../../../report.service';
 
@@ -24,9 +24,9 @@ export enum CertificateType {
 })
 export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 	@Input()
-	certTypesFormArray: FormArray;
+	certTypesFormArray: UntypedFormArray;
 
-	formGroup: FormGroup;
+	formGroup: UntypedFormGroup;
 	certTypesFormArrayName: string;
 
 	readonly CERTIFICATE_TYPES: CertificateType[] = Object.values(CertificateType);
@@ -41,7 +41,7 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.subscription = this.certTypesFormArray.valueChanges.subscribe(_ => this.setSelectAllCheckboxState());
 		this.subscription.add(this.reportService.reset$.subscribe(_ => this.certTypesFormArray.clear()));
-		Object.entries((this.certTypesFormArray.parent as FormGroup).controls).some(([controlName, control]) => {
+		Object.entries((this.certTypesFormArray.parent as UntypedFormGroup).controls).some(([controlName, control]) => {
 			if (control === this.certTypesFormArray) {
 				this.certTypesFormArrayName = controlName;
 				return true;
@@ -52,7 +52,7 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 			throw new Error('FormArrayName could not have been identified.');
 		}
 
-		if (this.certTypesFormArray.parent instanceof FormGroup) {
+		if (this.certTypesFormArray.parent instanceof UntypedFormGroup) {
 			this.formGroup = this.certTypesFormArray.parent;
 		} else {
 			throw new Error('Parent of certTypesFormArray is not a FormGroup.');
@@ -65,9 +65,9 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 
 	certTypeCheckboxChanged(checked: boolean, certType: CertificateType) {
 		if (checked) {
-			this.certTypesFormArray.push(new FormControl(certType));
+			this.certTypesFormArray.push(new UntypedFormControl(certType));
 		} else {
-			this.certTypesFormArray.controls.forEach((ctrl: FormControl, i) => {
+			this.certTypesFormArray.controls.forEach((ctrl: UntypedFormControl, i) => {
 				if (ctrl.value === certType) {
 					this.certTypesFormArray.removeAt(i);
 				}
@@ -81,7 +81,7 @@ export class CertTypeSelectionFieldsetComponent implements OnInit, OnDestroy {
 		this.certTypesFormArray.clear();
 		if (checked) {
 			this.CERTIFICATE_TYPES.forEach((certType, i) => {
-				this.certTypesFormArray.insert(i, new FormControl(certType));
+				this.certTypesFormArray.insert(i, new UntypedFormControl(certType));
 			});
 		}
 		this.certTypesFormArray.markAsTouched();

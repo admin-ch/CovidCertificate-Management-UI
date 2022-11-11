@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from '@angular/forms';
 import {ReportService} from '../../report.service';
 import {ReportType, IssuerType} from 'shared/model';
 import {ReplaySubject, Subscription} from 'rxjs';
@@ -16,12 +16,12 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 
 	IssuerType = IssuerType;
 
-	a4a6FormGroup: FormGroup;
-	dateFromFormControl: FormControl;
-	dateToFormControl: FormControl;
-	cantonFormControl: FormControl;
-	certTypesFormArray: FormArray;
-	userIdsFormArray: FormArray;
+	a4a6FormGroup: UntypedFormGroup;
+	dateFromFormControl: UntypedFormControl;
+	dateToFormControl: UntypedFormControl;
+	cantonFormControl: UntypedFormControl;
+	certTypesFormArray: UntypedFormArray;
+	userIdsFormArray: UntypedFormArray;
 
 	searchType = IssuerType.ORGANISATION;
 	unitSearchAuthority$: ReplaySubject<string> = new ReplaySubject<string>();
@@ -33,12 +33,12 @@ export class ReportA4A6Component implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
-		this.a4a6FormGroup = this.reportService.formGroup.get(ReportType.A4) as FormGroup;
-		this.dateFromFormControl = this.a4a6FormGroup.get('from') as FormControl;
-		this.dateToFormControl = this.a4a6FormGroup.get('to') as FormControl;
-		this.cantonFormControl = this.a4a6FormGroup.get('canton') as FormControl;
-		this.certTypesFormArray = this.a4a6FormGroup.get('types') as FormArray;
-		this.userIdsFormArray = this.a4a6FormGroup.get('userIds') as FormArray;
+		this.a4a6FormGroup = this.reportService.formGroup.get(ReportType.A4) as UntypedFormGroup;
+		this.dateFromFormControl = this.a4a6FormGroup.get('from') as UntypedFormControl;
+		this.dateToFormControl = this.a4a6FormGroup.get('to') as UntypedFormControl;
+		this.cantonFormControl = this.a4a6FormGroup.get('canton') as UntypedFormControl;
+		this.certTypesFormArray = this.a4a6FormGroup.get('types') as UntypedFormArray;
+		this.userIdsFormArray = this.a4a6FormGroup.get('userIds') as UntypedFormArray;
 		this.a4a6FormGroup.enable();
 		setTimeout(() => this.ngForm.resetForm(this.a4a6FormGroup.value));
 

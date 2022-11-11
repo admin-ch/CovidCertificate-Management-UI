@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UploadService} from './upload.service';
 import {GenerationType} from 'shared/model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ObNotificationService} from '@oblique/oblique';
 import {CertificateService} from 'shared/certificate.service';
 
@@ -13,14 +13,14 @@ import {CertificateService} from 'shared/certificate.service';
 export class UploadComponent implements OnInit {
 	@ViewChild('fileUpload') fileUpload: ElementRef;
 
-	certificateTypeSelectionForm: FormGroup;
+	certificateTypeSelectionForm: UntypedFormGroup;
 	featureToggleSetsLoaded = false;
 
 	private selectedFile: File;
 	private readonly maxFileSize: number = 40000;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly uploadService: UploadService,
 		private readonly notificationService: ObNotificationService,
 		private readonly certificateService: CertificateService

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {GenerationType, Patient, ProductInfo} from 'shared/model';
@@ -28,10 +28,10 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
-	exceptionalForm: FormGroup;
+	exceptionalForm: UntypedFormGroup;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService

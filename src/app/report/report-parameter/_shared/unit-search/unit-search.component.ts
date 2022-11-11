@@ -4,7 +4,7 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {SelectedProfilesService} from '../selected-profiles.service';
-import {FormArray} from '@angular/forms';
+import {UntypedFormArray} from '@angular/forms';
 import {ReportService} from '../../../report.service';
 import {Subscription} from 'rxjs';
 
@@ -26,7 +26,7 @@ export class UnitSearchComponent implements OnInit, OnChanges, OnDestroy {
 	authority: string;
 
 	@Input()
-	userIdsFormArray: FormArray;
+	userIdsFormArray: UntypedFormArray;
 
 	isUnitTreeLoading = false;
 	treeControl = new NestedTreeControl<UnitTree>(node => node.children);

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from "@angular/forms";
 import {ReplaySubject, Subscription} from "rxjs";
 import {ReportService} from "../../report.service";
 import {ReportType, IssuerType} from "shared/model";
@@ -16,11 +16,11 @@ export class ReportA3A5Component implements OnInit, OnDestroy {
 
 	IssuerType = IssuerType;
 
-	a3a5FormGroup: FormGroup;
-	dateFromFormControl: FormControl;
-	dateToFormControl: FormControl;
-	cantonFormControl: FormControl;
-	userIdsFormArray: FormArray;
+	a3a5FormGroup: UntypedFormGroup;
+	dateFromFormControl: UntypedFormControl;
+	dateToFormControl: UntypedFormControl;
+	cantonFormControl: UntypedFormControl;
+	userIdsFormArray: UntypedFormArray;
 
 
 	unitSearchAuthority$: ReplaySubject<string> = new ReplaySubject<string>();
@@ -33,11 +33,11 @@ export class ReportA3A5Component implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-	  this.a3a5FormGroup = this.reportService.formGroup.get(ReportType.A3) as FormGroup;
-	  this.dateFromFormControl = this.a3a5FormGroup.get('from') as FormControl;
-	  this.dateToFormControl = this.a3a5FormGroup.get('to') as FormControl;
-	  this.cantonFormControl = this.a3a5FormGroup.get('canton') as FormControl;
-	  this.userIdsFormArray = this.a3a5FormGroup.get('userIds') as FormArray;
+	  this.a3a5FormGroup = this.reportService.formGroup.get(ReportType.A3) as UntypedFormGroup;
+	  this.dateFromFormControl = this.a3a5FormGroup.get('from') as UntypedFormControl;
+	  this.dateToFormControl = this.a3a5FormGroup.get('to') as UntypedFormControl;
+	  this.cantonFormControl = this.a3a5FormGroup.get('canton') as UntypedFormControl;
+	  this.userIdsFormArray = this.a3a5FormGroup.get('userIds') as UntypedFormArray;
 	  this.a3a5FormGroup.enable();
 	  setTimeout(() => this.ngForm.resetForm(this.a3a5FormGroup.value));
 

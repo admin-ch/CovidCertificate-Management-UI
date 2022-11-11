@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NgForm} from "@angular/forms";
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, NgForm} from "@angular/forms";
 import {ReportType} from "shared/model";
 import {ReportService} from "../../report.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -13,10 +13,10 @@ import {Subscription} from "rxjs";
 export class ReportA9Component implements OnInit, OnDestroy {
 	@ViewChild('ngForm') ngForm: NgForm;
 
-	a9FormGroup: FormGroup;
-	dateFromFormControl: FormControl;
-	dateToFormControl: FormControl;
-	certTypesFormArray: FormArray;
+	a9FormGroup: UntypedFormGroup;
+	dateFromFormControl: UntypedFormControl;
+	dateToFormControl: UntypedFormControl;
+	certTypesFormArray: UntypedFormArray;
 
 	subscription: Subscription;
 
@@ -24,10 +24,10 @@ export class ReportA9Component implements OnInit, OnDestroy {
 				public readonly translate: TranslateService) { }
 
 	ngOnInit(): void {
-		this.a9FormGroup = this.reportService.formGroup.get(ReportType.A9) as FormGroup
-		this.dateFromFormControl = this.a9FormGroup.get('from') as FormControl;
-		this.dateToFormControl = this.a9FormGroup.get('to') as FormControl;
-		this.certTypesFormArray = this.a9FormGroup.get('types') as FormArray
+		this.a9FormGroup = this.reportService.formGroup.get(ReportType.A9) as UntypedFormGroup
+		this.dateFromFormControl = this.a9FormGroup.get('from') as UntypedFormControl;
+		this.dateToFormControl = this.a9FormGroup.get('to') as UntypedFormControl;
+		this.certTypesFormArray = this.a9FormGroup.get('types') as UntypedFormArray
 		this.a9FormGroup.enable()
 		this.subscription = this.reportService.reset$.subscribe(() => this.resetInput())
 		setTimeout(() => this.ngForm.resetForm(this.a9FormGroup.value))

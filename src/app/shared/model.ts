@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ValidatorFn} from '@angular/forms';
 import {Moment} from 'moment';
 
 export const DATE_FORMAT = 'dd.MM.YYYY';
@@ -219,7 +219,7 @@ export enum ShippingOptions {
 
 export interface FormObject {
 	formFields: FormFieldObject;
-	formGroup: FormGroup;
+	formGroup: UntypedFormGroup;
 }
 
 export interface FormFieldObject {
@@ -233,7 +233,7 @@ export interface FormControlObject {
 export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select';
 
 export class FormField {
-	public readonly angularFormControl: FormControl;
+	public readonly angularFormControl: UntypedFormControl;
 	public readonly selectableOptions?: {display: string; code: any}[];
 	public readonly tooltipTranslationKey?: string;
 	public readonly defaultValue: any;
@@ -250,11 +250,11 @@ export class FormField {
 			cssClasses?: string;
 		}
 	) {
-		let formControl: FormControl;
+		let formControl: UntypedFormControl;
 		if (options && options.validators) {
-			formControl = new FormControl(options.defaultValue || '', options.validators);
+			formControl = new UntypedFormControl(options.defaultValue || '', options.validators);
 		} else {
-			formControl = new FormControl(options?.defaultValue || '');
+			formControl = new UntypedFormControl(options?.defaultValue || '');
 		}
 		this.angularFormControl = formControl;
 

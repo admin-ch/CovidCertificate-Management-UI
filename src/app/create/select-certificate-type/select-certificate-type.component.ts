@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GenerationType} from 'shared/model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {CertificateService} from 'shared/certificate.service';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
@@ -26,13 +26,13 @@ export class SelectCertificateTypeComponent implements OnInit {
 
 	GenerationType = GenerationType;
 
-	certificateTypeSelectionForm: FormGroup;
+	certificateTypeSelectionForm: UntypedFormGroup;
 	typeSelection: string[] = Object.values(GenerationType);
 
 	AuthFunction: typeof AuthFunction = AuthFunction;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly dataService: CreationDataService,
 		private readonly authService: AuthService,
 		private readonly certificateService: CertificateService
