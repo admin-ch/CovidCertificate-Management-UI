@@ -39,8 +39,12 @@ export class DownloadComponent implements OnInit {
 			const linkSource = `data:application/pdf;base64,${this.createCertificateResponse.pdf}`;
 			const pdfBlob = this.certificateService.PDFtoBlob(linkSource);
 
-			// Internet Explorer only
+			/** Internet Explorer only */
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			if (window.navigator?.msSaveOrOpenBlob) {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				window.navigator.msSaveOrOpenBlob(pdfBlob, `${fileName}-${Date.now()}.pdf`);
 				return;
 			}

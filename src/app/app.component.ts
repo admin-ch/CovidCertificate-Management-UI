@@ -51,7 +51,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 	name$: Observable<string>;
 	currentPage: string;
 	lang$: Observable<string>;
-	private readonly unsubscribe = new Subject();
+	private readonly unsubscribe = new Subject<void>();
 
 	constructor(
 		private readonly oauthService: OauthService,
