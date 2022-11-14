@@ -11,10 +11,6 @@ describe('OpenIdConfigService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have a config property', () => {
-		expect(service.config).toBeDefined();
-	});
-
 	it('should have a stsStagingUrl property', () => {
 		expect(service.authorityUrl).toBeDefined();
 	});

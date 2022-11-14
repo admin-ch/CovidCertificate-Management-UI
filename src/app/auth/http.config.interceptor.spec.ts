@@ -1,9 +1,9 @@
-import {HTTP_INTERCEPTORS, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpEvent, HttpRequest, HttpResponse} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {HttpConfigInterceptor} from './http.config.interceptor';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 describe('HttpConfigInterceptor', () => {
 	let interceptor: HttpConfigInterceptor;
@@ -19,7 +19,7 @@ describe('HttpConfigInterceptor', () => {
 					multi: true
 				},
 				HttpConfigInterceptor,
-				{provide: OidcSecurityService, useValue: {getAccessToken: () => 'token'}}
+				{provide: OidcSecurityService, useValue: {getAccessToken: () => of('token')}}
 			]
 		}).compileComponents();
 		interceptor = TestBed.inject(HttpConfigInterceptor);
@@ -31,31 +31,40 @@ describe('HttpConfigInterceptor', () => {
 	});
 
 	describe('intercept', () => {
-		it('should add Authorization to Headers if pattern is matching', () => {
+		it('should add Authorization to Headers if pattern is matching', done => {
 			const response = configTest('/v1/covidcertificate');
-			expect(response.headers.get('Authorization')).toEqual('Bearer token');
+			response.subscribe(httpEvent => {
+				expect(httpEvent.headers.get('Authorization')).toEqual('Bearer token');
+				done();
+			});
 		});
-		it('should not add Authorization to Headers if pattern is not matching', () => {
+		it('should not add Authorization to Headers if pattern is not matching', done => {
 			const response = configTest('/api');
-			expect(response.headers.has('Authorization')).toBe(false);
+			response.subscribe(httpEvent => {
+				expect(httpEvent.headers.has('Authorization')).toBe(false);
+				done();
+			});
 		});
-		it("should not add Authorization to Headers if there's no token", () => {
+		it("should not add Authorization to Headers if there's no token", done => {
 			const auth = TestBed.inject(OidcSecurityService);
 			jest.spyOn(auth, 'getAccessToken').mockReturnValue(of(''));
 			const response = configTest('/v1/covidcertificate');
-			expect(response.headers.has('Authorization')).toBe(false);
+			response.subscribe(httpEvent => {
+				expect(httpEvent.headers.has('Authorization')).toBe(false);
+				done();
+			});
 		});
 
-		const configTest: (url: string) => HttpResponse<any> = (url: string) => {
+		const configTest: (url: string) => Observable<HttpEvent<any>> = (url: string) => {
 			let response: HttpResponse<any>;
 			const request = new HttpRequest<any>('GET', url);
 			const next: any = {
 				handle: responseHandle => {
 					response = responseHandle;
+					return of(response);
 				}
 			};
-			interceptor.intercept(request, next);
-			return response;
+			return interceptor.intercept(request, next);
 		};
 	});
 
