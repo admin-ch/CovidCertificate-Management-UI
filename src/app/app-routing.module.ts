@@ -7,6 +7,7 @@ import {OtpGuard} from './otp/otp.guard';
 import {UploadGuard} from './upload/upload.guard';
 import {ReportGuard} from './report/report.guard';
 import {BulkRevocationGuard} from './bulk-revocation/bulkRevocation.guard';
+import { NotificationsManagementGuard } from "./notifications/notifications-management/notifications-management.guard";
 
 const routes: Routes = [
 	{
@@ -53,6 +54,12 @@ const routes: Routes = [
 		loadChildren: () => import('./report/report.module').then(m => m.ReportModule),
 		canLoad: [AuthGuardService, ReportGuard],
 		canActivate: [AuthGuardService, ReportGuard]
+	},
+	{
+		path: 'notifications-management',
+		loadChildren: () => import('./notifications/notifications-management/notifications-management.module').then(m => m.NotificationsManagementModule),
+		canLoad: [AuthGuardService, NotificationsManagementGuard],
+		canActivate: [AuthGuardService, NotificationsManagementGuard],
 	},
 	{
 		path: 'bulk-revocation',

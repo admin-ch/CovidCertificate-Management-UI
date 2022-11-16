@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 	styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent {
-	imminentNotifications$: Observable<Notification[]>;
+	nonClosableNotifications$: Observable<Notification[]>;
 
 	get currentLang() {
 		return this.translateService.currentLang;
@@ -21,6 +21,6 @@ export class NotificationsComponent {
 		private readonly obNotificationService: ObNotificationService,
 		private readonly translateService: TranslateService
 	) {
-		this.imminentNotifications$ = notificationService.imminentNotifications$;
+		this.nonClosableNotifications$ = notificationService.nonClosableNotifications$;
 	}
 }

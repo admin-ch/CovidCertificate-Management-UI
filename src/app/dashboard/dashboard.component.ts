@@ -44,12 +44,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		this.router.navigateByUrl('report');
 	}
 
+	goToNotificationsManagement() {
+		this.router.navigateByUrl('notifications-management');
+	}
+
 	goToRevokeMultipleCertificates() {
 		this.router.navigateByUrl('bulk-revocation');
 	}
 
 	ngOnInit() {
-		this.subscription = this.notificationService.upcomingNotifications$.subscribe(notifications => {
+		this.subscription = this.notificationService.closableNotifications$.subscribe(notifications => {
 			for (const notification of notifications) {
 				let notificationFn: (config: ObINotification | string) => ObINotification;
 				switch (notification.type) {
@@ -60,7 +64,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 						notificationFn = this.obNotificationService.warning.bind(this.obNotificationService);
 						break;
 				}
-				notificationFn({message: notification.message[this.translateService.currentLang], sticky: true});
+				notificationFn({message: notification.content[this.translateService.currentLang], sticky: true});
 			}
 		});
 	}
