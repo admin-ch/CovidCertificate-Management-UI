@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportA11Component} from './report-a11.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,6 +9,7 @@ import {ReportType} from 'shared/model';
 import {Subject} from 'rxjs';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import * as moment from 'moment';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportA11Component', () => {
 	let component: ReportA11Component;
@@ -17,7 +17,7 @@ describe('ReportA11Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
+			imports: [TranslateModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
 			providers: [
 				{
 					provide: ReportService,

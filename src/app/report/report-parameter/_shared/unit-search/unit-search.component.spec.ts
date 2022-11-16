@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing'
 
 import {UnitSearchComponent, UnitTree} from './unit-search.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {SelectedProfilesService} from '../selected-profiles.service';
@@ -21,7 +20,7 @@ describe('UnitSearchComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule, HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule, MatTreeModule],
+			imports: [TranslateModule, HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule, MatTreeModule],
 			declarations: [UnitSearchComponent],
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},

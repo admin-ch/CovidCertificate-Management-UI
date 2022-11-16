@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TouristVaccineFormComponent} from './tourist-vaccine-form.component';
-import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
@@ -34,7 +34,7 @@ describe.skip('TouristVaccineFormComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [TouristVaccineFormComponent, DateTimePickerComponent, WhoCheckboxComponent, PersonalDataComponent],
-			imports: [NoopAnimationsModule, ObliqueTestingModule, ObNestedFormModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
+			imports: [NoopAnimationsModule, ObNestedFormModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 			providers: [
 				{
 					provide: ValueSetsService,

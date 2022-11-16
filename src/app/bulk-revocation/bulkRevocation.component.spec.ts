@@ -1,5 +1,4 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {of} from 'rxjs';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -8,6 +7,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {CertificateService} from 'shared/certificate.service';
 import {BulkRevocationComponent} from './bulkRevocation.component';
 import {BulkRevocationService} from './bulkRevocation.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('UploadComponent', () => {
 	let component: BulkRevocationComponent;
@@ -24,7 +24,7 @@ describe('UploadComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [NoopAnimationsModule, ObliqueTestingModule, ReactiveFormsModule, MatSelectModule],
+			imports: [NoopAnimationsModule, ReactiveFormsModule, MatSelectModule, TranslateModule.forRoot()],
 			declarations: [BulkRevocationComponent],
 			providers: [
 				{

@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CertificateRevokeComponent} from './certificate-revoke.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {of} from 'rxjs';
 import {RevocationService} from './revocation.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('CertificateRevokeComponent', () => {
 	let component: CertificateRevokeComponent;
@@ -16,7 +16,7 @@ describe('CertificateRevokeComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, ReactiveFormsModule],
+			imports: [TranslateModule.forRoot(), ReactiveFormsModule],
 			declarations: [CertificateRevokeComponent],
 			providers: [
 				{

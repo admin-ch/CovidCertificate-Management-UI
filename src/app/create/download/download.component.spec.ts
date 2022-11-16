@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DownloadComponent} from './download.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {CertificateService} from 'shared/certificate.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('DownloadComponent', () => {
 	let component: DownloadComponent;
@@ -13,7 +13,7 @@ describe('DownloadComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [DownloadComponent],
 			providers: [
 				{

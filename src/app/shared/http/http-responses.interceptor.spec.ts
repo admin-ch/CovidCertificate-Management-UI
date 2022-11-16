@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpResponsesInterceptor} from './http-responses.interceptor';
-import {ObNotificationService, ObliqueTestingModule} from '@oblique/oblique';
+import {ObNotificationService} from '@oblique/oblique';
 import {HttpErrorResponse, HttpRequest} from '@angular/common/http';
 import {throwError} from 'rxjs';
 
@@ -13,7 +13,7 @@ describe('HttpResponsesInterceptor', () => {
 
 	beforeEach(() =>
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [],
 			providers: [HttpResponsesInterceptor, {provide: ObNotificationService, useValue: mockNotificationService}]
 		})
 	);

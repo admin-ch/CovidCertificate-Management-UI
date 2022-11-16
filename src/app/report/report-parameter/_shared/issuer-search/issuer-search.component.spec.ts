@@ -5,7 +5,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {SelectedProfilesService} from '../selected-profiles.service';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {MatTableModule} from '@angular/material/table';
 import {HttpClient} from '@angular/common/http';
 import {FormArray} from '@angular/forms';
@@ -20,15 +19,7 @@ describe('IssuerSearchComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				ObliqueTestingModule,
-				TranslateModule.forRoot(),
-				HttpClientTestingModule,
-				MatTableModule,
-				MatSortModule,
-				MatPaginatorModule,
-				NoopAnimationsModule
-			],
+			imports: [TranslateModule.forRoot(), HttpClientTestingModule, MatTableModule, MatSortModule, MatPaginatorModule, NoopAnimationsModule],
 			declarations: [IssuerSearchComponent],
 			providers: [
 				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()},

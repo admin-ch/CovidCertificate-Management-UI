@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TestFormComponent} from './test-form.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -15,6 +15,8 @@ import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {ProductInfo} from 'shared/model';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -43,8 +45,9 @@ describe('TestFormComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [TestFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
 				NoopAnimationsModule,
-				ObliqueTestingModule,
 				ObNestedFormModule,
 				ReactiveFormsModule,
 				MatSelectModule,

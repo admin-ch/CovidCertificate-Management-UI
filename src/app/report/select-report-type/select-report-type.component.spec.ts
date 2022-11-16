@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SelectReportTypeComponent} from './select-report-type.component';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
 import {Subject} from 'rxjs';
@@ -9,6 +8,7 @@ import {ReportService} from '../report.service';
 import {MatRadioModule} from '@angular/material/radio';
 import {CommonModule} from '@angular/common';
 import {MatStepper} from '@angular/material/stepper';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Directive({
 	selector: '[ecHasAuthorizationFor],[ecHasAuthorizationForAny]'
@@ -36,7 +36,7 @@ describe('SelectReportTypeComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, CommonModule, MatRadioModule],
+			imports: [CommonModule, MatRadioModule, TranslateModule.forRoot()],
 			providers: [
 				{
 					provide: MatStepper,

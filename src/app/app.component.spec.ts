@@ -1,13 +1,14 @@
 import {TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObMasterLayoutService, ObliqueTestingModule} from '@oblique/oblique';
+import {ObMasterLayoutService} from '@oblique/oblique';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {BehaviorSubject, of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {OauthService} from './auth/oauth.service';
 import {AuthFunction, AuthService} from './auth/auth.service';
 import {NotificationService} from './notifications/notification.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('AppComponent', () => {
 	let app: AppComponent;
@@ -15,7 +16,7 @@ describe('AppComponent', () => {
 
 	const configureTestingModule = (oauthServiceMock, authServiceMock) => () => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}]), ObliqueTestingModule],
+			imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([{path: 'test', component: AppComponent}])],
 			declarations: [AppComponent],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 			providers: [
@@ -38,7 +39,7 @@ describe('AppComponent', () => {
 	describe('Authenticated and authorized', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of({isAuthenticated: true}),
+			isAuthenticated$: of(true),
 			claims$: of({}),
 			hasUserRole: () => true,
 			logout: jest.fn(),
@@ -135,7 +136,7 @@ describe('AppComponent', () => {
 	describe('Authenticated and unauthorized', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of({isAuthenticated: true}),
+			isAuthenticated$: of(true),
 			claims$: of({}),
 			hasUserRole: () => false,
 			logout: jest.fn(),
@@ -186,7 +187,7 @@ describe('AppComponent', () => {
 	describe('Unauthenticated', () => {
 		const oauthServiceMock = {
 			name$: of('name'),
-			isAuthenticated$: of({isAuthenticated: false}),
+			isAuthenticated$: of(false),
 			initialize: jest.fn(),
 			loadClaims: jest.fn()
 		};

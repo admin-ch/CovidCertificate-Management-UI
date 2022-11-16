@@ -1,7 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ApiService} from './api.service';
 
 describe('ApiService', () => {
@@ -10,7 +9,7 @@ describe('ApiService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule, ObliqueTestingModule],
+			imports: [HttpClientTestingModule],
 			providers: [{provide: 'HOST', useValue: 'host'}]
 		});
 		service = TestBed.inject(ApiService);

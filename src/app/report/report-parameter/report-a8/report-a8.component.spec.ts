@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportA8Component} from './report-a8.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {DataRoomCode, ReportType} from 'shared/model';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -17,7 +16,7 @@ describe('ReportA8Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule, FormsModule, ReactiveFormsModule],
+			imports: [TranslateModule.forRoot(), FormsModule, ReactiveFormsModule],
 			declarations: [ReportA8Component],
 			providers: [
 				{

@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportEndComponent} from './report-end.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatStepper} from '@angular/material/stepper';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportEndComponent', () => {
 	let component: ReportEndComponent;
@@ -16,7 +16,7 @@ describe('ReportEndComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule],
+			imports: [SharedModule, TranslateModule.forRoot()],
 			declarations: [ReportEndComponent],
 			providers: [
 				{

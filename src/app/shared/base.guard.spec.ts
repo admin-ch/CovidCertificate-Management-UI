@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject, of} from 'rxjs';
 import {AuthFunction, AuthService} from '../auth/auth.service';
-import {ObliqueTestingModule, WINDOW} from '@oblique/oblique';
+import {WINDOW} from '@oblique/oblique';
 import {BaseGuard} from 'shared/base.guard';
 
 describe('BaseGuard', () => {
@@ -17,7 +17,7 @@ describe('BaseGuard', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule, ObliqueTestingModule],
+			imports: [RouterTestingModule],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},
 				{

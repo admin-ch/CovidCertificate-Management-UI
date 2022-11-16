@@ -18,7 +18,7 @@ describe('OauthService', () => {
 						logoff: jest.fn(),
 						authorize: jest.fn(),
 						checkAuth: jest.fn().mockReturnValue(EMPTY),
-						isAuthenticated$: of(false),
+						isAuthenticated$: of({isAuthenticated: false}),
 						userData$: of(EMPTY)
 					}
 				},
@@ -103,8 +103,8 @@ describe('OauthService', () => {
 	describe('loadClaims', () => {
 		it('should receive from isAuthenticated$', done => {
 			service.loadClaims();
-			auth.isAuthenticated$.subscribe(isAuthenticated => {
-				expect(isAuthenticated).toBe(false);
+			auth.isAuthenticated$.subscribe(loginResponse => {
+				expect(loginResponse.isAuthenticated).toBe(false);
 				done();
 			});
 		});
@@ -112,7 +112,7 @@ describe('OauthService', () => {
 		describe('unauthorized', () => {
 			beforeEach(() => {
 				// @ts-ignore
-				auth.isAuthenticated$ = of(false);
+				auth.isAuthenticated$ = of({isAuthenticated: false});
 				// @ts-ignore
 				auth.userData$ = of({userData: {}});
 			});
@@ -130,14 +130,14 @@ describe('OauthService', () => {
 				});
 				it('should emit isAuthenticated', () => {
 					// @ts-ignore
-					spyOn(service.isAuthenticated, 'next');
+					jest.spyOn(service.isAuthenticated, 'next');
 					service.loadClaims();
 					// @ts-ignore
 					expect(service.isAuthenticated.next).toHaveBeenCalledWith(false);
 				});
 				it('should not emit claims', () => {
 					// @ts-ignore
-					spyOn(service.claims, 'next');
+					jest.spyOn(service.claims, 'next');
 					service.loadClaims();
 					// @ts-ignore
 					expect(service.claims.next).not.toHaveBeenCalled();
@@ -161,7 +161,7 @@ describe('OauthService', () => {
 				});
 				it('should emit isAuthenticated', () => {
 					// @ts-ignore
-					spyOn(service.isAuthenticated, 'next');
+					jest.spyOn(service.isAuthenticated, 'next');
 					service.loadClaims();
 					// @ts-ignore
 					expect(service.isAuthenticated.next).toHaveBeenCalledWith(false);
@@ -179,7 +179,7 @@ describe('OauthService', () => {
 		describe('authorized', () => {
 			beforeEach(() => {
 				// @ts-ignore
-				auth.isAuthenticated$ = of(true);
+				auth.isAuthenticated$ = of({isAuthenticated: true});
 			});
 			it('should emit isAuthenticated true', done => {
 				service.loadClaims();
@@ -190,7 +190,7 @@ describe('OauthService', () => {
 			});
 			it('should emit isAuthenticated', () => {
 				// @ts-ignore
-				spyOn(service.isAuthenticated, 'next');
+				jest.spyOn(service.isAuthenticated, 'next');
 				service.loadClaims();
 				// @ts-ignore
 				expect(service.isAuthenticated.next).toHaveBeenCalled();

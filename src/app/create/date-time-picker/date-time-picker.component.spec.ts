@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {DateTimePickerComponent} from './date-time-picker.component';
 
 describe('DateTimePickerComponent', () => {
@@ -10,7 +9,7 @@ describe('DateTimePickerComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, ReactiveFormsModule],
+			imports: [ReactiveFormsModule],
 			declarations: [DateTimePickerComponent],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
