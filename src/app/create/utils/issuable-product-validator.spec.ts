@@ -1,10 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 import {ValueSetsService} from './value-sets.service';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ValueSetsResponse} from 'shared/model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IssuableProductValidator} from './issuable-product-validator';
 import {ValueSetsResponseMock} from './value-sets-response-mock';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('IssuableProductValidator', () => {
 	let service: ValueSetsService;
@@ -13,9 +13,10 @@ describe('IssuableProductValidator', () => {
 
 	beforeAll(() => {
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule]
+			imports: [TranslateModule.forRoot()]
 		});
 		service = TestBed.inject(ValueSetsService);
+		TestBed.inject(TranslateService).use('en');
 		service.setValueSets(valueSets);
 	});
 

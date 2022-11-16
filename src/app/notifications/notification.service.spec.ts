@@ -16,6 +16,7 @@ describe('NotificationService', () => {
 		body: []
 	};
 	const getMock = jest.fn().mockReturnValue(of(mockResponse));
+	// @ts-ignore
 	const timerMock = jest.spyOn(rxjs, 'timer').mockReturnValue(of(1));
 
 	beforeEach(() => {
@@ -80,6 +81,8 @@ describe('NotificationService', () => {
 		});
 
 		it('should call pull every 15 minutes', () => {
+			localStorage.getItem = jest.fn(() => null);
+
 			service.fetchNotifications();
 
 			expect(timerMock).toHaveBeenCalledWith(0, 1000 * 60 * 15);
@@ -97,8 +100,7 @@ describe('NotificationService', () => {
 		});
 
 		it('should call get with If-None-Match header', () => {
-			localStorage.getItem = jest.fn(() => 'ETag');
-
+			jest.spyOn(localStorage, 'getItem').mockReturnValueOnce('ETag').mockReturnValueOnce(null);
 			service.fetchNotifications();
 			expect(getMock).toHaveBeenCalledWith(`NOTIFICATION_HOST/api/v1/notifications/`, {
 				headers: {'If-None-Match': 'ETag'},

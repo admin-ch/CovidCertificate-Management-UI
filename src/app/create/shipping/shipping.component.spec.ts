@@ -1,12 +1,12 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ShippingComponent} from './shipping.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ShippingComponent', () => {
 	let component: ShippingComponent;
@@ -14,7 +14,7 @@ describe('ShippingComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [NoopAnimationsModule, ObliqueTestingModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
+			imports: [TranslateModule.forRoot(), NoopAnimationsModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 			declarations: [ShippingComponent],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();

@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NotificationsManagementComponent} from './notifications-management.component';
-import {ObMockNotificationService, ObNotificationService, ObliqueTestingModule} from '@oblique/oblique';
+import {ObMockNotificationService, ObNotificationService} from '@oblique/oblique';
 import {NotificationApiService} from '../notification-api.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
@@ -17,7 +17,7 @@ describe('NotificationsManagementComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [RouterTestingModule, ObliqueTestingModule, TranslateModule, MatTableModule, MatDialogModule],
+			imports: [RouterTestingModule, TranslateModule.forRoot(), MatTableModule, MatDialogModule],
 			providers: [
 				{provide: ObNotificationService, useClass: ObMockNotificationService},
 				{

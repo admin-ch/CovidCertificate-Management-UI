@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportA9Component} from './report-a9.component';
 import {ReportType} from 'shared/model';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormArray, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ReportService} from '../../report.service';
@@ -16,7 +15,7 @@ describe('ReportA9Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule, FormsModule, ReactiveFormsModule],
+			imports: [TranslateModule.forRoot(), FormsModule, ReactiveFormsModule],
 			declarations: [ReportA9Component],
 			providers: [
 				{

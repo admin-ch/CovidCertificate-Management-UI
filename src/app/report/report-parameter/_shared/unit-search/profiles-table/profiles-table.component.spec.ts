@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProfilesTableComponent} from './profiles-table.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MatTableModule} from '@angular/material/table';
@@ -16,7 +15,7 @@ describe('ProfilesTableComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule],
+			imports: [HttpClientTestingModule, TranslateModule.forRoot(), MatTableModule],
 			declarations: [ProfilesTableComponent],
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},

@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {VaccinationImportantInformationComponent} from './vaccination-important-information.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('WhoCheckboxComponent', () => {
 	let component: VaccinationImportantInformationComponent;
@@ -11,7 +11,7 @@ describe('WhoCheckboxComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, ReactiveFormsModule, MatCheckboxModule],
+			imports: [ReactiveFormsModule, MatCheckboxModule, TranslateModule.forRoot()],
 			declarations: [VaccinationImportantInformationComponent],
 			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();

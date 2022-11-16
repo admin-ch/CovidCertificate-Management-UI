@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {ReportA4A6Component} from './report-a4-a6.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
@@ -12,6 +11,7 @@ import {ReportService} from '../../report.service';
 import {Subject} from 'rxjs';
 import {MatRadioModule} from '@angular/material/radio';
 import {SelectedProfilesService} from '../_shared/selected-profiles.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportA4A6Component', () => {
 	let component: ReportA4A6Component;
@@ -20,7 +20,16 @@ describe('ReportA4A6Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatRadioModule],
+			imports: [
+				TranslateModule.forRoot(),
+				SharedModule,
+				HttpClientTestingModule,
+				FormsModule,
+				ReactiveFormsModule,
+				MatFormFieldModule,
+				MatRadioModule,
+				TranslateModule.forRoot()
+			],
 			providers: [
 				{provide: 'REPORT_HOST', useValue: 'REPORT_HOST'},
 				{

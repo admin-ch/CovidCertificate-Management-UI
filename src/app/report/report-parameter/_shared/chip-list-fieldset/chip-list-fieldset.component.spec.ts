@@ -7,7 +7,6 @@ import {ReportService} from '../../../report.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 
 describe('ChipListFieldsetComponent', () => {
 	let component: ChipListFieldsetComponent;
@@ -16,7 +15,7 @@ describe('ChipListFieldsetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [],
 			declarations: [ChipListFieldsetComponent],
 			providers: [
 				{

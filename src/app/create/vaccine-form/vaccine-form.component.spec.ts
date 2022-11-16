@@ -5,13 +5,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import * as moment from 'moment';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {VaccineFormComponent} from './vaccine-form.component';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
@@ -32,7 +34,16 @@ describe('VaccineFormComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [VaccineFormComponent, DateTimePickerComponent, PersonalDataComponent],
-			imports: [NoopAnimationsModule, ObliqueTestingModule, ObNestedFormModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
+			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
+				NoopAnimationsModule,
+				ObNestedFormModule,
+				ReactiveFormsModule,
+				MatSelectModule,
+				MatFormFieldModule,
+				MatInputModule
+			],
 			providers: [
 				{
 					provide: ValueSetsService,

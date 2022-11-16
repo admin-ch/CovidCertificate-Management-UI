@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {ReportGenerationComponent} from './report-generation.component';
 import {MatStepper} from '@angular/material/stepper';
@@ -17,7 +16,7 @@ describe('ReportGenerationComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule, HttpClientTestingModule, TranslateModule],
+			imports: [SharedModule, HttpClientTestingModule, TranslateModule.forRoot()],
 			providers: [
 				{
 					provide: MatStepper,

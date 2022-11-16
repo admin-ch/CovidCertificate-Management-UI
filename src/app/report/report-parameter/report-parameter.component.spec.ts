@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {SharedModule} from 'shared/shared.module';
 import {ReportService} from '../report.service';
 import {ReportParameterComponent} from './report-parameter.component';
@@ -28,7 +27,7 @@ describe('ReportParameterComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, SharedModule],
+			imports: [SharedModule],
 			providers: [
 				{
 					provide: ReportService,
@@ -58,15 +57,22 @@ describe('ReportParameterComponent', () => {
 				expect(reportServiceMock.generateReport$.next).toHaveBeenCalled();
 			}));
 			it('call next on stepper', waitForAsync(() => {
-				const nextSpy = spyOn(stepper, 'next');
+				const nextSpy = jest.spyOn(stepper, 'next');
 				component.goNext();
 				expect(nextSpy).toHaveBeenCalled();
 			}));
 		});
 		describe('when formGroup is invalid', () => {
+			let stepperNextSpy: jest.SpyInstance;
+
+			beforeAll(() => {
+				stepperNextSpy = jest.spyOn(stepper, 'next');
+			});
+
 			beforeEach(() => {
 				reportServiceMock.generateReport$.next.mockReset();
 				reportServiceMock.formGroup.setErrors({hasError: true});
+				stepperNextSpy.mockReset();
 			});
 
 			it('should not emit next()', waitForAsync(() => {
@@ -74,9 +80,8 @@ describe('ReportParameterComponent', () => {
 				expect(reportServiceMock.generateReport$.next).not.toHaveBeenCalled();
 			}));
 			it('not call next on stepper', waitForAsync(() => {
-				const nextSpy = spyOn(stepper, 'next');
 				component.goNext();
-				expect(nextSpy).not.toHaveBeenCalled();
+				expect(stepperNextSpy).not.toHaveBeenCalled();
 			}));
 			it('should call formGroup.markAllAsTouched()', waitForAsync(() => {
 				const spy = jest.spyOn(reportServiceMock.formGroup, 'markAllAsTouched');

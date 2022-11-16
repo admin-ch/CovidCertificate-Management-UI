@@ -5,7 +5,6 @@ import {AuthService} from '../../../../auth/auth.service';
 import {DataRoomCode} from 'shared/model';
 import {Subject} from 'rxjs';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormControl} from '@angular/forms';
 import {ReportService} from '../../../report.service';
@@ -19,7 +18,7 @@ describe('DataRoomSelectionComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [DataRoomSelectionFieldsetComponent],
 			providers: [
 				{

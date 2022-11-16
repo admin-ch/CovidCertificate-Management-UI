@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject, of} from 'rxjs';
 import {AuthFunction, AuthService} from './auth.service';
-import {ObliqueTestingModule, WINDOW} from '@oblique/oblique';
+import {WINDOW} from '@oblique/oblique';
 import {AuthGuardService} from './auth-guard.service';
 import {OauthService} from './oauth.service';
 import {AutoLoginComponent} from './auto-login.component';
@@ -24,7 +24,7 @@ describe('AuthGuardService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}]), ObliqueTestingModule],
+			imports: [RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}])],
 			declarations: [AutoLoginComponent],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},

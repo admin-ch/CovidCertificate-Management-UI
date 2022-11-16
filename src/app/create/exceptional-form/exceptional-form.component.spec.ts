@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExceptionalFormComponent} from './exceptional-form.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObNestedFormModule, ObliqueTestingModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,6 +13,8 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {ValueSetsService} from '../utils/value-sets.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ExceptionalFormComponent', () => {
 	let component: ExceptionalFormComponent;
@@ -37,8 +39,9 @@ describe('ExceptionalFormComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [ExceptionalFormComponent, DateTimePickerComponent],
 			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
 				NoopAnimationsModule,
-				ObliqueTestingModule,
 				ObNestedFormModule,
 				ReactiveFormsModule,
 				MatSelectModule,
