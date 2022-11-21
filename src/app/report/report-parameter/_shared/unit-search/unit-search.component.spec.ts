@@ -147,11 +147,13 @@ describe('UnitSearchComponent', () => {
 
 				tick();
 
-				const expectCorrectParents = (unitTree: UnitTree, expectedParent: UnitTree) => {
-					expect(unitTree.parent).toBe(expectedParent);
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				const expectCorrectParents = (unitTree: UnitTree, expectedParent: UnitTree, depth = 0) => {
+					if (depth > 0) {
+						expect(unitTree.parent).toBe(expectedParent);
+					}
 					unitTree.children.forEach(child => expectCorrectParents(child, unitTree));
 				};
+				component.treeDataSource.data.forEach(ut => expectCorrectParents(ut, null));
 			}));
 
 			it('should treeDataSource.data', fakeAsync(() => {
