@@ -6,7 +6,7 @@ name: Node.js CI
 on:
     workflow_dispatch:
     push:
-        tags:        
+        tags:
           - '*.*.*'
     pull_request:
         branches:
@@ -20,7 +20,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [14.x, 16.8]
+                node-version: [14.x, 16.10]
 
         steps:
             - uses: actions/checkout@v2
