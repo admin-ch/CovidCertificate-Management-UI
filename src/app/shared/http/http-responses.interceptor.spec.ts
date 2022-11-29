@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpResponsesInterceptor} from './http-responses.interceptor';
-import {ObliqueTestingModule, ObNotificationService} from '@oblique/oblique';
+import {ObNotificationService} from '@oblique/oblique';
 import {HttpErrorResponse, HttpRequest} from '@angular/common/http';
 import {throwError} from 'rxjs';
 
@@ -13,7 +13,7 @@ describe('HttpResponsesInterceptor', () => {
 
 	beforeEach(() =>
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [],
 			providers: [HttpResponsesInterceptor, {provide: ObNotificationService, useValue: mockNotificationService}]
 		})
 	);
@@ -38,7 +38,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should rethrow the error', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				error => {
 					expect(error.error).toEqual({errorCode: 42});
 					done();
@@ -48,7 +48,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledTimes(1);
 					done();
@@ -58,7 +58,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService with the correct param', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledWith('i18n.oblique.http.error.status.500');
 					done();
@@ -75,7 +75,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledTimes(1);
 					done();
@@ -85,7 +85,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService with the correct param', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledWith('validation.error.http.470');
 					done();
@@ -101,7 +101,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledTimes(1);
 					done();
@@ -111,7 +111,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService with the correct param', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledWith('validation.error.http.485');
 					done();
@@ -128,7 +128,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledTimes(1);
 					done();
@@ -138,7 +138,7 @@ describe('HttpResponsesInterceptor', () => {
 
 		it('should call the ObNotificationService with the correct param', done => {
 			interceptor.intercept(mockHttpRequest, mockGeneralErrorHttpHandler).subscribe(
-				() => {},
+				() => fail(),
 				() => {
 					expect(mockNotificationService.error).toHaveBeenCalledWith('i18n.oblique.http.error.status.0');
 					done();

@@ -14,9 +14,7 @@ import {CertificateRevokeGuard} from './certificate-revoke.guard';
 	declarations: [CertificateRevokeComponent],
 	imports: [
 		SharedModule,
-		RouterModule.forChild([
-			{path: '', component: CertificateRevokeComponent, canActivate: [AuthGuardService, CertificateRevokeGuard]}
-		]),
+		RouterModule.forChild([{path: '', component: CertificateRevokeComponent, canActivate: [AuthGuardService, CertificateRevokeGuard]}]),
 		ObAlertModule,
 		ObButtonModule,
 		ObErrorMessagesModule,

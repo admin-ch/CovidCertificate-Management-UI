@@ -9,10 +9,7 @@ import {ObIObliqueHttpErrorResponse} from '@oblique/oblique/lib/http-api-interce
 export class HttpResponsesInterceptor implements HttpInterceptor {
 	private readonly supportedErrorCodes: number[] = [453, 470, 482, 485, 489, 458, 459, 497, 1004];
 
-	constructor(
-		private readonly notificationService: ObNotificationService,
-		private readonly interceptorEvents: ObHttpApiInterceptorEvents
-	) {}
+	constructor(private readonly notificationService: ObNotificationService, private readonly interceptorEvents: ObHttpApiInterceptorEvents) {}
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		return next.handle(request).pipe(
@@ -25,9 +22,7 @@ export class HttpResponsesInterceptor implements HttpInterceptor {
 	}
 
 	private handleUnknownError(error: ObIObliqueHttpErrorResponse): Observable<never> {
-		return this.handleError(error, !(error.error instanceof HttpErrorResponse), () =>
-			this.notificationService.error('i18n.oblique.http.error.general')
-		);
+		return this.handleError(error, !(error.error instanceof HttpErrorResponse), () => this.notificationService.error('i18n.oblique.http.error.general'));
 	}
 
 	private handleSessionExpiredError(error: ObIObliqueHttpErrorResponse): Observable<never> {
@@ -53,7 +48,7 @@ export class HttpResponsesInterceptor implements HttpInterceptor {
 	}
 
 	private isErrorHandled(error: HttpErrorResponse): boolean {
-		return this.supportedErrorCodes.indexOf(error?.error?.errorCode) > -1;
+		return this.supportedErrorCodes.includes(error?.error?.errorCode);
 	}
 
 	private notify(error: HttpErrorResponse): void {

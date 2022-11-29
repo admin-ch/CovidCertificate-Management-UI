@@ -13,7 +13,7 @@ export class DeliveryCodeCleanerDirective {
 	}
 
 	private setValue(value: string): void {
-		if (!!value) {
+		if (value) {
 			this.ngControl.reset(this.formatValue(value));
 		}
 	}

@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {OtpComponent} from './otp.component';
 import {of} from 'rxjs';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {OtpService} from './otp.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('OtpComponent', () => {
 	let component: OtpComponent;
@@ -15,7 +15,7 @@ describe('OtpComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [OtpComponent],
 			providers: [
 				{

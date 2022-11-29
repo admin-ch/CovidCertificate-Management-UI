@@ -10,26 +10,53 @@
 		<link href="assets/images/favicon.png" rel="shortcut icon" />
 	</head>
 	<body class="has-overlay">
-		<noscript style="display: table; height: 98vh; width: 98vw">
-			<section style="display: table-cell; vertical-align: middle">
-				<strong>Javascript is required!</strong>
-				<p>Please activate JavaScript as it is required for this application to run.</p>
-			</section>
+		<noscript class="ob-no-script">
+			<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+				<section lang="de">
+					<strong>JavaScript ist erforderlich!</strong>
+					<p>Bitte aktivieren Sie JavaScript, da es für die Ausführung dieser Anwendung erforderlich ist.</p>
+				</section>
+				<section lang="fr">
+					<strong>JavaScript est nécessaire!</strong>
+					<p>Veuillez activer JavaScript car il est nécessaire pour le fonctionnement de cette application.</p>
+				</section>
+				<section lang="it">
+					<strong>JavaScript è richiesto!</strong>
+					<p>Si prega di attivare JavaScript perché è necessario per l'esecuzione di questa applicazione.</p>
+				</section>
+				<section lang="en">
+					<strong>JavaScript is required!</strong>
+					<p>Please activate JavaScript as it is required for this application to run.</p>
+				</section>
+			</div>
 		</noscript>
-		<div
-			class="ob-compatibility"
-			hidden
-			style="position: fixed; top: 0; bottom: 0; right: 0; left: 0; background: white; z-index: 9999"
-		>
-			<section style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
-				<strong>Unsupported browser!</strong>
-				<p>Some features required for this application to run are not supported by your browser.</p>
-				<p>
-					Please note that the Swiss Confederation only supports Chrome, Firefox, Edge and Safari in their
-					respective latest 2 versions.
-				</p>
-			</section>
+		<div class="ob-compatibility" hidden style="position: fixed; top: 0; bottom: 0; right: 0; left: 0; background: white; z-index: 9999">
+			<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+				<section lang="de">
+					<strong>Nicht unterstützter Browser!</strong>
+					<p>Einige Funktionen, die für die Ausführung dieser Anwendung erforderlich sind, werden von Ihrem Browser nicht unterstützt.</p>
+					<p>
+						Bitte beachten Sie, dass die Schweizerische Eidgenossenschaft nur Chrome, Firefox, Edge und Safari in ihren jeweils 2 letzten Versionen unterstützt.
+					</p>
+				</section>
+				<section lang="fr">
+					<strong>Navigateur non pris en charge!</strong>
+					<p>Certaines fonctionnalités nécessaires au fonctionnement de cette application ne sont pas prises en charge par votre navigateur.</p>
+					<p>Veuillez noter que la Confédération suisse ne supporte que Chrome, Firefox, Edge et Safari dans leurs 2 dernières versions respectives.</p>
+				</section>
+				<section lang="it">
+					<strong>Browser non supportato!</strong>
+					<p>Alcune funzioni necessarie per il funzionamento di questa applicazione non sono supportate dal tuo browser.</p>
+					<p>Si prega di notare che la Confederazione Svizzera supporta solo Chrome, Firefox, Edge e Safari nelle loro rispettive ultime 2 versioni.</p>
+				</section>
+				<section lang="en">
+					<strong>Unsupported browser!</strong>
+					<p>Some features required for this application to run are not supported by your browser.</p>
+					<p>Please note that the Swiss Confederation only supports Chrome, Firefox, Edge and Safari in their respective latest 2 versions.</p>
+				</section>
+			</div>
 		</div>
+
 		<ec-root></ec-root>
 	</body>
 </html>

@@ -37,7 +37,7 @@ export class ProfilesTableComponent {
 		private readonly http: HttpClient,
 		@Inject('REPORT_HOST') private readonly REPORT_HOST: string
 	) {
-		this.PROFILES_URL = REPORT_HOST + '/api/v2/report/unit/profiles';
+		this.PROFILES_URL = `${REPORT_HOST}/api/v2/report/unit/profiles`;
 	}
 
 	/** Stores and returns the Observables for fetching Eiam profiles. We store them in order to avoid creating

@@ -6,8 +6,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		id="templates-link"
-		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-		>{{ "upload.templates" | translate }}</a
+		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span>{{ "upload.templates" | translate }}</a
 	>
 </p>
 
@@ -18,13 +17,7 @@
 <input type="file" class="file-input" accept=".csv" (change)="onFileSelected($event)" #fileBulkRevocationUpload />
 
 <div class="file-selection">
-	<button
-		id="select-file-bulk-revocation-button"
-		mat-button
-		obButton="secondary"
-		(click)="fileBulkRevocationUpload.click()"
-		class="margin-right"
-	>
+	<button id="select-file-bulk-revocation-button" mat-button obButton="secondary" (click)="fileBulkRevocationUpload.click()" class="margin-right">
 		{{ "upload.file.select" | translate }}
 	</button>
 
@@ -33,12 +26,6 @@
 </div>
 <p class="hint">{{ "upload.file.select.limit" | translate }}</p>
 
-<button
-	id="upload-file-button"
-	mat-button
-	obButton="primary"
-	(click)="uploadSelectedFile()"
-	[disabled]="!canUploadFile()"
->
+<button id="upload-file-button" mat-button obButton="primary" (click)="uploadSelectedFile()" [disabled]="!canUploadFile()">
 	{{ "bulk.revocation.file.upload" | translate }}
 </button>

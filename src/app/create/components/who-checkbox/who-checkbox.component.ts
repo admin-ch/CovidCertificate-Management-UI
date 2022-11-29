@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
 	selector: 'ec-who-checkbox',
@@ -7,7 +7,7 @@ import {FormControl} from '@angular/forms';
 	styleUrls: ['./who-checkbox.component.scss']
 })
 export class WhoCheckboxComponent {
-	@Input() control: FormControl;
+	@Input() control: UntypedFormControl;
 	@Input() infoText: string;
 	@Input() moreInfo: string;
 

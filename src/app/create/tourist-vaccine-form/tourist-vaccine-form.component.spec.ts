@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TouristVaccineFormComponent} from './tourist-vaccine-form.component';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType} from 'shared/model';
 import {WhoCheckboxComponent} from '../components/who-checkbox/who-checkbox.component';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
 describe.skip('TouristVaccineFormComponent', () => {
 	let component: TouristVaccineFormComponent;
@@ -34,15 +34,7 @@ describe.skip('TouristVaccineFormComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [TouristVaccineFormComponent, DateTimePickerComponent, WhoCheckboxComponent, PersonalDataComponent],
-			imports: [
-				NoopAnimationsModule,
-				ObliqueTestingModule,
-				ObNestedFormModule,
-				ReactiveFormsModule,
-				MatSelectModule,
-				MatFormFieldModule,
-				MatInputModule
-			],
+			imports: [NoopAnimationsModule, ObNestedFormModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 			providers: [
 				{
 					provide: ValueSetsService,
@@ -242,14 +234,14 @@ describe.skip('TouristVaccineFormComponent', () => {
 			});
 
 			it('should mark the dateOfVaccination as invalid if set before birthdate', () => {
-				const dateAhead = moment(datePast).clone().add({days: 1})
-				component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				const dateAhead = moment(datePast).clone().add({days: 1});
+				component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue({date: dateAhead.toDate(), time: timeNoon});
 				component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
 				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
 			});
 
 			it('should mark the dateOfVaccination as valid if set after/equal birthdate', () => {
-				component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+				component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue(datePast);
 				component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
 				expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeFalsy();
 			});

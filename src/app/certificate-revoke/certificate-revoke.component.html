@@ -13,13 +13,7 @@
 		<div class="input-container">
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateRevoke.uvci" | translate }}</mat-label>
-				<input
-					type="text"
-					matInput
-					formControlName="uvci"
-					id="input-uvci"
-					placeholder="urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx"
-				/>
+				<input type="text" matInput formControlName="uvci" id="input-uvci" placeholder="urn:uvci:01:CH:xxxxxxxxxxxxxxxxxxxxxxxx" />
 				<mat-error></mat-error>
 			</mat-form-field>
 			<mat-checkbox aria-label="isFraudCheckbox" [checked]="isFraud" (change)="toggleFraud()">
@@ -32,9 +26,7 @@
 		</button>
 	</form>
 
-	<ob-alert *ngIf="revoked" type="success">{{
-		"certificateRevoke.success" | obTranslateParams: { uvci: uvciUsed }
-	}}</ob-alert>
+	<ob-alert *ngIf="revoked" type="success">{{ "certificateRevoke.success" | obTranslateParams: { uvci: uvciUsed } }}</ob-alert>
 
 	<ob-alert *ngIf="previouslyRevoked" type="warning">{{
 		"certificateRevoke.alreadyRevoked" | obTranslateParams: { date: revocationDate | date: "dd.MM.YYYY HH:mm" }

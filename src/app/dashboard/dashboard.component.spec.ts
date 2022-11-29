@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {DashboardComponent} from './dashboard.component';
-import {ObliqueTestingModule, ObNotificationService} from '@oblique/oblique';
+import {ObNotificationService} from '@oblique/oblique';
 import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
@@ -25,9 +25,7 @@ export class HasAuthorizationForMockDirective {
 describe('DashboardComponent', () => {
 	let component: DashboardComponent;
 	let fixture: ComponentFixture<DashboardComponent>;
-	const router = {
-		navigateByUrl: jasmine.createSpy('navigateByUrl')
-	};
+	let router: Router;
 
 	const notificationServiceMock = {
 		closableNotifications$: new Subject<Notification[]>()
@@ -42,33 +40,31 @@ describe('DashboardComponent', () => {
 		currentLang: 'en'
 	};
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [
-					RouterTestingModule.withRoutes([
-						{
-							path: 'test',
-							component: DashboardComponent
-						}
-					]),
-					ObliqueTestingModule
-				],
-				declarations: [DashboardComponent, HasAuthorizationForMockDirective],
-				schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-				providers: [
-					{provide: Router, useValue: router},
-					{provide: NotificationService, useValue: notificationServiceMock},
-					{provide: ObNotificationService, useValue: obNotificationServiceMock},
-					{provide: TranslateService, useValue: translateServiceMock}
-				]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule.withRoutes([
+					{
+						path: 'test',
+						component: DashboardComponent
+					}
+				])
+			],
+			declarations: [DashboardComponent, HasAuthorizationForMockDirective],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+			providers: [
+				{provide: Router, useValue: {navigateByUrl: jest.fn()}},
+				{provide: NotificationService, useValue: notificationServiceMock},
+				{provide: ObNotificationService, useValue: obNotificationServiceMock},
+				{provide: TranslateService, useValue: translateServiceMock}
+			]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DashboardComponent);
 		component = fixture.componentInstance;
+		router = TestBed.inject(Router);
 		fixture.detectChanges();
 	});
 

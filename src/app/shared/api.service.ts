@@ -33,11 +33,11 @@ export class ApiService {
 		return this.http.get<T>(`${this.path}/${url}`, options);
 	}
 
-	post<T>(url: string, data: any, options?: HttpOptions): Observable<T> {
+	post<T>(url: string, data: unknown, options?: HttpOptions): Observable<T> {
 		return this.http.post<T>(`${this.path}/${url}`, data, options);
 	}
 
-	postText(url: string, data: any): Observable<string> {
+	postText(url: string, data: unknown): Observable<string> {
 		return this.http.post(`${this.path}/${url}`, data, {responseType: 'text'});
 	}
 
@@ -53,11 +53,11 @@ export class ApiService {
 		return this.http.options<T>(`${this.path}/${url}`, options);
 	}
 
-	put<T>(url: string, data: any, options?: HttpOptions): Observable<T> {
+	put<T>(url: string, data: unknown, options?: HttpOptions): Observable<T> {
 		return this.http.put<T>(`${this.path}/${url}`, data, options);
 	}
 
-	patch<T>(url: string, data: any, options?: HttpOptions): Observable<T> {
+	patch<T>(url: string, data: unknown, options?: HttpOptions): Observable<T> {
 		return this.http.patch<T>(`${this.path}/${url}`, data, options);
 	}
 

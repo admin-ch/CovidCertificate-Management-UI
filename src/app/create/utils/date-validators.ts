@@ -11,7 +11,7 @@ export class DateValidators {
 
 	static validShortDate() {
 		return (control: AbstractControl): {[key: string]: boolean} | null => {
-			const dateValue: any = control.value?.date;
+			const dateValue: string = control.value?.date;
 			if (!this.isDate(dateValue) && !this.DATE_REGEX.test(dateValue)) {
 				return {invalidShortDate: true};
 			}
@@ -62,19 +62,18 @@ export class DateValidators {
 			}
 
 			let birthdate = this.getMomentDate(formValue?.birthdate?.date);
-			if (!birthdate || !birthdate.isValid()) {
-
-				const [year, month, day] = (formValue?.birthdate?.date as string)?.split('-') || []
+			if (!birthdate?.isValid()) {
+				const [year, month, day] = (formValue?.birthdate?.date as string)?.split('-') || [];
 
 				if (!year || (!!day && !month)) {
 					return null;
 				}
 				if (!month) {
-					birthdate = moment(`${year}-01-01`)
+					birthdate = moment(`${year}-01-01`);
 				} else if (!day) {
-					birthdate = moment(`${year}-${month}-01`)
+					birthdate = moment(`${year}-${month}-01`);
 				} else {
-					birthdate = moment(`${year}-${month}-${day}`)
+					birthdate = moment(`${year}-${month}-${day}`);
 				}
 			}
 			if (!!dateValue && dateValue.isBefore(birthdate)) {
@@ -93,9 +92,8 @@ export class DateValidators {
 			if (!!momentDateValue && momentDateValue.isAfter(today)) {
 				if (control.value?.date > today) {
 					return {dateAfterToday: true};
-				} else {
-					return {timeAfterToday: true};
 				}
+				return {timeAfterToday: true};
 			}
 			return null;
 		};
@@ -128,7 +126,7 @@ export class DateValidators {
 		return moment(date, DATE_FORMAT);
 	}
 
-	private static isDate(value: any): boolean {
+	private static isDate(value: unknown): boolean {
 		const isMoment: boolean = moment.isMoment(value);
 		const isDateObject: boolean = value instanceof Date;
 		return isDateObject || isMoment;

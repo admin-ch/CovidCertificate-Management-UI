@@ -11,11 +11,7 @@ import {of} from 'rxjs';
 		<div id="ecHasAuthorizationForDiv" *ecHasAuthorizationFor="AuthFunction.CREATE_CERTIFICATE_WEB"></div>
 		<div
 			id="ecHasAuthorizationForAnyDiv"
-			*ecHasAuthorizationForAny="[
-				AuthFunction.CREATE_CERTIFICATE_WEB,
-				AuthFunction.CREATE_TEST_CERTIFICATE,
-				AuthFunction.OTP_GENERATION
-			]"
+			*ecHasAuthorizationForAny="[AuthFunction.CREATE_CERTIFICATE_WEB, AuthFunction.CREATE_TEST_CERTIFICATE, AuthFunction.OTP_GENERATION]"
 		></div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush

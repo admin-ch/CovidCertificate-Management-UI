@@ -1,12 +1,12 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {SelectedProfilesComponent} from './selected-profiles.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {SelectedProfilesService} from '../selected-profiles.service';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../../report.service';
 import {FormArray, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('SelectedUnitsComponent', () => {
 	let component: SelectedProfilesComponent;
@@ -16,7 +16,7 @@ describe('SelectedUnitsComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [SelectedProfilesComponent],
 			providers: [
 				{provide: SelectedProfilesService, useValue: new SelectedProfilesService()},
@@ -61,7 +61,6 @@ describe('SelectedUnitsComponent', () => {
 			expect(clear).toHaveBeenCalled();
 		}));
 		it('should populate formArray', fakeAsync(() => {
-			const clear = jest.spyOn(component.userIdsFormArray, 'clear');
 			// @ts-ignore
 			selectedProfilesService.changes.next([
 				// @ts-ignore

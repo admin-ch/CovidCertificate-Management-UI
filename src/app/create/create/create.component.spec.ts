@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CreateComponent} from './create.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {of} from 'rxjs';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {CertificateService} from 'shared/certificate.service';
@@ -22,7 +21,7 @@ describe('CreateComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [],
 			declarations: [CreateComponent],
 			providers: [
 				{

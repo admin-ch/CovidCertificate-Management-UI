@@ -2,9 +2,7 @@
 	<legend>{{ "reports.a7.selected-dataroom" | translate }}</legend>
 	<mat-form-field>
 		<mat-select [formControl]="dataRoomFormControl" [errorStateMatcher]="matcher">
-			<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async" [value]="dataRoom">{{
-				"dataroom." + (dataRoom | lowercase) | translate
-			}}</mat-option>
+			<mat-option *ngFor="let dataRoom of authorizedDataRooms$ | async" [value]="dataRoom">{{ "dataroom." + (dataRoom | lowercase) | translate }}</mat-option>
 		</mat-select>
 		<mat-error *ngIf="dataRoomFormControl.hasError('required')">
 			{{ "i18n.validation.required" | translate }}

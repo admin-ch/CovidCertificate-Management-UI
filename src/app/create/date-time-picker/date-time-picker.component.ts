@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostBinding, Input, OnChanges, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import timePolyfill from 'time-input-polyfill';
 import supportsTime from 'time-input-polyfill/supportsTime';
@@ -27,7 +27,6 @@ const MY_FORMATS: MatDateFormats = {
 	providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}]
 })
 export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit {
-	private static counter = 0;
 	@Input() id: string;
 	@Input() label: string;
 	@Input() showTime = true;
@@ -38,10 +37,11 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	@Input() shortDateAllowed: boolean;
 	@Input() minDate: Date = DateValidators.MIN_DATE;
 	@HostBinding('class.datetime') datetime = true;
-	form: FormGroup;
+	form: UntypedFormGroup;
 	maxDate: Date = new Date();
 
 	showShortDateInputField = false;
+	private static counter = 0;
 
 	get timePolyfillNeeded(): boolean {
 		if (supportsTime !== undefined) {
@@ -50,7 +50,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 		return false;
 	}
 
-	constructor(readonly fb: FormBuilder) {
+	constructor(readonly fb: UntypedFormBuilder) {
 		this.createForm();
 	}
 
@@ -129,7 +129,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 	}
 
 	private updateErrors(): void {
-		if (!!this.errors) {
+		if (this.errors) {
 			this.handleErrors();
 		}
 	}
@@ -138,7 +138,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 		Object.keys(this.errors).forEach(keyError => {
 			switch (keyError) {
 				case 'date': {
-					if (!!this.errors[keyError].required) {
+					if (this.errors[keyError].required) {
 						this.form.get('date').setErrors({[keyError]: this.errors[keyError]});
 					}
 					break;
@@ -172,7 +172,7 @@ export class DateTimePickerComponent implements OnInit, OnChanges, AfterViewInit
 					break;
 				}
 				case 'time': {
-					if (!!this.errors[keyError].required) {
+					if (this.errors[keyError].required) {
 						this.form.get('time').setErrors({[keyError]: this.errors[keyError]});
 					}
 					break;

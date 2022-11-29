@@ -1,21 +1,12 @@
 <form [formGroup]="a4a6FormGroup" #ngForm="ngForm">
 	<h3>{{ "reports.a4a6.title" | translate }}</h3>
-	<ec-date-from-to-fieldset
-		[dateFromFormControl]="dateFromFormControl"
-		[dateToFormControl]="dateToFormControl"
-		[label]="'reports.dateFromTo.text' | translate"
-	>
+	<ec-date-from-to-fieldset [dateFromFormControl]="dateFromFormControl" [dateToFormControl]="dateToFormControl" [label]="'reports.dateFromTo.text' | translate">
 	</ec-date-from-to-fieldset>
 	<ec-data-room-selection-fieldset [dataRoomFormControl]="cantonFormControl"></ec-data-room-selection-fieldset>
 
 	<fieldset>
 		<legend>{{ "reports.a4a6.organisationOrIssuer" | translate }}</legend>
-		<mat-radio-group
-			[(ngModel)]="searchType"
-			[ngModelOptions]="{ standalone: true }"
-			name="searchType"
-			class="search-type"
-		>
+		<mat-radio-group [(ngModel)]="searchType" [ngModelOptions]="{ standalone: true }" name="searchType" class="search-type">
 			<mat-radio-button id="searchType-organisation" value="organisation" name="organisation">
 				{{ "reports.a4a6.organisation" | translate }}
 			</mat-radio-button>
@@ -26,11 +17,7 @@
 		</mat-radio-group>
 	</fieldset>
 
-	<ec-unit-search
-		[hidden]="searchType !== IssuerType.ORGANISATION"
-		[authority]="unitSearchAuthority$ | async"
-		[userIdsFormArray]="userIdsFormArray"
-	>
+	<ec-unit-search [hidden]="searchType !== IssuerType.ORGANISATION" [authority]="unitSearchAuthority$ | async" [userIdsFormArray]="userIdsFormArray">
 	</ec-unit-search>
 	<ec-issuer-search
 		[hidden]="searchType !== IssuerType.ISSUER"

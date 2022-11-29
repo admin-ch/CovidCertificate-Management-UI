@@ -4,6 +4,7 @@ import {ObLanguageService} from 'shared/language.service';
 
 @Pipe({
 	name: 'obDate',
+	// eslint-disable-next-line
 	pure: false
 })
 export class ObDatePipe implements PipeTransform {

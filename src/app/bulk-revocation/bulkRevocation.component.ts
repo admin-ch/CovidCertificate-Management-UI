@@ -21,22 +21,6 @@ export class BulkRevocationComponent implements OnInit {
 		private readonly certificateService: CertificateService
 	) {}
 
-	private static downloadCsv(csvToDownload: string): void {
-		if (csvToDownload) {
-			const linkSource = `data:text/csv;base64,${csvToDownload}`;
-			const encodedUri = encodeURI(linkSource);
-
-			const link = document.createElement('a');
-			link.setAttribute('href', encodedUri);
-			link.setAttribute('download', `covid-certificate-revocation-report-${Date.now()}.csv`);
-
-			document.body.appendChild(link);
-
-			link.click();
-			link.remove();
-		}
-	}
-
 	ngOnInit(): void {
 		this.certificateService.getFeatureToggleSets().subscribe(featureToggleGroup => {
 			this.certificateService.setFeatureToggleSets(featureToggleGroup);
@@ -80,10 +64,26 @@ export class BulkRevocationComponent implements OnInit {
 				this.resetSelectedFile();
 			},
 			error => {
-				console.log(error);
+				console.error(error);
 				this.resetSelectedFile();
 			}
 		);
+	}
+
+	private static downloadCsv(csvToDownload: string): void {
+		if (csvToDownload) {
+			const linkSource = `data:text/csv;base64,${csvToDownload}`;
+			const encodedUri = encodeURI(linkSource);
+
+			const link = document.createElement('a');
+			link.setAttribute('href', encodedUri);
+			link.setAttribute('download', `covid-certificate-revocation-report-${Date.now()}.csv`);
+
+			document.body.appendChild(link);
+
+			link.click();
+			link.remove();
+		}
 	}
 
 	private resetSelectedFile(): void {

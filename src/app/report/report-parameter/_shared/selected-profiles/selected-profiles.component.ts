@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, TrackByFunction} from '@angular/core';
 import {EiamProfile, SelectedProfilesService} from '../selected-profiles.service';
-import {FormArray, FormControl} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ReportService} from '../../../report.service';
 
@@ -11,17 +11,14 @@ import {ReportService} from '../../../report.service';
 })
 export class SelectedProfilesComponent implements OnInit, OnDestroy {
 	@Input()
-	userIdsFormArray: FormArray;
+	userIdsFormArray: UntypedFormArray;
 
 	selectedChip: EiamProfile;
 
 	readonly Object = Object;
 	private subscription: Subscription;
 
-	constructor(
-		public readonly selectedProfilesService: SelectedProfilesService,
-		private readonly reportService: ReportService
-	) {}
+	constructor(public readonly selectedProfilesService: SelectedProfilesService, private readonly reportService: ReportService) {}
 
 	readonly trackBy: TrackByFunction<EiamProfile> = (_, item) => item.userExtId;
 
@@ -36,7 +33,7 @@ export class SelectedProfilesComponent implements OnInit, OnDestroy {
 				this.userIdsFormArray.clear();
 				Object.values(selectedProfiles)
 					.map(p => p.userExtId)
-					.forEach(userExtId => this.userIdsFormArray.push(new FormControl(userExtId)));
+					.forEach(userExtId => this.userIdsFormArray.push(new UntypedFormControl(userExtId)));
 			})
 		);
 	}

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {NgForm, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ReportType} from 'shared/model';
 import {ReportService} from '../../report.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -12,18 +12,18 @@ import {TranslateService} from '@ngx-translate/core';
 export class ReportA8Component implements OnInit, OnDestroy {
 	@ViewChild('ngForm') ngForm: NgForm;
 
-	a8FormGroup: FormGroup;
-	dateFromFormControl: FormControl;
-	dateToFormControl: FormControl;
-	certTypesFormArray: FormArray;
+	a8FormGroup: UntypedFormGroup;
+	dateFromFormControl: UntypedFormControl;
+	dateToFormControl: UntypedFormControl;
+	certTypesFormArray: UntypedFormArray;
 
 	constructor(public readonly reportService: ReportService, public readonly translate: TranslateService) {}
 
 	ngOnInit(): void {
-		this.a8FormGroup = this.reportService.formGroup.get(ReportType.A8) as FormGroup;
-		this.dateFromFormControl = this.a8FormGroup.get('from') as FormControl;
-		this.dateToFormControl = this.a8FormGroup.get('to') as FormControl;
-		this.certTypesFormArray = this.a8FormGroup.get('types') as FormArray;
+		this.a8FormGroup = this.reportService.formGroup.get(ReportType.A8) as UntypedFormGroup;
+		this.dateFromFormControl = this.a8FormGroup.get('from') as UntypedFormControl;
+		this.dateToFormControl = this.a8FormGroup.get('to') as UntypedFormControl;
+		this.certTypesFormArray = this.a8FormGroup.get('types') as UntypedFormArray;
 		this.a8FormGroup.enable();
 		setTimeout(() => this.ngForm.resetForm(this.a8FormGroup.value));
 	}

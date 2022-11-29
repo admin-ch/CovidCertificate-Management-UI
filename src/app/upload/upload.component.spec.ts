@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UploadComponent} from './upload.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {of} from 'rxjs';
 import {UploadService} from './upload.service';
@@ -9,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {GenerationType} from 'shared/model';
 import {CertificateService} from 'shared/certificate.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('UploadComponent', () => {
 	let component: UploadComponent;
@@ -25,7 +25,7 @@ describe('UploadComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [NoopAnimationsModule, ObliqueTestingModule, ReactiveFormsModule, MatSelectModule],
+			imports: [TranslateModule.forRoot(), NoopAnimationsModule, ReactiveFormsModule, MatSelectModule],
 			declarations: [UploadComponent],
 			providers: [
 				{

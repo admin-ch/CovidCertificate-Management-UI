@@ -1,15 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {of, ReplaySubject} from 'rxjs';
+import {ReplaySubject, of} from 'rxjs';
 import {AuthFunction, AuthService} from '../auth/auth.service';
-import {ObliqueTestingModule, WINDOW} from '@oblique/oblique';
+import {WINDOW} from '@oblique/oblique';
 import {BaseGuard} from 'shared/base.guard';
 
 describe('BaseGuard', () => {
 	let service: BaseGuard;
-	let router: Router;
 	const hasAuthorizationForMock = new ReplaySubject(1);
 	const hasAuthorizationForObsMock = hasAuthorizationForMock.asObservable();
 	const hasAuthorizationFor$Mock = jest.fn().mockReturnValue(hasAuthorizationForObsMock);
@@ -19,7 +17,7 @@ describe('BaseGuard', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule, ObliqueTestingModule],
+			imports: [RouterTestingModule],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},
 				{
@@ -34,7 +32,6 @@ describe('BaseGuard', () => {
 			]
 		}).compileComponents();
 		service = TestBed.inject(BaseGuard);
-		router = TestBed.inject(Router);
 	});
 
 	it('should be created', () => {
@@ -63,7 +60,7 @@ describe('BaseGuard', () => {
 				it(`should call hasAuthorizationFor$ with ${authFunction}`, done => {
 					const obs$ = service.checkExpectedRole(authFunction);
 
-					obs$.subscribe(_ => {
+					obs$.subscribe(() => {
 						expect(spy).toHaveBeenCalledWith(authFunction);
 						done();
 					});
@@ -103,7 +100,7 @@ describe('BaseGuard', () => {
 				it(`should call hasAuthorizationFor$ with ${authFunction}`, done => {
 					const obs$ = service.checkExpectedRole(authFunction);
 
-					obs$.subscribe(_ => {
+					obs$.subscribe(() => {
 						expect(spy).toHaveBeenCalledWith(authFunction);
 						done();
 					});
@@ -116,9 +113,7 @@ describe('BaseGuard', () => {
 
 					obs$.subscribe(() => {
 						// @ts-ignore
-						expect(service.window.location.href).toBe(
-							`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
-						);
+						expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
 						done();
 					});
 				});

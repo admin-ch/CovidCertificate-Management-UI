@@ -4,11 +4,7 @@
 		<legend class="padding-top">{{ "certificateCreate.step-one.enum.recovery" | translate }}</legend>
 
 		<div class="form-field">
-			<ob-nested-form
-				formControlName="dateFirstPositiveTestResult"
-				[nestedForm]="datepickerTestResult.form"
-				obErrorMessages
-			>
+			<ob-nested-form formControlName="dateFirstPositiveTestResult" [nestedForm]="datepickerTestResult.form" obErrorMessages>
 				<ec-datetimepicker
 					#datepickerTestResult
 					[label]="'certificateCreate.form.label.recovery.dateFirstPositiveTestResult' | translate"

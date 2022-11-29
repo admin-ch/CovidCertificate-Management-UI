@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GenerationType} from 'shared/model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {CertificateService} from 'shared/certificate.service';
 import {AuthFunction, AuthService} from '../../auth/auth.service';
@@ -22,17 +22,17 @@ const AUTH_FUNCTION_GEN_TYPE_MAP = {
 	styleUrls: ['./select-certificate-type.component.scss']
 })
 export class SelectCertificateTypeComponent implements OnInit {
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	GenerationType = GenerationType;
 
-	certificateTypeSelectionForm: FormGroup;
+	certificateTypeSelectionForm: UntypedFormGroup;
 	typeSelection: string[] = Object.values(GenerationType);
 
 	AuthFunction: typeof AuthFunction = AuthFunction;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly dataService: CreationDataService,
 		private readonly authService: AuthService,
 		private readonly certificateService: CertificateService
@@ -66,9 +66,7 @@ export class SelectCertificateTypeComponent implements OnInit {
 
 	private createForm(): void {
 		this.authService.authorizedFunctions$.pipe(take(1)).subscribe(authFunctions => {
-			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key =>
-				authFunctions.includes(key)
-			);
+			const authFunction = (Object.keys(AUTH_FUNCTION_GEN_TYPE_MAP) as AuthFunction[]).find(key => authFunctions.includes(key));
 
 			const type = AUTH_FUNCTION_GEN_TYPE_MAP[authFunction];
 			this.certificateTypeSelectionForm = this.formBuilder.group({

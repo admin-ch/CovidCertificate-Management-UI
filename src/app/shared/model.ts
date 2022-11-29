@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ValidatorFn} from '@angular/forms';
 import {Moment} from 'moment';
 
 export const DATE_FORMAT = 'dd.MM.YYYY';
@@ -219,7 +219,7 @@ export enum ShippingOptions {
 
 export interface FormObject {
 	formFields: FormFieldObject;
-	formGroup: FormGroup;
+	formGroup: UntypedFormGroup;
 }
 
 export interface FormFieldObject {
@@ -233,28 +233,28 @@ export interface FormControlObject {
 export type AllowedFieldType = 'text' | 'date' | 'datetime' | 'number' | 'select';
 
 export class FormField {
-	public readonly angularFormControl: FormControl;
-	public readonly selectableOptions?: {display: string; code: any}[];
+	public readonly angularFormControl: UntypedFormControl;
+	public readonly selectableOptions?: {display: string; code: unknown}[];
 	public readonly tooltipTranslationKey?: string;
-	public readonly defaultValue: any;
+	public readonly defaultValue: unknown;
 	public readonly cssClasses: string;
 
 	constructor(
 		public readonly name: string,
 		public readonly fieldType: AllowedFieldType,
 		options?: {
-			defaultValue?: any;
+			defaultValue?: unknown;
 			validators?: ValidatorFn | ValidatorFn[];
-			selectableOptions?: {display: string; code: any}[];
+			selectableOptions?: {display: string; code: unknown}[];
 			tooltipTranslationKey?: string;
 			cssClasses?: string;
 		}
 	) {
-		let formControl: FormControl;
-		if (options && options.validators) {
-			formControl = new FormControl(options.defaultValue || '', options.validators);
+		let formControl: UntypedFormControl;
+		if (options?.validators) {
+			formControl = new UntypedFormControl(options.defaultValue || '', options.validators);
 		} else {
-			formControl = new FormControl(options?.defaultValue || '');
+			formControl = new UntypedFormControl(options?.defaultValue || '');
 		}
 		this.angularFormControl = formControl;
 
@@ -358,5 +358,5 @@ export interface Shipping {
 
 export enum IssuerType {
 	ORGANISATION = 'organisation',
-	ISSUER = 'issuer',
+	ISSUER = 'issuer'
 }

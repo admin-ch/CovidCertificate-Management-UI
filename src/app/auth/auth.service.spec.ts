@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {of, ReplaySubject} from 'rxjs';
+import {ReplaySubject, of} from 'rxjs';
 import {Claims, OauthService} from './oauth.service';
 import {AuthFunction, AuthService} from './auth.service';
 import {ApiService} from 'shared/api.service';
@@ -8,14 +8,11 @@ import SpyInstance = jest.SpyInstance;
 
 describe('AuthService', () => {
 	let service: AuthService;
-	let apiService: ApiService;
-	let oauthService: OauthService;
 
 	let authorizedFunctionsNextSpy: SpyInstance;
 	let authorizedDataRoomsNextSpy: SpyInstance;
 
 	const authFunctionsMock: AuthFunction[] = [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION];
-	let claimsMock: Claims;
 	const oauthServiceClaims = new ReplaySubject<Claims>(1);
 
 	beforeEach(() => {
@@ -36,8 +33,6 @@ describe('AuthService', () => {
 			]
 		}).compileComponents();
 		service = TestBed.inject(AuthService);
-		apiService = TestBed.inject(ApiService);
-		oauthService = TestBed.inject(OauthService);
 	});
 
 	beforeEach(() => {
@@ -45,7 +40,6 @@ describe('AuthService', () => {
 		authorizedFunctionsNextSpy = jest.spyOn(service.authorizedFunctions, 'next');
 		// @ts-ignore
 		authorizedDataRoomsNextSpy = jest.spyOn(service.authorizedDataRooms, 'next');
-		claimsMock = {userroles: [AuthFunction.MAIN, AuthFunction.CERTIFICATE_REVOCATION]} as Claims;
 	});
 
 	it('should be created', () => {

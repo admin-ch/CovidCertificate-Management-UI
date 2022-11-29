@@ -1,15 +1,15 @@
-@import "~@oblique/oblique/styles/scss/core/variables";
+@import "@oblique/oblique/styles/scss/core/variables";
 
 :host {
 	display: flex;
 }
 
 .mat-card {
-	margin: $spacing-lg 0;
+	margin: $ob-spacing-xl 0;
 }
 
 .mat-card > .mat-card-actions.actions {
-	padding-top: $spacing-lg;
+	padding-top: $ob-spacing-xl;
 	margin-bottom: 0;
 	margin-right: 0;
 }
@@ -18,8 +18,8 @@
 	font-size: 30px;
 	line-height: 40px;
 	text-align: center;
-	background-color: $brand-primary;
-	color: $white;
+	background-color: $ob-primary;
+	color: $ob-white;
 }
 
 .links {

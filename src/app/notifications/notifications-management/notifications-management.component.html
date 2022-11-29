@@ -1,5 +1,5 @@
 <div class="flex-container">
-	<h1>{{'notificationsManagement.title' | translate}}</h1>
+	<h1>{{ "notificationsManagement.title" | translate }}</h1>
 
 	<div class="container">
 		<div class="loading-shade" *ngIf="isLoading">
@@ -7,69 +7,55 @@
 		</div>
 
 		<div class="table-container">
-			<table
-				mat-table
-				class="ob-table ob-table-hover"
-				[dataSource]="dataSource"
-				matSort
-				matSortActive="startTime"
-				matSortDirection="asc"
-				matSortDisableClear
-			>
+			<table mat-table class="ob-table ob-table-hover" [dataSource]="dataSource" matSort matSortActive="startTime" matSortDirection="asc" matSortDisableClear>
 				<tr class="mat-row" *matNoDataRow>
 					<td class="mat-cell" [attr.colspan]="COLUMNS.length">
-						{{'notificationsManagement.noNotifications' | translate}}
+						{{ "notificationsManagement.noNotifications" | translate }}
 					</td>
 				</tr>
 				<ng-container matColumnDef="startTime">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
-						{{ 'notificationsManagement.notification.start' | translate }}
+						{{ "notificationsManagement.notification.start" | translate }}
 					</th>
-					<td mat-cell *matCellDef="let notification"
-						[attr.data-title]="'notificationsManagement.notification.start' | translate">
-						{{ notification.startTime | date:'short'}}
+					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.start' | translate">
+						{{ notification.startTime | date: "short" }}
 					</td>
 				</ng-container>
 
 				<ng-container matColumnDef="endTime">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
-						{{ 'notificationsManagement.notification.end' | translate }}
+						{{ "notificationsManagement.notification.end" | translate }}
 					</th>
-					<td mat-cell *matCellDef="let notification"
-						[attr.data-title]="'notificationsManagement.notification.end' | translate">
-						{{ notification.endTime | date:'short'}}
+					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.end' | translate">
+						{{ notification.endTime | date: "short" }}
 					</td>
 				</ng-container>
 
 				<ng-container matColumnDef="type">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
-						{{ 'notificationsManagement.notification.type' | translate }}
+						{{ "notificationsManagement.notification.type" | translate }}
 					</th>
-					<td mat-cell *matCellDef="let notification"
-						[attr.data-title]="('notificationsManagement.notification.type.' + notification.type) | translate">
-						{{ ('notificationsManagement.notification.type.' + notification.type.toLowerCase()) | translate }}
+					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.type.' + notification.type | translate">
+						{{ "notificationsManagement.notification.type." + notification.type.toLowerCase() | translate }}
 					</td>
 				</ng-container>
 
 				<ng-container matColumnDef="isClosable">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
-						{{ 'notificationsManagement.notification.isClosable' | translate }}
+						{{ "notificationsManagement.notification.isClosable" | translate }}
 					</th>
-					<td mat-cell *matCellDef="let notification"
-						[attr.data-title]="'notificationsManagement.notification.isClosable' | translate">
-						<mat-checkbox aria-label="isFraudCheckbox" [checked]="notification.isClosable" disabled>
-						</mat-checkbox>
+					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.isClosable' | translate">
+						<mat-checkbox aria-label="isFraudCheckbox" [checked]="notification.isClosable" disabled> </mat-checkbox>
 					</td>
 				</ng-container>
 
 				<ng-container matColumnDef="content">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
-						{{ 'notificationsManagement.notification.content' | translate }}
+						{{ "notificationsManagement.notification.content" | translate }}
 					</th>
-					<td mat-cell *matCellDef="let notification"
-						[attr.data-title]="'notificationsManagement.notification.content' | translate">
+					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.content' | translate">
 						<ng-container *ngFor="let lang of languages">
-							<strong>{{ lang | uppercase }}:</strong> {{ notification.content[lang] }}<br>
+							<strong>{{ lang | uppercase }}:</strong> {{ notification.content[lang] }}<br />
 						</ng-container>
 					</td>
 				</ng-container>
@@ -77,31 +63,26 @@
 				<ng-container [matColumnDef]="COLUMN_NAME_ACTIONS">
 					<th mat-header-cell *matHeaderCellDef>
 						<div class="actions">
-							<button type="button" mat-icon-button obButton="primary"
-									(click)="createNotification()">
+							<button type="button" mat-icon-button obButton="primary" (click)="createNotification()">
 								<mat-icon svgIcon="plus"></mat-icon>
 							</button>
 						</div>
 					</th>
 					<td mat-cell *matCellDef="let notification">
 						<div class="actions">
-							<button type="button" mat-icon-button obButton="secondary"
-									(click)="editNotification(notification)">
+							<button type="button" mat-icon-button obButton="secondary" (click)="editNotification(notification)">
 								<mat-icon svgIcon="pen"></mat-icon>
 							</button>
-							<button type="button" mat-icon-button obButton="secondary"
-									(click)="openConfirmDeleteDialog(notification)">
+							<button type="button" mat-icon-button obButton="secondary" (click)="openConfirmDeleteDialog(notification)">
 								<mat-icon svgIcon="trash"></mat-icon>
 							</button>
 						</div>
 					</td>
 				</ng-container>
 
-
 				<tr mat-header-row *matHeaderRowDef="COLUMNS"></tr>
 				<tr mat-row *matRowDef="let row; columns: COLUMNS"></tr>
 			</table>
 		</div>
-
 	</div>
 </div>

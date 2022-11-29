@@ -12,11 +12,7 @@ import {WINDOW} from '@oblique/oblique';
 export class BaseGuard {
 	private readonly stage: string;
 
-	constructor(
-		private readonly translate: TranslateService,
-		private readonly authService: AuthService,
-		@Inject(WINDOW) private readonly window
-	) {
+	constructor(private readonly translate: TranslateService, private readonly authService: AuthService, @Inject(WINDOW) private readonly window) {
 		this.stage = environment.stage;
 	}
 

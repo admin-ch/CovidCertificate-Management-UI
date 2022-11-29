@@ -9,12 +9,11 @@ export const environment = {
 	host: 'https://covidcertificate-management.bag.admin.ch',
 	notificationHost: 'https://covidcertificate-notification.bag.admin.ch',
 	reportHost: 'https://covidcertificate-report.bag.admin.ch',
-	eiamSelfAdmin:
-		'https://sts006.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate.admin.chCURRENT_PAGE&language=LANGUAGE',
+	eiamSelfAdmin: 'https://sts006.bag.admin.ch/_pep/myaccount?returnURL=https%3A%2F%2Fwww.covidcertificate.admin.chCURRENT_PAGE&language=LANGUAGE',
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',
-		stsServer: 'https://identity.bit.admin.ch/realms/BAG-CovidCertificate',
+		authority: 'https://identity.bit.admin.ch/realms/BAG-CovidCertificate',
 		applicationUrl: 'https://www.covidcertificate.admin.ch/',
 		loginFeedback: 'auth/login-feedback/',
 		maxIdTokenIatOffsetAllowedInSeconds: 7200,

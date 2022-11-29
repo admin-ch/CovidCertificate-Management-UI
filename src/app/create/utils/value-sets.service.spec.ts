@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {ValueSetsService} from './value-sets.service';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ValueSetsResponse} from 'shared/model';
 import {ValueSetsResponseMock} from './value-sets-response-mock';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('ValueSetsService', () => {
 	let service: ValueSetsService;
@@ -11,9 +11,10 @@ describe('ValueSetsService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule]
+			imports: [TranslateModule.forRoot()]
 		});
 		service = TestBed.inject(ValueSetsService);
+		TestBed.inject(TranslateService).use('en');
 	});
 
 	it('should be created', () => {

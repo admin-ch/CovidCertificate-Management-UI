@@ -1,15 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from 'shared/api.service';
-import {
-	CertificateCreateDto,
-	CreateCertificateResponse,
-	FeaturesResponse,
-	GenerationType,
-	Patient,
-	Shipping,
-	ValueSetsResponse
-} from './model';
+import {CertificateCreateDto, CreateCertificateResponse, FeaturesResponse, GenerationType, Patient, Shipping, ValueSetsResponse} from './model';
 import {CertificateCreateDtoMappingService} from '../create/utils/certificate-create-dto-mapping.service';
 
 @Injectable({
@@ -21,10 +13,7 @@ export class CertificateService {
 	private readonly valueSetsApi = 'valuesets';
 	private featuresResponse: FeaturesResponse;
 
-	constructor(
-		private readonly http: ApiService,
-		private readonly dtoMappingService: CertificateCreateDtoMappingService
-	) {}
+	constructor(private readonly http: ApiService, private readonly dtoMappingService: CertificateCreateDtoMappingService) {}
 
 	createCertificate(patient: Patient, shipping: Shipping): Observable<CreateCertificateResponse> {
 		// the api endpoint is infered from the certificate type of the patient
@@ -61,9 +50,7 @@ export class CertificateService {
 	}
 
 	verifyFeatureAvailability(generationType: GenerationType) {
-		const featureToggleValue = this.featuresResponse.featureData.find(
-			e => GenerationType[e.type] === generationType
-		);
+		const featureToggleValue = this.featuresResponse.featureData.find(e => GenerationType[e.type] === generationType);
 		if (featureToggleValue === undefined) {
 			return true;
 		}

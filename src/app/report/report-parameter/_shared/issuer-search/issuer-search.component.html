@@ -102,13 +102,7 @@
 						}}
 					</mat-error>
 				</mat-form-field>
-				<button
-					type="button"
-					mat-button
-					(click)="applySearch$.next()"
-					[disabled]="searchFieldsFormGroup.invalid || isIssuerLoading"
-					obButton="secondary"
-				>
+				<button type="button" mat-button (click)="applySearch$.next()" [disabled]="searchFieldsFormGroup.invalid || isIssuerLoading" obButton="secondary">
 					{{ "reports.a4a6.search" | translate }}
 				</button>
 			</form>
@@ -154,9 +148,7 @@
 							<td mat-cell *matCellDef="let profile">{{ profile.name }}</td>
 						</ng-container>
 						<ng-container matColumnDef="userExtId">
-							<th mat-header-cell mat-sort-header disableClear class="userExtId-column" *matHeaderCellDef>
-								Ext_ID
-							</th>
+							<th mat-header-cell mat-sort-header disableClear class="userExtId-column" *matHeaderCellDef>Ext_ID</th>
 							<td mat-cell *matCellDef="let profile">{{ profile.userExtId }}</td>
 						</ng-container>
 						<ng-container matColumnDef="email">
@@ -173,11 +165,7 @@
 						</ng-container>
 
 						<tr mat-header-row *matHeaderRowDef="TABLE_ROWS; sticky: true"></tr>
-						<tr
-							mat-row
-							*matRowDef="let profile; columns: TABLE_ROWS"
-							(click)="selectedProfilesService.toggle(profile)"
-						></tr>
+						<tr mat-row *matRowDef="let profile; columns: TABLE_ROWS" (click)="selectedProfilesService.toggle(profile)"></tr>
 					</table>
 				</div>
 

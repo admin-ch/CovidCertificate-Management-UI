@@ -1,14 +1,7 @@
 import {Injectable} from '@angular/core';
-import {
-	CountryCodeDto,
-	ProductInfo,
-	Vaccine,
-	VaccinationValueSets,
-	ValueSetsResponse,
-	RapidTestProductInfoWithToString
-} from 'shared/model';
+import {CountryCodeDto, ProductInfo, RapidTestProductInfoWithToString, VaccinationValueSets, Vaccine, ValueSetsResponse} from 'shared/model';
 import {TranslateService} from '@ngx-translate/core';
-import {PCR_TEST_CODE, RAPID_TEST_CODE, ANTIBODY_TEST_CODE} from 'shared/constants';
+import {ANTIBODY_TEST_CODE, PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,7 +15,7 @@ export class ValueSetsService {
 	private certificateLanguages: ProductInfo[] = [];
 
 	constructor(private readonly translateService: TranslateService) {
-		translateService.onLangChange.subscribe(_ => {
+		translateService.onLangChange.subscribe(() => {
 			if (this.valueSets) {
 				this.setValueSets(this.valueSets);
 			}
@@ -87,9 +80,8 @@ export class ValueSetsService {
 					return -1;
 				} else if (countryB.code === 'CH') {
 					return 1;
-				} else {
-					return countryA.display.localeCompare(countryB.display);
 				}
+				return countryA.display.localeCompare(countryB.display);
 			});
 	}
 
@@ -98,9 +90,7 @@ export class ValueSetsService {
 			{code: PCR_TEST_CODE, display: 'Nucleic acid amplification with probe detection (PCR)'},
 			{
 				code: RAPID_TEST_CODE,
-				display: `Rapid immunoassay (${this.translateService.instant(
-					'certificateCreate.form.group.test.type.antigen'
-				)})`
+				display: `Rapid immunoassay (${this.translateService.instant('certificateCreate.form.group.test.type.antigen')})`
 			}
 		];
 	}

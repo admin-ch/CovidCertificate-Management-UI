@@ -19,9 +19,7 @@ import {BulkRevocationGuard} from './bulkRevocation.guard';
 		MatIconModule,
 		ObAlertModule,
 		MatSelectModule,
-		RouterModule.forChild([
-			{path: '', component: BulkRevocationComponent, canActivate: [AuthGuardService, BulkRevocationGuard]}
-		])
+		RouterModule.forChild([{path: '', component: BulkRevocationComponent, canActivate: [AuthGuardService, BulkRevocationGuard]}])
 	]
 })
 export class BulkRevocationModule {}

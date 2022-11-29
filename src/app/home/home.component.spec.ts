@@ -1,26 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {EventEmitter, NO_ERRORS_SCHEMA} from '@angular/core';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
-import {skip} from 'rxjs/operators';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HomeComponent} from './home.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 
 describe('HomeComponent', () => {
 	let component: HomeComponent;
 	let fixture: ComponentFixture<HomeComponent>;
+	let translateService: TranslateService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
-			providers: [
-				{
-					provide: TranslateService,
-					useValue: {
-						onLangChange: new EventEmitter<LangChangeEvent>(),
-						currentLang: 'en'
-					}
-				}
-			],
+			imports: [TranslateModule.forRoot()],
 			schemas: [NO_ERRORS_SCHEMA],
 			declarations: [HomeComponent]
 		}).compileComponents();
@@ -29,6 +19,8 @@ describe('HomeComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(HomeComponent);
 		component = fixture.componentInstance;
+		translateService = TestBed.inject(TranslateService);
+		translateService.use('en');
 		fixture.detectChanges();
 	});
 
@@ -46,15 +38,18 @@ describe('HomeComponent', () => {
 				expect(url).toBe('en');
 				done();
 			});
+			translateService.onLangChange.emit({
+				lang: 'en',
+				translations: {}
+			});
 		});
 
 		it('should use emitted language', done => {
-			const translate = TestBed.inject(TranslateService);
-			component.lang$.pipe(skip(1)).subscribe(url => {
+			component.lang$.subscribe(url => {
 				expect(url).toBe('de');
 				done();
 			});
-			translate.onLangChange.emit({
+			translateService.onLangChange.emit({
 				lang: 'de',
 				translations: {}
 			});

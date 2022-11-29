@@ -1,48 +1,15 @@
-<mat-horizontal-stepper
-	linear
-	labelPosition="bottom"
-	#stepper
-	class="mat-stepper-lg"
-	*ngIf="valueSetsLoaded && featureToggleSetsLoaded"
->
+<mat-horizontal-stepper linear labelPosition="bottom" #stepper class="mat-stepper-lg" *ngIf="valueSetsLoaded && featureToggleSetsLoaded">
 	<mat-step>
 		<ec-select-certificate-type (next)="nextCalled()"></ec-select-certificate-type>
 	</mat-step>
 	<mat-step>
-		<ec-vaccine-form
-			*ngIf="selectedForm === 'vaccination'"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-vaccine-form>
+		<ec-vaccine-form *ngIf="selectedForm === 'vaccination'" (back)="resetCalled()" (next)="nextCalled()"></ec-vaccine-form>
 		<ec-test-form *ngIf="selectedForm === 'test'" (back)="resetCalled()" (next)="nextCalled()"></ec-test-form>
-		<ec-recovery-form
-			*ngIf="selectedForm === 'recovery'"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-recovery-form>
-		<ec-test-form
-			*ngIf="selectedForm === 'antibody'"
-			[antibody]="true"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-test-form>
-		<ec-tourist-vaccine-form
-			*ngIf="selectedForm === 'vaccination-tourist'"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-tourist-vaccine-form>
-		<ec-exceptional-form
-			*ngIf="selectedForm === 'exceptional'"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-exceptional-form>
-		<ec-test-form
-			*ngIf="selectedForm === 'recovery-rat'"
-			[antibody]="false"
-			[rapid]="true"
-			(back)="resetCalled()"
-			(next)="nextCalled()"
-		></ec-test-form>
+		<ec-recovery-form *ngIf="selectedForm === 'recovery'" (back)="resetCalled()" (next)="nextCalled()"></ec-recovery-form>
+		<ec-test-form *ngIf="selectedForm === 'antibody'" [antibody]="true" (back)="resetCalled()" (next)="nextCalled()"></ec-test-form>
+		<ec-tourist-vaccine-form *ngIf="selectedForm === 'vaccination-tourist'" (back)="resetCalled()" (next)="nextCalled()"></ec-tourist-vaccine-form>
+		<ec-exceptional-form *ngIf="selectedForm === 'exceptional'" (back)="resetCalled()" (next)="nextCalled()"></ec-exceptional-form>
+		<ec-test-form *ngIf="selectedForm === 'recovery-rat'" [antibody]="false" [rapid]="true" (back)="resetCalled()" (next)="nextCalled()"></ec-test-form>
 	</mat-step>
 	<mat-step>
 		<ec-shipping (back)="backCalled()" (next)="nextCalled()"></ec-shipping>
