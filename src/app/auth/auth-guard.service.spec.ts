@@ -1,21 +1,19 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {of, ReplaySubject} from 'rxjs';
+import {ReplaySubject, of} from 'rxjs';
 import {AuthFunction, AuthService} from './auth.service';
-import {ObliqueTestingModule, WINDOW} from '@oblique/oblique';
+import {WINDOW} from '@oblique/oblique';
 import {AuthGuardService} from './auth-guard.service';
 import {OauthService} from './oauth.service';
 import {AutoLoginComponent} from './auto-login.component';
 
 describe('AuthGuardService', () => {
 	let service: AuthGuardService;
-	let router: Router;
 	const oauthServiceMock = {
 		claims$: new ReplaySubject(1),
 		hasUserRole: jest.fn(),
-		isAuthenticated$: of(true)
+		isAuthenticated$: of({isAuthenticated: true})
 	};
 	const hasAuthorizationForMock = new ReplaySubject(1);
 	const hasAuthorizationForObsMock = hasAuthorizationForMock.asObservable();
@@ -26,10 +24,7 @@ describe('AuthGuardService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}]),
-				ObliqueTestingModule
-			],
+			imports: [RouterTestingModule.withRoutes([{path: 'auth/auto-login', component: AutoLoginComponent}])],
 			declarations: [AutoLoginComponent],
 			providers: [
 				{provide: AuthService, useValue: authServiceMock},
@@ -46,7 +41,6 @@ describe('AuthGuardService', () => {
 			]
 		}).compileComponents();
 		service = TestBed.inject(AuthGuardService);
-		router = TestBed.inject(Router);
 	});
 
 	it('should be created', () => {
@@ -74,7 +68,7 @@ describe('AuthGuardService', () => {
 			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, done => {
 				const obs$ = service[name]();
 
-				obs$.subscribe(_ => {
+				obs$.subscribe(() => {
 					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN);
 					done();
 				});
@@ -112,7 +106,7 @@ describe('AuthGuardService', () => {
 			it(`should call hasAuthorizationFor$ with ${AuthFunction.MAIN}`, done => {
 				const obs$ = service[name]();
 
-				obs$.subscribe(_ => {
+				obs$.subscribe(() => {
 					expect(spy).toHaveBeenCalledWith(AuthFunction.MAIN);
 					done();
 				});
@@ -125,9 +119,7 @@ describe('AuthGuardService', () => {
 
 				obs$.subscribe(() => {
 					// @ts-ignore
-					expect(service.window.location.href).toBe(
-						`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`
-					);
+					expect(service.window.location.href).toBe(`https://www.eiam.admin.ch/403ggg?l=${service.translate.currentLang}&stage=${service.stage}`);
 					done();
 				});
 			});

@@ -2,11 +2,11 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ReportA2Component} from './report-a2.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReportService} from '../../report.service';
 import {ReportType} from 'shared/model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportA2Component', () => {
 	let component: ReportA2Component;
@@ -15,7 +15,7 @@ describe('ReportA2Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [ReportA2Component],
 			providers: [
 				{

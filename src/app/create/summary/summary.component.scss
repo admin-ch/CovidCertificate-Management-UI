@@ -1,4 +1,4 @@
-@import "~@oblique/oblique/styles/scss/core/variables";
+@import "@oblique/oblique/styles/scss/core/variables";
 
 dl {
 	display: flex;
@@ -7,14 +7,14 @@ dl {
 
 	dt {
 		min-width: 450px;
-		border-bottom: 1px solid $gray-dark;
+		border-bottom: 1px solid $ob-gray-dark;
 		padding-bottom: 1em;
 		padding-top: 0.5em;
 	}
 
 	dd {
 		width: 440px;
-		border-bottom: 1px solid $gray-dark;
+		border-bottom: 1px solid $ob-gray-dark;
 		padding-bottom: 1em;
 		padding-top: 0.5em;
 	}

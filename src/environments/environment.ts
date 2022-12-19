@@ -13,7 +13,7 @@ export const environment = {
 	oidc: {
 		clientId: 'cc-management-ui',
 		afterLoginPath: 'dashboard',
-		stsServer: 'http://localhost:8180',
+		authority: 'http://localhost:8180',
 		applicationUrl: 'http://localhost:4201/',
 		loginFeedback: 'auth/login-feedback/',
 		maxIdTokenIatOffsetAllowedInSeconds: 7200,
@@ -42,4 +42,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

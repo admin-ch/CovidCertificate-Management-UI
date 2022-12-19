@@ -2,9 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DateFromToFieldsetComponent} from './date-from-to-fieldset.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {TranslateModule} from '@ngx-translate/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ReportService} from '../../../report.service';
@@ -17,7 +16,7 @@ describe('DateFromToFieldsetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, TranslateModule],
+			imports: [TranslateModule, TranslateModule.forRoot()],
 			declarations: [DateFromToFieldsetComponent],
 			providers: [
 				{

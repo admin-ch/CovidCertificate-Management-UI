@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from 'shared/api.service';
 import {Observable} from 'rxjs';
-import {CsvResponseDto, CsvRevocationResponseDto, GenerationType} from 'shared/model';
+import {CsvRevocationResponseDto} from 'shared/model';
 
 @Injectable({
 	providedIn: 'root'

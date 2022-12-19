@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {SelectCertificateTypeComponent} from './select-certificate-type.component';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
@@ -32,7 +31,7 @@ describe.skip('SelectCertificateTypeComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule, ReactiveFormsModule, MatRadioModule],
+			imports: [ReactiveFormsModule, MatRadioModule],
 			providers: [
 				{
 					provide: AuthService,

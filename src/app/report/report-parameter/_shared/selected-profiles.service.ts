@@ -20,7 +20,7 @@ export class SelectedProfilesService {
 	changes$: Observable<EiamProfileSelection>;
 
 	private selectedProfiles: EiamProfileSelection = {};
-	private changes = new BehaviorSubject<EiamProfileSelection>({});
+	private readonly changes = new BehaviorSubject<EiamProfileSelection>({});
 
 	constructor() {
 		this.changes$ = this.changes.asObservable();
@@ -75,6 +75,7 @@ export class SelectedProfilesService {
 
 	clear() {
 		for (const key in this.selectedProfiles) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (this.selectedProfiles.hasOwnProperty(key)) {
 				delete this.selectedProfiles[key];
 			}

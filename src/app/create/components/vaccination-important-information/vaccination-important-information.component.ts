@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'ec-vaccination-important-information',

@@ -10,8 +10,8 @@ import {ValueSetsService} from '../utils/value-sets.service';
 	styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	patient: Patient;
 	validFrom: Date;
@@ -28,9 +28,8 @@ export class SummaryComponent implements OnInit {
 		const patientBirthdate = this.patient?.birthdate;
 		if (patientBirthdate instanceof Date) {
 			return patientBirthdate.toLocaleDateString('de-CH', {day: '2-digit', month: '2-digit', year: 'numeric'});
-		} else {
-			return patientBirthdate;
 		}
+		return patientBirthdate;
 	}
 
 	constructor(
@@ -45,9 +44,7 @@ export class SummaryComponent implements OnInit {
 
 			if (this.patient.recovery) {
 				this.validFrom = new Date(this.patient.recovery.dateFirstPositiveTestResult);
-				this.validFrom.setDate(
-					this.patient.recovery.dateFirstPositiveTestResult.getDate() + this.DAYS_UNTIL_VALID
-				);
+				this.validFrom.setDate(this.patient.recovery.dateFirstPositiveTestResult.getDate() + this.DAYS_UNTIL_VALID);
 				this.validUntil = new Date(this.patient.recovery.dateFirstPositiveTestResult);
 				this.validUntil.setDate(this.validUntil.getDate() + this.RECOVERY_CERTIFICATE_VALIDITY_IN_DAYS);
 			}

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {CreationDataService} from '../utils/creation-data.service';
 import {GenerationType, Shipping, ShippingOptions} from 'shared/model';
 import {DeliveryCodeValidatorValidators} from './delivery-code-validator';
@@ -10,12 +10,12 @@ import {DeliveryCodeValidatorValidators} from './delivery-code-validator';
 	styleUrls: ['./shipping.component.scss']
 })
 export class ShippingComponent implements OnInit {
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
-	shippingForm: FormGroup;
+	shippingForm: UntypedFormGroup;
 	shippingOptions: string[] = Object.values(ShippingOptions);
 	cantonCodes: string[] = [
 		'AG',
@@ -47,7 +47,7 @@ export class ShippingComponent implements OnInit {
 		'MI'
 	];
 
-	private inAppCodeConversionMap = {
+	private readonly inAppCodeConversionMap = {
 		O: '0',
 		G: '6',
 		I: '1',
@@ -57,7 +57,7 @@ export class ShippingComponent implements OnInit {
 		V: 'U'
 	};
 
-	constructor(private readonly formBuilder: FormBuilder, private readonly dataService: CreationDataService) {}
+	constructor(private readonly formBuilder: UntypedFormBuilder, private readonly dataService: CreationDataService) {}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -89,6 +89,7 @@ export class ShippingComponent implements OnInit {
 		return [...appCode]
 			.map(char => {
 				const uppercaseChar = char.toUpperCase();
+				// eslint-disable-next-line no-prototype-builtins
 				if (this.inAppCodeConversionMap.hasOwnProperty(uppercaseChar)) {
 					return this.inAppCodeConversionMap[uppercaseChar];
 				}
@@ -105,15 +106,7 @@ export class ShippingComponent implements OnInit {
 	private initializeFields(): void {
 		this.shippingForm = this.formBuilder.group({
 			shippingOption: [ShippingOptions.PDF, Validators.required],
-			appDeliveryCode: [
-				'',
-				[
-					Validators.required,
-					Validators.maxLength(9),
-					Validators.minLength(9),
-					DeliveryCodeValidatorValidators.validateAppDeliveryCode()
-				]
-			],
+			appDeliveryCode: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9), DeliveryCodeValidatorValidators.validateAppDeliveryCode()]],
 			streetAndNr: ['', [Validators.required, Validators.maxLength(128)]],
 			city: ['', [Validators.required, Validators.maxLength(128)]],
 			cantonCodeSender: ['', [Validators.required, Validators.max(2), Validators.min(2)]],
@@ -125,11 +118,10 @@ export class ShippingComponent implements OnInit {
 		this.shippingForm.get('shippingOption').valueChanges.subscribe(newValue => {
 			switch (newValue) {
 				case ShippingOptions.APP:
-					const appDeliveryCodeControl = this.shippingForm.get('appDeliveryCode');
-					appDeliveryCodeControl.enable();
-					appDeliveryCodeControl.valueChanges.subscribe(appCodeValue =>
-						appDeliveryCodeControl.setValue(this.convertInAppCode(appCodeValue), {emitEvent: false})
-					);
+					this.shippingForm.get('appDeliveryCode').enable();
+					this.shippingForm
+						.get('appDeliveryCode')
+						.valueChanges.subscribe(appCodeValue => this.shippingForm.get('appDeliveryCode').setValue(this.convertInAppCode(appCodeValue), {emitEvent: false}));
 					this.disablePostDelivery();
 					break;
 				case ShippingOptions.POST:

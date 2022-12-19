@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TestFormComponent} from './test-form.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,7 +14,9 @@ import {CreationDataService} from '../utils/creation-data.service';
 import * as moment from 'moment';
 import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {ProductInfo} from 'shared/model';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('TestFormComponent', () => {
 	let component: TestFormComponent;
@@ -43,8 +45,9 @@ describe('TestFormComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [TestFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
 				NoopAnimationsModule,
-				ObliqueTestingModule,
 				ObNestedFormModule,
 				ReactiveFormsModule,
 				MatSelectModule,
@@ -188,14 +191,14 @@ describe('TestFormComponent', () => {
 			});
 
 			it('should mark the sampleDate as invalid if set before birthdate', () => {
-				const dateAhead = moment(datePast).clone().add({days: 1})
-				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+				const dateAhead = moment(datePast).clone().add({days: 1});
+				component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue({date: dateAhead.toDate(), time: timeNoon});
 				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
 				expect(component.testForm.get('sampleDate').invalid).toBeTruthy();
 			});
 
 			it('should mark the sampleDate as valid if set after/equal birthdate', () => {
-				component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+				component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue(datePast);
 				component.testForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
 				expect(component.testForm.get('sampleDate').invalid).toBeFalsy();
 			});
@@ -322,25 +325,25 @@ describe('TestFormComponent', () => {
 
 	describe('Form reset', () => {
 		it('should reset the firstName correctly', () => {
-			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.firstName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
 		});
 
 		it('should reset the surName correctly', () => {
-			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.surName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
 		});
 
 		it('should reset the birthdate correctly', () => {
-			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
 		});
 
 		it('should reset the certificateLanguage correctly', () => {
-			component.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			component.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.certificateLanguage`).setValue({display: 'TEST', code: 'lang'});
 			creationDataService.emitResetCalled();
 			expect(component.testForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
 		});
@@ -381,4 +384,4 @@ describe('TestFormComponent', () => {
 	});
 });
 
-const addZeroIfLessThanTen = (n: number): string => ('0' + n).slice(-2);
+const addZeroIfLessThanTen = (n: number): string => `0${n}`.slice(-2);

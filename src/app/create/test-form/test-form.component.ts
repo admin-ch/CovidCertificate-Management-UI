@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {GenerationType, Patient, ProductInfo, RapidTestProductInfoWithToString} from 'shared/model';
@@ -12,12 +12,7 @@ import {PCR_TEST_CODE, RAPID_TEST_CODE} from 'shared/constants';
 import {RapidTestValidator} from '../utils/rapid-test-validator';
 import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
 
-const BASE_DATE_VALIDATORS = [
-	Validators.required,
-	TimeValidators.validateTime(),
-	DateValidators.dateLessThanToday(),
-	DateValidators.dateMoreThanMinDate()
-];
+const BASE_DATE_VALIDATORS = [Validators.required, TimeValidators.validateTime(), DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()];
 
 const RAPID_DATE_VALIDATORS = [
 	Validators.required,
@@ -43,16 +38,16 @@ const ANTIBODY_DATE_VALIDATORS = [
 export class TestFormComponent implements OnInit, AfterViewInit {
 	@Input() antibody = false;
 	@Input() rapid = false;
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('testPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
-	testForm: FormGroup;
+	testForm: UntypedFormGroup;
 	testType: ProductInfo;
 
-	rapidTestCompleteControl: FormControl;
+	rapidTestCompleteControl: UntypedFormControl;
 	filteredRapidTests: RapidTestProductInfoWithToString[];
 
 	private rapidTests: RapidTestProductInfoWithToString[];
@@ -62,7 +57,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
@@ -77,35 +72,30 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
-		this.translateService.onLangChange.subscribe(_ => {
+		this.translateService.onLangChange.subscribe(() => {
 			this.updateTestTypeRadio();
 			this.testForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage(),
-				countryOfTest: this.getCountriesOfTest().find(
-					countryCode => countryCode.code === this.testForm.controls.countryOfTest.value.code
-				)
+				countryOfTest: this.getCountriesOfTest().find(countryCode => countryCode.code === this.testForm.controls.countryOfTest.value.code)
 			});
 		});
 		this.rapidTestCompleteControl = this.createAutocompleteControl();
 		this.rapidTests = this.valueSetsService
 			.getRapidTests()
-			.map(
-				productInfo =>
-					new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil)
-			);
+			.map(productInfo => new RapidTestProductInfoWithToString(productInfo.code, productInfo.display, productInfo.validUntil));
 		this.filteredRapidTests = this.rapidTests;
 	}
 
 	ngAfterViewInit(): void {
 		// revalidate the 'sampleDate' field when birthdate is change
-		this.testForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+		this.testForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).valueChanges.subscribe(() => {
 			// timeout is needed to ensure that the validator gets called after the field contains the new value
 			setTimeout(() => {
 				const control = this.testForm.get('sampleDate');
 				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
 				// will contain an object-path for subfield of the ec-datetimepicker
-				control.patchValue(control.value)
-			})
+				control.patchValue(control.value);
+			});
 		});
 	}
 
@@ -137,14 +127,14 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		return this.antibody ? this.valueSetsService.getTypeOfAntibodyTests() : this.valueSetsService.getTypeOfTests();
 	}
 
-	getCurrentDateTime(): any {
+	getCurrentDateTime() {
 		return {
 			time: moment().format('HH:mm'),
 			date: moment()
 		};
 	}
 
-	getCurrentDate(): any {
+	getCurrentDate() {
 		return {
 			time: '00:00',
 			date: moment()
@@ -170,11 +160,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	getMinDate(): Date {
-		return this.rapid
-			? DateValidators.RAPID_CERTIFICATE_MIN_DATE
-			: this.antibody
-			? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE
-			: DateValidators.MIN_DATE;
+		return this.rapid ? DateValidators.RAPID_CERTIFICATE_MIN_DATE : this.antibody ? DateValidators.ANTIBODY_CERTIFICATE_MIN_DATE : DateValidators.MIN_DATE;
 	}
 
 	private updateProductValidators(testTypeCode: string) {
@@ -197,18 +183,18 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 		}
 		this.testForm = this.formBuilder.group({
 			typeOfTest: [this.testType, Validators.required],
-			sampleDate: [this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(), [
-				DateValidators.dateMoreThanBirthday(PersonalDataComponent.FORM_GROUP_NAME),
-				...sampleDateValidators
-			]],
+			sampleDate: [
+				this.rapid ? this.getCurrentDate() : this.getCurrentDateTime(),
+				[DateValidators.dateMoreThanBirthday(PersonalDataComponent.FORM_GROUP_NAME), ...sampleDateValidators]
+			],
 			countryOfTest: [this.getDefaultCountryOfTest(), Validators.required],
 			product: [''],
 			...(this.rapid ? {center: ['']} : {center: ['', [Validators.required, Validators.maxLength(50)]]})
 		});
 	}
 
-	private createAutocompleteControl(): FormControl {
-		const autocompleteControl = new FormControl('', RapidTestValidator.testRequired);
+	private createAutocompleteControl(): UntypedFormControl {
+		const autocompleteControl = new UntypedFormControl('', RapidTestValidator.testRequired);
 		autocompleteControl.valueChanges.subscribe(value => {
 			if (typeof value === 'string') {
 				this.filteredRapidTests = this.filterRapidTests(value);
@@ -273,10 +259,7 @@ export class TestFormComponent implements OnInit, AfterViewInit {
 	}
 
 	private updateTestTypeRadio(): void {
-		this.testType =
-			this.testType.code === this.getTestTypeOptions()[0].code
-				? this.getTestTypeOptions()[0]
-				: this.getTestTypeOptions()[1];
+		this.testType = this.testType.code === this.getTestTypeOptions()[0].code ? this.getTestTypeOptions()[0] : this.getTestTypeOptions()[1];
 	}
 
 	private resetForm(): void {

@@ -30,4 +30,4 @@ describe('TimeValidator', () => {
 	});
 });
 
-const addZeroIfLessThanTen = (n: number): string => ('0' + n).slice(-2);
+const addZeroIfLessThanTen = (n: number): string => `0${n}`.slice(-2);

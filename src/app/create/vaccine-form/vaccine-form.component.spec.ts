@@ -5,13 +5,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import * as moment from 'moment';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {CreationDataService} from '../utils/creation-data.service';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {VaccineFormComponent} from './vaccine-form.component';
-import {PersonalDataComponent} from "../components/personal-data/personal-data.component";
+import {PersonalDataComponent} from '../components/personal-data/personal-data.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('VaccineFormComponent', () => {
 	let component: VaccineFormComponent;
@@ -33,8 +35,9 @@ describe('VaccineFormComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [VaccineFormComponent, DateTimePickerComponent, PersonalDataComponent],
 			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
 				NoopAnimationsModule,
-				ObliqueTestingModule,
 				ObNestedFormModule,
 				ReactiveFormsModule,
 				MatSelectModule,
@@ -204,14 +207,14 @@ describe('VaccineFormComponent', () => {
 		});
 
 		it('should mark the dateOfVaccination as invalid if set before birthdate', () => {
-			const dateAhead = moment(datePast).clone().add({days: 1})
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
+			const dateAhead = moment(datePast).clone().add({days: 1});
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue({date: dateAhead.toDate(), time: timeNoon});
 			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
 			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeTruthy();
 		});
 
 		it('should mark the dateOfVaccination as valid if set after/equal birthdate', () => {
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue(datePast);
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue(datePast);
 			component.vaccineForm.get('dateOfVaccination').setValue({date: datePast, time: timeNoon});
 			expect(component.vaccineForm.get('dateOfVaccination').invalid).toBeFalsy();
 		});
@@ -296,25 +299,25 @@ describe('VaccineFormComponent', () => {
 
 	describe('Form reset', () => {
 		it('should reset the firstName correctly', () => {
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.firstName').setValue('TEST');
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.firstName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].firstName).toBeNull();
 		});
 
 		it('should reset the surName correctly', () => {
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.surName').setValue('TEST');
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.surName`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].surName).toBeNull();
 		});
 
 		it('should reset the birthdate correctly', () => {
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').setValue('TEST');
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).setValue('TEST');
 			creationDataService.emitResetCalled();
 			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].birthdate).toEqual({date: null, time: null});
 		});
 
 		it('should reset the certificateLanguage correctly', () => {
-			component.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.certificateLanguage').setValue({display: 'TEST', code: 'lang'});
+			component.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.certificateLanguage`).setValue({display: 'TEST', code: 'lang'});
 			creationDataService.emitResetCalled();
 			expect(component.vaccineForm.value[PersonalDataComponent.FORM_GROUP_NAME].certificateLanguage).toEqual({display: 'TEST', code: 'lang'});
 		});

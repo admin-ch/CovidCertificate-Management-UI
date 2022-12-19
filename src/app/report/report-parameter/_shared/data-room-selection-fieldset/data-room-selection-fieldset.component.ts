@@ -3,7 +3,7 @@ import {take, tap} from 'rxjs/operators';
 import {AuthService} from '../../../../auth/auth.service';
 import {Observable, Subscription} from 'rxjs';
 import {DataRoomCode} from 'shared/model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {ReportService} from '../../../report.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
@@ -15,7 +15,7 @@ import {REPORT_ERROR_STATE_MATCHER} from '../../../errorStateMatcher';
 })
 export class DataRoomSelectionFieldsetComponent implements OnInit, OnDestroy {
 	@Input()
-	dataRoomFormControl: FormControl;
+	dataRoomFormControl: UntypedFormControl;
 
 	authorizedDataRooms$: Observable<DataRoomCode[]>;
 

@@ -1,13 +1,8 @@
 <h1>{{ "upload.title" | translate }}</h1>
 <p>
 	{{ "upload.instructions" | translate }}
-	<a
-		href="https://github.com/admin-ch/CovidCertificate-Documents/tree/main/ui-doc"
-		target="_blank"
-		rel="noopener noreferrer"
-		id="templates-link"
-		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span
-		>{{ "upload.templates" | translate }}</a
+	<a href="https://github.com/admin-ch/CovidCertificate-Documents/tree/main/ui-doc" target="_blank" rel="noopener noreferrer" id="templates-link"
+		><span class="icon-link"><span class="fas fa-external-link-alt"></span></span>{{ "upload.templates" | translate }}</a
 	>
 </p>
 
@@ -39,12 +34,6 @@
 </div>
 <p class="hint">{{ "upload.file.select.limit" | translate }}</p>
 
-<button
-	id="upload-file-button"
-	mat-button
-	obButton="primary"
-	(click)="uploadSelectedFile()"
-	[disabled]="!canUploadFile()"
->
+<button id="upload-file-button" mat-button obButton="primary" (click)="uploadSelectedFile()" [disabled]="!canUploadFile()">
 	{{ "upload.file.upload" | translate }}
 </button>

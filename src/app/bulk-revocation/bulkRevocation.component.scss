@@ -1,4 +1,4 @@
-@import "~@oblique/oblique/styles/scss/core/variables";
+@import "@oblique/oblique/styles/scss/core/variables";
 
 .file-input {
 	display: none;
@@ -23,7 +23,7 @@
 }
 
 .hint {
-	font-size: $font-size-smallest;
+	font-size: $ob-font-size-smallest;
 }
 
 .file-info {

@@ -1,18 +1,18 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 
-import { ReportA3A5Component } from './report-a3-a5.component';
-import {ObliqueTestingModule} from "@oblique/oblique";
-import {SharedModule} from "shared/shared.module";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {ReportService} from "../../report.service";
-import {ReportType} from "shared/model";
-import {Subject} from "rxjs";
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
-import * as moment from "moment";
-import {SelectedProfilesService} from "../_shared/selected-profiles.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {MatRadioModule} from "@angular/material/radio";
+import {ReportA3A5Component} from './report-a3-a5.component';
+import {SharedModule} from 'shared/shared.module';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReportService} from '../../report.service';
+import {ReportType} from 'shared/model';
+import {Subject} from 'rxjs';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import * as moment from 'moment';
+import {SelectedProfilesService} from '../_shared/selected-profiles.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {MatRadioModule} from '@angular/material/radio';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ReportA3A5Component', () => {
 	let component: ReportA3A5Component;
@@ -21,15 +21,7 @@ describe('ReportA3A5Component', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				ObliqueTestingModule,
-				SharedModule,
-				HttpClientTestingModule,
-				FormsModule,
-				ReactiveFormsModule,
-				MatFormFieldModule,
-				MatRadioModule
-			],
+			imports: [TranslateModule.forRoot(), SharedModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatRadioModule],
 			providers: [
 				{
 					provide: ReportService,
@@ -39,7 +31,7 @@ describe('ReportA3A5Component', () => {
 								from: new FormControl(''),
 								to: new FormControl(''),
 								canton: new FormControl('buv'),
-								userIds: new FormControl([]),
+								userIds: new FormControl([])
 							})
 						}),
 						reset$: new Subject()
@@ -58,7 +50,6 @@ describe('ReportA3A5Component', () => {
 		selectedProfilesService = TestBed.inject(SelectedProfilesService);
 		fixture.detectChanges();
 	});
-
 
 	it('should create', () => {
 		expect(component).toBeTruthy();

@@ -22,16 +22,7 @@
 		<div class="from">
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.vaccine.doseNumber" | translate }}</mat-label>
-				<input
-					type="number"
-					matInput
-					formControlName="doseNumber"
-					id="doseNumber"
-					min="{{ minDose }}"
-					max="{{ maxDose }}"
-					obNumberFormat
-					decimals="0"
-				/>
+				<input type="number" matInput formControlName="doseNumber" id="doseNumber" min="{{ minDose }}" max="{{ maxDose }}" obNumberFormat decimals="0" />
 				<mat-error></mat-error>
 			</mat-form-field>
 		</div>
@@ -39,26 +30,13 @@
 		<div class="to">
 			<mat-form-field obErrorMessages class="mat-form-field-lg">
 				<mat-label>{{ "certificateCreate.form.label.vaccine.totalDoses" | translate }}</mat-label>
-				<input
-					type="number"
-					matInput
-					formControlName="totalDoses"
-					id="totalDoses"
-					min="{{ minDose }}"
-					max="{{ maxDose }}"
-					obNumberFormat
-					decimals="0"
-				/>
+				<input type="number" matInput formControlName="totalDoses" id="totalDoses" min="{{ minDose }}" max="{{ maxDose }}" obNumberFormat decimals="0" />
 				<mat-error></mat-error>
 			</mat-form-field>
 		</div>
 
 		<div class="form-field">
-			<ob-nested-form
-				formControlName="dateOfVaccination"
-				[nestedForm]="datepickerVaccination.form"
-				obErrorMessages
-			>
+			<ob-nested-form formControlName="dateOfVaccination" [nestedForm]="datepickerVaccination.form" obErrorMessages>
 				<ec-datetimepicker
 					#datepickerVaccination
 					[label]="'certificateCreate.form.label.vaccine.dateOfVaccination' | translate"

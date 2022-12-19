@@ -10,18 +10,14 @@ import {CertificateService} from 'shared/certificate.service';
 	styleUrls: ['./download.component.scss']
 })
 export class DownloadComponent implements OnInit {
-	@Output() resetEmitter = new EventEmitter<void>();
+	@Output() readonly resetEmitter = new EventEmitter<void>();
 	@Input() type;
 
 	createCertificateResponse: CreateCertificateResponse;
 	safeResourceUrl: SafeResourceUrl;
 
 	get showChOnlyBanner(): boolean {
-		return (
-			this.type === GenerationType.ANTIBODY ||
-			this.type === GenerationType.VACCINATION_TOURIST ||
-			this.type === GenerationType.EXCEPTIONAL
-		);
+		return this.type === GenerationType.ANTIBODY || this.type === GenerationType.VACCINATION_TOURIST || this.type === GenerationType.EXCEPTIONAL;
 	}
 
 	constructor(
@@ -33,9 +29,7 @@ export class DownloadComponent implements OnInit {
 	ngOnInit(): void {
 		this.dataService.createCertificateResponseChanged.subscribe(createCertificateResponse => {
 			this.createCertificateResponse = createCertificateResponse;
-			this.safeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-				`data:image/png;base64,${this.createCertificateResponse.qrCode}`
-			);
+			this.safeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${this.createCertificateResponse.qrCode}`);
 		});
 	}
 
@@ -45,8 +39,12 @@ export class DownloadComponent implements OnInit {
 			const linkSource = `data:application/pdf;base64,${this.createCertificateResponse.pdf}`;
 			const pdfBlob = this.certificateService.PDFtoBlob(linkSource);
 
-			// Internet Explorer only
-			if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+			/** Internet Explorer only */
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (window.navigator?.msSaveOrOpenBlob) {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				window.navigator.msSaveOrOpenBlob(pdfBlob, `${fileName}-${Date.now()}.pdf`);
 				return;
 			}
@@ -63,9 +61,7 @@ export class DownloadComponent implements OnInit {
 	}
 
 	getDescription(): string {
-		return this.type === GenerationType.VACCINATION
-			? 'certificateCreate.step-four.description.vaccinated'
-			: 'certificateCreate.step-four.description.tested';
+		return this.type === GenerationType.VACCINATION ? 'certificateCreate.step-four.description.vaccinated' : 'certificateCreate.step-four.description.tested';
 	}
 
 	callReset(): void {

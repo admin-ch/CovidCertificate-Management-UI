@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {RevocationService} from './revocation.service';
 import {ObNotificationService} from '@oblique/oblique';
 import {RevocationStatus} from 'shared/model';
@@ -10,7 +10,7 @@ import {RevocationStatus} from 'shared/model';
 	styleUrls: ['./certificate-revoke.component.scss']
 })
 export class CertificateRevokeComponent implements OnInit, OnDestroy {
-	revocationForm: FormGroup;
+	revocationForm: UntypedFormGroup;
 	revoked: boolean;
 	previouslyRevoked: boolean;
 	revocationDate: Date;
@@ -18,7 +18,7 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	isFraud = false;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly revocationService: RevocationService,
 		private readonly notificationService: ObNotificationService
 	) {}
@@ -58,17 +58,15 @@ export class CertificateRevokeComponent implements OnInit, OnDestroy {
 	}
 
 	private callRevocation(): void {
-		this.revocationService
-			.revoke({uvci: this.uvciUsed, fraud: this.isFraud, systemSource: 'WebUI'})
-			.subscribe(response => {
-				if (response?.status === RevocationStatus.OK) {
-					this.previouslyRevoked = false;
-					this.revoked = true;
-				} else {
-					this.revoked = false;
-					this.previouslyRevoked = true;
-					this.revocationDate = response?.revocationDateTime;
-				}
-			});
+		this.revocationService.revoke({uvci: this.uvciUsed, fraud: this.isFraud, systemSource: 'WebUI'}).subscribe(response => {
+			if (response?.status === RevocationStatus.OK) {
+				this.previouslyRevoked = false;
+				this.revoked = true;
+			} else {
+				this.revoked = false;
+				this.previouslyRevoked = true;
+				this.revocationDate = response?.revocationDateTime;
+			}
+		});
 	}
 }

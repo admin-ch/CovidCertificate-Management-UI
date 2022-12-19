@@ -27,7 +27,7 @@ describe('getStartDateBeforeEndDateValidator', () => {
 		[moment('2022-06-15T15:00'), moment('2022-06-15T15:00'), true],
 		[moment('2022-06-15T15:00'), moment('2022-06-15T16:00'), true],
 		[moment('2022-06-15T15:00'), moment('2022-06-15T14:00'), false],
-		[moment('2022-06-15T15:00'), moment('2022-06-15T14:59'), false],
+		[moment('2022-06-15T15:00'), moment('2022-06-15T14:59'), false]
 	])('when startDate is %s, endDate is %s, startTime is %s, endTime is %s, control.valid should be %s', (startDate, endDate, valid) => {
 		startDateControl.setValue(startDate);
 		endDateControl.setValue(endDate);

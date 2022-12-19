@@ -1,26 +1,24 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {EiamSelfAdminComponent} from './eiam-self-admin.component';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('EiamSelfAdminComponent', () => {
 	let component: EiamSelfAdminComponent;
 	let fixture: ComponentFixture<EiamSelfAdminComponent>;
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [ObliqueTestingModule],
-				declarations: [EiamSelfAdminComponent],
-				schemas: [NO_ERRORS_SCHEMA],
-				providers: [{provide: 'EIAM_SELF_ADMIN', useValue: 'prefix_CURRENT_PAGE_middle_LANGUAGE_suffix'}]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [TranslateModule.forRoot()],
+			declarations: [EiamSelfAdminComponent],
+			schemas: [NO_ERRORS_SCHEMA],
+			providers: [{provide: 'EIAM_SELF_ADMIN', useValue: 'prefix_CURRENT_PAGE_middle_LANGUAGE_suffix'}]
+		}).compileComponents();
+	}));
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		fixture = TestBed.createComponent(EiamSelfAdminComponent);
+		await TestBed.inject(TranslateService).use('en');
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

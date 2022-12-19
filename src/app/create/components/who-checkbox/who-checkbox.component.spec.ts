@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {WhoCheckboxComponent} from './who-checkbox.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -9,15 +8,13 @@ describe('WhoCheckboxComponent', () => {
 	let component: WhoCheckboxComponent;
 	let fixture: ComponentFixture<WhoCheckboxComponent>;
 
-	beforeEach(
-		waitForAsync(() => {
-			TestBed.configureTestingModule({
-				imports: [ObliqueTestingModule, ReactiveFormsModule, MatCheckboxModule],
-				declarations: [WhoCheckboxComponent],
-				schemas: [NO_ERRORS_SCHEMA]
-			}).compileComponents();
-		})
-	);
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			imports: [ReactiveFormsModule, MatCheckboxModule],
+			declarations: [WhoCheckboxComponent],
+			schemas: [NO_ERRORS_SCHEMA]
+		}).compileComponents();
+	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(WhoCheckboxComponent);

@@ -1,6 +1,5 @@
-@import "~@oblique/oblique/styles/scss/core/variables";
-@import "~@oblique/oblique/styles/scss/core/mixins/layout";
-@import '~@angular/material/theming';
+@import "@oblique/oblique/styles/scss/core/variables";
+@import "@oblique/oblique/styles/scss/core/mixins/layout";
 .mat-checkbox-layout {
 	white-space: normal !important;
 	text-align: justify;
@@ -11,28 +10,28 @@
 }
 
 .viewport-collapsed {
-	@include layout-collapse-down {
+	@include ob-media-breakpoint-down(md) {
 		display: block;
 	}
 
-	@include layout-collapse-up {
+	@include ob-media-breakpoint-up(md) {
 		display: none;
 	}
 }
 
 .viewport-expanded {
-	@include layout-collapse-down {
+	@include ob-media-breakpoint-down(md) {
 		display: none;
 	}
 
-	@include layout-collapse-up {
+	@include ob-media-breakpoint-up(md) {
 		display: inline;
 	}
 }
 
 // Oblique fix, should be removed with Oblique 7+
 .ob-master-layout-header .ob-header-controls.ob-header-locale {
-	margin-right: $spacing-default;
+	margin-right: $ob-spacing-default;
 }
 
 .stepper-footer {
@@ -40,11 +39,11 @@
 	height: max-content;
 	bottom: 0;
 	left: 0;
-	z-index: $z-index-layout;
+	z-index: $ob-z-index-layout;
 	padding: 16px 24px;
 
 	background-color: white;
-	border-top: 1px $gray-light solid;
+	border-top: 1px $ob-gray-light solid;
 
 	.stepper-footer-content {
 		background-color: white;
@@ -83,7 +82,7 @@
 
 .form-field-info {
 	grid-column: span 3;
-	font-size: $font-size-smallest;
+	font-size: $ob-font-size-smallest;
 	text-align: justify;
 }
 
@@ -97,5 +96,5 @@
 
 .icon-link {
 	text-decoration: none;
-	margin-right: $spacing-sm;
+	margin-right: $ob-spacing-sm;
 }

@@ -1,13 +1,13 @@
-import { Inject, Injectable, OnDestroy } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
-import { Observable, of, ReplaySubject, Subject, Subscription, throwError, timer } from "rxjs";
-import { catchError, switchMap } from "rxjs/operators";
-import * as moment from "moment";
-import { NotificationApiService } from "./notification-api.service";
+import {Inject, Injectable, OnDestroy} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Observable, ReplaySubject, Subject, Subscription, of, throwError, timer} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
+import * as moment from 'moment';
+import {NotificationApiService} from './notification-api.service';
 
 export interface Notification {
 	id: string;
-	type: "INFO" | "WARNING";
+	type: 'INFO' | 'WARNING';
 	isClosable: boolean;
 	content: Record<string, string>;
 	startTime: string;
@@ -15,21 +15,22 @@ export interface Notification {
 }
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class NotificationService implements OnDestroy {
 	public nonClosableNotifications$: Observable<Notification[]>;
 	public closableNotifications$: Observable<Notification[]>;
 
-	private nonClosableNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1);
-	private closableNotifications: Subject<Notification[]> = new Subject<Notification[]>();
-	private readonly ETAG_LOCALSTORAGE_KEY = "ecNotificationETag";
-	private readonly NOTIFICATIONS_LOCALSTORAGE_KEY = "ecNotifications";
-	private readonly NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY = "ecClosableNotificationsShown";
+	private readonly nonClosableNotifications: ReplaySubject<Notification[]> = new ReplaySubject<Notification[]>(1);
+	private readonly closableNotifications: Subject<Notification[]> = new Subject<Notification[]>();
+	private readonly ETAG_LOCALSTORAGE_KEY = 'ecNotificationETag';
+	private readonly NOTIFICATIONS_LOCALSTORAGE_KEY = 'ecNotifications';
+	private readonly NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY = 'ecClosableNotificationsShown';
 	private subscription: Subscription;
 
-	constructor(private readonly apiService: NotificationApiService,
-				@Inject("IS_NOTIFICATION_SERVICE_ENABLED") private isNotificationServiceEnabled: boolean
+	constructor(
+		private readonly apiService: NotificationApiService,
+		@Inject('IS_NOTIFICATION_SERVICE_ENABLED') private readonly isNotificationServiceEnabled: boolean
 	) {
 		this.nonClosableNotifications$ = this.nonClosableNotifications.asObservable();
 		this.closableNotifications$ = this.closableNotifications.asObservable();
@@ -49,21 +50,19 @@ export class NotificationService implements OnDestroy {
 						const storedHash = localStorage.getItem(this.ETAG_LOCALSTORAGE_KEY);
 						const headers = {};
 						if (storedHash) {
-							headers["If-None-Match"] = storedHash;
+							headers['If-None-Match'] = storedHash;
 						}
-						return this.apiService
-							.getHttpResponse(headers)
-							.pipe(
-								// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
-								// by the `HttpResponsesInterceptor`.
-								catchError(response => (response.status === 304 ? of(response) : throwError(response)))
-							);
+						return this.apiService.getHttpResponse(headers).pipe(
+							// Angular's `HttpClient` handles HTTP status 304 as error, so we need to catch it in order to not get caught
+							// by the `HttpResponsesInterceptor`.
+							catchError(response => (response.status === 304 ? of(response) : throwError(response)))
+						);
 					})
 				)
 				.subscribe((response: HttpResponse<Notification[]>) => {
 					// If status is "304 Not Modified", there have been no changes since the last pull.
 					if (response.status !== 304) {
-						localStorage.setItem(this.ETAG_LOCALSTORAGE_KEY, response.headers.get("ETag"));
+						localStorage.setItem(this.ETAG_LOCALSTORAGE_KEY, response.headers.get('ETag'));
 						localStorage.setItem(this.NOTIFICATIONS_LOCALSTORAGE_KEY, JSON.stringify(response.body));
 
 						// We create a map which its index is the index of the notification and its value is true or false
@@ -71,10 +70,7 @@ export class NotificationService implements OnDestroy {
 						// all to false.
 						const shownNotificationsMap = [];
 						response.body?.forEach((_, i) => (shownNotificationsMap[i] = false));
-						localStorage.setItem(
-							this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY,
-							JSON.stringify(shownNotificationsMap)
-						);
+						localStorage.setItem(this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY, JSON.stringify(shownNotificationsMap));
 					}
 					this.emitClosableIfExisting();
 					this.emitNonClosableIfExisting();
@@ -109,13 +105,9 @@ export class NotificationService implements OnDestroy {
 					if (this.isNowInPeriod(notification)) {
 						closableNotifications.push(notification);
 						shownNotificationsMap[i] = true;
-						localStorage.setItem(
-							this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY,
-							JSON.stringify(shownNotificationsMap)
-						);
+						localStorage.setItem(this.NOTIFICATIONS_SHOWN_LOCALSTORAGE_KEY, JSON.stringify(shownNotificationsMap));
 					}
 				}
-
 			}
 		});
 		this.closableNotifications.next(closableNotifications);
@@ -125,6 +117,6 @@ export class NotificationService implements OnDestroy {
 		const now = moment.utc(Date.now());
 		const start = moment.utc(notification.startTime);
 		const end = moment.utc(notification.endTime);
-		return now.isBetween(start, end)
+		return now.isBetween(start, end);
 	}
 }

@@ -9,13 +9,6 @@ import {HomeComponent} from './home.component';
 
 @NgModule({
 	declarations: [HomeComponent],
-	imports: [
-		CommonModule,
-		TranslateModule,
-		RouterModule.forChild([{path: '', component: HomeComponent}]),
-		MatButtonModule,
-		MatCardModule,
-		MatIconModule
-	]
+	imports: [CommonModule, TranslateModule, RouterModule.forChild([{path: '', component: HomeComponent}]), MatButtonModule, MatCardModule, MatIconModule]
 })
 export class HomeModule {}

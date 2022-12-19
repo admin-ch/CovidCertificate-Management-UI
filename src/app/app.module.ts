@@ -1,5 +1,5 @@
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Inject, LOCALE_ID, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Inject, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -10,32 +10,26 @@ import localeITCH from '@angular/common/locales/it-CH';
 import localeENGB from '@angular/common/locales/en-GB';
 import {TranslateModule} from '@ngx-translate/core';
 import {
-	multiTranslateLoader,
+	OB_BANNER,
 	ObDocumentMetaService,
+	ObDropdownModule,
 	ObHttpApiInterceptor,
 	ObHttpApiInterceptorConfig,
+	ObIconModule,
 	ObMasterLayoutConfig,
 	ObMasterLayoutModule,
 	ObOffCanvasModule,
-	ObIconModule,
-	OB_BANNER,
-	ObDropdownModule
+	multiTranslateLoader
 } from '@oblique/oblique';
-import {AuthModule, OidcConfigService} from 'angular-auth-oidc-client';
+import {AuthModule} from 'angular-auth-oidc-client';
 import {ObLanguageService} from 'shared/language.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {OpenIdConfigService} from './auth/open-id-config-service';
 import {HttpConfigInterceptor} from './auth/http.config.interceptor';
 import {EiamSelfAdminComponent} from './eiam-self-admin/eiam-self-admin.component';
 import {SharedModule} from 'shared/shared.module';
 import {environment} from '../environments/environment';
 import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
-
-export const loadConfig =
-	(oidcConfigService: OidcConfigService, openIdConfigService: OpenIdConfigService): (() => Promise<any>) =>
-	() =>
-		oidcConfigService.withConfig(openIdConfigService.config);
 
 registerLocaleData(localeDECH);
 registerLocaleData(localeFRCH);
@@ -51,7 +45,22 @@ registerLocaleData(localeENGB);
 		AppRoutingModule,
 		SharedModule,
 		TranslateModule.forRoot(multiTranslateLoader()),
-		AuthModule.forRoot(),
+		AuthModule.forRoot({
+			config: {
+				clientId: environment.oidc.clientId,
+				authority: environment.oidc.authority,
+				redirectUrl: `${environment.oidc.applicationUrl}${environment.oidc.loginFeedback}`,
+				silentRenewUrl: `${environment.oidc.applicationUrl}assets/auth/silent-refresh.html`,
+				postLogoutRedirectUri: environment.oidc.applicationUrl,
+				postLoginRoute: `/${environment.oidc.afterLoginPath}`,
+				logLevel: environment.oidc.debug,
+				maxIdTokenIatOffsetAllowedInSeconds: environment.oidc.maxIdTokenIatOffsetAllowedInSeconds,
+				responseType: 'code',
+				startCheckSession: false,
+				silentRenew: environment.oidc.silentRenew,
+				autoUserInfo: true
+			}
+		}),
 		ObMasterLayoutModule,
 		ObOffCanvasModule,
 		ObDropdownModule,
@@ -63,13 +72,6 @@ registerLocaleData(localeENGB);
 		{provide: HTTP_INTERCEPTORS, useClass: ObHttpApiInterceptor, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: HttpResponsesInterceptor, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true},
-		OidcConfigService,
-		{
-			provide: APP_INITIALIZER,
-			useFactory: loadConfig,
-			deps: [OidcConfigService, OpenIdConfigService],
-			multi: true
-		},
 		{provide: OB_BANNER, useValue: environment.banner}
 	],
 	bootstrap: [AppComponent],

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {DATE_FORMAT, GenerationType, MomentWrapper, Patient, ProductInfo, Vaccine} from 'shared/model';
@@ -24,27 +24,23 @@ const VACCINE_DATE_VALIDATORS = [
 	styleUrls: ['./tourist-vaccine-form.component.scss']
 })
 export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 	@ViewChild('touristPersonalDataComponent') personalDataChild: PersonalDataComponent;
 
-	vaccineForm: FormGroup;
+	vaccineForm: UntypedFormGroup;
 
 	public maxDose = 9;
 	public minDose = 0;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
 	) {}
-
-	private static getDefaultDateOfVaccination(): MomentWrapper {
-		return {date: moment(new Date(), DATE_FORMAT)};
-	}
 
 	ngOnInit(): void {
 		this.createForm();
@@ -54,7 +50,7 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
-		this.translateService.onLangChange.subscribe(_ => {
+		this.translateService.onLangChange.subscribe(() => {
 			this.vaccineForm.controls.medicalProduct.reset();
 			this.vaccineForm.controls.countryOfVaccination.reset();
 			this.vaccineForm.controls.checkBox.reset();
@@ -66,14 +62,14 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		// revalidate the 'dateOfVaccination' field when birthdate is change
-		this.vaccineForm.get(PersonalDataComponent.FORM_GROUP_NAME + '.birthdate').valueChanges.subscribe(() => {
+		this.vaccineForm.get(`${PersonalDataComponent.FORM_GROUP_NAME}.birthdate`).valueChanges.subscribe(() => {
 			// timeout is needed to ensure that the validator gets called after the field contains the new value
 			setTimeout(() => {
 				const control = this.vaccineForm.get('dateOfVaccination');
 				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
 				// will contain an object-path for subfield of the ec-datetimepicker
-				control.patchValue(control.value)
-			})
+				control.patchValue(control.value);
+			});
 		});
 	}
 
@@ -108,6 +104,10 @@ export class TouristVaccineFormComponent implements OnInit, AfterViewInit {
 		text += this.translateService.instant('certificateCreate.step-two.nonissuablevaccineproductinformation');
 
 		return text;
+	}
+
+	private static getDefaultDateOfVaccination(): MomentWrapper {
+		return {date: moment(new Date(), DATE_FORMAT)};
 	}
 
 	private createForm(): void {

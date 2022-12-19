@@ -2,9 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {SummaryComponent} from './summary.component';
 import {Patient} from 'shared/model';
 import {CreationDataService} from '../utils/creation-data.service';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {of} from 'rxjs';
 import {CertificateService} from 'shared/certificate.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('SummaryComponent', () => {
 	let component: SummaryComponent;
@@ -30,7 +30,7 @@ describe('SummaryComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ObliqueTestingModule],
+			imports: [TranslateModule.forRoot()],
 			declarations: [SummaryComponent],
 			providers: [
 				{
@@ -150,10 +150,7 @@ describe('SummaryComponent', () => {
 		});
 
 		it('should call the the CreationDataService for setting the certificate information', () => {
-			const setNewCreateCertificateResponseSpy = jest.spyOn(
-				creationDataService,
-				'setNewCreateCertificateResponse'
-			);
+			const setNewCreateCertificateResponseSpy = jest.spyOn(creationDataService, 'setNewCreateCertificateResponse');
 
 			component.goNext();
 
@@ -161,10 +158,7 @@ describe('SummaryComponent', () => {
 		});
 
 		it('should call the the CreationDataService for setting the certificate information with the correct values', () => {
-			const setNewCreateCertificateResponseSpy = jest.spyOn(
-				creationDataService,
-				'setNewCreateCertificateResponse'
-			);
+			const setNewCreateCertificateResponseSpy = jest.spyOn(creationDataService, 'setNewCreateCertificateResponse');
 
 			component.goNext();
 

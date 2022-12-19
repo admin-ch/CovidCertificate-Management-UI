@@ -2,11 +2,7 @@
 	<fieldset [formArrayName]="certTypesFormArrayName">
 		<legend>{{ "reports.certTypesSelection.title" | translate }}</legend>
 		<ec-field-wrapper [isError]="certTypesFormArray.touched && certTypesFormArray.hasError('required')">
-			<mat-checkbox
-				[checked]="isSelectAllChecked"
-				[indeterminate]="isSelectAllIndeterminate"
-				(change)="checkAllCertTypes($event.checked)"
-			>
+			<mat-checkbox [checked]="isSelectAllChecked" [indeterminate]="isSelectAllIndeterminate" (change)="checkAllCertTypes($event.checked)">
 				{{ "reports.certTypesSelection.select-all" | translate }}
 			</mat-checkbox>
 			<ul>

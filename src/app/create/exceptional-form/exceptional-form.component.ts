@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ValueSetsService} from '../utils/value-sets.service';
 import {TranslateService} from '@ngx-translate/core';
 import {GenerationType, Patient, ProductInfo} from 'shared/model';
@@ -23,15 +23,15 @@ const SAMPLE_DATE_VALIDATORS = [
 	styleUrls: ['./exceptional-form.component.scss']
 })
 export class ExceptionalFormComponent implements OnInit, AfterViewInit {
-	@Output() back = new EventEmitter<void>();
-	@Output() next = new EventEmitter<void>();
+	@Output() readonly back = new EventEmitter<void>();
+	@Output() readonly next = new EventEmitter<void>();
 
 	@ViewChild('formDirective') formDirective: FormGroupDirective;
 
-	exceptionalForm: FormGroup;
+	exceptionalForm: UntypedFormGroup;
 
 	constructor(
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: UntypedFormBuilder,
 		private readonly valueSetsService: ValueSetsService,
 		private readonly translateService: TranslateService,
 		private readonly dataService: CreationDataService
@@ -45,7 +45,7 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 		this.dataService.certificateTypeChanged.subscribe(() => {
 			this.resetForm();
 		});
-		this.translateService.onLangChange.subscribe(_ => {
+		this.translateService.onLangChange.subscribe(() => {
 			this.exceptionalForm.patchValue({
 				certificateLanguage: this.getDefaultCertificateLanguage(),
 				countryOfTest: this.getDefaultCountryOfTest()
@@ -61,8 +61,8 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 				const control = this.exceptionalForm.get('sampleDate');
 				// we cannot use AbstractControl::updateValueAndValidity() because then the error message
 				// will contain an object-path for subfield of the ec-datetimepicker
-				control.patchValue(control.value)
-			})
+				control.patchValue(control.value);
+			});
 		});
 	}
 
@@ -86,14 +86,14 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 		return this.valueSetsService.getCountryOptions();
 	}
 
-	getCurrentDateTime(): any {
+	getCurrentDateTime() {
 		return {
 			time: moment().format('HH:mm'),
 			date: moment()
 		};
 	}
 
-	getCurrentDate(): any {
+	getCurrentDate() {
 		return {
 			time: '23:59',
 			date: moment()
@@ -105,9 +105,7 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 	}
 
 	get infoText(): string {
-		return this.translateService.instant(
-			'certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation'
-		);
+		return this.translateService.instant('certificateCreate.step-two.entitledtoissuemedicalattestationconfirmation');
 	}
 
 	private createForm(): void {
@@ -115,15 +113,7 @@ export class ExceptionalFormComponent implements OnInit, AfterViewInit {
 		this.exceptionalForm = this.formBuilder.group({
 			firstName: ['', [Validators.required, Validators.maxLength(50)]],
 			surName: ['', [Validators.required, Validators.maxLength(50)]],
-			birthdate: [
-				'',
-				[
-					Validators.required,
-					DateValidators.validShortDate(),
-					DateValidators.dateLessThanToday(),
-					DateValidators.dateMoreThanMinDate()
-				]
-			],
+			birthdate: ['', [Validators.required, DateValidators.validShortDate(), DateValidators.dateLessThanToday(), DateValidators.dateMoreThanMinDate()]],
 			certificateLanguage: [this.getDefaultCertificateLanguage(), Validators.required],
 			sampleDate: [this.getCurrentDateTime(), SAMPLE_DATE_VALIDATORS],
 			center: ['', [Validators.required, Validators.maxLength(50)]],

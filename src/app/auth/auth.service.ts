@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ApiService} from 'shared/api.service';
 import {Claims, OauthService} from './oauth.service';
-import {Observable, of, ReplaySubject, Subscription} from 'rxjs';
+import {Observable, ReplaySubject, Subscription, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {HttpParams} from '@angular/common/http';
 import {DataRoomCode} from 'shared/model';
@@ -54,13 +54,13 @@ export enum AuthFunction {
 export class AuthService implements OnDestroy {
 	public authorizedFunctions$: Observable<AuthFunction[]>;
 	public authorizedDataRooms$: Observable<DataRoomCode[]>;
-	private authorizedFunctions: ReplaySubject<AuthFunction[]> = new ReplaySubject<AuthFunction[]>(1);
-	private authorizedDataRooms: ReplaySubject<DataRoomCode[]> = new ReplaySubject<DataRoomCode[]>(1);
-	private claimsSubscription: Subscription;
+	private readonly authorizedFunctions: ReplaySubject<AuthFunction[]> = new ReplaySubject<AuthFunction[]>(1);
+	private readonly authorizedDataRooms: ReplaySubject<DataRoomCode[]> = new ReplaySubject<DataRoomCode[]>(1);
+	private readonly claimsSubscription: Subscription;
 
 	private readonly URL: string = 'authorization/current/web-ui';
 
-	constructor(private http: ApiService, private oauthService: OauthService) {
+	constructor(private readonly http: ApiService, private readonly oauthService: OauthService) {
 		this.authorizedFunctions$ = this.authorizedFunctions.asObservable();
 		this.authorizedDataRooms$ = this.authorizedDataRooms.asObservable();
 		this.claimsSubscription = oauthService.claims$.subscribe(claims => {
@@ -68,13 +68,11 @@ export class AuthService implements OnDestroy {
 		});
 
 		this.claimsSubscription.add(
-			oauthService.claims$
-				.pipe(switchMap(claims => this.getAuthorizedFunctions(claims)))
-				.subscribe(authorizedFunctions => {
-					if (authorizedFunctions != null) {
-						this.authorizedFunctions.next(authorizedFunctions);
-					}
-				})
+			oauthService.claims$.pipe(switchMap(claims => this.getAuthorizedFunctions(claims))).subscribe(authorizedFunctions => {
+				if (authorizedFunctions != null) {
+					this.authorizedFunctions.next(authorizedFunctions);
+				}
+			})
 		);
 	}
 
@@ -83,17 +81,11 @@ export class AuthService implements OnDestroy {
 	}
 
 	public hasAuthorizationFor$(...neededAuthorizedFunctions: AuthFunction[]): Observable<boolean> {
-		return this.authorizedFunctions$.pipe(
-			map(authorizedFunctions => neededAuthorizedFunctions.some(authFun => authorizedFunctions.includes(authFun)))
-		);
+		return this.authorizedFunctions$.pipe(map(authorizedFunctions => neededAuthorizedFunctions.some(authFun => authorizedFunctions.includes(authFun))));
 	}
 
 	public hasAuthorizationForAll$(...neededAuthorizedFunctions: AuthFunction[]): Observable<boolean> {
-		return this.authorizedFunctions$.pipe(
-			map(authorizedFunctions =>
-				neededAuthorizedFunctions.every(authFun => authorizedFunctions.includes(authFun))
-			)
-		);
+		return this.authorizedFunctions$.pipe(map(authorizedFunctions => neededAuthorizedFunctions.every(authFun => authorizedFunctions.includes(authFun))));
 	}
 
 	private getAuthorizedFunctions(claims: Claims): Observable<AuthFunction[]> {
@@ -102,9 +94,8 @@ export class AuthService implements OnDestroy {
 			return this.http.get<AuthFunction[]>(this.URL, {
 				params
 			});
-		} else {
-			return of(null);
 		}
+		return of(null);
 	}
 
 	private emitAuthorizedDataRooms(claims: Claims): void {

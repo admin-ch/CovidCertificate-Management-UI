@@ -1,7 +1,6 @@
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed, fakeAsync, tick} from '@angular/core/testing';
 
 import {EiamProfile, SelectedProfilesService} from './selected-profiles.service';
-import {MatTableDataSource} from '@angular/material/table';
 
 describe('UnitDataService', () => {
 	let service: SelectedProfilesService;

@@ -19,16 +19,14 @@ export class ObLanguageService {
 	constructor(translate: TranslateService) {
 		this.locale = new BehaviorSubject<string>(ObLanguageService.getLocale(translate.currentLang));
 		this.locale$ = this.locale.asObservable();
-		translate.onLangChange
-			.pipe(map(lang => ObLanguageService.getLocale(lang.lang)))
-			.subscribe(locale => this.locale.next(locale));
+		translate.onLangChange.pipe(map(lang => ObLanguageService.getLocale(lang.lang))).subscribe(locale => this.locale.next(locale));
+	}
+
+	setAdapter(adapter: DateAdapter<unknown>): void {
+		this.locale$.subscribe(locale => adapter.setLocale(locale));
 	}
 
 	private static getLocale(language: string): string {
 		return ObLanguageService.locales[language] || language;
-	}
-
-	setAdapter(adapter: DateAdapter<any>): void {
-		this.locale$.subscribe(locale => adapter.setLocale(locale));
 	}
 }

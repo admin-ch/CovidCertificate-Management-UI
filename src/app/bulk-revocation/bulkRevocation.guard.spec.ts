@@ -1,7 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthFunction} from '../auth/auth.service';
-import {ObliqueTestingModule} from '@oblique/oblique';
 import {BulkRevocationGuard} from './bulkRevocation.guard';
 import {BaseGuard} from 'shared/base.guard';
 
@@ -11,7 +10,7 @@ describe('BulkRevocationGuard', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule, ObliqueTestingModule],
+			imports: [RouterTestingModule],
 			providers: [
 				{
 					provide: BaseGuard,

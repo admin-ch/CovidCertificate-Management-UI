@@ -1,10 +1,5 @@
 <div class="form-field">
-	<mat-radio-group
-		id="confirmationType"
-		name="confirmationType"
-		aria-label="Select an option"
-		class="radio-button-container confirmation-container"
-	>
+	<mat-radio-group id="confirmationType" name="confirmationType" aria-label="Select an option" class="radio-button-container confirmation-container">
 		<mat-radio-button
 			id="confirmationType-nonRetroactive"
 			value="nonRetroactive"
@@ -12,21 +7,10 @@
 			class="radio-button confirmation-radio"
 			[checked]="true"
 		>
-			<span
-				[innerHTML]="'certificateCreate.form.label.radio.nonRetroactive' | translate"
-				class="label-container"
-			></span>
+			<span [innerHTML]="'certificateCreate.form.label.radio.nonRetroactive' | translate" class="label-container"></span>
 		</mat-radio-button>
-		<mat-radio-button
-			id="confirmationType-retroactive"
-			value="retroactive"
-			name="retroactive"
-			class="radio-button confirmation-radio"
-		>
-			<span
-				[innerHTML]="'certificateCreate.form.label.radio.retroactive' | translate"
-				class="label-container"
-			></span>
+		<mat-radio-button id="confirmationType-retroactive" value="retroactive" name="retroactive" class="radio-button confirmation-radio">
+			<span [innerHTML]="'certificateCreate.form.label.radio.retroactive' | translate" class="label-container"></span>
 		</mat-radio-button>
 	</mat-radio-group>
 </div>

@@ -184,9 +184,7 @@ describe('CertificateCreateDtoMappingService', () => {
 				testInfo: [
 					{
 						memberStateOfTest: 'CH',
-						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
-							testDataForTestWithoutManufacturer.test.sampleDate
-						)}`,
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTestWithoutManufacturer.test.sampleDate)}`,
 						manufacturerCode: undefined,
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
@@ -309,9 +307,7 @@ describe('CertificateCreateDtoMappingService', () => {
 				testInfo: [
 					{
 						memberStateOfTest: 'CH',
-						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
-							testDataForTestWithoutManufacturer.test.sampleDate
-						)}`,
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTestWithoutManufacturer.test.sampleDate)}`,
 						manufacturerCode: undefined,
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'
@@ -466,9 +462,7 @@ describe('CertificateCreateDtoMappingService', () => {
 				testInfo: [
 					{
 						memberStateOfTest: 'CH',
-						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(
-							testDataForTestWithoutManufacturer.test.sampleDate
-						)}`,
+						sampleDateTime: `2021-02-01T00:00:00.000${getTimeZone(testDataForTestWithoutManufacturer.test.sampleDate)}`,
 						manufacturerCode: undefined,
 						testingCentreOrFacility: 'TEST-center',
 						typeCode: 'T-42'

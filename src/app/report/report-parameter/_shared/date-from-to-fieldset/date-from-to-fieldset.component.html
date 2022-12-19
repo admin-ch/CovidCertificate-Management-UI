@@ -26,10 +26,7 @@
 					</mat-error>
 					<ng-template #periodTooBig>
 						<mat-error *ngIf="dateFromFormControl.hasError('maxPeriodDays')">
-							{{
-								"reports.dateFromTo.maxPeriodDays"
-									| translate: { maxPeriodDays: dateFromFormControl.errors["maxPeriodDays"] }
-							}}
+							{{ "reports.dateFromTo.maxPeriodDays" | translate: { maxPeriodDays: dateFromFormControl.errors["maxPeriodDays"] } }}
 						</mat-error>
 					</ng-template>
 				</ng-template>

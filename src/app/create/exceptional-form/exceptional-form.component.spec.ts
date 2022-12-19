@@ -3,16 +3,18 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExceptionalFormComponent} from './exceptional-form.component';
 import {DateTimePickerComponent} from '../date-time-picker/date-time-picker.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ObliqueTestingModule, ObNestedFormModule} from '@oblique/oblique';
+import {ObNestedFormModule} from '@oblique/oblique';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {CreationDataService} from "../utils/creation-data.service";
-import * as moment from "moment";
-import {ValueSetsService} from "../utils/value-sets.service";
+import {CreationDataService} from '../utils/creation-data.service';
+import * as moment from 'moment';
+import {ValueSetsService} from '../utils/value-sets.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ExceptionalFormComponent', () => {
 	let component: ExceptionalFormComponent;
@@ -27,15 +29,19 @@ describe('ExceptionalFormComponent', () => {
 	const mockValueSetsService = {
 		getCertificateLanguages: jest.fn().mockReturnValue([]),
 		getVaccines: jest.fn().mockReturnValue([]),
-		getCountryOptions: jest.fn().mockReturnValue([{code: 'CH', display: 'TEST-CH'}, {code: 'DE', display: 'TEST-DE'}])
+		getCountryOptions: jest.fn().mockReturnValue([
+			{code: 'CH', display: 'TEST-CH'},
+			{code: 'DE', display: 'TEST-DE'}
+		])
 	};
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [ExceptionalFormComponent, DateTimePickerComponent],
 			imports: [
+				TranslateModule.forRoot(),
+				HttpClientTestingModule,
 				NoopAnimationsModule,
-				ObliqueTestingModule,
 				ObNestedFormModule,
 				ReactiveFormsModule,
 				MatSelectModule,
@@ -93,7 +99,7 @@ describe('ExceptionalFormComponent', () => {
 			});
 
 			it('should mark the sampleDate as invalid if set before birthdate', () => {
-				const dateAhead = moment(datePast).clone().add({days: 1})
+				const dateAhead = moment(datePast).clone().add({days: 1});
 				component.exceptionalForm.get('birthdate').setValue({date: dateAhead.toDate(), time: timeNoon});
 				component.exceptionalForm.get('sampleDate').setValue({date: datePast, time: timeNoon});
 				expect(component.exceptionalForm.get('sampleDate').invalid).toBeTruthy();
