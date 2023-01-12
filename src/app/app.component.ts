@@ -15,8 +15,6 @@ import {NotificationService} from './notifications/notification.service';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-	AuthFunction = AuthFunction;
-
 	static configs = [
 		{
 			functions: [AuthFunction.MAIN],
@@ -48,6 +46,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		}
 	];
 
+	AuthFunction = AuthFunction;
 	navigation: ObINavigationLink[] = [];
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;

@@ -30,7 +30,7 @@ import {EiamSelfAdminComponent} from './eiam-self-admin/eiam-self-admin.componen
 import {SharedModule} from 'shared/shared.module';
 import {environment} from '../environments/environment';
 import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
-import {CacheResetModule} from "./cache-reset/cache-reset.module";
+import {CacheResetModule} from './cache-reset/cache-reset.module';
 
 registerLocaleData(localeDECH);
 registerLocaleData(localeFRCH);
