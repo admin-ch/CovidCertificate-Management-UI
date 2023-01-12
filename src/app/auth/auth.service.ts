@@ -30,6 +30,9 @@ export enum AuthFunction {
 	// OTP
 	CREATE_OTP = 'create-otp',
 
+	//Clear cache
+	CLEAR_CACHES = 'clear-caches',
+
 	// Bulk
 	BULK_CREATE_CERTIFICATES = 'bulk-create-certificates',
 	BULK_REVOKE_CERTIFICATES = 'bulk-revoke-certificates',

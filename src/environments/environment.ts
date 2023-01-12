@@ -22,6 +22,7 @@ export const environment = {
 		debug: LogLevel.Warn,
 		tokenAwareUrlPatterns: [
 			'/v1/covidcertificate.*',
+			'/v1/caches/clear',
 			'/v1/valuesets',
 			'/v1/feature-toggle/features',
 			'/v1/otp',
