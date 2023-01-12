@@ -31,7 +31,7 @@ export enum AuthFunction {
 	CREATE_OTP = 'create-otp',
 
 	//Clear cache
-	CLEAR_CACHES = 'clear-caches',
+	MAIN_CACHE_MANAGEMENT = 'main-cache-management',
 
 	// Bulk
 	BULK_CREATE_CERTIFICATES = 'bulk-create-certificates',
