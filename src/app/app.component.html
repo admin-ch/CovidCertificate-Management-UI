@@ -25,13 +25,6 @@
 		</ob-dropdown>
 	</ng-template>
 	<ng-container *ngIf="isAuthenticated$ | async">
-		<ng-container *ecHasAuthorizationFor="AuthFunction.MAIN_CACHE_MANAGEMENT">
-			<ng-template #obHeaderControl>
-				<ec-cache-reset></ec-cache-reset>
-			</ng-template>
-		</ng-container>
-	</ng-container>
-	<ng-container *ngIf="isAuthenticated$ | async">
 		<ng-template #obHeaderControl>
 			<button id="button-logout" [matTooltip]="'logout' | translate" class="ob-control-link" (click)="logout()">
 				<span class="fa fa-sign-out-alt ob-control-icon"></span>
