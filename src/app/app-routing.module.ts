@@ -8,7 +8,7 @@ import {UploadGuard} from './upload/upload.guard';
 import {ReportGuard} from './report/report.guard';
 import {BulkRevocationGuard} from './bulk-revocation/bulkRevocation.guard';
 import {NotificationsManagementGuard} from './notifications/notifications-management/notifications-management.guard';
-import {CacheResetGuard} from "./cache-reset/cache-reset.guard";
+import {CacheResetGuard} from './cache-reset/cache-reset.guard';
 
 const routes: Routes = [
 	{
