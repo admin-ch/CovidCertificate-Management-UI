@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {CacheResetService} from './cache-reset.service';
 
 enum Caches {
-	KeyIdentifier= 'KeyIdentifier',
+	KeyIdentifier = 'KeyIdentifier',
 	SigningInformation = 'SigningInformation',
 	Rapidtests = 'Rapidtests',
 	IssuableRapidtests = 'IssuableRapidtests',
@@ -18,7 +18,7 @@ enum Caches {
 	CountryCodeByLanguage = 'CountryCodeByLanguage'
 }
 
-type Checklist = {value: Caches, isSelected: boolean}[]
+type Checklist = {value: Caches; isSelected: boolean}[]
 
 @Component({
 	selector: 'ec-cache-reset',
