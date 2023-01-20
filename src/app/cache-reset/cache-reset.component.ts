@@ -7,6 +7,10 @@ import {CacheResetService} from './cache-reset.service';
 	styleUrls: ['./cache-reset.component.scss']
 })
 export class CacheResetComponent {
+	masterSelected: boolean;
+	checkedList: any;
+	checklist: any;
+
 	constructor(private readonly cacheResetService: CacheResetService) {
 		this.masterSelected = false;
 		this.checklist = [
@@ -27,10 +31,6 @@ export class CacheResetComponent {
 		];
 		this.getCheckedItemList();
 	}
-
-	masterSelected: boolean;
-	checkedList: any;
-	checklist: any;
 
 	checkUncheckAll() {
 		for (let value of this.checklist) {
