@@ -32,7 +32,6 @@ export class CacheResetComponent {
 	checkedList: any;
 	checklist: any;
 
-	// The master checkbox will check/ uncheck all items
 	checkUncheckAll() {
 		for (let value of this.checklist) {
 			value.isSelected = this.masterSelected;
@@ -40,20 +39,14 @@ export class CacheResetComponent {
 		this.getCheckedItemList();
 	}
 
-	// Check All Checkbox Checked
 	isAllSelected() {
-		this.masterSelected = this.checklist.every(function (item: any) {
-			return item.isSelected == true;
-		})
+		this.masterSelected = this.checklist.every(item => item.isSelected);
 		this.getCheckedItemList();
 	}
 
-	// Get List of Checked Items
 	getCheckedItemList() {
 		this.checkedList = [];
-		for (let value of this.checklist) {
-			this.checkedList = this.checklist.filter(value => value.isSelected);
-		}
+		this.checkedList = this.checklist.filter(value => value.isSelected);
 		this.checkedList = JSON.stringify(this.checkedList.map(a => a.value));
 	}
 
@@ -63,7 +56,6 @@ export class CacheResetComponent {
 	}
 
 	resetAllCheckboxes() {
-		// Reset Checkboxes after submit
 		for (let value of this.checklist) {
 			value.isSelected = false;
 		}
