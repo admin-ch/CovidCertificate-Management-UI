@@ -1,6 +1,25 @@
 import {Component} from '@angular/core';
 import {CacheResetService} from './cache-reset.service';
 
+enum Caches {
+	KeyIdentifier= 'KeyIdentifier',
+	SigningInformation = 'SigningInformation',
+	Rapidtests = 'Rapidtests',
+	IssuableRapidtests = 'IssuableRapidtests',
+	Vaccines = 'Vaccines',
+	IssuableVaccines = 'IssuableVaccines',
+	ApiIssuableVaccines = 'ApiIssuableVaccines',
+	WebIssuableVaccines = 'WebIssuableVaccines',
+	Valuesets = 'Valuesets',
+	ExtendedValuesets = 'ExtendedValuesets',
+	IssuableVaccineDTO = 'IssuableVaccineDTO',
+	IssuableTestDTO = 'IssuableTestDTO',
+	CountryCodes = 'CountryCodes',
+	CountryCodeByLanguage = 'CountryCodeByLanguage'
+}
+
+type Checklist = {value: Caches, isSelected: boolean}[]
+
 @Component({
 	selector: 'ec-cache-reset',
 	templateUrl: './cache-reset.component.html',
@@ -8,50 +27,41 @@ import {CacheResetService} from './cache-reset.service';
 })
 export class CacheResetComponent {
 	masterSelected: boolean;
-	checkedList: any;
-	checklist: any;
+	checklist: Checklist;
 
 	constructor(private readonly cacheResetService: CacheResetService) {
 		this.masterSelected = false;
 		this.checklist = [
-			{value: 'KeyIdentifier', isSelected: false},
-			{value: 'SigningInformation', isSelected: false},
-			{value: 'Rapidtests', isSelected: false},
-			{value: 'IssuableRapidtests', isSelected: false},
-			{value: 'Vaccines', isSelected: false},
-			{value: 'IssuableVaccines', isSelected: false},
-			{value: 'ApiIssuableVaccines', isSelected: false},
-			{value: 'WebIssuableVaccines', isSelected: false},
-			{value: 'Valuesets', isSelected: false},
-			{value: 'ExtendedValuesets', isSelected: false},
-			{value: 'IssuableVaccineDTO', isSelected: false},
-			{value: 'IssuableTestDTO', isSelected: false},
-			{value: 'CountryCodes', isSelected: false},
-			{value: 'CountryCodeByLanguage', isSelected: false}
+			{value: Caches.KeyIdentifier, isSelected: false},
+			{value: Caches.SigningInformation, isSelected: false},
+			{value: Caches.Rapidtests, isSelected: false},
+			{value: Caches.IssuableRapidtests, isSelected: false},
+			{value: Caches.Vaccines, isSelected: false},
+			{value: Caches.IssuableVaccines, isSelected: false},
+			{value: Caches.ApiIssuableVaccines, isSelected: false},
+			{value: Caches.WebIssuableVaccines, isSelected: false},
+			{value: Caches.Valuesets, isSelected: false},
+			{value: Caches.ExtendedValuesets, isSelected: false},
+			{value: Caches.IssuableVaccineDTO, isSelected: false},
+			{value: Caches.IssuableTestDTO, isSelected: false},
+			{value: Caches.CountryCodes, isSelected: false},
+			{value: Caches.CountryCodeByLanguage, isSelected: false}
 		];
-		this.getCheckedItemList();
 	}
 
 	checkUncheckAll() {
 		for (const value of this.checklist) {
 			value.isSelected = this.masterSelected;
 		}
-		this.getCheckedItemList();
 	}
 
 	isAllSelected() {
 		this.masterSelected = this.checklist.every(item => item.isSelected);
-		this.getCheckedItemList();
-	}
-
-	getCheckedItemList() {
-		this.checkedList = [];
-		this.checkedList = this.checklist.filter(value => value.isSelected);
-		this.checkedList = JSON.stringify(this.checkedList.map(a => a.value));
+		return this.masterSelected;
 	}
 
 	resetCache() {
-		this.cacheResetService.resetCache(JSON.parse(this.checkedList));
+		this.cacheResetService.resetCache(this.checklist.filter(item => item.isSelected).map(a => a.value));
 		this.resetAllCheckboxes();
 	}
 
