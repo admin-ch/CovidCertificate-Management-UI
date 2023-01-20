@@ -18,7 +18,7 @@ enum Caches {
 	CountryCodeByLanguage = 'CountryCodeByLanguage'
 }
 
-type Checklist = {value: Caches; isSelected: boolean}[]
+type Checklist = {value: Caches; isSelected: boolean}[];
 
 @Component({
 	selector: 'ec-cache-reset',
