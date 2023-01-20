@@ -33,7 +33,7 @@ export class CacheResetComponent {
 	}
 
 	checkUncheckAll() {
-		for (let value of this.checklist) {
+		for (const value of this.checklist) {
 			value.isSelected = this.masterSelected;
 		}
 		this.getCheckedItemList();
@@ -56,7 +56,7 @@ export class CacheResetComponent {
 	}
 
 	resetAllCheckboxes() {
-		for (let value of this.checklist) {
+		for (const value of this.checklist) {
 			value.isSelected = false;
 		}
 		this.masterSelected = false;

@@ -8,8 +8,7 @@ import {AuthFunction} from '../auth/auth.service';
 	providedIn: 'root'
 })
 export class CacheResetGuard implements CanActivate, CanActivateChild, CanLoad {
-	constructor(private readonly baseGuard: BaseGuard) {
-	}
+	constructor(private readonly baseGuard: BaseGuard) {}
 
 	canActivate(): Observable<boolean> {
 		return this.baseGuard.checkExpectedRole(AuthFunction.MAIN_CACHE_MANAGEMENT);

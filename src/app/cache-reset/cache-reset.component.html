@@ -3,9 +3,10 @@
 	<p>{{ "cache.reset.subtitle" | translate }}</p>
 	<div class="container">
 		<mat-checkbox (change)="checkUncheckAll()" [(ngModel)]="masterSelected" id="select-all-checkbox">
-			<b> {{ "cache.reset.select" | translate }} </b></mat-checkbox>
+			<b> {{ "cache.reset.select" | translate }} </b></mat-checkbox
+		>
 		<div *ngFor="let item of checklist" class="caches">
-			<mat-checkbox (change)="isAllSelected()" [(ngModel)]="item.isSelected">{{item.value}}</mat-checkbox>
+			<mat-checkbox (change)="isAllSelected()" [(ngModel)]="item.isSelected">{{ item.value }}</mat-checkbox>
 		</div>
 	</div>
 	<button (click)="resetCache()" id="reset-cache-button" mat-button obButton="primary">

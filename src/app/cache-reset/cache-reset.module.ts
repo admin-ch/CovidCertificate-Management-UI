@@ -31,6 +31,4 @@ import {FormsModule} from '@angular/forms';
 		FormsModule
 	]
 })
-
-export class CacheResetModule {
-}
+export class CacheResetModule {}
