@@ -10,7 +10,8 @@
     "prerelease": "npm run lint && npm test -- --configuration production && npm run build -- --configuration production",
     "supportedBrowsers": "echo \"export const supportedBrowsers = $(browserslist-useragent-regexp --allowHigherVersions);\" > ./src/app/supportedBrowsers.ts",
     "lint": "ng lint",
-    "format": "npm run lint -- --fix"
+    "format": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
   "private": true,
   "jestSonar": {

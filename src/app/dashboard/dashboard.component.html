@@ -112,4 +112,20 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
+	<mat-card class="dashboard-card" *ecHasAuthorizationFor="AuthFunction.MAIN_CACHE_MANAGEMENT">
+		<div class="dashboard-icon">
+			<mat-icon svgIcon="warning-triangle" class="ob-icon"></mat-icon>
+		</div>
+		<mat-card-header>
+			<mat-card-title class="dashboard-title">{{ "dashboard.cacheReset.title" | translate }}</mat-card-title>
+		</mat-card-header>
+		<mat-card-content class="dashboard-content">
+			<p>{{ "dashboard.cacheReset.description" | translate }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button id="dashboard-button-cachesManagement" mat-button obButton="primary" (click)="goToCacheReset()">
+				{{ "dashboard.cacheReset.action" | translate }}
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>

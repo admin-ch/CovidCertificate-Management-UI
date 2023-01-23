@@ -24,6 +24,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		private readonly translateService: TranslateService
 	) {}
 
+	goToCacheReset() {
+		this.router.navigateByUrl('cache-reset');
+	}
+
 	goToCertificateCreate() {
 		this.router.navigateByUrl('certificate-create');
 	}
