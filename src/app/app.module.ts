@@ -30,7 +30,6 @@ import {EiamSelfAdminComponent} from './eiam-self-admin/eiam-self-admin.componen
 import {SharedModule} from 'shared/shared.module';
 import {environment} from '../environments/environment';
 import {HttpResponsesInterceptor} from 'shared/http/http-responses.interceptor';
-import {CacheResetModule} from './cache-reset/cache-reset.module';
 
 registerLocaleData(localeDECH);
 registerLocaleData(localeFRCH);
@@ -67,7 +66,6 @@ registerLocaleData(localeENGB);
 		ObDropdownModule,
 		MatTooltipModule,
 		ObIconModule.forRoot(),
-		CacheResetModule
 	],
 	providers: [
 		{provide: LOCALE_ID, useValue: 'de-CH'},

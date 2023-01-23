@@ -9,6 +9,7 @@
     "bulk.revocation.warning": "Toutes les révocations n'ont pas abouti. Veuillez vérifier le CSV retourné pour connaître les détails.",
     "cache.reset.title" : "Cache",
     "cache.reset.subtitle" : "Sélectionner les caches à effacer",
+    "cache.reset.success": "Caches effacés avec succès",
     "cache.reset.select" : "Tout sélectionner",
     "cache.reset.resetCaches" : "Supprimer les caches",
     "certificateCreate.form.group.personalData": "Données personnelles",

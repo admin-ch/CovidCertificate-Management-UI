@@ -1,22 +1,5 @@
 import {Component} from '@angular/core';
-import {CacheResetService} from './cache-reset.service';
-
-enum Caches {
-	KeyIdentifier = 'KeyIdentifier',
-	SigningInformation = 'SigningInformation',
-	Rapidtests = 'Rapidtests',
-	IssuableRapidtests = 'IssuableRapidtests',
-	Vaccines = 'Vaccines',
-	IssuableVaccines = 'IssuableVaccines',
-	ApiIssuableVaccines = 'ApiIssuableVaccines',
-	WebIssuableVaccines = 'WebIssuableVaccines',
-	Valuesets = 'Valuesets',
-	ExtendedValuesets = 'ExtendedValuesets',
-	IssuableVaccineDTO = 'IssuableVaccineDTO',
-	IssuableTestDTO = 'IssuableTestDTO',
-	CountryCodes = 'CountryCodes',
-	CountryCodeByLanguage = 'CountryCodeByLanguage'
-}
+import {CacheResetService, Caches} from './cache-reset.service';
 
 type Checklist = {value: Caches; isSelected: boolean}[];
 

@@ -9,6 +9,7 @@
     "bulk.revocation.warning": "Nicht alle Sperrungen waren erfolgreich. Bitte prüfen Sie die generierte CSV-Datei, um Details zu erfahren.",
     "cache.reset.title": "Cache",
     "cache.reset.subtitle": "Wählen Sie die zu löschenden Caches aus.",
+    "cache.reset.success": "Caches wurden erfolgreich gelöscht",
     "cache.reset.select": "Alle auswählen",
     "cache.reset.resetCaches": "Caches löschen",
     "certificateCreate.form.group.personalData": "Personalien",
