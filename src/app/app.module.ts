@@ -65,7 +65,7 @@ registerLocaleData(localeENGB);
 		ObOffCanvasModule,
 		ObDropdownModule,
 		MatTooltipModule,
-		ObIconModule.forRoot(),
+		ObIconModule.forRoot()
 	],
 	providers: [
 		{provide: LOCALE_ID, useValue: 'de-CH'},
