@@ -26,7 +26,7 @@ export class CacheResetService {
 	constructor(private readonly http: ApiService, private readonly notificationService: ObNotificationService) {}
 
 	resetCache(selectedCaches: Caches[]) {
-		const cacheNames = selectedCaches.map(cache => cache.replace(/ /g,''));
+		const cacheNames = selectedCaches.map(cache => cache.replace(/ /g, ''));
 		this.http.post('caches/clear', cacheNames).subscribe(() => {
 			this.notificationService.success('cache.reset.success');
 		});

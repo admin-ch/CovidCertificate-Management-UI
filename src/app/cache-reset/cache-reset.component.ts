@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CacheResetService, Caches} from './cache-reset.service';
 
-type Checklist = { value: Caches; isSelected: boolean }[];
+type Checklist = {value: Caches; isSelected: boolean}[];
 
 @Component({
 	selector: 'ec-cache-reset',
@@ -42,11 +42,11 @@ export class CacheResetComponent {
 	}
 
 	isAllSelected() {
-		this.allUnselected = this.checklist.every(item => item.isSelected === false);
-		let allSelected = this.checklist.every(item => item.isSelected);
+		this.allUnselected = this.checklist.every(item => !item.isSelected);
+		const allSelected = this.checklist.every(item => item.isSelected);
 		if (!allSelected && this.masterSelected) {
 			this.masterSelected = null;
-		} else if (allSelected && this.masterSelected === false || allSelected && this.masterSelected === null) {
+		} else if ((allSelected && !this.masterSelected) || (allSelected && this.masterSelected === null)) {
 			this.masterSelected = true;
 		}
 	}
