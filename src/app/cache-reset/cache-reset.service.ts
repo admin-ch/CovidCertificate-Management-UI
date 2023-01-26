@@ -3,20 +3,20 @@ import {ApiService} from 'shared/api.service';
 import {ObNotificationService} from '@oblique/oblique';
 
 export enum Caches {
-	KeyIdentifier = 'KeyIdentifier',
-	SigningInformation = 'SigningInformation',
+	KeyIdentifier = 'Key Identifier',
+	SigningInformation = 'Signing Information',
 	Rapidtests = 'Rapidtests',
-	IssuableRapidtests = 'IssuableRapidtests',
+	IssuableRapidtests = 'Issuable Rapidtests',
 	Vaccines = 'Vaccines',
-	IssuableVaccines = 'IssuableVaccines',
-	ApiIssuableVaccines = 'ApiIssuableVaccines',
-	WebIssuableVaccines = 'WebIssuableVaccines',
+	IssuableVaccines = 'Issuable Vaccines',
+	ApiIssuableVaccines = 'Api Issuable Vaccines',
+	WebIssuableVaccines = 'Web Issuable Vaccines',
 	Valuesets = 'Valuesets',
-	ExtendedValuesets = 'ExtendedValuesets',
-	IssuableVaccineDTO = 'IssuableVaccineDTO',
-	IssuableTestDTO = 'IssuableTestDTO',
-	CountryCodes = 'CountryCodes',
-	CountryCodeByLanguage = 'CountryCodeByLanguage'
+	ExtendedValuesets = 'Extended Valuesets',
+	IssuableVaccineDTO = 'Issuable Vaccine DTO',
+	IssuableTestDTO = 'Issuable Test DTO',
+	CountryCodes = 'Country Codes',
+	CountryCodeByLanguage = 'Country Code By Language'
 }
 
 @Injectable({
@@ -26,7 +26,8 @@ export class CacheResetService {
 	constructor(private readonly http: ApiService, private readonly notificationService: ObNotificationService) {}
 
 	resetCache(selectedCaches: Caches[]) {
-		this.http.post('caches/clear', selectedCaches).subscribe(() => {
+		const cacheNames = selectedCaches.map(cache => cache.replace(/ /g,''));
+		this.http.post('caches/clear', cacheNames).subscribe(() => {
 			this.notificationService.success('cache.reset.success');
 		});
 	}

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CacheResetService, Caches} from './cache-reset.service';
 
-type Checklist = {value: Caches; isSelected: boolean}[];
+type Checklist = { value: Caches; isSelected: boolean }[];
 
 @Component({
 	selector: 'ec-cache-reset',
@@ -11,9 +11,10 @@ type Checklist = {value: Caches; isSelected: boolean}[];
 export class CacheResetComponent {
 	masterSelected: boolean;
 	checklist: Checklist;
+	allUnselected = true;
 
 	constructor(private readonly cacheResetService: CacheResetService) {
-		this.masterSelected = false;
+		this.masterSelected = null;
 		this.checklist = [
 			{value: Caches.KeyIdentifier, isSelected: false},
 			{value: Caches.SigningInformation, isSelected: false},
@@ -36,22 +37,21 @@ export class CacheResetComponent {
 		for (const value of this.checklist) {
 			value.isSelected = this.masterSelected;
 		}
+		this.allUnselected = !this.masterSelected;
+		this.masterSelected = null;
 	}
 
 	isAllSelected() {
-		this.masterSelected = this.checklist.every(item => item.isSelected);
-		return this.masterSelected;
+		this.allUnselected = this.checklist.every(item => item.isSelected === false);
+		let allSelected = this.checklist.every(item => item.isSelected);
+		if (!allSelected && this.masterSelected) {
+			this.masterSelected = null;
+		} else if (allSelected && this.masterSelected === false || allSelected && this.masterSelected === null) {
+			this.masterSelected = true;
+		}
 	}
 
 	resetCache() {
 		this.cacheResetService.resetCache(this.checklist.filter(item => item.isSelected).map(a => a.value));
-		this.resetAllCheckboxes();
-	}
-
-	resetAllCheckboxes() {
-		for (const value of this.checklist) {
-			value.isSelected = false;
-		}
-		this.masterSelected = false;
 	}
 }
