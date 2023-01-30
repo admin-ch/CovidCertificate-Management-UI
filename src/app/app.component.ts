@@ -46,6 +46,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 		}
 	];
 
+	AuthFunction = AuthFunction;
 	navigation: ObINavigationLink[] = [];
 	isAuthenticated$: Observable<boolean>;
 	name$: Observable<string>;

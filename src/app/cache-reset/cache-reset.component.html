@@ -1,0 +1,20 @@
+<div class="flex-container">
+	<h1>{{ "cache.reset.title" | translate }}</h1>
+	<p>{{ "cache.reset.subtitle" | translate }}</p>
+	<div class="container">
+		<mat-checkbox
+			(change)="checkUncheckAll()"
+			[indeterminate]="masterSelected === null && !allUnselected"
+			[(ngModel)]="masterSelected"
+			id="select-all-checkbox"
+		>
+			<strong> {{ "cache.reset.select" | translate }} </strong></mat-checkbox
+		>
+		<div *ngFor="let item of checklist" class="caches">
+			<mat-checkbox (change)="isAllSelected()" [(ngModel)]="item.isSelected">{{ item.value }}</mat-checkbox>
+		</div>
+	</div>
+	<button (click)="resetCache()" id="reset-cache-button" [disabled]="allUnselected" mat-button obButton="primary">
+		{{ "cache.reset.resetCaches" | translate }}
+	</button>
+</div>

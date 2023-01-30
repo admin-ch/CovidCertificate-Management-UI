@@ -1,7 +1,7 @@
 {
   "title": "cc-management-ui",
   "name": "cc-management-ui",
-  "version": "4.9.1",
+  "version": "4.10.2",
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
@@ -10,7 +10,8 @@
     "prerelease": "npm run lint && npm test -- --configuration production && npm run build -- --configuration production",
     "supportedBrowsers": "echo \"export const supportedBrowsers = $(browserslist-useragent-regexp --allowHigherVersions);\" > ./src/app/supportedBrowsers.ts",
     "lint": "ng lint",
-    "format": "npm run lint -- --fix"
+    "format": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
   "private": true,
   "jestSonar": {

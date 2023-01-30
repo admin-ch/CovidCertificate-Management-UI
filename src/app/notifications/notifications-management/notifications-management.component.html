@@ -18,7 +18,7 @@
 						{{ "notificationsManagement.notification.start" | translate }}
 					</th>
 					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.start' | translate">
-						{{ notification.startTime | date: "short" }}
+						{{ notification.startTime | date : "short" }}
 					</td>
 				</ng-container>
 
@@ -27,7 +27,7 @@
 						{{ "notificationsManagement.notification.end" | translate }}
 					</th>
 					<td mat-cell *matCellDef="let notification" [attr.data-title]="'notificationsManagement.notification.end' | translate">
-						{{ notification.endTime | date: "short" }}
+						{{ notification.endTime | date : "short" }}
 					</td>
 				</ng-container>
 
