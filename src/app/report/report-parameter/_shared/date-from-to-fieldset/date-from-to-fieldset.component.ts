@@ -16,10 +16,10 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	@Input() dateFromFormControl: UntypedFormControl;
 	@Input() dateToFormControl: UntypedFormControl;
 	@Input() label: string;
+	@Input() MIN_DATE: moment.Moment = moment('2021-05-01');
 
 	subscription: Subscription;
 
-	readonly MIN_DATE = moment('2021-05-01');
 	readonly TODAY = moment();
 
 	constructor(
