@@ -3,7 +3,7 @@ import {ReportService} from '../../report.service';
 import {NgForm, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ReportType} from 'shared/model';
-import * as moment from 'moment';
+import * as moment from 'moment/moment';
 
 @Component({
 	selector: 'ec-report-a13',
@@ -17,7 +17,7 @@ export class ReportA13Component implements OnInit, OnDestroy {
 	dateFromFormControl: UntypedFormControl;
 	dateToFormControl: UntypedFormControl;
 	cantonFormControl: UntypedFormControl;
-	readonly MIN_DATE: moment.Moment = moment('2021-08-07');
+	readonly MIN_DATE = moment('2021-08-07');
 
 	subscription: Subscription;
 
