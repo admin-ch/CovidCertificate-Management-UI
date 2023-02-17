@@ -23,7 +23,7 @@ describe('ReportA13Component', () => {
 					provide: ReportService,
 					useValue: {
 						formGroup: new FormGroup({
-							[ReportType.A11]: new FormGroup({
+							[ReportType.A13]: new FormGroup({
 								from: new FormControl(''),
 								to: new FormControl(''),
 								canton: new FormControl('buv')
