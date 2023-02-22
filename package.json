@@ -1,7 +1,7 @@
 {
   "title": "cc-management-ui",
   "name": "cc-management-ui",
-  "version": "4.11.1",
+  "version": "4.11.2",
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
