@@ -4,7 +4,7 @@
 	<div class="container">
 		<mat-checkbox
 			(change)="checkUncheckAll()"
-			[indeterminate]="masterSelected === null && !allUnselected"
+			[indeterminate]="indeterminate"
 			[(ngModel)]="masterSelected"
 			id="select-all-checkbox"
 		>
@@ -14,7 +14,7 @@
 			<mat-checkbox (change)="isAllSelected()" [(ngModel)]="item.isSelected">{{ item.value }}</mat-checkbox>
 		</div>
 	</div>
-	<button (click)="resetCache()" id="reset-cache-button" [disabled]="allUnselected" mat-button obButton="primary">
+	<button (click)="resetCache()" id="reset-cache-button" [disabled]="indeterminate" mat-button obButton="primary">
 		{{ "cache.reset.resetCaches" | translate }}
 	</button>
 </div>
