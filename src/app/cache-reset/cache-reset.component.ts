@@ -10,11 +10,14 @@ type Checklist = {value: Caches; isSelected: boolean}[];
 })
 export class CacheResetComponent {
 	masterSelected: boolean;
+	indeterminate: boolean;
+	allUnselected: boolean;
 	checklist: Checklist;
-	allUnselected = true;
 
 	constructor(private readonly cacheResetService: CacheResetService) {
-		this.masterSelected = null;
+		this.masterSelected = false;
+		this.indeterminate = false;
+		this.allUnselected = true;
 		this.checklist = [
 			{value: Caches.KeyIdentifier, isSelected: false},
 			{value: Caches.SigningInformation, isSelected: false},
@@ -38,16 +41,20 @@ export class CacheResetComponent {
 			value.isSelected = this.masterSelected;
 		}
 		this.allUnselected = !this.masterSelected;
-		this.masterSelected = null;
+		this.indeterminate = false;
 	}
 
 	isAllSelected() {
 		this.allUnselected = this.checklist.every(item => !item.isSelected);
 		const allSelected = this.checklist.every(item => item.isSelected);
-		if (!allSelected && this.masterSelected) {
-			this.masterSelected = null;
-		} else if ((allSelected && !this.masterSelected) || (allSelected && this.masterSelected === null)) {
+		if (allSelected) {
 			this.masterSelected = true;
+			this.indeterminate = false;
+		} else if (this.allUnselected) {
+			this.masterSelected = false;
+			this.indeterminate = false;
+		} else {
+			this.indeterminate = true;
 		}
 	}
 

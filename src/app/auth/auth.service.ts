@@ -48,7 +48,8 @@ export enum AuthFunction {
 	REPORT_A9 = 'report-a9',
 	REPORT_A10 = 'report-a10',
 	REPORT_A11 = 'report-a11',
-	REPORT_A12 = 'report-a12'
+	REPORT_A12 = 'report-a12',
+	REPORT_A13 = 'report-a13'
 }
 
 @Injectable({

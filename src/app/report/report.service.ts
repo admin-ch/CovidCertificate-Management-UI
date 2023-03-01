@@ -86,7 +86,15 @@ export class ReportService {
 			),
 			[ReportType.A12]: this.fb.group({
 				transferCodes: [[], Validators.required]
-			})
+			}),
+			[ReportType.A13]: this.fb.group(
+				{
+					from: ['', [ReportService.isDateValidator]],
+					to: ['', [ReportService.isDateValidator]],
+					canton: ['', Validators.required]
+				},
+				{validators: getStartDateBeforeEndDateValidator('from', 'to')}
+			)
 		});
 		this.formGroup.disable();
 	}

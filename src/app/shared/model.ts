@@ -172,7 +172,8 @@ export enum ReportType {
 	A9 = 'report-a9',
 	A10 = 'report-a10',
 	A11 = 'report-a11',
-	A12 = 'report-a12'
+	A12 = 'report-a12',
+	A13 = 'report-a13'
 }
 
 // CAUTION:

@@ -2,12 +2,7 @@
 	<h1>{{ "cache.reset.title" | translate }}</h1>
 	<p>{{ "cache.reset.subtitle" | translate }}</p>
 	<div class="container">
-		<mat-checkbox
-			(change)="checkUncheckAll()"
-			[indeterminate]="masterSelected === null && !allUnselected"
-			[(ngModel)]="masterSelected"
-			id="select-all-checkbox"
-		>
+		<mat-checkbox (change)="checkUncheckAll()" [indeterminate]="indeterminate" [(ngModel)]="masterSelected" id="select-all-checkbox">
 			<strong> {{ "cache.reset.select" | translate }} </strong></mat-checkbox
 		>
 		<div *ngFor="let item of checklist" class="caches">
