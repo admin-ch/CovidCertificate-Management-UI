@@ -16,7 +16,8 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	@Input() dateFromFormControl: UntypedFormControl;
 	@Input() dateToFormControl: UntypedFormControl;
 	@Input() label: string;
-	@Input() MIN_DATE = moment('2021-05-01');
+	// ToDo final version needs to subtract 2 years. For testing we used 2 months
+	@Input() MIN_DATE = moment('2023-05-01');
 
 	subscription: Subscription;
 
@@ -29,13 +30,12 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
-		// Works like usual until 1.05.2021(default MIN_DATE), after that it will only accept 2 years in the past
-		// TODO Correct Validation & Notification
 		const now = moment();
-		if (now > this.MIN_DATE.clone().add(2, 'years')) {
-			this.MIN_DATE = now.subtract(2, 'years');
+		// ToDo final version needs to subtract 2 years. For testing we used 2 months
+		const twoYearsAgo = now.subtract(2, 'months');
+		if (twoYearsAgo.isBefore(this.MIN_DATE)) {
+			this.MIN_DATE = twoYearsAgo;
 		}
-
 		this.subscription = this.reportService.reset$.subscribe(() => {
 			this.dateFromFormControl.reset();
 			this.dateToFormControl.reset();
