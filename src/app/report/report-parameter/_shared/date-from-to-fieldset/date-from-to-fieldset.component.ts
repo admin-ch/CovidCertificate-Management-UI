@@ -16,12 +16,15 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	@Input() dateFromFormControl: UntypedFormControl;
 	@Input() dateToFormControl: UntypedFormControl;
 	@Input() label: string;
-	// ToDo final version needs to subtract 2 years. For testing we used 2 months
-	@Input() MIN_DATE = moment('2023-05-01');
+	// temporary value for testing purposes
+	@Input() MIN_DATE = moment('2021-01-01');
+	// original value
+	// @Input() MIN_DATE = moment('2021-05-01');
 
 	subscription: Subscription;
 
 	readonly TODAY = moment();
+	START_DATE = '';
 
 	constructor(
 		public readonly translate: TranslateService,
@@ -31,11 +34,12 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		const now = moment();
-		// ToDo final version needs to subtract 2 years. For testing we used 2 months
-		const twoYearsAgo = now.subtract(2, 'months');
-		if (twoYearsAgo.isBefore(this.MIN_DATE)) {
+		const twoYearsAgo = now.subtract(2, 'years');
+		if (twoYearsAgo.isAfter(this.MIN_DATE)) {
 			this.MIN_DATE = twoYearsAgo;
 		}
+		this.START_DATE = this.MIN_DATE.clone().subtract(1, 'days').format('DD.MM.YYYY');
+
 		this.subscription = this.reportService.reset$.subscribe(() => {
 			this.dateFromFormControl.reset();
 			this.dateToFormControl.reset();

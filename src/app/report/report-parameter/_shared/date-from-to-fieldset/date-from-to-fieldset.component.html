@@ -22,7 +22,7 @@
 				</mat-error>
 				<ng-template #dateFromTooSmall>
 					<mat-error *ngIf="dateFromFormControl.hasError('matDatepickerMin'); else periodTooBig">
-						{{ "reports.dateFromTo.dateTooSmall" | translate }}
+						{{ "reports.dateFromTo.dateTooSmall" | translate : { startDate: START_DATE } }}
 					</mat-error>
 					<ng-template #periodTooBig>
 						<mat-error *ngIf="dateFromFormControl.hasError('maxPeriodDays')">
@@ -49,7 +49,7 @@
 			</mat-error>
 			<ng-template #dateToTooSmall>
 				<mat-error *ngIf="dateToFormControl.hasError('matDatepickerMin')">
-					{{ "reports.dateFromTo.dateTooSmall" | translate }}
+					{{ "reports.dateFromTo.dateTooSmall" | translate : { startDate: START_DATE } }}
 				</mat-error>
 			</ng-template>
 		</mat-form-field>

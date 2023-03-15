@@ -321,7 +321,7 @@
     "reports.dataRoomSelection": "Ausgewählter Kanton/Bereich:",
     "reports.dateFromTo.date-from": "Anfangsdatum",
     "reports.dateFromTo.date-to": "Enddatum",
-    "reports.dateFromTo.dateTooSmall": "Das Datum muss nach dem 30.04.2021 liegen",
+    "reports.dateFromTo.dateTooSmall": "Das Datum muss nach dem {{startDate}} liegen",
     "reports.dateFromTo.maxPeriodDays": "Bitte reduzieren Sie den Ausstellungszeitraum auf maximal {{maxPeriodDays}} Tage",
     "reports.dateFromTo.startDateBeforeEndDate": "Anfangsdatum darf nicht nach dem Enddatum liegen",
     "reports.dateFromTo.text": "Bitte wählen Sie ein Anfangs- und ein Enddatum des Ausstellungszeitraums für den Report aus:",
