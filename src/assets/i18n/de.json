@@ -318,6 +318,7 @@
     "reports.certTypesSelection.oneCertTypeHasToBeSelected": "Mindestens ein Zertifikatstyp muss ausgewählt sein",
     "reports.certTypesSelection.select-all": "Alle Zertifikatstypen auswählen",
     "reports.certTypesSelection.title": "Bitte wählen Sie den/die Zertifikatstypen aus, für den/die Sie den Report generieren wollen:",
+    "reports.datalimit.description": "Hinweis: Aus Datenschutzgründen können im Reporting-Service keine Reports erstellt werden für Daten, die mehr als zwei Jahre zurückliegen.",
     "reports.dataRoomSelection": "Ausgewählter Kanton/Bereich:",
     "reports.dateFromTo.date-from": "Anfangsdatum",
     "reports.dateFromTo.date-to": "Enddatum",
