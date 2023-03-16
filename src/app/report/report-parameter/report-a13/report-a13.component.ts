@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ReportService} from '../../report.service';
 import {NgForm, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
@@ -17,7 +17,11 @@ export class ReportA13Component implements OnInit, OnDestroy {
 	dateFromFormControl: UntypedFormControl;
 	dateToFormControl: UntypedFormControl;
 	cantonFormControl: UntypedFormControl;
-	readonly MIN_DATE = moment('2021-08-07');
+	// temporary value for testing purposes
+	readonly MIN_DATE = moment('2021-01-01');
+	// original value
+	// readonly MIN_DATE = moment('2021-08-07');
+
 
 	subscription: Subscription;
 
