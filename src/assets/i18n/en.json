@@ -321,7 +321,7 @@
     "reports.dataRoomSelection": "Canton/area selected:",
     "reports.dateFromTo.date-from": "Start date",
     "reports.dateFromTo.date-to": "End date",
-    "reports.dateFromTo.dateTooSmall": "The date must be after 30.04.2021",
+    "reports.dateFromTo.dateTooSmall": "The date must be after {{startDate}}",
     "reports.dateFromTo.maxPeriodDays": "Please limit the issuing period to no more than {{maxPeriodDays}} days",
     "reports.dateFromTo.startDateBeforeEndDate": "Start date must not be after the end date",
     "reports.dateFromTo.text": "Please select a start and end date for the issue period for the report:",

@@ -321,7 +321,7 @@
     "reports.dataRoomSelection": "Cantone/settore selezionato:",
     "reports.dateFromTo.date-from": "Data di inizio",
     "reports.dateFromTo.date-to": "Data di fine",
-    "reports.dateFromTo.dateTooSmall": "La data deve essere successiva al 30.04.2021",
+    "reports.dateFromTo.dateTooSmall": "La data deve essere successiva al {{startDate}}",
     "reports.dateFromTo.maxPeriodDays": "Si prega di limitare il periodo di emissione a non più di {{maxPeriodDays}} giorni",
     "reports.dateFromTo.startDateBeforeEndDate": "La data di inizio non deve essere successiva alla data di fine",
     "reports.dateFromTo.text": "Selezionare una data di inizio e una data di fine del periodo di emissione per il rapporto:",
