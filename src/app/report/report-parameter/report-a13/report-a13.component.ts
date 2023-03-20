@@ -17,10 +17,7 @@ export class ReportA13Component implements OnInit, OnDestroy {
 	dateFromFormControl: UntypedFormControl;
 	dateToFormControl: UntypedFormControl;
 	cantonFormControl: UntypedFormControl;
-	// temporary value for testing purposes
-	readonly MIN_DATE = moment('2021-01-01');
-	// original value
-	// readonly MIN_DATE = moment('2021-08-07');
+	readonly MIN_DATE = moment('2021-08-07');
 
 
 	subscription: Subscription;

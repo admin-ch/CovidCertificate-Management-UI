@@ -16,10 +16,7 @@ export class DateFromToFieldsetComponent implements OnInit, OnDestroy {
 	@Input() dateFromFormControl: UntypedFormControl;
 	@Input() dateToFormControl: UntypedFormControl;
 	@Input() label: string;
-	// temporary value for testing purposes
-	@Input() MIN_DATE = moment('2021-01-01');
-	// original value
-	// @Input() MIN_DATE = moment('2021-05-01');
+	@Input() MIN_DATE = moment('2021-05-01');
 
 	subscription: Subscription;
 
