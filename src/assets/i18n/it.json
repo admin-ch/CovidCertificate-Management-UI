@@ -318,6 +318,7 @@
     "reports.certTypesSelection.oneCertTypeHasToBeSelected": "È necessario selezionare almeno un tipo di certificato",
     "reports.certTypesSelection.select-all": "Selezionare tutti i tipi di certificato",
     "reports.certTypesSelection.title": "Selezionare il tipo o i tipi di certificato per cui si desidera generare il rapporto:",
+    "reports.datalimit.description": "Avviso: per motivi legati alla protezione dei dati, nel servizio di reporting non si possono allestire rapporti per date che risalgono a più di due anni prima.",
     "reports.dataRoomSelection": "Cantone/settore selezionato:",
     "reports.dateFromTo.date-from": "Data di inizio",
     "reports.dateFromTo.date-to": "Data di fine",
